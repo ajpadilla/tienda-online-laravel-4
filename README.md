@@ -1,8 +1,10 @@
 TiendaEnLinea
 =============
 
-
 Este proyecto está basado en Laravel, tiene instalados los módulos "mcamara/laravel-localization" para manejo de múltiples idiomas y "zizaco/confide" para gestión de usuarios
+
+Estructura del proyecto
+-----------------------
 
 Además, cuenta con la plantilla base "src/app/views/layouts/template.blade.php", en la cual debe basarse el desarrollo de todas las vistas del proyecto.
 
