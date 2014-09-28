@@ -14,12 +14,15 @@
 		"anouar/paypalpayment": "dev-master",
 		"omnipay/omnipay": "~2.0",
 		"fzaninotto/faker" : "dev-master",
-		"zizaco/confide": "~4.0@dev",
+		"zizaco/confide": "3.2.x",
         "zizaco/entrust": "1.2.*@dev",
         "bllim/datatables": "*",
         "anahkiasen/former": "dev-develop",
 		"intervention/image": "2.*",
         "intervention/imagecache": "dev-master",
+        "moltin/tax": "dev-master",
+        "moltin/currency": "1.0.*@dev",
+        "moltin/cart": "dev-master",
         "moltin/laravel-cart": "dev-master"
 	},
 	"autoload": {
