@@ -31,27 +31,27 @@
             </p>
             <p>Login in. To see it in action.</p>
             {{Form::open( array (
-                            'action'=>'UserController@do_login', 
-                            "id"   => "login_form", 
-                            "class"=> "m-t", 
+                            'action'=>'UserController@do_login',
+                            "id"   => "login_form",
+                            "class"=> "m-t",
                             "role" => "form" )
-                        ) 
+                        )
             }}
                 <div class="form-group">
                     {{ Form::email('email', $value = Input::old('email'), $attributes = array(
-                        "class"=>"form-control", 
+                        "class"=>"form-control",
                         "placeholder"=>Lang::get('confide::confide.username_e_mail') ))
                     }}
-                    
+
                 </div>
                 <div class="form-group">
                     {{ Form::password('password', $attributes = array(
                         "class"=>"form-control",
-                        "placeholder"=>Lang::get('confide::confide.password') )) 
+                        "placeholder"=>Lang::get('confide::confide.password') ))
                     }}
                 </div>
-                <td style="text-align:center;"><input type="hidden" name="_token" value="<?php echo Session::getToken(); ?>">
-                <input type="hidden" name="remember" value="0"> 
+                <td style="text-align:center;"><input type="hidden" name="_token" value="<?php echo Session::getToken();?>">
+                <input type="hidden" name="remember" value="0">
                 <button type="submit" class="btn btn-primary block full-width m-b">{{ Lang::get('confide::confide.login.submit') }}</button>
 
                 <a href="#"><small>Forgot password?</small></a>
