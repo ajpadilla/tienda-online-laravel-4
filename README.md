@@ -15,5 +15,18 @@ Se cuenta con la plantilla base "src/app/views/layouts/template.blade.php", en l
 
 La plantilla base puede parecer incompleta, pero no es necesario y debe modificarse nada en ella, a excepción de corrección de errores, los cuales deben ser notificados a los administradores del proyecto.
 
-El template 
+El template
+------------
 Favor de tomar los controles y demás elementos gráficos de la plantilla ubicada en /inspinia_admin_theme
+
+Estándares de desarrollo
+-------------------------
+Debe apegarse a los estándares PSR-1 y PSR-2 en cuanto a convenciones de nombramiento de objetos y estilo de codificación
+https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+
+Documentación del código
+------------------------
+Debe apegarse al estántar PSR-5 de PHPDoc.
+Documentar todas las clases y funciones generadas, cómo mínimo el propósito de cada clase y función, los parámetros que recibe y la salida éstas, así como el propósito de las variables y las secciones importantes dentro de cada función o método.
+https://github.com/phpDocumentor/fig-standards/blob/master/proposed/phpdoc.md
