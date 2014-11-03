@@ -6,24 +6,32 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"mcamara/laravel-localization": "0.14.*",
-		"laravelbook/ardent": "dev-master",
-		"way/generators": "2.*",
-		"barryvdh/laravel-debugbar": "1.*",
-		"dompdf/dompdf" : "dev-master",
-		"stripe/stripe-php" : "dev-master",
-		"anouar/paypalpayment": "dev-master",
-		"omnipay/omnipay": "~2.0",
-		"fzaninotto/faker" : "dev-master",
-		"zizaco/confide": "3.2.x",
-        "zizaco/entrust": "1.2.*@dev",
-        "bllim/datatables": "*",
-        "anahkiasen/former": "dev-develop",
+        "laracasts/commander": "~1.0",
+        "laracasts/validation": "1.1.2",
+        "laracasts/flash": "~1.0",
+        "codesleeve/laravel-stapler": "1.0.*",
 		"intervention/image": "2.*",
         "intervention/imagecache": "dev-master",
-        "moltin/tax": "dev-master",
+        "chumper/datatable": "2.*",
+		"laravelbook/ardent": "dev-master",
+		"zizaco/confide": "3.2.x",
+		"zizaco/entrust": "1.2.*@dev",
+		"moltin/tax": "dev-master",
         "moltin/currency": "1.0.*@dev",
         "moltin/cart": "dev-master",
-        "moltin/laravel-cart": "dev-master"
+        "moltin/laravel-cart": "dev-master",
+		"barryvdh/laravel-dompdf": "0.4.*",
+		"stripe/stripe-php" : "dev-master",
+		"anouar/paypalpayment": "dev-master",
+		"bkwld/croppa": "~3.0",
+		"aws/aws-sdk-php-laravel": "1.*"
+	},
+	"require-dev": {
+		"codeception/codeception": "2.0.*",
+		"barryvdh/laravel-debugbar": "1.x",
+		"fzaninotto/faker": "1.5.x-dev",
+		"way/generators": "~2.0",
+		"laracasts/testdummy": "~1.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -33,7 +41,13 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+		"psr-4" : {
+			"s4h\\": "app/s4h",
+			"s4h\\social\\": "app/s4h/social",
+			"s4h\\core\\": "app/s4h/core",
+			"s4h\\store\\": "app/s4h/store"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [
