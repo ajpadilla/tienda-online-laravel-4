@@ -15,7 +15,7 @@ return array(
 	|
 	 */
 
-	'driver' => 'smtp',
+	'driver' => 'log',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	 */
 
-	'host' => 'mail.presentatenlaweb.com',
+	'host' => 'smtp.gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
 	|
 	 */
 
-	'port' => 25,
+	'port' => 587,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	 */
 
-	'from' => array('address' => 'informacion@tienda-en-linea.presentatenlaweb.com', 'name' => 'Tienda en Linea: Atención al cliente'),
+	'from' => array('address' => 'informacion@tienda-en-linea.presentatenlaweb.com', 'name' => 'Tienda en Linea - Atención al cliente'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ return array(
 	|
 	 */
 
-	'encryption' => 'tls',
+	'encryption' => 'ssl',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	 */
 
-	'username' => 'informacion@tienda-en-linea.presentatenlaweb.com',
+	'username' => 'nightzpy@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	 */
 
-	'password' => 'tienda-en-linea',
+	'password' => 'pl4ae3un2lyn1',
 
 	/*
 	|--------------------------------------------------------------------------
