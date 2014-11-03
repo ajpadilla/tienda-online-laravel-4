@@ -886,7 +886,7 @@ class LaravelLocalization
 			{
 				$option = array_map('trim', explode(';', $option));
 
-				$l = strtolower($option[0]);
+				$l = $option[0];
 				if (isset($option[1]))
 				{
 					$q = (float) str_replace('q=', '', $option[1]);
@@ -943,6 +943,33 @@ class LaravelLocalization
 				return array_shift($supported);
 			}
 		}
+	
+		if (class_exists('Locale'))
+        	{
+	            if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+	            {
+	                if ($_SERVER['HTTP_ACCEPT_LANGUAGE'] != '')
+	                {
+	                    $http_accept_language = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+	                    if (in_array($http_accept_language, $supported))
+	                    {
+	                        return $http_accept_language;
+	                    }
+	                }
+	            }
+        	}
+
+	        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+	        {
+	            if ($_SERVER['HTTP_ACCEPT_LANGUAGE'] != '')
+	            {
+                	$http_accept_language = \locale_accept_from_http($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                	if (in_array($http_accept_language, $supported))
+                	{
+                    		return $http_accept_language;
+                	}
+	            }
+	        }		
 
 		if (Request::server('REMOTE_HOST'))
 		{
