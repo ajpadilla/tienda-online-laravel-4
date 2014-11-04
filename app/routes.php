@@ -13,14 +13,11 @@
 
 Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
-	/*Route::get('/', function()
-	{
-	return View::make('hello');
-	});*/
 
-	Route::get('/', array('before' => 'auth', function () {
-		return View::make('index');
-	}));
+	Route::get('/', [
+		'as' => 'pages.home',
+		'uses' => 'PageController@home'
+	]);
 
 });
 

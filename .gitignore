@@ -1,5 +1,5 @@
-/src/bootstrap/compiled.php
-/src/vendor
+/bootstrap/compiled.php
+/vendor
 composer.phar
 composer.lock
 .env.*.php
@@ -7,9 +7,6 @@ composer.lock
 .DS_Store
 Thumbs.db
 
-/src/logs/
 *.log
-/src/conf/
-*.conf
-
-/src/app/config/local/
+/app/config/local/
+/.idea
