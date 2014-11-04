@@ -125,6 +125,7 @@ return array(
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 	),
 
 	/*
@@ -195,6 +196,7 @@ return array(
 		'Confide'             => 'Zizaco\Confide\ConfideFacade',
 		'Entrust'             => 'Zizaco\Entrust\EntrustFacade',
 		'PDF'                 => 'Barryvdh\DomPDF\Facade',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 	),
 
 );
