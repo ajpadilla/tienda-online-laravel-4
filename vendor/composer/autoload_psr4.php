@@ -6,5 +6,16 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    's4h\\store\\' => array($baseDir . '/app/s4h/store'),
+    's4h\\social\\' => array($baseDir . '/app/s4h/social'),
+    's4h\\core\\' => array($baseDir . '/app/s4h/core'),
+    's4h\\' => array($baseDir . '/app/s4h'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image', $vendorDir . '/intervention/imagecache/src/Intervention/Image'),
+    'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
+    'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
+    'Codesleeve\\Stapler\\' => array($vendorDir . '/codesleeve/stapler/src'),
+    'Codesleeve\\LaravelStapler\\' => array($vendorDir . '/codesleeve/laravel-stapler/src'),
+    'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
+    'Barryvdh\\Debugbar\\' => array($vendorDir . '/barryvdh/laravel-debugbar/src'),
 );
