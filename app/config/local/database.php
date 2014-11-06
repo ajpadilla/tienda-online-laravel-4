@@ -47,16 +47,15 @@ return array(
 	'connections' => array(
 
 		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'tienda_online_dev',
-			'username'  => 'root',
-			'password'  => 'root',
-			'charset'   => 'utf8',
+			'driver' => 'mysql',
+			'host' => getenv('DB_HOST'),
+			'database' => getenv('DB_NAME'),
+			'username' => getenv('DB_USERNAME'),
+			'password' => getenv('DB_PASSWORD'),
+			'charset' => 'utf8',
 			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
+			'prefix' => '',
 		),
-
 	),
 
 	/*
@@ -88,8 +87,8 @@ return array(
 		'cluster' => false,
 
 		'default' => array(
-			'host'     => '127.0.0.1',
-			'port'     => 6379,
+			'host' => '127.0.0.1',
+			'port' => 6379,
 			'database' => 0,
 		),
 
