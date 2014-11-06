@@ -32,4 +32,6 @@
 <!-- Jquery preimage -->
 {{ HTML::script('assets/js/plugins/preimage/preimage.js'); }}
 
+<!-- Jquery Form -->
+{{ HTML::script('assets/js/plugins/jQueryForm/jquery.form.js'); }}
 @yield('scripts')
