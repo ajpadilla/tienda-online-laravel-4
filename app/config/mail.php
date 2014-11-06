@@ -29,7 +29,7 @@ return array(
 	 */
 
 	//'host' => 'secure4164.hostgator.com',
-	'host' => 'mail.presentatenlaweb.com',
+	'host' => getenv('EMAIL_DOMAIN'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return array(
 	|
 	 */
 
-	'port' => 25,
+	'port' => getenv('EMAIL_PORT'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	| used globally for all e-mails that are sent by your application.
 	|
 	 */
-	'from' => array('address' => getenv('SYSTEM_EMAIL'), 'name' => getenv('SYSTEM_EMAIL_NAME')),
+	'from' => array('address' => getenv('ADDRESS'), 'name' => getenv('ADDRESS_NAME')),
 
 	/*
 	|--------------------------------------------------------------------------
