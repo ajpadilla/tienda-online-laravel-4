@@ -1,7 +1,7 @@
 <?php
 
-use s4h\store\Discount\Discount;
-use s4h\store\Discount\DiscountRepository;
+use s4h\store\Discounts\Discount;
+use s4h\store\Discounts\DiscountRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 
 class DiscountController extends \BaseController {
@@ -9,7 +9,7 @@ class DiscountController extends \BaseController {
 	private $registerDiscountForm;
 	private $discountRepository;
 
-	function __construct(RegisterDiscountForm $registerDiscountForm, DiscountRepository $discountRepository)
+	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository)
 	{
 		$this->registerDiscountForm = $registerDiscountForm;
 		$this->discountRepository = $discountRepository;	
