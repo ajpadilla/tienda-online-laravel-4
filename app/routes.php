@@ -19,6 +19,8 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 		'uses' => 'PageController@home'
 	]);
 
+	Route::resource('discounts','DiscountController');
+
 });
 
 // Confide routes
