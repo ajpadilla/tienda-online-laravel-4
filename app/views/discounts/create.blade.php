@@ -10,6 +10,15 @@
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h5>Create discount</h5>
+				@if ($errors->any())
+				<div class="alert alert-danger">
+					<ul>
+						@foreach($errors->all() as $error)
+						<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+				@endif
 			</div>
 			<div class="ibox-content">
 				{{ Form::open(['route' => 'discounts.store','class'=>'form-horizontal','method' => 'POST']) }}
@@ -30,7 +39,7 @@
 				<div class="form-group">
 					{{ Form::label('value', 'Value:',['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-8">
-						{{ Form::text('Value',null, ['class' => 'form-control']) }}
+						{{ Form::text('value',null, ['class' => 'form-control']) }}
 					</div>
 				</div>
 				<div class="hr-line-dashed"></div>
