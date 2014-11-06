@@ -1,6 +1,19 @@
 <?php
 
+use s4h\store\Discount\Discount;
+use s4h\store\Discount\DiscountRepository;
+use s4h\store\Forms\RegisterDiscountForm;
+
 class DiscountController extends \BaseController {
+
+	private $registerDiscountForm;
+	private $discountRepository;
+
+	function __construct(RegisterDiscountForm $registerDiscountForm, DiscountRepository $discountRepository)
+	{
+		$this->registerDiscountForm = $registerDiscountForm;
+		$this->discountRepository = $discountRepository;	
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +33,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('discounts.create');
 	}
 
 
@@ -31,7 +44,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		dd(Input::all());
 	}
 
 
