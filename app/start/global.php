@@ -62,9 +62,6 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::error(function(Laracasts\Validation\FormValidationException $exception, $code){
-	return Redirect::back()->withInput()->withErrors($exception->getErrors());
-});
 
 
 App::down(function()
