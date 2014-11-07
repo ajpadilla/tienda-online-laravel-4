@@ -75,7 +75,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return "Show:".$id;
 	}
 
 
@@ -87,7 +87,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return "Edit:".$id;
 	}
 
 
@@ -111,7 +111,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "Destroy:".$id;
 	}
 
 	public function createNewDiscount($data = array())
@@ -178,18 +178,15 @@ class DiscountController extends \BaseController {
 			return $model->to;
 		});
 
-		/*$collection->addColumn('Actions',function($model){
-			$links = "<a href='" . route('users.show', $model->id) . "'>Ver</a>
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
 					<br />";
-
-			if(Auth::check() AND Auth::user()->rol == 'admin') {
-			$links .= "<a href='" . route('users.edit', $model->id) . "'>Editar</a>
+			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
 					<br />
-					<a href='" . URL::to('borrar/'.$model->id) . "'>Eliminar</a>";
-			}
+					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
 
 			return $links;
-		});*/
+		});
 
 		return $collection->make();
 	}
