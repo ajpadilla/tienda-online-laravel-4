@@ -20,6 +20,10 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 	]);
 
 	Route::resource('discounts','DiscountController');
+
+	//Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
+	//Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
+
 	Route::get('delete/{id}','DiscountController@destroy');
 	// Datatable Discounts
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
