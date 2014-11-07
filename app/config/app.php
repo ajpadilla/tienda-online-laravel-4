@@ -126,7 +126,8 @@ return array(
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
-		'Laracasts\Validation\ValidationServiceProvider'
+		'Laracasts\Validation\ValidationServiceProvider',
+		'Chumper\Datatable\DatatableServiceProvider'
 	),
 
 	/*
@@ -198,6 +199,7 @@ return array(
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
 		'PDF' => 'Barryvdh\DomPDF\Facade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade'
 	),
 
 );

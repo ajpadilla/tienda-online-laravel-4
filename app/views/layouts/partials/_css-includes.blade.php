@@ -46,4 +46,7 @@
 <!-- Jquery UI -->
 {{ HTML::style('assets/js/plugins/jquery-ui/jquery-ui.css'); }}
 
+<!-- Datatable -->
+{{ HTML::style('assets/css/plugins/dataTables/dataTables.bootstrap.css'); }}
+
 @yield('styles')
