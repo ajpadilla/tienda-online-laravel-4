@@ -140,11 +140,11 @@
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-            }, 'only letters, numbers and spaces.');
+            }, '{{ trans('discounts.validation.onlyLettersNumbersAndSpaces') }}');
 
 		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-            }, 'only letters, numbers and dash.');
+            }, '{{ trans('discounts.validation.onlyLettersNumbersAndDash') }}');
 
 		$('#formCreateDiscount').validate({
 
@@ -176,7 +176,6 @@
 				},
 				code:{
 					required:!0,
-					rangelength: [1, 255],
 					onlyLettersNumbersAndDash: true
 				},
 				active:{
@@ -194,6 +193,51 @@
 				discount_type_id:{
 					required:!0,
 					digits: true
+				}
+			},
+			messages:{
+				name:{
+					required: '{{ trans('discounts.validation.required') }}',
+					rangelength: '{{ trans('discounts.validation.rangelength') }}'+'[2, 255]'+'{{ trans('discounts.validation.characters') }}',
+				},
+				description:{
+					required: '{{ trans('discounts.validation.required') }}',
+					rangelength: '{{ trans('discounts.validation.rangelength') }}'+'[10, 255]'+'{{ trans('discounts.validation.characters') }}',
+				},
+				value:{
+					required: '{{ trans('discounts.validation.required') }}',
+					number: '{{ trans('discounts.validation.number') }}'
+				},
+				percent:{
+					required: '{{ trans('discounts.validation.required') }}',
+					number: '{{ trans('discounts.validation.number') }}'
+				},
+				quantity:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
+				},
+				quantity_per_user:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
+				},
+				code:{
+					required: '{{ trans('discounts.validation.required') }}',
+				},
+				active:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
+				},
+				from:{
+					required: '{{ trans('discounts.validation.required') }}',
+					date: '{{ trans('discounts.validation.date') }}'
+				},
+				to:{
+					required: '{{ trans('discounts.validation.required') }}',
+					date: '{{ trans('discounts.validation.date') }}'
+				},
+				discount_type_id:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
 				}
 			},
 			highlight:function(element){
