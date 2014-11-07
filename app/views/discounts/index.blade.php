@@ -15,13 +15,14 @@
 				<?php
 					$columns = [
 						'Code',
-						'Ciscount type',
+						'Discount type',
 						'Name',
 						'Value',
 						'Percent',
 						'Active',
 						'From',
 						'To',
+						'Actions'
 				];
 				$table = Datatable::table()
 				->addColumn($columns)
