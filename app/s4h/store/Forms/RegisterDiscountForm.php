@@ -10,7 +10,7 @@ class RegisterDiscountForm extends FormValidator{
 						'percent' => 'required|numeric',
 						'quantity' =>'required|integer',
 						'quantity_per_user' => 'required|integer',
-						'code' => 'required|alpha_num|unique:discounts|max:255',
+						'code' => 'required|alpha_dash|unique:discounts|max:255',
 						'active' => 'required|integer',
 						'from' => 'required|date',
 						'to' => 'required|date',
