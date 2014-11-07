@@ -38,4 +38,8 @@
 
 <!-- Jquery Form -->
 {{ HTML::script('assets/js/plugins/jQueryForm/jquery.form.js'); }}
+
+<!-- Jquery UI -->
+{{ HTML::script('assets/js/plugins/jquery-ui/jquery-ui.js'); }}
+
 @yield('scripts')
