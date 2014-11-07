@@ -40,4 +40,6 @@
 <!-- Styles -->
 {{ HTML::style('assets/css/style.css'); }}
 
+<!-- Fancybox -->
+{{ HTML::style('assets/js/plugins/fancybox/jquery.fancybox.css'); }}
 @yield('styles')
