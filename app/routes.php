@@ -11,7 +11,9 @@
 |
  */
 
-Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
+Route::group(array('prefix' => LaravelLocalization::setLocale(),
+					'before' => 'LaravelLocalizationRoutes|LaravelLocalizationRedirectFilter'), 
+function () {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
 	Route::get('/', [
@@ -19,10 +21,10 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 		'uses' => 'PageController@home'
 	]);
 
-	Route::resource('discounts','DiscountController');
-
-	//Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
-	//Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
+	//Route::resource('discounts','DiscountController');
+	
+	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
+	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
 
 	Route::get('delete/{id}','DiscountController@destroy');
 	// Datatable Discounts
