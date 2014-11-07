@@ -145,12 +145,21 @@
 			dateFormat: 'yy-mm-dd'
 		});
 
+		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+            }, 'only letters, numbers and spaces.');
+
+		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+            }, 'only letters, numbers and dash.');
+
 		$('#formCreateDiscount').validate({
 
 			rules:{
 				name:{
 					required:!0,
-					rangelength: [2, 255]
+					rangelength: [2, 255],
+					onlyLettersNumbersAndSpaces: true
 				},
 				description:{
 					required:!0,
@@ -174,7 +183,8 @@
 				},
 				code:{
 					required:!0,
-					rangelength: [1, 255]
+					rangelength: [1, 255],
+					onlyLettersNumbersAndDash: true
 				},
 				active:{
 					required:!0,
