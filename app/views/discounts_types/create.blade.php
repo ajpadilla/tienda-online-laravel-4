@@ -36,11 +36,15 @@
 <script>
 	$(document).ready(function () {
 
+		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+        }, 'only letters, numbers and spaces.');
+
 		$('#formCreateDiscountType').validate({
 			rules:{
 				name:{
 					required:!0,
-					max: 45
+					onlyLettersNumbersAndSpaces: true
 				},
 			},
 			highlight:function(element){
