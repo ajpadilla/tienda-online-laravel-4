@@ -20,7 +20,12 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 	]);
 
 	Route::resource('discounts','DiscountController');
+	// Datatable Discounts
+	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
+
+
 	Route::resource('discounts_type','DiscountTypeController');
+
 });
 
 // Confide routes
