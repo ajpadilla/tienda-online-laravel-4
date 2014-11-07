@@ -8,4 +8,7 @@ class DiscountRepository {
 		return $discount->save();
 	}
 
+	public function getAll(){
+		return Discount::all();
+	}
 }
