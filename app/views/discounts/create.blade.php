@@ -9,7 +9,7 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>Create discount</h5>
+				<h5>Create discount {{ trans('discounts.store') }}</h5>
 				@if ($errors->any())
 				<div class="alert alert-danger">
 					<ul>
@@ -21,9 +21,9 @@
 				@endif
 			</div>
 			<div class="ibox-content">
-				{{ Form::open(['route' => 'discounts.store','class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
+				{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
 				<div class="form-group">
-					{{ Form::label('name', 'Name:',['class'=>'col-sm-2 control-label']) }}
+					{{ Form::label('name', trans('discounts.labels.name'),['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-8">
 						{{ Form::text('name',null, ['class' => 'form-control']) }}
 					</div>
@@ -218,7 +218,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::route('discounts.store')}}',
+				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
