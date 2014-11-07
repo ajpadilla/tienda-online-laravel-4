@@ -26,7 +26,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('discounts.index');
 	}
 
 
@@ -129,6 +129,69 @@ class DiscountController extends \BaseController {
 		$discount->to = $data['to'];
 		$discount->discount_type_id = $data['discount_type_id'];
 		$this->discountRepository->save($discount);
+	}
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->discountRepository->getAll())
+			->showColumns('code','discount_type_id','name', 'value', 'percent', 'active', 'from', 'to')
+			->searchColumns('code','discount_type_id','name', 'value', 'percent', 'active', 'from', 'to')
+			->orderColumns('code','discount_type_id','name', 'value', 'percent', 'active', 'from', 'to');
+
+		$collection->addColumn('code', function($model)
+		{
+			return $model->code;
+		});
+
+		$collection->addColumn('discount_type_id', function($model)
+		{
+			 return $model->discountType->name;
+		});
+		
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+
+		$collection->addColumn('value', function($model)
+		{
+			return $model->value;
+		});
+
+		$collection->addColumn('percent', function($model)
+		{
+			return $model->percent;
+		});
+
+		$collection->addColumn('active', function($model)
+		{
+			return $model->getActivoShow();
+		});
+
+		$collection->addColumn('from', function($model)
+		{
+			return $model->from;
+		});
+
+		$collection->addColumn('to', function($model)
+		{
+			return $model->to;
+		});
+
+		/*$collection->addColumn('Actions',function($model){
+			$links = "<a href='" . route('users.show', $model->id) . "'>Ver</a>
+					<br />";
+
+			if(Auth::check() AND Auth::user()->rol == 'admin') {
+			$links .= "<a href='" . route('users.edit', $model->id) . "'>Editar</a>
+					<br />
+					<a href='" . URL::to('borrar/'.$model->id) . "'>Eliminar</a>";
+			}
+
+			return $links;
+		});*/
+
+		return $collection->make();
 	}
 
 }
