@@ -32,6 +32,10 @@
 <!-- Jquery preimage -->
 {{ HTML::script('assets/js/plugins/preimage/preimage.js'); }}
 
+<!-- Jquery Fancybox -->
+{{ HTML::script('assets/js/plugins/fancybox/jquery.fancybox.js'); }}
+{{ HTML::script('assets/js/plugins/fancybox/jquery.fancybox.pack.js'); }}
+
 <!-- Jquery Form -->
 {{ HTML::script('assets/js/plugins/jQueryForm/jquery.form.js'); }}
 @yield('scripts')
