@@ -1,11 +1,16 @@
 <?php namespace s4h\store\Discounts_types;
 
-use s4h\store\Discounts_types\Discount_type;
+use s4h\store\Discounts_types\DiscountType;
 
 class DiscountTypeRepository {
 
-	public function save(Discount_type $discount_type){
-		return $discount_type->save();
+	public function save(DiscountType $discountType){
+		return $discountType->save();
 	}
 
+	public function getAll(){
+		return DiscountType::all();
+	}
+
+	
 }
