@@ -102,6 +102,12 @@
 						{{ Form::text('to',null, ['class' => 'form-control','id'=>'to']) }}
 					</div>
 				</div>
+				<div class="form-group">
+					{{ Form::label('discount_type_id', 'Discount type:',['class'=>'col-sm-2 control-label']) }}
+					<div class="col-sm-8">
+						{{ Form::select('discount_type_id',$discountTypes,null,array('class' => 'form-control')) }}
+					</div>
+				</div>
 				<div class="hr-line-dashed"></div>
 				<div class="form-group">
 					<div class="col-sm-4 col-sm-offset-2">
@@ -127,7 +133,7 @@
 			showButtonPanel: true,
 			changeMonth: true,
 			changeYear: true,
-			yearRange: '2014:2020',
+			yearRange: '2014:2030',
 			dateFormat: 'yy-mm-dd'
 		});
 
@@ -135,8 +141,68 @@
 			showButtonPanel: true,
 			changeMonth: true,
 			changeYear: true,
-			yearRange: '2002:2012', 
+			yearRange: '2014:2030', 
 			dateFormat: 'yy-mm-dd'
+		});
+
+		$('#formCreateDiscount').validate({
+
+			rules:{
+				name:{
+					required:!0,
+					rangelength: [2, 255]
+				},
+				description:{
+					required:!0,
+					rangelength: [10, 255]
+				},
+				value:{
+					required:!0,
+					number: true
+				},
+				percent:{
+					required:!0,
+					number: true
+				},
+				quantity:{
+					required:!0,
+					digits: true
+				},
+				quantity_per_user:{
+					required:!0,
+					digits: true
+				},
+				code:{
+					required:!0,
+					rangelength: [1, 255]
+				},
+				active:{
+					required:!0,
+					digits: true
+				},
+				from:{
+					required:!0,
+					date: true
+				},
+				to:{
+					required:!0,
+					date: true
+				},
+				discount_type_id:{
+					required:!0,
+					digits: true
+				}
+			},
+			highlight:function(element){
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight:function(element){
+				$(element).closest('.form-group').removeClass('has-error');
+			},
+			success:function(element){
+				element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+			}  
+
 		});
 
 		var options = { 
@@ -161,7 +227,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false    
 			}), 5000 );  
-			//return $('#formCreateDiscount').valid(); 
+			return $('#formCreateDiscount').valid(); 
 		} 
 														     
 		// post-submit callback 
