@@ -1,6 +1,7 @@
 <?php
 	return array(
 		"create" => "discounts/create",
-		"store" => "discounts/store"
+		"store" => "discounts/store",
+		"labels" => array('name' =>'nombre'),
 	);
  
