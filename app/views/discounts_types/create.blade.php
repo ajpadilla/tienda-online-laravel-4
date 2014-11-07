@@ -35,13 +35,33 @@
 @section('scripts')
 <script>
 	$(document).ready(function () {
+
+		$('#formCreateDiscountType').validate({
+			rules:{
+				name:{
+					required:!0,
+					max: 45
+				},
+			},
+			highlight:function(element){
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight:function(element){
+				$(element).closest('.form-group').removeClass('has-error');
+			},
+			success:function(element){
+				element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+			}  
+		});
+
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::route('discounts.store')}}',
+				url:  '{{URL::route('discounts_type.store')}}',
         		type:'POST'
 			};
 		$('#formCreateDiscountType').ajaxForm(options);
+
 	});
 
 	// pre-submit callback 
@@ -57,7 +77,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false    
 			}), 5000 );  
-			//return $('#formCreateDiscountType').valid(); 
+			return $('#formCreateDiscountType').valid(); 
 		} 
 														     
 		// post-submit callback 
