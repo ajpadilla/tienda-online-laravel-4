@@ -16,7 +16,17 @@
 			'from' => 'Desde:',
 			'to' => 'Hasta',
 			'discount_type' => 'Tipo de descuento:',
-			'save' => 'Agregar'
+			'save' => 'Agregar',
 		),
+		"validation" => array(
+			'required' => 'Campo obligatorio.',
+			'rangelength' => 'Por favor, introduzca un valor entre ',
+			'characters' => 'caracteres.',
+			'number' => 'Por favor, introduzca un número válido.',
+			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
+			'date' => 'Por favor, Ingrese una fecha valida.',
+			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
+			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y guiones.'
+		), 
 	);
  
