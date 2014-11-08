@@ -173,4 +173,18 @@ class DiscountController extends \BaseController {
 		return $collection->make();
 	}
 
+	public function verificarCodigo()
+	{
+		if(Request::ajax()) 
+		{
+			$discount = $this->discountRepository->getCode(Input::get('code'));
+			if(count($discount) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
+			}
+       	}
+		return Response::json(array('respuesta' => 'false'));
+	}
+
 }
