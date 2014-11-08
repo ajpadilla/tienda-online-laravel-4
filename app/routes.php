@@ -21,16 +21,17 @@ function () {
 		'uses' => 'PageController@home'
 	]);
 
-	//Route::resource('discounts','DiscountController');
-	
+	/**
+		* ------------------------------ Rutas para descuentos -----------------------
+	**/
 	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
 	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
-
 	Route::get('delete/{id}','DiscountController@destroy');
-	// Datatable Discounts
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
 
-
+	/**
+		* ------------------------------ Rutas para Typo de descuento -----------------------
+	**/
 	Route::resource('discounts_type','DiscountTypeController');
 
 });
