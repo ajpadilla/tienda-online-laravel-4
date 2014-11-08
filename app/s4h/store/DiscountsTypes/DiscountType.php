@@ -1,4 +1,4 @@
-<?php namespace s4h\store\Discounts_types;
+<?php namespace s4h\store\DiscountsTypes;
 
 use Eloquent;
 
