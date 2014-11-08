@@ -45,4 +45,8 @@
 {{ HTML::script('assets/js/plugins/fancybox/jquery.fancybox.js'); }}
 {{ HTML::script('assets/js/plugins/fancybox/jquery.fancybox.pack.js'); }}
 
+<!-- summernote -->
+{{ HTML::script('assets/js/plugins/summernote/summernote.min.js'); }}
+
+
 @yield('scripts')
