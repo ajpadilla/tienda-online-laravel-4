@@ -9,4 +9,8 @@ class CategoryRepository {
 		return $category->save();
 	}
 
+	public function getAll(){
+		return Category::all();
+	}
+
 }
