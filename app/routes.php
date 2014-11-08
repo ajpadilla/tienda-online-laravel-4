@@ -37,6 +37,15 @@ function () {
 	Route::get(LaravelLocalization::transRoute('discountType.create'),'DiscountTypeController@create');
 	Route::post(LaravelLocalization::transRoute('discountType.store'),'DiscountTypeController@store');
 	Route::post('checkName','DiscountTypeController@checkName');
+
+	/**
+		* ------------------------------ Rutas para lenguajes -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('languages.create'),'LanguageController@create');
+	Route::post(LaravelLocalization::transRoute('languages.store'),'LanguageController@store');
+	Route::post('checkIsoCodeLang','LanguageController@checkIsoCodeLang');
+
 });
 
 // Confide routes
