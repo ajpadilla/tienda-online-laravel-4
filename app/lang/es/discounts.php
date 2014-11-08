@@ -27,6 +27,7 @@
 			'date' => 'Por favor, Ingrese una fecha valida.',
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y guiones.'
-		), 
+		),
+		'date' => 'dd-mm-yy',
 	);
  
