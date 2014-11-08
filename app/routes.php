@@ -26,15 +26,17 @@ function () {
 	**/
 	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
 	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
+	Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
 	Route::get('delete/{id}','DiscountController@destroy');
-	Route::post('verificarCodigo','DiscountController@verificarCodigo');
+	Route::post('checkCode','DiscountController@checkCode');
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
 
 	/**
 		* ------------------------------ Rutas para Typo de descuento -----------------------
 	**/
-	Route::resource('discounts_type','DiscountTypeController');
-
+	Route::get(LaravelLocalization::transRoute('discountType.create'),'DiscountTypeController@create');
+	Route::post(LaravelLocalization::transRoute('discountType.store'),'DiscountTypeController@store');
+	Route::post('checkName','DiscountTypeController@checkName');
 });
 
 // Confide routes
