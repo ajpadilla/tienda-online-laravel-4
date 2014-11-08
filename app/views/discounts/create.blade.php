@@ -73,15 +73,15 @@
 					{{ Form::label('active', 'Active:',['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-10">
 						<div class="radio i-checks">
-							<label> 
+							<label>
 								<!--<input type="radio" value="option1" name="a">-->
 								{{ Form::radio('active', '1', 1)}}
 								<i></i> Yes
 							</label>
 						</div>
 						<div class="radio i-checks">
-							<label> 
-								<!--<input type="radio" value="option1" name="a">--> 
+							<label>
+								<!--<input type="radio" value="option1" name="a">-->
 								{{ Form::radio('active', '0', 0)}}
 								<i></i> No
 							</label>
@@ -141,7 +141,7 @@
 			showButtonPanel: true,
 			changeMonth: true,
 			changeYear: true,
-			yearRange: '2014:2030', 
+			yearRange: '2014:2030',
 			dateFormat: 'yy-mm-dd'
 		});
 
@@ -211,41 +211,41 @@
 			},
 			success:function(element){
 				element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
-			}  
+			}
 
 		});
 
-		var options = { 
-				beforeSubmit:  showRequest,  // pre-submit callback 
-				success:       showResponse,  // post-submit callback 
+		var options = {
+				beforeSubmit:  showRequest,  // pre-submit callback
+				success:       showResponse,  // post-submit callback
 				url:  '{{URL::route('discounts.store')}}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
 	});
 
-	// pre-submit callback 
-		function showRequest(formData, jqForm, options) {          
+	// pre-submit callback
+		function showRequest(formData, jqForm, options) {
 			setTimeout(jQuery.fancybox({
 				'content': '<h1>Enviando datos</h1>',
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
-				'scrolling' : 'no',         
+				'scrolling' : 'no',
 				'type' : 'inline',
 				'showCloseButton' : false,
 				'hideOnOverlayClick' : false,
-				'hideOnContentClick' : false    
-			}), 5000 );  
-			return $('#formCreateDiscount').valid(); 
-		} 
-														     
-		// post-submit callback 
-		function showResponse(responseText, statusText, xhr, $form)  {    
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formCreateDiscount').valid();
+		}
+
+		// post-submit callback
+		function showResponse(responseText, statusText, xhr, $form)  {
 			jQuery.fancybox({
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-		} 						
+		}
 </script>
 @stop
