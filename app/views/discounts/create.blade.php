@@ -17,7 +17,7 @@
 				<div class="form-group">
 					{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
 					<div class="col-sm-8">
-						{{ Form::text('code',null, ['class' => 'form-control']) }}
+						{{ Form::text('code',null, ['class' => 'form-control','id' =>'code']) }}
 					</div>
 				</div>
 				<div class="hr-line-dashed"></div>
@@ -176,7 +176,21 @@
 				},
 				code:{
 					required:!0,
-					onlyLettersNumbersAndDash: true
+					onlyLettersNumbersAndDash: true,
+					 remote:
+						{
+							url:'{{ URL::to('/verificarCodigo/') }}',
+							type: 'POST',
+							data: {
+								code: function() {
+									return $('#code').val();
+								}
+							},
+							dataFilter: function (respuesta) {
+								console.log('consulta:'+respuesta);
+								return respuesta;
+							}
+						} 
 				},
 				active:{
 					required:!0,
@@ -222,6 +236,7 @@
 				},
 				code:{
 					required: '{{ trans('discounts.validation.required') }}',
+					remote: jQuery.validator.format('{{ trans('discounts.alert') }}')
 				},
 				active:{
 					required: '{{ trans('discounts.validation.required') }}',
@@ -229,11 +244,11 @@
 				},
 				from:{
 					required: '{{ trans('discounts.validation.required') }}',
-					date: '{{ trans('discounts.validation.date') }}'
+					//date: '{{ trans('discounts.validation.date') }}'
 				},
 				to:{
 					required: '{{ trans('discounts.validation.required') }}',
-					date: '{{ trans('discounts.validation.date') }}'
+					//date: '{{ trans('discounts.validation.date') }}'
 				},
 				discount_type_id:{
 					required: '{{ trans('discounts.validation.required') }}',
