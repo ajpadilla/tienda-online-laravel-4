@@ -7,28 +7,7 @@
 @section('content')
 
 	<div class="col-lg-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-title">
-				<h5>All form elements <small>With custom checbox and radion elements.</small></h5>
-				<div class="ibox-tools">
-					<a class="collapse-link">
-						<i class="fa fa-chevron-up"></i>
-					</a>
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="fa fa-wrench"></i>
-					</a>
-					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#">Config option 1</a>
-						</li>
-						<li><a href="#">Config option 2</a>
-						</li>
-					</ul>
-					<a class="close-link">
-						<i class="fa fa-times"></i>
-					</a>
-				</div>
-			</div>
-			<div class="ibox-content">
+
 				{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
 					<div class="col-lg-7">
 						<div class="form-group">
@@ -41,7 +20,10 @@
 						<div class="form-group">
 							{{ Form::label('description', 'Description:', ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{Form::textarea('description', null, array('class' => 'form-control'))}}
+								<div class="ibox-content no-padding">
+
+								{{ Form::textarea('description', null, array('class' => 'form-control')) }}
+								</div>
 							</div>
 						</div>
 
@@ -196,12 +178,15 @@
 						<div class="form-group">
 							{{ Form::label('categories', 'Categories:', ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								<select data-placeholder="Choose a Categories..." class="chosen-select form-control" multiple style="width:350px;" tabindex="4" name="categories[]" id="categories" required>
-									<option value="">Select</option>
-									@for ($i = 0; $i < 20; $i++)
-										<option value="{{$i}}">{{$i}}</option>
-									@endfor
-								</select>
+								{{ Form::select('categories[]',$categories,null,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::label('condition_id', 'Condition:', ['class' => 'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								{{ Form::select('condition_id',$condition,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
 							</div>
 						</div>
 					</div>
@@ -217,8 +202,7 @@
 					<div class="clearfix"></div>
 
 				{{Form::close()}}
-			</div>
-		</div>
+
 	</div>
 @stop
 
@@ -233,6 +217,8 @@
 
 			// Iniciar select chosen
 			$('.chosen-select').chosen();
+
+			 $('#description').summernote();
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
@@ -301,9 +287,13 @@
 						required:true,
 						digits: true
 					},
-					categories:{
+					'categories[]':{
+						required:true
+					},
+					condition_id:{
 						required:true
 					}
+
 				},
 				highlight:function(element){
 					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
