@@ -179,7 +179,7 @@
 					onlyLettersNumbersAndDash: true,
 					 remote:
 						{
-							url:'{{ URL::to('/verificarCodigo/') }}',
+							url:'{{ URL::to('/checkCode/') }}',
 							type: 'POST',
 							data: {
 								code: function() {
@@ -198,11 +198,11 @@
 				},
 				from:{
 					required:!0,
-					date: true
+					//date: true
 				},
 				to:{
 					required:!0,
-					date: true
+					//date: true
 				},
 				discount_type_id:{
 					required:!0,
@@ -298,6 +298,7 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
+			$('#formCreateDiscount').resetForm();
 		} 						
 </script>
 @stop
