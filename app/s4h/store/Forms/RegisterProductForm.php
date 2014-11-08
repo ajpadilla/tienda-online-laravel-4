@@ -17,6 +17,7 @@ class RegisterProductForm extends FormValidator{
                     'available_for_order' => 'required|integer',
                     'show_price' => 'required|integer',
                     'accept_barter' => 'required|integer',
-                    'product_for_barter' => 'required|integer'
+                    'product_for_barter' => 'required|integer',
+                    'condition_id' => 'required|integer'
                 ];
 }
