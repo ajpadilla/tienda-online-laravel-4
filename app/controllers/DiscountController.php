@@ -2,6 +2,7 @@
 
 use s4h\store\Discounts\Discount;
 use s4h\store\Discounts\DiscountRepository;
+use s4h\store\DiscountsTypes\DiscountType;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
@@ -53,11 +54,12 @@ class DiscountController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
+			//dd($input);
 			try
 			{
 				$this->registerDiscountForm->validate($input);
 				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -160,7 +162,7 @@ class DiscountController extends \BaseController {
 			return $model->to;
 		});
 
-		$collection->addColumn('Actions',function($model){
+		/*$collection->addColumn('Actions',function($model){
 			$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
 					<br />";
 			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
@@ -168,12 +170,12 @@ class DiscountController extends \BaseController {
 					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
 
 			return $links;
-		});
+		});*/
 
 		return $collection->make();
 	}
 
-	public function verificarCodigo()
+	public function checkCode()
 	{
 		if(Request::ajax()) 
 		{
