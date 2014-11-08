@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 64);
-			$table->text('descripcion');
+			$table->text('description');
 			$table->tinyInteger('on_sale');
 			$table->integer('quantity');
 			$table->decimal('price', 20,6)->nullable();
@@ -39,7 +39,7 @@ class CreateProductsTable extends Migration {
 
 	/**
 	 * Reverse the migrations.
-	 *	
+	 *
 	 * @return void
 	 */
 	public function down()
