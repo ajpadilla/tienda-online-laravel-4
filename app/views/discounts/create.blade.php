@@ -127,7 +127,7 @@
 			changeMonth: true,
 			changeYear: true,
 			yearRange: '2014:2030',
-			dateFormat: 'yy-mm-dd'
+			dateFormat: '{{ trans('discounts.date') }}',
 		});
 
 		$('#to').datepicker({
@@ -135,7 +135,7 @@
 			changeMonth: true,
 			changeYear: true,
 			yearRange: '2014:2030', 
-			dateFormat: 'yy-mm-dd'
+			dateFormat: '{{ trans('discounts.date') }}',
 		});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
