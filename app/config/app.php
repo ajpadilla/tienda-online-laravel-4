@@ -126,6 +126,8 @@ return array(
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
+		'Laracasts\Validation\ValidationServiceProvider',
 	),
 
 	/*

@@ -19,6 +19,13 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 		'uses' => 'PageController@home'
 	]);
 
+	/**
+	* ------------------------------ Rutas para productos -----------------------
+	**/
+	Route::resource('products', 'ProductController',[
+		'only' => ['index', 'create', 'show', 'store', 'update', 'destroy']
+	]);
+
 });
 
 // Confide routes

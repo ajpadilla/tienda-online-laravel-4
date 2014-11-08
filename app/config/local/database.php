@@ -51,7 +51,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'tienda_online_dev',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

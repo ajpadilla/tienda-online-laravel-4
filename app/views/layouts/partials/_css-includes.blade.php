@@ -40,4 +40,16 @@
 <!-- Styles -->
 {{ HTML::style('assets/css/style.css'); }}
 
+<!-- Fancybox -->
+{{ HTML::style('assets/js/plugins/fancybox/jquery.fancybox.css'); }}
+
+<!-- IiCheck -->
+{{ HTML::style('assets/css/plugins/iCheck/custom.css'); }}
+
+<!-- Chosen -->
+{{ HTML::style('assets/css/plugins/chosen/chosen.css'); }}
+
+<!-- summernote -->
+{{ HTML::style('assets/css/plugins/summernote/summernote.css'); }}
+
 @yield('styles')
