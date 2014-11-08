@@ -15,8 +15,6 @@ class DiscountRepository {
 	public function createNewDiscount($data = array())
 	{
 		$discount = new Discount;
-		$discount->name = $data['name'];
-		$discount->description = $data['description'];
 		$discount->value = $data['value'];
 		$discount->percent = $data['percent'];
 		$discount->quantity = $data['quantity'];
