@@ -8,6 +8,11 @@ class Product extends Eloquent{
 
 	public function categories()
 	{
-		return $this->hasMany('s4h\store\Categories\Category');
+		return $this->belongsToMany('s4h\store\Categories\Category', 'product_classification');
+	}
+
+	public function condition()
+	{
+		return $this->belongsto('s4h\store\Conditions\Condition');
 	}
 }

@@ -8,5 +8,4 @@ class ProductRepository {
 	public function save(Product $product){
 		return $product->save();
 	}
-
 }
