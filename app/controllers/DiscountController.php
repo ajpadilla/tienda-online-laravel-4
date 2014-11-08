@@ -2,7 +2,7 @@
 
 use s4h\store\Discounts\Discount;
 use s4h\store\Discounts\DiscountRepository;
-use s4h\store\Discounts_types\DiscountTypeRepository;
+use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
 
