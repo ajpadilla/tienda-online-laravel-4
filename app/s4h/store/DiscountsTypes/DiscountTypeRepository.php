@@ -12,5 +12,9 @@ class DiscountTypeRepository {
 		return DiscountType::all();
 	}
 
+	public function getName($name)
+	{
+		return DiscountType::where('name','=',$name)->get();
+	}
 	
 }
