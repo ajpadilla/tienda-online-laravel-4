@@ -13,17 +13,21 @@
 				<h5>{{ trans('discountType.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
+			<div class="row">
 				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
-				<div class="form-group">
-					{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
+				<div class="col-sm-6 b-r">
+					<div class="form-group">
+						{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
+						<div class="col-sm-8">
+							{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
+						</div>
 					</div>
 				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-2">
-						{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
+				<div class="col-sm-6">
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
+						</div>
 					</div>
 				</div>
 				{{ Form::close() }}
