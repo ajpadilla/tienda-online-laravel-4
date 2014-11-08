@@ -3,6 +3,8 @@
 use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
 use s4h\store\Products\RegisterProductCommand;
+use s4h\store\Categories\CategoryRepository;
+use s4h\store\Conditions\ConditionRepository;
 use s4h\store\Forms\RegisterProductForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -10,16 +12,21 @@ class ProductController extends \BaseController {
 
 	protected $productRepo;
 	protected $RegisterProductForm;
+	protected $categoryRepository;
+	protected $conditionRepository;
 
-	public function __construct(RegisterProductForm $registerProductForm, ProductRepository $productRepo)
+	public function __construct(RegisterProductForm $registerProductForm, ProductRepository $productRepo, CategoryRepository $categoryRepository, ConditionRepository $conditionRepository)
 	{
 		$this->RegisterProductForm = $registerProductForm;
 		$this->productRepo = $productRepo;
+		$this->categoryRepository = $categoryRepository;
+		$this->conditionRepository = $conditionRepository;
 	}
 
 	public function index()
 	{
-		return View::make('products.index');
+		return 'en construcción';
+		// return View::make('products.index');
 	}
 
 	/**
@@ -29,8 +36,9 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		// dd($this->productRepo->getAll());
-		return View::make('products.create');
+		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
+		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
+		return View::make('products.create', compact('categories', 'condition'));
 	}
 
 
@@ -41,7 +49,6 @@ class ProductController extends \BaseController {
 	 */
 	public function store()
 	{
-		//dd(Input::all());
 		if(Request::ajax())
 		{
 			$input = Input::all();
@@ -75,15 +82,14 @@ class ProductController extends \BaseController {
 		$product->show_price = $data['show_price'];
 		$product->accept_barter = $data['accept_barter'];
 		$product->product_for_barter = $data['product_for_barter'];
-		// $product->condition_id = $data['condition_id'];
-		// $product->user_id = $data['user_id'];
-		// dd($data['categories']);
-		// if (!is_null($data['categories'])) {
-		// 	$product->categories()->sync($data['categories']);
-		// }else{
-		// 	$product->categories()->detach();
-		// }
+		$product->condition_id = $data['condition_id'];
+
+
+		/*$user = Auth::user();
+		$product->associate($user);*/
 		$this->productRepo->save($product);
+		$product->categories()->sync($data['categories']);
+
 	}
 
 }
