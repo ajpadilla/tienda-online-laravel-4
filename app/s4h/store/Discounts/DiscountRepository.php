@@ -28,4 +28,9 @@ class DiscountRepository {
 		$discount->discount_type_id = $data['discount_type_id'];
 		$this->save($discount);
 	}
+
+	public function getCode($code)
+	{
+		return Discount::where('code','=',$code)->get();
+	}
 }
