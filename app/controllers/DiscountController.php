@@ -2,7 +2,8 @@
 
 use s4h\store\Discounts\Discount;
 use s4h\store\Discounts\DiscountRepository;
-use s4h\store\Discounts_types\DiscountTypeRepository;
+use s4h\store\DiscountsTypes\DiscountType;
+use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -53,11 +54,12 @@ class DiscountController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
+			//dd($input);
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-				$this->createNewDiscount($input);
-				return Response::json('Descuento'.' '.$input['name'].' '.'Agregado con exito!');
+				$this->discountRepository->createNewDiscount($input);
+				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -77,7 +79,6 @@ class DiscountController extends \BaseController {
 	{
 		return "Show:".$id;
 	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -112,23 +113,6 @@ class DiscountController extends \BaseController {
 	public function destroy($id)
 	{
 		return "Destroy:".$id;
-	}
-
-	public function createNewDiscount($data = array())
-	{
-		$discount = new Discount;
-		$discount->name = $data['name'];
-		$discount->description = $data['description'];
-		$discount->value = $data['value'];
-		$discount->percent = $data['percent'];
-		$discount->quantity = $data['quantity'];
-		$discount->quantity_per_user = $data['quantity_per_user'];
-		$discount->code = $data['code'];
-		$discount->active = $data['active'];
-		$discount->from = $data['from'];
-		$discount->to = $data['to'];
-		$discount->discount_type_id = $data['discount_type_id'];
-		$this->discountRepository->save($discount);
 	}
 
 	public function getDatatable()
@@ -178,7 +162,7 @@ class DiscountController extends \BaseController {
 			return $model->to;
 		});
 
-		$collection->addColumn('Actions',function($model){
+		/*$collection->addColumn('Actions',function($model){
 			$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
 					<br />";
 			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
@@ -186,9 +170,23 @@ class DiscountController extends \BaseController {
 					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
 
 			return $links;
-		});
+		});*/
 
 		return $collection->make();
+	}
+
+	public function checkCode()
+	{
+		if(Request::ajax()) 
+		{
+			$discount = $this->discountRepository->getCode(Input::get('code'));
+			if(count($discount) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
+			}
+       	}
+		return Response::json(array('respuesta' => 'false'));
 	}
 
 }

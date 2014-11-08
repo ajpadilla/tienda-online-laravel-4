@@ -100,5 +100,4 @@ return array(
 	*/
 
 	'attributes' => array(),
-
 );

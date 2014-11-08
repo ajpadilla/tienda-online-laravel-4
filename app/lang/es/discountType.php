@@ -1,10 +1,9 @@
-<?php
+<?php 
 	return array(
-		"create" => "crear/descuento",
-		"store" => "agregar/descuento",
-		'index'=>'lista/descuentos',
-		"title" => "Agregar descuento",
-		"subtitle" => "Crear nuevo descuento",
+		"create" => "crear/TypoDescuento",
+		"store" => "agregar/TypoDescuento",
+		"title" => "Agregar Tipo de descuento",
+		"subtitle" => "Crear nuevo  tipo de descuento",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
@@ -32,21 +31,5 @@
 		'date' => 'dd-mm-yy',
 		'message1' =>'Descuento',
 		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El codigo del descuento ya se encuentra registrado!',
-		'list' =>array(
-			'title' => 'Listado de descuentos',
-			'subtitle'=>'Lista de descuentos',
-			'Code'=>'Codigo',
-			'Discount_type'=>'Tipo de descuento',
-			'Name'=>'',
-			'Value'=>'',
-			'Percent'=>'',
-			'Active'=>'',
-			'From'=>'',
-			'To'=>'',
-			'Actions'=>'',
-			''=>'',
-			''=>''
-		),
+		'alert' => '¡El nombre ya se encuentra registrado!'
 	);
- 

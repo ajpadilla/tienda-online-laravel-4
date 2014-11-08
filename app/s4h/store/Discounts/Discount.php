@@ -14,6 +14,6 @@ class Discount extends Eloquent {
 	}
 
 	public function discountType(){
-		return $this->belongsTo('s4h\store\Discounts_types\DiscountType');
+		return $this->belongsTo('s4h\store\DiscountsTypes\DiscountType');
 	}
 }

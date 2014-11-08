@@ -2,6 +2,7 @@
 
 @section('title')
 {{--{{ Lang::get('modulo.variable') }}--}}
+{{ trans('discounts.list.title') }}
 @stop
 
 @section('content')
@@ -9,13 +10,13 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>List discounts</h5>
+				<h5>{{ trans('discounts.list.title') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<?php
 					$columns = [
-						'Code',
-						'Discount type',
+						trans('discounts.list.Code'),
+						trans('discounts.list.Code'),
 						'Name',
 						'Value',
 						'Percent',
