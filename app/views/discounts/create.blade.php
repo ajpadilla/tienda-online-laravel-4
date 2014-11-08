@@ -13,102 +13,99 @@
 				<h5>{{	trans('discounts.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
-				{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
-				<div class="form-group">
-					{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('code',null, ['class' => 'form-control','id' =>'code']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('name', trans('discounts.labels.name'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('name',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('description', trans('discounts.labels.description'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('value',  trans('discounts.labels.value'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('value',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('percent', trans('discounts.labels.percent'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('percent',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('quantity', trans('discounts.labels.quantity'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('quantity',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('quantity_per_user', trans('discounts.labels.quantity_per_user'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('quantity_per_user',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('active', trans('discounts.labels.active'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-10">
-						<div class="radio i-checks">
-							<label> 
-								<!--<input type="radio" value="option1" name="a">-->
-								{{ Form::radio('active', '1', 1)}}
-								<i></i> Yes
-							</label>
+				<div class="row">
+					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
+					<div class="col-sm-6 b-r">
+						<div class="form-group">
+							{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('code',null, ['class' => 'form-control','id' =>'code']) }}
+							</div>
 						</div>
-						<div class="radio i-checks">
-							<label> 
-								<!--<input type="radio" value="option1" name="a">--> 
-								{{ Form::radio('active', '0', 0)}}
-								<i></i> No
-							</label>
+						<div class="form-group">
+							{{ Form::label('name', trans('discounts.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('name',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('description', trans('discounts.labels.description'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('value',  trans('discounts.labels.value'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('value',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('percent', trans('discounts.labels.percent'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('percent',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('quantity', trans('discounts.labels.quantity'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('quantity',null, ['class' => 'form-control']) }}
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('from',null, ['class' => 'form-control','id'=>'from']) }}
+
+					<div class="col-sm-6">
+						<div class="form-group">
+							{{ Form::label('quantity_per_user', trans('discounts.labels.quantity_per_user'),['class'=>'col-sm-4 control-label']) }}
+							<div class="col-sm-6 ">
+								{{ Form::text('quantity_per_user',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('active', trans('discounts.labels.active'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								<div class="radio i-checks">
+									<label> 
+										<!--<input type="radio" value="option1" name="a">-->
+										{{ Form::radio('active', '1', 1)}}
+										<i></i> Yes
+									</label>
+								</div>
+								<div class="radio i-checks">
+									<label> 
+										<!--<input type="radio" value="option1" name="a">--> 
+										{{ Form::radio('active', '0', 0)}}
+										<i></i> No
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('from',null, ['class' => 'form-control','id'=>'from']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('to',null, ['class' => 'form-control','id'=>'to']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('discount_type_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('discount_type_id',$discountTypes,null,array('class' => 'form-control')) }}
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								{{ Form::submit(trans('discounts.labels.save'), ['class' => 'btn btn-primary']) }}
+							</div>
+						</div>
 					</div>
+					{{ Form::close() }}
 				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('to',null, ['class' => 'form-control','id'=>'to']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('discount_type_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::select('discount_type_id',$discountTypes,null,array('class' => 'form-control')) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-2">
-						{{ Form::submit(trans('discounts.labels.save'), ['class' => 'btn btn-primary']) }}
-					</div>
-				</div>
-				{{ Form::close() }}
-			</div>
 		</div>
 	</div>
 </div>
