@@ -56,7 +56,7 @@ class DiscountController extends \BaseController {
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-				$this->createNewDiscount($input);
+				$this->discountRepository->createNewDiscount($input);
 				return Response::json('Descuento'.' '.$input['name'].' '.'Agregado con exito!');
 			}
 			catch (FormValidationException $e)
@@ -77,7 +77,6 @@ class DiscountController extends \BaseController {
 	{
 		return "Show:".$id;
 	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -112,23 +111,6 @@ class DiscountController extends \BaseController {
 	public function destroy($id)
 	{
 		return "Destroy:".$id;
-	}
-
-	public function createNewDiscount($data = array())
-	{
-		$discount = new Discount;
-		$discount->name = $data['name'];
-		$discount->description = $data['description'];
-		$discount->value = $data['value'];
-		$discount->percent = $data['percent'];
-		$discount->quantity = $data['quantity'];
-		$discount->quantity_per_user = $data['quantity_per_user'];
-		$discount->code = $data['code'];
-		$discount->active = $data['active'];
-		$discount->from = $data['from'];
-		$discount->to = $data['to'];
-		$discount->discount_type_id = $data['discount_type_id'];
-		$this->discountRepository->save($discount);
 	}
 
 	public function getDatatable()
