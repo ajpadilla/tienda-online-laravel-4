@@ -13,7 +13,7 @@ return array(
 	|
 	 */
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -128,6 +128,7 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
+		'Chumper\Datatable\DatatableServiceProvider'
 	),
 
 	/*
@@ -199,6 +200,7 @@ return array(
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
 		'PDF' => 'Barryvdh\DomPDF\Facade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 	),
 
 );

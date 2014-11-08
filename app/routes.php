@@ -19,12 +19,29 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 		'uses' => 'PageController@home'
 	]);
 
+
 	/**
 	* ------------------------------ Rutas para productos -----------------------
 	**/
 	Route::resource('products', 'ProductController',[
 		'only' => ['index', 'create', 'show', 'store', 'update', 'destroy']
 	]);
+
+	/**
+	* ------------------------------ Rutas para Descuentos ----------------------
+	**/
+
+	Route::resource('discounts','DiscountController');
+
+	//Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
+	//Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
+
+	Route::get('delete/{id}','DiscountController@destroy');
+	// Datatable Discounts
+	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
+
+
+	Route::resource('discounts_type','DiscountTypeController');
 
 });
 

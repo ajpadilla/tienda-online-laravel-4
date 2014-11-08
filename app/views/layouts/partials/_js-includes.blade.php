@@ -35,9 +35,6 @@
 <!-- Jquery Form -->
 {{ HTML::script('assets/js/plugins/jQueryForm/jquery.form.min.js'); }}
 
-<!-- Icheck -->
-{{ HTML::script('assets/js/plugins/iCheck/icheck.min.js'); }}
-
 <!-- Chosen -->
 {{ HTML::script('assets/js/plugins/chosen/chosen.jquery.js')}}
 
@@ -48,5 +45,11 @@
 <!-- summernote -->
 {{ HTML::script('assets/js/plugins/summernote/summernote.min.js'); }}
 
+<!-- Jquery UI -->
+{{ HTML::script('assets/js/plugins/jquery-ui/jquery-ui.js'); }}
+
+<!-- Datatable -->
+{{ HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js'); }}
+{{ HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js'); }}
 
 @yield('scripts')

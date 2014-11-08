@@ -43,8 +43,11 @@
 <!-- Fancybox -->
 {{ HTML::style('assets/js/plugins/fancybox/jquery.fancybox.css'); }}
 
-<!-- IiCheck -->
-{{ HTML::style('assets/css/plugins/iCheck/custom.css'); }}
+<!-- Jquery UI -->
+{{ HTML::style('assets/js/plugins/jquery-ui/jquery-ui.css'); }}
+
+<!-- Datatable -->
+{{ HTML::style('assets/css/plugins/dataTables/dataTables.bootstrap.css'); }}
 
 <!-- Chosen -->
 {{ HTML::style('assets/css/plugins/chosen/chosen.css'); }}
