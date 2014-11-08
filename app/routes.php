@@ -27,6 +27,7 @@ function () {
 	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
 	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
 	Route::get('delete/{id}','DiscountController@destroy');
+	Route::post('verificarCodigo','DiscountController@verificarCodigo');
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
 
 	/**
