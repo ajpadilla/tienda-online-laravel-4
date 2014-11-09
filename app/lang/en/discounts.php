@@ -29,7 +29,7 @@
 			'digits' => 'Please enter whole numbers only.',
 			'date' => 'Please enter a valid date.',
 			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
-			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and / or dash.'
+			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
 		'date' => 'yy-mm-dd',
 		'message1' =>'Discount',
