@@ -122,4 +122,16 @@ class LanguageController extends \BaseController {
 		return Response::json(array('respuesta' => 'false'));
 	}
 
+	 public function returnLanguages(){
+          $response = array();
+          $languages = $this->languageRepository->getAll()->lists('iso_code', 'id');
+          if(count($languages) > 0) 
+          {
+              $response['success'] = true;
+              $response['languages'] = $languages;
+               return $response;
+          }
+      }
+
+
 }
