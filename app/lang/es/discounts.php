@@ -18,6 +18,8 @@
 			'to' => 'Hasta',
 			'discount_type' => 'Tipo de descuento:',
 			'save' => 'Agregar',
+			'Yes' => 'Si',
+			'No' => 'No'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
@@ -45,8 +47,6 @@
 			'From'=>'Desde',
 			'To'=>'Hasta',
 			'Actions'=>'Acciones',
-			''=>'',
-			''=>''
 		),
 	);
  
