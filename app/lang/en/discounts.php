@@ -32,6 +32,7 @@
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
 		'date' => 'yy-mm-dd',
+		'date2' => 'Y-m-d',
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
 		'alert' => '¡The discount code is already registered!.',
