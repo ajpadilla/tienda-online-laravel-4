@@ -83,13 +83,13 @@
 						<div class="form-group">
 							{{ Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('from',null, ['class' => 'form-control','id'=>'from']) }}
+								{{ Form::text('from',null, ['class' => 'form-control']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('to',null, ['class' => 'form-control','id'=>'to']) }}
+								{{ Form::text('to',null, ['class' => 'form-control']) }}
 							</div>
 						</div>
 						<div class="form-group">
@@ -142,11 +142,18 @@
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-            }, '{{ trans('discounts.validation.onlyLettersNumbersAndSpaces') }}');
+       	}, '{{ trans('discounts.validation.onlyLettersNumbersAndSpaces') }}');
 
 		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-            }, '{{ trans('discounts.validation.onlyLettersNumbersAndDash') }}');
+        }, '{{ trans('discounts.validation.onlyLettersNumbersAndDash') }}');
+
+		jQuery.validator.addMethod('customDateValidator', function(value, element) {
+        	// parseDate throws exception if the value is invalid
+       	 	try{
+       	 		jQuery.datepicker.parseDate( '{{ trans('discounts.date') }}' , value);return true;}
+        	catch(e){return false;}
+    	},'{{ trans('discounts.validation.date') }}');
 
 		$('#formCreateDiscount').validate({
 
@@ -200,11 +207,11 @@
 				},
 				from:{
 					required:!0,
-					//date: true
+					customDateValidator: true
 				},
 				to:{
 					required:!0,
-					//date: true
+					customDateValidator: true
 				},
 				discount_type_id:{
 					required:!0,
