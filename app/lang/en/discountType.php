@@ -1,24 +1,24 @@
 <?php 
 	return array(
-		"create" => "crear/TypoDescuento",
-		"store" => "agregar/TypoDescuento",
-		"title" => "Agregar Tipo de descuento",
-		"subtitle" => "Crear nuevo  tipo de descuento",
+		"create" => "create/discountType",
+		"store" => "add/discountType",
+		"title" => "Add Discount Type",
+		"subtitle" => "Create new discount type",
 		"labels" => array(
-			'name' =>'Nombre:',
-			'save' => 'Agregar',
+			'name' =>'Name:',
+			'save' => 'Save',
 		),
 		"validation" => array(
-			'required' => 'Campo obligatorio.',
-			'rangelength' => 'Por favor, introduzca un valor entre ',
-			'characters' => 'caracteres.',
-			'number' => 'Por favor, introduzca un número válido.',
-			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
-			'date' => 'Por favor, Ingrese una fecha valida.',
-			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
-			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
+			'required' => 'The field is required.',
+			'rangelength' => 'Please enter a value between ',
+			'characters' => 'Characters.',
+			'number' => 'The field must be a number.',
+			'digits' => 'Please enter whole numbers only.',
+			'date' => 'Please enter a valid date.',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
+			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
-		'message1' =>'Nuevo tipo de descuento',
-		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!'
+		'message1' =>'Discount',
+		'message2' =>'Successfully added!.',
+		'alert' => '¡The discount code is already registered!.'
 	);
