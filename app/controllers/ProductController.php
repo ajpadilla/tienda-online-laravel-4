@@ -25,8 +25,7 @@ class ProductController extends \BaseController {
 
 	public function index()
 	{
-		return 'en construcción';
-		// return View::make('products.index');
+		return View::make('products.index');
 	}
 
 	/**
@@ -88,8 +87,69 @@ class ProductController extends \BaseController {
 		/*$user = Auth::user();
 		$product->associate($user);*/
 		$this->productRepo->save($product);
-		$product->categories()->sync($data['categories']);
+		if (!is_null($data['categories']))
+			$product->categories()->sync($data['categories']);
 
+	}
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->discountRepository->getAll())
+			->showColumns('Photo','name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
+			->searchColumns('Photo','name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
+			->orderColumns('Photo','name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings');
+
+		$collection->addColumn('Photo', function($model)
+		{
+			return $model->Photo;
+		});
+
+		$collection->addColumn('name', function($model)
+		{
+			 return $model->name;
+		});
+
+		$collection->addColumn('price', function($model)
+		{
+			return $model->price;
+		});
+
+		$collection->addColumn('quantity', function($model)
+		{
+			return $model->quantity;
+		});
+
+		$collection->addColumn('active', function($model)
+		{
+			return $model->getActivoShow();
+		});
+
+		$collection->addColumn('accept_barter', function($model)
+		{
+			return $model->getActivoShow();
+		});
+
+		$collection->addColumn('category', function($model)
+		{
+			return $model->category;
+		});
+
+		$collection->addColumn('ratings', function($model)
+		{
+			return $model->ratings;
+		});
+
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
+					<br />
+					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
 	}
 
 }
