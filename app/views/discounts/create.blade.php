@@ -99,6 +99,11 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<div class="col-sm-6">
+								{{ Form::text('lang_id',null, ['class' => 'form-control','id'=>'lang_id']) }}
+							</div>
+						</div>
+						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
 								{{ Form::submit(trans('discounts.labels.save'), ['class' => 'btn btn-primary']) }}
 							</div>
