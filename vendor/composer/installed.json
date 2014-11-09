@@ -1055,17 +1055,17 @@
     },
     {
         "name": "patchwork/utf8",
-        "version": "v1.1.25",
-        "version_normalized": "1.1.25.0",
+        "version": "v1.1.26",
+        "version_normalized": "1.1.26.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/nicolas-grekas/Patchwork-UTF8.git",
-            "reference": "2d43bd047b120279511d45e76e61c5a9812d9a83"
+            "url": "https://github.com/tchwork/utf8.git",
+            "reference": "6b8e46603b49ee87ad6bceb314da94cc04ffcdce"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nicolas-grekas/Patchwork-UTF8/zipball/2d43bd047b120279511d45e76e61c5a9812d9a83",
-            "reference": "2d43bd047b120279511d45e76e61c5a9812d9a83",
+            "url": "https://api.github.com/repos/tchwork/utf8/zipball/6b8e46603b49ee87ad6bceb314da94cc04ffcdce",
+            "reference": "6b8e46603b49ee87ad6bceb314da94cc04ffcdce",
             "shasum": ""
         },
         "require": {
@@ -1077,7 +1077,7 @@
             "ext-intl": "Use Intl for best performance",
             "ext-mbstring": "Use Mbstring for best performance"
         },
-        "time": "2014-08-05 08:00:32",
+        "time": "2014-11-08 10:13:25",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1098,13 +1098,13 @@
         "authors": [
             {
                 "name": "Nicolas Grekas",
-                "email": "p@tchwork.com",
-                "role": "Developer"
+                "email": "p@tchwork.com"
             }
         ],
-        "description": "Extensive, portable and performant handling of UTF-8 and grapheme clusters for PHP",
-        "homepage": "https://github.com/nicolas-grekas/Patchwork-UTF8",
+        "description": "Portable and performant UTF-8, Unicode and Grapheme Clusters for PHP",
+        "homepage": "https://github.com/tchwork/utf8",
         "keywords": [
+            "grapheme",
             "i18n",
             "unicode",
             "utf-8",
@@ -2116,12 +2116,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/stripe/stripe-php.git",
-            "reference": "7192b556801973954e21bf37ec572772c29727c0"
+            "reference": "a00f65a8a0293612a6c9c147c1701d8bf07f3772"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/7192b556801973954e21bf37ec572772c29727c0",
-            "reference": "7192b556801973954e21bf37ec572772c29727c0",
+            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/a00f65a8a0293612a6c9c147c1701d8bf07f3772",
+            "reference": "a00f65a8a0293612a6c9c147c1701d8bf07f3772",
             "shasum": ""
         },
         "require": {
@@ -2133,7 +2133,7 @@
         "require-dev": {
             "simpletest/simpletest": "*"
         },
-        "time": "2014-10-09 01:21:53",
+        "time": "2014-11-07 05:52:05",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2258,12 +2258,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/fzaninotto/Faker.git",
-            "reference": "a845fa37a6c38000c9061aa9afc329057d502eec"
+            "reference": "8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a845fa37a6c38000c9061aa9afc329057d502eec",
-            "reference": "a845fa37a6c38000c9061aa9afc329057d502eec",
+            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2",
+            "reference": "8f673c9e31c1aa5ce1e4d289be55c2384ee0ffd2",
             "shasum": ""
         },
         "require": {
@@ -2273,7 +2273,7 @@
             "phpunit/phpunit": "~4.0",
             "squizlabs/php_codesniffer": "~1.5"
         },
-        "time": "2014-11-04 21:37:14",
+        "time": "2014-11-07 08:38:46",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3267,17 +3267,17 @@
     },
     {
         "name": "aws/aws-sdk-php",
-        "version": "2.7.2",
-        "version_normalized": "2.7.2.0",
+        "version": "2.7.3",
+        "version_normalized": "2.7.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/aws/aws-sdk-php.git",
-            "reference": "21115c088549520a8b268557601987c12d835f4b"
+            "reference": "142116308c921e18777fb73a46e87f7f899209b2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/21115c088549520a8b268557601987c12d835f4b",
-            "reference": "21115c088549520a8b268557601987c12d835f4b",
+            "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/142116308c921e18777fb73a46e87f7f899209b2",
+            "reference": "142116308c921e18777fb73a46e87f7f899209b2",
             "shasum": ""
         },
         "require": {
@@ -3298,7 +3298,7 @@
             "monolog/monolog": "Adds support for logging HTTP requests and responses",
             "symfony/yaml": "Eases the ability to write manifests for creating jobs in AWS Import/Export"
         },
-        "time": "2014-10-23 20:13:09",
+        "time": "2014-11-06 22:36:17",
         "type": "library",
         "extra": {
             "branch-alias": {

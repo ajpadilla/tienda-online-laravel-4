@@ -49,4 +49,10 @@
 <!-- Datatable -->
 {{ HTML::style('assets/css/plugins/dataTables/dataTables.bootstrap.css'); }}
 
+<!-- Chosen -->
+{{ HTML::style('assets/css/plugins/chosen/chosen.css'); }}
+
+<!-- summernote -->
+{{ HTML::style('assets/css/plugins/summernote/summernote.css'); }}
+
 @yield('styles')

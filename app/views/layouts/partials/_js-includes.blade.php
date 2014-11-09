@@ -32,12 +32,18 @@
 <!-- Jquery preimage -->
 {{ HTML::script('assets/js/plugins/preimage/preimage.js'); }}
 
+<!-- Jquery Form -->
+{{ HTML::script('assets/js/plugins/jQueryForm/jquery.form.min.js'); }}
+
+<!-- Chosen -->
+{{ HTML::script('assets/js/plugins/chosen/chosen.jquery.js')}}
+
 <!-- Jquery Fancybox -->
 {{ HTML::script('assets/js/plugins/fancybox/jquery.fancybox.js'); }}
 {{ HTML::script('assets/js/plugins/fancybox/jquery.fancybox.pack.js'); }}
 
-<!-- Jquery Form -->
-{{ HTML::script('assets/js/plugins/jQueryForm/jquery.form.js'); }}
+<!-- summernote -->
+{{ HTML::script('assets/js/plugins/summernote/summernote.min.js'); }}
 
 <!-- Jquery UI -->
 {{ HTML::script('assets/js/plugins/jquery-ui/jquery-ui.js'); }}
@@ -46,6 +52,7 @@
 {{ HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js'); }}
 
+<<<<<<< HEAD
 <script>
 	$(document).ready(function () {
 		$.ajax({
@@ -78,3 +85,6 @@
 
 
 	
+=======
+@yield('scripts')
+>>>>>>> eb61758cc7cf6db30c8f28c15ba6f90b15008a1f

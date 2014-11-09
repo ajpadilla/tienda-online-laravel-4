@@ -21,12 +21,23 @@ function () {
 		'uses' => 'PageController@home'
 	]);
 
+	
 	/**
-		* ------------------------------ Rutas para descuentos -----------------------
+	* ------------------------------ Rutas para productos -----------------------
 	**/
+	Route::resource('products', 'ProductController',[
+		'only' => ['index', 'create', 'show', 'store', 'update', 'destroy']
+	]);
+
+	/**
+	* ------------------------------ Rutas para Descuentos ----------------------
+	**/
+
+
 	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
 	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
 	Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
+
 	Route::get('delete/{id}','DiscountController@destroy');
 	Route::post('checkCode','DiscountController@checkCode');
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
