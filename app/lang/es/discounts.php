@@ -18,6 +18,8 @@
 			'to' => 'Hasta',
 			'discount_type' => 'Tipo de descuento:',
 			'save' => 'Agregar',
+			'Yes' => 'Si',
+			'No' => 'No'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
@@ -26,7 +28,7 @@
 			'number' => 'Por favor, introduzca un número válido.',
 			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
 			'date' => 'Por favor, Ingrese una fecha valida.',
-			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
+			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
 		'date' => 'dd-mm-yy',
@@ -38,15 +40,13 @@
 			'subtitle'=>'Lista de descuentos',
 			'Code'=>'Codigo',
 			'Discount_type'=>'Tipo de descuento',
-			'Name'=>'',
-			'Value'=>'',
-			'Percent'=>'',
-			'Active'=>'',
-			'From'=>'',
-			'To'=>'',
-			'Actions'=>'',
-			''=>'',
-			''=>''
+			'Name'=>'Nombre',
+			'Value'=>'Monto',
+			'Percent'=>'Porcentaje',
+			'Active'=>'Activo',
+			'From'=>'Desde',
+			'To'=>'Hasta',
+			'Actions'=>'Acciones',
 		),
 	);
  

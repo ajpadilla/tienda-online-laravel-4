@@ -16,14 +16,14 @@
 				<?php
 					$columns = [
 						trans('discounts.list.Code'),
-						trans('discounts.list.Code'),
-						'Name',
-						'Value',
-						'Percent',
-						'Active',
-						'From',
-						'To',
-						'Actions'
+						trans('discounts.list.Discount_type'),
+						trans('discounts.list.Name'),
+						trans('discounts.list.Value'),
+						trans('discounts.list.Percent'),
+						trans('discounts.list.Active'),
+						trans('discounts.list.From'),
+						trans('discounts.list.To'),
+						trans('discounts.list.Actions')
 				];
 				$table = Datatable::table()
 				->addColumn($columns)

@@ -13,7 +13,6 @@
 				<h5>{{	trans('discounts.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
-<<<<<<< HEAD
 				<div class="row">
 					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
 					<div class="col-sm-6 b-r">
@@ -52,72 +51,6 @@
 							<div class="col-sm-6">
 								{{ Form::text('quantity',null, ['class' => 'form-control']) }}
 							</div>
-=======
-				{{ Form::open(['route' => 'discounts.store','class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
-				<div class="form-group">
-					{{ Form::label('name', 'Name:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('name',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('description', 'Description:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('value', 'Value:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('value',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('percent', 'Percent:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('percent',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('quantity', 'Quantity:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('quantity',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('quantity_per_user', 'Quantity Per User:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('quantity_per_user',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('code', 'Code:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('code',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('active', 'Active:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-10">
-						<div class="radio i-checks">
-							<label>
-								<!--<input type="radio" value="option1" name="a">-->
-								{{ Form::radio('active', '1', 1)}}
-								<i></i> Yes
-							</label>
-						</div>
-						<div class="radio i-checks">
-							<label>
-								<!--<input type="radio" value="option1" name="a">-->
-								{{ Form::radio('active', '0', 0)}}
-								<i></i> No
-							</label>
->>>>>>> eb61758cc7cf6db30c8f28c15ba6f90b15008a1f
 						</div>
 					</div>
 
@@ -135,14 +68,14 @@
 									<label> 
 										<!--<input type="radio" value="option1" name="a">-->
 										{{ Form::radio('active', '1', 1)}}
-										<i></i> Yes
+										<i></i> {{ trans('discounts.labels.Yes') }}
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label> 
 										<!--<input type="radio" value="option1" name="a">--> 
 										{{ Form::radio('active', '0', 0)}}
-										<i></i> No
+										<i></i> {{ trans('discounts.labels.No') }}
 									</label>
 								</div>
 							</div>
@@ -185,7 +118,8 @@
 
 @section('scripts')
 <script>
-	$(document).ready(function () {
+	$(document).ready(function () 
+	{
 		$('.i-checks').iCheck({
 			checkboxClass: 'icheckbox_square-green',
 			radioClass: 'iradio_square-green',
@@ -203,13 +137,7 @@
 			showButtonPanel: true,
 			changeMonth: true,
 			changeYear: true,
-<<<<<<< HEAD
-			yearRange: '2014:2030', 
 			dateFormat: '{{ trans('discounts.date') }}',
-=======
-			yearRange: '2014:2030',
-			dateFormat: 'yy-mm-dd'
->>>>>>> eb61758cc7cf6db30c8f28c15ba6f90b15008a1f
 		});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
@@ -341,17 +269,10 @@
 
 		});
 
-<<<<<<< HEAD
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
 				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
-=======
-		var options = {
-				beforeSubmit:  showRequest,  // pre-submit callback
-				success:       showResponse,  // post-submit callback
-				url:  '{{URL::route('discounts.store')}}',
->>>>>>> eb61758cc7cf6db30c8f28c15ba6f90b15008a1f
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
@@ -379,11 +300,8 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-<<<<<<< HEAD
 			$('#formCreateDiscount').resetForm();
 		} 						
-=======
-		}
->>>>>>> eb61758cc7cf6db30c8f28c15ba6f90b15008a1f
+
 </script>
 @stop
