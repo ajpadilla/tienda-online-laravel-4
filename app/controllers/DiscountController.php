@@ -59,7 +59,7 @@ class DiscountController extends \BaseController {
 			{
 				$this->registerDiscountForm->validate($input);
 				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -154,12 +154,12 @@ class DiscountController extends \BaseController {
 
 		$collection->addColumn('from', function($model)
 		{
-			return $model->from;
+			return date( trans('discounts.date2') ,strtotime($model->from));
 		});
 
 		$collection->addColumn('to', function($model)
 		{
-			return $model->to;
+			return date(trans('discounts.date2') ,strtotime($model->to));
 		});
 
 		/*$collection->addColumn('Actions',function($model){
