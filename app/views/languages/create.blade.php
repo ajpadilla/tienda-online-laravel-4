@@ -61,6 +61,7 @@
 	</div>
 @stop
 
+
 @section('scripts')
 <script>
 	$(document).ready(function () {

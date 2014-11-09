@@ -46,4 +46,35 @@
 {{ HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js'); }}
 
+<script>
+	$(document).ready(function () {
+		$.ajax({
+			type: 'GET',
+			url:'{{ URL::to('/returnLanguages/') }}',
+			dataType:'json',
+			success: function(response) {
+				if (response.success == true) {
+					$('#language').html('');
+					$('#language').append('<option value=\"\">{{ Lang::get('menu.language') }}</option>');
+					$.each(response.languages,function (k,v){
+						$('#language').append('<option value=\"'+k+'\">'+v+'</option>');
+					});
+				}else{
+					$('#language').html('');
+					$('#language').append('<option value=\"\">{{ Lang::get('menu.language') }} </option>');
+				}
+			},
+			error : function(jqXHR, status, error) {
+				console.log('Disculpe, existió un problema');
+			},
+		});
+		$('select#language').on('change',function(){
+    		var valor = $(this).val();
+    		$('#lang_id').val(valor);
+		});
+	});
+</script>
 @yield('scripts')
+
+
+	

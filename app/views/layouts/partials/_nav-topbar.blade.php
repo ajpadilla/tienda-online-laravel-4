@@ -7,6 +7,11 @@
                 </form>
         </div>
         <ul class="nav navbar-top-links navbar-right">
+             <li>
+                <select  class="form-control m-b" name="language" id="language">
+                    <option selected>{{ Lang::get('menu.language') }}</option>
+                </select>
+            </li>
             <li>
                 <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
             </li>
@@ -110,6 +115,7 @@
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>
+           
         </ul>
     </nav>
 </div>
