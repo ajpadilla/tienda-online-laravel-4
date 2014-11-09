@@ -28,7 +28,7 @@
 			'number' => 'Por favor, introduzca un número válido.',
 			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
 			'date' => 'Por favor, Ingrese una fecha valida.',
-			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
+			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
 		'date' => 'dd-mm-yy',
