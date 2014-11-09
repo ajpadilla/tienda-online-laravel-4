@@ -68,14 +68,14 @@
 									<label> 
 										<!--<input type="radio" value="option1" name="a">-->
 										{{ Form::radio('active', '1', 1)}}
-										<i></i> Yes
+										<i></i> {{ trans('discounts.labels.Yes') }}
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label> 
 										<!--<input type="radio" value="option1" name="a">--> 
 										{{ Form::radio('active', '0', 0)}}
-										<i></i> No
+										<i></i> {{ trans('discounts.labels.No') }}
 									</label>
 								</div>
 							</div>
