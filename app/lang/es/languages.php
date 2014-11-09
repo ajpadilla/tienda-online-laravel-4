@@ -27,23 +27,12 @@
 			'onlyLetters' => 'Ingrese solo letras por favor!.'
 		),
 		'date' => 'dd-mm-yy',
-		'message1' =>'lenguaje',
+		'message1' =>'Lenguaje',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El codigo del lenguaje ya se encuentra registrado!',
 		'list' =>array(
 			'title' => 'Listado de lenguajes',
 			'subtitle'=>'Lista de lenguajes',
-			'Code'=>'Código',
-			'Discount_type'=>'Tipo de lenguaje',
-			'Name'=>'',
-			'Value'=>'',
-			'Percent'=>'',
-			'Active'=>'',
-			'From'=>'',
-			'To'=>'',
-			'Actions'=>'',
-			''=>'',
-			''=>''
 		),
 	);
  
