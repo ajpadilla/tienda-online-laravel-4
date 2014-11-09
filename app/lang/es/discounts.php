@@ -32,6 +32,7 @@
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
 		'date' => 'dd-mm-yy',
+		'date2' => 'd-m-Y',
 		'message1' =>'Descuento',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El codigo del descuento ya se encuentra registrado!',
