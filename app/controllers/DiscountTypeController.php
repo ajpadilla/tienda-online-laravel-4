@@ -113,9 +113,10 @@ class DiscountTypeController extends \BaseController {
 
 	public function checkName()
 	{
+		$response = array();
 		if(Request::ajax()) 
 		{
-			$discount_type = $this->discountTypeRepository->getName(Input::get('name'));
+			$discount_type = $this->discountTypeRepository->getName(Input::get('name'), Session::get('language_id'));
 			if(count($discount_type) > 0){
 				return Response::json(false);
 			}else{

@@ -146,9 +146,4 @@ class LanguageController extends \BaseController {
 		}
 	}
 
-	public function mostrar()
-	{
-		return Session::get('language_id');
-	}
-
 }
