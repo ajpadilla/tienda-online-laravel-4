@@ -15,7 +15,7 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Bienvenido a nuestro store.</span>
+                <span class="m-r-sm text-muted welcome-message">{{ Lang::get('menu.welcome-message') }}</span>
             </li>
 			<li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -92,7 +92,7 @@
             </li>
             <li>
                 <a href="login.html">
-                    <i class="fa fa-sign-out fa-lg"></i> Log out
+                    <i class="fa fa-sign-out fa-lg"></i> {{ Lang::get('menu.log-out') }}
                 </a>
             </li>
            
