@@ -122,16 +122,33 @@ class LanguageController extends \BaseController {
 		return Response::json(array('respuesta' => 'false'));
 	}
 
-	 public function returnLanguages(){
-          $response = array();
-          $languages = $this->languageRepository->getAll()->lists('iso_code', 'id');
-          if(count($languages) > 0) 
-          {
-              $response['success'] = true;
-              $response['languages'] = $languages;
-               return $response;
-          }
-      }
+	public function returnLanguages(){
+		if(Request::ajax()){
+			$response = array();
+			$languages = $this->languageRepository->getAll()->lists('iso_code', 'id');
+			if(count($languages) > 0) 
+			{
+				$response['success'] = true;
+				$response['languages'] = $languages;
+				return $response;
+			}
+		}
+		
+	}
 
+	public function getIdLanguage()
+	{
+		if (Request::ajax()) {
+			Session::put('language_id', Input::get('id'));
+			$response['success'] = true;
+			$response['language_id'] = Input::get('id');
+			return $response;
+		}
+	}
+
+	public function mostrar()
+	{
+		return Session::get('language_id');
+	}
 
 }

@@ -75,8 +75,21 @@
 			},
 		});
 		$('select#language').on('change',function(){
-    		var valor = $(this).val();
-    		$('#lang_id').val(valor);
+    		//var id = $(this).val();
+    		//$('#lang_id').val(valor);
+
+    		$.ajax({
+    			type:'POST',
+    			url:'{{ URL::to('/getIdLanguage/') }}',
+    			data:{ id: $(this).val() },
+    			dataType:'json',
+    			success : function(response) {
+    				console.log(response);
+    			},
+    			error : function(jqXHR, status, error) {
+    				console.log('Disculpe, existió un problema');
+    			},
+    		});
 		});
 	});
 </script>
