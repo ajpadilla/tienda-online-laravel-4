@@ -8,8 +8,9 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">{{trans('menu.language')}}</a>
-                <i class="fa fa-flag fa-lg"> {{ Lang::get('menu.language') }}</i>
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    <i class="fa fa-flag fa-lg"> {{ Lang::get('menu.language') }}</i>
+                </a>
                 <ul class="dropdown-menu">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                     <li>
