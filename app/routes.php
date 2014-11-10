@@ -27,6 +27,9 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 		'only' => ['index', 'create', 'show', 'store', 'update', 'destroy']
 	]);
 
+	//Datatable Products
+	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getDatatable'));
+
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
