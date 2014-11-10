@@ -116,7 +116,7 @@ class DiscountTypeController extends \BaseController {
 		$response = array();
 		if(Request::ajax()) 
 		{
-			$discount_type = $this->discountTypeRepository->getName(Input::get('name'), Session::get('language_id'));
+			$discount_type = $this->discountTypeRepository->getName(Input::get('name'));
 			if(count($discount_type) > 0){
 				return Response::json(false);
 			}else{
