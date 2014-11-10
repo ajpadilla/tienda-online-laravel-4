@@ -50,7 +50,7 @@
 				name:{
 					required:!0,
 					onlyLettersNumbersAndSpaces: true,
-					remote:
+					/*remote:
 						{
 							url:'{{ URL::to('/checkName/') }}',
 							type: 'POST',
@@ -63,7 +63,7 @@
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						} 
+						} */
 				},
 			},
 			messages:{
