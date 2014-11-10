@@ -46,13 +46,14 @@ class DiscountTypeController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
-			$input = Input::all();
+			$input = array();
+			$input['name'] = Input::get('name');
+			$input['language_id'] = Session::get('language_id');
+			//dd($input);
 			try
 			{
 				$this->registerDiscountTypeForm->validate($input);
-				$discount_type = new DiscountType;
-				$discount_type->name = $input['name'];
-				$this->discountTypeRepository->save($discount_type);
+				$this->discountTypeRepository->createNewDiscountType($input);
 				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
 			}
 			catch (FormValidationException $e)
