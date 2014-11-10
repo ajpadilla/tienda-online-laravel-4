@@ -14,50 +14,33 @@
             </form>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-             <li>
-                <select  class="form-control m-b" name="language" id="language">
-                    <option selected>{{ Lang::get('menu.language') }}</option>
-                </select>
-            </li>
             <li>
                 <span class="m-r-sm text-muted welcome-message">Bienvenido a nuestro store.</span>
             </li>
 			<li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-flag"> {{ Lang::get('menu.language') }}</i>
+                    <i class="fa fa-flag fa-lg"> {{ Lang::get('menu.language') }}</i>
                     {{--<span class="label label-warning">16</span>--}}
                 </a>
-                <ul class="dropdown-menu dropdown-messages">
+                <ul class="dropdown-menu">
                     <li>
-                        <div class="dropdown-messages-box">
-                            {{--<a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a7.jpg">
-                            </a>--}}
-                            <div class="media-body">
+                        <div class="dropdown">
+                            <a href="profile.html" class="pull-left">
+                                Otro Idioma
+                            </a>
+                            {{--<div class="media-body">
                                 <small class="pull-right">Otro Idioma</small>
-                                {{--<strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>--}}
-                            </div>
+                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                            </div>--}}
                         </div>
                     </li>
                     <li class="divider"></li>
-                    <li>
-                        <div class="dropdown-messages-box">
-                            {{--<a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a4.jpg">
-                            </a>--}}
-                            <div class="media-body ">
-                                <small class="pull-right text-navy">Otro Idioma</small>
-                                {{--<strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>--}}
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-shopping-cart"></i>
+                    <i class="fa fa-shopping-cart fa-lg"></i>
                     <span class="label label-warning">16</span>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
@@ -75,19 +58,6 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <div class="dropdown-messages-box">
-                            <a href="profile.html" class="pull-left">
-                                <img alt="image" class="img-circle" src="img/a4.jpg">
-                            </a>
-                            <div class="media-body ">
-                                <small class="pull-right text-navy">5h ago</small>
-                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                         <div class="text-center link-block">
                             <a href="mailbox.html">
                                 <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
@@ -98,31 +68,13 @@
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    <i class="fa fa-check-square-o fa-lg"></i>  <span class="label label-primary">8</span>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
                     <li>
                         <a href="mailbox.html">
                             <div>
                                 <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                <span class="pull-right text-muted small">4 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="profile.html">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 minutes ago</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="grid_options.html">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
                                 <span class="pull-right text-muted small">4 minutes ago</span>
                             </div>
                         </a>
@@ -140,7 +92,7 @@
             </li>
             <li>
                 <a href="login.html">
-                    <i class="fa fa-sign-out"></i> Log out
+                    <i class="fa fa-sign-out fa-lg"></i> Log out
                 </a>
             </li>
            
