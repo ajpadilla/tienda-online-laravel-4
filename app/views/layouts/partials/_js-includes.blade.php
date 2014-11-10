@@ -52,7 +52,7 @@
 {{ HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js'); }}
 
-<<<<<<< HEAD
+s
 <script>
 	$(document).ready(function () {
 		$.ajax({
@@ -82,9 +82,3 @@
 	});
 </script>
 @yield('scripts')
-
-
-	
-=======
-@yield('scripts')
->>>>>>> eb61758cc7cf6db30c8f28c15ba6f90b15008a1f
