@@ -47,7 +47,7 @@ function () {
 	**/
 	Route::get(LaravelLocalization::transRoute('discountType.create'),'DiscountTypeController@create');
 	Route::post(LaravelLocalization::transRoute('discountType.store'),'DiscountTypeController@store');
-	//Route::post('checkName','DiscountTypeController@checkName');
+	Route::post('checkName','DiscountTypeController@checkName');
 
 	/**
 		* ------------------------------ Rutas para lenguajes -----------------------
