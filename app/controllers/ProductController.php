@@ -10,15 +10,15 @@ use Laracasts\Validation\FormValidationException;
 
 class ProductController extends \BaseController {
 
-	protected $productRepo;
-	protected $RegisterProductForm;
+	protected $productRepository;
+	protected $registerProductForm;
 	protected $categoryRepository;
 	protected $conditionRepository;
 
-	public function __construct(RegisterProductForm $registerProductForm, ProductRepository $productRepo, CategoryRepository $categoryRepository, ConditionRepository $conditionRepository)
+	public function __construct(RegisterProductForm $registerProductForm, ProductRepository $productRepository, CategoryRepository $categoryRepository, ConditionRepository $conditionRepository)
 	{
 		$this->RegisterProductForm = $registerProductForm;
-		$this->productRepo = $productRepo;
+		$this->productRepository = $productRepository;
 		$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 	}
@@ -64,6 +64,19 @@ class ProductController extends \BaseController {
 		}
 	}
 
+	public function show()
+	{
+		return false;
+	}
+
+	public function destroy($id)
+	{
+		$product = Product::find($id);
+		$product->delete();
+		Flash::message('producto borrado  con éxito!');
+		return Redirect::to('products');
+	}
+
 	public function createNewProduct($data = array())
 	{
 		$product = new Product;
@@ -86,7 +99,7 @@ class ProductController extends \BaseController {
 
 		/*$user = Auth::user();
 		$product->associate($user);*/
-		$this->productRepo->save($product);
+		$this->productRepository->save($product);
 		if (!is_null($data['categories']))
 			$product->categories()->sync($data['categories']);
 
@@ -94,14 +107,20 @@ class ProductController extends \BaseController {
 
 	public function getDatatable()
 	{
-		$collection = Datatable::collection($this->discountRepository->getAll())
-			->showColumns('Photo','name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
-			->searchColumns('Photo','name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
-			->orderColumns('Photo','name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings');
+		$collection = Datatable::collection($this->productRepository->getAll())
+			->showColumns('photo', 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
+			->searchColumns( 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
+			->orderColumns('name','price', 'quantity', 'active', 'accept_barter');
 
-		$collection->addColumn('Photo', function($model)
+		$collection->addColumn('photo', function($model)
 		{
-			return $model->Photo;
+			$links = '';
+			if($model->hasPhotos()){
+					$photo = $model->getFirstPhoto();
+					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->name . "' src='" . asset($photo->path . $photo->name) . "'></a>";
+
+			}
+			return $links;
 		});
 
 		$collection->addColumn('name', function($model)
@@ -126,25 +145,40 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('accept_barter', function($model)
 		{
-			return $model->getActivoShow();
+			return $model->getAcceptBarterShow();
 		});
 
 		$collection->addColumn('category', function($model)
 		{
-			return $model->category;
+			if($model->hasCategories())
+			{
+				$links = '<select class="form-control m-b">';
+				foreach ($model->categories as $category) {
+					$links .= '<option>'.$category->name.'</option>';
+				}
+				$links .='</select>';
+
+				return $links;
+			}
+			return '';
 		});
 
 		$collection->addColumn('ratings', function($model)
 		{
-			return $model->ratings;
+			if($model->hasRatings())
+			{
+				return $model->getRating();
+			}
+			return '';
 		});
 
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
+			$links = "<a class='btn btn-info btn-circle' href='" .route('products.show', $model->id). "'><i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
+			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.show', $model->id). "'><i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
+					<form action=".route('products.destroy', $model->id)." method='delete' >
+					<button class='btn btn-danger btn-circle' ><i class='fa fa-times'></i></button></form>";
 
 			return $links;
 		});
