@@ -100,7 +100,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-6">
-								{{ Form::text('lang_id',null, ['class' => 'form-control','id'=>'lang_id']) }}
+								{{ Form::text('lang_id', LaravelLocalization::setLocale(), ['class' => 'form-control','id'=>'lang_id']) }}
 							</div>
 						</div>
 						<div class="form-group">

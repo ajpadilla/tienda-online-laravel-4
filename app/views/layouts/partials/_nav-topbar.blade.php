@@ -7,11 +7,21 @@
                 </form>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-             <li>
-                <select  class="form-control m-b" name="language" id="language">
-                    <option selected>{{ Lang::get('menu.language') }}</option>
-                </select>
+            <li class="dropdown">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    <i class="fa fa-flag fa-lg"> {{ Lang::get('menu.language') }}</i>
+                </a>
+                <ul class="dropdown-menu">
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <li>
+                        <a rel="alternate" id="{{$localeCode}}" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                            {{{ $properties['native'] }}}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
             </li>
+
             <li>
                 <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
             </li>
