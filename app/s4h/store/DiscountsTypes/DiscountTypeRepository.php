@@ -12,9 +12,11 @@ class DiscountTypeRepository {
 		return DiscountType::all();
 	}
 
-	public function getName($name)
-	{
-		return DiscountType::where('name','=',$name)->get();
-	}
 	
+	public function createNewDiscountType($data = array())
+	{
+		$discount_type = new DiscountType;
+		$discount_type->save();
+		$discount_type->languages()->attach($data['language_id'], array('name'=> $data['name']));	
+	}
 }
