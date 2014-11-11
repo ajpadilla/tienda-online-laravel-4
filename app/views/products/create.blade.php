@@ -11,14 +11,14 @@
 				{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
 					<div class="col-lg-7">
 						<div class="form-group">
-							{{ Form::label('name', 'Name:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('description', 'Description:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								<div class="ibox-content no-padding">
 
@@ -28,21 +28,21 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('quantity', 'Quantity:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('price', 'Price:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Price']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('width', 'Dimensions:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								<div class="input-group m-b">
 									{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
@@ -57,7 +57,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('weight', 'Weight:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								<div class="input-group m-b">
 									{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
@@ -68,7 +68,7 @@
 					</div>
 					<div class="col-lg-5">
 						<div class="form-group">
-							{{ Form::label('on_sale', 'On sale:', ['class' => 'col-sm-4 control-label']) }}
+							{{ Form::label('on_sale', trans('products.labels.on_sale'), ['class' => 'col-sm-4 control-label']) }}
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
@@ -86,7 +86,7 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('active', 'Active:', ['class' => 'col-sm-4 control-label']) }}
+							{{ Form::label('active', trans('products.labels.active'), ['class' => 'col-sm-4 control-label']) }}
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
@@ -104,7 +104,7 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('available_for_order', 'Available for order:', ['class' => 'col-sm-4 control-label']) }}
+							{{ Form::label('available_for_order', trans('products.labels.available_for_order'), ['class' => 'col-sm-4 control-label']) }}
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
@@ -120,7 +120,7 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('show_price', 'Show price:', ['class' => 'col-sm-4 control-label']) }}
+							{{ Form::label('show_price', trans('products.labels.show_price'), ['class' => 'col-sm-4 control-label']) }}
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
@@ -138,7 +138,7 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('accept_barter', 'Accept barder:', ['class' => 'col-sm-4 control-label']) }}
+							{{ Form::label('accept_barter', trans('products.labels.accept_barter'), ['class' => 'col-sm-4 control-label']) }}
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
@@ -156,7 +156,7 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('product_for_barter', 'Product for barder:', ['class' => 'col-sm-4 control-label']) }}
+							{{ Form::label('product_for_barter', trans('products.labels.product_for_barter'), ['class' => 'col-sm-4 control-label']) }}
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
@@ -176,7 +176,7 @@
 
 					<div class="col-lg-7">
 						<div class="form-group">
-							{{ Form::label('categories', 'Categories:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::select('categories[]',$categories,null,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
 
@@ -184,7 +184,7 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('condition_id', 'Condition:', ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::select('condition_id',$condition,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
 							</div>
