@@ -15,8 +15,6 @@ class DiscountRepository {
 	public function createNewDiscount($data = array())
 	{
 		$discount = new Discount;
-		$discount->name = $data['name'];
-		$discount->description = $data['description'];
 		$discount->value = $data['value'];
 		$discount->percent = $data['percent'];
 		$discount->quantity = $data['quantity'];
@@ -26,7 +24,8 @@ class DiscountRepository {
 		$discount->from = date("Y-m-d",strtotime($data['from']));
 		$discount->to = date("Y-m-d",strtotime($data['from']));
 		$discount->discount_type_id = $data['discount_type_id'];
-		$this->save($discount);
+		$discount->save();
+		$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}
 
 	public function getCode($code)
