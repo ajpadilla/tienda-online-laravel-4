@@ -63,7 +63,7 @@
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						} 
+						}
 				},
 			},
 			messages:{

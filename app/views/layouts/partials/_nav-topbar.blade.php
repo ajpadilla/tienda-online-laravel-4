@@ -17,25 +17,18 @@
             <li>
                 <span class="m-r-sm text-muted welcome-message">{{ Lang::get('menu.welcome-message') }}</span>
             </li>
-			<li class="dropdown">
+            <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-flag fa-lg"> {{ Lang::get('menu.language') }}</i>
-                    {{--<span class="label label-warning">16</span>--}}
                 </a>
                 <ul class="dropdown-menu">
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                     <li>
-                        <div class="dropdown">
-                            <a href="profile.html" class="pull-left">
-                                Otro Idioma
-                            </a>
-                            {{--<div class="media-body">
-                                <small class="pull-right">Otro Idioma</small>
-                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                            </div>--}}
-                        </div>
+                        <a rel="alternate" id="{{$localeCode}}" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode) }}">
+                            {{{ $properties['native'] }}}
+                        </a>
                     </li>
-                    <li class="divider"></li>
+                    @endforeach
                 </ul>
             </li>
             <li class="dropdown">
@@ -95,7 +88,9 @@
                     <i class="fa fa-sign-out fa-lg"></i> {{ Lang::get('menu.log-out') }}
                 </a>
             </li>
-           
+
         </ul>
     </nav>
 </div>
+
+
