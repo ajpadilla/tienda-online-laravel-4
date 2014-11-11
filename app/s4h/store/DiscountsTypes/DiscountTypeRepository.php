@@ -19,10 +19,7 @@ class DiscountTypeRepository {
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		$discount_type = DiscountTypeLang::select()->where('language_id', '=' , $language->id)
-					->where('name','=',$name)
-					->get();
-		return $discount_type;
+		return $language->discounts_types()->wherePivot('name','=',$name)->get();
 	}
 	
 	public function createNewDiscountType($data = array())
