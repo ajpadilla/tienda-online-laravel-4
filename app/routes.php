@@ -12,7 +12,7 @@
  */
 
 Route::group(array('prefix' => LaravelLocalization::setLocale(),
-					'before' => 'LaravelLocalizationRoutes|LaravelLocalizationRedirectFilter'), 
+					'before' => 'LaravelLocalizationRoutes|LaravelLocalizationRedirectFilter'),
 function () {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
@@ -21,13 +21,14 @@ function () {
 		'uses' => 'PageController@home'
 	]);
 
-	
+
 	/**
 	* ------------------------------ Rutas para productos -----------------------
 	**/
-	Route::resource('products', 'ProductController',[
-		'only' => ['index', 'create', 'show', 'store', 'update', 'destroy']
-	]);
+	Route::get(LaravelLocalization::transRoute('products.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
+	Route::post(LaravelLocalization::transRoute('products.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
+	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
+	Route::get('products/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
 	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getDatatable'));
