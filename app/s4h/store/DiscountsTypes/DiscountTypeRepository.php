@@ -1,6 +1,6 @@
-<?php namespace s4h\store\Discounts_types;
+<?php namespace s4h\store\DiscountsTypes;
 
-use s4h\store\Discounts_types\DiscountType;
+use s4h\store\DiscountsTypes\DiscountType;
 
 class DiscountTypeRepository {
 
@@ -12,5 +12,9 @@ class DiscountTypeRepository {
 		return DiscountType::all();
 	}
 
+	public function getName($name)
+	{
+		return DiscountType::where('name','=',$name)->get();
+	}
 	
 }

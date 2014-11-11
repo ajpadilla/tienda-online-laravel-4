@@ -1,7 +1,8 @@
 @extends('layouts.template')
 
 @section('title')
-{{--{{ Lang::get('modulo.variable') }}--}}
+{{--{{ trans('discounts.labels.name')}}--}}
+{{	trans('discounts.title') }}
 @stop
 
 @section('content')
@@ -9,113 +10,107 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>Create discount</h5>
-				@if ($errors->any())
-				<div class="alert alert-danger">
-					<ul>
-						@foreach($errors->all() as $error)
-						<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-				@endif
+				<h5>{{	trans('discounts.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
-				{{ Form::open(['route' => 'discounts.store','class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
-				<div class="form-group">
-					{{ Form::label('name', 'Name:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('name',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('description', 'Description:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('value', 'Value:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('value',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('percent', 'Percent:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('percent',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('quantity', 'Quantity:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('quantity',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('quantity_per_user', 'Quantity Per User:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('quantity_per_user',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('code', 'Code:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('code',null, ['class' => 'form-control']) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('active', 'Active:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-10">
-						<div class="radio i-checks">
-							<label>
-								<!--<input type="radio" value="option1" name="a">-->
-								{{ Form::radio('active', '1', 1)}}
-								<i></i> Yes
-							</label>
+				<div class="row">
+					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
+					<div class="col-sm-6 b-r">
+						<div class="form-group">
+							{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('code',null, ['class' => 'form-control','id' =>'code']) }}
+							</div>
 						</div>
-						<div class="radio i-checks">
-							<label>
-								<!--<input type="radio" value="option1" name="a">-->
-								{{ Form::radio('active', '0', 0)}}
-								<i></i> No
-							</label>
+						<div class="form-group">
+							{{ Form::label('name', trans('discounts.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('name',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('description', trans('discounts.labels.description'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('value',  trans('discounts.labels.value'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('value',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('percent', trans('discounts.labels.percent'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('percent',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('quantity', trans('discounts.labels.quantity'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('quantity',null, ['class' => 'form-control']) }}
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('from', 'From:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('from',null, ['class' => 'form-control','id'=>'from']) }}
+
+					<div class="col-sm-6">
+						<div class="form-group">
+							{{ Form::label('quantity_per_user', trans('discounts.labels.quantity_per_user'),['class'=>'col-sm-4 control-label']) }}
+							<div class="col-sm-6 ">
+								{{ Form::text('quantity_per_user',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('active', trans('discounts.labels.active'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								<div class="radio i-checks">
+									<label> 
+										<!--<input type="radio" value="option1" name="a">-->
+										{{ Form::radio('active', '1', 1)}}
+										<i></i> {{ trans('discounts.labels.Yes') }}
+									</label>
+								</div>
+								<div class="radio i-checks">
+									<label> 
+										<!--<input type="radio" value="option1" name="a">--> 
+										{{ Form::radio('active', '0', 0)}}
+										<i></i> {{ trans('discounts.labels.No') }}
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('from',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('to',null, ['class' => 'form-control']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('discount_type_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('discount_type_id',$discountTypes,null,array('class' => 'form-control')) }}
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-6">
+								{{ Form::text('lang_id',null, ['class' => 'form-control','id'=>'lang_id']) }}
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								{{ Form::submit(trans('discounts.labels.save'), ['class' => 'btn btn-primary']) }}
+							</div>
+						</div>
 					</div>
+					{{ Form::close() }}
 				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					{{ Form::label('to', 'To:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('to',null, ['class' => 'form-control','id'=>'to']) }}
-					</div>
-				</div>
-				<div class="form-group">
-					{{ Form::label('discount_type_id', 'Discount type:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::select('discount_type_id',$discountTypes,null,array('class' => 'form-control')) }}
-					</div>
-				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-2">
-						{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
-					</div>
-				</div>
-				{{ Form::close() }}
-			</div>
 		</div>
 	</div>
 </div>
@@ -123,7 +118,8 @@
 
 @section('scripts')
 <script>
-	$(document).ready(function () {
+	$(document).ready(function () 
+	{
 		$('.i-checks').iCheck({
 			checkboxClass: 'icheckbox_square-green',
 			radioClass: 'iradio_square-green',
@@ -134,24 +130,30 @@
 			changeMonth: true,
 			changeYear: true,
 			yearRange: '2014:2030',
-			dateFormat: 'yy-mm-dd'
+			dateFormat: '{{ trans('discounts.date') }}',
 		});
 
 		$('#to').datepicker({
 			showButtonPanel: true,
 			changeMonth: true,
 			changeYear: true,
-			yearRange: '2014:2030',
-			dateFormat: 'yy-mm-dd'
+			dateFormat: '{{ trans('discounts.date') }}',
 		});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-            }, 'only letters, numbers and spaces.');
+       	}, '{{ trans('discounts.validation.onlyLettersNumbersAndSpaces') }}');
 
 		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-            }, 'only letters, numbers and dash.');
+        }, '{{ trans('discounts.validation.onlyLettersNumbersAndDash') }}');
+
+		jQuery.validator.addMethod('customDateValidator', function(value, element) {
+        	// parseDate throws exception if the value is invalid
+       	 	try{
+       	 		jQuery.datepicker.parseDate( '{{ trans('discounts.date') }}' , value);return true;}
+        	catch(e){return false;}
+    	},'{{ trans('discounts.validation.date') }}');
 
 		$('#formCreateDiscount').validate({
 
@@ -183,8 +185,21 @@
 				},
 				code:{
 					required:!0,
-					rangelength: [1, 255],
-					onlyLettersNumbersAndDash: true
+					onlyLettersNumbersAndDash: true,
+					 remote:
+						{
+							url:'{{ URL::to('/checkCode/') }}',
+							type: 'POST',
+							data: {
+								code: function() {
+									return $('#code').val();
+								}
+							},
+							dataFilter: function (respuesta) {
+								console.log('consulta:'+respuesta);
+								return respuesta;
+							}
+						} 
 				},
 				active:{
 					required:!0,
@@ -192,15 +207,61 @@
 				},
 				from:{
 					required:!0,
-					date: true
+					customDateValidator: true
 				},
 				to:{
 					required:!0,
-					date: true
+					customDateValidator: true
 				},
 				discount_type_id:{
 					required:!0,
 					digits: true
+				}
+			},
+			messages:{
+				name:{
+					required: '{{ trans('discounts.validation.required') }}',
+					rangelength: '{{ trans('discounts.validation.rangelength') }}'+'[2, 255]'+'{{ trans('discounts.validation.characters') }}',
+				},
+				description:{
+					required: '{{ trans('discounts.validation.required') }}',
+					rangelength: '{{ trans('discounts.validation.rangelength') }}'+'[10, 255]'+'{{ trans('discounts.validation.characters') }}',
+				},
+				value:{
+					required: '{{ trans('discounts.validation.required') }}',
+					number: '{{ trans('discounts.validation.number') }}'
+				},
+				percent:{
+					required: '{{ trans('discounts.validation.required') }}',
+					number: '{{ trans('discounts.validation.number') }}'
+				},
+				quantity:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
+				},
+				quantity_per_user:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
+				},
+				code:{
+					required: '{{ trans('discounts.validation.required') }}',
+					remote: jQuery.validator.format('{{ trans('discounts.alert') }}')
+				},
+				active:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
+				},
+				from:{
+					required: '{{ trans('discounts.validation.required') }}',
+					//date: '{{ trans('discounts.validation.date') }}'
+				},
+				to:{
+					required: '{{ trans('discounts.validation.required') }}',
+					//date: '{{ trans('discounts.validation.date') }}'
+				},
+				discount_type_id:{
+					required: '{{ trans('discounts.validation.required') }}',
+					digits: '{{ trans('discounts.validation.digits') }}'
 				}
 			},
 			highlight:function(element){
@@ -215,10 +276,10 @@
 
 		});
 
-		var options = {
-				beforeSubmit:  showRequest,  // pre-submit callback
-				success:       showResponse,  // post-submit callback
-				url:  '{{URL::route('discounts.store')}}',
+		var options = { 
+				beforeSubmit:  showRequest,  // pre-submit callback 
+				success:       showResponse,  // post-submit callback 
+				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
@@ -246,6 +307,8 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-		}
+			$('#formCreateDiscount').resetForm();
+		} 						
+
 </script>
 @stop

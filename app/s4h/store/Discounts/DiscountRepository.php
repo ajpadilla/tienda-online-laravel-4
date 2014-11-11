@@ -11,4 +11,26 @@ class DiscountRepository {
 	public function getAll(){
 		return Discount::all();
 	}
+
+	public function createNewDiscount($data = array())
+	{
+		$discount = new Discount;
+		$discount->name = $data['name'];
+		$discount->description = $data['description'];
+		$discount->value = $data['value'];
+		$discount->percent = $data['percent'];
+		$discount->quantity = $data['quantity'];
+		$discount->quantity_per_user = $data['quantity_per_user'];
+		$discount->code = $data['code'];
+		$discount->active = $data['active'];
+		$discount->from = date("Y-m-d",strtotime($data['from']));
+		$discount->to = date("Y-m-d",strtotime($data['from']));
+		$discount->discount_type_id = $data['discount_type_id'];
+		$this->save($discount);
+	}
+
+	public function getCode($code)
+	{
+		return Discount::where('code','=',$code)->get();
+	}
 }

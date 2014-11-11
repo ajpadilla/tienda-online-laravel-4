@@ -2,6 +2,7 @@
 
 @section('title')
 {{--{{ Lang::get('modulo.variable') }}--}}
+{{ trans('discountType.title') }}
 @stop
 
 @section('content')
@@ -9,20 +10,24 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>Create discount</h5>
+				<h5>{{ trans('discountType.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
-				{{ Form::open(['route' => 'discounts_type.store','class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
-				<div class="form-group">
-					{{ Form::label('name', 'Name:',['class'=>'col-sm-2 control-label']) }}
-					<div class="col-sm-8">
-						{{ Form::text('name',null, ['class' => 'form-control']) }}
+			<div class="row">
+				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
+				<div class="col-sm-6 b-r">
+					<div class="form-group">
+						{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
+						<div class="col-sm-8">
+							{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
+						</div>
 					</div>
 				</div>
-				<div class="hr-line-dashed"></div>
-				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-2">
-						{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+				<div class="col-sm-6">
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
+						</div>
 					</div>
 				</div>
 				{{ Form::close() }}
@@ -38,13 +43,34 @@
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-        }, 'only letters, numbers and spaces.');
+            }, '{{ trans('discountType.validation.onlyLettersNumbersAndSpaces') }}');
 
 		$('#formCreateDiscountType').validate({
 			rules:{
 				name:{
 					required:!0,
-					onlyLettersNumbersAndSpaces: true
+					onlyLettersNumbersAndSpaces: true,
+					remote:
+						{
+							url:'{{ URL::to('/checkName/') }}',
+							type: 'POST',
+							data: {
+								name: function() {
+									return $('#name').val();
+								}
+							},
+							dataFilter: function (respuesta) {
+								console.log('consulta:'+respuesta);
+								return respuesta;
+							}
+						} 
+				},
+			},
+			messages:{
+				name:{
+					required: '{{ trans('discountType.validation.required') }}',
+					rangelength: '{{ trans('discountType.validation.rangelength') }}'+'[2, 45]'+'{{ trans('discounts.validation.characters') }}',
+					remote: jQuery.validator.format('{{ trans('discountType.alert') }}')
 				},
 			},
 			highlight:function(element){
@@ -61,7 +87,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::route('discounts_type.store')}}',
+				url:  '{{URL::to(LaravelLocalization::transRoute('discountType.store'))}}',
         		type:'POST'
 			};
 		$('#formCreateDiscountType').ajaxForm(options);
@@ -90,6 +116,7 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
+			$('#formCreateDiscountType').resetForm();
 		} 						
 </script>
 @stop

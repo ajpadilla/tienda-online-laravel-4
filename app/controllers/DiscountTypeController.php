@@ -1,7 +1,7 @@
 <?php
 
-use s4h\store\Discounts_types\DiscountType;
-use s4h\store\Discounts_types\DiscountTypeRepository;
+use s4h\store\DiscountsTypes\DiscountType;
+use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountTypeForm;
 use Laracasts\Validation\FormValidationException;
 
@@ -53,7 +53,7 @@ class DiscountTypeController extends \BaseController {
 				$discount_type = new DiscountType;
 				$discount_type->name = $input['name'];
 				$this->discountTypeRepository->save($discount_type);
-				return Response::json('Typo de descuento'.' '.$input['name'].' '.'Agregado con exito!');
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -110,5 +110,18 @@ class DiscountTypeController extends \BaseController {
 		//
 	}
 
+	public function checkName()
+	{
+		if(Request::ajax()) 
+		{
+			$discount_type = $this->discountTypeRepository->getName(Input::get('name'));
+			if(count($discount_type) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
+			}
+       	}
+		return Response::json(array('respuesta' => 'false'));	
+	}
 
 }

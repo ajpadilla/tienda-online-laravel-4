@@ -11,7 +11,9 @@
 |
  */
 
-Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
+Route::group(array('prefix' => LaravelLocalization::setLocale(),
+					'before' => 'LaravelLocalizationRoutes|LaravelLocalizationRedirectFilter'), 
+function () {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
 	Route::get('/', [
@@ -19,7 +21,7 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 		'uses' => 'PageController@home'
 	]);
 
-
+	
 	/**
 	* ------------------------------ Rutas para productos -----------------------
 	**/
@@ -34,18 +36,30 @@ Route::group(array('prefix' => LaravelLocalization::setLocale()), function () {
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
 
-	Route::resource('discounts','DiscountController');
 
-	//Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
-	//Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
+	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
+	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
+	Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
 
 	Route::get('delete/{id}','DiscountController@destroy');
-	// Datatable Discounts
+	Route::post('checkCode','DiscountController@checkCode');
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
 
+	/**
+		* ------------------------------ Rutas para Typo de descuento -----------------------
+	**/
+	Route::get(LaravelLocalization::transRoute('discountType.create'),'DiscountTypeController@create');
+	Route::post(LaravelLocalization::transRoute('discountType.store'),'DiscountTypeController@store');
+	Route::post('checkName','DiscountTypeController@checkName');
 
-	Route::resource('discounts_type','DiscountTypeController');
+	/**
+		* ------------------------------ Rutas para lenguajes -----------------------
+	**/
 
+	Route::get(LaravelLocalization::transRoute('languages.create'),'LanguageController@create');
+	Route::post(LaravelLocalization::transRoute('languages.store'),'LanguageController@store');
+	Route::post('checkIsoCodeLang','LanguageController@checkIsoCodeLang');
+	Route::get('returnLanguages','LanguageController@returnLanguages');
 });
 
 // Confide routes
