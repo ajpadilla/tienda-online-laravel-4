@@ -162,15 +162,15 @@ class DiscountController extends \BaseController {
 			return date(trans('discounts.date2') ,strtotime($model->to));
 		});
 
-		/*$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
+		$collection->addColumn('Actions',function($model){
+			/*$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
 					<br />";
 			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
 					<br />
 					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
 
-			return $links;
-		});*/
+			return $links;*/
+		});
 
 		return $collection->make();
 	}

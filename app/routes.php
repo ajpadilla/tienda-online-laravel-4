@@ -61,6 +61,8 @@ function () {
 	Route::post(LaravelLocalization::transRoute('languages.store'),'LanguageController@store');
 	Route::post('checkIsoCodeLang','LanguageController@checkIsoCodeLang');
 	Route::get('returnLanguages','LanguageController@returnLanguages');
+	Route::post('getIdLanguage','LanguageController@getIdLanguage');
+	Route::get('mostar','LanguageController@mostrar');
 });
 
 // Confide routes

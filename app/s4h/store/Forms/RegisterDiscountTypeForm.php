@@ -3,5 +3,5 @@
 use Laracasts\Validation\FormValidator;
 
 class RegisterDiscountTypeForm extends FormValidator{
-	protected $rules = ['name' => 'required|unique:discounts_types|max:45'];
+	protected $rules = ['name' => 'required|max:45'];
 }
