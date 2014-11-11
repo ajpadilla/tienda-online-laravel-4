@@ -4,8 +4,6 @@ use Laracasts\Validation\FormValidator;
 
 class RegisterDiscountForm extends FormValidator{
 	protected $rules = [
-						'name' => 'required|max:255',
-						'description' => 'required|min:10',
 						'value' => 'required|numeric',
 						'percent' => 'required|numeric',
 						'quantity' =>'required|integer',
