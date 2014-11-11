@@ -52,7 +52,6 @@
 {{ HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js'); }}
 
-s
 <script>
 	$(document).ready(function () {
 		$.ajax({
