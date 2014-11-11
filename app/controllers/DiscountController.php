@@ -6,18 +6,23 @@ use s4h\store\DiscountsTypes\DiscountType;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
+use s4h\store\languages\LanguageRepository;
+
 
 class DiscountController extends \BaseController {
 
 	private $registerDiscountForm;
 	private $discountRepository;
 	private $discountTypeRepository;
+	private $languageRepository;
 
-	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository)
+	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository)
+
 	{
 		$this->registerDiscountForm = $registerDiscountForm;
 		$this->discountRepository = $discountRepository;	
 		$this->discountTypeRepository = $discountTypeRepository;
+		$this->languageRepository = $languageRepository;
 	}
 
 	/**
@@ -38,7 +43,8 @@ class DiscountController extends \BaseController {
 	 */
 	public function create()
 	{
-		$discountTypes = $this->discountTypeRepository->getAll()->lists('name', 'id');
+		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
+		//dd($discountTypes);
 		return View::make('discounts.create',compact('discountTypes'));
 	}
 
@@ -53,7 +59,9 @@ class DiscountController extends \BaseController {
 		//dd(Input::all());
 		if(Request::ajax())
 		{
+			$input = array();
 			$input = Input::all();
+			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
 			//dd($input);
 			try
 			{
