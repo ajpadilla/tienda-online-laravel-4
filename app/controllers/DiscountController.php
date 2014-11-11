@@ -16,7 +16,7 @@ class DiscountController extends \BaseController {
 	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository)
 	{
 		$this->registerDiscountForm = $registerDiscountForm;
-		$this->discountRepository = $discountRepository;	
+		$this->discountRepository = $discountRepository;
 		$this->discountTypeRepository = $discountTypeRepository;
 	}
 
@@ -131,7 +131,7 @@ class DiscountController extends \BaseController {
 		{
 			 return $model->discountType->name;
 		});
-		
+
 		$collection->addColumn('name', function($model)
 		{
 			return $model->name;
@@ -177,7 +177,7 @@ class DiscountController extends \BaseController {
 
 	public function checkCode()
 	{
-		if(Request::ajax()) 
+		if(Request::ajax())
 		{
 			$discount = $this->discountRepository->getCode(Input::get('code'));
 			if(count($discount) > 0){
