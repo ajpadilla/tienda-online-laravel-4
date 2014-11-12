@@ -6,19 +6,26 @@ use s4h\store\Products\RegisterProductCommand;
 use s4h\store\Categories\CategoryRepository;
 use s4h\store\Conditions\ConditionRepository;
 use s4h\store\Forms\RegisterProductForm;
+use s4h\store\Forms\EditProductForm;
 use Laracasts\Validation\FormValidationException;
 
 class ProductController extends \BaseController {
 
 	protected $productRepository;
 	protected $registerProductForm;
+	protected $EditProductForm;
 	protected $categoryRepository;
 	protected $conditionRepository;
 
-	public function __construct(RegisterProductForm $registerProductForm, ProductRepository $productRepository, CategoryRepository $categoryRepository, ConditionRepository $conditionRepository)
+	public function __construct(RegisterProductForm $registerProductForm,
+	                            ProductRepository $productRepository,
+	                            CategoryRepository $categoryRepository,
+	                            ConditionRepository $conditionRepository,
+	                            EditProductForm $editProductForm)
 	{
-		$this->RegisterProductForm = $registerProductForm;
+		$this->registerProductForm = $registerProductForm;
 		$this->productRepository = $productRepository;
+		$this->editProductForm = $editProductForm;
 		$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 	}
@@ -53,7 +60,7 @@ class ProductController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->RegisterProductForm->validate($input);
+				$this->registerProductForm->validate($input);
 				$this->createNewProduct($input);
 				return Response::json('Producto'.' '.$input['name'].' '.'Agregado con exito!');
 			}
@@ -69,12 +76,73 @@ class ProductController extends \BaseController {
 		return false;
 	}
 
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$product = Product::find($id);
+		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
+		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
+		return View::make('products.edit',compact('product', 'categories', 'condition'));
+	}
+
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id)
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editProductForm->validate($input);
+				$product = Product::find($id);
+				$product->name = $input['name'];
+				$product->description = $input['description'];
+				$product->on_sale = $input['on_sale'];
+				$product->quantity = $input['quantity'];
+				$product->price = $input['price'];
+				$product->width = $input['width'];
+				$product->height = $input['height'];
+				$product->depth = $input['depth'];
+				$product->weight = $input['weight'];
+				$product->active = $input['active'];
+				$product->available_for_order = $input['available_for_order'];
+				$product->show_price = $input['show_price'];
+				$product->accept_barter = $input['accept_barter'];
+				$product->product_for_barter = $input['product_for_barter'];
+				$product->condition_id = $input['condition_id'];
+
+				$this->productRepository->save($product);
+				if (!is_null($input['categories'])){
+					$product->categories()->sync($input['categories']);
+				}else{
+					$product->categories()>detach();
+				}
+				return Response::json('Producto'.' '.$input['name'].' '.'Modificado con exito!');
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
+	}
+
 	public function destroy($id)
 	{
 		$product = Product::find($id);
 		$product->delete();
-		Flash::message('producto borrado  con éxito!');
-		return Redirect::to('products');
+		Session::flash('message', 'El producto fue borrado con éxito!');
+		return Redirect::back();
 	}
 
 	public function createNewProduct($data = array())
@@ -104,6 +172,7 @@ class ProductController extends \BaseController {
 			$product->categories()->sync($data['categories']);
 
 	}
+
 
 	public function getDatatable()
 	{
@@ -174,7 +243,7 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('Actions',function($model){
 			$links = "<a class='btn btn-info btn-circle' href='" .route('products.destroy', $model->id). "'><i class='fa fa-check'></i></a><br />";
-			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.destroy', $model->id). "'><i class='fa fa-pencil'></i></a><br />
+			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.edit', $model->id). "'><i class='fa fa-pencil'></i></a><br />
 					<form action=".route('products.destroy', $model->id)." method='POST' >
 					<button class='btn btn-danger btn-circle' ><i class='fa fa-times'></i></button></form>";
 
