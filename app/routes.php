@@ -42,6 +42,26 @@ function () {
 	Route::get(LaravelLocalization::transRoute('discounts.createData'),'DiscountController@createData');
 	Route::post(LaravelLocalization::transRoute('discounts.saveData'),'DiscountController@saveData');
 
+	Route::get(LaravelLocalization::transRoute('discounts.show'), [
+		'as' => 'discounts.show',
+		'uses' => 'DiscountController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('discounts.edit'), [
+		'as' => 'discounts.edit',
+		'uses' => 'DiscountController@edit'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('discounts.update'), [
+		'as' => 'discounts.update',
+		'uses' => 'DiscountController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('discounts.destroy'), [
+		'as' => 'discounts.destroy',
+		'uses' => 'DiscountController@destroy'
+	]);
+
 	Route::get('delete/{id}','DiscountController@destroy');
 	Route::post('checkCode','DiscountController@checkCode');
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
