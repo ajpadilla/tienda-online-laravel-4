@@ -1,6 +1,7 @@
 <?php namespace s4h\store\Discounts;
 
 use s4h\store\Discounts\Discount;
+use s4h\store\languages\LanguageRepository;
 
 class DiscountRepository {
 
@@ -10,6 +11,19 @@ class DiscountRepository {
 
 	public function getAll(){
 		return Discount::all();
+	}
+
+	public function associateLanguage($data = array())
+	{
+		$discount = $this->getCode($data['code']);
+		if (count($discount->languages()->where('language_id','=',$data['language_id'])->first()) > 0) {
+			return false;
+		}else{
+			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+			$discount->save();
+			return true;
+		}
+		
 	}
 
 	public function createNewDiscount($data = array())
@@ -30,6 +44,6 @@ class DiscountRepository {
 
 	public function getCode($code)
 	{
-		return Discount::where('code','=',$code)->get();
+		return Discount::select()->where('code','=',$code)->first();
 	}
 }
