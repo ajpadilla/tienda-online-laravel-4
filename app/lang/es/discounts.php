@@ -2,7 +2,11 @@
 	return array(
 		"create" => "crear/descuento",
 		"store" => "agregar/descuento",
-		'index'=>'lista/descuentos',
+ 		"createCode" =>"crear/codigo_descuento", 
+ 		"storeCode" => "agregar/codigo_descuento",
+		"index"=>'lista/descuentos',
+		"createData" =>"agregar/datos_idioma",
+		"saveData" =>'agregar/caracteristicas_descuento',
 		"title" => "Agregar descuento",
 		"subtitle" => "Crear nuevo descuento",
 		"labels" => array(
