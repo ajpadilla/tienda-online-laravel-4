@@ -7,6 +7,10 @@
 		"index"=>'lista/descuentos',
 		"createData" =>"agregar/datos_idioma",
 		"saveData" =>'agregar/caracteristicas_descuento',
+		"show"=>"ver/{id}",
+		"edit"=>"editar/{id}",
+		"update"=>"Actualizar/{id}",
+		"destroy"=>"Eliminar/{id}",
 		"title" => "Agregar descuento",
 		"subtitle" => "Crear nuevo descuento",
 		"labels" => array(
