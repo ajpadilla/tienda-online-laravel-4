@@ -3,9 +3,10 @@
 		"create" => "crear/producto",
 		"store" => "agregar/producto",
 		'index'=>'lista/productos',
+		'edit' => 'editar/producto/{id}',
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
-		"labels" => array(			
+		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
 			'on_sale' => 'a la venta: :',
@@ -21,7 +22,7 @@
 			'accept_barter' => 'Aceptar trueque',
 			'product_for_barter' => 'Producto para trueque',
 			'categories' => 'Categorias:',
-			'condition' => 'Condición:'		
+			'condition' => 'Condición:'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
@@ -32,6 +33,18 @@
 			'date' => 'Por favor, Ingrese una fecha valida.',
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
-		)
+		),
+		'list' =>array(
+				'photo'		=> 'Foto',
+				'name'		=> 'Nombre',
+				'price'		=> 'Precio',
+				'quantity'	=> 'Cantidad',
+				'active'		=> 'Activo',
+				'accept'		=> 'Acepta trueque',
+				'category'	=> 'Categorias',
+				'ratings'	=> 'Ratings',
+				'actions'	=> 'Acciones',
+				'title'		=> 'Lista de productos'
+		),
 	);
 

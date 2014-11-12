@@ -3,6 +3,7 @@
 		"create" => "create/product",
 		"store" => "add/product",
 		'index'=>'list/product',
+		'edit' => 'edit/product/{id}',
 		"title" => "Add product",
 		"subtitle" => "Create new product",
 		"labels" => array(
@@ -21,7 +22,7 @@
 			'accept_barter' => 'Accept barter',
 			'product_for_barter' => 'Product for barter',
 			'categories' => 'Categories:',
-			'condition' => 'Condition:'		
+			'condition' => 'Condition:'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',
@@ -32,6 +33,18 @@
 			'date' => 'Please enter a valid date.',
 			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
-		)
+		),
+		'list' =>array(
+				'photo'		=> 'Photo',
+				'name'		=> 'Name',
+				'price'		=> 'Price',
+				'quantity'	=> 'Quantity',
+				'active'		=> 'Active',
+				'accept'		=> 'Accept barter',
+				'category'	=> 'Categories',
+				'ratings'	=> 'Ratings',
+				'actions'	=> 'Actions',
+				'title'		=> 'List Products'
+		),
 	);
 
