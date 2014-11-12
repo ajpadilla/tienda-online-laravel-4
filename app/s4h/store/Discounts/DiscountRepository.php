@@ -2,7 +2,7 @@
 
 use s4h\store\Discounts\Discount;
 use s4h\store\languages\LanguageRepository;
-
+use s4h\store\DiscountTypesLang\DiscountTypeLang;
 class DiscountRepository {
 
 	public function save(Discount $discount){
@@ -12,6 +12,8 @@ class DiscountRepository {
 	public function getAll(){
 		return Discount::all();
 	}
+
+	
 
 	public function associateLanguage($data = array())
 	{
