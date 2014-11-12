@@ -128,7 +128,8 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
-		'Chumper\Datatable\DatatableServiceProvider'
+		'Chumper\Datatable\DatatableServiceProvider',
+		'Laracasts\Flash\FlashServiceProvider'
 	),
 
 	/*
@@ -201,6 +202,7 @@ return array(
 		'PDF' => 'Barryvdh\DomPDF\Facade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
+		'Flash' => 'Laracasts\Flash\Flash'
 	),
 
 );
