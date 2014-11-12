@@ -1,6 +1,7 @@
 <?php namespace s4h\store\Languages;
 
 use	 s4h\store\Languages\Language;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
 * 
@@ -29,6 +30,13 @@ class LanguageRepository{
 	public function getIsoCode($iso_code)
 	{
 		return Language::where('iso_code','=',$iso_code)->get();
+	}
+
+	public function returnLanguage()
+	{
+		$iso_code = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		return $language;
 	}
 
 }

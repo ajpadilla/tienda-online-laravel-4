@@ -6,18 +6,22 @@ use s4h\store\DiscountsTypes\DiscountType;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
+use s4h\store\languages\LanguageRepository;
 
 class DiscountController extends \BaseController {
 
 	private $registerDiscountForm;
 	private $discountRepository;
 	private $discountTypeRepository;
+	private $languageRepository;
 
-	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository)
+	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository)
+
 	{
 		$this->registerDiscountForm = $registerDiscountForm;
 		$this->discountRepository = $discountRepository;	
 		$this->discountTypeRepository = $discountTypeRepository;
+		$this->languageRepository = $languageRepository;
 	}
 
 	/**
@@ -38,7 +42,8 @@ class DiscountController extends \BaseController {
 	 */
 	public function create()
 	{
-		$discountTypes = $this->discountTypeRepository->getAll()->lists('name', 'id');
+		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
+		//dd($discountTypes);
 		return View::make('discounts.create',compact('discountTypes'));
 	}
 
@@ -53,7 +58,9 @@ class DiscountController extends \BaseController {
 		//dd(Input::all());
 		if(Request::ajax())
 		{
+			$input = array();
 			$input = Input::all();
+			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
 			//dd($input);
 			try
 			{
@@ -189,4 +196,54 @@ class DiscountController extends \BaseController {
 		return Response::json(array('respuesta' => 'false'));
 	}
 
+	public function createCode()
+	{
+		return View::make('discounts.code');
+	}
+
+	public function storeCode()
+	{
+		 $discount = $this->discountRepository->getCode(Input::get('code'));
+		 //dd($discount);
+		 if (count($discount) > 0) {
+		 	Session::put('discount_code',Input::get('code'));
+		 	Flash::warning(trans('discounts.alert'));
+		 	return Redirect::to(LaravelLocalization::transRoute('discounts.createData'));
+		 }else{
+		 	//$language_id = $this->languageRepository->returnLanguage()->id;
+		 	Session::put('discount_code',Input::get('code'));
+		 	return Redirect::to(LaravelLocalization::transRoute('discounts.create'));
+		 }
+
+	}
+
+	public function createData()
+	{
+		return View::make('discounts.data');
+	}
+
+	public function saveData()
+	{
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
+			//dd($input);
+			try
+			{
+				//$this->registerDiscountForm->validate($input);
+				$response = $this->discountRepository->associateLanguage($input);
+				if ($response) {
+					return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				}else{
+					return Response::json('Algo');
+				}
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
+	}
 }

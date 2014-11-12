@@ -19,7 +19,8 @@
 						<div class="form-group">
 							{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('code',null, ['class' => 'form-control','id' =>'code']) }}
+								{{ Form::text('code',Session::get('discount_code'), ['class' => 'form-control','id' =>'code',
+								'readonly']) }}
 							</div>
 						</div>
 						<div class="form-group">
@@ -307,7 +308,7 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-			$('#formCreateDiscount').resetForm();
+			window.location.href = 	'{{URL::to(LaravelLocalization::transRoute('discounts.createCode'))}}'		
 		} 						
 
 </script>

@@ -5,6 +5,10 @@
 		'index'=>'list/discount',
 		"title" => "Add discount",
 		"subtitle" => "Create new discount",
+		"createCode" =>"create/discount_code", 
+ 		"storeCode" => "agregar/discount_code",
+ 		"createData" =>"create/language_data",
+		"saveData" =>'add/features_discount',
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description:',

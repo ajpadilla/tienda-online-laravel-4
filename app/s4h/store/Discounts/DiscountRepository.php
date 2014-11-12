@@ -1,6 +1,7 @@
 <?php namespace s4h\store\Discounts;
 
 use s4h\store\Discounts\Discount;
+use s4h\store\languages\LanguageRepository;
 
 class DiscountRepository {
 
@@ -12,11 +13,22 @@ class DiscountRepository {
 		return Discount::all();
 	}
 
+	public function associateLanguage($data = array())
+	{
+		$discount = $this->getCode($data['code']);
+		if (count($discount->languages()->where('language_id','=',$data['language_id'])->first()) > 0) {
+			return false;
+		}else{
+			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+			$discount->save();
+			return true;
+		}
+		
+	}
+
 	public function createNewDiscount($data = array())
 	{
 		$discount = new Discount;
-		$discount->name = $data['name'];
-		$discount->description = $data['description'];
 		$discount->value = $data['value'];
 		$discount->percent = $data['percent'];
 		$discount->quantity = $data['quantity'];
@@ -26,11 +38,12 @@ class DiscountRepository {
 		$discount->from = date("Y-m-d",strtotime($data['from']));
 		$discount->to = date("Y-m-d",strtotime($data['from']));
 		$discount->discount_type_id = $data['discount_type_id'];
-		$this->save($discount);
+		$discount->save();
+		$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}
 
 	public function getCode($code)
 	{
-		return Discount::where('code','=',$code)->get();
+		return Discount::select()->where('code','=',$code)->first();
 	}
 }
