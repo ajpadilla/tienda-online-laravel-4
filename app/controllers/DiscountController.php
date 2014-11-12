@@ -7,6 +7,7 @@ use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
 use s4h\store\languages\LanguageRepository;
+use s4h\store\DiscountsLang\DiscountLangRepository;
 
 class DiscountController extends \BaseController {
 
@@ -14,14 +15,16 @@ class DiscountController extends \BaseController {
 	private $discountRepository;
 	private $discountTypeRepository;
 	private $languageRepository;
+	private $discountLangRepository;
 
-	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository)
+	function __construct(RegisterDiscountForm $registerDiscountForm,DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository,DiscountLangRepository  $discountLangRepository)
 
 	{
 		$this->registerDiscountForm = $registerDiscountForm;
 		$this->discountRepository = $discountRepository;	
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->languageRepository = $languageRepository;
+		$this->discountLangRepository = $discountLangRepository;
 	}
 
 	/**
@@ -95,7 +98,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return "Edit:".$id;
+		return "Edit:".$id."El id es:".$id;
 	}
 
 
@@ -107,7 +110,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		return "Update:".$id;
 	}
 
 
@@ -124,59 +127,61 @@ class DiscountController extends \BaseController {
 
 	public function getDatatable()
 	{
-		$collection = Datatable::collection($this->discountRepository->getAll())
-			->showColumns('code','discount_type_id','name', 'value', 'percent', 'active', 'from', 'to')
-			->searchColumns('code','discount_type_id','name', 'value', 'percent', 'active', 'from', 'to')
-			->orderColumns('code','discount_type_id','name', 'value', 'percent', 'active', 'from', 'to');
+		$collection = Datatable::collection($this->discountLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			
+			->searchColumns('name','code','discount_type_id','name','value','percent','active','from','to')
+			->orderColumns('code');
 
 		$collection->addColumn('code', function($model)
 		{
-			return $model->code;
+			return $model->discount->code;
 		});
 
 		$collection->addColumn('discount_type_id', function($model)
 		{
-			 return $model->discountType->name;
+			  foreach ($model->discount->discountType->languages as $language) {
+			  	return $language->pivot->name;
+			  }
 		});
-		
+
 		$collection->addColumn('name', function($model)
 		{
 			return $model->name;
 		});
-
+	
 		$collection->addColumn('value', function($model)
 		{
-			return $model->value;
+			return $model->discount->value;
 		});
 
 		$collection->addColumn('percent', function($model)
 		{
-			return $model->percent;
+			return $model->discount->percent;
 		});
 
 		$collection->addColumn('active', function($model)
 		{
-			return $model->getActivoShow();
+			return $model->discount->getActivoShow();
 		});
 
 		$collection->addColumn('from', function($model)
 		{
-			return date( trans('discounts.date2') ,strtotime($model->from));
+			return date( trans('discounts.date2') ,strtotime($model->discount->from));
 		});
 
 		$collection->addColumn('to', function($model)
 		{
-			return date(trans('discounts.date2') ,strtotime($model->to));
+			return date(trans('discounts.date2') ,strtotime($model->discount->to));
 		});
 
 		$collection->addColumn('Actions',function($model){
-			/*$links = "<a href='" .route('discounts.show', $model->id). "'>View</a>
+			$links = "<a href='" .route('discounts.show',$model->discount->id). "'>View</a>
 					<br />";
-			$links .= "<a href='" .route('discounts.edit', $model->id). "'>Edit</a>
+			$links .= "<a href='" .route('discounts.edit',$model->discount->id). "'>Edit</a>
 					<br />
-					<a href='" .URL::to('delete', $model->id). "'>Delete</a>";
+					<a href='" .route('discounts.destroy',$model->discount->id). "'>Delete</a>";
 
-			return $links;*/
+			return $links;
 		});
 
 		return $collection->make();
