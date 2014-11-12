@@ -88,7 +88,7 @@
                     <i class="fa fa-sign-out fa-lg"></i> {{ Lang::get('menu.log-out') }}
                 </a>
             </li>
-           
+
         </ul>
     </nav>
 </div>

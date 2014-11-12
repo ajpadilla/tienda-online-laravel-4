@@ -41,7 +41,7 @@
 		),
 		'date' => 'dd-mm-yy',
 		'date2' => 'd-m-Y',
-		'message1' =>'Descuento',
+		'message1' =>'descuento',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El codigo del descuento ya se encuentra registrado!',
 		'list' =>array(
@@ -58,4 +58,4 @@
 			'Actions'=>'Acciones',
 		),
 	);
- 
+

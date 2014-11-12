@@ -21,7 +21,7 @@ class DiscountController extends \BaseController {
 
 	{
 		$this->registerDiscountForm = $registerDiscountForm;
-		$this->discountRepository = $discountRepository;	
+		$this->discountRepository = $discountRepository;
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->languageRepository = $languageRepository;
 		$this->discountLangRepository = $discountLangRepository;
@@ -189,7 +189,7 @@ class DiscountController extends \BaseController {
 
 	public function checkCode()
 	{
-		if(Request::ajax()) 
+		if(Request::ajax())
 		{
 			$discount = $this->discountRepository->getCode(Input::get('code'));
 			if(count($discount) > 0){

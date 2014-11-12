@@ -8,12 +8,12 @@
 
 	<div class="col-lg-12">
 
-				{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
+				{{Form::open(['route' => ['products.update', $product->id], 'class' => 'form-horizontal', 'id' => 'formUpdateProduct'])}}
 					<div class="col-lg-7">
 						<div class="form-group">
 							{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) }}
+								{{ Form::text('name', $product->name, ['class' => 'form-control', 'placeholder' => 'Name']) }}
 							</div>
 						</div>
 
@@ -22,7 +22,7 @@
 							<div class="col-sm-10">
 								<div class="ibox-content no-padding">
 
-								{{ Form::textarea('description', null, array('class' => 'form-control')) }}
+								{{ Form::textarea('description', $product->description, array('class' => 'form-control')) }}
 								</div>
 							</div>
 						</div>
@@ -30,14 +30,14 @@
 						<div class="form-group">
 							{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
+								{{ Form::text('quantity', $product->quantity, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Price']) }}
+								{{ Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => 'Price']) }}
 							</div>
 						</div>
 
@@ -45,11 +45,11 @@
 							{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								<div class="input-group m-b">
-									{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
+									{{ Form::text('width', $product->width, ['class' => 'form-control', 'placeholder' => 'Width']) }}
 									<span class="input-group-addon">x</span>
-									{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => 'Height']) }}
+									{{ Form::text('height', $product->height, ['class' => 'form-control', 'placeholder' => 'Height']) }}
 									<span class="input-group-addon">x</span>
-									{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
+									{{ Form::text('depth', $product->depth, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
 									<span class="input-group-addon">inches</span>
 								</div>
 							</div>
@@ -60,7 +60,7 @@
 							{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								<div class="input-group m-b">
-									{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
+									{{ Form::text('weight', $product->weight, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
 									<span class="input-group-addon">pounds</span>
 								</div>
 							</div>
@@ -72,13 +72,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('on_sale', '1', 1)}}
+										{{ Form::radio('on_sale', '1', $product->on_sale ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('on_sale', '0', 0)}}
+										{{ Form::radio('on_sale', '0', !$product->on_sale ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -90,13 +90,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('active', '1', 1)}}
+										{{ Form::radio('active', '1', $product->active ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('active', '0', 0)}}
+										{{ Form::radio('active', '0', !$product->active ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -108,12 +108,12 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('available_for_order', '1', 1)}}
+										{{ Form::radio('available_for_order', '1', $product->available_for_order ? true : false)}}
 										<i></i> Yes </label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('available_for_order', '0', 0)}}
+										{{ Form::radio('available_for_order', '0', !$product->available_for_order ? true : false)}}
 										<i></i> No </label>
 								</div>
 							</div>
@@ -124,13 +124,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('show_price', '1', 1)}}
+										{{ Form::radio('show_price', '1', $product->show_price ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('show_price', '0', 0)}}
+										{{ Form::radio('show_price', '0', !$product->show_price ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -142,13 +142,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('accept_barter', '1', 1)}}
+										{{ Form::radio('accept_barter', '1', $product->accept_barter ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('accept_barter', '0', 0)}}
+										{{ Form::radio('accept_barter', '0', !$product->accept_barter ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -160,13 +160,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('product_for_barter', '1', 1)}}
+										{{ Form::radio('product_for_barter', '1', $product->product_for_barter ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('product_for_barter', '0', 0)}}
+										{{ Form::radio('product_for_barter', '0', !$product->product_for_barter ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -178,7 +178,7 @@
 						<div class="form-group">
 							{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::select('categories[]',$categories,null,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
+								{{ Form::select('categories[]',$categories, $product->categories->lists('id') ,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
 
 							</div>
 						</div>
@@ -186,7 +186,7 @@
 						<div class="form-group">
 							{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::select('condition_id',$condition,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
+								{{ Form::select('condition_id',$condition,$product->condition->id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
 							</div>
 						</div>
 					</div>
@@ -224,11 +224,7 @@
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
 			}, 'only letters, numbers and spaces.');
 
-			$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
-				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-			}, 'only letters, numbers and dash.');
-
-			$('#formCreateProduct').validate({
+			$('#formUpdateProduct').validate({
 				rules:{
 					name:{
 						required:true,
@@ -309,10 +305,10 @@
 			var options = {
 					beforeSubmit:  showRequest,  // pre-submit callback
 					success:       showResponse,  // post-submit callback
-					url:  '{{URL::route('products.store')}}',
+					url:  '{{URL::route('products.update', $product->id)}}',
 					type:'POST'
 				};
-			$('#formCreateProduct').ajaxForm(options);
+			$('#formUpdateProduct').ajaxForm(options);
 
 			// pre-submit callback
 			function showRequest(formData, jqForm, options) {
@@ -327,7 +323,7 @@
 					'hideOnOverlayClick' : false,
 					'hideOnContentClick' : false
 				}), 5000 );
-				return $('#formCreateProduct').valid();
+				return $('#formUpdateProduct').valid();
 			}
 
 			// post-submit callback
@@ -340,3 +336,4 @@
 		});
 	</script>
 @stop
+luvebr

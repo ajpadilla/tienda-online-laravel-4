@@ -39,7 +39,7 @@
 		'date2' => 'Y-m-d',
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
-		'alert' => '¡The discount code is already registered!.',
+		'alert' => 'Â¡The discount code is already registered!.',
 		'list' =>array(
 			'title' => 'List of discounts',
 			'subtitle'=>'Discount List',
@@ -54,4 +54,4 @@
 			'Actions'=>'Actions',
 		),
 	);
- 
+
