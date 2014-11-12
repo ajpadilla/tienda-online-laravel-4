@@ -5,24 +5,25 @@
 @stop
 
 @section('content')
+@include('layouts.partials._error')
 <div class="row">
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>List discounts</h5>
+				<h5>{{trans('products.list.title')}}</h5>
 			</div>
 			<div class="ibox-content">
 				<?php
 					$columns = [
-						'Photo',
-						'Name',
-						'Price',
-						'Quantity',
-						'Active',
-						'Accept',
-						'Category',
-						'Ratings',
-						'Actions'
+						trans('products.list.photo'),
+						trans('products.list.name'),
+						trans('products.list.price'),
+						trans('products.list.quantity'),
+						trans('products.list.active'),
+						trans('products.list.accept'),
+						trans('products.list.category'),
+						trans('products.list.ratings'),
+						trans('products.list.actions')
 				];
 				$table = Datatable::table()
 				->addColumn($columns)

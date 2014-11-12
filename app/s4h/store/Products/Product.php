@@ -1,12 +1,14 @@
 <?php namespace s4h\store\Products;
 
 use Eloquent;
+use SoftDeletingTrait;
 
 class Product extends Eloquent{
 
 	protected $fillable = ['name','description','on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id'];
 	protected $softDelete = true;
 
+	protected $dates = ['deleted_at'];
 	/*
 	* Realaciones
 	*/
