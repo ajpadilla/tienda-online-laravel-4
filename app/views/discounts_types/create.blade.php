@@ -22,6 +22,12 @@
 							{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
 						</div>
 					</div>
+					<div class="form-group">
+							{{ Form::label('language', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-8">
+								{{ Form::select('discount_type_id',array(),null,array('class' => 'form-control')) }}
+							</div>
+					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
