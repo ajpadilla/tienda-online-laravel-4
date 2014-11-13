@@ -102,7 +102,12 @@ class DiscountController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return "Edit:".$id."El id es:".$id;
+		$discount = $this->discountRepository->getDiscountId($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$discount_language = $discount->languages()->where('language_id','=',$language_id)->first();
+		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
+		return View::make('discounts.edit',compact('discount','discount_language','discountTypes'));
+
 	}
 
 
