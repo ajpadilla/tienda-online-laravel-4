@@ -58,13 +58,9 @@ class DiscountController extends \BaseController {
 	 */
 	public function store()
 	{
-		//dd(Input::all());
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
-			//dd($input);
 			try
 			{
 				$this->registerDiscountForm->validate($input);
