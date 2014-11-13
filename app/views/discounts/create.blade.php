@@ -17,10 +17,15 @@
 					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
+							{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
+							</div>
+						</div>
+						<div class="form-group">
 							{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('code',Session::get('discount_code'), ['class' => 'form-control','id' =>'code',
-								'readonly']) }}
+								{{ Form::text('code',Session::get('discount_code'), ['class' => 'form-control','id' =>'code']) }}
 							</div>
 						</div>
 						<div class="form-group">
@@ -100,11 +105,6 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-sm-6">
-								{{ Form::text('lang_id', LaravelLocalization::setLocale(), ['class' => 'form-control','id'=>'lang_id']) }}
-							</div>
-						</div>
-						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
 								{{ Form::submit(trans('discounts.labels.save'), ['class' => 'btn btn-primary']) }}
 							</div>
@@ -112,9 +112,9 @@
 					</div>
 					{{ Form::close() }}
 				</div>
+			</div>
 		</div>
 	</div>
-</div>
 @stop
 
 @section('scripts')
