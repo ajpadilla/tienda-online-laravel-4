@@ -308,7 +308,6 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-			window.location.href = 	'{{URL::to(LaravelLocalization::transRoute('discounts.createCode'))}}'		
 		} 						
 
 </script>
