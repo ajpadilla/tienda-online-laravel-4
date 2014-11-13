@@ -6,6 +6,7 @@
 		"subtitle" => "Crear nuevo  tipo de descuento",
 		"labels" => array(
 			'name' =>'Nombre:',
+			'language' => 'Idioma',
 			'save' => 'Agregar',
 		),
 		"validation" => array(
