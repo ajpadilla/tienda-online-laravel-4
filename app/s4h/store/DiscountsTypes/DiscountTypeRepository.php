@@ -17,7 +17,7 @@ class DiscountTypeRepository {
 
 	public function getName($data)
 	{
-		$language = Language::select()->where('iso_code','=',$data['language_id'])->first();
+		$language = Language::select()->where('id','=',$data['language_id'])->first();
 		if (count($language) > 0) {
 			return $language->discounts_types()->wherePivot('name','=',$data['name'])->first();
 		}else{
