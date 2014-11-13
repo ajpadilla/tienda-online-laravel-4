@@ -13,8 +13,6 @@ class DiscountRepository {
 		return Discount::all();
 	}
 
-	
-
 	public function associateLanguage($data = array())
 	{
 		$discount = $this->getCode($data['code']);
@@ -47,5 +45,10 @@ class DiscountRepository {
 	public function getCode($code)
 	{
 		return Discount::select()->where('code','=',$code)->first();
+	}
+
+	public function getDiscountId($id)
+	{
+		return Discount::select()->where('id','=',$id)->first();
 	}
 }
