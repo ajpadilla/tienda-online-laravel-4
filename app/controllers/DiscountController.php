@@ -215,25 +215,6 @@ class DiscountController extends \BaseController {
 		return View::make('discounts.code');
 	}
 
-	public function storeCode()
-	{
-		 $discount = $this->discountRepository->getCode(Input::get('code'));
-		 //dd($discount);
-		 if (count($discount) > 0) {
-		 	Session::put('discount_code',Input::get('code'));
-		 	Flash::warning(trans('discounts.alert'));
-		 	return Redirect::to(LaravelLocalization::transRoute('discounts.createData'));
-		 }else{
-		 	//$language_id = $this->languageRepository->returnLanguage()->id;
-		 	Session::put('discount_code',Input::get('code'));
-		 	return Redirect::to(LaravelLocalization::transRoute('discounts.create'));
-		 }
-
-	}
-
-	public function createData()
-	{
-		return View::make('discounts.data');
-	}
+	
 
 }
