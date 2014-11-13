@@ -43,10 +43,6 @@ function () {
 	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
 	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
 	Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
-	Route::get(LaravelLocalization::transRoute('discounts.createCode'),'DiscountController@createCode');
-	Route::post(LaravelLocalization::transRoute('discounts.storeCode'),'DiscountController@storeCode');
-	Route::get(LaravelLocalization::transRoute('discounts.createData'),'DiscountController@createData');
-	Route::post(LaravelLocalization::transRoute('discounts.saveData'),'DiscountController@saveData');
 
 	Route::get(LaravelLocalization::transRoute('discounts.show'), [
 		'as' => 'discounts.show',
