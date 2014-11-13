@@ -127,6 +127,7 @@
 				'autoScale' : true
 			});
 			$('#formCreateDiscountType').resetForm();
+			 document.location.href = '{{URL::to(LaravelLocalization::transRoute('discountType.create'))}}';
 		} 						
 </script>
 @stop
