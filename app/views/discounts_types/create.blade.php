@@ -23,9 +23,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-							{{ Form::label('language', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-8">
-								{{ Form::select('discount_type_id',array(),null,array('class' => 'form-control')) }}
+								{{ Form::select('language_id',$languages,null,array('class' => 'form-control')) }}
 							</div>
 					</div>
 				</div>
@@ -63,7 +63,11 @@
 							data: {
 								name: function() {
 									return $('#name').val();
+								},
+								language_id: function () {
+									return $('#language_id').val();
 								}
+
 							},
 							dataFilter: function (respuesta) {
 								console.log('consulta:'+respuesta);
