@@ -46,8 +46,8 @@ class DiscountController extends \BaseController {
 	public function create()
 	{
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		//dd($discountTypes);
-		return View::make('discounts.create',compact('discountTypes'));
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('discounts.create',compact('discountTypes','languages'));
 	}
 
 
@@ -236,28 +236,4 @@ class DiscountController extends \BaseController {
 		return View::make('discounts.data');
 	}
 
-	public function saveData()
-	{
-		if(Request::ajax())
-		{
-			$input = array();
-			$input = Input::all();
-			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
-			//dd($input);
-			try
-			{
-				//$this->registerDiscountForm->validate($input);
-				$response = $this->discountRepository->associateLanguage($input);
-				if ($response) {
-					return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
-				}else{
-					return Response::json('Algo');
-				}
-			}
-			catch (FormValidationException $e)
-			{
-				return Response::json($e->getErrors()->all());
-			}
-		}
-	}
 }
