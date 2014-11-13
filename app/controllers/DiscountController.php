@@ -210,11 +210,4 @@ class DiscountController extends \BaseController {
 		return Response::json(array('respuesta' => 'false'));
 	}
 
-	public function createCode()
-	{
-		return View::make('discounts.code');
-	}
-
-	
-
 }
