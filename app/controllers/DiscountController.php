@@ -64,8 +64,8 @@ class DiscountController extends \BaseController {
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-				/*$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));*/
+				$this->discountRepository->createNewDiscount($input);
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
 			}
 			catch (FormValidationException $e)
 			{
