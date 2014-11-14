@@ -66,6 +66,7 @@ function () {
 
 	Route::get('delete/{id}','DiscountController@destroy');
 	Route::post('checkCode','DiscountController@checkCode');
+	Route::post('checkCodeForEdit','DiscountController@checkCodeForEdit');
 	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
 
 	/**
