@@ -76,4 +76,11 @@ class DiscountRepository {
 	{
 		return Discount::select()->where('id','!=',$data['discount_id'])->where('code','=',$data['code'])->first();
 	}
+
+	public function deleteDiscount($discount_id)
+	{
+		$discount = Discount::find($discount_id);
+		//$discount->languages()->withTrashed()->get();
+		$discount->delete();
+	}
 }
