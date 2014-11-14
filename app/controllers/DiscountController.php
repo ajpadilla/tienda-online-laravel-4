@@ -142,7 +142,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		return "Destroy:".$id;
+		$this->discountRepository->deleteDiscount($id);
 	}
 
 	public function getDatatable()
