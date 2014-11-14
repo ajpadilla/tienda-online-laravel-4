@@ -51,4 +51,9 @@ class DiscountRepository {
 	{
 		return Discount::select()->where('id','=',$id)->first();
 	}
+
+	public function getCodeEdit($data = array())
+	{
+		return Discount::select()->where('id','!=',$data['id'])->where('code','=',$data['code'])->first();
+	}
 }
