@@ -1,7 +1,7 @@
 <?php namespace s4h\store\Discounts;
 
 use s4h\store\Discounts\Discount;
-use s4h\store\languages\LanguageRepository;
+use s4h\store\Languages\LanguageRepository;
 use s4h\store\DiscountTypesLang\DiscountTypeLang;
 class DiscountRepository {
 
