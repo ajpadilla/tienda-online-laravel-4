@@ -54,7 +54,7 @@ function () {
 		'uses' => 'DiscountController@edit'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discounts.update'), [
+	Route::post(LaravelLocalization::transRoute('discounts.update'), [
 		'as' => 'discounts.update',
 		'uses' => 'DiscountController@update'
 	]);
