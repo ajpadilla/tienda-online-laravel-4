@@ -94,6 +94,12 @@
 							</div>
 						</div>
 						<div class="form-group">
+							{{ Form::label('discount_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('discount_id',$discount->id,['class' => 'form-control','id'=>'discount_id']) }}
+							</div>
+						</div>
+						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
 								{{ Form::submit(trans('discounts.labels.save'), ['class' => 'btn btn-primary']) }}
 							</div>
@@ -184,7 +190,9 @@
 								code: function() {
 									return $('#code').val();
 								},
-								language_id: function() {}
+								discount_id: function() {
+									return $('#discount_id').val();
+								}
 							},
 							dataFilter: function (respuesta) {
 								console.log('consulta:'+respuesta);
@@ -270,7 +278,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
+				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.update'))}}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
