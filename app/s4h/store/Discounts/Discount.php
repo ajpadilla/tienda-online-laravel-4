@@ -1,8 +1,12 @@
 <?php namespace s4h\store\Discounts;
 
 use Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Discount extends Eloquent {
+	use SoftDeletingTrait;
+
+    protected $dates = ['deleted_at'];
 	
 	protected $table = 'discounts';
 

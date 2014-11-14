@@ -2,11 +2,7 @@
 	return array(
 		"create" => "crear/descuento",
 		"store" => "agregar/descuento",
- 		"createCode" =>"crear/codigo_descuento", 
- 		"storeCode" => "agregar/codigo_descuento",
 		"index"=>'lista/descuentos',
-		"createData" =>"agregar/datos_idioma",
-		"saveData" =>'agregar/caracteristicas_descuento',
 		"show"=>"ver/{id}",
 		"edit"=>"editar/{id}",
 		"update"=>"Actualizar/{id}",
@@ -27,7 +23,8 @@
 			'discount_type' => 'Tipo de descuento:',
 			'save' => 'Agregar',
 			'Yes' => 'Si',
-			'No' => 'No'
+			'No' => 'No',
+			'language' => 'Idioma'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',

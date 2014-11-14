@@ -15,12 +15,11 @@ class DiscountTypeRepository {
 		return DiscountType::all();
 	}
 
-	public function getName($name)
+	public function getName($data)
 	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		$language = Language::select()->where('id','=',$data['language_id'])->first();
 		if (count($language) > 0) {
-			return $language->discounts_types()->wherePivot('name','=',$name)->first();
+			return $language->discounts_types()->wherePivot('name','=',$data['name'])->first();
 		}else{
 			return $language;
 		}
