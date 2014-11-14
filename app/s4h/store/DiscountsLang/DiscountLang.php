@@ -1,11 +1,16 @@
 <?php namespace s4h\store\DiscountsLang;
 
 use Eloquent;
-
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 /**
 * 
 */
 class DiscountLang extends Eloquent{
+
+	use SoftDeletingTrait;
+
+    protected $dates = ['deleted_at'];
+
 	protected $table = 'discounts_lang';
 
 	public function discount(){
