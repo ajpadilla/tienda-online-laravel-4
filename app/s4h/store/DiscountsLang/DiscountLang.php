@@ -17,7 +17,7 @@ class DiscountLang extends Eloquent{
 		return $this->belongsTo('s4h\store\Discounts\Discount','discount_id');
 	}
 
-	public function discount(){
+	public function language(){
 		return $this->belongsTo('s4h\store\Languages\Language','language_id');
 	}
 }
