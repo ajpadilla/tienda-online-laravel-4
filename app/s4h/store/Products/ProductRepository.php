@@ -14,4 +14,12 @@ class ProductRepository {
 	{
 		return Product::all();
 	}
+
+	public function deleteProduct($id)
+	{
+		$product = Product::find($id);
+
+		$product->delete();
+
+	}
 }
