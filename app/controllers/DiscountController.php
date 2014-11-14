@@ -210,9 +210,9 @@ class DiscountController extends \BaseController {
 	public function checkCodeForEdit()
 	{
 		if (Request::ajax()) {
-			$discount = $this->discountRepository->getCodeEdit(Input::get('code'));
+			$discount = $this->discountRepository->getCodeEdit(Input::all());
 			if(count($discount) > 0){
-				return Response::json($discount);
+				return Response::json(false);
 			}else{
 				 return Response::json(true);
 			}
