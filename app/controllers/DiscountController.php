@@ -6,7 +6,7 @@ use s4h\store\DiscountsTypes\DiscountType;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use Laracasts\Validation\FormValidationException;
-use s4h\store\languages\LanguageRepository;
+use s4h\store\Languages\LanguageRepository;
 use s4h\store\DiscountsLang\DiscountLangRepository;
 
 class DiscountController extends \BaseController {
