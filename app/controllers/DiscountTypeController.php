@@ -1,10 +1,9 @@
 <?php
 
-use s4h\store\DiscountsTypes\DiscountType;
+use Laracasts\Validation\FormValidationException;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Forms\RegisterDiscountTypeForm;
-use Laracasts\Validation\FormValidationException;
-use s4h\store\languages\LanguageRepository;
+use s4h\store\Languages\LanguageRepository;
 
 class DiscountTypeController extends \BaseController {
 
@@ -12,7 +11,7 @@ class DiscountTypeController extends \BaseController {
 	private $registerDiscountTypeForm;
 	private $languageRepository;
 
-	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository){
+	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository) {
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
 		$this->languageRepository = $languageRepository;
@@ -23,47 +22,38 @@ class DiscountTypeController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index() {
 		//return "Hola";
 	}
-
 
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		$languages = $this->languageRepository->getAll()->lists('name','id');
+	public function create() {
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		return View::make('discounts_types.create', compact('languages'));
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		if(Request::ajax())
-		{
+	public function store() {
+		if (Request::ajax()) {
 			$input = Input::all();
 			try
 			{
 				$this->registerDiscountTypeForm->validate($input);
 				$this->discountTypeRepository->createNewDiscountType($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
-			}
-			catch (FormValidationException $e)
-			{
+				return Response::json(trans('discounts.message1') . ' ' . $input['name'] . ' ' . trans('discounts.message2'));
+			} catch (FormValidationException $e) {
 				return Response::json($e->getErrors()->all());
 			}
 		}
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -71,11 +61,9 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+	public function show($id) {
 		//
 	}
-
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -83,11 +71,9 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+	public function edit($id) {
 		//
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -95,11 +81,9 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
+	public function update($id) {
 		//
 	}
-
 
 	/**
 	 * Remove the specified resource from storage.
@@ -107,24 +91,21 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id) {
 		//
 	}
 
-	public function checkName()
-	{
+	public function checkName() {
 		$response = array();
-		if(Request::ajax()) 
-		{
+		if (Request::ajax()) {
 			$discount_type = $this->discountTypeRepository->getName(Input::all());
-			if(count($discount_type) > 0){
+			if (count($discount_type) > 0) {
 				return Response::json(false);
-			}else{
-				 return Response::json(true);
+			} else {
+				return Response::json(true);
 			}
-       	}
-		return Response::json(array('respuesta' => 'false'));	
+		}
+		return Response::json(array('respuesta' => 'false'));
 	}
 
 }
