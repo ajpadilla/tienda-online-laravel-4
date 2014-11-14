@@ -1,14 +1,15 @@
 <?php namespace s4h\store\Products;
 
 use Eloquent;
-use SoftDeletingTrait;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Product extends Eloquent{
+	use SoftDeletingTrait;
+	protected $softDelete = true;
+	protected $dates = ['deleted_at'];
 
 	protected $fillable = ['name','description','on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id'];
-	protected $softDelete = true;
 
-	protected $dates = ['deleted_at'];
 	/*
 	* Realaciones
 	*/
@@ -97,8 +98,10 @@ class Product extends Eloquent{
 	*/
 	public function delete()
 	{
-		$this->photos()->delete();
-		$this->categories()->delete();
+		if($this->hasPhotos())
+			$this->photos()->delete();
+		if($this->hasRatings())
+			$this->ratings()->delete();
 		return parent::delete();
 	}
 }
