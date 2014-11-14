@@ -116,7 +116,21 @@ class DiscountController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		return "Update:".$id;
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			//dd($input);
+			try
+			{
+				//$this->registerDiscountForm->validate($input);
+				$this->discountRepository->updateDiscount($input, $id);
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
