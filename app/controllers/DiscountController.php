@@ -46,8 +46,8 @@ class DiscountController extends \BaseController {
 	public function create()
 	{
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		//dd($discountTypes);
-		return View::make('discounts.create',compact('discountTypes'));
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('discounts.create',compact('discountTypes','languages'));
 	}
 
 
@@ -58,18 +58,14 @@ class DiscountController extends \BaseController {
 	 */
 	public function store()
 	{
-		//dd(Input::all());
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
-			//dd($input);
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				/*$this->discountRepository->createNewDiscount($input);
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));*/
 			}
 			catch (FormValidationException $e)
 			{
@@ -106,7 +102,8 @@ class DiscountController extends \BaseController {
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$discount_language = $discount->languages()->where('language_id','=',$language_id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		return View::make('discounts.edit',compact('discount','discount_language','discountTypes'));
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('discounts.edit',compact('discount','discount_language','discountTypes','languages'));
 
 	}
 
@@ -119,7 +116,21 @@ class DiscountController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		return "Update:".$id;
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			//dd($input);
+			try
+			{
+				//$this->registerDiscountForm->validate($input);
+				$this->discountRepository->updateDiscount($input, $id);
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -131,7 +142,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		return "Destroy:".$id;
+		$this->discountRepository->deleteDiscount($id);
 	}
 
 	public function getDatatable()
@@ -210,53 +221,14 @@ class DiscountController extends \BaseController {
 		return Response::json(array('respuesta' => 'false'));
 	}
 
-	public function createCode()
+	public function checkCodeForEdit()
 	{
-		return View::make('discounts.code');
-	}
-
-	public function storeCode()
-	{
-		 $discount = $this->discountRepository->getCode(Input::get('code'));
-		 //dd($discount);
-		 if (count($discount) > 0) {
-		 	Session::put('discount_code',Input::get('code'));
-		 	Flash::warning(trans('discounts.alert'));
-		 	return Redirect::to(LaravelLocalization::transRoute('discounts.createData'));
-		 }else{
-		 	//$language_id = $this->languageRepository->returnLanguage()->id;
-		 	Session::put('discount_code',Input::get('code'));
-		 	return Redirect::to(LaravelLocalization::transRoute('discounts.create'));
-		 }
-
-	}
-
-	public function createData()
-	{
-		return View::make('discounts.data');
-	}
-
-	public function saveData()
-	{
-		if(Request::ajax())
-		{
-			$input = array();
-			$input = Input::all();
-			$input['language_id'] = $this->languageRepository->returnLanguage()->id;
-			//dd($input);
-			try
-			{
-				//$this->registerDiscountForm->validate($input);
-				$response = $this->discountRepository->associateLanguage($input);
-				if ($response) {
-					return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
-				}else{
-					return Response::json('Algo');
-				}
-			}
-			catch (FormValidationException $e)
-			{
-				return Response::json($e->getErrors()->all());
+		if (Request::ajax()) {
+			$discount = $this->discountRepository->getCodeEdit(Input::all());
+			if(count($discount) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
 			}
 		}
 	}

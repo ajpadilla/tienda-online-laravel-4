@@ -14,43 +14,49 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
+					{{ Form::model($discount, array('route' => array('discounts.update', $discount->id),'id'=>'formCreateDiscount','class'=>'form-horizontal')) }}
 					<div class="col-sm-6 b-r">
+						<div class="form-group">
+							{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('language_id',$languages,$discount_language->id,array('class' => 'form-control','id'=>'language_id')) }}
+							</div>
+						</div>
 						<div class="form-group">
 							{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('code',$discount->code, ['class' => 'form-control','id' =>'code',
-								'readonly']) }}
+								'']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('name', trans('discounts.labels.name'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('name',$discount_language->pivot->name, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('name',$discount_language->pivot->name, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('description', trans('discounts.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('description',$discount_language->pivot->description, ['class' => 'form-control', 'rows' => '3','readonly']) }}
+								{{ Form::textarea('description',$discount_language->pivot->description, ['class' => 'form-control', 'rows' => '3','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('value',  trans('discounts.labels.value'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('value',$discount->value, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('value',$discount->value, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('percent', trans('discounts.labels.percent'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('percent',$discount->percent, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('percent',$discount->percent, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('quantity', trans('discounts.labels.quantity'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('quantity',$discount->quantity, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('quantity',$discount->quantity, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 					</div>
@@ -59,32 +65,38 @@
 						<div class="form-group">
 							{{ Form::label('quantity_per_user', trans('discounts.labels.quantity_per_user'),['class'=>'col-sm-4 control-label']) }}
 							<div class="col-sm-6 ">
-								{{ Form::text('quantity_per_user',$discount->quantity_per_user, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('quantity_per_user',$discount->quantity_per_user, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('active', trans('discounts.labels.active'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('active',array('1'=>'Si','2'=>'No'),$discount->active,array('class' => 'form-control','readonly')) }}
+								{{ Form::select('active',array('1'=>'Si','2'=>'No'),$discount->active,array('class' => 'form-control','')) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('from',$discount->from, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('from',$discount->from, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('to',$discount->to, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('to',$discount->to, ['class' => 'form-control','']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('discount_type_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::select('discount_type_id',$discountTypes,$discount->discountType->id,array('class' => 'form-control')) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('discount_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('discount_id',$discount->id,['class' => 'form-control','id'=>'discount_id']) }}
 							</div>
 						</div>
 						<div class="form-group">
@@ -170,13 +182,16 @@
 				code:{
 					required:!0,
 					onlyLettersNumbersAndDash: true,
-					 remote:
+						remote:
 						{
-							url:'{{ URL::to('/checkCode/') }}',
+							url:'{{ URL::to('/checkCodeForEdit/') }}',
 							type: 'POST',
 							data: {
 								code: function() {
 									return $('#code').val();
+								},
+								discount_id: function() {
+									return $('#discount_id').val();
 								}
 							},
 							dataFilter: function (respuesta) {
@@ -263,7 +278,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
+				url:  '{{ route('discounts.update',$discount->id) }}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
@@ -291,7 +306,6 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-			window.location.href = 	'{{URL::to(LaravelLocalization::transRoute('discounts.createCode'))}}'		
 		} 						
 
 </script>

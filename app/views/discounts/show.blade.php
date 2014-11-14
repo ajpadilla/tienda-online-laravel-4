@@ -17,6 +17,13 @@
 					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
+							{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::text('code',$discount_language->name, ['class' => 'form-control','id' =>'code',
+								'readonly']) }}
+							</div>
+						</div>
+						<div class="form-group">
 							{{ Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('code',$discount->code, ['class' => 'form-control','id' =>'code',
@@ -84,7 +91,7 @@
 						<div class="form-group">
 							{{ Form::label('discount_type_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('discount_type_id',$discountTypes,$discount->discountType->id,array('class' => 'form-control')) }}
+								{{ Form::select('discount_type_id',$discountTypes,$discount->discountType->id,array('class' => 'form-control','selected')) }}
 							</div>
 						</div>
 					</div>
