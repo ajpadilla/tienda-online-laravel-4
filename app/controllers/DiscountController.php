@@ -64,8 +64,8 @@ class DiscountController extends \BaseController {
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				/*$this->discountRepository->createNewDiscount($input);
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));*/
 			}
 			catch (FormValidationException $e)
 			{
@@ -102,7 +102,8 @@ class DiscountController extends \BaseController {
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$discount_language = $discount->languages()->where('language_id','=',$language_id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		return View::make('discounts.edit',compact('discount','discount_language','discountTypes'));
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('discounts.edit',compact('discount','discount_language','discountTypes','languages'));
 
 	}
 
@@ -206,4 +207,15 @@ class DiscountController extends \BaseController {
 		return Response::json(array('respuesta' => 'false'));
 	}
 
+	public function checkCodeForEdit()
+	{
+		if (Request::ajax()) {
+			$discount = $this->discountRepository->getCodeEdit(Input::get('code'));
+			if(count($discount) > 0){
+				return Response::json($discount);
+			}else{
+				 return Response::json(true);
+			}
+		}
+	}
 }
