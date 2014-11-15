@@ -42,7 +42,13 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
 	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
-	Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
+	//Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
+
+	Route::get(LaravelLocalization::transRoute('discounts.index'), [
+		'as' => 'discounts.index',
+		'uses' => 'DiscountController@index'
+	]);
+
 
 	Route::get(LaravelLocalization::transRoute('discounts.show'), [
 		'as' => 'discounts.show',
