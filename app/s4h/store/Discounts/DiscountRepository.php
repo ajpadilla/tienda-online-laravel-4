@@ -3,6 +3,8 @@
 use s4h\store\Discounts\Discount;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\DiscountTypesLang\DiscountTypeLang;
+use s4h\store\DiscountsLang\DiscountLang;
+
 class DiscountRepository {
 
 	public function save(Discount $discount){
@@ -80,7 +82,7 @@ class DiscountRepository {
 	public function deleteDiscount($discount_id)
 	{
 		$discount = Discount::find($discount_id);
-		//$discount->languages()->withTrashed()->get();
 		$discount->delete();
+		DiscountLang::where('discount_id','=',$discount_id)->delete();
 	}
 }
