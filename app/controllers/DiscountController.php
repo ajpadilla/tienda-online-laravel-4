@@ -143,6 +143,7 @@ class DiscountController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->discountRepository->deleteDiscount($id);
+		Redirect::route('discounts.index');
 	}
 
 	public function getDatatable()
