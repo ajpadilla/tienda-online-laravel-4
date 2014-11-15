@@ -12,7 +12,7 @@ class CreateShipmentStatusTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('shipment_status', function($table)
+		Schema::create('shipment_status', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('color', 7);
