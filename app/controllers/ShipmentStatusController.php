@@ -1,13 +1,20 @@
 <?php
 
 use s4h\store\Languages\LanguageRepository;
+use s4h\store\Forms\RegisterShipmentStatusForm;
+use s4h\store\ShipmentStatus\ShipmentStatusRepository;
+use Laracasts\Validation\FormValidationException;
 
 class ShipmentStatusController extends \BaseController {
 
 	private $languageRepository;
+	private $registerShipmentStatusForm;
+	private $shipmentStatusRepository;
 
-	function __construct(LanguageRepository $languageRepository) {
+	function __construct(LanguageRepository $languageRepository, RegisterShipmentStatusForm $registerShipmentStatusForm, ShipmentStatusRepository $shipmentStatusRepository) {
 		$this->languageRepository = $languageRepository;
+		$this->registerShipmentStatusForm = $registerShipmentStatusForm;
+		$this->shipmentStatusRepository = $shipmentStatusRepository;
 	}
 
 	/**
@@ -28,7 +35,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll();
+		$languages = $this->languageRepository->getAll()->lists('name','id');
 		return View::make('shipment_status.create',compact('languages'));
 	}
 
@@ -40,7 +47,21 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			//dd($input);
+			try
+			{
+				$this->registerShipmentStatusForm->validate($input);
+				$this->shipmentStatusRepository->createNewShipmentStatus($input);
+				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -91,5 +112,29 @@ class ShipmentStatusController extends \BaseController {
 		//
 	}
 
+	public function checkNameShipmentStatus()
+	{
+		if (Request::ajax()) {
+			$input = Input::all();
+			$shipment_status = $this->shipmentStatusRepository->getNameShipmentStatus($input);
+			if(count($shipment_status) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
+			}
+		}
+	}
+
+	public function checkColorShipmentStatus($value='')
+	{
+		if (Request::ajax()) {
+			$shipment_status = $this->shipmentStatusRepository->getColor(Input::get('color'));
+			if(count($shipment_status) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
+			}
+		}
+	}
 
 }
