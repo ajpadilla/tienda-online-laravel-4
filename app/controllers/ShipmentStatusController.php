@@ -1,6 +1,14 @@
 <?php
 
+use s4h\store\Languages\LanguageRepository;
+
 class ShipmentStatusController extends \BaseController {
+
+	private $languageRepository;
+
+	function __construct(LanguageRepository $languageRepository) {
+		$this->languageRepository = $languageRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +28,8 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$languages = $this->languageRepository->getAll();
+		return View::make('shipment_status.create',compact('languages'));
 	}
 
 
