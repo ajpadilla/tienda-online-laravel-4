@@ -102,6 +102,14 @@ function () {
 		'uses' => 'ShipmentStatusController@create'
 	]);
 
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.store'), [
+		'as' => 'shipmentStatus.store',
+		'uses' => 'ShipmentStatusController@store'
+	]);
+
+	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
+	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
+
 });
 
 // Confide routes
