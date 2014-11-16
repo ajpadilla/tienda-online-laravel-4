@@ -107,6 +107,8 @@ function () {
 		'uses' => 'ShipmentStatusController@store'
 	]);
 
+	Route::get('api/shipmentStatus', array('as'=>'api.shipmentStatus', 'uses'=>'ShipmentStatusController@getDatatable'));
+
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
 
