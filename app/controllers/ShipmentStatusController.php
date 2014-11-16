@@ -125,16 +125,14 @@ class ShipmentStatusController extends \BaseController {
 		}
 	}
 
-	public function checkColorShipmentStatus($value='')
+	public function checkColorShipmentStatus()
 	{
-		if (Request::ajax()) {
 			$shipment_status = $this->shipmentStatusRepository->getColor(Input::get('color'));
 			if(count($shipment_status) > 0){
 				return Response::json(false);
 			}else{
 				 return Response::json(true);
 			}
-		}
 	}
 
 }
