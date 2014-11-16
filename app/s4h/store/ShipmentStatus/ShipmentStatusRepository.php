@@ -31,8 +31,8 @@ class ShipmentStatusRepository {
 
 	public function getColor($color)
 	{
-		$shipment_status = ShipmentStatus::select()->where('color','=',$color))->first();
+		$shipment_status = ShipmentStatus::select()->where('color','=',$color)->first();
 		return $shipment_status;
 	}
-	
+
 }
