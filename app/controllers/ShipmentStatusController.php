@@ -3,6 +3,7 @@
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\RegisterShipmentStatusForm;
 use s4h\store\ShipmentStatus\ShipmentStatusRepository;
+use s4h\store\ShipmentStatusLang\ShipmentStatusLangRepository;
 use Laracasts\Validation\FormValidationException;
 
 class ShipmentStatusController extends \BaseController {
@@ -10,11 +11,13 @@ class ShipmentStatusController extends \BaseController {
 	private $languageRepository;
 	private $registerShipmentStatusForm;
 	private $shipmentStatusRepository;
+	private $shipmentStatusLangRepository;
 
-	function __construct(LanguageRepository $languageRepository, RegisterShipmentStatusForm $registerShipmentStatusForm, ShipmentStatusRepository $shipmentStatusRepository) {
+	function __construct(LanguageRepository $languageRepository, RegisterShipmentStatusForm $registerShipmentStatusForm, ShipmentStatusRepository $shipmentStatusRepository, ShipmentStatusLangRepository $shipmentStatusLangRepository) {
 		$this->languageRepository = $languageRepository;
 		$this->registerShipmentStatusForm = $registerShipmentStatusForm;
 		$this->shipmentStatusRepository = $shipmentStatusRepository;
+		$this->shipmentStatusLangRepository = $shipmentStatusLangRepository;
 	}
 
 	/**
@@ -24,9 +27,42 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('shipment_status.index');
 	}
 
+	public function getDatatable(){
+
+		$collection = Datatable::collection($this->shipmentStatusLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('color','name','description')
+			->orderColumns('color','name','description');
+
+		$collection->addColumn('color', function($model)
+		{
+			return $model->shipmentStatus->color;
+		});
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+
+		$collection->addColumn('description', function($model)
+		{
+			return $model->description;
+		});
+	
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('discounts.show',$model->shipmentStatus->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('discounts.edit',$model->shipmentStatus->id). "'>Edit</a>
+					<br />
+					<a href='" .route('discounts.destroy',$model->shipmentStatus->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
+	}
 
 	/**
 	 * Show the form for creating a new resource.
