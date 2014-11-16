@@ -14,6 +14,7 @@
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
 			'save' => 'Agregar',
+			'sending' => 'Enviando datos'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
