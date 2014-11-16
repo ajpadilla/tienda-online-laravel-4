@@ -107,6 +107,11 @@ function () {
 		'uses' => 'ShipmentStatusController@store'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.index'), [
+		'as' => 'shipmentStatus.index',
+		'uses' => 'ShipmentStatusController@index'
+	]);
+
 	Route::get('api/shipmentStatus', array('as'=>'api.shipmentStatus', 'uses'=>'ShipmentStatusController@getDatatable'));
 
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
