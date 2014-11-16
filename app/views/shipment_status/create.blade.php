@@ -25,19 +25,19 @@
 						<div class="form-group">
 							{{ Form::label('name', trans('shipmentStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('name',null, ['class' => 'form-control']) }}
+								{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
 							</div>
 						</div>
-
+					</div>
+					
+					<div class="col-sm-6">
 						<div class="form-group">
 							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
 							</div>
 						</div>
-					</div>
-					
-					<div class="col-sm-6">
+						
 						<div class="form-group">
 							{{ Form::label('color', trans('shipmentStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
@@ -55,7 +55,7 @@
 											'#dbadff' => 'Purple',
 											'#e1e1e1' => 'Gray',
 										)
-								,null,array('class' => 'form-control')) }}
+								,null,['class' => 'form-control','id' => 'color']) }}
 							</div>
 						</div>
 						<div class="form-group">
@@ -92,7 +92,24 @@
 				name:{
 					required:!0,
 					rangelength: [2, 255],
-					onlyLettersNumbersAndSpaces: true
+					onlyLettersNumbersAndSpaces: true,
+					remote:
+					{
+						url:'{{ URL::to('/checkNameShipmentStatus/') }}',
+						type: 'POST',
+						data: {
+							language_id: function() {
+								return $('#language_id').val();
+							},
+							name: function() {
+								return $('#name').val();
+							}
+						},
+						dataFilter: function (respuesta) {
+							console.log('consulta:'+respuesta);
+							return respuesta;
+						}
+					} 
 				},
 				description:{
 					required:!0,
@@ -100,12 +117,27 @@
 				},
 				color:{
 					required:!0,
+					 remote:
+						{
+							url:'{{ URL::to('/checkColorShipmentStatus/') }}',
+							type: 'POST',
+							data: {
+								color: function() {
+									return $('#color').val();
+								}
+							},
+							dataFilter: function (respuesta) {
+								console.log('consulta:'+respuesta);
+								return respuesta;
+							}
+						} 
 				}
 			},
 			messages:{
 				name:{
 					required: '{{ trans('shipmentStatus.validation.required') }}',
 					rangelength: '{{ trans('shipmentStatus.validation.rangelength') }}'+'[2, 255]'+'{{ trans('shipmentStatus.validation.characters') }}',
+					remote: jQuery.validator.format('{{ trans('shipmentStatus.alert') }}')
 				},
 				description:{
 					required: '{{ trans('shipmentStatus.validation.required') }}',
@@ -113,6 +145,7 @@
 				},
 				color:{
 					required: '{{ trans('shipmentStatus.validation.required') }}',
+					remote: jQuery.validator.format('{{ trans('shipmentStatus.alertColor') }}')
 				}
 			},
 			highlight:function(element){
