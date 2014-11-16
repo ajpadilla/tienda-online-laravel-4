@@ -92,6 +92,16 @@ function () {
 	Route::get('returnLanguages','LanguageController@returnLanguages');
 	Route::post('getIdLanguage','LanguageController@getIdLanguage');
 	Route::get('mostar','LanguageController@mostrar');
+
+	/**
+		* ------------------------------ Rutas shipment status  -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.create'), [
+		'as' => 'shipmentStatus.create',
+		'uses' => 'ShipmentStatusController@create'
+	]);
+
 });
 
 // Confide routes
