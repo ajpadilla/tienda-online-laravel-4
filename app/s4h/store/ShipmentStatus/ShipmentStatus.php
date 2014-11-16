@@ -4,6 +4,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class ShipmentStatus extends Eloquent {
+	
 	use SoftDeletingTrait;
 
     protected $dates = ['deleted_at'];
