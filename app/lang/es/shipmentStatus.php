@@ -13,6 +13,7 @@
 			'language' => 'Idioma',
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
+			'color' => 'Color',
 			'save' => 'Agregar',
 			'sending' => 'Enviando datos'
 		),
@@ -27,7 +28,8 @@
 		),
 		'message1' =>'Estatus',
 		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El codigo del descuento ya se encuentra registrado!',
+		'alert' => '¡El nombre del estatus ya se encuentra registrado!',
+		'alertColor' => '¡El color ya se encuentra registrado!.',
 		'list' =>array(
 			'title' => 'Listado de estatus',
 			'subtitle'=>'Lista de estatus',
