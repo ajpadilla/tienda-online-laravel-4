@@ -12,13 +12,8 @@ class ShipmentStatus extends Eloquent {
 
 	protected $fillable = ['color'];
 
-
-	public function discountType(){
-		return $this->belongsTo('s4h\store\DiscountsTypes\DiscountType');
-	}
-
 	public function languages(){
-		return $this->belongsToMany('s4h\store\Languages\Language','discounts_lang','discount_id','language_id')->withPivot('name','description');
+		return $this->belongsToMany('s4h\store\Languages\Language','shipment_status_lang','shipment_status_id','language_id')->withPivot('name','description');
 	}	
 
 }
