@@ -7,6 +7,7 @@ use s4h\store\Forms\RegisterInvoiceStatusForm;
 use Laracasts\Validation\FormValidationException;
 
 class InvoiceStatusController extends \BaseController {
+
 	private $invoiceStatusRepository;
 	private $invoiceStatusLangRepository;
 	private $languageRepository;
@@ -37,7 +38,8 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('invoice_status.create',compact('languages'));
 	}
 
 
@@ -48,7 +50,20 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerInvoiceStatusForm->validate($input);
+				$this->invoiceStatusRepository->createNewInvoiceStatus($input);
+				return Response::json(trans('invoiceStatus.message1').' '.$input['name'].' '.trans('invoiceStatus.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
