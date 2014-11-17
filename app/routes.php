@@ -148,32 +148,32 @@ function () {
 	]);
 
 	Route::post(LaravelLocalization::transRoute('invoiceStatus.store'), [
-		'as' => 'shipmentStatus.store',
+		'as' => 'invoiceStatus.store',
 		'uses' => 'InvoiceStatusController@store'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.index'), [
-		'as' => 'shipmentStatus.index',
+		'as' => 'invoiceStatus.index',
 		'uses' => 'InvoiceStatusController@index'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.edit'), [
-		'as' => 'shipmentStatus.edit',
+		'as' => 'invoiceStatus.edit',
 		'uses' => 'InvoiceStatusController@edit'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.show'), [
-		'as' => 'shipmentStatus.show',
+		'as' => 'invoiceStatus.show',
 		'uses' => 'InvoiceStatusController@show'
 	]);
 
 	Route::post(LaravelLocalization::transRoute('invoiceStatus.update'), [
-		'as' => 'shipmentStatus.update',
+		'as' => 'invoiceStatus.update',
 		'uses' => 'InvoiceStatusController@update'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.destroy'), [
-		'as' => 'shipmentStatus.destroy',
+		'as' => 'invoiceStatus.destroy',
 		'uses' => 'InvoiceStatusController@destroy'
 	]);
 
