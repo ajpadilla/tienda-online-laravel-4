@@ -114,5 +114,18 @@ class InvoiceStatusController extends \BaseController {
 		//
 	}
 
+	public function checkNameInvoiceStatus()
+	{
+		if (Request::ajax()) 
+		{
+			$input = Input::all();
+			$invoice_status = $this->invoiceStatusRepository->getNameInvoiceStatus($input);
+			if(count($invoice_status) > 0){
+				return Response::json(false);
+			}else{
+				 return Response::json(true);
+			}
+		}
+	}
 
 }
