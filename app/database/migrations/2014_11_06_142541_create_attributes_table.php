@@ -31,7 +31,7 @@ class CreateAttributesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('attributes');
+		Schema::dropIfExists('attributes');
 	}
 
 }

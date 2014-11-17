@@ -27,7 +27,7 @@ class UpdateCategoriesTable extends Migration {
 	{
 		Schema::table('categories', function(Blueprint $table)
 		{
-			Schema::drop('categories');
+			Schema::dropIfExists('categories');
 		});
 	}
 

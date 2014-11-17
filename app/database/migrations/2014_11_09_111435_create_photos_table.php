@@ -28,10 +28,7 @@ class CreatePhotosTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('photos', function(Blueprint $table)
-		{
-			Schema::drop('photos');
-		});
+		Schema::dropIfExists('photos');
 	}
 
 }

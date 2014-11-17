@@ -28,7 +28,7 @@ class UpdateRatingsTable extends Migration {
 	{
 		Schema::table('ratings', function(Blueprint $table)
 		{
-			Schema::drop('ratings');
+			Schema::dropIfExists('ratings');
 		});
 	}
 

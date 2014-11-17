@@ -32,7 +32,7 @@ class CreateDiscountsLangTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('discounts_lang');
+		Schema::dropIfExists('discounts_lang');
 	}
 
 }
