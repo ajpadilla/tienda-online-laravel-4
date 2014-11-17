@@ -7,8 +7,8 @@
 		"edit"=>"editar_estatus_factura/{id}",
 		"update"=>"actualizar_estatus_factura/{id}",
 		"destroy"=>"eliminar_estatus_factura/{id}",
-		"title" => "Agregar Estatus para factura",
-		"subtitle" => "Crear Estatus para factura",
+		"title" => "Agregar estatus para factura",
+		"subtitle" => "Crear estatus para factura",
 		"labels" => array(
 			'language' => 'Idioma',
 			'name' =>'Nombre:',
