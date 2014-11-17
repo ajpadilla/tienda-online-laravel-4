@@ -1,14 +1,14 @@
 <?php 
 	return array(
-		"create" => "crear/factura_de_envio",
-		"store" => "agregar/factura_de_envio",
-		"index"=>'lista/factura_de_envio',
-		"show"=>"ver_factura_de_envio/{id}",
-		"edit"=>"editar_factura_de_envio/{id}",
-		"update"=>"actualizar_factura_de_envio/{id}",
-		"destroy"=>"eliminar_factura_de_envio/{id}",
-		"title" => "Agregar factura de envío",
-		"subtitle" => "Crear factura de envío",
+		"create" => "crear/estatus_factura",
+		"store" => "agregar/estatus_factura",
+		"index"=>'lista/estatus_factura',
+		"show"=>"ver_estatus_factura/{id}",
+		"edit"=>"editar_estatus_factura/{id}",
+		"update"=>"actualizar_estatus_factura/{id}",
+		"destroy"=>"eliminar_estatus_factura/{id}",
+		"title" => "Agregar Estatus para factura",
+		"subtitle" => "Crear Estatus para factura",
 		"labels" => array(
 			'language' => 'Idioma',
 			'name' =>'Nombre:',
@@ -27,7 +27,7 @@
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
 		'message1' =>'Factura',
-		'message2' =>'Agregado con exito!.',
+		'message2' =>'Agregada con exito!.',
 		'alert' => '¡El nombre del factura ya se encuentra registrado!',
 		'alertColor' => '¡El color ya se encuentra registrado!.',
 		'list' =>array(
