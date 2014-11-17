@@ -10,4 +10,5 @@ class InvoiceStatusRepository {
 	{
 		$invoiceStatus->save();
 	}
+	
 }
