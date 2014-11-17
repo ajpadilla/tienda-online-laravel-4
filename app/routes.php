@@ -92,6 +92,52 @@ function () {
 	Route::get('returnLanguages','LanguageController@returnLanguages');
 	Route::post('getIdLanguage','LanguageController@getIdLanguage');
 	Route::get('mostar','LanguageController@mostrar');
+
+	/**
+		* ------------------------------ Rutas shipment status  -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.create'), [
+		'as' => 'shipmentStatus.create',
+		'uses' => 'ShipmentStatusController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.store'), [
+		'as' => 'shipmentStatus.store',
+		'uses' => 'ShipmentStatusController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.index'), [
+		'as' => 'shipmentStatus.index',
+		'uses' => 'ShipmentStatusController@index'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.edit'), [
+		'as' => 'shipmentStatus.edit',
+		'uses' => 'ShipmentStatusController@edit'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.show'), [
+		'as' => 'shipmentStatus.show',
+		'uses' => 'ShipmentStatusController@show'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.update'), [
+		'as' => 'shipmentStatus.update',
+		'uses' => 'ShipmentStatusController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.destroy'), [
+		'as' => 'shipmentStatus.destroy',
+		'uses' => 'ShipmentStatusController@destroy'
+	]);
+
+
+	Route::get('api/shipmentStatus', array('as'=>'api.shipmentStatus', 'uses'=>'ShipmentStatusController@getDatatable'));
+
+	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
+	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
+
 });
 
 // Confide routes
