@@ -38,7 +38,7 @@ class ShipmentStatusController extends \BaseController {
 
 		$collection->addColumn('color', function($model)
 		{
-			return $model->shipmentStatus->color;
+			return  "<input type='text' class='form-control' STYLE='background-color: ".$model->shipmentStatus->color.";' size='5' readonly>";
 		});
 
 		$collection->addColumn('name', function($model)
@@ -52,11 +52,11 @@ class ShipmentStatusController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('discounts.show',$model->shipmentStatus->id). "'>View</a>
+			$links = "<a href='" .route('shipmentStatus.show',$model->shipmentStatus->id). "'>View</a>
 					<br />";
-			$links .= "<a href='" .route('discounts.edit',$model->shipmentStatus->id). "'>Edit</a>
+			$links .= "<a href='" .route('shipmentStatus.edit',$model->shipmentStatus->id). "'>Edit</a>
 					<br />
-					<a href='" .route('discounts.destroy',$model->shipmentStatus->id). "'>Delete</a>";
+					<a href='" .route('shipmentStatus.destroy',$model->shipmentStatus->id). "'>Delete</a>";
 
 			return $links;
 		});
@@ -109,7 +109,10 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$shipmentStatus = $this->shipmentStatusRepository->getShipmentStatus($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$shipmentStatusLanguage = $shipmentStatus->languages()->where('language_id','=',$language_id)->first();
+		return View::make('shipment_status.show',compact('shipmentStatus','shipmentStatusLanguage'));
 	}
 
 
@@ -121,7 +124,11 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$shipmentStatus = $this->shipmentStatusRepository->getShipmentStatus($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$shipmentStatusLanguage = $shipmentStatus->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('shipment_status.edit',compact('shipmentStatus','shipmentStatusLanguage','languages'));
 	}
 
 
@@ -133,7 +140,23 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['shipment_status_id'] = $id;
+			$language_id = $this->languageRepository->returnLanguage()->id;
+			try
+			{
+				//$this->registerShipmentStatusForm->validate($input);
+				$this->shipmentStatusRepository->updateShipmentStatu($input, $language_id);
+				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -145,7 +168,9 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$this->shipmentStatusRepository->deleteShipmentStatu($id);
+		Flash::message('¡shipment status borrado  con éxito!');
+		return Redirect::route('shipmentStatus.index');
 	}
 
 	public function checkNameShipmentStatus()
