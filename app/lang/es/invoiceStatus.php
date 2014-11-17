@@ -28,7 +28,7 @@
 		),
 		'message1' =>'Estatus para factura',
 		'message2' =>'Agregada con exito!.',
-		'alert' => '¡El nombre del factura ya se encuentra registrado!',
+		'alert' => '¡El nombre del estatus para la factura ya se encuentra registrado!',
 		'alertColor' => '¡El color ya se encuentra registrado!.',
 		'list' =>array(
 			'title' => 'Listado de facturas',
