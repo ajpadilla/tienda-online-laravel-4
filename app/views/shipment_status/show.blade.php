@@ -19,13 +19,13 @@
 						<div class="form-group">
 							{{ Form::label('language_id', trans('shipmentStatus.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
+								{{ Form::text('language_id',$shipmentStatusLanguage->name, ['class' => 'form-control', 'id' => 'name','readonly']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('name', trans('shipmentStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
+								{{ Form::text('name',$shipmentStatusLanguage->pivot->name, ['class' => 'form-control', 'id' => 'name','readonly']) }}
 							</div>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 						<div class="form-group">
 							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
+								{{ Form::textarea('description',$shipmentStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3','readonly']) }}
 							</div>
 						</div>
 						
@@ -55,12 +55,7 @@
 											'#dbadff' => 'Purple',
 											'#e1e1e1' => 'Gray',
 										)
-								,null,['class' => 'form-control','id' => 'color']) }}
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('shipmentStatus.labels.save'), ['class' => 'btn btn-primary']) }}
+								,$shipmentStatus->color,['class' => 'form-control','id' => 'color']) }}
 							</div>
 						</div>
 					</div>
@@ -77,6 +72,5 @@
 	{
 		$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 	});
-
 </script>
 @stop
