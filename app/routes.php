@@ -112,6 +112,22 @@ function () {
 		'uses' => 'ShipmentStatusController@index'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.edit'), [
+		'as' => 'shipmentStatus.edit',
+		'uses' => 'ShipmentStatusController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.update'), [
+		'as' => 'shipmentStatus.update',
+		'uses' => 'ShipmentStatusController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.destroy'), [
+		'as' => 'shipmentStatus.destroy',
+		'uses' => 'ShipmentStatusController@destroy'
+	]);
+
+
 	Route::get('api/shipmentStatus', array('as'=>'api.shipmentStatus', 'uses'=>'ShipmentStatusController@getDatatable'));
 
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
