@@ -1,6 +1,6 @@
 <?php namespace s4h\store\InvoiceStatus;
 
-use namespace s4h\store\InvoiceStatus\InvoiceStatus;
+use s4h\store\InvoiceStatus\InvoiceStatus;
 /**
 * 
 */
@@ -10,5 +10,13 @@ class InvoiceStatusRepository {
 	{
 		$invoiceStatus->save();
 	}
-	
+
+	public function createNewInvoiceStatus($data = array())
+	{
+		$invoiceStatus = new InvoiceStatus;
+		$invoiceStatus->color = $data['color'];
+		$invoiceStatus->save();
+		$invoiceStatus->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+	}	
+
 }
