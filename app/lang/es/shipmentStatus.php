@@ -33,6 +33,7 @@
 		'list' =>array(
 			'title' => 'Listado de estatus',
 			'subtitle'=>'Lista de estatus',
+			'Color' => 'Color',
 			'Name'=>'Nombre',
 			'Description' => 'Descripción',
 			'Actions'=>'Acciones',
