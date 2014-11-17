@@ -117,6 +117,11 @@ function () {
 		'uses' => 'ShipmentStatusController@edit'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.show'), [
+		'as' => 'shipmentStatus.show',
+		'uses' => 'ShipmentStatusController@show'
+	]);
+
 	Route::post(LaravelLocalization::transRoute('shipmentStatus.update'), [
 		'as' => 'shipmentStatus.update',
 		'uses' => 'ShipmentStatusController@update'
