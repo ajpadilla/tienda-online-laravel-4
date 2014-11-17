@@ -138,6 +138,48 @@ function () {
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
 
+	/**
+		* ------------------------------ Rutas Invoice status  -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.create'), [
+		'as' => 'invoiceStatus.create',
+		'uses' => 'InvoiceStatusController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.store'), [
+		'as' => 'shipmentStatus.store',
+		'uses' => 'InvoiceStatusController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.index'), [
+		'as' => 'shipmentStatus.index',
+		'uses' => 'InvoiceStatusController@index'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.edit'), [
+		'as' => 'shipmentStatus.edit',
+		'uses' => 'InvoiceStatusController@edit'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.show'), [
+		'as' => 'shipmentStatus.show',
+		'uses' => 'InvoiceStatusController@show'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.update'), [
+		'as' => 'shipmentStatus.update',
+		'uses' => 'InvoiceStatusController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.destroy'), [
+		'as' => 'shipmentStatus.destroy',
+		'uses' => 'InvoiceStatusController@destroy'
+	]);
+
+
+	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
+	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
 });
 
 // Confide routes
