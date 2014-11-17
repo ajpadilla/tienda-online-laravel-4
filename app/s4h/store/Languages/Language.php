@@ -22,4 +22,10 @@ class Language extends Eloquent
 	{
 		return $this->belongsToMany('s4h\store\ShipmentStatus\ShipmentStatus','shipment_status_lang','language_id','shipment_status_id')->withPivot('name','description');
 	}
+
+	public function invoice_status()
+	{
+		return $this->belongsToMany('s4h\store\InvoiceStatus\InvoiceStatus','invoice_status_lang','language_id','invoice_status_id')->withPivot('name','description');
+	}
+
 }
