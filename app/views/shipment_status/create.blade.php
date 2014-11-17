@@ -109,7 +109,7 @@
 							console.log('consulta:'+respuesta);
 							return respuesta;
 						}
-					} 
+					}
 				},
 				description:{
 					required:!0,
@@ -117,7 +117,7 @@
 				},
 				color:{
 					required:!0,
-					 remote:
+					 /*remote:
 						{
 							url:'{{ URL::to('/checkColorShipmentStatus/') }}',
 							type: 'POST',
@@ -130,7 +130,7 @@
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						} 
+						} */
 				}
 			},
 			messages:{
