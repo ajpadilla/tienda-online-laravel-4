@@ -26,7 +26,7 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
-		'message1' =>'Factura',
+		'message1' =>'Estatus para factura',
 		'message2' =>'Agregada con exito!.',
 		'alert' => '¡El nombre del factura ya se encuentra registrado!',
 		'alertColor' => '¡El color ya se encuentra registrado!.',
