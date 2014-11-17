@@ -123,10 +123,10 @@ class ProductController extends \BaseController {
 				$product->condition_id = $input['condition_id'];
 
 				$this->productRepository->save($product);
-				if (!is_null($input['categories'])){
+				if (isset($input['categories'])){
 					$product->categories()->sync($input['categories']);
 				}else{
-					$product->categories()>detach();
+					$product->categories()->detach();
 				}
 				return Response::json('Producto'.' '.$input['name'].' '.'Modificado con exito!');
 			}
@@ -139,9 +139,7 @@ class ProductController extends \BaseController {
 
 	public function destroy($id)
 	{
-		$product = Product::find($id);
-		$product->delete();
-		Session::flash('message', 'El producto fue borrado con éxito!');
+		$this->productRepository->deleteProduct($id);
 		return Redirect::back();
 	}
 
