@@ -1,6 +1,7 @@
 <?php namespace s4h\store\ShipmentStatus;
 
 use s4h\store\ShipmentStatus\ShipmentStatus;
+use s4h\store\ShipmentStatusLang\ShipmentStatusLang;
 use s4h\store\Languages\Language;
 /**
 * 
@@ -35,4 +36,24 @@ class ShipmentStatusRepository {
 		return $shipment_status;
 	}
 
+	public function getShipmentStatus($id)
+	{
+		return ShipmentStatus::find($id);
+	}
+
+	public function updateShipmentStatu($data = array(), $language_id)
+	{
+		$shipment_status = $this->getShipmentStatus($data['shipment_status_id']);
+		$shipment_status->color = $data['color'];
+		$shipment_status->save();
+
+		$shipment_status->languages()->updateExistingPivot($language_id, array('name' => $data['name'], 'description' => $data['description']));
+	}
+
+	public function deleteShipmentStatu($shipment_status_id)
+	{
+		$shipment_status = $this->getShipmentStatus($shipment_status_id);
+		$shipment_status->delete();
+		ShipmentStatusLang::where('shipment_status_id','=',$shipment_status_id)->delete();
+	}
 }
