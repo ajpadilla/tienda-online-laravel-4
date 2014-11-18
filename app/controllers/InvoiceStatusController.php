@@ -110,7 +110,10 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$invoiceStatus = $this->invoiceStatusRepository->getInvoicetStatus($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$invoiceStatusLanguage = $invoiceStatus->languages()->where('language_id','=',$language_id)->first();
+		return View::make('invoice_status.show',compact('invoiceStatus','invoiceStatusLanguage'));
 	}
 
 
@@ -122,7 +125,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return "Edit:".$id;
 	}
 
 
@@ -146,7 +149,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "Delete:".$id;
 	}
 
 	public function checkNameInvoiceStatus()
