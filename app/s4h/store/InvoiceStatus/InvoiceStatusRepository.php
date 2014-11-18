@@ -20,6 +20,15 @@ class InvoiceStatusRepository {
 		$invoiceStatus->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}	
 
+	public function updateInvoiceStatu($data = array())
+	{
+		$invoice_status = $this->getInvoicetStatus($data['invoice_status_id']);
+		$invoice_status->color = $data['color'];
+		$invoice_status->save();
+
+		$invoice_status->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+	}
+
 	public function getNameInvoiceStatus($data = array())
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
