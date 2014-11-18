@@ -4,6 +4,7 @@ use s4h\store\InvoiceStatus\InvoiceStatusRepository;
 use s4h\store\InvoiceStatusLang\InvoiceStatusLangRepository;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\RegisterInvoiceStatusForm;
+use s4h\store\Forms\EditInvoiceStatusForm;
 use Laracasts\Validation\FormValidationException;
 
 class InvoiceStatusController extends \BaseController {
@@ -12,12 +13,14 @@ class InvoiceStatusController extends \BaseController {
 	private $invoiceStatusLangRepository;
 	private $languageRepository;
 	private $registerInvoiceStatusForm;
+	private $editInvoiceStatusForm;
 
-	function __construct(InvoiceStatusRepository $invoiceStatusRepository, InvoiceStatusLangRepository $invoiceStatusLangRepository, LanguageRepository $languageRepository, RegisterInvoiceStatusForm $registerInvoiceStatusForm) {
+	function __construct(InvoiceStatusRepository $invoiceStatusRepository, InvoiceStatusLangRepository $invoiceStatusLangRepository, LanguageRepository $languageRepository, RegisterInvoiceStatusForm $registerInvoiceStatusForm, EditInvoiceStatusForm $editInvoiceStatusForm) {
 		$this->invoiceStatusRepository = $invoiceStatusRepository;
 		$this->invoiceStatusLangRepository = $invoiceStatusLangRepository;
 		$this->languageRepository = $languageRepository;
 		$this->registerInvoiceStatusForm = $registerInvoiceStatusForm;
+		$this->editInvoiceStatusForm = $editInvoiceStatusForm;
 	}
 
 	/**
@@ -148,7 +151,7 @@ class InvoiceStatusController extends \BaseController {
 			$input['invoice_status_id'] = $id;
 			try
 			{
-				//$this->registerShipmentStatusForm->validate($input);
+				$this->editInvoiceStatusForm ->validate($input);
 				$this->invoiceStatusRepository->updateInvoiceStatu($input);
 				return Response::json(trans('invoiceStatus.message1').' '.$input['name'].' '.trans('invoiceStatus.message2'));
 			}
