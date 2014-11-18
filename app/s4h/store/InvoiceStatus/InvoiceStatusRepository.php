@@ -1,6 +1,7 @@
 <?php namespace s4h\store\InvoiceStatus;
 
 use s4h\store\InvoiceStatus\InvoiceStatus;
+use s4h\store\InvoiceStatusLang\InvoiceStatusLang;
 use s4h\store\Languages\Language;
 /**
 * 
@@ -30,6 +31,13 @@ class InvoiceStatusRepository {
 		}else{
 			$invoice_status->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 		}
+	}
+
+	public function deleteInvoiceStatu($invoice_status_id)
+	{
+		$invoiceStatus = $this->getInvoicetStatus($invoice_status_id);
+		$invoiceStatus->delete();
+		InvoiceStatusLang::where('invoice_status_id','=', $invoice_status_id)->delete();
 	}
 
 	public function getNameInvoiceStatus($data = array())
