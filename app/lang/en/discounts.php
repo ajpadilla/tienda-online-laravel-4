@@ -36,14 +36,14 @@
 			'number' => 'The field must be a number.',
 			'digits' => 'Please enter whole numbers only.',
 			'date' => 'Please enter a valid date.',
-			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
 		'date' => 'yy-mm-dd',
 		'date2' => 'Y-m-d',
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
-		'alert' => 'Â¡The discount code is already registered!.',
+		'alert' => 'The discount code is already registered!.',
 		'list' =>array(
 			'title' => 'List of discounts',
 			'subtitle'=>'Discount List',
