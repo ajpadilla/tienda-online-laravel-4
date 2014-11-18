@@ -12,6 +12,7 @@
 			<div class="ibox-title">
 				<h5>{{ trans('discounts.list.title') }}</h5>
 			</div>
+			@include('flash::message')
 			<div class="ibox-content">
 				<?php
 					$columns = [
