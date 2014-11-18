@@ -141,7 +141,22 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['invoice_status_id'] = $id;
+			try
+			{
+				//$this->registerShipmentStatusForm->validate($input);
+				$this->invoiceStatusRepository->updateInvoiceStatu($input);
+				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
