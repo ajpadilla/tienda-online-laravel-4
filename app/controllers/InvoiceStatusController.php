@@ -125,7 +125,11 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return "Edit:".$id;
+		$invoiceStatus = $this->invoiceStatusRepository->getInvoicetStatus($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$invoiceStatusLanguage = $invoiceStatus->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('invoice_status.edit',compact('invoiceStatus','invoiceStatusLanguage','languages'));
 	}
 
 
