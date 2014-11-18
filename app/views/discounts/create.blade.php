@@ -280,7 +280,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
+				url:  '{{URL::route('discounts.store')}}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
