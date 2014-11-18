@@ -25,8 +25,11 @@ class InvoiceStatusRepository {
 		$invoice_status = $this->getInvoicetStatus($data['invoice_status_id']);
 		$invoice_status->color = $data['color'];
 		$invoice_status->save();
-
-		$invoice_status->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		if (count($invoice_status->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$invoice_status->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		}else{
+			$invoice_status->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		}
 	}
 
 	public function getNameInvoiceStatus($data = array())
