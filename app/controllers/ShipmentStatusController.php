@@ -2,6 +2,7 @@
 
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\RegisterShipmentStatusForm;
+use s4h\store\Forms\EditShipmentStatusForm;
 use s4h\store\ShipmentStatus\ShipmentStatusRepository;
 use s4h\store\ShipmentStatusLang\ShipmentStatusLangRepository;
 use Laracasts\Validation\FormValidationException;
@@ -12,12 +13,13 @@ class ShipmentStatusController extends \BaseController {
 	private $registerShipmentStatusForm;
 	private $shipmentStatusRepository;
 	private $shipmentStatusLangRepository;
-
-	function __construct(LanguageRepository $languageRepository, RegisterShipmentStatusForm $registerShipmentStatusForm, ShipmentStatusRepository $shipmentStatusRepository, ShipmentStatusLangRepository $shipmentStatusLangRepository) {
+	private $editShipmentStatusForm;
+	function __construct(LanguageRepository $languageRepository, RegisterShipmentStatusForm $registerShipmentStatusForm, ShipmentStatusRepository $shipmentStatusRepository, ShipmentStatusLangRepository $shipmentStatusLangRepository, EditShipmentStatusForm $editShipmentStatusForm) {
 		$this->languageRepository = $languageRepository;
 		$this->registerShipmentStatusForm = $registerShipmentStatusForm;
 		$this->shipmentStatusRepository = $shipmentStatusRepository;
 		$this->shipmentStatusLangRepository = $shipmentStatusLangRepository;
+		$this->editShipmentStatusForm = $editShipmentStatusForm;
 	}
 
 	/**
@@ -147,7 +149,7 @@ class ShipmentStatusController extends \BaseController {
 			$input['shipment_status_id'] = $id;
 			try
 			{
-				//$this->registerShipmentStatusForm->validate($input);
+				$this->editShipmentStatusForm->validate($input);
 				$this->shipmentStatusRepository->updateShipmentStatu($input);
 				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
 			}
