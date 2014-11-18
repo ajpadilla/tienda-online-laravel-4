@@ -41,7 +41,7 @@ class ShipmentStatusRepository {
 		return ShipmentStatus::find($id);
 	}
 
-	public function updateShipmentStatu($data = array(), $language_id)
+	public function updateShipmentStatu($data = array())
 	{
 		$shipment_status = $this->getShipmentStatus($data['shipment_status_id']);
 		$shipment_status->color = $data['color'];
