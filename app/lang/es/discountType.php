@@ -13,6 +13,11 @@
 			'language' => 'Idioma',
 			'save' => 'Agregar',
 		),
+		"list" => array(
+			'title' => 'Lista para los tipos de descuento',
+			'name' => 'Nombre',
+			'Actions' =>'Acciones'
+		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
 			'rangelength' => 'Por favor, introduzca un valor entre ',
