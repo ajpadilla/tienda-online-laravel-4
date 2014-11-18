@@ -27,8 +27,43 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('invoice_status.index');
 	}
+
+	public function getDatatable(){
+
+		$collection = Datatable::collection($this->invoiceStatusLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('color','name','description')
+			->orderColumns('color','name','description');
+
+		$collection->addColumn('color', function($model)
+		{
+			return  "<input type='text' class='form-control' STYLE='background-color: ".$model->invoiceStatus->color.";' size='5' readonly>";
+		});
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+
+		$collection->addColumn('description', function($model)
+		{
+			return $model->description;
+		});
+	
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('invoiceStatus.show',$model->invoiceStatus->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('invoiceStatus.edit',$model->invoiceStatus->id). "'>Edit</a>
+					<br />
+					<a href='" .route('invoiceStatus.destroy',$model->invoiceStatus->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
+	}
+
 
 
 	/**
