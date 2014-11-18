@@ -94,6 +94,12 @@ function () {
 		'uses' => 'DiscountTypeController@store'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('discountType.index'), [
+		'as' => 'discountType.index',
+		'uses' => 'DiscountTypeController@index'
+	]);
+
+
 	Route::get(LaravelLocalization::transRoute('discountType.show'), [
 		'as' => 'discountType.show',
 		'uses' => 'DiscountTypeController@show'
@@ -117,7 +123,7 @@ function () {
 	Route::post('checkName','DiscountTypeController@checkName');
 
 	Route::get('api/discountType', array('as'=>'api.discountType', 'uses'=>'DiscountTypeController@getDatatable'));
-	
+
 
 	/**
 		* ------------------------------ Rutas para lenguajes -----------------------
