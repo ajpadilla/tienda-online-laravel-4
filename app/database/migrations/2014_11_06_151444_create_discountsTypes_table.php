@@ -27,7 +27,7 @@ class CreateDiscountsTypesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('discounts_types');
+		Schema::dropIfExists('discounts_types');
 	}
 
 }

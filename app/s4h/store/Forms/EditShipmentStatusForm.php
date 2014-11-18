@@ -2,10 +2,10 @@
 
 use Laracasts\Validation\FormValidator;
 
-class RegisterShipmentStatusForm extends FormValidator{
+class EditShipmentStatusForm extends FormValidator{
 	protected $rules = [
                     'name' => 'required|max:255',
                     'description' => 'required',
-                    'color' => 'required|max:7|unique:shipment_status,color'
+                    'color' => 'required|max:7'
      ];
 }

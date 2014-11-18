@@ -28,7 +28,7 @@ class CreateShipmentStatusTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('shipment_status');
+		Schema::dropIfExists('shipment_status');
 	}
 
 }

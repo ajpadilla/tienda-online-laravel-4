@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDiscountsTypesLangTable extends Migration {
+class CreateInvoiceStatusLangTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class CreateDiscountsTypesLangTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('discount_types_lang', function(Blueprint $table)
+		Schema::create('invoice_status_lang', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name', 255);
-			$table->integer('discount_type_id')->index();
+			$table->text('description')->nullable();
+			$table->integer('invoice_status_id')->index();
 			$table->integer('language_id')->index();
-			$table->unique(array('discount_type_id', 'language_id'), 'discount_types_lang_unique');
+			$table->unique(array('invoice_status_id', 'language_id'), 'invoice_status_lang_unique');
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -31,7 +32,7 @@ class CreateDiscountsTypesLangTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('discount_types_lang');
+		Schema::dropIfExists('invoice_status_lang');
 	}
 
 }

@@ -30,7 +30,7 @@ class CreateProductClassificationTable extends Migration {
 	{
 		Schema::table('product_classification', function(Blueprint $table)
 		{
-			Schema::drop('product_classification');
+			Schema::dropIfExists('product_classification');
 		});
 	}
 

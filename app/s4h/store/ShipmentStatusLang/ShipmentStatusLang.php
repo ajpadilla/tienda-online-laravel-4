@@ -15,7 +15,7 @@ class ShipmentStatusLang extends Eloquent{
 	protected $table = 'shipment_status_lang';
 
 	public function shipmentStatus(){
-		return $this->belongsTo('s4h\store\ShipmentStatus\ShipmentStatus','shipment_status_id');
+		return $this->belongsTo('s4h\store\ShipmentStatus\Shipment_Status','shipment_status_id');
 	}
 
 	public function language(){

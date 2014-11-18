@@ -32,7 +32,7 @@ class CreateShipmentStatusLangTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('shipment_status_lang');
+		Schema::dropIfExists('shipment_status_lang');
 	}
 
 }

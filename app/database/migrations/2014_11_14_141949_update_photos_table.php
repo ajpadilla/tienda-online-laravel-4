@@ -28,7 +28,7 @@ class UpdatePhotosTable extends Migration {
 	{
 		Schema::table('photos', function(Blueprint $table)
 		{
-			Schema::drop('photos');
+			Schema::dropIfExists('photos');
 		});
 	}
 

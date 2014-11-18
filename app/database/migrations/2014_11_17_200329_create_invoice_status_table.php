@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRatingsTable extends Migration {
+class CreateInvoiceStatusTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,12 @@ class CreateRatingsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('ratings', function(Blueprint $table)
+		Schema::create('invoice_status', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->smallInteger('points');
-			$table->integer('product_id');
-			$table->integer('user_id');
+			$table->string('color', 7);
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -28,7 +28,7 @@ class CreateRatingsTable extends Migration {
 	 */
 	public function down()
 	{
-		 Schema::dropIfExists('ratings');
+		Schema::dropIfExists('invoice_status');
 	}
 
 }

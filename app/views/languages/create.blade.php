@@ -70,6 +70,14 @@
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
             }, '{{ trans('languages.validation.onlyLettersNumbersAndSpaces') }}');
 
+		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+        }, '{{ trans('languages.validation.onlyLettersNumbersAndDash') }}');
+
+		$.validator.addMethod('onlyLettersNumbersAndUnderscore', function(value, element) {
+         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\_]+$/i.test(value);
+        }, '{{ trans('languages.validation.onlyLettersNumbersAndUnderscore') }}');
+
 		$.validator.addMethod('onlyLetters', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
             }, '{{ trans('languages.validation.onlyLetters') }}');
@@ -104,12 +112,12 @@
 				},
 				language_code:{
 					required: true,
-					onlyLettersNumbersAndSpaces: true,
+					onlyLettersNumbersAndUnderscore: true,
 				},
 				date_format:{
 					required: true,
 					rangelength: [2,45],
-					onlyLettersNumbersAndSpaces: true,
+					onlyLettersNumbersAndDash: true,
 				},
 			},
 			messages:{
