@@ -13,7 +13,7 @@ class DiscountTypeController extends \BaseController {
 	private $registerDiscountTypeForm;
 	private $languageRepository;
 	private $discountTypeLangRepository;
-	
+
 	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository, DiscountTypeLangRepository $discountTypeLangRepository){
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
@@ -28,7 +28,7 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//return "Hola";
+		return View::make('discounts_types.index');
 	}
 
 	public function getDatatable()
