@@ -30,4 +30,9 @@ class InvoiceStatusRepository {
 		}
 	}
 
+	public function getInvoicetStatus($invoice_status_id)
+	{
+		return InvoiceStatus::find($invoice_status_id);
+	}
+
 }
