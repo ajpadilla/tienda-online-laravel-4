@@ -1,6 +1,6 @@
 <?php namespace s4h\store\DiscountTypesLang;
  
- use s4h\store\DiscountTypeLang;
+ use s4h\store\DiscountTypesLang\DiscountTypeLang;
  /**
  * 
  */
