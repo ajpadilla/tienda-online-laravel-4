@@ -84,10 +84,10 @@ class DiscountController extends \BaseController {
 	public function show($id)
 	{
 		$discount = $this->discountRepository->getDiscountId($id);
-		$language_id = $this->languageRepository->returnLanguage()->id;
-		$discount_language = $discount->languages()->where('language_id','=',$language_id)->first();
+		$language = $this->languageRepository->returnLanguage();
+		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		return View::make('discounts.show',compact('discount','discount_language','discountTypes'));
+		return View::make('discounts.show',compact('discount','discount_language','discountTypes','language'));
 	}
 
 	/**
