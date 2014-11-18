@@ -15,19 +15,6 @@ class DiscountRepository {
 		return Discount::all();
 	}
 
-	public function associateLanguage($data = array())
-	{
-		$discount = $this->getCode($data['code']);
-		if (count($discount->languages()->where('language_id','=',$data['language_id'])->first()) > 0) {
-			return false;
-		}else{
-			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
-			$discount->save();
-			return true;
-		}
-		
-	}
-
 	public function createNewDiscount($data = array())
 	{
 		$discount = new Discount;
