@@ -150,7 +150,7 @@ class InvoiceStatusController extends \BaseController {
 			{
 				//$this->registerShipmentStatusForm->validate($input);
 				$this->invoiceStatusRepository->updateInvoiceStatu($input);
-				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
+				return Response::json(trans('invoiceStatus.message1').' '.$input['name'].' '.trans('invoiceStatus.message2'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -168,7 +168,9 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		return "Delete:".$id;
+		$this->invoiceStatusRepository->deleteInvoiceStatu($id);
+		Flash::message('¡invoice status borrado  con éxito!');
+		return Redirect::route('invoiceStatus.index');
 	}
 
 	public function checkNameInvoiceStatus()
