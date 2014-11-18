@@ -116,6 +116,9 @@ function () {
 
 	Route::post('checkName','DiscountTypeController@checkName');
 
+	Route::get('api/discountType', array('as'=>'api.discountType', 'uses'=>'DiscountTypeController@getDatatable'));
+	
+
 	/**
 		* ------------------------------ Rutas para lenguajes -----------------------
 	**/
