@@ -2,6 +2,10 @@
 	return array(
 		"create" => "crear/TypoDescuento",
 		"store" => "agregar/TypoDescuento",
+		"show"=>"ver_tipo_descuento/{id}",
+		"edit"=>"editar_tipo_descuento/{id}",
+		"update"=>"actualizar_tipo_descuento/{id}",
+		"destroy"=>"eliminar_tipo_descuento/{id}",
 		"title" => "Agregar Tipo de descuento",
 		"subtitle" => "Crear nuevo  tipo de descuento",
 		"labels" => array(

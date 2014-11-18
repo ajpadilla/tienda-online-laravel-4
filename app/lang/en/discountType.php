@@ -1,7 +1,11 @@
 <?php 
 	return array(
-		"create" => "create/discountType",
-		"store" => "add/discountType",
+		"create" => "create/discount_type",
+		"store" => "add/discount_type",
+		"show"=>"show_discount_type/{id}",
+		"edit"=>"edit_discount_type/{id}",
+		"update"=>"update_discount_type/{id}",
+		"destroy"=>"delete_discount_type/{id}",
 		"title" => "Add Discount Type",
 		"subtitle" => "Create new discount type",
 		"labels" => array(
