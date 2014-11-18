@@ -47,7 +47,11 @@ class ShipmentStatusRepository {
 		$shipment_status->color = $data['color'];
 		$shipment_status->save();
 
-		$shipment_status->languages()->updateExistingPivot($language_id, array('name' => $data['name'], 'description' => $data['description']));
+		if (count($shipment_status->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$shipment_status->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		}else{
+			$shipment_status->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		}
 	}
 
 	public function deleteShipmentStatu($shipment_status_id)

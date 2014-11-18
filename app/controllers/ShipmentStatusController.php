@@ -145,11 +145,10 @@ class ShipmentStatusController extends \BaseController {
 			$input = array();
 			$input = Input::all();
 			$input['shipment_status_id'] = $id;
-			$language_id = $this->languageRepository->returnLanguage()->id;
 			try
 			{
 				//$this->registerShipmentStatusForm->validate($input);
-				$this->shipmentStatusRepository->updateShipmentStatu($input, $language_id);
+				$this->shipmentStatusRepository->updateShipmentStatu($input);
 				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
 			}
 			catch (FormValidationException $e)
