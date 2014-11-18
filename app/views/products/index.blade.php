@@ -13,6 +13,7 @@
 				<h5>{{trans('products.list.title')}}</h5>
 			</div>
 			<div class="ibox-content">
+				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> New</a>
 				<?php
 					$columns = [
 						trans('products.list.photo'),
