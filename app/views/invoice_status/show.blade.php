@@ -1,8 +1,8 @@
 @extends('layouts.template')
 
 @section('title')
-{{--{{ trans('shipmentStatus.labels.name')}}--}}
-{{	trans('shipmentStatus.title') }}
+{{--{{ trans('invoiceStatus.labels.name')}}--}}
+{{	trans('invoiceStatus.title') }}
 @stop
 
 @section('content')
@@ -10,20 +10,20 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{	trans('shipmentStatus.subtitle') }}</h5>
+				<h5>{{	trans('invoiceStatus.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('shipmentStatus.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateShipmentStatus']) }}
+					{{ Form::open(['url' => LaravelLocalization::transRoute('invoiceStatus.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateinvoiceStatus']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
-							{{ Form::label('language_id', trans('shipmentStatus.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('language_id', trans('invoiceStatus.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('language_id',$invoiceStatusLanguage->name, ['class' => 'form-control', 'id' => 'name','readonly']) }}
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('name', trans('shipmentStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('name', trans('invoiceStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('name',$invoiceStatusLanguage->pivot->name, ['class' => 'form-control', 'id' => 'name','readonly']) }}
 							</div>
@@ -32,14 +32,14 @@
 					
 					<div class="col-sm-6">
 						<div class="form-group">
-							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('description', trans('invoiceStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::textarea('description',$invoiceStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3','readonly']) }}
 							</div>
 						</div>
 						
 						<div class="form-group">
-							{{ Form::label('color', trans('shipmentStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('color', trans('invoiceStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::select('color',array(
 											'#7bd148' => 'Green',
