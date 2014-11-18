@@ -6,7 +6,7 @@ class DiscountTypeLang extends Eloquent {
 	
 	protected $table = 'discount_types_lang';
 
-	public function discount_types(){
+	public function discount_type(){
 		return $this->belongsTo('s4h\store\DiscountsTypes\DiscountType','discount_type_id');
 	}
 
