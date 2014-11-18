@@ -2,6 +2,7 @@
 
 use s4h\store\DiscountsTypes\DiscountType;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
+use s4h\store\DiscountTypesLang\DiscountTypeLangRepository;
 use s4h\store\Forms\RegisterDiscountTypeForm;
 use Laracasts\Validation\FormValidationException;
 use s4h\store\Languages\LanguageRepository;
@@ -11,11 +12,13 @@ class DiscountTypeController extends \BaseController {
 	private $discountTypeRepository;
 	private $registerDiscountTypeForm;
 	private $languageRepository;
-
-	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository){
+	private $discountTypeLangRepository;
+	
+	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository, DiscountTypeLangRepository $discountTypeLangRepository){
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
 		$this->languageRepository = $languageRepository;
+		$this->discountTypeLangRepository = $discountTypeLangRepository;
 	}
 
 	/**
@@ -28,6 +31,29 @@ class DiscountTypeController extends \BaseController {
 		//return "Hola";
 	}
 
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->discountTypeLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name')
+			->orderColumns('name');
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+	
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('discountType.show',$model->discountType->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('discountType.edit',$model->discountType->id). "'>Edit</a>
+					<br />
+					<a href='" .route('discountType.destroy',$model->discountType->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
+	}
 
 	/**
 	 * Show the form for creating a new resource.
