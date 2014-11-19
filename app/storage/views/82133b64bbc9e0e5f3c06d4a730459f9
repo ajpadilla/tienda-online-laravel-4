@@ -1,0 +1,106 @@
+<!-- Mainly scripts -->
+<?php echo HTML::script('assets/js/jquery-1.10.2.js');; ?>
+
+<?php echo HTML::script('assets/js/bootstrap.min.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js');; ?>
+
+
+<!-- Custom and plugin javascript -->
+<?php echo HTML::script('assets/js/inspinia.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/pace/pace.min.js');; ?>
+
+<?php echo HTML::script('assets/js/jquery-ui.custom.min.js');; ?>
+
+
+<!-- DROPZONE -->
+<?php echo HTML::script('assets/js/plugins/dropzone/dropzone.js');; ?>
+
+
+<!-- Input Mask-->
+<?php echo HTML::script('assets/js/plugins/jasny/jasny-bootstrap.min.js');; ?>
+
+
+<!-- Date picker -->
+<?php echo HTML::script('assets/js/plugins/datapicker/bootstrap-datepicker.js');; ?>
+
+
+<!-- iCheck -->
+<?php echo HTML::script('assets/js/plugins/iCheck/icheck.min.js');; ?>
+
+
+<!-- Full Calendar -->
+<?php echo HTML::script('assets/js/plugins/fullcalendar/fullcalendar.min.js');; ?>
+
+
+<!-- Steps -->
+<?php echo HTML::script('assets/js/plugins/staps/jquery.steps.min.js');; ?>
+
+
+<!-- Jquery Validate -->
+<?php echo HTML::script('assets/js/plugins/validate/jquery.validate.min.js');; ?>
+
+
+<!-- Jquery preimage -->
+<?php echo HTML::script('assets/js/plugins/preimage/preimage.js');; ?>
+
+
+<!-- Jquery Form -->
+<?php echo HTML::script('assets/js/plugins/jQueryForm/jquery.form.min.js');; ?>
+
+
+<!-- Chosen -->
+<?php echo HTML::script('assets/js/plugins/chosen/chosen.jquery.js'); ?>
+
+
+<!-- Jquery Fancybox -->
+<?php echo HTML::script('assets/js/plugins/fancybox/jquery.fancybox.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/fancybox/jquery.fancybox.pack.js');; ?>
+
+
+<!-- summernote -->
+<?php echo HTML::script('assets/js/plugins/summernote/summernote.min.js');; ?>
+
+
+<!-- Jquery UI -->
+<?php echo HTML::script('assets/js/plugins/jquery-ui/jquery-ui.js');; ?>
+
+
+<!-- Datatable -->
+<?php echo HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js');; ?>
+
+
+s
+<script>
+	$(document).ready(function () {
+		$.ajax({
+			type: 'GET',
+			url:'<?php echo URL::to('/returnLanguages/'); ?>',
+			dataType:'json',
+			success: function(response) {
+				if (response.success == true) {
+					$('#language').html('');
+					$('#language').append('<option value=\"\"><?php echo Lang::get('menu.language'); ?></option>');
+					$.each(response.languages,function (k,v){
+						$('#language').append('<option value=\"'+k+'\">'+v+'</option>');
+					});
+				}else{
+					$('#language').html('');
+					$('#language').append('<option value=\"\"><?php echo Lang::get('menu.language'); ?> </option>');
+				}
+			},
+			error : function(jqXHR, status, error) {
+				console.log('Disculpe, existió un problema');
+			},
+		});
+		$('select#language').on('change',function(){
+    		var valor = $(this).val();
+    		$('#lang_id').val(valor);
+		});
+	});
+</script>
+<?php echo $__env->yieldContent('scripts'); ?>

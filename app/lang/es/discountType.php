@@ -1,13 +1,23 @@
 <?php 
 	return array(
-		"create" => "crear/TypoDescuento",
-		"store" => "agregar/TypoDescuento",
+		"create" => "crear/tipo_descuento",
+		"store" => "agregar/tipo_descuento",
+		"index" => "lista/tipos_descuentos",
+		"show"=>"ver_tipo_descuento/{id}",
+		"edit"=>"editar_tipo_descuento/{id}",
+		"update"=>"actualizar_tipo_descuento/{id}",
+		"destroy"=>"eliminar_tipo_descuento/{id}",
 		"title" => "Agregar Tipo de descuento",
 		"subtitle" => "Crear nuevo  tipo de descuento",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'language' => 'Idioma',
 			'save' => 'Agregar',
+		),
+		"list" => array(
+			'title' => 'Lista para los tipos de descuento',
+			'Name' => 'Nombre',
+			'Actions' =>'Acciones'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',

@@ -150,7 +150,6 @@
         }, '{{ trans('discounts.validation.onlyLettersNumbersAndDash') }}');
 
 		jQuery.validator.addMethod('customDateValidator', function(value, element) {
-        	// parseDate throws exception if the value is invalid
        	 	try{
        	 		jQuery.datepicker.parseDate( '{{ trans('discounts.date') }}' , value);return true;}
         	catch(e){return false;}
@@ -280,7 +279,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::to(LaravelLocalization::transRoute('discounts.store'))}}',
+				url:  '{{URL::route('discounts.store')}}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
