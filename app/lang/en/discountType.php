@@ -2,7 +2,7 @@
 	return array(
 		"create" => "create/discount_type",
 		"store" => "add/discount_type",
-		"index" => "",
+		"index" => "list/discount_type",
 		"show"=>"show_discount_type/{id}",
 		"edit"=>"edit_discount_type/{id}",
 		"update"=>"update_discount_type/{id}",
@@ -12,6 +12,11 @@
 		"labels" => array(
 			'name' =>'Name:',
 			'save' => 'Save',
+		),
+		"list" => array(
+			'title' => 'list of types of discounts',
+			'Name' => 'Name',
+			'Actions' =>'Actions'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',
