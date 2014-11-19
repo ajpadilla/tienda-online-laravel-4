@@ -160,7 +160,7 @@ class DiscountTypeController extends \BaseController {
 	{
 		$this->discountTypeRepository->deletediscountType($id);
 		Flash::message('¡tipo de descuento borrado  con éxito!');
-		return Redirect::route('discounts_types.index');
+		return Redirect::route('discountType.index');
 	}
 
 	public function checkName()
