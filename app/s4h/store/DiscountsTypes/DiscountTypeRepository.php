@@ -45,9 +45,9 @@ class DiscountTypeRepository {
 		$discount_type->save();
 
 		if (count($discount_type->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$discount_type->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+			$discount_type->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
 		}else{
-			$discount_type->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+			$discount_type->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
 	}
 
