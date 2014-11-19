@@ -42,27 +42,38 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
+							{{ Form::label('measure_id', trans('products.labels.measure'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								<div class="input-group m-b">
-									{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
-									<span class="input-group-addon">x</span>
-									{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => 'Height']) }}
-									<span class="input-group-addon">x</span>
-									{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
-									<span class="input-group-addon">inches</span>
-								</div>
-							</div>
-							<div class="col-sm-1">
+								{{ Form::select('measure_id',$measures,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')) }}
 							</div>
 						</div>
+
+						<div class="form-group">
+							{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => 'Height']) }}
+							</div>
+						</div>
+
+						<div class="form-group">
+							{{ Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
+							</div>
+						</div>
+
 						<div class="form-group">
 							{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								<div class="input-group m-b">
-									{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
-									<span class="input-group-addon">pounds</span>
-								</div>
+								{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
+								<!-- <span class="input-group-addon">pounds</span> -->
 							</div>
 						</div>
 					</div>
