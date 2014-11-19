@@ -31,7 +31,7 @@ class CreateDiscountsTypesLangTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('discount_types_lang');
+		Schema::dropIfExists('discount_types_lang');
 	}
 
 }

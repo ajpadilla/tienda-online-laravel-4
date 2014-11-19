@@ -39,10 +39,22 @@ function () {
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
 
+	Route::get(LaravelLocalization::transRoute('discounts.create'), [
+		'as' => 'discounts.create',
+		'uses' => 'DiscountController@create'
+	]);
 
-	Route::get(LaravelLocalization::transRoute('discounts.create'),'DiscountController@create');
-	Route::post(LaravelLocalization::transRoute('discounts.store'),'DiscountController@store');
-	Route::get(LaravelLocalization::transRoute('discounts.index'),'DiscountController@index');
+	Route::post(LaravelLocalization::transRoute('discounts.store'), [
+		'as' => 'discounts.store',
+		'uses' => 'DiscountController@store'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('discounts.index'), [
+		'as' => 'discounts.index',
+		'uses' => 'DiscountController@index'
+	]);
+
 
 	Route::get(LaravelLocalization::transRoute('discounts.show'), [
 		'as' => 'discounts.show',
@@ -72,9 +84,46 @@ function () {
 	/**
 		* ------------------------------ Rutas para Typo de descuento -----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('discountType.create'),'DiscountTypeController@create');
-	Route::post(LaravelLocalization::transRoute('discountType.store'),'DiscountTypeController@store');
+	Route::get(LaravelLocalization::transRoute('discountType.create'), [
+		'as' => 'discountType.create',
+		'uses' => 'DiscountTypeController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('discountType.store'), [
+		'as' => 'discountType.store',
+		'uses' => 'DiscountTypeController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('discountType.index'), [
+		'as' => 'discountType.index',
+		'uses' => 'DiscountTypeController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('discountType.show'), [
+		'as' => 'discountType.show',
+		'uses' => 'DiscountTypeController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('discountType.edit'), [
+		'as' => 'discountType.edit',
+		'uses' => 'DiscountTypeController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('discountType.update'), [
+		'as' => 'discountType.update',
+		'uses' => 'DiscountTypeController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('discountType.destroy'), [
+		'as' => 'discountType.destroy',
+		'uses' => 'DiscountTypeController@destroy'
+	]);
+
 	Route::post('checkName','DiscountTypeController@checkName');
+
+	Route::get('api/discountType', array('as'=>'api.discountType', 'uses'=>'DiscountTypeController@getDatatable'));
+
 
 	/**
 		* ------------------------------ Rutas para lenguajes -----------------------
@@ -86,6 +135,94 @@ function () {
 	Route::get('returnLanguages','LanguageController@returnLanguages');
 	Route::post('getIdLanguage','LanguageController@getIdLanguage');
 	Route::get('mostar','LanguageController@mostrar');
+
+	/**
+		* ------------------------------ Rutas shipment status  -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.create'), [
+		'as' => 'shipmentStatus.create',
+		'uses' => 'ShipmentStatusController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.store'), [
+		'as' => 'shipmentStatus.store',
+		'uses' => 'ShipmentStatusController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.index'), [
+		'as' => 'shipmentStatus.index',
+		'uses' => 'ShipmentStatusController@index'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.edit'), [
+		'as' => 'shipmentStatus.edit',
+		'uses' => 'ShipmentStatusController@edit'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.show'), [
+		'as' => 'shipmentStatus.show',
+		'uses' => 'ShipmentStatusController@show'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.update'), [
+		'as' => 'shipmentStatus.update',
+		'uses' => 'ShipmentStatusController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.destroy'), [
+		'as' => 'shipmentStatus.destroy',
+		'uses' => 'ShipmentStatusController@destroy'
+	]);
+
+
+	Route::get('api/shipmentStatus', array('as'=>'api.shipmentStatus', 'uses'=>'ShipmentStatusController@getDatatable'));
+
+	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
+	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
+
+	/**
+		* ------------------------------ Rutas Invoice status  -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.create'), [
+		'as' => 'invoiceStatus.create',
+		'uses' => 'InvoiceStatusController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.store'), [
+		'as' => 'invoiceStatus.store',
+		'uses' => 'InvoiceStatusController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.index'), [
+		'as' => 'invoiceStatus.index',
+		'uses' => 'InvoiceStatusController@index'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.edit'), [
+		'as' => 'invoiceStatus.edit',
+		'uses' => 'InvoiceStatusController@edit'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.show'), [
+		'as' => 'invoiceStatus.show',
+		'uses' => 'InvoiceStatusController@show'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.update'), [
+		'as' => 'invoiceStatus.update',
+		'uses' => 'InvoiceStatusController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.destroy'), [
+		'as' => 'invoiceStatus.destroy',
+		'uses' => 'InvoiceStatusController@destroy'
+	]);
+
+
+	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
+	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
 });
 
 // Confide routes

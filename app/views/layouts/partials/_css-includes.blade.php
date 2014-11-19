@@ -55,4 +55,10 @@
 <!-- summernote -->
 {{ HTML::style('assets/css/plugins/summernote/summernote.css'); }}
 
+<!-- simplecolorpicker -->
+{{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css'); }}
+{{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-regularfont.css'); }}
+{{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css'); }}
+{{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css'); }}
+
 @yield('styles')

@@ -28,7 +28,7 @@ class CreateProductConditionsTable extends Migration {
 	{
 		Schema::table('product_conditions', function(Blueprint $table)
 		{
-			Schema::drop('product_conditions');
+			Schema::dropIfExists('product_conditions');
 		});
 	}
 

@@ -2,7 +2,12 @@
 
 use Laracasts\Validation\FormValidationException;
 use s4h\store\DiscountsTypes\DiscountTypeRepository;
+use s4h\store\DiscountTypesLang\DiscountTypeLangRepository;
 use s4h\store\Forms\RegisterDiscountTypeForm;
+<<<<<<< HEAD
+=======
+use Laracasts\Validation\FormValidationException;
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 use s4h\store\Languages\LanguageRepository;
 
 class DiscountTypeController extends \BaseController {
@@ -10,11 +15,17 @@ class DiscountTypeController extends \BaseController {
 	private $discountTypeRepository;
 	private $registerDiscountTypeForm;
 	private $languageRepository;
+	private $discountTypeLangRepository;
 
+<<<<<<< HEAD
 	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository) {
+=======
+	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository, DiscountTypeLangRepository $discountTypeLangRepository){
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
 		$this->languageRepository = $languageRepository;
+		$this->discountTypeLangRepository = $discountTypeLangRepository;
 	}
 
 	/**
@@ -22,10 +33,42 @@ class DiscountTypeController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+<<<<<<< HEAD
 	public function index() {
 		//return "Hola";
 	}
 
+=======
+	public function index()
+	{
+		return View::make('discounts_types.index');
+	}
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->discountTypeLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name')
+			->orderColumns('name');
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+	
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('discountType.show',$model->discountType->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('discountType.edit',$model->discountType->id). "'>Edit</a>
+					<br />
+					<a href='" .route('discountType.destroy',$model->discountType->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
+	}
+
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -48,8 +91,15 @@ class DiscountTypeController extends \BaseController {
 			{
 				$this->registerDiscountTypeForm->validate($input);
 				$this->discountTypeRepository->createNewDiscountType($input);
+<<<<<<< HEAD
 				return Response::json(trans('discounts.message1') . ' ' . $input['name'] . ' ' . trans('discounts.message2'));
 			} catch (FormValidationException $e) {
+=======
+				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 				return Response::json($e->getErrors()->all());
 			}
 		}
@@ -61,8 +111,17 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+<<<<<<< HEAD
 	public function show($id) {
 		//
+=======
+	public function show($id)
+	{
+		$discount_type = $this->discountTypeRepository->getDiscountTypeId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$discount_type_language = $discount_type->languages()->where('language_id','=', $language->id)->first();
+		return View::make('discounts_types.show',compact('discount_type_language'));
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 	}
 
 	/**
@@ -71,8 +130,18 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+<<<<<<< HEAD
 	public function edit($id) {
 		//
+=======
+	public function edit($id)
+	{
+		$discount_type = $this->discountTypeRepository->getDiscountTypeId($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$discount_type_language = $discount_type->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('discounts_types.edit',compact('discount_type','discount_type_language','languages'));
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 	}
 
 	/**
@@ -81,8 +150,30 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+<<<<<<< HEAD
 	public function update($id) {
 		//
+=======
+	public function update($id)
+	{
+		/*echo "id:".$id;
+		dd(Input::all());*/
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['discount_type_id'] = $id;
+			try
+			{
+				$this->discountTypeRepository->updateDiscountType($input);
+				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 	}
 
 	/**
@@ -91,8 +182,16 @@ class DiscountTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
+<<<<<<< HEAD
 	public function destroy($id) {
 		//
+=======
+	public function destroy($id)
+	{
+		$this->discountTypeRepository->deletediscountType($id);
+		Flash::message('¡tipo de descuento borrado  con éxito!');
+		return Redirect::route('discountType.index');
+>>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 	}
 
 	public function checkName() {

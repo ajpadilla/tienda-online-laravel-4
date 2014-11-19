@@ -52,4 +52,7 @@
 {{ HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js'); }}
 {{ HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js'); }}
 
+<!-- simplecolorpicker -->
+{{ HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'); }}
+
 @yield('scripts')

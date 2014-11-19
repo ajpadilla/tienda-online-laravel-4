@@ -2,11 +2,11 @@
 	return array(
 		"create" => "create/discount",
 		"store" => "add/discount",
-		'index'=>'list/discount',
-		"show"=>"view/{id}",
-		"edit"=>"edit/{id}",
-		"update"=>"update/{id}",
-		"destroy"=>"destroy/{id}",
+		'index'=>'list/discounts',
+		"show"=>"show_discount/{id}",
+		"edit"=>"edit_discount/{id}",
+		"update"=>"update_discount/{id}",
+		"destroy"=>"destroy_discount/{id}",
 		"title" => "Add discount",
 		"subtitle" => "Create new discount",
 		"createCode" =>"create/discount_code", 
@@ -27,7 +27,8 @@
 			'discount_type' => 'Discount type:',
 			'save' => 'Save',
 			'Yes' => 'Yes',
-			'No' => 'No'
+			'No' => 'No',
+			'language' => 'language'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',
@@ -36,14 +37,14 @@
 			'number' => 'The field must be a number.',
 			'digits' => 'Please enter whole numbers only.',
 			'date' => 'Please enter a valid date.',
-			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
 		'date' => 'yy-mm-dd',
 		'date2' => 'Y-m-d',
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
-		'alert' => 'Â¡The discount code is already registered!.',
+		'alert' => 'The discount code is already registered!.',
 		'list' =>array(
 			'title' => 'List of discounts',
 			'subtitle'=>'Discount List',

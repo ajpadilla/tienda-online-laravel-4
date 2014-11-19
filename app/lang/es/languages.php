@@ -1,10 +1,10 @@
 <?php
 	return array(
-		"create" => "crear/lenguaje",
-		"store" => "agregar/lenguaje",
-		'index'=>'lista/lenguajes',
-		"title" => "Agregar lenguaje",
-		"subtitle" => "Crear nuevo lenguaje",
+		"create" => "crear/idioma",
+		"store" => "agregar/idioma",
+		'index'=>'lista/idiomas',
+		"title" => "Agregar idioma",
+		"subtitle" => "Crear nuevo idioma",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'native_name' => 'Nombre natal:',
@@ -22,17 +22,18 @@
 			'date' => 'Por favor, Ingrese una fecha valida.',
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco.',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.',
+			'onlyLettersNumbersAndUnderscore' => 'Ingrese solo letras, numeros y/o piso(_).',
 			'max' => 'Dede ingresar maximo ',
 			'min' => 'Debe ingresar minimo ',
 			'onlyLetters' => 'Ingrese solo letras por favor!.'
 		),
 		'date' => 'dd-mm-yy',
-		'message1' =>'Lenguaje',
+		'message1' =>'Idioma',
 		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El codigo del lenguaje ya se encuentra registrado!',
+		'alert' => '¡El codigo del idioma ya se encuentra registrado!',
 		'list' =>array(
-			'title' => 'Listado de lenguajes',
-			'subtitle'=>'Lista de lenguajes',
+			'title' => 'Listado de idiomas',
+			'subtitle'=>'Lista de idiomas',
 		),
 	);
  
