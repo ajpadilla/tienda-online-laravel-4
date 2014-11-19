@@ -1,6 +1,20 @@
 <?php
 
+use Laracasts\Validation\FormValidationException;
+use s4h\store\Languages\LanguageRepository;
+use s4h\store\Forms\RegisterClassifiedTypesForm;
+use s4h\store\ClassifiedTypes\ClassifiedTypesRepository;
+
 class ClassifiedTypeController extends \BaseController {
+	private $languageRepository;
+	private $registerClassifiedTypesForm;
+	private $classifiedTypesRepository;
+
+	function __construct(LanguageRepository $languageRepository, RegisterClassifiedTypesForm $registerClassifiedTypesForm, ClassifiedTypesRepository $classifiedTypesRepository) {
+		$this->languageRepository = $languageRepository;
+		$this->registerClassifiedTypesForm = $registerClassifiedTypesForm;
+		$this->classifiedTypesRepository = $classifiedTypesRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +34,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('classified_types.create');
 	}
 
 
