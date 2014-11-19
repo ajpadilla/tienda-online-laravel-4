@@ -2,6 +2,7 @@
 	return array(
 		"create" => "create/discount_type",
 		"store" => "add/discount_type",
+		"index" => "",
 		"show"=>"show_discount_type/{id}",
 		"edit"=>"edit_discount_type/{id}",
 		"update"=>"update_discount_type/{id}",

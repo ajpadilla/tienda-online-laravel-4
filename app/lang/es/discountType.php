@@ -1,7 +1,8 @@
 <?php 
 	return array(
-		"create" => "crear/TypoDescuento",
-		"store" => "agregar/TypoDescuento",
+		"create" => "crear/tipo_descuento",
+		"store" => "agregar/tipo_descuento",
+		"index" => "lista/tipos_descuentos",
 		"show"=>"ver_tipo_descuento/{id}",
 		"edit"=>"editar_tipo_descuento/{id}",
 		"update"=>"actualizar_tipo_descuento/{id}",
@@ -15,7 +16,7 @@
 		),
 		"list" => array(
 			'title' => 'Lista para los tipos de descuento',
-			'name' => 'Nombre',
+			'Name' => 'Nombre',
 			'Actions' =>'Acciones'
 		),
 		"validation" => array(
