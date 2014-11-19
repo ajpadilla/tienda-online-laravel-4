@@ -34,7 +34,8 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('classified_types.create');
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		return View::make('classified_types.create',compact('languages'));
 	}
 
 
