@@ -39,4 +39,8 @@ class DiscountTypeRepository {
 		$discount_type->languages()->attach($data['language_id'], array('name'=> $data['name']));	
 	}
 
+	public function getDiscountTypeId($discount_type_id)
+	{
+		return DiscountType::find($discount_type_id);
+	}
 }
