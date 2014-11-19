@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::model($discount_type, array('route' => array('discountType.update', $discount_type->id),'id'=>'formCreateDiscount','class'=>'form-horizontal')) }}
+					{{ Form::model($discount_type, array('route' => array('discountType.update', $discount_type->id),'id'=>'formEditDiscountType','class'=>'form-horizontal')) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
@@ -51,12 +51,12 @@
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
             }, '{{ trans('discountType.validation.onlyLettersNumbersAndSpaces') }}');
 
-		$('#formCreateDiscountType').validate({
+		$('#formEditDiscountType').validate({
 			rules:{
 				name:{
 					required:!0,
 					onlyLettersNumbersAndSpaces: true,
-					remote:
+					/*remote:
 						{
 							url:'{{ URL::to('/checkName/') }}',
 							type: 'POST',
@@ -73,7 +73,7 @@
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						}
+						}*/
 				},
 			},
 			messages:{
@@ -97,10 +97,10 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::route('discountType.update',$discount_type->id)}}',
+				url:  '{{ URL::route('discountType.update',$discount_type->id) }}',
         		type:'POST'
 			};
-		$('#formCreateDiscountType').ajaxForm(options);
+		$('#formEditDiscountType').ajaxForm(options);
 
 	});
 
@@ -117,7 +117,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false    
 			}), 5000 );  
-			return $('#formCreateDiscountType').valid(); 
+			return $('#formEditDiscountType').valid(); 
 		} 
 														     
 		// post-submit callback 
@@ -126,8 +126,7 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-			$('#formCreateDiscountType').resetForm();
-			 //document.location.href = '{{URL::to(LaravelLocalization::transRoute('discountType.create'))}}';
+			//$('#formEditDiscountType').resetForm();
 		} 						
 </script>
 @stop
