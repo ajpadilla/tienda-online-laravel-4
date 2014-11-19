@@ -22,7 +22,10 @@
 			'accept_barter' => 'Accept barter',
 			'product_for_barter' => 'Product for barter',
 			'categories' => 'Categories:',
-			'condition' => 'Condition:'
+			'condition' => 'Condition:',
+			'measure' => 'Measure:',
+			'height' => 'height:',
+			'depth' => 'depth'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',

@@ -22,7 +22,10 @@
 			'accept_barter' => 'Aceptar trueque',
 			'product_for_barter' => 'Producto para trueque',
 			'categories' => 'Categorias:',
-			'condition' => 'Condición:'
+			'condition' => 'Condición:',
+			'measure' => 'Medida:',
+			'height' => 'Altura: ',
+			'depth' => 'Profundidad:'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
