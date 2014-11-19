@@ -19,7 +19,7 @@ class DiscountRepository {
 	{
 		$discount = new Discount;
 		$discount->value = $data['value'];
-		$discount->percent = $data['percent'];
+		$discount->percent = number_format($data['percent'], 2, ".", " ");
 		$discount->quantity = $data['quantity'];
 		$discount->quantity_per_user = $data['quantity_per_user'];
 		$discount->code = $data['code'];
@@ -35,7 +35,7 @@ class DiscountRepository {
 	{
 		$discount = $this->getDiscountId($data['discount_id']);
 		$discount->value = $data['value'];
-		$discount->percent = $data['percent'];
+		$discount->percent = number_format($data['percent'], 2, ".", "");
 		$discount->quantity = $data['quantity'];
 		$discount->quantity_per_user = $data['quantity_per_user'];
 		$discount->code = $data['code'];
