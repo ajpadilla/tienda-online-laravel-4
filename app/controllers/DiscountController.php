@@ -7,13 +7,7 @@ use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\Discounts\Discount;
 use s4h\store\Discounts\DiscountRepository;
 use s4h\store\Forms\RegisterDiscountForm;
-<<<<<<< HEAD
 use s4h\store\Languages\LanguageRepository;
-=======
-use Laracasts\Validation\FormValidationException;
-use s4h\store\Languages\LanguageRepository;
-use s4h\store\DiscountsLang\DiscountLangRepository;
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 
 class DiscountController extends \BaseController {
 
@@ -56,23 +50,19 @@ class DiscountController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store() {
-		if (Request::ajax()) {
+	public function store() 
+	{
+		if (Request::ajax()) 
+		{
 			$input = Input::all();
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-<<<<<<< HEAD
-				/*$this->discountRepository->createNewDiscount($input);
-			return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));*/
-			} catch (FormValidationException $e) {
-=======
 				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));*/
 			}
 			catch (FormValidationException $e)
 			{
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 				return Response::json($e->getErrors()->all());
 			}
 		}
@@ -86,17 +76,10 @@ class DiscountController extends \BaseController {
 	 */
 	public function show($id) {
 		$discount = $this->discountRepository->getDiscountId($id);
-<<<<<<< HEAD
-		$language_id = $this->languageRepository->returnLanguage()->id;
-		$discount_language = $discount->languages()->where('language_id', '=', $language_id)->first();
-		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		return View::make('discounts.show', compact('discount', 'discount_language', 'discountTypes'));
-=======
 		$language = $this->languageRepository->returnLanguage();
 		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
 		return View::make('discounts.show',compact('discount','discount_language','discountTypes','language'));
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 	}
 
 	/**
@@ -107,20 +90,11 @@ class DiscountController extends \BaseController {
 	 */
 	public function edit($id) {
 		$discount = $this->discountRepository->getDiscountId($id);
-<<<<<<< HEAD
-		$language_id = $this->languageRepository->returnLanguage()->id;
-		$discount_language = $discount->languages()->where('language_id', '=', $language_id)->first();
-		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		return View::make('discounts.edit', compact('discount', 'discount_language', 'discountTypes', 'languages'));
-=======
 		$language = $this->languageRepository->returnLanguage();
 		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
 		return View::make('discounts.edit',compact('discount','discount_language','discountTypes','language','languages'));
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
-
 	}
 
 	/**
@@ -129,16 +103,11 @@ class DiscountController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-<<<<<<< HEAD
-	public function update($id) {
-		if (Request::ajax()) {
-=======
 	public function update($id)
 	{
 		if(Request::ajax())
 		{
 			$input = array();
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 			$input = Input::all();
 			$input['discount_id'] = $id;
 			try
@@ -166,31 +135,18 @@ class DiscountController extends \BaseController {
 
 	public function getDatatable() {
 		$collection = Datatable::collection($this->discountLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-<<<<<<< HEAD
-=======
-			->searchColumns('code','name','discount_type_id','name','value','percent','active','from','to')
-			->orderColumns('code','name','discount_type_id','name','value','percent','active','from','to');
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
-
-		->searchColumns('name', 'code', 'discount_type_id', 'name', 'value', 'percent', 'active', 'from', 'to')
-		->orderColumns('code');
+		->searchColumns('code', 'name', 'discount_type_id', 'name', 'value', 'percent', 'active', 'from', 'to')
+		->orderColumns('code', 'name', 'discount_type_id', 'name', 'value', 'percent', 'active', 'from', 'to');
 
 		$collection->addColumn('code', function ($model) {
 			return $model->discount->code;
 		});
 
-<<<<<<< HEAD
-		$collection->addColumn('discount_type_id', function ($model) {
-			foreach ($model->discount->discountType->languages as $language) {
-				return $language->pivot->name;
-			}
-=======
 		$collection->addColumn('discount_type_id', function($model)
 		{
 			$language = $this->languageRepository->returnLanguage();
 			$discount_type_language = $model->discount->discountType->languages()->where('language_id','=',$language->id)->first();
 			return $discount_type_language->pivot->name;
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 		});
 
 		$collection->addColumn('name', function ($model) {
@@ -209,14 +165,6 @@ class DiscountController extends \BaseController {
 			return $model->discount->getActivoShow();
 		});
 
-<<<<<<< HEAD
-		$collection->addColumn('from', function ($model) {
-			return date(trans('discounts.date2'), strtotime($model->discount->from));
-		});
-
-		$collection->addColumn('to', function ($model) {
-			return date(trans('discounts.date2'), strtotime($model->discount->to));
-=======
 		$collection->addColumn('from', function($model)
 		{
 			return date($model->language->date_format ,strtotime($model->discount->from));
@@ -225,7 +173,6 @@ class DiscountController extends \BaseController {
 		$collection->addColumn('to', function($model)
 		{
 			return date($model->language->date_format ,strtotime($model->discount->to));
->>>>>>> ee2d1554b91f0bcb19e45b2ca190dc78a6213dd4
 		});
 
 		$collection->addColumn('Actions', function ($model) {
