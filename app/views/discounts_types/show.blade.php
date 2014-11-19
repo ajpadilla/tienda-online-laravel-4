@@ -13,27 +13,28 @@
 				<h5>{{ trans('discountType.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
-			<div class="row">
-				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
-				<div class="col-sm-6 b-r">
-					<div class="form-group">
-						{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
-						<div class="col-sm-8">
-							{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
-						</div>
-					</div>
-					<div class="form-group">
+				<div class="row">
+					{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
+					<div class="col-sm-6 b-r">
+						<div class="form-group">
 							{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-8">
-								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
+								{{ Form::text('language_id',$discount_type_language->name, ['class' => 'form-control','id'=>'language_id','readonly']) }}
 							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-8">
+								{{ Form::text('name',$discount_type_language->pivot->name, ['class' => 'form-control','id'=>'name','readonly']) }}
+							</div>
+						</div>
+
 					</div>
+					{{ Form::close() }}
 				</div>
-				{{ Form::close() }}
 			</div>
 		</div>
 	</div>
-</div>
 @stop
 
 @section('scripts')
