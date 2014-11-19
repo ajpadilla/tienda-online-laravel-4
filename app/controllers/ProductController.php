@@ -5,6 +5,7 @@ use s4h\store\Products\ProductRepository;
 use s4h\store\Products\RegisterProductCommand;
 use s4h\store\Categories\CategoryRepository;
 use s4h\store\Conditions\ConditionRepository;
+use s4h\store\Measures\MeasureRepository;
 use s4h\store\Forms\RegisterProductForm;
 use s4h\store\Forms\EditProductForm;
 use Laracasts\Validation\FormValidationException;
@@ -16,18 +17,22 @@ class ProductController extends \BaseController {
 	protected $EditProductForm;
 	protected $categoryRepository;
 	protected $conditionRepository;
+	protected $measureRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
-	                            ProductRepository $productRepository,
-	                            CategoryRepository $categoryRepository,
-	                            ConditionRepository $conditionRepository,
-	                            EditProductForm $editProductForm)
+										ProductRepository $productRepository,
+										CategoryRepository $categoryRepository,
+										ConditionRepository $conditionRepository,
+										MeasureRepository $measureRepository,
+										EditProductForm $editProductForm
+										)
 	{
 		$this->registerProductForm = $registerProductForm;
 		$this->productRepository = $productRepository;
 		$this->editProductForm = $editProductForm;
 		$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
+		$this->measureRepository = $measureRepository;
 	}
 
 	public function index()
@@ -44,7 +49,8 @@ class ProductController extends \BaseController {
 	{
 		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
 		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
-		return View::make('products.create', compact('categories', 'condition'));
+		$measures = $this->measureRepository->getAll()->lists('name', 'id');
+		return View::make('products.create', compact('categories', 'condition', 'measures'));
 	}
 
 
@@ -87,7 +93,8 @@ class ProductController extends \BaseController {
 		$product = Product::find($id);
 		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
 		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
-		return View::make('products.edit',compact('product', 'categories', 'condition'));
+		$measures = $this->measureRepository->getAll()->lists('name', 'id');
+		return View::make('products.edit',compact('product', 'categories', 'condition', 'measures'));
 	}
 
 
@@ -110,6 +117,7 @@ class ProductController extends \BaseController {
 				$product->description = $input['description'];
 				$product->on_sale = $input['on_sale'];
 				$product->quantity = $input['quantity'];
+				$product->measure_id = $input['measure_id'];
 				$product->price = $input['price'];
 				$product->width = $input['width'];
 				$product->height = $input['height'];
@@ -151,6 +159,7 @@ class ProductController extends \BaseController {
 		$product->on_sale = $data['on_sale'];
 		$product->quantity = $data['quantity'];
 		$product->price = $data['price'];
+		$product->measure_id = $data['measure_id'];
 		$product->width = $data['width'];
 		$product->height = $data['height'];
 		$product->depth = $data['depth'];
