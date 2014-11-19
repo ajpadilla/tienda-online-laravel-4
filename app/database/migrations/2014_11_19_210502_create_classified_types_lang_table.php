@@ -15,7 +15,7 @@ class CreateClassifiedTypesLangTable extends Migration {
 		Schema::create('classified_types_lang', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 255);
+			$table->string('name', 128);
 			$table->integer('classified_types_id')->index();
 			$table->integer('language_id')->index();
 			$table->unique(array('classified_types_id', 'language_id'), 'classified_types_lang_unique');
