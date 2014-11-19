@@ -130,6 +130,8 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		/*echo "id:".$id;
+		dd(Input::all());*/
 		if(Request::ajax())
 		{
 			$input = array();
@@ -144,7 +146,8 @@ class DiscountTypeController extends \BaseController {
 			{
 				return Response::json($e->getErrors()->all());
 			}
-		}	}
+		}
+	}
 
 
 	/**
