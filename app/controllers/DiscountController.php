@@ -161,9 +161,9 @@ class DiscountController extends \BaseController {
 
 		$collection->addColumn('discount_type_id', function($model)
 		{
-			  foreach ($model->discount->discountType->languages as $language) {
-			  	return $language->pivot->name;
-			  }
+			$language = $this->languageRepository->returnLanguage();
+			$discount_type_language = $model->discount->discountType->languages()->where('language_id','=',$language->id)->first();
+			return $discount_type_language->pivot->name;
 		});
 
 		$collection->addColumn('name', function($model)
