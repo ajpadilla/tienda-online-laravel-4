@@ -278,7 +278,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{ route('discounts.update',$discount->id) }}',
+				url:  '{{ URL::route('discounts.update',$discount->id) }}',
         		type:'POST'
 			};
 		$('#formCreateDiscount').ajaxForm(options);
