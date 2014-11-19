@@ -81,7 +81,7 @@ class DiscountTypeController extends \BaseController {
 			{
 				$this->registerDiscountTypeForm->validate($input);
 				$this->discountTypeRepository->createNewDiscountType($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -130,8 +130,21 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		dd(Input::all());
-	}
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['discount_type_id'] = $id;
+			try
+			{
+				$this->discountTypeRepository->updateDiscountType($input);
+				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}	}
 
 
 	/**
