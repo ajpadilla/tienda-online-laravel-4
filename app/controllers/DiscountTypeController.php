@@ -99,7 +99,10 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$discount_type = $this->discountTypeRepository->getDiscountTypeId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$discount_type_language = $discount_type->languages()->where('language_id','=', $language->id)->first();
+		return View::make('discounts_types.show',compact('discount_type_language'));
 	}
 
 
@@ -111,7 +114,7 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return "edit:".$id;
 	}
 
 
@@ -135,7 +138,7 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "Delete:".$id;
 	}
 
 	public function checkName()
