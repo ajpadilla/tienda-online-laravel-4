@@ -15,53 +15,42 @@ class DiscountRepository {
 		return Discount::all();
 	}
 
-	public function associateLanguage($data = array())
-	{
-		$discount = $this->getCode($data['code']);
-		if (count($discount->languages()->where('language_id','=',$data['language_id'])->first()) > 0) {
-			return false;
-		}else{
-			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
-			$discount->save();
-			return true;
-		}
-		
-	}
-
 	public function createNewDiscount($data = array())
 	{
 		$discount = new Discount;
 		$discount->value = $data['value'];
-		$discount->percent = $data['percent'];
+		$discount->percent = number_format($data['percent'], 2, ".", " ");
 		$discount->quantity = $data['quantity'];
 		$discount->quantity_per_user = $data['quantity_per_user'];
 		$discount->code = $data['code'];
 		$discount->active = $data['active'];
 		$discount->from = date("Y-m-d",strtotime($data['from']));
-		$discount->to = date("Y-m-d",strtotime($data['from']));
+		$discount->to = date("Y-m-d",strtotime($data['to']));
 		$discount->discount_type_id = $data['discount_type_id'];
 		$discount->save();
 		$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}
 
-	public function updateDiscount($data = array(), $discount_id)
+	public function updateDiscount($data = array())
 	{
-		$discount = Discount::find($discount_id);
+		$discount = $this->getDiscountId($data['discount_id']);
 		$discount->value = $data['value'];
-		$discount->percent = $data['percent'];
+		$discount->percent = number_format($data['percent'], 2, ".", "");
 		$discount->quantity = $data['quantity'];
 		$discount->quantity_per_user = $data['quantity_per_user'];
 		$discount->code = $data['code'];
 		$discount->active = $data['active'];
 		$discount->from = date("Y-m-d",strtotime($data['from']));
-		$discount->to = date("Y-m-d",strtotime($data['from']));
+		$discount->to = date("Y-m-d",strtotime($data['to']));
 		$discount->discount_type_id = $data['discount_type_id'];
 		$discount->save();
 
-		$discount_language = $discount->languages()->where('language_id','=',$data['language_id'])->first();
-		$discount_language->pivot->name = $data['name'];
-		$discount_language->pivot->description = $data['description'];
-		$discount_language->pivot->save();
+		if (count($discount->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$discount->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		}else{
+			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
+		}
+		
 	}
 
 	public function getCode($code)
@@ -69,9 +58,9 @@ class DiscountRepository {
 		return Discount::select()->where('code','=',$code)->first();
 	}
 
-	public function getDiscountId($id)
+	public function getDiscountId($discount_id)
 	{
-		return Discount::select()->where('id','=',$id)->first();
+		return Discount::find($discount_id);
 	}
 
 	public function getCodeEdit($data = array())
@@ -81,7 +70,7 @@ class DiscountRepository {
 
 	public function deleteDiscount($discount_id)
 	{
-		$discount = Discount::find($discount_id);
+		$discount = $this->getDiscountId($discount_id);
 		$discount->delete();
 		DiscountLang::where('discount_id','=',$discount_id)->delete();
 	}

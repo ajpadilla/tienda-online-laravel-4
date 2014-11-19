@@ -13,35 +13,34 @@
 				<h5>{{ trans('discountType.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
-			<div class="row">
-				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
-				<div class="col-sm-6 b-r">
-					<div class="form-group">
-						{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
-						<div class="col-sm-8">
-							{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
+				<div class="row">
+					{{ Form::model($discount_type, array('route' => array('discountType.update', $discount_type->id),'id'=>'formEditDiscountType','class'=>'form-horizontal')) }}
+					<div class="col-sm-6 b-r">
+						<div class="form-group">
+							{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-8">
+								{{ Form::select('language_id',$languages,$discount_type_language->id,array('class' => 'form-control','id'=>'language_id')) }}
+							</div>
+						</div>
+						<div class="form-group">
+							{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-8">
+								{{ Form::text('name',$discount_type_language->pivot->name, ['class' => 'form-control','id'=>'name']) }}
+							</div>
 						</div>
 					</div>
-					
-					<div class="form-group">
-						{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
-						<div class="col-sm-8">
-							{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
+					<div class="col-sm-6">
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-2">
+								{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
+							</div>
 						</div>
 					</div>
+					{{ Form::close() }}
 				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<div class="col-sm-4 col-sm-offset-2">
-							{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
-						</div>
-					</div>
-				</div>
-				{{ Form::close() }}
 			</div>
 		</div>
 	</div>
-</div>
 @stop
 
 @section('scripts')
@@ -52,12 +51,12 @@
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
             }, '{{ trans('discountType.validation.onlyLettersNumbersAndSpaces') }}');
 
-		$('#formCreateDiscountType').validate({
+		$('#formEditDiscountType').validate({
 			rules:{
 				name:{
 					required:!0,
 					onlyLettersNumbersAndSpaces: true,
-					remote:
+					/*remote:
 						{
 							url:'{{ URL::to('/checkName/') }}',
 							type: 'POST',
@@ -74,7 +73,7 @@
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						}
+						}*/
 				},
 			},
 			messages:{
@@ -98,10 +97,10 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::to(LaravelLocalization::transRoute('discountType.store'))}}',
+				url:  '{{ URL::route('discountType.update',$discount_type->id) }}',
         		type:'POST'
 			};
-		$('#formCreateDiscountType').ajaxForm(options);
+		$('#formEditDiscountType').ajaxForm(options);
 
 	});
 
@@ -118,7 +117,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false    
 			}), 5000 );  
-			return $('#formCreateDiscountType').valid(); 
+			return $('#formEditDiscountType').valid(); 
 		} 
 														     
 		// post-submit callback 
@@ -127,8 +126,7 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-			$('#formCreateDiscountType').resetForm();
-			 document.location.href = '{{URL::to(LaravelLocalization::transRoute('discountType.create'))}}';
+			//$('#formEditDiscountType').resetForm();
 		} 						
 </script>
 @stop

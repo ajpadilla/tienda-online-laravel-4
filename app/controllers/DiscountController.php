@@ -84,10 +84,10 @@ class DiscountController extends \BaseController {
 	public function show($id)
 	{
 		$discount = $this->discountRepository->getDiscountId($id);
-		$language_id = $this->languageRepository->returnLanguage()->id;
-		$discount_language = $discount->languages()->where('language_id','=',$language_id)->first();
+		$language = $this->languageRepository->returnLanguage();
+		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		return View::make('discounts.show',compact('discount','discount_language','discountTypes'));
+		return View::make('discounts.show',compact('discount','discount_language','discountTypes','language'));
 	}
 
 	/**
@@ -99,11 +99,11 @@ class DiscountController extends \BaseController {
 	public function edit($id)
 	{
 		$discount = $this->discountRepository->getDiscountId($id);
-		$language_id = $this->languageRepository->returnLanguage()->id;
-		$discount_language = $discount->languages()->where('language_id','=',$language_id)->first();
+		$language = $this->languageRepository->returnLanguage();
+		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
-		return View::make('discounts.edit',compact('discount','discount_language','discountTypes','languages'));
+		return View::make('discounts.edit',compact('discount','discount_language','discountTypes','language','languages'));
 
 	}
 
@@ -118,8 +118,9 @@ class DiscountController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
+			$input = array();
 			$input = Input::all();
-			//dd($input);
+			$input['discount_id'] = $id;
 			try
 			{
 				//$this->registerDiscountForm->validate($input);
@@ -143,15 +144,15 @@ class DiscountController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->discountRepository->deleteDiscount($id);
-		Redirect::route('discounts.index');
+		Flash::message('¡Descuento borrado  con éxito!');
+		return Redirect::route('discounts.index');
 	}
 
 	public function getDatatable()
 	{
 		$collection = Datatable::collection($this->discountLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-			
-			->searchColumns('name','code','discount_type_id','name','value','percent','active','from','to')
-			->orderColumns('code');
+			->searchColumns('code','name','discount_type_id','name','value','percent','active','from','to')
+			->orderColumns('code','name','discount_type_id','name','value','percent','active','from','to');
 
 		$collection->addColumn('code', function($model)
 		{
@@ -160,9 +161,9 @@ class DiscountController extends \BaseController {
 
 		$collection->addColumn('discount_type_id', function($model)
 		{
-			  foreach ($model->discount->discountType->languages as $language) {
-			  	return $language->pivot->name;
-			  }
+			$language = $this->languageRepository->returnLanguage();
+			$discount_type_language = $model->discount->discountType->languages()->where('language_id','=',$language->id)->first();
+			return $discount_type_language->pivot->name;
 		});
 
 		$collection->addColumn('name', function($model)
@@ -187,12 +188,12 @@ class DiscountController extends \BaseController {
 
 		$collection->addColumn('from', function($model)
 		{
-			return date( trans('discounts.date2') ,strtotime($model->discount->from));
+			return date($model->language->date_format ,strtotime($model->discount->from));
 		});
 
 		$collection->addColumn('to', function($model)
 		{
-			return date(trans('discounts.date2') ,strtotime($model->discount->to));
+			return date($model->language->date_format ,strtotime($model->discount->to));
 		});
 
 		$collection->addColumn('Actions',function($model){

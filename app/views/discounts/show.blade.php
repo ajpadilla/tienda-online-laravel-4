@@ -79,13 +79,13 @@
 						<div class="form-group">
 							{{ Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('from',$discount->from, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('from',date($language->date_format ,strtotime($discount->from)), ['class' => 'form-control','readonly']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::text('to',$discount->to, ['class' => 'form-control','readonly']) }}
+								{{ Form::text('to',date($language->date_format ,strtotime($discount->to)), ['class' => 'form-control','readonly']) }}
 							</div>
 						</div>
 						<div class="form-group">

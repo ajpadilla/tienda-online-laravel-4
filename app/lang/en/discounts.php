@@ -2,11 +2,11 @@
 	return array(
 		"create" => "create/discount",
 		"store" => "add/discount",
-		'index'=>'list/discount',
-		"show"=>"view/{id}",
-		"edit"=>"edit/{id}",
-		"update"=>"update/{id}",
-		"destroy"=>"destroy/{id}",
+		'index'=>'list/discounts',
+		"show"=>"show_discount/{id}",
+		"edit"=>"edit_discount/{id}",
+		"update"=>"update_discount/{id}",
+		"destroy"=>"destroy_discount/{id}",
 		"title" => "Add discount",
 		"subtitle" => "Create new discount",
 		"createCode" =>"create/discount_code", 
@@ -27,7 +27,8 @@
 			'discount_type' => 'Discount type:',
 			'save' => 'Save',
 			'Yes' => 'Yes',
-			'No' => 'No'
+			'No' => 'No',
+			'language' => 'language'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',
