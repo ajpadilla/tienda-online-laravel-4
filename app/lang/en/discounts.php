@@ -2,7 +2,7 @@
 	return array(
 		"create" => "create/discount",
 		"store" => "add/discount",
-		'index'=>'list/discount',
+		'index'=>'list/discounts',
 		"show"=>"show_discount/{id}",
 		"edit"=>"edit_discount/{id}",
 		"update"=>"update_discount/{id}",
