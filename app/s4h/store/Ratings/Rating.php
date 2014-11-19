@@ -1,11 +1,11 @@
-<?php namespace s4h\store\ShipmentStatus;
+<?php namespace s4h\store\Ratings;
 
 // use Andrew13\Cabinet\CabinetUpload;
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 // class Photo extends CabinetUpload {
-class ShipmentStatus extends Eloquent {
+class Rating extends Eloquent {
 
 	use SoftDeletingTrait;
 	protected $softDelete = true;
