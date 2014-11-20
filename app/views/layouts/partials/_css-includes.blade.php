@@ -61,4 +61,6 @@
 {{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css'); }}
 {{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css'); }}
 
+@yield('in-situ-css')
+
 @yield('styles')
