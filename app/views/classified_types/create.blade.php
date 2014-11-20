@@ -1,8 +1,8 @@
 @extends('layouts.template')
 
 @section('title')
-{{--{{ trans('shipmentStatus.labels.name')}}--}}
-{{	trans('shipmentStatus.title') }}
+{{--{{ trans('classifiedTypes.labels.name')}}--}}
+{{	trans('classifiedTypes.title') }}
 @stop
 
 @section('content')
@@ -10,20 +10,20 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{	trans('shipmentStatus.subtitle') }}</h5>
+				<h5>{{	trans('classifiedTypes.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('shipmentStatus.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateShipmentStatus']) }}
+					{{ Form::open(['url' => LaravelLocalization::transRoute('classifiedTypes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateclassifiedTypes']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
-							{{ Form::label('language_id', trans('shipmentStatus.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('language_id', trans('classifiedTypes.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('name', trans('shipmentStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('name', trans('classifiedTypes.labels.name'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
 							</div>
@@ -32,35 +32,8 @@
 					
 					<div class="col-sm-6">
 						<div class="form-group">
-							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
-							</div>
-						</div>
-						
-						<div class="form-group">
-							{{ Form::label('color', trans('shipmentStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('color',array(
-											'#7bd148' => 'Green',
-											'#5484ed' =>'Bold blue',
-											'#a4bdfc' => 'Blue',
-											'#46d6db' => 'Turquoise',
-											'#7ae7bf' => 'Light green',
-											'#51b749' => 'Bold green',
-											'#fbd75b' => 'Yellow',
-											'#ffb878' => 'Orange',
-											'#ff887c' => 'Red',
-											'#dc2127' => 'Bold red',
-											'#dbadff' => 'Purple',
-											'#e1e1e1' => 'Gray',
-										)
-								,null,['class' => 'form-control','id' => 'color']) }}
-							</div>
-						</div>
-						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('shipmentStatus.labels.save'), ['class' => 'btn btn-primary']) }}
+								{{ Form::submit(trans('classifiedTypes.labels.save'), ['class' => 'btn btn-primary']) }}
 							</div>
 						</div>
 					</div>
@@ -75,27 +48,21 @@
 <script>
 	$(document).ready(function () 
 	{
-		$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-       	}, '{{ trans('shipmentStatus.validation.onlyLettersNumbersAndSpaces') }}');
+       	}, '{{ trans('classifiedTypes.validation.onlyLettersNumbersAndSpaces') }}');
 
-		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-        }, '{{ trans('shipmentStatus.validation.onlyLettersNumbersAndDash') }}');
-
-
-		$('#formCrateShipmentStatus').validate({
+		$('#formCrateclassifiedTypes').validate({
 
 			rules:{
 				name:{
 					required:!0,
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
-					remote:
+					/*remote:
 					{
-						url:'{{ URL::to('/checkNameShipmentStatus/') }}',
+						url:'{{ URL::to('/checkNameclassifiedTypes/') }}',
 						type: 'POST',
 						data: {
 							language_id: function() {
@@ -109,44 +76,15 @@
 							console.log('consulta:'+respuesta);
 							return respuesta;
 						}
-					}
+					}*/
 				},
-				description:{
-					required:!0,
-					rangelength: [10, 255]
-				},
-				color:{
-					required:!0,
-					 /*remote:
-						{
-							url:'{{ URL::to('/checkColorShipmentStatus/') }}',
-							type: 'POST',
-							data: {
-								color: function() {
-									return $('#color').val();
-								}
-							},
-							dataFilter: function (respuesta) {
-								console.log('consulta:'+respuesta);
-								return respuesta;
-							}
-						} */
-				}
 			},
 			messages:{
 				name:{
-					required: '{{ trans('shipmentStatus.validation.required') }}',
-					rangelength: '{{ trans('shipmentStatus.validation.rangelength') }}'+'[2, 255]'+'{{ trans('shipmentStatus.validation.characters') }}',
-					remote: jQuery.validator.format('{{ trans('shipmentStatus.alert') }}')
+					required: '{{ trans('classifiedTypes.validation.required') }}',
+					rangelength: '{{ trans('classifiedTypes.validation.rangelength') }}'+'[2, 255]'+'{{ trans('classifiedTypes.validation.characters') }}',
+					remote: jQuery.validator.format('{{ trans('classifiedTypes.alert') }}')
 				},
-				description:{
-					required: '{{ trans('shipmentStatus.validation.required') }}',
-					rangelength: '{{ trans('shipmentStatus.validation.rangelength') }}'+'[10, 255]'+'{{ trans('shipmentStatus.validation.characters') }}',
-				},
-				color:{
-					required: '{{ trans('shipmentStatus.validation.required') }}',
-					remote: jQuery.validator.format('{{ trans('shipmentStatus.alertColor') }}')
-				}
 			},
 			highlight:function(element){
 				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -162,16 +100,16 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{ URL::route('shipmentStatus.store') }}',
+				url:  '{{ URL::route('classifiedTypes.store') }}',
         		type:'POST'
 			};
-		$('#formCrateShipmentStatus').ajaxForm(options);
+		$('#formCrateclassifiedTypes').ajaxForm(options);
 	});
 
 	// pre-submit callback
 		function showRequest(formData, jqForm, options) {
 			setTimeout(jQuery.fancybox({
-				'content': '<h1>'+"{{ trans('shipmentStatus.sending') }}"+'</h1>',
+				'content': "<h1>"+'{{ trans('classifiedTypes.sending') }}'+"</h1>",
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
@@ -181,7 +119,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formCrateShipmentStatus').valid();
+			return $('#formCrateclassifiedTypes').valid();
 		}
 
 		// post-submit callback
