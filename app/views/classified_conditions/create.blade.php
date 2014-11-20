@@ -60,8 +60,8 @@
 					required:!0,
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
-					remote:
-					/*{
+					/*remote:
+					{
 						url:'{{ URL::to('/checkNameClassifiedType/') }}',
 						type: 'POST',
 						data: {
@@ -109,7 +109,7 @@
 	// pre-submit callback
 		function showRequest(formData, jqForm, options) {
 			setTimeout(jQuery.fancybox({
-				'content': "<h1>"+'{{ trans('classifiedConditions.sending') }}'+"</h1>",
+				'content': '<h1>'+'{{ trans('classifiedConditions.sending') }}'+'</h1>',
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
