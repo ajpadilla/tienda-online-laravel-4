@@ -15,11 +15,15 @@ class CreateClassifiedPhotoTable extends Migration {
 		Schema::create('classified_photos', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 255);
-			$table->string('path', 255);
-			$table->integer('classified_id')->index();
-			$table->timestamps();
-			$table->softDeletes();
+            $table->string('filename');
+            $table->string('path');
+            $table->integer('size');
+            $table->string('extension');
+            $table->string('mimetype');
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('classified_id')->unsigned()->index(); // If this is a child file, it'll be referenced here.
+            $table->softDeletes();
+            $table->timestamps();
 		});
 	}
 
