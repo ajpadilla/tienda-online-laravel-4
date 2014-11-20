@@ -115,7 +115,11 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return "Edit:".$id;
+		$classified_condition = $this->classifiedConditionsRepository->getClassifiedConditionId($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$classified_condition_language = $classified_condition->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('classified_conditions.edit',compact('classified_condition','classified_condition_language','languages'));
 	}
 
 
@@ -127,7 +131,21 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		return "Update:".$id;
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['classified_condition_id'] = $id;
+			try
+			{
+				$this->classifiedConditionsRepository->updateClassifiedCondition($input);
+				return Response::json(trans('classifiedConditions.message1').' '.$input['name'].' '.trans('classifiedConditions.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -139,7 +157,9 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		return "destroy:".$id;
+		$this->classifiedConditionsRepository->delteClassifiedCondition($id);
+		Flash::message('¡condicion de clasificado borrado con éxito!');
+		return Redirect::route('classifiedConditions.index');
 	}
 
 	public function checkName() {
