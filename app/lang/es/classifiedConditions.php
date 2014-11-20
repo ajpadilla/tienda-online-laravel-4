@@ -31,5 +31,6 @@
 		),
 		'message1' =>'Nuevo Condición para clasificados',
 		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!'
+		'alert' => '¡El nombre ya se encuentra registrado!',
+		'sending' => 'Enviado datos'
 	);
