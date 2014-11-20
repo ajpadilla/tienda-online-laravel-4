@@ -3,7 +3,7 @@
         <div class="pi-img-wrapper">
             <img class="img-responsive" src="{{ asset('uploads/products/images/model1.jpg') }}" alt=""/>
             <div>
-              <a href="../../assets/frontend/pages/img/products/model1.jpg" class="btn btn-default fancybox-button"><i class="fa fa-search-plus fa-3x"></i>
+              <a href="{{ asset('uploads/products/images/model1.jpg') }}" class="btn btn-default fancybox-button"><i class="fa fa-search-plus fa-3x"></i>
 </a>
               <a href="#product-pop-up" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
             </div>

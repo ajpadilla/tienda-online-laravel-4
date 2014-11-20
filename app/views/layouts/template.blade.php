@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body class="ecommerce">
 
     <div id="wrapper">
 

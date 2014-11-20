@@ -55,4 +55,6 @@
 <!-- simplecolorpicker -->
 {{ HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'); }}
 
+@yield('in-situ-js')
+
 @yield('scripts')

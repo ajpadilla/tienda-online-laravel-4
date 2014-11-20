@@ -6,21 +6,13 @@
 
 @section('content')
 	    <div class="row">
-	        <h2>New Products</h2>
-	        @include('products.partials._new-products')
-	    </div>
-	    <div class="row">
-	        <h2>Top Products</h2>
-	        <div class="sidebar col col-md-3">
-	            @include('products.partials._category-sidebar')
+	        <div class="col-md-3 col-sm-5">
+
 	        </div>
-	        @include('products.partials._top-products')
-        </div>
-        <div class="row">
-            <h2>New Classifieds</h2>
-            {{-- Aquí va es top classifieds --}}
-            @include('products.partials._new-products')
-        </div>
+	        <div class="col-md-9 col-sm-7">
+	        
+	        </div>
+	    </div>
 @stop
 
 @section('in-situ-css')
