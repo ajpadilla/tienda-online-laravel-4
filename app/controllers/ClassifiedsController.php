@@ -5,10 +5,11 @@ use s4h\store\Languages\LanguageRepository;
 use s4h\store\Classifieds\ClassifiedRepository;
 
 class ClassifiedsController extends \BaseController {
+
 	private $classifiedRepository;
 
 	function __construct(ClassifiedRepository $classifiedRepository) {
-		$this->$classifiedRepository = $classifiedRepository;
+		$this->classifiedRepository = $classifiedRepository;
 	}
 
 	/**
@@ -29,7 +30,7 @@ class ClassifiedsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('classifieds.create');
 	}
 
 
