@@ -4,16 +4,19 @@ use Laracasts\Validation\FormValidationException;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\RegisterClassifiedTypesForm;
 use s4h\store\ClassifiedTypes\ClassifiedTypesRepository;
+use s4h\store\ClassifiedTypesLang\ClassifiedTypeLangRepository;
 
 class ClassifiedTypeController extends \BaseController {
 	private $languageRepository;
 	private $registerClassifiedTypesForm;
 	private $classifiedTypesRepository;
+	private $classifiedTypeLangRepository;
 
-	function __construct(LanguageRepository $languageRepository, RegisterClassifiedTypesForm $registerClassifiedTypesForm, ClassifiedTypesRepository $classifiedTypesRepository) {
+	function __construct(LanguageRepository $languageRepository, RegisterClassifiedTypesForm $registerClassifiedTypesForm, ClassifiedTypesRepository $classifiedTypesRepository, ClassifiedTypeLangRepository $classifiedTypeLangRepository) {
 		$this->languageRepository = $languageRepository;
 		$this->registerClassifiedTypesForm = $registerClassifiedTypesForm;
 		$this->classifiedTypesRepository = $classifiedTypesRepository;
+		$this->classifiedTypeLangRepository = $classifiedTypeLangRepository;
 	}
 
 	/**
@@ -23,9 +26,33 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('classified_types.index');
 	}
 
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->classifiedTypeLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name')
+			->orderColumns('name');
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+	
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('classifiedTypes.show',$model->classifiedTypes->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('classifiedTypes.edit',$model->classifiedTypes->id). "'>Edit</a>
+					<br />
+					<a href='" .route('classifiedTypes.destroy',$model->classifiedTypes->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -71,7 +98,10 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$classified_type = $this->classifiedTypesRepository->getClassifiedTypeId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$classified_type_language = $classified_type->languages()->where('language_id','=', $language->id)->first();
+		return View::make('discounts_types.show',compact('discount_type_language'));
 	}
 
 
@@ -83,7 +113,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return "Edit:". $id;
 	}
 
 
@@ -95,7 +125,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		
 	}
 
 
@@ -107,7 +137,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "Destroy:". $id;
 	}
 
 	public function checkName() {
