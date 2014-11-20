@@ -2,6 +2,7 @@
 
 use s4h\store\ClassifiedConditions\ClassifiedCondition;
 use s4h\store\Languages\Language;
+use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLang;
 /**
 * 
 */
@@ -38,7 +39,7 @@ class ClassifiedConditionsRepository {
 	{
 		$classified_condition = $this->getClassifiedConditionId($classified_condition_id);
 		$classified_condition->delete();
-		ClassifiedTypeLang::where('classified_conditions_id','=', $classified_condition_id)->delete();
+		ClassifiedConditionLang::where('classified_conditions_id','=', $classified_condition_id)->delete();
  	}
 
 	public function getName($data)
