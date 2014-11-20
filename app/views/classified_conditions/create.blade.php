@@ -1,8 +1,8 @@
 @extends('layouts.template')
 
 @section('title')
-{{--{{ trans('classifiedTypes.labels.name')}}--}}
-{{	trans('classifiedTypes.title') }}
+{{--{{ trans('classifiedConditions.labels.name')}}--}}
+{{	trans('classifiedConditions.title') }}
 @stop
 
 @section('content')
@@ -10,20 +10,20 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{	trans('classifiedTypes.subtitle') }}</h5>
+				<h5>{{	trans('classifiedConditions.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('classifiedTypes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateclassifiedTypes']) }}
+					{{ Form::open(['url' => LaravelLocalization::transRoute('classifiedConditions.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateClassifiedConditions']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
-							{{ Form::label('language_id', trans('classifiedTypes.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('language_id', trans('classifiedConditions.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('name', trans('classifiedTypes.labels.name'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('name', trans('classifiedConditions.labels.name'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
 								{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
 							</div>
@@ -33,7 +33,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('classifiedTypes.labels.save'), ['class' => 'btn btn-primary']) }}
+								{{ Form::submit(trans('classifiedConditions.labels.save'), ['class' => 'btn btn-primary']) }}
 							</div>
 						</div>
 					</div>
@@ -51,9 +51,9 @@
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-       	}, '{{ trans('classifiedTypes.validation.onlyLettersNumbersAndSpaces') }}');
+       	}, '{{ trans('classifiedConditions.validation.onlyLettersNumbersAndSpaces') }}');
 
-		$('#formCrateclassifiedTypes').validate({
+		$('#formCrateClassifiedConditions').validate({
 
 			rules:{
 				name:{
@@ -61,7 +61,7 @@
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
 					remote:
-					{
+					/*{
 						url:'{{ URL::to('/checkNameClassifiedType/') }}',
 						type: 'POST',
 						data: {
@@ -76,14 +76,14 @@
 							console.log('consulta:'+respuesta);
 							return respuesta;
 						}
-					}
+					}*/
 				},
 			},
 			messages:{
 				name:{
-					required: '{{ trans('classifiedTypes.validation.required') }}',
-					rangelength: '{{ trans('classifiedTypes.validation.rangelength') }}'+'[2, 255]'+'{{ trans('classifiedTypes.validation.characters') }}',
-					remote: jQuery.validator.format('{{ trans('classifiedTypes.alert') }}')
+					required: '{{ trans('classifiedConditions.validation.required') }}',
+					rangelength: '{{ trans('classifiedConditions.validation.rangelength') }}'+'[2, 255]'+'{{ trans('classifiedConditions.validation.characters') }}',
+					remote: jQuery.validator.format('{{ trans('classifiedConditions.alert') }}')
 				},
 			},
 			highlight:function(element){
@@ -100,16 +100,16 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{ URL::route('classifiedTypes.store') }}',
+				url:  '{{ URL::route('classifiedConditions.store') }}',
         		type:'POST'
 			};
-		$('#formCrateclassifiedTypes').ajaxForm(options);
+		$('#formCrateClassifiedConditions').ajaxForm(options);
 	});
 
 	// pre-submit callback
 		function showRequest(formData, jqForm, options) {
 			setTimeout(jQuery.fancybox({
-				'content': "<h1>"+'{{ trans('classifiedTypes.sending') }}'+"</h1>",
+				'content': "<h1>"+'{{ trans('classifiedConditions.sending') }}'+"</h1>",
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
@@ -119,7 +119,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formCrateclassifiedTypes').valid();
+			return $('#formCrateClassifiedConditions').valid();
 		}
 
 		// post-submit callback
