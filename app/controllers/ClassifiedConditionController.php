@@ -4,18 +4,21 @@ use Laracasts\Validation\FormValidationException;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\ClassifiedConditions\ClassifiedConditionsRepository;
 use s4h\store\Forms\RegisterClassifiedConditionsForm;
-
+use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLangRepository;
 
 class ClassifiedConditionController extends \BaseController {
 	private $languageRepository;
 	private $classifiedConditionsRepository;
 	private $registerClassifiedConditionsForm;
+	private $classifiedConditionLangRepository;
 
-	function __construct(LanguageRepository $languageRepository, ClassifiedConditionsRepository $classifiedConditionsRepository, RegisterClassifiedConditionsForm $registerClassifiedConditionsForm) {
+	function __construct(LanguageRepository $languageRepository, ClassifiedConditionsRepository $classifiedConditionsRepository, RegisterClassifiedConditionsForm $registerClassifiedConditionsForm,
+		ClassifiedConditionLangRepository $classifiedConditionLangRepository) {
 
 		$this->languageRepository = $languageRepository ;
 		$this->classifiedConditionsRepository = $classifiedConditionsRepository;
 		$this->registerClassifiedConditionsForm = $registerClassifiedConditionsForm;
+		$this->classifiedConditionLangRepository = $classifiedConditionLangRepository;
 	}
 
 	/**
@@ -25,7 +28,31 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('classified_conditions.index');
+	}
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->classifiedConditionLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name')
+			->orderColumns('name');
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+	
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('classifiedConditions.show',$model->classifiedCondition->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('classifiedConditions.edit',$model->classifiedCondition->id). "'>Edit</a>
+					<br />
+					<a href='" .route('classifiedConditions.destroy',$model->classifiedCondition->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
 	}
 
 
