@@ -15,7 +15,7 @@ class CreateClassifiedsTable extends Migration {
 		Schema::create('classifieds', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->decimal('percent', 20,5);
+			$table->decimal('price', 20,5);
 			$table->integer('user_id')->index();
 			$table->integer('classified_type_id')->index();
 			$table->integer('classified_condition_id')->index();
