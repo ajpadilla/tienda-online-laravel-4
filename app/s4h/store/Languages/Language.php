@@ -28,4 +28,10 @@ class Language extends Eloquent
 		return $this->belongsToMany('s4h\store\InvoiceStatus\InvoiceStatus','invoice_status_lang','language_id','invoice_status_id')->withPivot('name','description');
 	}
 
+	public function classifiedTypes()
+	{
+		return $this->belongsToMany('s4h\store\ClassifiedTypes\ClassifiedType','classified_types_lang','language_id','classified_types_id')->withPivot('name');
+	}
+
+
 }

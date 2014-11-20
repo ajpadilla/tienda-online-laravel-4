@@ -223,6 +223,52 @@ function () {
 
 	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
 	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
+
+	/**
+		* ------------------------------ Rutas classified type -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.create'), [
+		'as' => 'classifiedTypes.create',
+		'uses' => 'ClassifiedTypeController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifiedTypes.store'), [
+		'as' => 'classifiedTypes.store',
+		'uses' => 'ClassifiedTypeController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.index'), [
+		'as' => 'classifiedTypes.index',
+		'uses' => 'ClassifiedTypeController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.show'), [
+		'as' => 'classifiedTypes.show',
+		'uses' => 'ClassifiedTypeController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.edit'), [
+		'as' => 'classifiedTypes.edit',
+		'uses' => 'ClassifiedTypeController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifiedTypes.update'), [
+		'as' => 'classifiedTypes.update',
+		'uses' => 'ClassifiedTypeController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.destroy'), [
+		'as' => 'classifiedTypes.destroy',
+		'uses' => 'ClassifiedTypeController@destroy'
+	]);
+
+	Route::post('checkNameClassifiedType','ClassifiedTypeController@checkName');
+
+	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
+
+
 });
 
 // Confide routes
