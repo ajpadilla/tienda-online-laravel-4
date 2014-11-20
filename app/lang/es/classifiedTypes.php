@@ -11,6 +11,8 @@
 		"subtitle" => "Crear nuevo  tipo de anuncio",
 		"labels" => array(
 			'name' =>'Nombre:',
+			'description' => 'descripción',
+			'color' => 'color',
 			'language' => 'Idioma',
 			'save' => 'Agregar',
 		),
@@ -31,5 +33,6 @@
 		),
 		'message1' =>'Nuevo tipo de anuncio',
 		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!'
+		'alert' => '¡El nombre ya se encuentra registrado!',
+		'sending' => 'Enviando datos'
 	);
