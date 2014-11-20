@@ -1,23 +1,29 @@
 <?php 
 	return array(
-		"create" => "crear/tipo_de_clasificado",
-		"store" => "agregar/tipo_de_clasificado",
-		"index" => "lista/tipo_de_clasificado",
-		"show"=>"ver_tipo_de_clasificado/{id}",
-		"edit"=>"editar_tipo_de_clasificado/{id}",
-		"update"=>"actualizar_tipo_de_clasificado/{id}",
-		"destroy"=>"eliminar_tipo_de_clasificado/{id}",
+		"create" => "crear/clasificado",
+		"store" => "agregar/clasificado",
+		"index" => "lista/clasificado",
+		"show"=>"ver_clasificado/{id}",
+		"edit"=>"editar_clasificado/{id}",
+		"update"=>"actualizar_clasificado/{id}",
+		"destroy"=>"eliminar_clasificado/{id}",
 		"title" => "Agregar Tipo de clasificado",
-		"subtitle" => "Crear nuevo  tipo de clasificado",
+		"subtitle" => "Crear clasificado",
 		"labels" => array(
 			'name' =>'Nombre:',
-			'description' => 'descripción',
-			'color' => 'color',
+			'description' => 'Descripción',
+			'price' => 'Precio',
 			'language' => 'Idioma',
+			'add_photos' => 'Agregar foto',
+			'user' => 'Usuario',
+			'classified_type' => 'Tipo de clasificado',
+			'classified_condition' => 'Condición del clasificado',
 			'save' => 'Agregar',
+			'Yes' => 'Si',
+			'No' => 'No'
 		),
 		"list" => array(
-			'title' => 'Lista para los tipo de clasificado',
+			'title' => 'Lista de clasificados',
 			'Name' => 'Nombre',
 			'Actions' =>'Acciones'
 		),
@@ -31,7 +37,7 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
-		'message1' =>'Nuevo tipo de clasificado',
+		'message1' =>'Nuevo clasificado',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El nombre ya se encuentra registrado!',
 		'sending' => 'Enviando datos'
