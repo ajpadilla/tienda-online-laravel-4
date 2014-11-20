@@ -81,7 +81,7 @@ class ClassifiedConditionController extends \BaseController {
 			try
 			{
 				$this->registerClassifiedConditionsForm->validate($input);
-				$this->classifiedConditionsRepository->createNewClassifiedType($input);
+				$this->classifiedConditionsRepository->createNewClassifiedCondition($input);
 				return Response::json(trans('classifiedConditions.message1') . ' ' . $input['name'] . ' ' . trans('classifiedConditions.message2'));
 			} 
 			catch (FormValidationException $e)
@@ -139,5 +139,17 @@ class ClassifiedConditionController extends \BaseController {
 		//
 	}
 
+	public function checkName() {
+		$response = array();
+		if (Request::ajax()) {
+			$classified_condition = $this->classifiedConditionsRepository->getName(Input::all());
+			if (count($classified_condition) > 0) {
+				return Response::json(false);
+			} else {
+				return Response::json(true);
+			}
+		}
+		return Response::json(array('respuesta' => 'false'));
+	}
 
 }
