@@ -48,7 +48,20 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if (Request::ajax()) 
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerClassifiedConditionsForm->validate($input);
+				$this->classifiedConditionsRepository->createNewClassifiedType($input);
+				return Response::json(trans('classifiedConditions.message1') . ' ' . $input['name'] . ' ' . trans('classifiedConditions.message2'));
+			} 
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
