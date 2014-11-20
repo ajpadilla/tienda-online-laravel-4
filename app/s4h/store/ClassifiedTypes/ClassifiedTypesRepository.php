@@ -22,6 +22,19 @@ class ClassifiedTypesRepository {
 		$classified_type->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
+	public function updateClassifiedType($data = array())
+	{
+		$classified_type = $this->getClassifiedTypeId($data['classified_type_id']);
+		$classified_type->save();
+
+		if (count($classified_type->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classified_type->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
+		}else{
+			$classified_type->languages()->attach($data['language_id'], array('name' => $data['name']));
+		}
+	}
+
+
 	public function getName($data)
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
