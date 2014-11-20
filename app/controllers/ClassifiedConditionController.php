@@ -1,6 +1,22 @@
 <?php
 
+use Laracasts\Validation\FormValidationException;
+use s4h\store\Languages\LanguageRepository;
+use s4h\store\ClassifiedConditions\ClassifiedConditionsRepository;
+use s4h\store\Forms\RegisterClassifiedConditionsForm;
+
+
 class ClassifiedConditionController extends \BaseController {
+	private $languageRepository;
+	private $classifiedConditionsRepository;
+	private $registerClassifiedConditionsForm;
+
+	function __construct(LanguageRepository $languageRepository, ClassifiedConditionsRepository $classifiedConditionsRepository, RegisterClassifiedConditionsForm $registerClassifiedConditionsForm) {
+
+		$this->languageRepository = $languageRepository ;
+		$this->classifiedConditionsRepository = $classifiedConditionsRepository;
+		$this->registerClassifiedConditionsForm = $registerClassifiedConditionsForm;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +36,8 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		return View::make('classified_conditions.create',compact('languages'));
 	}
 
 
