@@ -52,7 +52,7 @@ class ClassifiedTypeController extends \BaseController {
 			try
 			{
 				$this->registerClassifiedTypesForm->validate($input);
-				$this->classifiedTypesRepository->createNewDiscountType($input);
+				$this->classifiedTypesRepository->createNewClassifiedType($input);
 				return Response::json(trans('classifiedTypes.message1') . ' ' . $input['name'] . ' ' . trans('classifiedTypes.message2'));
 			} 
 			catch (FormValidationException $e)
@@ -108,6 +108,19 @@ class ClassifiedTypeController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function checkName() {
+		$response = array();
+		if (Request::ajax()) {
+			$classified_type = $this->classifiedTypesRepository->getName(Input::all());
+			if (count($classified_type) > 0) {
+				return Response::json(false);
+			} else {
+				return Response::json(true);
+			}
+		}
+		return Response::json(array('respuesta' => 'false'));
 	}
 
 
