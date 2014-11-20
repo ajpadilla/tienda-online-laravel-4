@@ -155,7 +155,9 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		return "Destroy:". $id;
+		$this->classifiedTypesRepository->delteClassifiedType($id);
+		Flash::message('¡tipo de clasificado borrado  con éxito!');
+		return Redirect::route('classifiedTypes.index');
 	}
 
 	public function checkName() {
