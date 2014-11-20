@@ -1,6 +1,7 @@
 <?php namespace s4h\store\ClassifiedConditions; 
 
 use s4h\store\ClassifiedConditions\ClassifiedCondition;
+use s4h\store\Languages\Language;
 /**
 * 
 */
