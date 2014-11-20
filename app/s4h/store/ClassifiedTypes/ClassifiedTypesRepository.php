@@ -31,4 +31,9 @@ class ClassifiedTypesRepository {
 			return $language;
 		}
 	}
+
+	public function getClassifiedTypeId($classified_type_id)
+	{
+		return ClassifiedType::find($classified_type_id);
+	}
 }
