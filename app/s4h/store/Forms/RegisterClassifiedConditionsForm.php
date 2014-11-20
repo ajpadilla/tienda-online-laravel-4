@@ -3,6 +3,6 @@
 /**
 * 
 */
-class RegisterClassifiedConditionsForm{
+class RegisterClassifiedConditionsForm {
 	
 }
