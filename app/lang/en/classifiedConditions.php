@@ -1,21 +1,21 @@
 <?php 
 	return array(
-		"create" => "crear/tipo_descuento",
-		"store" => "agregar/tipo_descuento",
-		"index" => "lista/tipos_descuentos",
-		"show"=>"ver_tipo_descuento/{id}",
-		"edit"=>"editar_tipo_descuento/{id}",
-		"update"=>"actualizar_tipo_descuento/{id}",
-		"destroy"=>"eliminar_tipo_descuento/{id}",
-		"title" => "Agregar Tipo de descuento",
-		"subtitle" => "Crear nuevo  tipo de descuento",
+		"create" => "crear/condicion_de_clasificado",
+		"store" => "agregar/condicion_de_clasificado",
+		"index" => "lista/condicion_de_clasificados",
+		"show"=>"ver_condicion_de_clasificado/{id}",
+		"edit"=>"editar_condicion_de_clasificado/{id}",
+		"update"=>"actualizar_condicion_de_clasificado/{id}",
+		"destroy"=>"eliminar_condicion_de_clasificado/{id}",
+		"title" => "Agregar Condición para clasificados",
+		"subtitle" => "Crear Condición para clasificados",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'language' => 'Idioma',
 			'save' => 'Agregar',
 		),
 		"list" => array(
-			'title' => 'Lista para los tipos de descuento',
+			'title' => 'Lista para condición para clasificados',
 			'Name' => 'Nombre',
 			'Actions' =>'Acciones'
 		),
@@ -29,7 +29,7 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
-		'message1' =>'Nuevo tipo de descuento',
+		'message1' =>'Nuevo Condición para clasificados',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El nombre ya se encuentra registrado!'
 	);
