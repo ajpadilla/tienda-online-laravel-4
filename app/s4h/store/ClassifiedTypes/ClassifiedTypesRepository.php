@@ -2,6 +2,7 @@
 
 use s4h\store\ClassifiedTypes\ClassifiedType;
 use s4h\store\Languages\Language;
+use s4h\store\ClassifiedTypesLang\ClassifiedTypeLang;
 /**
 * 
 */
@@ -34,6 +35,12 @@ class ClassifiedTypesRepository {
 		}
 	}
 
+	public function delteClassifiedType($classified_type_id)
+	{
+		$classified_type = $this->getClassifiedTypeId($classified_type_id);
+		$classified_type->delete();
+		ClassifiedTypeLang::where('classified_types_id','=', $classified_type_id)->delete();
+ 	}
 
 	public function getName($data)
 	{
