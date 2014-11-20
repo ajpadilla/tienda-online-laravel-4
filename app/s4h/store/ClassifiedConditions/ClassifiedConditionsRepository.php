@@ -14,30 +14,30 @@ class ClassifiedConditionsRepository {
 		return ClassifiedCondition::all();
 	}
 
-	public function createNewClassifiedType($data = array())
+	public function createNewClassifiedCondition($data = array())
 	{
 		$classified_condition = new ClassifiedCondition;
 		$classified_condition->save();
 		$classified_condition->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
-	public function updateClassifiedType($data = array())
+	public function updateClassifiedCondition($data = array())
 	{
-		$classified_type = $this->getClassifiedConditionId($data['classified_type_id']);
-		$classified_type->save();
+		$classified_condition = $this->getClassifiedConditionId($data['classified_condition_id']);
+		$classified_condition->save();
 
-		if (count($classified_type->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$classified_type->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
+		if (count($classified_condition->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classified_condition->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
 		}else{
-			$classified_type->languages()->attach($data['language_id'], array('name' => $data['name']));
+			$classified_condition->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
 	}
 
-	public function delteClassifiedType($classified_type_id)
+	public function delteClassifiedCondition($classified_condition_id)
 	{
-		$classified_type = $this->getClassifiedConditionId($classified_type_id);
-		$classified_type->delete();
-		ClassifiedTypeLang::where('classified_types_id','=', $classified_type_id)->delete();
+		$classified_condition = $this->getClassifiedConditionId($classified_condition_id);
+		$classified_condition->delete();
+		ClassifiedTypeLang::where('classified_conditions_id','=', $classified_condition_id)->delete();
  	}
 
 	public function getName($data)
@@ -50,9 +50,9 @@ class ClassifiedConditionsRepository {
 		}
 	}
 
-	public function getClassifiedConditionId($classified_type_id)
+	public function getClassifiedConditionId($classified_condition_id)
 	{
-		return ClassifiedCondition::find($classified_type_id);
+		return ClassifiedCondition::find($classified_condition_id);
 	}
 		
 }
