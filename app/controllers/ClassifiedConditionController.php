@@ -100,7 +100,10 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$classified_condition = $this->classifiedConditionsRepository->getClassifiedConditionId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$classified_condition_language = $classified_condition->languages()->where('language_id','=', $language->id)->first();
+		return View::make('classified_conditions.show',compact('classified_condition_language'));
 	}
 
 
@@ -112,7 +115,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return "Edit:".$id;
 	}
 
 
@@ -124,7 +127,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		return "Update:".$id;
 	}
 
 
@@ -136,7 +139,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return "destroy:".$id;
 	}
 
 	public function checkName() {
