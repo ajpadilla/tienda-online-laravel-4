@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ Lang::get('modulo.variable') }}--}}
-{{ trans('shipmentStatus.list.title') }}
+{{ trans('classifiedTypes.list.title') }}
 @stop
 
 @section('content')
@@ -10,20 +10,18 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('shipmentStatus.list.title') }}</h5>
+				<h5>{{ trans('classifiedTypes.list.title') }}</h5>
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
 				<?php
 					$columns = [
-						trans('shipmentStatus.list.Color'),
-						trans('shipmentStatus.list.Name'),
-						trans('shipmentStatus.list.Description'),
-						trans('shipmentStatus.list.Actions')
+						trans('classifiedTypes.list.Name'),
+						trans('classifiedTypes.list.Actions')
 				];
 				$table = Datatable::table()
 				->addColumn($columns)
-				->setUrl(route('api.shipmentStatus'))
+				->setUrl(route('api.classifiedTypes'))
 				->noScript();
 				?>
 				<div class="row"><br/></div>
