@@ -19,6 +19,7 @@ class ClassifiedConditionsRepository {
 	public function createNewClassifiedCondition($data = array())
 	{
 		$classified_condition = new ClassifiedCondition;
+		
 		$classified_condition->save();
 		$classified_condition->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
