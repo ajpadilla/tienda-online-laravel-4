@@ -268,6 +268,50 @@ function () {
 
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
+	/**
+		* ------------------------------ Rutas classified conditions -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.create'), [
+		'as' => 'classifiedConditions.create',
+		'uses' => 'ClassifiedConditionController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifiedConditions.store'), [
+		'as' => 'classifiedConditions.store',
+		'uses' => 'ClassifiedConditionController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.index'), [
+		'as' => 'classifiedConditions.index',
+		'uses' => 'ClassifiedConditionController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.show'), [
+		'as' => 'classifiedConditions.show',
+		'uses' => 'ClassifiedConditionController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.edit'), [
+		'as' => 'classifiedConditions.edit',
+		'uses' => 'ClassifiedConditionController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifiedConditions.update'), [
+		'as' => 'classifiedConditions.update',
+		'uses' => 'ClassifiedConditionController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.destroy'), [
+		'as' => 'classifiedConditions.destroy',
+		'uses' => 'ClassifiedConditionController@destroy'
+	]);
+
+	Route::post('checkNameClassifiedCondition','ClassifiedConditionController@checkName');
+
+	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
+
 
 });
 
