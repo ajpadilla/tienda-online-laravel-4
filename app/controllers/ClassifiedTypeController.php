@@ -101,7 +101,7 @@ class ClassifiedTypeController extends \BaseController {
 		$classified_type = $this->classifiedTypesRepository->getClassifiedTypeId($id);
 		$language = $this->languageRepository->returnLanguage();
 		$classified_type_language = $classified_type->languages()->where('language_id','=', $language->id)->first();
-		return View::make('discounts_types.show',compact('discount_type_language'));
+		return View::make('classified_types.show',compact('classified_type_language'));
 	}
 
 
