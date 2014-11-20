@@ -264,7 +264,7 @@ function () {
 		'uses' => 'ClassifiedTypeController@destroy'
 	]);
 
-	Route::post('checkName','ClassifiedTypeController@checkName');
+	Route::post('checkNameClassifiedType','ClassifiedTypeController@checkName');
 
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
