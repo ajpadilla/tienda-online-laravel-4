@@ -1,11 +1,11 @@
 <?php namespace s4h\store\Photos;
 
-// use Andrew13\Cabinet\CabinetUpload;
+use Andrew13\Cabinet\CabinetUpload;
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 // class Photo extends CabinetUpload {
-class Photo extends Eloquent {
+class Photo extends CabinetUpload {
 
 	use SoftDeletingTrait;
 	protected $softDelete = true;
