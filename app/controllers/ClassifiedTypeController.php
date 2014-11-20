@@ -113,7 +113,11 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return "Edit:". $id;
+		$classified_type = $this->classifiedTypesRepository->getClassifiedTypeId($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$classified_type_language = $classified_type->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name','id');
+		return View::make('classified_types.edit',compact('classified_type','classified_type_language','languages'));
 	}
 
 
@@ -125,7 +129,21 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['classified_type_id'] = $id;
+			try
+			{
+				$this->classifiedTypesRepository->updateClassifiedType($input);
+				return Response::json(trans('classifiedTypes.message1').' '.$input['name'].' '.trans('classifiedTypes.message2'));
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
