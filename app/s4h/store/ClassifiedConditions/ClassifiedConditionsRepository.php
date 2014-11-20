@@ -45,7 +45,7 @@ class ClassifiedConditionsRepository {
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
 		if (count($language) > 0) {
-			return $language->classifiedTypes()->wherePivot('name','=',$data['name'])->first();
+			return $language->classifiedConditions()->wherePivot('name','=',$data['name'])->first();
 		}else{
 			return $language;
 		}
