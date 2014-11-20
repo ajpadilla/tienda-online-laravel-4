@@ -46,7 +46,20 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if (Request::ajax()) 
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerClassifiedTypesForm->validate($input);
+				$this->classifiedTypesRepository->createNewDiscountType($input);
+				return Response::json(trans('classifiedTypes.message1') . ' ' . $input['name'] . ' ' . trans('classifiedTypes.message2'));
+			} 
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
