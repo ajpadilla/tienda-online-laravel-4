@@ -162,7 +162,8 @@ class ClassifiedConditionController extends \BaseController {
 		return Redirect::route('classifiedConditions.index');
 	}
 
-	public function checkName() {
+	public function checkNameClassifiedCondition() 
+	{
 		$response = array();
 		if (Request::ajax()) {
 			$classified_condition = $this->classifiedConditionsRepository->getName(Input::all());
