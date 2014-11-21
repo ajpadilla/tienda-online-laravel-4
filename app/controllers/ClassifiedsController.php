@@ -6,6 +6,7 @@ use s4h\store\Classifieds\ClassifiedRepository;
 use s4h\store\ClassifiedConditions\ClassifiedConditionsRepository;
 use s4h\store\ClassifiedTypes\ClassifiedTypesRepository;
 use s4h\store\Users\UserRepository;
+use s4h\store\ClassifiedsLang\ClassifiedsLangRepository;
 
 class ClassifiedsController extends \BaseController {
 
@@ -15,12 +16,13 @@ class ClassifiedsController extends \BaseController {
 	private $userRepository;
 	private $languageRepository;
 
-	function __construct(ClassifiedRepository $classifiedRepository, ClassifiedConditionsRepository $classifiedConditionsRepository, ClassifiedTypesRepository $classifiedTypesRepository, UserRepository $userRepository,LanguageRepository $languageRepository) {
+	function __construct(ClassifiedRepository $classifiedRepository, ClassifiedConditionsRepository $classifiedConditionsRepository, ClassifiedTypesRepository $classifiedTypesRepository, UserRepository $userRepository,LanguageRepository $languageRepository, ClassifiedsLangRepository $classifiedLangRepository) {
 		$this->classifiedRepository = $classifiedRepository;
 		$this->classifiedConditionsRepository = $classifiedConditionsRepository;
 		$this->classifiedTypesRepository = $classifiedTypesRepository;
 		$this->userRepository = $userRepository;
 		$this->languageRepository = $languageRepository;
+		$this->classifiedLangRepository = $classifiedLangRepository;
 	}
 
 	/**
@@ -30,9 +32,66 @@ class ClassifiedsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('classifieds.index');
 	}
 
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->classifiedLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name','description', 'address')
+			->orderColumns('name','description', 'address');
+
+		$collection->addColumn('name', function($model)
+		{
+			return $model->name;
+		});
+		
+		$collection->addColumn('description', function($model)
+		{
+			return $model->description;
+		});
+
+		$collection->addColumn('address', function($model)
+		{
+			return $model->address;
+		});
+
+		$collection->addColumn('address', function($model)
+		{
+			return $model->address;
+		});
+
+		$collection->addColumn('user', function($model)
+		{
+			return $model->classified->user->username;
+		});
+
+		$collection->addColumn('classified_type', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+			$classified_type_language = $model->classified->classifiedType->languages()->where('language_id','=',$language->id)->first();
+			return $classified_type_language->pivot->name;
+		});
+
+		$collection->addColumn('classified_condition', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+			$classified_condition_language = $model->classified->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
+			return $classified_condition_language->pivot->name;
+		});
+
+		$collection->addColumn('Actions',function($model){
+			$links = "<a href='" .route('classifieds.show',$model->classified->id). "'>View</a>
+					<br />";
+			$links .= "<a href='" .route('classifieds.edit',$model->classified->id). "'>Edit</a>
+					<br />
+					<a href='" .route('classifieds.destroy',$model->classified->id). "'>Delete</a>";
+
+			return $links;
+		});
+
+		return $collection->make();
+	}
 
 	/**
 	 * Show the form for creating a new resource.
