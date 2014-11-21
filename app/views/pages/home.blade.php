@@ -25,6 +25,8 @@
 
 @section('in-situ-css')
 	<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/>
+	{{--<link rel="stylesheet" href="{{ asset('assets/css/components.css') }}"/>
+	<link rel="stylesheet" href="{{ asset('assets/css/style-shop.css') }}"/>--}}
 @stop
 
 @section('in-situ-js')

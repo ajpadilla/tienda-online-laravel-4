@@ -49,7 +49,7 @@ Nostrud duis molestie at dolore.</p>
 	                      <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
 	                  </div>
 	                  <button class="btn btn-primary" style="margin-left: 20px" type="submit">Add to cart</button>
-	                  <a href="shop-item.html" class="btn btn-default">More details</a>
+	                  <a href="{{ LaravelLocalization::transRoute('products.show') }}" class="btn btn-default">More details</a>
 			      </div>
                 </div>
 

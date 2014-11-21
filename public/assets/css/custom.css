@@ -1,6 +1,35 @@
 .btn {
   text-transform: uppercase;
 }
+.top-cart-info {
+  background: #f9f9f9;
+  color: #595f65;
+  border: solid 1px #ececec;
+  border-radius: 16px !important;
+  float: left;
+  padding: 8px 39px 6px 13px;
+  line-height: 1.2;
+}
+.top-cart-content-wrapper {
+  position: absolute;
+  right: -2px;
+  top: 100%;
+  z-index: 99999;
+}
+.top-cart-content {
+  padding: 8px 0 10px;
+  background: #fcfafb;
+  border-top: solid 2px #ea4c1d;
+  box-shadow: 5px 5px rgba(91,91,91,0.2);
+  width: 364px;
+  margin-top: 12px;
+  color: #717880;
+  display: none;
+  position: relative;
+  transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+}
 .pi-price {
   color: #f00;
   font: 18px 'PT Sans Narrow', sans-serif;
@@ -111,6 +140,40 @@ h3
 .ecommerce h2 {
   font-size: 20px;
 }
+.ecommerce .sidebar {
+  font: 15px 'PT Sans Narrow' sans-serif;
+  color: #3e4d5c;
+  text-transform: uppercase;
+}
+.ecommerce .sidebar .list-group-item {
+  background: rgba(244,244,244,0.5);
+  border: none;
+  display: block;
+  margin-bottom: 2px;
+  padding: 7px 10px;
+  position: relative;
+  border-radius: 0;
+}
+.ecommerce .sidebar .list-group-item {
+  background: #fff;
+  padding: 8px 10px 6px;
+}
+.ecommerce .nav-tabs {
+  text-transform: uppercase;
+  font: 16px/1 "PT Sans Narrow", sans-serif;
+}
+.sidebar-menu a {
+  display: block;
+}
+.sidebar-menu .fa-angle-right {
+  position: relative;
+  top: 1px;
+  margin-right: 2px;
+  float: left;
+}
+.margin-bottom-25 {
+  margin-bottom: 25px !important;
+}
 .price-availability-block {
   border-bottom: 1px solid #f4f4f4;
   padding-bottom: 12px;
@@ -215,4 +278,78 @@ a.btn.btn-default:hover .btn i {
   position: relative;
   top: -2px;
   left: 1px;
+}
+.product-page .review {
+  color: #6e7a85;
+  font-family: 'Open Sans', sans-serif;
+  border-bottom: 1px solid #f4f4f4;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.product-page .review a {
+  color: #e6400c;
+}
+.product-page .rateit {
+  margin-right: 27px;
+  position: relative;
+  top: 2px;
+}
+.product-page .social-icons li a {
+  background-position: 0 -38px;
+  opacity: 1;
+}
+.product-page .nav-tabs {
+  margin-top: 1px;
+}
+.social-icons {
+  padding: 0;
+  margin: 0;
+}
+.social-icons li {
+  float: left;
+  display: inline;
+  list-style: none;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  text-indent: -9999px;
+}
+.product-page-content {
+  width: 100%;
+  overflow: hidden;
+  padding: 50px 13px 0;
+}
+.nav-tabs {
+  border-color: #e6400c;
+}
+.sidebar-products {
+  background: #fff;
+  padding: 15px 15px 20px;
+}
+.sidebar-products h2 {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+.sidebar-products .item {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: solid 1px #eee;
+}
+.sidebar-products img {
+  width: 65px;
+  height: auto;
+  float: left;
+}
+.sidebar-products h3 {
+  font: 300 13px 'Open Sans' sans-serif;
+/* text-transform none */
+  margin-left: 80px;
+  margin-bottom: 2px;
+}
+.sidebar-products .price {
+  margin-left: 80px;
+  color: #e84d1c;
+  font: 16px 'PT Sans Narrow', sans-serif;
 }

@@ -1,5 +1,6 @@
 <?php
 	return array(
+		"show" => "productos/{id}",
 		"create" => "crear/producto",
 		"store" => "agregar/producto",
 		'index'=>'lista/productos',

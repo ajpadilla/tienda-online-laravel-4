@@ -79,7 +79,7 @@ class ProductController extends \BaseController {
 
 	public function show()
 	{
-		return false;
+		return View::make('products.show');
 	}
 
 	/**
