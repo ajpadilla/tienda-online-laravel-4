@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 /**
 * 
 */
-class Classified extends Eloquent {
+class ClassifiedsLang extends Eloquent {
 	
 	use SoftDeletingTrait;
 
