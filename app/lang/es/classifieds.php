@@ -18,9 +18,11 @@
 			'user' => 'Usuario',
 			'classified_type' => 'Tipo de clasificado',
 			'classified_condition' => 'Condición del clasificado',
+			'address' => 'Dirección',
 			'save' => 'Agregar',
 			'Yes' => 'Si',
-			'No' => 'No'
+			'No' => 'No',
+			'user' => 'Usuario'
 		),
 		"list" => array(
 			'title' => 'Lista de clasificados',
