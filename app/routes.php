@@ -308,7 +308,7 @@ function () {
 		'uses' => 'ClassifiedConditionController@destroy'
 	]);
 
-	Route::post('checkNameClassifiedCondition','ClassifiedConditionController@checkName');
+	Route::post('verificateNameClassifiedCondition','ClassifiedConditionController@checkNameClassifiedCondition');
 
 	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
 
@@ -352,9 +352,24 @@ function () {
 		'uses' => 'ClassifiedsController@destroy'
 	]);
 
-	Route::post('checkNameClassifiedCondition','ClassifiedsController@checkName');
+	Route::post('checkNameClassified','ClassifiedsController@checkNameClassified');
 
 	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedsController@getDatatable'));
+
+
+	/**
+		* ------------------------------ Rutas Photos -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('photosClassifieds.create'), [
+		'as' => 'photosClassifieds.create',
+		'uses' => 'PhotosClassifiedsController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('photos.store'), [
+		'as' => 'photosClassifieds.store',
+		'uses' => 'PhotosClassifiedsController@store'
+	]);
 
 });
 
