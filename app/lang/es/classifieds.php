@@ -27,6 +27,11 @@
 		"list" => array(
 			'title' => 'Lista de clasificados',
 			'Name' => 'Nombre',
+			'Description' =>'Descripción',
+			'Address' => 'Dirección',
+			'User' => 'Usuario',
+			'Classifieds_types' => 'Tipo de clasificado',
+			'Classified_condition' => 'Condición del clasificado',
 			'Actions' =>'Acciones'
 		),
 		"validation" => array(
