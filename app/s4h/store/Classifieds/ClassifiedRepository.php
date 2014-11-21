@@ -13,7 +13,7 @@ class ClassifiedRepository{
 	{
 		$classified = new Classified;
 		$classified->price = $data['price'];
-		$classified->user_id = $data['price'];
+		$classified->user_id = 1;
 		$classified->classified_type_id = $data['classified_type_id'];
 		$classified->classified_condition_id = $data['classified_condition_id'];
 		$classified->save();
@@ -21,6 +21,22 @@ class ClassifiedRepository{
 			'description'=> $data['description'],
 			'address' => $data['address']
 		));
+		return $classified;
 	}
-	
+
+	public function getClassifiedId($classified_id)
+	{
+		return Classified::findOrFail($classified_id);
+	}	
+
+	public function getName($data)
+	{
+		$language = Language::select()->where('id','=',$data['language_id'])->first();
+		if (count($language) > 0) {
+			return $language->classifieds()->wherePivot('name','=',$data['name'])->first();
+		}else{
+			return $language;
+		}
+	}
+
 }
