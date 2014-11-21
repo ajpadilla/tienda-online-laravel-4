@@ -3,6 +3,7 @@
 use s4h\store\ClassifiedTypes\ClassifiedType;
 use s4h\store\Languages\Language;
 use s4h\store\ClassifiedTypesLang\ClassifiedTypeLang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /**
 * 
 */
@@ -55,5 +56,11 @@ class ClassifiedTypesRepository {
 	public function getClassifiedTypeId($classified_type_id)
 	{
 		return ClassifiedType::find($classified_type_id);
+	}
+	public function getNameForLanguage()
+	{
+		$iso_code = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		return $language->classifiedTypes()->lists('name','classified_types_id');
 	}
 }
