@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "create/invoice_status",
-		"store" => "add/invoice_status",
-		"index"=>'list/invoice_status',
-		"show"=>"show_invoice_status/{id}",
-		"edit"=>"edit_invoice_status/{id}",
-		"update"=>"update_invoice_status/{id}",
-		"destroy"=>"delete_invoice_status/{id}",
+		"create" => "create/invoice/status",
+		"store" => "add/invoice/status",
+		"index"=>'list/invoice/status',
+		"show"=>"show/invoice/status/{id}",
+		"edit"=>"edit/invoice/status/{id}",
+		"update"=>"update/invoice/status/{id}",
+		"destroy"=>"delete/invoice/status/{id}",
 		"title" => "Add invoice status",
 		"subtitle" => "Create invoice status",
 		"labels" => array(

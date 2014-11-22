@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "crear/estatus_factura",
-		"store" => "agregar/estatus_factura",
-		"index"=>'lista/estatus_factura',
-		"show"=>"ver_estatus_factura/{id}",
-		"edit"=>"editar_estatus_factura/{id}",
-		"update"=>"actualizar_estatus_factura/{id}",
-		"destroy"=>"eliminar_estatus_factura/{id}",
+		"create" => "crear/estatus/factura",
+		"store" => "agregar/estatus/factura",
+		"index"=>'lista/estatus/factura',
+		"show"=>"ver/estatus/factura/{id}",
+		"edit"=>"editar/estatus/factura/{id}",
+		"update"=>"actualizar/estatus/factura/{id}",
+		"destroy"=>"eliminar/estatus/factura/{id}",
 		"title" => "Agregar estatus para factura",
 		"subtitle" => "Crear estatus para factura",
 		"labels" => array(
