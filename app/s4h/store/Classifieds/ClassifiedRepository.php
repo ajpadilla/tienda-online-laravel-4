@@ -3,6 +3,7 @@
 use s4h\store\Classifieds\Classified;
 use s4h\store\Languages\Language;
 use s4h\store\Photos\ClassifiedPhotos;
+use s4h\store\ClassifiedsLang\ClassifiedsLang;
 
 /**
 * 
@@ -45,6 +46,13 @@ class ClassifiedRepository{
 			));
 		}
 	}
+
+	public function delteClassified($classified_id)
+	{
+		$classified = $this->getClassifiedId($classified_id);
+		$classified->delete();
+		ClassifiedsLang::where('classified_id','=', $classified_id)->delete();
+ 	}
 
 	public function getClassifiedId($classified_id)
 	{
