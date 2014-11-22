@@ -153,7 +153,13 @@ class ClassifiedsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$classified = $this->classifiedRepository->getClassifiedId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage();
+		$classified_types = $this->classifiedTypesRepository->getNameForLanguage();
+		$classified_language = $classified->languages()->where('language_id','=', $language->id)->first();
+		return View::make('classifieds.edit', compact('classified','languages','classified_conditions','classified_types','classified_language'));
 	}
 
 
@@ -165,7 +171,18 @@ class ClassifiedsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = Input::all();
+		//dd($input);
+		$input['classified_id'] = $id;
+		try
+		{
+			$classified = $this->classifiedRepository->createNewClassified($input);
+			return Response::json(trans('classifieds.message1') . ' ' . $input['name'] . ' ' . trans('classifieds.message2'));
+		} 
+		catch (FormValidationException $e)
+		{
+			return Response::json($e->getErrors()->all());
+		}
 	}
 
 
