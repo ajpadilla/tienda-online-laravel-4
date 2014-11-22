@@ -24,6 +24,28 @@ class ClassifiedRepository{
 		return $classified;
 	}
 
+	public function updateClassified($data = array())
+	{
+		$classified = $this->getClassifiedId($data['classified_id']);
+		$classified->price = $data['price'];
+		$classified->user_id = 1;
+		$classified->classified_type_id = $data['classified_type_id'];
+		$classified->classified_condition_id = $data['classified_condition_id'];
+		$classified->save();
+
+		if (count($classified->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classified->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description'=> $data['description'],
+				'address' => $data['address']
+			));
+		}else{
+			$classified->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description'=> $data['description'],
+				'address' => $data['address']
+			));
+		}
+	}
+
 	public function getClassifiedId($classified_id)
 	{
 		return Classified::findOrFail($classified_id);
