@@ -103,8 +103,7 @@ class ClassifiedsController extends \BaseController {
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage(); 
 		$classified_types = $this->classifiedTypesRepository->getNameForLanguage();
-		$users = $this->userRepository->getAll()->lists('username', 'id');
-		return View::make('classifieds.create', compact('languages','classified_conditions','classified_types','users'));
+		return View::make('classifieds.create', compact('languages','classified_conditions','classified_types'));
 	}
 
 
@@ -137,7 +136,12 @@ class ClassifiedsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$classified = $this->classifiedRepository->getClassifiedId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$classifiedType = $classified->classifiedType->languages()->where('language_id','=',$language->id)->first();
+		$classifiedConditions = $classified->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
+		$classified_language = $classified->languages()->where('language_id','=', $language->id)->first();
+		return View::make('classifieds.show', compact('classified','classifiedType','classifiedConditions','classified_language'));
 	}
 
 
