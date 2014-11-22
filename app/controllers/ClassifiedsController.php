@@ -176,7 +176,7 @@ class ClassifiedsController extends \BaseController {
 		$input['classified_id'] = $id;
 		try
 		{
-			$classified = $this->classifiedRepository->createNewClassified($input);
+			$classified = $this->classifiedRepository->updateClassified($input);
 			return Response::json(trans('classifieds.message1') . ' ' . $input['name'] . ' ' . trans('classifieds.message2'));
 		} 
 		catch (FormValidationException $e)
@@ -194,7 +194,9 @@ class ClassifiedsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$this->classifiedRepository->delteClassified($id);
+		Flash::message('¡Clasificado borrado con éxito!');
+		return Redirect::route('classifieds.index');
 	}
 
 	
