@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>soft4home | @yield('title')</title>
+    <title>@yield('title')</title>
 
     @include('layouts.partials._css-includes')
-    
+
 </head>
 
-<body>
+<body class="ecommerce">
 
     <div id="wrapper">
 

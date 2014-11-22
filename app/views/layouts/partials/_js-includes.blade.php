@@ -55,7 +55,10 @@
 <!-- simplecolorpicker -->
 {{ HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'); }}
 
+<<<<<<< HEAD
 <!-- Dropzone Includes -->
 {{ HTML::script('assets/js/plugins/dropzone/dropzone.js'); }}
+
+@yield('in-situ-js')
 
 @yield('scripts')

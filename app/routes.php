@@ -25,6 +25,7 @@ function () {
 	/**
 	* ------------------------------ Rutas para productos -----------------------
 	**/
+	Route::get(LaravelLocalization::transRoute('products.show'), ['as' => 'products.show', 'uses' => 'ProductController@show'] );
 	Route::get(LaravelLocalization::transRoute('products.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
 	Route::post(LaravelLocalization::transRoute('products.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
 	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
