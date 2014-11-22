@@ -1,10 +1,12 @@
 <?php
 	return array(
-		"show" => "productos/{id}",
+		"show" => "producto/{id}",
 		"create" => "crear/producto",
 		"store" => "agregar/producto",
 		'index'=>'lista/productos',
 		'edit' => 'editar/producto/{id}',
+		'update' => 'actualizar/producto/{id}',
+		'destroy' => 'eliminar/producto/{id}',
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
 		"labels" => array(
