@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "crear/tipo_descuento",
-		"store" => "agregar/tipo_descuento",
-		"index" => "lista/tipos_descuentos",
-		"show"=>"ver_tipo_descuento/{id}",
-		"edit"=>"editar_tipo_descuento/{id}",
-		"update"=>"actualizar_tipo_descuento/{id}",
-		"destroy"=>"eliminar_tipo_descuento/{id}",
+		"create" => "crear/tipo/descuento",
+		"store" => "agregar/tipo/descuento",
+		"index" => "lista/tipos/descuentos",
+		"show"=>"ver/tipo/descuento/{id}",
+		"edit"=>"editar/tipo/descuento/{id}",
+		"update"=>"actualizar/tipo/descuento/{id}",
+		"destroy"=>"eliminar/tipo/descuento/{id}",
 		"title" => "Agregar Tipo de descuento",
 		"subtitle" => "Crear nuevo  tipo de descuento",
 		"labels" => array(
