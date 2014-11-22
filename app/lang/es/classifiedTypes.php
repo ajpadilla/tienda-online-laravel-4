@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "crear/tipo_de_clasificado",
-		"store" => "agregar/tipo_de_clasificado",
-		"index" => "lista/tipo_de_clasificado",
-		"show"=>"ver_tipo_de_clasificado/{id}",
-		"edit"=>"editar_tipo_de_clasificado/{id}",
-		"update"=>"actualizar_tipo_de_clasificado/{id}",
-		"destroy"=>"eliminar_tipo_de_clasificado/{id}",
+		"create" => "crear/tipo/clasificado",
+		"store" => "agregar/tipo/clasificado",
+		"index" => "lista/tipo/clasificado",
+		"show"=>"ver/tipo/clasificado/{id}",
+		"edit"=>"editar/tipo/clasificado/{id}",
+		"update"=>"actualizar/tipo/clasificado/{id}",
+		"destroy"=>"eliminar/tipo/clasificado/{id}",
 		"title" => "Agregar Tipo de clasificado",
 		"subtitle" => "Crear nuevo  tipo de clasificado",
 		"labels" => array(
