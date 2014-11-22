@@ -1,8 +1,8 @@
 <?php
 	return array(
-		"create" => "crear/lenguaje",
-		"store" => "agregar/lenguaje",
-		'index'=>'lista/lenguajes',
+		"create" => "create/language",
+		"store" => "add/language",
+		'index'=>'list/languages',
 		"title" => "Agregar lenguaje",
 		"subtitle" => "Crear nuevo lenguaje",
 		"labels" => array(
