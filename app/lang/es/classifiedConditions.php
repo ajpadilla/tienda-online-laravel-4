@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "crear/condicion_de_clasificado",
-		"store" => "agregar/condicion_de_clasificado",
-		"index" => "lista/condicion_de_clasificados",
-		"show"=>"ver_condicion_de_clasificado/{id}",
-		"edit"=>"editar_condicion_de_clasificado/{id}",
-		"update"=>"actualizar_condicion_de_clasificado/{id}",
-		"destroy"=>"eliminar_condicion_de_clasificado/{id}",
+		"create" => "crear/condicion/clasificado",
+		"store" => "agregar/condicion/clasificado",
+		"index" => "lista/condicion/clasificados",
+		"show"=>"ver/condicion/clasificado/{id}",
+		"edit"=>"editar/condicion/clasificado/{id}",
+		"update"=>"actualizar/condicion/clasificado/{id}",
+		"destroy"=>"eliminar/condicion/clasificado/{id}",
 		"title" => "Agregar Condición para clasificados",
 		"subtitle" => "Crear Condición para clasificados",
 		"labels" => array(
