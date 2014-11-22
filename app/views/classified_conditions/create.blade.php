@@ -62,7 +62,7 @@
 					onlyLettersNumbersAndSpaces: true,
 					remote:
 					{
-						url:'{{ URL::to('/checkNameClassifiedCondition/') }}',
+						url:'{{ URL::to('/verificateNameClassifiedCondition/') }}',
 						type: 'POST',
 						data: {
 							language_id: function() {

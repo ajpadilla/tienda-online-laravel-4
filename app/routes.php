@@ -308,10 +308,68 @@ function () {
 		'uses' => 'ClassifiedConditionController@destroy'
 	]);
 
-	Route::post('checkNameClassifiedCondition','ClassifiedConditionController@checkName');
+	Route::post('verificateNameClassifiedCondition','ClassifiedConditionController@checkNameClassifiedCondition');
 
 	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
 
+	/**
+		* ------------------------------ Rutas classifieds -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('classifieds.create'), [
+		'as' => 'classifieds.create',
+		'uses' => 'ClassifiedsController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifieds.store'), [
+		'as' => 'classifieds.store',
+		'uses' => 'ClassifiedsController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifieds.index'), [
+		'as' => 'classifieds.index',
+		'uses' => 'ClassifiedsController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('classifieds.show'), [
+		'as' => 'classifieds.show',
+		'uses' => 'ClassifiedsController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifieds.edit'), [
+		'as' => 'classifieds.edit',
+		'uses' => 'ClassifiedsController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifieds.update'), [
+		'as' => 'classifieds.update',
+		'uses' => 'ClassifiedsController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifieds.destroy'), [
+		'as' => 'classifieds.destroy',
+		'uses' => 'ClassifiedsController@destroy'
+	]);
+
+	Route::post('checkNameClassified','ClassifiedsController@checkNameClassified');
+
+	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedsController@getDatatable'));
+
+
+	/**
+		* ------------------------------ Rutas Photos -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('photosClassifieds.create'), [
+		'as' => 'photosClassifieds.create',
+		'uses' => 'PhotosClassifiedsController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('photos.store'), [
+		'as' => 'photosClassifieds.store',
+		'uses' => 'PhotosClassifiedsController@store'
+	]);
 
 });
 

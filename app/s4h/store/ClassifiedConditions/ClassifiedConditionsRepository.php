@@ -3,6 +3,7 @@
 use s4h\store\ClassifiedConditions\ClassifiedCondition;
 use s4h\store\Languages\Language;
 use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /**
 * 
 */
@@ -19,6 +20,7 @@ class ClassifiedConditionsRepository {
 	public function createNewClassifiedCondition($data = array())
 	{
 		$classified_condition = new ClassifiedCondition;
+		
 		$classified_condition->save();
 		$classified_condition->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
@@ -55,6 +57,13 @@ class ClassifiedConditionsRepository {
 	public function getClassifiedConditionId($classified_condition_id)
 	{
 		return ClassifiedCondition::find($classified_condition_id);
+	}
+
+	public function getNameForLanguage()
+	{
+		$iso_code = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		return $language->classifiedConditions()->lists('name','classified_conditions_id');
 	}
 		
 }

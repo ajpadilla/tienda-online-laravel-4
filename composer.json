@@ -10,6 +10,8 @@
         "laracasts/validation": "1.1.2",
         "laracasts/flash": "~1.0",
         "codesleeve/laravel-stapler": "1.0.*",
+        "intervention/image": "2.*",
+        "intervention/imagecache": "dev-master",
         "chumper/datatable": "2.*",
 		"laravelbook/ardent": "dev-master",
 		"zizaco/confide": "3.2.x",
@@ -22,8 +24,7 @@
 		"stripe/stripe-php" : "dev-master",
 		"anouar/paypalpayment": "dev-master",
 		"bkwld/croppa": "~3.0",
-		"aws/aws-sdk-php-laravel": "1.*",
-		"andrewelkins/cabinet": "1.1.x"
+		"aws/aws-sdk-php-laravel": "1.*"
 	},
 	"require-dev": {
 		"codeception/codeception": "2.0.*",
