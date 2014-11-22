@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "crear/estatus_de_envio",
-		"store" => "agregar/estatus_de_envio",
-		"index"=>'lista/estatus_de_envio',
-		"show"=>"ver_estatus_de_envio/{id}",
-		"edit"=>"editar_estatus_de_envio/{id}",
-		"update"=>"actualizar_estatus_de_envio/{id}",
-		"destroy"=>"eliminar_estatus_de_envio/{id}",
+		"create" => "crear/estatus/envio",
+		"store" => "agregar/estatus/envio",
+		"index"=>'lista/estatus/envio',
+		"show"=>"ver/estatus/envio/{id}",
+		"edit"=>"editar/estatus/envio/{id}",
+		"update"=>"actualizar/estatus/envio/{id}",
+		"destroy"=>"eliminar/estatus/envio/{id}",
 		"title" => "Agregar estatus de envío",
 		"subtitle" => "Crear estatus de envío",
 		"labels" => array(

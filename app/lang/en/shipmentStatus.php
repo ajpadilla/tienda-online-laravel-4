@@ -1,12 +1,12 @@
 <?php 
 	return array(
-		"create" => "create/shipment_status",
-		"store" => "add/shipment_status",
-		"index"=>'list/shipment_status',
-		"show"=>"show_shipment_status/{id}",
-		"edit"=>"edit_shipment_status/{id}",
-		"update"=>"update_shipment_status/{id}",
-		"destroy"=>"delete_shipment_status/{id}",
+		"create" => "create/shipment/status",
+		"store" => "add/shipment/status",
+		"index"=>'list/shipment/status',
+		"show"=>"show/shipment/status/{id}",
+		"edit"=>"edit/shipment/status/{id}",
+		"update"=>"update/shipment/status/{id}",
+		"destroy"=>"delete/shipment/status/{id}",
 		"title" => "Add shipment status",
 		"subtitle" => "Create shipment status",
 		"labels" => array(
