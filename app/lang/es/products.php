@@ -1,6 +1,6 @@
 <?php
 	return array(
-		"show" => "producto/{id}",
+		"show" => "ver/producto/{id}",
 		"create" => "crear/producto",
 		"show" => "ver/producto/{id}",
 		"store" => "agregar/producto",
