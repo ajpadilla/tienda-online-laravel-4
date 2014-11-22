@@ -2,6 +2,7 @@
 	return array(
 		"show" => "producto/{id}",
 		"create" => "crear/producto",
+		"show" => "ver/producto/{id}",
 		"store" => "agregar/producto",
 		'index'=>'lista/productos',
 		'edit' => 'editar/producto/{id}',
