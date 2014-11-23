@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder {
 		 $this->call('DiscountsLangTableSeeder');
 		 $this->call('InvoiceStatusTableSeeder');
 		 $this->call('InvoiceStatusLangTableSeeder');
+		 $this->call('ShipmentStatusTableSeeder');
+	     $this->call('ShipmentStatusLangTableSeeder');
 	}
 
 }
