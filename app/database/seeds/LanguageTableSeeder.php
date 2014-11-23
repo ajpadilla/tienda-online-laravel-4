@@ -10,6 +10,7 @@ class LanguageTableSeeder extends Seeder {
 	public function run()
 	{
 		$date = new DateTime;
+		
 		$languages [] = array(
 			'name' => 'Español',
 			'native_name'=> 'Castellano',
@@ -20,7 +21,6 @@ class LanguageTableSeeder extends Seeder {
 			'updated_at' => $date->format('Y-m-d h:m:s')                 
 		);  
 
-		$date = new DateTime;
 		$languages [] = array(
 			'name' => 'English',
 			'native_name'=> 'English',
