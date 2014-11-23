@@ -15,7 +15,7 @@ class ClassifiedTypesLangTableSeeder extends DatabaseSeeder{
 		$date = new DateTime;
 
 		$classified_types_lang [] = array(
-			'name' => 'Noticia', 
+			'name' => 'Alquiler', 
 			'classified_types_id' =>1,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -23,7 +23,7 @@ class ClassifiedTypesLangTableSeeder extends DatabaseSeeder{
 		);  
 
 		$classified_types_lang [] = array(
-			'name' => 'News',
+			'name' => 'Rental',
 			'classified_types_id' =>1,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
