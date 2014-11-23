@@ -13,7 +13,7 @@ class ClassifiedConditionsTableSeeder extends DatabaseSeeder{
 	 */
 	public function run()
 	{
-		for ($i = 0; $i < 2; $i++)
+		for ($i = 0; $i < 6; $i++)
 		{
 			ClassifiedCondition::create([]);
 		}
