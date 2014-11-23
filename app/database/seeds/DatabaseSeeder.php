@@ -4,7 +4,7 @@ class DatabaseSeeder extends Seeder {
 
 
 	protected $faker;
-	
+
 	public function getFaker()
 	{
 		if (empty($this->faker))
@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder {
 		//Eloquent::unguard();
 
 		 $this->call('LanguageTableSeeder');
+		 $this->call('DiscountsTypesTableSeeder');
+		 $this->call('DiscountsTypesLangTableSeeder');
 	}
 
 }
