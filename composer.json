@@ -24,7 +24,8 @@
 		"stripe/stripe-php" : "dev-master",
 		"anouar/paypalpayment": "dev-master",
 		"bkwld/croppa": "~3.0",
-		"aws/aws-sdk-php-laravel": "1.*"
+		"aws/aws-sdk-php-laravel": "1.*",
+		"fzaninotto/faker" : "dev-master"
 	},
 	"require-dev": {
 		"codeception/codeception": "2.0.*",
