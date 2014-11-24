@@ -2,6 +2,8 @@
 
 
 use s4h\store\Conditions\Condition;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
 
 class ConditionRepository {
 
@@ -13,4 +15,11 @@ class ConditionRepository {
 		return Condition::all();
 	}
 
+	public function getNameForLanguage()
+	{
+		$iso_code = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		return $language->classifiedConditions()->lists('name','classified_conditions_id');
+	}
+		
 }
