@@ -2,6 +2,8 @@
 
 
 use s4h\store\Categories\Category;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
 
 class CategoryRepository {
 
