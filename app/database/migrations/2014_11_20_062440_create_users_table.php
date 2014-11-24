@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string('username', 255);
 			$table->string('email', 255);
 			$table->string('password', 255);
-			$table->string('confirmation_code', 255);
+			$table->string('confirmation_code', 255)->nullable();
 			$table->tinyInteger('confirmed');
 			$table->timestamps();
 			$table->softDeletes();
