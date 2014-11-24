@@ -53,7 +53,7 @@ h3
   padding-bottom: 4;
   text-transform: uppercase;
 }
-.product-item .add2cart :hover {
+.product-item .add2cart hover {
   color: #fff !important;
   background: #e84d1c !important;
   border-color: #e84d1c;
@@ -61,10 +61,10 @@ h3
 .product-item .add2cart a {
   color: #3e4d5c;
 }
-.product-item .add2cart :hover {
+.product-item .add2cart hover {
   box-shadow: 5px 5px rgba(234,234,234,0.9);
 }
-.product-item .btn:hover {
+.product-item .btnhover {
   background: #f00;
   border-color: #c8c8c8;
 }
@@ -91,7 +91,7 @@ h3
   top: 50%;
   font-size: 12px;
 }
-.product-item:hover .pi-img-wrapper div {
+.product-itemhover .pi-img-wrapper div {
   display: block;
 }
 .product-main-image {
@@ -133,7 +133,7 @@ h3
   height: auto;
   margin: 0 12px 12px 0;
 }
-.product-other-images a:hover img,
+.product-other-images ahover img,
 .product-other-images a.active img {
   box-shadow: 0 0 0 2px #c7ced5;
 }
@@ -257,14 +257,14 @@ a.btn.btn-default {
   background-color: #fff;
   border-color: #ccc;
 }
-a.btn.btn-default:hover {
+a.btn.btn-defaulthover {
   background: #7c7c7c;
 }
-a.btn.btn-default:hover .input-group,
-a.btn.btn-default:hover .input-group-btn {
+a.btn.btn-defaulthover .input-group,
+a.btn.btn-defaulthover .input-group-btn {
   position: static;
 }
-a.btn.btn-default:hover input.form-control {
+a.btn.btn-defaulthover input.form-control {
   border: none;
   background: #edeff1 !important;
   font: 300 23px 'Open Sans', sans-serif;
@@ -274,7 +274,7 @@ a.btn.btn-default:hover input.form-control {
   text-align: center;
   padding: 5px;
 }
-a.btn.btn-default:hover .btn i {
+a.btn.btn-defaulthover .btn i {
   position: relative;
   top: -2px;
   left: 1px;
@@ -352,4 +352,98 @@ a.btn.btn-default:hover .btn i {
   margin-left: 80px;
   color: #e84d1c;
   font: 16px 'PT Sans Narrow', sans-serif;
+}
+.goods-data {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  margin-right: 10px;
+}
+.goods-page-image,
+.checkout-image {
+  width: 105px;
+}
+.goods-data a,
+.checkout-page .checkout-description a {
+  color: #e6400c;
+}
+.goods-data table,
+.checkout-page table {
+  width: 100%;
+  font: 300 13px 'Open Sans' sans-serif;
+}
+.goods-data th,
+.checkout-page th {
+  font: 16px "PT Sans Narrow", sans-serif;
+  text-transform: uppercase;
+  border-bottom: solid 1px #ecebeb;
+  padding-bottom: 8px;
+}
+.goods-page-image img,
+.checkout-image img {
+  width: 75px;
+}
+.goods-data h3,
+.checkout-page .checkout-description h3 {
+  font: 300 14px 'Open Sans', sans-serif;
+  text-transform: inherit;
+  padding: 0;
+  margin: 0 0 5px;
+}
+.goods-data p,
+.checkout-description p {
+  margin-bottom: 2px;
+}
+.goods-page-description em,
+.checkout-description em {
+  display: block;
+  font-style: normal;
+}
+.goods-data td,
+.checkout-page td {
+  vertical-align: top;
+  padding: 20px 20px 20px 0;
+  border-bottom: solid 1px #ecebeb;
+}
+.goods-page-price,
+.goods-page-total,
+.checkout-price,
+.checkout-total {
+  font-family: 'PT Sans Narrow' sans-serif;
+}
+.goods-page-price strong,
+.goods-page-total strong,
+.checkout-price strong,
+.checkout-total strong {
+  color: #e84d1c;
+  font-size: 21px;
+  font-weight: normal;
+}
+.goods-page-price strong span,
+.goods-page-total strong span,
+.checkout-price strong span,
+.checkout-total strong span {
+  font-size: 17px;
+}
+.goods-data .del-goods,
+.goods-data .add-goods {
+  margin-top: 4px;
+}
+.del-goods {
+  background: #d7dde3 url("icons/del-goods.png") no-repeat 50% 50%;
+}
+.add-goods {
+  background: #7bdd00 url("icons/add-goods.png") no-repeat 50% 50%;
+}
+.del-goods,
+.add-goods {
+  width: 25px;
+  height: 25px;
+  color: #fff !important;
+  border-radius: 22px !important;
+  float: right;
+  margin: 10px 0 0 5px;
+  line-height: 1;
+  font-size: 16px;
 }

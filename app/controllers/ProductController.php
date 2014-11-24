@@ -261,4 +261,8 @@ class ProductController extends \BaseController {
 		return $collection->make();
 	}
 
+	public function showWhistList() {
+		return View::make('products.whistlist');
+	}
+
 }
