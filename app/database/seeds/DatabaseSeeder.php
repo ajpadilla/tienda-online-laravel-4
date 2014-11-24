@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('ClassifiedTypesLangTableSeeder');
 	     $this->call('UserTableSeeder');
 	     $this->call('ClassifiedsTableSeeder');
+	     $this->call('ClassifiedsLangTableSeeder');
 	}
 
 }
