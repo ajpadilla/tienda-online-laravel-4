@@ -50,5 +50,7 @@ class Language extends Eloquent
 		return $this->belongsToMany('s4h\store\Conditions\Condition','product_condition_lang','language_id','product_condition_id')->withPivot('name');
 	}	
 
-
+	public function categories(){
+		return $this->belongsToMany('use s4h\store\Categories\Category;','categories_lang','language_id','category_id')->withPivot('name');
+	}	
 }
