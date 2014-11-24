@@ -51,6 +51,10 @@ class Language extends Eloquent
 	}	
 
 	public function categories(){
-		return $this->belongsToMany('use s4h\store\Categories\Category;','categories_lang','language_id','category_id')->withPivot('name');
+		return $this->belongsToMany('s4h\store\Categories\Category','categories_lang','language_id','category_id')->withPivot('name');
 	}	
+
+	public function measure(){
+		return $this->belongsToMany('s4h\store\Measures\Measure','measures_lang','language_id','measures_id')->withPivot('name','abbreviation');
+	}
 }
