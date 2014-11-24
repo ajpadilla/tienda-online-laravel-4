@@ -21,8 +21,8 @@ class DiscountsTableSeeder extends DatabaseSeeder{
 
 		foreach ($discountsTypes as $discountType) {
 			Discount::create([
-				'value' => $faker->randomFloat(2, 17, 100),
-				'percent' =>  $faker->randomNumber(2),
+				'value' => $faker->randomFloat(17, 2, 100),
+				'percent' =>  $faker->randomFloat(3, 2, 100),
 				'quantity' => $faker->numberBetween(0, 100),
 				'quantity_per_user' => $faker->numberBetween(0, 100),
 				'code' => $faker->numerify('Code###'),
@@ -30,7 +30,7 @@ class DiscountsTableSeeder extends DatabaseSeeder{
 				'from' => $faker->dateTimeThisYear($max = 'now'),
 				'to' =>$faker->dateTimeThisYear($max = 'now'),
 				'discount_type_id' => $discountType->id,
-				]);
+			]);
 		}
 	}
 
