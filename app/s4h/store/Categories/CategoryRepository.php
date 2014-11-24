@@ -13,4 +13,11 @@ class CategoryRepository {
 		return Category::all();
 	}
 
+	public function getNameForLanguage()
+	{
+		$iso_code = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		return $language->categories()->lists('name','category_id');
+	}
+
 }
