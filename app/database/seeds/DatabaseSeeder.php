@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('ClassifiedConditionsLangTableSeeder');
 	     $this->call('ClassifiedTypesTableSeeder');
 	     $this->call('ClassifiedTypesLangTableSeeder');
+	     $this->call('UserTableSeeder');
 	}
 
 }
