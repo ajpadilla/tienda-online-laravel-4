@@ -76,7 +76,7 @@ class ClassifiedsController extends \BaseController {
 		$collection->addColumn('classified_condition', function($model)
 		{
 			$language = $this->languageRepository->returnLanguage();
-			$classified_condition_language = $model->classified->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
+			$classified_condition_language = $model->classified->classifiedsCondition->languages()->where('language_id','=',$language->id)->first();
 			return $classified_condition_language->pivot->name;
 		});
 
