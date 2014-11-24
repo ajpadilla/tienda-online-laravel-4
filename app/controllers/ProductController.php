@@ -188,7 +188,7 @@ class ProductController extends \BaseController {
 			->searchColumns( 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
 			->orderColumns('name','price', 'quantity', 'active', 'accept_barter');
 
-		$collection->addColumn('photo', function($model)
+		/*$collection->addColumn('photo', function($model)
 		{
 			$links = '';
 			if($model->hasPhotos()){
@@ -197,7 +197,7 @@ class ProductController extends \BaseController {
 
 			}
 			return $links;
-		});
+		});*/
 
 		$collection->addColumn('name', function($model)
 		{
