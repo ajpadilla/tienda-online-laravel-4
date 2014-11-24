@@ -25,7 +25,7 @@ class Classified extends Eloquent {
 		return $this->belongsTo('s4h\store\ClassifiedTypes\ClassifiedType','classified_type_id');
 	}
 
-	public function classifiedCondition(){
+	public function classifiedsCondition(){
 		return $this->belongsTo('s4h\store\ClassifiedConditions\ClassifiedCondition','classified_condition_id');
 	}
 
