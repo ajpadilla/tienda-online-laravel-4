@@ -36,6 +36,7 @@ class ClassifiedsTableSeeder extends DatabaseSeeder{
 				'classified_condition_id' =>$classifiedCondition['id'],
 			]);
 		}
+		
 			
 	}
 
