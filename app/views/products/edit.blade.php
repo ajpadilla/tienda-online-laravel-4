@@ -6,215 +6,221 @@
 
 @section('content')
 
-	<div class="col-lg-12">
+<div class="col-lg-12">
 
-				{{Form::open(['route' => ['products.update', $product->id], 'class' => 'form-horizontal', 'id' => 'formUpdateProduct'])}}
-					<div class="col-lg-7">
-						<div class="form-group">
-							{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('name', $product->name, ['class' => 'form-control', 'placeholder' => 'Name']) }}
-							</div>
-						</div>
+	{{Form::open(['route' => ['products.update', $product->id], 'class' => 'form-horizontal', 'id' => 'formUpdateProduct'])}}
+	<div class="col-lg-7">
+		<div class="form-group">
+			{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+			{{ Form::select('language_id',$languages,$product_language->id,array('class' => 'form-control','id'=>'language_id')) }}
+			</div>
+		</div>
+		<div class="form-group">
+			{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('name', $product_language->pivot->name, ['class' => 'form-control', 'placeholder' => 'Name']) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								<div class="ibox-content no-padding">
+		<div class="form-group">
+			{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				<div class="ibox-content no-padding">
 
-								{{ Form::textarea('description', $product->description, array('class' => 'form-control')) }}
-								</div>
-							</div>
-						</div>
+					{{ Form::textarea('description', $product_language->pivot->description, array('class' => 'form-control')) }}
+				</div>
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('quantity', $product->quantity, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
-							</div>
-						</div>
+		<div class="form-group">
+			{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('quantity', $product->quantity, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => 'Price']) }}
-							</div>
-						</div>
+		<div class="form-group">
+			{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => 'Price']) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('measure_id', trans('products.labels.measure'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::select('measure_id',$measures,$product->measure_id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')) }}
-							</div>
-						</div>
+		<div class="form-group">
+			{{ Form::label('measure_id', trans('products.labels.measure'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::select('measure_id',$measures,$product->measure_id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('width', $product->width, ['class' => 'form-control', 'placeholder' => 'Width']) }}
-							</div>
-						</div>
+		<div class="form-group">
+			{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('width', $product->width, ['class' => 'form-control', 'placeholder' => 'Width']) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('height', $product->height, ['class' => 'form-control', 'placeholder' => 'Height']) }}
-							</div>
-						</div>
+		<div class="form-group">
+			{{ Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('height', $product->height, ['class' => 'form-control', 'placeholder' => 'Height']) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('depth', $product->depth, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
-							</div>
-						</div>
+		<div class="form-group">
+			{{ Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('depth', $product->depth, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
+			</div>
+		</div>
 
-						<div class="form-group">
-							{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::text('weight', $product->weight, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
-								<!-- <span class="input-group-addon">pounds</span> -->
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-5">
-						<div class="form-group">
-							{{ Form::label('on_sale', trans('products.labels.on_sale'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('on_sale', '1', $product->on_sale ? true : false)}}
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('on_sale', '0', !$product->on_sale ? true : false)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('active', trans('products.labels.active'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('active', '1', $product->active ? true : false)}}
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('active', '0', !$product->active ? true : false)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('available_for_order', trans('products.labels.available_for_order'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('available_for_order', '1', $product->available_for_order ? true : false)}}
-										<i></i> Yes </label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('available_for_order', '0', !$product->available_for_order ? true : false)}}
-										<i></i> No </label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('show_price', trans('products.labels.show_price'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('show_price', '1', $product->show_price ? true : false)}}
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('show_price', '0', !$product->show_price ? true : false)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('accept_barter', trans('products.labels.accept_barter'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('accept_barter', '1', $product->accept_barter ? true : false)}}
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('accept_barter', '0', !$product->accept_barter ? true : false)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('product_for_barter', trans('products.labels.product_for_barter'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('product_for_barter', '1', $product->product_for_barter ? true : false)}}
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('product_for_barter', '0', !$product->product_for_barter ? true : false)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-7">
-						<div class="form-group">
-							{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::select('categories[]',$categories, $product->categories->lists('id') ,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::select('condition_id',$condition,$product->condition->id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-12">
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
-							</div>
-						</div>
-					</div>
-
-					<div class="clearfix"></div>
-
-				{{Form::close()}}
-
+		<div class="form-group">
+			{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
+			<div class="col-sm-10">
+				{{ Form::text('weight', $product->weight, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
+				<!-- <span class="input-group-addon">pounds</span> -->
+			</div>
+		</div>
 	</div>
+	<div class="col-lg-5">
+		<div class="form-group">
+			{{ Form::label('on_sale', trans('products.labels.on_sale'), ['class' => 'col-sm-4 control-label']) }}
+			<div class="col-sm-8">
+				<div class="radio i-checks">
+					<label>
+						{{ Form::radio('on_sale', '1', $product->on_sale ? true : false)}}
+						<i></i> Yes
+					</label>
+				</div>
+				<div class="radio i-checks">
+					<label>
+						{{ Form::radio('on_sale', '0', !$product->on_sale ? true : false)}}
+						<i></i> No
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ Form::label('active', trans('products.labels.active'), ['class' => 'col-sm-4 control-label']) }}
+			<div class="col-sm-8">
+				<div class="radio i-checks">
+					<label>
+						{{ Form::radio('active', '1', $product->active ? true : false)}}
+						<i></i> Yes
+					</label>
+				</div>
+				<div class="radio i-checks">
+					<label>
+						{{ Form::radio('active', '0', !$product->active ? true : false)}}
+						<i></i> No
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			{{ Form::label('available_for_order', trans('products.labels.available_for_order'), ['class' => 'col-sm-4 control-label']) }}
+			<div class="col-sm-8">
+				<div class="radio i-checks">
+					<label>
+						{{ Form::radio('available_for_order', '1', $product->available_for_order ? true : false)}}
+						<i></i> Yes </label>
+					</div>
+					<div class="radio i-checks">
+						<label>
+							{{ Form::radio('available_for_order', '0', !$product->available_for_order ? true : false)}}
+							<i></i> No </label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('show_price', trans('products.labels.show_price'), ['class' => 'col-sm-4 control-label']) }}
+					<div class="col-sm-8">
+						<div class="radio i-checks">
+							<label>
+								{{ Form::radio('show_price', '1', $product->show_price ? true : false)}}
+								<i></i> Yes
+							</label>
+						</div>
+						<div class="radio i-checks">
+							<label>
+								{{ Form::radio('show_price', '0', !$product->show_price ? true : false)}}
+								<i></i> No
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('accept_barter', trans('products.labels.accept_barter'), ['class' => 'col-sm-4 control-label']) }}
+					<div class="col-sm-8">
+						<div class="radio i-checks">
+							<label>
+								{{ Form::radio('accept_barter', '1', $product->accept_barter ? true : false)}}
+								<i></i> Yes
+							</label>
+						</div>
+						<div class="radio i-checks">
+							<label>
+								{{ Form::radio('accept_barter', '0', !$product->accept_barter ? true : false)}}
+								<i></i> No
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('product_for_barter', trans('products.labels.product_for_barter'), ['class' => 'col-sm-4 control-label']) }}
+					<div class="col-sm-8">
+						<div class="radio i-checks">
+							<label>
+								{{ Form::radio('product_for_barter', '1', $product->product_for_barter ? true : false)}}
+								<i></i> Yes
+							</label>
+						</div>
+						<div class="radio i-checks">
+							<label>
+								{{ Form::radio('product_for_barter', '0', !$product->product_for_barter ? true : false)}}
+								<i></i> No
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-7">
+				<div class="form-group">
+					{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
+					<div class="col-sm-10">
+						{{ Form::select('categories[]',$categories, $product->categories->lists('id') ,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
+
+					</div>
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
+					<div class="col-sm-10">
+						{{ Form::select('condition_id',$condition,$product->condition->id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-12">
+				<div class="form-group">
+					<div class="col-sm-4 col-sm-offset-2">
+						{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+
+			{{Form::close()}}
+
+		</div>
 @stop
 
 @section('scripts')

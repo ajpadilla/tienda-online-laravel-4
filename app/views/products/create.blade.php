@@ -11,6 +11,13 @@
 				{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
 					<div class="col-lg-7">
 						<div class="form-group">
+							{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-10">
+								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
+							</div>
+						</div>
+
+						<div class="form-group">
 							{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) }}

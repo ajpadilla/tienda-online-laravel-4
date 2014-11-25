@@ -42,5 +42,19 @@ class Language extends Eloquent
 		return $this->belongsToMany('s4h\store\Classifieds\Classified','classifieds_lang','language_id','classified_id')->withPivot('name','description','address');
 	}	
 
+	public function products(){
+		return $this->belongsToMany('s4h\store\Products\Product','products_lang','language_id','product_id')->withPivot('name','description');
+	}	
 
+	public function productConditions(){
+		return $this->belongsToMany('s4h\store\Conditions\Condition','product_condition_lang','language_id','product_condition_id')->withPivot('name');
+	}	
+
+	public function categories(){
+		return $this->belongsToMany('s4h\store\Categories\Category','categories_lang','language_id','categories_id')->withPivot('name');
+	}	
+
+	public function measure(){
+		return $this->belongsToMany('s4h\store\Measures\Measure','measures_lang','language_id','measures_id')->withPivot('name','abbreviation');
+	}
 }

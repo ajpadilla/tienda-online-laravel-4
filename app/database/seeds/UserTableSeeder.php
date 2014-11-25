@@ -22,7 +22,7 @@ class UserTableSeeder extends DatabaseSeeder{
 				'username' => $faker->userName,
 				'email' =>  $faker->email,
 				'password' => $faker->password,
-				'confirmation_code' =>'',
+				'confirmation_code' => $faker->password,
 				'confirmed' => $faker->numberBetween(0, 1),
 			]);
 		}

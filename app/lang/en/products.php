@@ -52,5 +52,11 @@
 				'actions'	=> 'Actions',
 				'title'		=> 'List Products'
 		),
+
+		'actions' => array(
+			'Show' => 'Show',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
 	);
 

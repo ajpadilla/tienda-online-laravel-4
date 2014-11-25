@@ -15,4 +15,7 @@ class Measure extends Eloquent {
 		return $this->belongsTo('s4h\store\Products\Product');
 	}
 
+	public function languages(){
+		return $this->belongsToMany('s4h\store\Languages\Language','measures_lang','measures_id','language_id')->withPivot('name','abbreviation');
+	}	
 }
