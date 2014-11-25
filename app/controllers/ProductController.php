@@ -2,6 +2,7 @@
 
 use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
+use s4h\store\ProductsLang\ProductLangRepository;
 use s4h\store\Products\RegisterProductCommand;
 use s4h\store\Categories\CategoryRepository;
 use s4h\store\Conditions\ConditionRepository;
@@ -20,6 +21,7 @@ class ProductController extends \BaseController {
 	protected $conditionRepository;
 	protected $measureRepository;
 	protected $languageRepository;
+	protected $productLangRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
@@ -27,7 +29,8 @@ class ProductController extends \BaseController {
 										ConditionRepository $conditionRepository,
 										MeasureRepository $measureRepository,
 										EditProductForm $editProductForm,
-										LanguageRepository $languageRepository
+										LanguageRepository $languageRepository,
+										ProductLangRepository $productLangRepository
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
@@ -37,6 +40,7 @@ class ProductController extends \BaseController {
 		$this->conditionRepository = $conditionRepository;
 		$this->measureRepository = $measureRepository;
 		$this->languageRepository = $languageRepository;
+		$this->productLangRepository = $productLangRepository;
 	}
 
 	public function index()
@@ -161,21 +165,22 @@ class ProductController extends \BaseController {
 
 	public function getDatatable()
 	{
-		$collection = Datatable::collection($this->productRepository->getAll())
-			->showColumns('photo', 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
+		$collection = Datatable::collection($this->productLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
 			->searchColumns( 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
 			->orderColumns('name','price', 'quantity', 'active', 'accept_barter');
 
-		/*$collection->addColumn('photo', function($model)
+		$collection->addColumn('photo', function($model)
 		{
-			$links = '';
-			if($model->hasPhotos()){
-					$photo = $model->getFirstPhoto();
+
+
+			/*$links = '';
+			if($model->product->hasPhotos()){
+					$photo = $model->product->getFirstPhoto();
 					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->name . "' src='" . asset($photo->path . $photo->name) . "'></a>";
 
 			}
-			return $links;
-		});*/
+			return $links;*/
+		});
 
 		$collection->addColumn('name', function($model)
 		{
@@ -184,31 +189,37 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('price', function($model)
 		{
-			return $model->price;
+			return $model->product->price;
 		});
 
 		$collection->addColumn('quantity', function($model)
 		{
-			return $model->quantity;
+			return $model->product->quantity;
 		});
 
 		$collection->addColumn('active', function($model)
 		{
-			return $model->getActivoShow();
+			return $model->product->getActivoShow();
 		});
 
 		$collection->addColumn('accept_barter', function($model)
 		{
-			return $model->getAcceptBarterShow();
+			return $model->product->getAcceptBarterShow();
 		});
 
 		$collection->addColumn('category', function($model)
 		{
-			if($model->hasCategories())
+			$language = $this->languageRepository->returnLanguage();
+			
+			if($model->product->hasCategories())
 			{
+				$product_categories = $model->product->categories()->get();
 				$links = '<select class="form-control m-b">';
-				foreach ($model->categories as $category) {
-					$links .= '<option>'.$category->name.'</option>';
+				foreach ($product_categories as $category) {
+					$categories_languages =  $category->languages()->where('language_id','=',$language->id)->get();
+					foreach ($categories_languages as $language) {
+						$links .= '<option>'.$language->pivot->name.'</option>';
+					}
 				}
 				$links .='</select>';
 
@@ -219,16 +230,16 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('ratings', function($model)
 		{
-			if($model->hasRatings())
+			if($model->product->hasRatings())
 			{
-				return $model->getRating();
+				return $model->product->getRating();
 			}
 			return '';
 		});
 
 		$collection->addColumn('Actions',function($model){
-			$links = "<a class='btn btn-info btn-circle' href='" .route('products.destroy', $model->id). "'><i class='fa fa-check'></i></a><br />";
-			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.edit', $model->id). "'><i class='fa fa-pencil'></i></a><br />
+			$links = "<a class='btn btn-info btn-circle' href='" .route('products.destroy', $model->product->id). "'><i class='fa fa-check'></i></a><br />";
+			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.edit', $model->product->id). "'><i class='fa fa-pencil'></i></a><br />
 					<form action=".route('products.destroy', $model->id)." method='POST' >
 					<button class='btn btn-danger btn-circle' ><i class='fa fa-times'></i></button></form>";
 
