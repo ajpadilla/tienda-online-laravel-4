@@ -28,8 +28,6 @@ class ProductRepository {
 	public function createNewProduct($data = array())
 	{
 		$product = new Product;
-		$product->name = $data['name'];
-		$product->description = $data['description'];
 		$product->on_sale = $data['on_sale'];
 		$product->quantity = $data['quantity'];
 		$product->price = $data['price'];
@@ -48,7 +46,13 @@ class ProductRepository {
 
 		/*$user = Auth::user();
 		$product->associate($user);*/
-		$this->productRepository->save($product);
+
+		$product->save();
+
+		$product->languages()->attach($data['language_id'], array('name'=> $data['name'],
+			'description' => $data['description'])
+		);
+
 		if (!is_null($data['categories']))
 			$product->categories()->sync($data['categories']);
 
