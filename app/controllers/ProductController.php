@@ -56,9 +56,9 @@ class ProductController extends \BaseController {
 	public function create()
 	{
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$categories = $this->categoryRepository->getNameForLanguage();;
+		$categories = $this->categoryRepository->getNameForLanguage();
 		$condition = $this->conditionRepository->getNameForLanguage();
-		$measures = $this->measureRepository->getNameForLanguage();;
+		$measures = $this->measureRepository->getNameForLanguage();
 		return View::make('products.create', compact('categories', 'condition', 'measures','languages'));
 	}
 
@@ -99,11 +99,14 @@ class ProductController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$product = Product::find($id);
-		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
-		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
-		$measures = $this->measureRepository->getAll()->lists('name', 'id');
-		return View::make('products.edit',compact('product', 'categories', 'condition', 'measures'));
+		$product = $this->productRepository->getProductId($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$product_language = $product->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();
+		$condition = $this->conditionRepository->getNameForLanguage();
+		$measures = $this->measureRepository->getNameForLanguage();
+		return View::make('products.edit',compact('product','product_language','categories', 'condition', 'measures','languages'));
 	}
 
 
@@ -117,34 +120,13 @@ class ProductController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
+			$input = array();
 			$input = Input::all();
+			$input['product_id'] = $id;
 			try
 			{
 				$this->editProductForm->validate($input);
-				$product = Product::find($id);
-				$product->name = $input['name'];
-				$product->description = $input['description'];
-				$product->on_sale = $input['on_sale'];
-				$product->quantity = $input['quantity'];
-				$product->measure_id = $input['measure_id'];
-				$product->price = $input['price'];
-				$product->width = $input['width'];
-				$product->height = $input['height'];
-				$product->depth = $input['depth'];
-				$product->weight = $input['weight'];
-				$product->active = $input['active'];
-				$product->available_for_order = $input['available_for_order'];
-				$product->show_price = $input['show_price'];
-				$product->accept_barter = $input['accept_barter'];
-				$product->product_for_barter = $input['product_for_barter'];
-				$product->condition_id = $input['condition_id'];
-
-				$this->productRepository->save($product);
-				if (isset($input['categories'])){
-					$product->categories()->sync($input['categories']);
-				}else{
-					$product->categories()->detach();
-				}
+				$this->productRepository->updateProduct($input);
 				return Response::json('Producto'.' '.$input['name'].' '.'Modificado con exito!');
 			}
 			catch (FormValidationException $e)
