@@ -8,6 +8,7 @@ use s4h\store\Conditions\ConditionRepository;
 use s4h\store\Measures\MeasureRepository;
 use s4h\store\Forms\RegisterProductForm;
 use s4h\store\Forms\EditProductForm;
+use s4h\store\Languages\LanguageRepository;
 use Laracasts\Validation\FormValidationException;
 
 class ProductController extends \BaseController {
@@ -18,14 +19,16 @@ class ProductController extends \BaseController {
 	protected $categoryRepository;
 	protected $conditionRepository;
 	protected $measureRepository;
+	protected $languageRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
 										CategoryRepository $categoryRepository,
 										ConditionRepository $conditionRepository,
 										MeasureRepository $measureRepository,
-										EditProductForm $editProductForm
-										)
+										EditProductForm $editProductForm,
+										LanguageRepository $languageRepository
+	)
 	{
 		$this->registerProductForm = $registerProductForm;
 		$this->productRepository = $productRepository;
@@ -33,6 +36,7 @@ class ProductController extends \BaseController {
 		$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 		$this->measureRepository = $measureRepository;
+		$this->languageRepository = $languageRepository;
 	}
 
 	public function index()
@@ -47,10 +51,11 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
-		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
-		$measures = $this->measureRepository->getAll()->lists('name', 'id');
-		return View::make('products.create', compact('categories', 'condition', 'measures'));
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();;
+		$condition = $this->conditionRepository->getNameForLanguage();
+		$measures = $this->measureRepository->getNameForLanguage();;
+		return View::make('products.create', compact('categories', 'condition', 'measures','languages'));
 	}
 
 
