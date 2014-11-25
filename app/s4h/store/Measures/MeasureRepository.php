@@ -18,7 +18,11 @@ class MeasureRepository {
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->measure()->lists('name','measures_id');
+		if (!empty($language)) {
+			return $language->measure()->lists('name','measures_id');
+		}else{
+			return array();
+		}
 	}
 		
 }

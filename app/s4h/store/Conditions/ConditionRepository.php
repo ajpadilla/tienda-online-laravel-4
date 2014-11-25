@@ -19,7 +19,11 @@ class ConditionRepository {
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->productConditions()->lists('name','product_condition_id');
+		if (!empty($language)) {
+			return $language->productConditions()->lists('name','product_condition_id');
+		}else{
+			return array();
+		}
 	}
 		
 }

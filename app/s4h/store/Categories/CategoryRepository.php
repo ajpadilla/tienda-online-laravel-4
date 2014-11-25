@@ -19,7 +19,11 @@ class CategoryRepository {
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->categories()->lists('name','category_id');
+		if (!empty($language)) {
+			return $language->categories()->lists('name','category_id');
+		}else{
+			return array();
+		}
 	}
 
 }
