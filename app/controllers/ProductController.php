@@ -72,7 +72,7 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->registerProductForm->validate($input);
-				$this->createNewProduct($input);
+				$this->productRepository->createNewProduct($input);
 				return Response::json('Producto'.' '.$input['name'].' '.'Agregado con exito!');
 			}
 			catch (FormValidationException $e)
@@ -156,34 +156,7 @@ class ProductController extends \BaseController {
 		return Redirect::back();
 	}
 
-	public function createNewProduct($data = array())
-	{
-		$product = new Product;
-		$product->name = $data['name'];
-		$product->description = $data['description'];
-		$product->on_sale = $data['on_sale'];
-		$product->quantity = $data['quantity'];
-		$product->price = $data['price'];
-		$product->measure_id = $data['measure_id'];
-		$product->width = $data['width'];
-		$product->height = $data['height'];
-		$product->depth = $data['depth'];
-		$product->weight = $data['weight'];
-		$product->active = $data['active'];
-		$product->available_for_order = $data['available_for_order'];
-		$product->show_price = $data['show_price'];
-		$product->accept_barter = $data['accept_barter'];
-		$product->product_for_barter = $data['product_for_barter'];
-		$product->condition_id = $data['condition_id'];
 
-
-		/*$user = Auth::user();
-		$product->associate($user);*/
-		$this->productRepository->save($product);
-		if (!is_null($data['categories']))
-			$product->categories()->sync($data['categories']);
-
-	}
 
 
 	public function getDatatable()
