@@ -20,7 +20,7 @@ class CreateClassifiedsLangTable extends Migration {
 			$table->text('address');
 			$table->integer('classified_id')->index();
 			$table->integer('language_id')->index();
-			$table->unique(array('classified_id', 'language_id'), 'classifieds_Lang_unique');
+			$table->unique(array('classified_id', 'language_id'), 'classifieds_lang_unique');
 			$table->timestamps();
 			$table->softDeletes();
 		});
