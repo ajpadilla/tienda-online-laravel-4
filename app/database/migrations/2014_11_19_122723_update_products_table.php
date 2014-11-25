@@ -14,7 +14,7 @@ class UpdateProductsTable extends Migration {
 	{
 		Schema::table('products', function(Blueprint $table)
 		{
-			$table->integer('measure_id')->unsigned();
+			$table->integer('measure_id')->unsigned()->after('updated_at');
 		});
 	}
 
