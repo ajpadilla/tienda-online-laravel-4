@@ -12,6 +12,6 @@ class Category extends Eloquent{
 	//protected $fillable = ['category_id'];
 
 	public function languages(){
-		return $this->belongsToMany('s4h\store\Languages\Language','categories_lang','category_id','language_id')->withPivot('name');
+		return $this->belongsToMany('s4h\store\Languages\Language','categories_lang','categories_id','language_id')->withPivot('name');
 	}	
 }
