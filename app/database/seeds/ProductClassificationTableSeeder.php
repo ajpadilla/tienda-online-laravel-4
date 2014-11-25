@@ -27,7 +27,7 @@ class ProductClassificationTableSeeder extends DatabaseSeeder
     {
 
       $used = [];
-      for ($i = 0; $i < rand(1, 2); $i++)
+      for ($i = 0; $i < rand(1, 8); $i++)
       {
 
         $category = $faker->randomElement($categories);
