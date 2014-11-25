@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 * 
 */
 class ProductLang extends Eloquent{
+	
 	use SoftDeletingTrait;
 
 	protected $softDelete = true;
