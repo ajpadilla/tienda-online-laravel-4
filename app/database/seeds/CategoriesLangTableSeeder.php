@@ -15,7 +15,7 @@ class CategoriesLangTableSeeder extends DatabaseSeeder{
 		$date = new DateTime;
 
 		$categories_lang [] = array(
-			'name' => 'Venta', 
+			'name' => 'Ventas', 
 			'categories_id' =>1,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -41,6 +41,105 @@ class CategoriesLangTableSeeder extends DatabaseSeeder{
 		$categories_lang [] = array(
 			'name' => 'Shopping',
 			'categories_id' =>2,
+			'language_id' => 2,
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')    
+		);  
+
+
+		$categories_lang [] = array(
+			'name' => 'Deportes', 
+			'categories_id' =>3,
+			'language_id' => 1,  
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')             
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Sports',
+			'categories_id' =>3,
+			'language_id' => 2,
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')    
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Ropa', 
+			'categories_id' =>4,
+			'language_id' => 1,  
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')             
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Clothes',
+			'categories_id' =>4,
+			'language_id' => 2,
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')    
+		);  
+
+
+		$categories_lang [] = array(
+			'name' => 'Juguetes', 
+			'categories_id' =>5,
+			'language_id' => 1,  
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')             
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Toys',
+			'categories_id' =>5,
+			'language_id' => 2,
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')    
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Tecnología', 
+			'categories_id' =>6,
+			'language_id' => 1,  
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')             
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Technology',
+			'categories_id' =>6,
+			'language_id' => 2,
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')    
+		);  
+
+
+		$categories_lang [] = array(
+			'name' => 'Celulares', 
+			'categories_id' =>7,
+			'language_id' => 1,  
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')             
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Phones',
+			'categories_id' =>7,
+			'language_id' => 2,
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')    
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Atomoviles', 
+			'categories_id' =>8,
+			'language_id' => 1,  
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')             
+		);  
+
+		$categories_lang [] = array(
+			'name' => 'Cars',
+			'categories_id' =>8,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
