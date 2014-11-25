@@ -33,7 +33,7 @@ class CreateClassifiedsLangTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('classifieds_Lang');
+		Schema::dropIfExists('classifieds_lang');
 	}
 
 
