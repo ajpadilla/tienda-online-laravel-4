@@ -8,7 +8,7 @@ class Product extends Eloquent{
 	protected $softDelete = true;
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['name','description','on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id', 'measure_id'];
+	protected $fillable = ['on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id', 'measure_id'];
 
 	/*
 	* Realaciones
@@ -17,6 +17,10 @@ class Product extends Eloquent{
 	{
 		return $this->belongsToMany('s4h\store\Categories\Category', 'product_classification');
 	}
+
+	public function languages(){
+		return $this->belongsToMany('s4h\store\Languages\Language','products_lang','product_id','language_id')->withPivot('name','description');
+	}	
 
 	public function condition()
 	{
@@ -98,8 +102,8 @@ class Product extends Eloquent{
 	*/
 	public function delete()
 	{
-		if($this->hasPhotos())
-			$this->photos()->delete();
+		/*if($this->hasPhotos())
+			$this->photos()->delete();*/
 		if($this->hasRatings())
 			$this->ratings()->delete();
 		return parent::delete();

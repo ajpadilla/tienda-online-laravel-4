@@ -2,12 +2,14 @@
 
 use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
+use s4h\store\ProductsLang\ProductLangRepository;
 use s4h\store\Products\RegisterProductCommand;
 use s4h\store\Categories\CategoryRepository;
 use s4h\store\Conditions\ConditionRepository;
 use s4h\store\Measures\MeasureRepository;
 use s4h\store\Forms\RegisterProductForm;
 use s4h\store\Forms\EditProductForm;
+use s4h\store\Languages\LanguageRepository;
 use Laracasts\Validation\FormValidationException;
 
 class ProductController extends \BaseController {
@@ -18,14 +20,18 @@ class ProductController extends \BaseController {
 	protected $categoryRepository;
 	protected $conditionRepository;
 	protected $measureRepository;
+	protected $languageRepository;
+	protected $productLangRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
 										CategoryRepository $categoryRepository,
 										ConditionRepository $conditionRepository,
 										MeasureRepository $measureRepository,
-										EditProductForm $editProductForm
-										)
+										EditProductForm $editProductForm,
+										LanguageRepository $languageRepository,
+										ProductLangRepository $productLangRepository
+	)
 	{
 		$this->registerProductForm = $registerProductForm;
 		$this->productRepository = $productRepository;
@@ -33,6 +39,8 @@ class ProductController extends \BaseController {
 		$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 		$this->measureRepository = $measureRepository;
+		$this->languageRepository = $languageRepository;
+		$this->productLangRepository = $productLangRepository;
 	}
 
 	public function index()
@@ -47,10 +55,11 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
-		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
-		$measures = $this->measureRepository->getAll()->lists('name', 'id');
-		return View::make('products.create', compact('categories', 'condition', 'measures'));
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();
+		$condition = $this->conditionRepository->getNameForLanguage();
+		$measures = $this->measureRepository->getNameForLanguage();
+		return View::make('products.create', compact('categories', 'condition', 'measures','languages'));
 	}
 
 
@@ -67,7 +76,7 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->registerProductForm->validate($input);
-				$this->createNewProduct($input);
+				$this->productRepository->createNewProduct($input);
 				return Response::json('Producto'.' '.$input['name'].' '.'Agregado con exito!');
 			}
 			catch (FormValidationException $e)
@@ -90,11 +99,14 @@ class ProductController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$product = Product::find($id);
-		$categories = $this->categoryRepository->getAll()->lists('name', 'id');
-		$condition = $this->conditionRepository->getAll()->lists('name', 'id');
-		$measures = $this->measureRepository->getAll()->lists('name', 'id');
-		return View::make('products.edit',compact('product', 'categories', 'condition', 'measures'));
+		$product = $this->productRepository->getProductId($id);
+		$language_id = $this->languageRepository->returnLanguage()->id;
+		$product_language = $product->languages()->where('language_id','=',$language_id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();
+		$condition = $this->conditionRepository->getNameForLanguage();
+		$measures = $this->measureRepository->getNameForLanguage();
+		return View::make('products.edit',compact('product','product_language','categories', 'condition', 'measures','languages'));
 	}
 
 
@@ -108,34 +120,13 @@ class ProductController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
+			$input = array();
 			$input = Input::all();
+			$input['product_id'] = $id;
 			try
 			{
 				$this->editProductForm->validate($input);
-				$product = Product::find($id);
-				$product->name = $input['name'];
-				$product->description = $input['description'];
-				$product->on_sale = $input['on_sale'];
-				$product->quantity = $input['quantity'];
-				$product->measure_id = $input['measure_id'];
-				$product->price = $input['price'];
-				$product->width = $input['width'];
-				$product->height = $input['height'];
-				$product->depth = $input['depth'];
-				$product->weight = $input['weight'];
-				$product->active = $input['active'];
-				$product->available_for_order = $input['available_for_order'];
-				$product->show_price = $input['show_price'];
-				$product->accept_barter = $input['accept_barter'];
-				$product->product_for_barter = $input['product_for_barter'];
-				$product->condition_id = $input['condition_id'];
-
-				$this->productRepository->save($product);
-				if (isset($input['categories'])){
-					$product->categories()->sync($input['categories']);
-				}else{
-					$product->categories()->detach();
-				}
+				$this->productRepository->updateProduct($input);
 				return Response::json('Producto'.' '.$input['name'].' '.'Modificado con exito!');
 			}
 			catch (FormValidationException $e)
@@ -148,56 +139,30 @@ class ProductController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->productRepository->deleteProduct($id);
-		return Redirect::back();
+		Flash::message('¡condicion de clasificado borrado con éxito!');
+		return Redirect::route('products.index');
 	}
 
-	public function createNewProduct($data = array())
-	{
-		$product = new Product;
-		$product->name = $data['name'];
-		$product->description = $data['description'];
-		$product->on_sale = $data['on_sale'];
-		$product->quantity = $data['quantity'];
-		$product->price = $data['price'];
-		$product->measure_id = $data['measure_id'];
-		$product->width = $data['width'];
-		$product->height = $data['height'];
-		$product->depth = $data['depth'];
-		$product->weight = $data['weight'];
-		$product->active = $data['active'];
-		$product->available_for_order = $data['available_for_order'];
-		$product->show_price = $data['show_price'];
-		$product->accept_barter = $data['accept_barter'];
-		$product->product_for_barter = $data['product_for_barter'];
-		$product->condition_id = $data['condition_id'];
-
-
-		/*$user = Auth::user();
-		$product->associate($user);*/
-		$this->productRepository->save($product);
-		if (!is_null($data['categories']))
-			$product->categories()->sync($data['categories']);
-
-	}
 
 
 	public function getDatatable()
 	{
-		$collection = Datatable::collection($this->productRepository->getAll())
-			->showColumns('photo', 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
+		$collection = Datatable::collection($this->productLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
 			->searchColumns( 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
 			->orderColumns('name','price', 'quantity', 'active', 'accept_barter');
 
-		/*$collection->addColumn('photo', function($model)
+		$collection->addColumn('photo', function($model)
 		{
-			$links = '';
-			if($model->hasPhotos()){
-					$photo = $model->getFirstPhoto();
+
+
+			/*$links = '';
+			if($model->product->hasPhotos()){
+					$photo = $model->product->getFirstPhoto();
 					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->name . "' src='" . asset($photo->path . $photo->name) . "'></a>";
 
 			}
-			return $links;
-		});*/
+			return $links;*/
+		});
 
 		$collection->addColumn('name', function($model)
 		{
@@ -206,31 +171,37 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('price', function($model)
 		{
-			return $model->price;
+			return $model->product->price;
 		});
 
 		$collection->addColumn('quantity', function($model)
 		{
-			return $model->quantity;
+			return $model->product->quantity;
 		});
 
 		$collection->addColumn('active', function($model)
 		{
-			return $model->getActivoShow();
+			return $model->product->getActivoShow();
 		});
 
 		$collection->addColumn('accept_barter', function($model)
 		{
-			return $model->getAcceptBarterShow();
+			return $model->product->getAcceptBarterShow();
 		});
 
 		$collection->addColumn('category', function($model)
 		{
-			if($model->hasCategories())
+			$language = $this->languageRepository->returnLanguage();
+			
+			if($model->product->hasCategories())
 			{
+				$product_categories = $model->product->categories()->get();
 				$links = '<select class="form-control m-b">';
-				foreach ($model->categories as $category) {
-					$links .= '<option>'.$category->name.'</option>';
+				foreach ($product_categories as $category) {
+					$categories_languages =  $category->languages()->where('language_id','=',$language->id)->get();
+					foreach ($categories_languages as $language) {
+						$links .= '<option>'.$language->pivot->name.'</option>';
+					}
 				}
 				$links .='</select>';
 
@@ -241,18 +212,18 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('ratings', function($model)
 		{
-			if($model->hasRatings())
+			if($model->product->hasRatings())
 			{
-				return $model->getRating();
+				return $model->product->getRating();
 			}
 			return '';
 		});
 
 		$collection->addColumn('Actions',function($model){
-			$links = "<a class='btn btn-info btn-circle' href='" .route('products.destroy', $model->id). "'><i class='fa fa-check'></i></a><br />";
-			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.edit', $model->id). "'><i class='fa fa-pencil'></i></a><br />
+			$links = "<a class='btn btn-info' href='" .route('products.show', $model->product->id). "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
+			$links .= "<a class='btn btn-warning' href='" .route('products.edit', $model->product->id). "'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />
 					<form action=".route('products.destroy', $model->id)." method='POST' >
-					<button class='btn btn-danger btn-circle' ><i class='fa fa-times'></i></button></form>";
+					<button class='btn btn-danger' > ".trans('products.actions.Delete')." <i class='fa fa-times'></i></button></form>";
 
 
 			return $links;

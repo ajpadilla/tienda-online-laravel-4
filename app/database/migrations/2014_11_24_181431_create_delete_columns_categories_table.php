@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateProductsTable extends Migration {
+class CreateDeleteColumnsCategoriesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,9 +12,9 @@ class UpdateProductsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('products', function(Blueprint $table)
+		Schema::table('categories', function($table)
 		{
-			$table->integer('measure_id')->unsigned()->after('user_id');
+			$table->dropColumn('name');
 		});
 	}
 
@@ -25,10 +25,7 @@ class UpdateProductsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('products', function(Blueprint $table)
-		{
-			Schema::dropIfExists('products');
-		});
+		//
 	}
 
 }
