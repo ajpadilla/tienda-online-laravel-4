@@ -220,11 +220,11 @@ class ProductController extends \BaseController {
 		});
 
 		$collection->addColumn('Actions',function($model){
-			$links = "<a class='btn btn-info btn-circle' href='" .route('products.destroy', $model->product->id). "'><i class='fa fa-check'></i></a><br />";
-			$links .= "<a class='btn btn-warning btn-circle' href='" .route('products.edit', $model->product->id). "'><i class='fa fa-pencil'></i></a><br />
-					<form action=".route('products.destroy', $model->id)." method='POST' >
-					<button class='btn btn-danger btn-circle' ><i class='fa fa-times'></i></button></form>";
-
+			$links = "<a href='" .route('products.show',$model->product->id). "' class='btn btn-primary'> View  <i class='fa fa-check'></i></a>
+			<br />";
+			$links .= "<a href='" .route('products.edit',$model->product->id). "' class='btn btn-info'> Edit   <i class='fa fa-paste'></i></a>
+			<br />
+			<a href='" .route('products.destroy',$model->product->id). "' class='btn btn-danger'> Delete <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
