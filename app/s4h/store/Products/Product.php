@@ -102,8 +102,8 @@ class Product extends Eloquent{
 	*/
 	public function delete()
 	{
-		if($this->hasPhotos())
-			$this->photos()->delete();
+		/*if($this->hasPhotos())
+			$this->photos()->delete();*/
 		if($this->hasRatings())
 			$this->ratings()->delete();
 		return parent::delete();
