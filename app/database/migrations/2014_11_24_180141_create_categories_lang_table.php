@@ -16,9 +16,9 @@ class CreateCategoriesLangTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 128);
-			$table->integer('category_id')->index();
+			$table->integer('categories_id')->index();
 			$table->integer('language_id')->index();
-			$table->unique(array('category_id', 'language_id'), 'categories_lang_unique');
+			$table->unique(array('categories_id', 'language_id'), 'categories_lang_unique');
 			$table->timestamps();
 			$table->softDeletes();
 		});
