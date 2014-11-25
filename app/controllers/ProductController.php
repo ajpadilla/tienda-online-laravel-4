@@ -139,9 +139,9 @@ class ProductController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->productRepository->deleteProduct($id);
-		return Redirect::back();
+		Flash::message('¡condicion de clasificado borrado con éxito!');
+		return Redirect::route('products.index');
 	}
-
 
 
 
@@ -220,11 +220,11 @@ class ProductController extends \BaseController {
 		});
 
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('products.show',$model->product->id). "' class='btn btn-primary'> View  <i class='fa fa-check'></i></a>
-			<br />";
-			$links .= "<a href='" .route('products.edit',$model->product->id). "' class='btn btn-info'> Edit   <i class='fa fa-paste'></i></a>
-			<br />
-			<a href='" .route('products.destroy',$model->product->id). "' class='btn btn-danger'> Delete <i class='fa fa-times'></i></a>";
+			$links = "<a class='btn btn-info' href='" .route('products.show', $model->product->id). "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
+			$links .= "<a class='btn btn-warning' href='" .route('products.edit', $model->product->id). "'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />
+					<form action=".route('products.destroy', $model->id)." method='POST' >
+					<button class='btn btn-danger' > ".trans('products.actions.Delete')." <i class='fa fa-times'></i></button></form>";
+
 
 			return $links;
 		});
