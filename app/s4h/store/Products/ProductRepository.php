@@ -1,7 +1,9 @@
 <?php namespace s4h\store\Products;
 
-
+	
 use s4h\store\Products\Product;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
 
 class ProductRepository {
 
@@ -22,4 +24,5 @@ class ProductRepository {
 		$product->delete();
 
 	}
+
 }
