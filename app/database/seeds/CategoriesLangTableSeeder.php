@@ -16,7 +16,7 @@ class CategoriesLangTableSeeder extends DatabaseSeeder{
 
 		$categories_lang [] = array(
 			'name' => 'Venta', 
-			'category_id' =>1,
+			'categories_id' =>1,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
@@ -24,7 +24,7 @@ class CategoriesLangTableSeeder extends DatabaseSeeder{
 
 		$categories_lang [] = array(
 			'name' => 'Sales',
-			'category_id' =>1,
+			'categories_id' =>1,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
@@ -32,7 +32,7 @@ class CategoriesLangTableSeeder extends DatabaseSeeder{
 
 		$categories_lang [] = array(
 			'name' => 'Compras', 
-			'category_id' =>2,
+			'categories_id' =>2,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
@@ -40,7 +40,7 @@ class CategoriesLangTableSeeder extends DatabaseSeeder{
 
 		$categories_lang [] = array(
 			'name' => 'Shopping',
-			'category_id' =>2,
+			'categories_id' =>2,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
