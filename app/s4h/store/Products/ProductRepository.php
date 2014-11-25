@@ -4,6 +4,7 @@
 use s4h\store\Products\Product;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
+use s4h\store\ProductsLang\ProductLang;
 
 class ProductRepository {
 
@@ -19,10 +20,9 @@ class ProductRepository {
 
 	public function deleteProduct($id)
 	{
-		$product = Product::find($id);
-
+		$product = $this->getProductId($id);
 		$product->delete();
-
+		ProductLang::where('product_id','=',$id)->delete();
 	}
 
 	public function createNewProduct($data = array())
