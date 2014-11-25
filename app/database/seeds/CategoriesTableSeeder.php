@@ -11,7 +11,7 @@ class CategoriesTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		for ($i = 0; $i < 2; $i++)
+		for ($i = 0; $i < 8; $i++)
 		{
 			Category::create([
 				'category_id' => $i + 1 ,
