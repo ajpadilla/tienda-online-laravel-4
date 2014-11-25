@@ -1,6 +1,6 @@
 <?php 
 
-use s4h\store\ProductConditions\ProductCondition;
+use s4h\store\Conditions\Condition;
 /**
 * 
 */
@@ -15,7 +15,7 @@ class ProductConditionTableSeeder extends DatabaseSeeder{
 	{
 		for ($i = 0; $i < 4; $i++)
 		{
-			ProductCondition::create([]);
+			Condition::create([]);
 		}
 	}
 
