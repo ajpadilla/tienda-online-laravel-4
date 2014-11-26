@@ -251,11 +251,11 @@
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-			}, 'only letters, numbers and spaces.');
+			}, '{{ trans('products.validation.onlyLettersNumbersAndSpaces') }}');
 
 			$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-			}, 'only letters, numbers and dash.');
+			}, '{{ trans('products.validation.onlyLettersNumbersAndDash') }}');
 
 			$('#formCreateProduct').validate({
 				rules:{
@@ -324,6 +324,70 @@
 					}
 
 				},
+				messages:{
+					name:{
+						required: '{{ trans('products.validation.required') }}',
+						rangelength: '{{ trans('products.validation.rangelength') }}'+'[2, 64]'+'{{ trans('products.validation.characters') }}'
+					},
+					description:{
+						required: '{{ trans('products.validation.required') }}',
+							rangelength: '{{ trans('products.validation.rangelength') }}'+'[10, 255]'+'{{ trans('products.validation.characters') }}'
+					},
+					quantity:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					price:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					width:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					height:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					depth:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					weight:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					on_sale:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					active:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					available_for_order:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					show_price:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					accept_barter:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					product_for_barter:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					'categories[]':{
+						required: '{{ trans('products.validation.required') }}',
+					},
+					condition_id:{
+						required: '{{ trans('products.validation.required') }}',
+					}
+				},
 				highlight:function(element){
 					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 				},
@@ -338,7 +402,7 @@
 			var options = {
 					beforeSubmit:  showRequest,  // pre-submit callback
 					success:       showResponse,  // post-submit callback
-					url:  '{{URL::route('products.store')}}',
+					url:  '{{ URL::route('products.store') }}',
 					type:'POST'
 				};
 			$('#formCreateProduct').ajaxForm(options);
@@ -346,7 +410,7 @@
 			// pre-submit callback
 			function showRequest(formData, jqForm, options) {
 				setTimeout(jQuery.fancybox({
-					'content': '<h1>Enviando datos</h1>',
+					'content':'<h1>' + '{{ trans('products.sending') }}' + '</h1>',
 					'autoScale' : true,
 					'transitionIn' : 'none',
 					'transitionOut' : 'none',
