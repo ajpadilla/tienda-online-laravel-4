@@ -18,11 +18,29 @@ class ShipmentStatusTableSeeder extends Seeder {
 		);  
 
 		$shipment_status [] = array(
-			'color' => '#7bd148',
+			'color' => '#ffb878',
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')           
 		);  
 
+		$shipment_status [] = array(
+			'color' => '#e1e1e1',
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')                 
+		);  
+
+		$shipment_status [] = array(
+			'color' => '#a4bdfc',
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')           
+		);  
+
+		$shipment_status [] = array(
+			'color' => '#7bd148',
+			'created_at' => $date->format('Y-m-d h:m:s'),
+			'updated_at' => $date->format('Y-m-d h:m:s')           
+		);
+		
 		// Uncomment the below to run the seeder
 		DB::table('shipment_status')->insert($shipment_status);
 	}

@@ -12,7 +12,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		$date = new DateTime;
 
 		$product_condition_lang [] = array(
-			'name' => 'En espera', 
+			'name' => 'Nuevo', 
 			'product_condition_id' =>1,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -20,7 +20,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'On hold',
+			'name' => 'New',
 			'product_condition_id' =>1,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -28,7 +28,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'Enviado', 
+			'name' => 'Usado', 
 			'product_condition_id' =>2,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -36,7 +36,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'dispatched',
+			'name' => 'Used',
 			'product_condition_id' =>2,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -44,7 +44,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'En almacén', 
+			'name' => 'Regresado al fabricante', 
 			'product_condition_id' =>3,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -52,7 +52,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'In stock',
+			'name' => 'Returned to the manufacturer',
 			'product_condition_id' =>3,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -60,7 +60,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'Agotado', 
+			'name' => 'Para repuesto', 
 			'product_condition_id' =>4,
 			'language_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
@@ -68,7 +68,7 @@ class ProductConditionsLangTableSeeder extends DatabaseSeeder {
 		);  
 
 		$product_condition_lang [] = array(
-			'name' => 'Spent',
+			'name' => 'To spare',
 			'product_condition_id' =>4,
 			'language_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
