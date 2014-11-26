@@ -5,16 +5,16 @@
 @stop
 
 @section('content')
-	    <div class="row">
-	        <h2>New Products</h2>
-	        @include('products.partials._new-products')
-	    </div>
-	    <div class="row">
-	        <h2>Top Products</h2>
-	        <div class="sidebar col col-md-3">
-	            @include('products.partials._category-sidebar')
-	        </div>
-	        @include('products.partials._top-products')
+        <div class="row">
+            <h2>New Products</h2>
+            @include('products.partials._new-products')
+        </div>
+        <div class="row">
+            <h2>Top Products</h2>
+            <div class="sidebar col col-md-3">
+                @include('products.partials._category-sidebar')
+            </div>
+            @include('products.partials._top-products')
         </div>
         <div class="row">
             <h2>New Classifieds</h2>
@@ -24,37 +24,36 @@
 @stop
 
 @section('in-situ-css')
-	<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/>
-	{{--<link rel="stylesheet" href="{{ asset('assets/css/components.css') }}"/>
-	<link rel="stylesheet" href="{{ asset('assets/css/style-shop.css') }}"/>--}}
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/>
+    {{--<link rel="stylesheet" href="{{ asset('assets/css/components.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/style-shop.css') }}"/>--}}
 @stop
 
 @section('in-situ-js')
-	<script src="{{ asset('assets/js/plugins/zoom/jquery.zoom.min.js') }}" type="text/javascript"></script><!-- product zoom -->
-	<script src="{{ asset('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js') }}" type="text/javascript"></script><!-- product zoom -->
+    <script src="{{ asset('assets/js/plugins/zoom/jquery.zoom.min.js') }}" type="text/javascript"></script><!-- product zoom -->
+    <script src="{{ asset('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js') }}" type="text/javascript"></script><!-- product zoom -->
 @stop
 
 @section('scripts')
   <script>
     var initImageZoom = function () {
         jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
-	}
+    }
 
     var initTouchspin = function () {
-	  jQuery(".product-quantity .form-control").TouchSpin({
-	      buttondown_class: "btn quantity-down",
-	      buttonup_class: "btn quantity-up"
-	  });
-	  jQuery(".quantity-down").html("<i class='fa fa-angle-down'></i>");
-	  jQuery(".quantity-up").html("<i class='fa fa-angle-up'></i>");
-	}
+      jQuery(".product-quantity .form-control").TouchSpin({
+          buttondown_class: "btn quantity-down",
+          buttonup_class: "btn quantity-up"
+      });
+      jQuery(".quantity-down").html("<i class='fa fa-angle-down'></i>");
+      jQuery(".quantity-up").html("<i class='fa fa-angle-up'></i>");
+    }
 
 
 
     var handleFancybox = function () {
         if (!jQuery.fancybox) {
-            alert('algo');
-            //return;
+            return;
         }
 
         jQuery(".fancybox-fast-view").fancybox();
@@ -78,9 +77,9 @@
         }
     }
     $(document).ready(function(){
-		handleFancybox();
-		initImageZoom();
-		initTouchspin();
+        handleFancybox();
+        initImageZoom();
+        initTouchspin();
     });
   </script>
 @stop
