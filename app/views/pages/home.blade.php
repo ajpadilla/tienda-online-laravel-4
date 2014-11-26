@@ -53,7 +53,8 @@
 
     var handleFancybox = function () {
         if (!jQuery.fancybox) {
-            return;
+            alert('algo');
+            //return;
         }
 
         jQuery(".fancybox-fast-view").fancybox();
