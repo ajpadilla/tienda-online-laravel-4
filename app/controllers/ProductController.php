@@ -77,7 +77,7 @@ class ProductController extends \BaseController {
 			{
 				$this->registerProductForm->validate($input);
 				$this->productRepository->createNewProduct($input);
-				return Response::json('Producto'.' '.$input['name'].' '.'Agregado con exito!');
+				return Response::json(trans('products.response'));
 			}
 			catch (FormValidationException $e)
 			{
