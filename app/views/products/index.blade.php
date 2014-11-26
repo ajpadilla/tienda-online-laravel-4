@@ -14,7 +14,7 @@
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
-				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> {{ trans('products.labels.new') }}</a>
+				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> {{ trans('products.labels.new') }} </a>
 				<?php
 					$columns = [
 						trans('products.list.photo'),
