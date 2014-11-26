@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-	
+	{{ trans('products.list.title') }}
 @stop
 
 @section('content')
@@ -10,11 +10,11 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{trans('products.list.title')}}</h5>
+				<h5>{{trans('products.list.subtitle')}}</h5>
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
-				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> New</a>
+				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> {{ trans('products.labels.new') }}</a>
 				<?php
 					$columns = [
 						trans('products.list.photo'),
