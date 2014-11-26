@@ -45,12 +45,12 @@ Nostrud duis molestie at dolore.</p>
                     </div>
                   </div>
                   <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
-                    </div>
-                    <button class="btn btn-primary" style="margin-left: 20px" type="submit">Add to cart</button>
-                    <a href="{{ LaravelLocalization::transRoute('products.show') }}" class="btn btn-default">More details</a>
-            </div>
+	                  <div class="product-quantity">
+	                      <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+	                  </div>
+	                  <button class="btn btn-primary" style="margin-left: 20px" type="submit">Add to cart</button>
+	                  <a href="{{ LaravelLocalization::transRoute('products.show') }}" class="btn btn-default">More details</a>
+			      </div>
                 </div>
 
                 <div class="sticker sticker-sale"></div>

@@ -12,65 +12,13 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Productos</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('products.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('products.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Descuentos</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('discounts.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('discounts.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Typos de descuentos</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('discountType.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('discountType.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Idiomas</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('languages.create')}}">Crear</a></li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Estatus del envío</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('shipmentStatus.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('shipmentStatus.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Estatus del factura</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('invoiceStatus.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('invoiceStatus.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Tipo de clasificado</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('classifiedTypes.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('classifiedTypes.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Condiciones de anuncios</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('classifiedConditions.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('classifiedConditions.index')}}">Listar</a></li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Clasificados</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('classifieds.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('classifieds.index')}}">Listar</a></li>
+                            <li><a href="graph_flot.html">Flot Charts</a></li>
+                            <li><a href="graph_morris.html">Morris.js Charts</a></li>
+                            <li><a href="graph_rickshaw.html">Rickshaw Charts</a></li>
+                            <li><a href="graph_peity.html">Peity Charts</a></li>
+                            <li><a href="graph_sparkline.html">Sparkline Charts</a></li>
                         </ul>
                     </li>
                     <li>
