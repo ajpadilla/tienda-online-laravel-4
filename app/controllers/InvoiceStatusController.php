@@ -154,7 +154,7 @@ class InvoiceStatusController extends \BaseController {
 			{
 				$this->editInvoiceStatusForm ->validate($input);
 				$this->invoiceStatusRepository->updateInvoiceStatu($input);
-				return Response::json(trans('invoiceStatus.updated'));
+				return Response::json(trans('invoiceStatus.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -173,7 +173,7 @@ class InvoiceStatusController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->invoiceStatusRepository->deleteInvoiceStatu($id);
-		Flash::message(trans('invoiceStatus.delete'));
+		Flash::message(trans('invoiceStatus.Delete'));
 		return Redirect::route('invoiceStatus.index');
 	}
 

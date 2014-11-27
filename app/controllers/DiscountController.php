@@ -114,7 +114,7 @@ class DiscountController extends \BaseController {
 			{
 				//$this->registerDiscountForm->validate($input);
 				$this->discountRepository->updateDiscount($input);
-				return Response::json(trans('discounts.updated'));
+				return Response::json(trans('discounts.Updated'));
 			} catch (FormValidationException $e) {
 				return Response::json($e->getErrors()->all());
 			}
@@ -129,7 +129,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function destroy($id) {
 		$this->discountRepository->deleteDiscount($id);
-		Flash::message(trans('discounts.delete'));
+		Flash::message(trans('discounts.Delete'));
 		return Redirect::route('discounts.index');
 	}
 

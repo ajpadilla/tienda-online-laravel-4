@@ -152,7 +152,7 @@ class ShipmentStatusController extends \BaseController {
 			{
 				$this->editShipmentStatusForm->validate($input);
 				$this->shipmentStatusRepository->updateShipmentStatu($input);
-				return Response::json(trans('shipmentStatus.updated'));
+				return Response::json(trans('shipmentStatus.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -171,7 +171,7 @@ class ShipmentStatusController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->shipmentStatusRepository->deleteShipmentStatu($id);
-		Flash::message(trans('shipmentStatus.delete'));
+		Flash::message(trans('shipmentStatus.Delete'));
 		return Redirect::route('shipmentStatus.index');
 	}
 

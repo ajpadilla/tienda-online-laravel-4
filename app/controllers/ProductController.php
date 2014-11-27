@@ -127,7 +127,7 @@ class ProductController extends \BaseController {
 			{
 				$this->editProductForm->validate($input);
 				$this->productRepository->updateProduct($input);
-				return Response::json(trans('products.updated'));
+				return Response::json(trans('products.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -139,7 +139,7 @@ class ProductController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->productRepository->deleteProduct($id);
-		Flash::message(trans('products.delete'));
+		Flash::message(trans('products.Delete'));
 		return Redirect::route('products.index');
 	}
 

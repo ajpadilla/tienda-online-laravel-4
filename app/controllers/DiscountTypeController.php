@@ -43,14 +43,7 @@ class DiscountTypeController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			/*$links = "<a href='" .route('discountType.show',$model->discountType->id). "'>View</a>
-					<br />";
-			$links .= "<a href='" .route('discountType.edit',$model->discountType->id). "'>Edit</a>
-					<br />
-					<a href='" .route('discountType.destroy',$model->discountType->id). "'>Delete</a>";
-
-			return $links;*/
-
+		
 			$links = "<a class='btn btn-info' href='" . route('discountType.show', $model->discountType->id) . "'>".trans('discountType.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
 			$links .= "<a a class='btn btn-warning' href='" . route('discountType.edit', $model->discountType->id) . "'>".trans('discountType.actions.Edit')." <i class='fa fa-pencil'></i></a>
@@ -143,7 +136,7 @@ class DiscountTypeController extends \BaseController {
 			try
 			{
 				$this->discountTypeRepository->updateDiscountType($input);
-				return Response::json(trans('discountType.updated'));
+				return Response::json(trans('discountType.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -162,7 +155,7 @@ class DiscountTypeController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->discountTypeRepository->deletediscountType($id);
-		Flash::message(trans('discountType.delete'));
+		Flash::message(trans('discountType.Delete'));
 		return Redirect::route('discountType.index');
 	}
 

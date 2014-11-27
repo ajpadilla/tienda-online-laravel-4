@@ -42,11 +42,12 @@ class ClassifiedTypeController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('classifiedTypes.show',$model->classifiedTypes->id). "'>View</a>
+			
+			$links = "<a class='btn btn-info' href='" . route('classifiedTypes.show', $model->classifiedTypes->id) . "'>".trans('classifiedTypes.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('classifiedTypes.edit',$model->classifiedTypes->id). "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('classifiedTypes.edit', $model->classifiedTypes->id) . "'>".trans('classifiedTypes.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .route('classifiedTypes.destroy',$model->classifiedTypes->id). "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('classifiedTypes.destroy', $model->classifiedTypes->id) . "'>".trans('classifiedTypes.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -80,7 +81,7 @@ class ClassifiedTypeController extends \BaseController {
 			{
 				$this->registerClassifiedTypesForm->validate($input);
 				$this->classifiedTypesRepository->createNewClassifiedType($input);
-				return Response::json(trans('classifiedTypes.message1') . ' ' . $input['name'] . ' ' . trans('classifiedTypes.message2'));
+				return Response::json(trans('classifiedTypes.response'));
 			} 
 			catch (FormValidationException $e)
 			{
@@ -137,7 +138,7 @@ class ClassifiedTypeController extends \BaseController {
 			try
 			{
 				$this->classifiedTypesRepository->updateClassifiedType($input);
-				return Response::json(trans('classifiedTypes.message1').' '.$input['name'].' '.trans('classifiedTypes.message2'));
+				return Response::json(trans('classifiedTypes.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -156,7 +157,7 @@ class ClassifiedTypeController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->classifiedTypesRepository->delteClassifiedType($id);
-		Flash::message('¡tipo de clasificado borrado  con éxito!');
+		Flash::message(trans('classifiedTypes.Delete'));
 		return Redirect::route('classifiedTypes.index');
 	}
 
