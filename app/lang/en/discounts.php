@@ -13,6 +13,10 @@
  		"storeCode" => "agregar/discount_code",
  		"createData" =>"create/language_data",
 		"saveData" =>'add/features_discount',
+		"sending" => "Adding discount",
+		"response" => "Discount added",
+		"updated" => "Discount updated",
+		"delete" => "¡Discount successfully removed!",
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description:',
@@ -28,8 +32,10 @@
 			'save' => 'Save',
 			'Yes' => 'Yes',
 			'No' => 'No',
-			'language' => 'language'
+			'language' => 'language:',
+			'new' => 'New'	
 		),
+
 		"validation" => array(
 			'required' => 'The field is required.',
 			'rangelength' => 'Please enter a value between ',
@@ -40,11 +46,13 @@
 			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
+
 		'date' => 'yy-mm-dd',
 		'date2' => 'Y-m-d',
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
 		'alert' => 'The discount code is already registered!.',
+
 		'list' =>array(
 			'title' => 'List of discounts',
 			'subtitle'=>'Discount List',
@@ -57,6 +65,24 @@
 			'From'=>'From',
 			'To'=>'To',
 			'Actions'=>'Actions',
+			'title'		=> 'Discounts list',
+			'subtitle' => 'List of discounts'
 		),
+
+		'edit_view' => array(
+			'title' => 'Edit discount',
+			'subtitle' => 'Discount Details'
+		),
+
+		'show_data' => array(
+			'title' => 'See discount details',
+		),
+
+		'actions' => array(
+			'Show' => 'Show   ',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
+		
 	);
 
