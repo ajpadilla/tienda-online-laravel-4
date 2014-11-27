@@ -27,7 +27,8 @@
 			'save' => 'Agregar',
 			'Yes' => 'Si',
 			'No' => 'No',
-			'user' => 'Usuario'
+			'user' => 'Usuario',
+			'new' => 'Nuevo'
 		),
 
 		"list" => array(

@@ -27,6 +27,7 @@
 			'save' => 'Save',
 			'Yes' => 'Yes',
 			'No' => 'No',
+			'new' => 'New'
 		),
 
 		"list" => array(
