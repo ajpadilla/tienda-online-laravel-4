@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ trans('discounts.labels.name')}}--}}
-{{	trans('discounts.title') }}
+{{	trans('discounts.edit_view.title') }}
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{	trans('discounts.subtitle') }}</h5>
+				<h5>{{	trans('discounts.edit_view.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
@@ -287,7 +287,7 @@
 	// pre-submit callback
 		function showRequest(formData, jqForm, options) {
 			setTimeout(jQuery.fancybox({
-				'content': '<h1>Enviando datos</h1>',
+				'content':'<h1>' + '{{ trans('discounts.sending') }}' + '</h1>',
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
