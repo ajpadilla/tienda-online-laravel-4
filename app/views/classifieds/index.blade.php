@@ -10,10 +10,11 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('classifieds.list.title') }}</h5>
+				<h5>{{ trans('classifieds.list.subtitle') }}</h5>
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
+			<a class="btn btn-info " href="{{route('classifieds.create')}}"><i class="fa fa-paste"></i> {{ trans('classifieds.labels.new') }} </a>
 				<?php
 					$columns = [
 						trans('classifieds.list.Name'),
