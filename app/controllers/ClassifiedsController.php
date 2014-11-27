@@ -76,16 +76,17 @@ class ClassifiedsController extends \BaseController {
 		$collection->addColumn('classified_condition', function($model)
 		{
 			$language = $this->languageRepository->returnLanguage();
-			$classified_condition_language = $model->classified->classifiedsCondition->languages()->where('language_id','=',$language->id)->first();
+			$classified_condition_language = $model->classified->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
 			return $classified_condition_language->pivot->name;
 		});
 
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('classifieds.show',$model->classified->id). "'>View</a>
+			
+			$links = "<a class='btn btn-info' href='" . route('classifieds.show', $model->classified->id) . "'>".trans('classifieds.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('classifieds.edit',$model->classified->id). "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('classifieds.edit', $model->classified->id) . "'>".trans('classifieds.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .route('classifieds.destroy',$model->classified->id). "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('classifieds.destroy', $model->classified->id) . "'>".trans('classifieds.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -119,7 +120,7 @@ class ClassifiedsController extends \BaseController {
 		try
 		{
 			$classified = $this->classifiedRepository->createNewClassified($input);
-			return Response::json(trans('classifieds.message1') . ' ' . $input['name'] . ' ' . trans('classifieds.message2'));
+			return Response::json(trans('classifieds.response'));
 		} 
 		catch (FormValidationException $e)
 		{
@@ -177,7 +178,7 @@ class ClassifiedsController extends \BaseController {
 		try
 		{
 			$classified = $this->classifiedRepository->updateClassified($input);
-			return Response::json(trans('classifieds.message1') . ' ' . $input['name'] . ' ' . trans('classifieds.message2'));
+			return Response::json(trans('classifieds.Actualiced'));
 		} 
 		catch (FormValidationException $e)
 		{
@@ -195,7 +196,7 @@ class ClassifiedsController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->classifiedRepository->delteClassified($id);
-		Flash::message('¡Clasificado borrado con éxito!');
+		Flash::message(trans('classifieds.Delete'));
 		return Redirect::route('classifieds.index');
 	}
 

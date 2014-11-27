@@ -140,7 +140,7 @@ class ClassifiedConditionController extends \BaseController {
 			try
 			{
 				$this->classifiedConditionsRepository->updateClassifiedCondition($input);
-				return Response::json(trans('classifiedConditions.Update'));
+				return Response::json(trans('classifiedConditions.Actualiced'));
 			}
 			catch (FormValidationException $e)
 			{
