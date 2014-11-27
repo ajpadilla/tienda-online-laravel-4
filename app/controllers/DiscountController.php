@@ -59,7 +59,7 @@ class DiscountController extends \BaseController {
 			{
 				$this->registerDiscountForm->validate($input);
 				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.message1').' '.$input['name'].' '.trans('discounts.message2'));
+				return Response::json(trans('discounts.response'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -114,7 +114,7 @@ class DiscountController extends \BaseController {
 			{
 				//$this->registerDiscountForm->validate($input);
 				$this->discountRepository->updateDiscount($input);
-				return Response::json(trans('discounts.message1') . ' ' . $input['name'] . ' ' . trans('discounts.message2'));
+				return Response::json(trans('discounts.updated'));
 			} catch (FormValidationException $e) {
 				return Response::json($e->getErrors()->all());
 			}
@@ -129,7 +129,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function destroy($id) {
 		$this->discountRepository->deleteDiscount($id);
-		Flash::message('¡Descuento borrado  con éxito!');
+		Flash::message(trans('discounts.delete'));
 		return Redirect::route('discounts.index');
 	}
 
@@ -176,11 +176,11 @@ class DiscountController extends \BaseController {
 		});
 
 		$collection->addColumn('Actions', function ($model) {
-			$links = "<a href='" . route('discounts.show', $model->discount->id) . "'>View</a>
+			$links = "<a class='btn btn-info' href='" . route('discounts.show', $model->discount->id) . "'>".trans('discounts.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" . route('discounts.edit', $model->discount->id) . "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('discounts.edit', $model->discount->id) . "'>".trans('discounts.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" . route('discounts.destroy', $model->discount->id) . "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('discounts.destroy', $model->discount->id) . "'>".trans('products.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
