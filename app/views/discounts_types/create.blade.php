@@ -108,7 +108,7 @@
 	// pre-submit callback 
 		function showRequest(formData, jqForm, options) {          
 			setTimeout(jQuery.fancybox({
-				'content': '<h1>Enviando datos</h1>',
+				'content':'<h1>' + '{{ trans('discountType.sending') }}' + '</h1>',
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',

@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ Lang::get('modulo.variable') }}--}}
-{{ trans('discountType.title') }}
+{{ trans('discountType.show_data.title') }}
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('discountType.subtitle') }}</h5>
+				<h5>{{ trans('discountType.show_data.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
