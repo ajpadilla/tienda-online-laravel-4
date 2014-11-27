@@ -54,11 +54,12 @@ class ShipmentStatusController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('shipmentStatus.show',$model->shipmentStatus->id). "'>View</a>
+			
+			$links = "<a class='btn btn-info' href='" . route('shipmentStatus.show', $model->shipmentStatus->id) . "'>".trans('shipmentStatus.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('shipmentStatus.edit',$model->shipmentStatus->id). "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('shipmentStatus.edit', $model->shipmentStatus->id) . "'>".trans('shipmentStatus.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .route('shipmentStatus.destroy',$model->shipmentStatus->id). "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('shipmentStatus.destroy', $model->shipmentStatus->id) . "'>".trans('shipmentStatus.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -93,7 +94,7 @@ class ShipmentStatusController extends \BaseController {
 			{
 				$this->registerShipmentStatusForm->validate($input);
 				$this->shipmentStatusRepository->createNewShipmentStatus($input);
-				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
+				return Response::json(trans('shipmentStatus.response'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -151,7 +152,7 @@ class ShipmentStatusController extends \BaseController {
 			{
 				$this->editShipmentStatusForm->validate($input);
 				$this->shipmentStatusRepository->updateShipmentStatu($input);
-				return Response::json(trans('shipmentStatus.message1').' '.$input['name'].' '.trans('shipmentStatus.message2'));
+				return Response::json(trans('shipmentStatus.updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -170,7 +171,7 @@ class ShipmentStatusController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->shipmentStatusRepository->deleteShipmentStatu($id);
-		Flash::message('¡shipment status borrado  con éxito!');
+		Flash::message(trans('shipmentStatus.delete'));
 		return Redirect::route('shipmentStatus.index');
 	}
 
