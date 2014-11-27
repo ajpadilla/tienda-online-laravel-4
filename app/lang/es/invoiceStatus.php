@@ -11,8 +11,8 @@
 		"subtitle" => "Crear estatus para factura",
 		"sending" => "Agregando estatus para factura",
 		"response" => "Estatus para factura agregado",
-		"updated" => "Estatus para factura actualizado",
-		"delete" => "¡Estatus para factura eliminado con exito!",
+		"Updated" => "Estatus para factura actualizado",
+		"Delete" => "¡Estatus para factura eliminado con exito!",
 
 		"labels" => array(
 			'language' => 'Idioma',

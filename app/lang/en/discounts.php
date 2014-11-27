@@ -15,8 +15,8 @@
 		"saveData" =>'add/features_discount',
 		"sending" => "Adding discount",
 		"response" => "Discount added",
-		"updated" => "Discount updated",
-		"delete" => "¡Discount successfully removed!",
+		"Updated" => "Discount updated",
+		"Delete" => "¡Discount successfully removed!",
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description:',

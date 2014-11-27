@@ -12,8 +12,8 @@
 		"subtitle" => "Create new product",
 		"sending" => "Adding product",
 		"response" => "Product added",
-		"updated" => "Product update",
-		"delete" => "¡Product successfully removed!",
+		"Updated" => "Product update",
+		"Delete" => "¡Product successfully removed!",
 
 		"labels" => array(
 			'name' =>'Name:',

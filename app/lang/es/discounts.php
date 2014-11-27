@@ -11,8 +11,8 @@
 		"subtitle" => "Crear nuevo descuento",
 		"sending" => "Agregando descuento",
 		"response" => "Descuento agregado",
-		"updated" => "Descuento actualizado",
-		"delete" => "¡Descuento eliminado con éxito!",
+		"Updated" => "Descuento actualizado",
+		"Delete" => "¡Descuento eliminado con éxito!",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',

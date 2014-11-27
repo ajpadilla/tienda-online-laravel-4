@@ -11,8 +11,8 @@
 		"subtitle" => "Crear nuevo  tipo de descuento",
 		"sending" => "Agregando tipo de descuento",
 		"response" => "Tipo de descuento agregado",
-		"updated" => "Tipo de descuento actualizado",
-		"delete" => "¡Tipo de descuento eliminado con éxito!",
+		"Updated" => "Tipo de descuento actualizado",
+		"Delete" => "¡Tipo de descuento eliminado con éxito!",
 
 		"labels" => array(
 			'name' =>'Nombre:',

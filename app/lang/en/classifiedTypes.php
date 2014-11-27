@@ -7,29 +7,53 @@
 		"edit"=>"edit/classified/type/{id}",
 		"update"=>"update/classified/type/{id}",
 		"destroy"=>"delete/classified/type/{id}",
-		"title" => "Agregar Tipo de descuento",
-		"subtitle" => "Crear nuevo  tipo de descuento",
+		"title" => "Add classified type",
+		"subtitle" => "Create new  classified type",
+		"sending" => "Adding classified type",
+		"response" => "Classified type added",
+		"Updated" => "Classified type updated",
+		"Delete" => "¡Classified type successfully removed!",
+
 		"labels" => array(
-			'name' =>'Nombre:',
-			'language' => 'Idioma',
-			'save' => 'Agregar',
+			'name' =>'Name:',
+			'language' => 'Language',
+			'save' => 'Save',
+			'new' => 'New'
 		),
+
 		"list" => array(
-			'title' => 'Lista para los tipos de descuento',
-			'Name' => 'Nombre',
-			'Actions' =>'Acciones'
+			'title' => 'Classified type list',
+			'subtitle'=>'List of classified type',
+			'Name' => 'Name',
+			'Actions' =>'Actions'
 		),
+
 		"validation" => array(
-			'required' => 'Campo obligatorio.',
-			'rangelength' => 'Por favor, introduzca un valor entre ',
-			'characters' => 'caracteres.',
-			'number' => 'Por favor, introduzca un número válido.',
-			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
-			'date' => 'Por favor, Ingrese una fecha valida.',
-			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
-			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
+			'required' => 'The field is required.',
+			'rangelength' => 'Please enter a value between ',
+			'characters' => 'Characters.',
+			'number' => 'The field must be a number.',
+			'digits' => 'Please enter whole numbers only.',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
+			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
-		'message1' =>'Nuevo tipo de descuento',
-		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!'
+
+		'alert' => 'The classified type name is already registered!.',
+
+		'edit_view' => array(
+			'title' => 'Edit classified type',
+			'subtitle' => 'Classified type Details '
+		),
+
+		'show_data' => array(
+			'title' => 'See classified type details',
+			'subtitle' => 'Classified type'
+		),
+
+		'actions' => array(
+			'Show' => 'Show   ',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
+
 	);

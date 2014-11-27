@@ -11,8 +11,8 @@
 		"subtitle" => "Create shipment status",
 		"sending" => "Adding shipment status",
 		"response" => "Shipment status added",
-		"updated" => "Shipment status updated",
-		"delete" => "¡Shipment status successfully removed!",
+		"Updated" => "Shipment status updated",
+		"Delete" => "¡Shipment status successfully removed!",
 
 		"labels" => array(
 			'language' => 'language',

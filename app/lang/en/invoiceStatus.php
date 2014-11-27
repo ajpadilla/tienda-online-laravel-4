@@ -11,8 +11,8 @@
 		"subtitle" => "Create invoice status",
 		"sending" => "Adding invoice status",
 		"response" => "Invoice status added",
-		"updated" => "Invoice status updated",
-		"delete" => "¡Invoice status successfully removed!",
+		"Updated" => "Invoice status updated",
+		"Delete" => "¡Invoice status successfully removed!",
 
 		"labels" => array(
 			'language' => 'Language',

@@ -11,8 +11,8 @@
 		"subtitle" => "Crear estatus de envío",
 		"sending" => "Agregando estatus de envio",
 		"response" => "Estatus de envio agregando",
-		"updated" => "Estatus de envio actualizado",
-		"delete" => "¡Estatus de envion eliminado con exito!",
+		"Updated" => "Estatus de envio actualizado",
+		"Delete" => "¡Estatus de envion eliminado con exito!",
 
 		"labels" => array(
 			'language' => 'Idioma',

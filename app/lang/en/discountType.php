@@ -11,8 +11,8 @@
 		"subtitle" => "Create new discount type",
 		"sending" => "Adding discount type",
 		"response" => "Discount type added",
-		"updated" => "Discount type updated",
-		"delete" => "¡Discount type successfully removed!",
+		"Updated" => "Discount type updated",
+		"Delete" => "¡Discount type successfully removed!",
 
 		"labels" => array(
 			'name' =>'Name:',
