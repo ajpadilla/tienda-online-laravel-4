@@ -9,6 +9,10 @@
 		"destroy"=>"eliminar/descuento/{id}",
 		"title" => "Agregar descuento",
 		"subtitle" => "Crear nuevo descuento",
+		"sending" => "Agregando descuento",
+		"response" => "Descuento agregado",
+		"Updated" => "Descuento actualizado",
+		"Delete" => "¡Descuento eliminado con éxito!",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
@@ -24,7 +28,8 @@
 			'save' => 'Agregar',
 			'Yes' => 'Si',
 			'No' => 'No',
-			'language' => 'Idioma'
+			'language' => 'Idioma:',
+			'new' => 'Nuevo'		
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
@@ -36,11 +41,13 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
+
 		'date' => 'dd-mm-yy',
 		'date2' => 'd-m-Y',
 		'message1' =>'descuento',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El codigo del descuento ya se encuentra registrado!',
+
 		'list' =>array(
 			'title' => 'Listado de descuentos',
 			'subtitle'=>'Lista de descuentos',
@@ -53,6 +60,25 @@
 			'From'=>'Desde',
 			'To'=>'Hasta',
 			'Actions'=>'Acciones',
+			'title'		=> 'Listado de descuentos',
+			'subtitle' => 'Lista de descuentos'
 		),
+
+		'edit_view' => array(
+			'title' => 'Editar descuento',
+			'subtitle' => 'Datos del descuento'
+		),
+
+		'show_data' => array(
+			'title' => 'Ver datos del descuento',
+			'subtitle' => 'Datos del descuento'
+		),
+
+		'actions' => array(
+			'Show' => 'Ver   ',
+			'Edit' => 'Editar',
+			'Delete' => 'Eliminar'
+		)
+
 	);
 

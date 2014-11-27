@@ -1,19 +1,14 @@
 <?php 
 	return array(
-		"create" => "crear/clasificado",
-		"store" => "agregar/clasificado",
+		"create" => "crear/fotoClasificado/{classifieds_id}",
+		"store" => "agregar/fotoClasificado",
 		"index" => "lista/clasificado",
-		"show"=>"ver/clasificado/{id}",
-		"edit"=>"editar/clasificado/{id}",
-		"update"=>"actualizar/clasificado/{id}",
-		"destroy"=>"eliminar/clasificado/{id}",
+		"show"=>"ver_clasificado/{id}",
+		"edit"=>"editar_clasificado/{id}",
+		"update"=>"actualizar_clasificado/{id}",
+		"destroy"=>"eliminar_clasificado/{id}",
 		"title" => "Agregar Tipo de clasificado",
 		"subtitle" => "Crear clasificado",
-		"sending" => "Agregando clasificado",
-		"response" => "Clasificado agregado",
-		"Actualiced" => "Clasificado actualizado",
-		"Delete" => "¡Clasificado eliminado con exito!",
-
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción',
@@ -23,26 +18,16 @@
 			'user' => 'Usuario',
 			'classified_type' => 'Tipo de clasificado',
 			'classified_condition' => 'Condición del clasificado',
-			'address' => 'Dirección',
+			'addres' => 'Dirección',
 			'save' => 'Agregar',
 			'Yes' => 'Si',
-			'No' => 'No',
-			'user' => 'Usuario',
-			'new' => 'Nuevo'
+			'No' => 'No'
 		),
-
 		"list" => array(
 			'title' => 'Lista de clasificados',
-			'subtitle' => 'Listado de clasificados',
 			'Name' => 'Nombre',
-			'Description' =>'Descripción',
-			'Address' => 'Dirección',
-			'User' => 'Usuario',
-			'Classifieds_types' => 'Tipo de clasificado',
-			'Classified_condition' => 'Condición del clasificado',
 			'Actions' =>'Acciones'
 		),
-
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
 			'rangelength' => 'Por favor, introduzca un valor entre ',
@@ -53,22 +38,8 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
-
+		'message1' =>'Nuevo clasificado',
+		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El nombre ya se encuentra registrado!',
-
-		'edit_view' => array(
-			'title' => 'Editar tipo de clasificado',
-			'subtitle' => 'Datos del tipo de clasificado'
-		),
-
-		'show_data' => array(
-			'title' => 'Ver datos del tipo de clasificado',
-			'subtitle' => 'Tipo de clasificado'
-		),
-
-		'actions' => array(
-			'Show' => 'Ver   ',
-			'Edit' => 'Editar',
-			'Delete' => 'Eliminar'
-		)
+		'sending' => 'Enviando datos'
 	);

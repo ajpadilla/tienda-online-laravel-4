@@ -43,11 +43,12 @@ class DiscountTypeController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('discountType.show',$model->discountType->id). "'>View</a>
+		
+			$links = "<a class='btn btn-info' href='" . route('discountType.show', $model->discountType->id) . "'>".trans('discountType.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('discountType.edit',$model->discountType->id). "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('discountType.edit', $model->discountType->id) . "'>".trans('discountType.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .route('discountType.destroy',$model->discountType->id). "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('discountType.destroy', $model->discountType->id) . "'>".trans('products.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -79,7 +80,7 @@ class DiscountTypeController extends \BaseController {
 			{
 				$this->registerDiscountTypeForm->validate($input);
 				$this->discountTypeRepository->createNewDiscountType($input);
-				return Response::json(trans('discounts.message1') . ' ' . $input['name'] . ' ' . trans('discounts.message2'));
+				return Response::json(trans('discounts.response'));
 			} 
 			catch (FormValidationException $e)
 			{
@@ -135,7 +136,7 @@ class DiscountTypeController extends \BaseController {
 			try
 			{
 				$this->discountTypeRepository->updateDiscountType($input);
-				return Response::json(trans('discountType.message1').' '.$input['name'].' '.trans('discountType.message2'));
+				return Response::json(trans('discountType.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -154,7 +155,7 @@ class DiscountTypeController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->discountTypeRepository->deletediscountType($id);
-		Flash::message('¡tipo de descuento borrado  con éxito!');
+		Flash::message(trans('discountType.Delete'));
 		return Redirect::route('discountType.index');
 	}
 

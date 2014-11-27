@@ -10,6 +10,11 @@
 		'destroy' => 'delete/product/{id}',
 		"title" => "Add product",
 		"subtitle" => "Create new product",
+		"sending" => "Adding product",
+		"response" => "Product added",
+		"Updated" => "Product update",
+		"Delete" => "¡Product successfully removed!",
+
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description:',
@@ -29,7 +34,9 @@
 			'condition' => 'Condition:',
 			'measure' => 'Measure:',
 			'height' => 'height:',
-			'depth' => 'depth'
+			'depth' => 'depth',
+			'language' => 'Language:',
+			'new' => 'New'	
 		),
 		"validation" => array(
 			'required' => 'The field is required.',
@@ -51,7 +58,18 @@
 				'category'	=> 'Categories',
 				'ratings'	=> 'Ratings',
 				'actions'	=> 'Actions',
-				'title'		=> 'List Products'
+				'title'		=> 'List Products',
+				'title'		=> 'Product List',
+				'subtitle' => 'List of products'
+		),
+
+		'edit_view' => array(
+			'title' => 'Edit product',
+			'subtitle' => 'Product Details'
+		),
+
+		'show_data' => array(
+			'title' => 'See product details',
 		),
 
 		'actions' => array(

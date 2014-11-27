@@ -9,16 +9,23 @@
 		"destroy"=>"eliminar/condicion/clasificado/{id}",
 		"title" => "Agregar Condición para clasificados",
 		"subtitle" => "Crear Condición para clasificados",
+		"sending" => "Agregando tipo de clasificado",
+		"response" => "Tipo de clasificado agregado",
+		"Actualiced" => "Tipo de clasificado actualizado",
+		"Delete" => "¡Tipo de clasificado eliminado con exito!",
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'language' => 'Idioma',
 			'save' => 'Agregar',
 		),
+
 		"list" => array(
 			'title' => 'Lista para condición para clasificados',
 			'Name' => 'Nombre',
 			'Actions' =>'Acciones'
 		),
+
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
 			'rangelength' => 'Por favor, introduzca un valor entre ',
@@ -29,8 +36,24 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
+
 		'message1' =>'Nuevo Condición para clasificados',
 		'message2' =>'Agregado con exito!.',
 		'alert' => '¡El nombre ya se encuentra registrado!',
-		'sending' => 'Enviado datos'
+		
+		'edit_view' => array(
+			'title' => 'Editar condicion de clasificado',
+			'subtitle' => 'Datos para la condicion de clasificado'
+		),
+
+		'show_data' => array(
+			'title' => 'Ver datos para la condicion de clasificado',
+			'subtitle' => 'Condicion de clasificado'
+		),
+
+		'actions' => array(
+			'Show' => 'Ver   ',
+			'Edit' => 'Editar',
+			'Delete' => 'Eliminar'
+		)
 	);

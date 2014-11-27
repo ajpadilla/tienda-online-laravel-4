@@ -55,11 +55,12 @@ class InvoiceStatusController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('invoiceStatus.show',$model->invoiceStatus->id). "'>View</a>
+			
+			$links = "<a class='btn btn-info' href='" . route('invoiceStatus.show', $model->invoiceStatus->id) . "'>".trans('invoiceStatus.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('invoiceStatus.edit',$model->invoiceStatus->id). "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('invoiceStatus.edit', $model->invoiceStatus->id) . "'>".trans('invoiceStatus.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .route('invoiceStatus.destroy',$model->invoiceStatus->id). "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('invoiceStatus.destroy', $model->invoiceStatus->id) . "'>".trans('invoiceStatus.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -95,7 +96,7 @@ class InvoiceStatusController extends \BaseController {
 			{
 				$this->registerInvoiceStatusForm->validate($input);
 				$this->invoiceStatusRepository->createNewInvoiceStatus($input);
-				return Response::json(trans('invoiceStatus.message1').' '.$input['name'].' '.trans('invoiceStatus.message2'));
+				return Response::json(trans('invoiceStatus.response'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -153,7 +154,7 @@ class InvoiceStatusController extends \BaseController {
 			{
 				$this->editInvoiceStatusForm ->validate($input);
 				$this->invoiceStatusRepository->updateInvoiceStatu($input);
-				return Response::json(trans('invoiceStatus.message1').' '.$input['name'].' '.trans('invoiceStatus.message2'));
+				return Response::json(trans('invoiceStatus.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -172,7 +173,7 @@ class InvoiceStatusController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->invoiceStatusRepository->deleteInvoiceStatu($id);
-		Flash::message('¡invoice status borrado  con éxito!');
+		Flash::message(trans('invoiceStatus.Delete'));
 		return Redirect::route('invoiceStatus.index');
 	}
 

@@ -7,29 +7,51 @@
 		"edit"=>"edit/condition/classified/{id}",
 		"update"=>"update/condition/classified/{id}",
 		"destroy"=>"delete/condition/classified/{id}",
-		"title" => "Agregar Condición para classifieds",
-		"subtitle" => "Crear Condición para clasificados",
+		"title" => "Add Condition to classifieds",
+		"subtitle" => "create new condition to classifieds",
+		"sending" => "Adding condition to classifieds",
+		"response" => "condition to classifieds added",
+		"Actualiced" => "Condition to classifieds update",
+		"Delete" => "¡Condition to classifieds successfully removed!",
+
 		"labels" => array(
-			'name' =>'Nombre:',
-			'language' => 'Idioma',
-			'save' => 'Agregar',
+			'name' =>'Name:',
+			'language' => 'Language',
+			'save' => 'Save',
+			'new' => 'New'
 		),
 		"list" => array(
-			'title' => 'Lista para condición para clasificados',
-			'Name' => 'Nombre',
-			'Actions' =>'Acciones'
+			'title' => 'Condition to classifieds list',
+			'subtitle'=>'List of condition to classifieds',
+			'Name' => 'Name',
+			'Actions' =>'Actions'
 		),
+
 		"validation" => array(
-			'required' => 'Campo obligatorio.',
-			'rangelength' => 'Por favor, introduzca un valor entre ',
-			'characters' => 'caracteres.',
-			'number' => 'Por favor, introduzca un número válido.',
-			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
-			'date' => 'Por favor, Ingrese una fecha valida.',
-			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
-			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
+			'required' => 'The field is required.',
+			'rangelength' => 'Please enter a value between ',
+			'characters' => 'Characters.',
+			'number' => 'The field must be a number.',
+			'digits' => 'Please enter whole numbers only.',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
+			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
-		'message1' =>'Nuevo Condición para clasificados',
-		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!'
+
+		'alert' => 'The condition to classifieds name is already registered!.',
+
+		'edit_view' => array(
+			'title' => 'Edit condition to classifieds',
+			'subtitle' => 'Condition to classifieds Details '
+		),
+
+		'show_data' => array(
+			'title' => 'See condition to classifieds details',
+			'subtitle' => 'Condition to classifieds'
+		),
+
+		'actions' => array(
+			'Show' => 'Show   ',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
 	);

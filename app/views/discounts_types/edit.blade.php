@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ Lang::get('modulo.variable') }}--}}
-{{ trans('discountType.title') }}
+{{ trans('discountType.edit_view.title') }}
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('discountType.subtitle') }}</h5>
+				<h5>{{ trans('discountType.edit_view.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
@@ -107,7 +107,7 @@
 	// pre-submit callback 
 		function showRequest(formData, jqForm, options) {          
 			setTimeout(jQuery.fancybox({
-				'content': '<h1>Enviando datos</h1>',
+				'content':'<h1>' + '{{ trans('discountType.sending') }}' + '</h1>',
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',

@@ -1,17 +1,23 @@
 @extends('layouts.template')
 
 @section('title')
-
+	{{ trans('products.title') }}
 @stop
 
 @section('content')
 
+<div class="row">
 	<div class="col-lg-12">
-
-				{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5>{{	trans('products.subtitle') }}</h5>
+			</div>
+			<div class="ibox-content">
+				<div class="row">
+					{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
 					<div class="col-lg-7">
 						<div class="form-group">
-							{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('language_id', trans('products.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
 								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
 							</div>
@@ -29,7 +35,7 @@
 							<div class="col-sm-10">
 								<div class="ibox-content no-padding">
 
-								{{ Form::textarea('description', null, array('class' => 'form-control')) }}
+									{{ Form::textarea('description', null, array('class' => 'form-control')) }}
 								</div>
 							</div>
 						</div>
@@ -128,100 +134,105 @@
 									<label>
 										{{ Form::radio('available_for_order', '1', 1)}}
 										<i></i> Yes </label>
+									</div>
+									<div class="radio i-checks">
+										<label>
+											{{ Form::radio('available_for_order', '0', 0)}}
+											<i></i> No </label>
+										</div>
+									</div>
 								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('available_for_order', '0', 0)}}
-										<i></i> No </label>
-								</div>
-							</div>
-						</div>
 
-						<div class="form-group">
-							{{ Form::label('show_price', trans('products.labels.show_price'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('show_price', '1', 1)}}
-										<i></i> Yes
-									</label>
+								<div class="form-group">
+									{{ Form::label('show_price', trans('products.labels.show_price'), ['class' => 'col-sm-4 control-label']) }}
+									<div class="col-sm-8">
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('show_price', '1', 1)}}
+												<i></i> Yes
+											</label>
+										</div>
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('show_price', '0', 0)}}
+												<i></i> No
+											</label>
+										</div>
+									</div>
 								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('show_price', '0', 0)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
 
-						<div class="form-group">
-							{{ Form::label('accept_barter', trans('products.labels.accept_barter'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('accept_barter', '1', 1)}}
-										<i></i> Yes
-									</label>
+								<div class="form-group">
+									{{ Form::label('accept_barter', trans('products.labels.accept_barter'), ['class' => 'col-sm-4 control-label']) }}
+									<div class="col-sm-8">
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('accept_barter', '1', 1)}}
+												<i></i> Yes
+											</label>
+										</div>
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('accept_barter', '0', 0)}}
+												<i></i> No
+											</label>
+										</div>
+									</div>
 								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('accept_barter', '0', 0)}}
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
 
-						<div class="form-group">
-							{{ Form::label('product_for_barter', trans('products.labels.product_for_barter'), ['class' => 'col-sm-4 control-label']) }}
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('product_for_barter', '1', 1)}}
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										{{ Form::radio('product_for_barter', '0', 0)}}
-										<i></i> No
-									</label>
+								<div class="form-group">
+									{{ Form::label('product_for_barter', trans('products.labels.product_for_barter'), ['class' => 'col-sm-4 control-label']) }}
+									<div class="col-sm-8">
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('product_for_barter', '1', 1)}}
+												<i></i> Yes
+											</label>
+										</div>
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('product_for_barter', '0', 0)}}
+												<i></i> No
+											</label>
+										</div>
+									</div>
 								</div>
 							</div>
+
+							<div class="col-lg-7">
+								<div class="form-group">
+									{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
+									<div class="col-sm-10">
+										{{ Form::select('categories[]',$categories,null,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
+									<div class="col-sm-10">
+										{{ Form::select('condition_id',$condition,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-12">
+								<div class="form-group">
+									<div class="col-sm-4 col-sm-offset-2">
+										{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+									</div>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							{{Form::close()}}
 						</div>
 					</div>
 
-					<div class="col-lg-7">
-						<div class="form-group">
-							{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::select('categories[]',$categories,null,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
 
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								{{ Form::select('condition_id',$condition,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-12">
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
-							</div>
-						</div>
-					</div>
-
-					<div class="clearfix"></div>
-
-				{{Form::close()}}
-
-	</div>
+				</div>
+			</div>		
+		</div>
 @stop
 
 @section('scripts')
@@ -240,11 +251,11 @@
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-			}, 'only letters, numbers and spaces.');
+			}, '{{ trans('products.validation.onlyLettersNumbersAndSpaces') }}');
 
 			$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-			}, 'only letters, numbers and dash.');
+			}, '{{ trans('products.validation.onlyLettersNumbersAndDash') }}');
 
 			$('#formCreateProduct').validate({
 				rules:{
@@ -313,6 +324,70 @@
 					}
 
 				},
+				messages:{
+					name:{
+						required: '{{ trans('products.validation.required') }}',
+						rangelength: '{{ trans('products.validation.rangelength') }}'+'[2, 64]'+'{{ trans('products.validation.characters') }}'
+					},
+					description:{
+						required: '{{ trans('products.validation.required') }}',
+							rangelength: '{{ trans('products.validation.rangelength') }}'+'[10, 255]'+'{{ trans('products.validation.characters') }}'
+					},
+					quantity:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					price:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					width:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					height:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					depth:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					weight:{
+						required: '{{ trans('products.validation.required') }}',
+						number: '{{ trans('products.validation.number') }}'
+					},
+					on_sale:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					active:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					available_for_order:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					show_price:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					accept_barter:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					product_for_barter:{
+						required: '{{ trans('products.validation.required') }}',
+						digits: '{{ trans('products.validation.digits') }}'
+					},
+					'categories[]':{
+						required: '{{ trans('products.validation.required') }}',
+					},
+					condition_id:{
+						required: '{{ trans('products.validation.required') }}',
+					}
+				},
 				highlight:function(element){
 					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 				},
@@ -327,7 +402,7 @@
 			var options = {
 					beforeSubmit:  showRequest,  // pre-submit callback
 					success:       showResponse,  // post-submit callback
-					url:  '{{URL::route('products.store')}}',
+					url:  '{{ URL::route('products.store') }}',
 					type:'POST'
 				};
 			$('#formCreateProduct').ajaxForm(options);
@@ -335,7 +410,7 @@
 			// pre-submit callback
 			function showRequest(formData, jqForm, options) {
 				setTimeout(jQuery.fancybox({
-					'content': '<h1>Enviando datos</h1>',
+					'content':'<h1>' + '{{ trans('products.sending') }}' + '</h1>',
 					'autoScale' : true,
 					'transitionIn' : 'none',
 					'transitionOut' : 'none',

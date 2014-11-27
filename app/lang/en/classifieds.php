@@ -9,43 +9,65 @@
 		"destroy"=>"delete/classified/{id}",
 		"title" => "Agregar Tipo de classified",
 		"subtitle" => "Crear classified",
+		"sending" => "Adding classified type",
+		"response" => "Classified type added",
+		"Actualiced" => "Classified type updated",
+		"Delete" => "¡Classified type successfully removed!",
+
 		"labels" => array(
-			'name' =>'Nombre:',
-			'description' => 'Descripción',
-			'price' => 'Precio',
-			'language' => 'Idioma',
-			'add_photos' => 'Agregar foto',
-			'user' => 'Usuario',
-			'classified_type' => 'Tipo de classified',
-			'classified_condition' => 'Condición del clasificado',
-			'address' => 'Dirección',
-			'save' => 'Agregar',
-			'Yes' => 'Si',
+			'name' =>'Name:',
+			'description' => 'Description',
+			'price' => 'Price',
+			'language' => 'Language',
+			'add_photos' => 'Add photo',
+			'user' => 'User',
+			'classified_type' => 'Classified Type',
+			'classified_condition' => 'Condition Classified',
+			'address' => 'Address',
+			'save' => 'Save',
+			'Yes' => 'Yes',
 			'No' => 'No',
-			'user' => 'Usuario'
+			'new' => 'New'
 		),
+
 		"list" => array(
-			'title' => 'Lista de clasificados',
-			'Name' => 'Nombre',
-			'Description' =>'Descripción',
-			'Address' => 'Dirección',
-			'User' => 'Usuario',
-			'Classifieds_types' => 'Tipo de clasificado',
-			'Classified_condition' => 'Condición del clasificado',
-			'Actions' =>'Acciones'
+			'title' => 'List Classified',
+			'subtitle' => 'List of classified',
+			'Name' => 'Name',
+			'Description' =>'Description',
+			'Address' => 'Address',
+			'User' => 'User',
+			'Classifieds_types' => 'Classified Type',
+			'Classified_condition' => 'Condition Classified',
+			'Actions' =>'Actions'
 		),
+
 		"validation" => array(
-			'required' => 'Campo obligatorio.',
-			'rangelength' => 'Por favor, introduzca un valor entre ',
-			'characters' => 'caracteres.',
-			'number' => 'Por favor, introduzca un número válido.',
-			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
-			'date' => 'Por favor, Ingrese una fecha valida.',
-			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
-			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
+			'required' => 'The field is required.',
+			'rangelength' => 'Please enter a value between ',
+			'characters' => 'Characters.',
+			'number' => 'The field must be a number.',
+			'digits' => 'Please enter whole numbers only.',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
+			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
-		'message1' =>'Nuevo clasificado',
-		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!',
-		'sending' => 'Enviando datos'
+
+		'alert' => 'The classified  name is already registered!.',
+
+		'edit_view' => array(
+			'title' => 'Edit classified ',
+			'subtitle' => 'Classified details '
+		),
+
+		'show_data' => array(
+			'title' => 'See classified details',
+			'subtitle' => 'Classified'
+		),
+
+		'actions' => array(
+			'Show' => 'Show   ',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
+
 	);

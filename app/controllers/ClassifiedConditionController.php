@@ -43,11 +43,12 @@ class ClassifiedConditionController extends \BaseController {
 		});
 	
 		$collection->addColumn('Actions',function($model){
-			$links = "<a href='" .route('classifiedConditions.show',$model->classifiedCondition->id). "'>View</a>
+		
+			$links = "<a class='btn btn-info' href='" . route('classifiedConditions.show', $model->classifiedCondition->id) . "'>".trans('classifiedConditions.actions.Show')." <i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a href='" .route('classifiedConditions.edit',$model->classifiedCondition->id). "'>Edit</a>
+			$links .= "<a a class='btn btn-warning' href='" . route('classifiedConditions.edit', $model->classifiedCondition->id) . "'>".trans('classifiedConditions.actions.Edit')." <i class='fa fa-pencil'></i></a>
 					<br />
-					<a href='" .route('classifiedConditions.destroy',$model->classifiedCondition->id). "'>Delete</a>";
+					<a class='btn btn-danger' href='" . route('classifiedConditions.destroy', $model->classifiedCondition->id) . "'>".trans('classifiedConditions.actions.Delete')." <i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -82,7 +83,7 @@ class ClassifiedConditionController extends \BaseController {
 			{
 				$this->registerClassifiedConditionsForm->validate($input);
 				$this->classifiedConditionsRepository->createNewClassifiedCondition($input);
-				return Response::json(trans('classifiedConditions.message1') . ' ' . $input['name'] . ' ' . trans('classifiedConditions.message2'));
+				return Response::json(trans('classifiedConditions.response'));
 			} 
 			catch (FormValidationException $e)
 			{
@@ -139,7 +140,7 @@ class ClassifiedConditionController extends \BaseController {
 			try
 			{
 				$this->classifiedConditionsRepository->updateClassifiedCondition($input);
-				return Response::json(trans('classifiedConditions.message1').' '.$input['name'].' '.trans('classifiedConditions.message2'));
+				return Response::json(trans('classifiedConditions.Actualiced'));
 			}
 			catch (FormValidationException $e)
 			{
@@ -158,7 +159,7 @@ class ClassifiedConditionController extends \BaseController {
 	public function destroy($id)
 	{
 		$this->classifiedConditionsRepository->delteClassifiedCondition($id);
-		Flash::message('¡condicion de clasificado borrado con éxito!');
+		Flash::message(trans('classifiedConditions.Delete'));
 		return Redirect::route('classifiedConditions.index');
 	}
 

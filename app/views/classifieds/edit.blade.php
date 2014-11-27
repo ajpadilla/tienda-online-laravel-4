@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ trans('classifieds.labels.name')}}--}}
-{{	trans('classifieds.title') }}
+{{	trans('classifieds.edit_view.title') }}
 @stop
 
 @section('content')
@@ -10,11 +10,11 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{	trans('classifieds.subtitle') }}</h5>
+				<h5>{{	trans('classifieds.edit_view.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::model($classified, array('route' => array('classifiedTypes.update', $classified->id),'id'=>'formEditClassified','class'=>'form-horizontal')) }}
+					{{ Form::model($classified, array('route' => array('classifieds.update', $classified->id),'id'=>'formEditClassified','class'=>'form-horizontal')) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('language_id', trans('classifieds.labels.language'),['class'=>'col-sm-2 control-label']) }}
