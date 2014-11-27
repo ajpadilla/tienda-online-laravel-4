@@ -40,8 +40,8 @@
 		'alertColor' => '¡El color ya se encuentra registrado!.',
 
 		'list' =>array(
-			'title' => 'Listado de facturas',
-			'subtitle'=>'Lista de facturas',
+			'title' => 'Listado de estatus para factura',
+			'subtitle'=>'Lista de estatus para factura',
 			'Color' => 'Color',
 			'Name'=>'Nombre',
 			'Description' => 'Descripción',
