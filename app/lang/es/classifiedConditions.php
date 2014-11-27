@@ -11,7 +11,7 @@
 		"subtitle" => "Crear Condición para clasificados",
 		"sending" => "Agregando tipo de clasificado",
 		"response" => "Tipo de clasificado agregado",
-		"Updated" => "Tipo de clasificado actualizado",
+		"Actualiced" => "Tipo de clasificado actualizado",
 		"Delete" => "¡Tipo de clasificado eliminado con exito!",
 
 		"labels" => array(
@@ -42,13 +42,13 @@
 		'alert' => '¡El nombre ya se encuentra registrado!',
 		
 		'edit_view' => array(
-			'title' => 'Editar tipo de clasificado',
-			'subtitle' => 'Datos del tipo de clasificado'
+			'title' => 'Editar condicion de clasificado',
+			'subtitle' => 'Datos para la condicion de clasificado'
 		),
 
 		'show_data' => array(
-			'title' => 'Ver datos del tipo de clasificado',
-			'subtitle' => 'Tipo de clasificado'
+			'title' => 'Ver datos para la condicion de clasificado',
+			'subtitle' => 'Condicion de clasificado'
 		),
 
 		'actions' => array(

@@ -9,6 +9,11 @@
 		"destroy"=>"eliminar/clasificado/{id}",
 		"title" => "Agregar Tipo de clasificado",
 		"subtitle" => "Crear clasificado",
+		"sending" => "Agregando clasificado",
+		"response" => "Clasificado agregado",
+		"Actualiced" => "Clasificado actualizado",
+		"Delete" => "¡Clasificado eliminado con exito!",
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción',
@@ -24,8 +29,10 @@
 			'No' => 'No',
 			'user' => 'Usuario'
 		),
+
 		"list" => array(
 			'title' => 'Lista de clasificados',
+			'subtitle' => 'Listado de clasificados',
 			'Name' => 'Nombre',
 			'Description' =>'Descripción',
 			'Address' => 'Dirección',
@@ -34,6 +41,7 @@
 			'Classified_condition' => 'Condición del clasificado',
 			'Actions' =>'Acciones'
 		),
+
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
 			'rangelength' => 'Por favor, introduzca un valor entre ',
@@ -44,8 +52,22 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
-		'message1' =>'Nuevo clasificado',
-		'message2' =>'Agregado con exito!.',
+
 		'alert' => '¡El nombre ya se encuentra registrado!',
-		'sending' => 'Enviando datos'
+
+		'edit_view' => array(
+			'title' => 'Editar tipo de clasificado',
+			'subtitle' => 'Datos del tipo de clasificado'
+		),
+
+		'show_data' => array(
+			'title' => 'Ver datos del tipo de clasificado',
+			'subtitle' => 'Tipo de clasificado'
+		),
+
+		'actions' => array(
+			'Show' => 'Ver   ',
+			'Edit' => 'Editar',
+			'Delete' => 'Eliminar'
+		)
 	);

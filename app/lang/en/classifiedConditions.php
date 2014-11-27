@@ -11,7 +11,7 @@
 		"subtitle" => "create new condition to classifieds",
 		"sending" => "Adding condition to classifieds",
 		"response" => "condition to classifieds added",
-		"Updated" => "Condition to classifieds update",
+		"Actualiced" => "Condition to classifieds update",
 		"Delete" => "¡Condition to classifieds successfully removed!",
 
 		"labels" => array(
@@ -41,7 +41,7 @@
 
 		'edit_view' => array(
 			'title' => 'Edit condition to classifieds',
-			'subtitle' => 'Condition to classifiedsDetails '
+			'subtitle' => 'Condition to classifieds Details '
 		),
 
 		'show_data' => array(
