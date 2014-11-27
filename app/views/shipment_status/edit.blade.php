@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ trans('shipmentStatus.labels.name')}}--}}
-{{	trans('shipmentStatus.title') }}
+{{	trans('shipmentStatus.edit_view.title') }}
 @stop
 
 @section('content')
@@ -10,7 +10,7 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{	trans('shipmentStatus.subtitle') }}</h5>
+				<h5>{{	trans('shipmentStatus.edit_view.subtitle') }}</h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">

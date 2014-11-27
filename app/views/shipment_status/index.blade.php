@@ -10,10 +10,11 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('shipmentStatus.list.title') }}</h5>
+				<h5>{{ trans('shipmentStatus.list.subtitle') }}</h5>
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
+			<a class="btn btn-info " href="{{route('shipmentStatus.create')}}"><i class="fa fa-paste"></i> {{ trans('shipmentStatus.labels.new') }} </a>
 				<?php
 					$columns = [
 						trans('shipmentStatus.list.Color'),
