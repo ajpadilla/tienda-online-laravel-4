@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-	{{	trans('products.edit_view.title') }}
+	{{	trans('products.show_data.title') }}
 @stop
 
 @section('content')

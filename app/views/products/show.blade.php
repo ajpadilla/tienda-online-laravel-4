@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-    {{--{{ Lang::get('modulo.variable') }}--}}
+    {{  trans('products.show_data.title') }}
 @stop
 
 @section('content')
