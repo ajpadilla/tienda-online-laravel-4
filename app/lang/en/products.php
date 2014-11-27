@@ -12,6 +12,9 @@
 		"subtitle" => "Create new product",
 		"sending" => "Adding product",
 		"response" => "Product added",
+		"updated" => "Product update",
+		"delete" => "¡Product successfully removed!",
+
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description:',
@@ -55,7 +58,9 @@
 				'category'	=> 'Categories',
 				'ratings'	=> 'Ratings',
 				'actions'	=> 'Actions',
-				'title'		=> 'List Products'
+				'title'		=> 'List Products',
+				'title'		=> 'Product List',
+				'subtitle' => 'List of products'
 		),
 
 		'edit_view' => array(
