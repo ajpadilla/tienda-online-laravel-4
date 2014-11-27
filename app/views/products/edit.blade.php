@@ -338,7 +338,7 @@
 			// pre-submit callback
 			function showRequest(formData, jqForm, options) {
 				setTimeout(jQuery.fancybox({
-					'content': '<h1>Enviando datos</h1>',
+					'content':'<h1>' + '{{ trans('products.sending') }}' + '</h1>',
 					'autoScale' : true,
 					'transitionIn' : 'none',
 					'transitionOut' : 'none',
@@ -361,4 +361,3 @@
 		});
 	</script>
 @stop
-luvebr
