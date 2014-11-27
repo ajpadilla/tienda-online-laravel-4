@@ -46,7 +46,7 @@
 			'Name'=>'Nombre',
 			'Description' => 'Descripción',
 			'Actions'=>'Acciones',
-			'title'		=> 'Listado de estus envios',
+			'title'		=> 'Listado de estatus de envio',
 			'subtitle' => 'Lista de estatus de envio',
 		),
 
