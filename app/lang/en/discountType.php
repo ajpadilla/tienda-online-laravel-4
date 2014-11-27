@@ -9,15 +9,24 @@
 		"destroy"=>"delete/discount/type/{id}",
 		"title" => "Add Discount Type",
 		"subtitle" => "Create new discount type",
+		"sending" => "Adding discount type",
+		"response" => "Discount type added",
+		"updated" => "Discount type updated",
+		"delete" => "¡Discount type successfully removed!",
+
 		"labels" => array(
 			'name' =>'Name:',
 			'save' => 'Save',
+			'language' => 'Language:',
+			'new' => 'New'
 		),
 		"list" => array(
-			'title' => 'list of types of discounts',
 			'Name' => 'Name',
-			'Actions' =>'Actions'
+			'Actions' =>'Actions',
+			'title'		=> 'Discounts type list',
+			'subtitle' => 'List of discounts types'
 		),
+
 		"validation" => array(
 			'required' => 'The field is required.',
 			'rangelength' => 'Please enter a value between ',
@@ -28,7 +37,25 @@
 			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),
+
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
-		'alert' => '¡The discount code is already registered!.'
+		'alert' => '¡The discount code is already registered!.',
+
+		'edit_view' => array(
+			'title' => 'Edit discount type',
+			'subtitle' => 'Discount type Details '
+		),
+
+		'show_data' => array(
+			'title' => 'See discount type details',
+			'subtitle' => 'Discount type'
+		),
+
+		'actions' => array(
+			'Show' => 'Show   ',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
+		
 	);

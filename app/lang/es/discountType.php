@@ -9,16 +9,26 @@
 		"destroy"=>"eliminar/tipo/descuento/{id}",
 		"title" => "Agregar Tipo de descuento",
 		"subtitle" => "Crear nuevo  tipo de descuento",
+		"sending" => "Agregando tipo de descuento",
+		"response" => "Tipo de descuento agregado",
+		"updated" => "Tipo de descuento actualizado",
+		"delete" => "¡Tipo de descuento eliminado con éxito!",
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'language' => 'Idioma',
 			'save' => 'Agregar',
 		),
+
 		"list" => array(
 			'title' => 'Lista para los tipos de descuento',
 			'Name' => 'Nombre',
-			'Actions' =>'Acciones'
+			'Actions' =>'Acciones',
+			'title'		=> 'Listado de descuentos',
+			'subtitle' => 'Lista de descuentos',
+			'new' => 'Nuevo'
 		),
+
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
 			'rangelength' => 'Por favor, introduzca un valor entre ',
@@ -29,7 +39,24 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
+
 		'message1' =>'Nuevo tipo de descuento',
 		'message2' =>'Agregado con exito!.',
-		'alert' => '¡El nombre ya se encuentra registrado!'
+		'alert' => '¡El nombre ya se encuentra registrado!',
+
+		'edit_view' => array(
+			'title' => 'Edit discount type',
+			'subtitle' => 'Discount type Details'
+		),
+
+		'show_data' => array(
+			'title' => 'See discount details',
+			'subtitle' => 'Tipo de descuento'
+		),
+
+		'actions' => array(
+			'Show' => 'Show   ',
+			'Edit' => 'Edit',
+			'Delete' => 'Delete'
+		)
 	);
