@@ -11,10 +11,12 @@
 		'destroy' => 'eliminar/producto/{id}',
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
+		"sending" => "Agregando producto",
+		"response" => "Producto agregado",
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
-			'on_sale' => 'a la venta: :',
+			'on_sale' => 'A la venta: :',
 			'quantity' => 'Cantidad:',
 			'price' => 'Precio:',
 			'width' => 'Ancho:',
@@ -30,7 +32,9 @@
 			'condition' => 'Condición:',
 			'measure' => 'Medida:',
 			'height' => 'Altura: ',
-			'depth' => 'Profundidad:'
+			'depth' => 'Profundidad:',
+			'language' => 'Idioma:',
+			'new' => 'Nuevo'		
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
@@ -42,7 +46,7 @@
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),
-		'list' =>array(
+		'list' => array(
 				'photo'		=> 'Foto',
 				'name'		=> 'Nombre',
 				'price'		=> 'Precio',
@@ -52,7 +56,17 @@
 				'category'	=> 'Categorias',
 				'ratings'	=> 'Ratings',
 				'actions'	=> 'Acciones',
-				'title'		=> 'Lista de productos'
+				'title'		=> 'Listado de productos',
+				'subtitle' => 'Lista de productos'
+		),
+
+		'edit_view' => array(
+			'title' => 'Editar Producto',
+			'subtitle' => 'Datos del producto'
+		),
+
+		'show_data' => array(
+			'title' => 'Ver datos del producto',
 		),
 
 		'actions' => array(
