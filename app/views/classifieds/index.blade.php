@@ -17,6 +17,7 @@
 			<a class="btn btn-info " href="{{route('classifieds.create')}}"><i class="fa fa-paste"></i> {{ trans('classifieds.labels.new') }} </a>
 				<?php
 					$columns = [
+						trans('classifieds.list.photo'),
 						trans('classifieds.list.Name'),
 						trans('classifieds.list.Description'),
 						trans('classifieds.list.Address'),
