@@ -1,6 +1,6 @@
 <?php 
 	return array(
-		"create" => "crear/fotoClasificado/{classifieds_id}",
+		"create" => "crear/fotoClasificado",
 		"store" => "agregar/fotoClasificado",
 		"index" => "lista/clasificado",
 		"show"=>"ver_clasificado/{id}",
