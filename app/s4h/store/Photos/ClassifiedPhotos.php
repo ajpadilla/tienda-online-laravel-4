@@ -5,7 +5,7 @@ use Eloquent;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Photo extends Eloquent {
+class ClassifiedPhotos extends Eloquent {
 
 	use SoftDeletingTrait;
 
@@ -25,7 +25,7 @@ class Photo extends Eloquent {
 		return $this->belongsTo('s4h\store\Users\User');
 	}
 
-	public function register(UploadedFile $file, $productId, $userId)
+	public function register(UploadedFile $file, $classified_id, $userId)
 	{
 		$this->upload = new Upload($file);
 		$this->upload->process();
@@ -37,7 +37,7 @@ class Photo extends Eloquent {
 		$this->size = $this->upload->getSize();
 		$this->mimetype = $this->upload->getMimeType();
 		$this->user_id = $userId;
-		$this->product_id = $productId;
+		$this->classified_id = $classified_id;
 		$this->save();
 	}
 }
