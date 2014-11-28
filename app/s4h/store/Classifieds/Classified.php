@@ -29,4 +29,21 @@ class Classified extends Eloquent {
 		return $this->belongsTo('s4h\store\ClassifiedConditions\ClassifiedCondition','classified_condition_id');
 	}
 
+	public function photos()
+	{
+		return $this->hasMany('s4h\store\Photos\ClassifiedPhotos');
+	}
+
+	public function hasPhotos(){
+		return $this->photos->count();
+	}
+
+	public function getFirstPhoto(){
+		if($this->hasPhotos())
+			foreach ($this->photos as $photo)
+				return $photo;
+		return false;
+	}
+
+
 }
