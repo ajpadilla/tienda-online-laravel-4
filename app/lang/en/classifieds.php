@@ -33,6 +33,7 @@
 		"list" => array(
 			'title' => 'List Classified',
 			'subtitle' => 'List of classified',
+			'photo' => 'Photo',
 			'Name' => 'Name',
 			'Description' =>'Description',
 			'Address' => 'Address',

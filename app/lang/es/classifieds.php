@@ -34,6 +34,7 @@
 		"list" => array(
 			'title' => 'Lista de clasificados',
 			'subtitle' => 'Listado de clasificados',
+			'photo' => 'Photo',
 			'Name' => 'Nombre',
 			'Description' =>'Descripción',
 			'Address' => 'Dirección',
