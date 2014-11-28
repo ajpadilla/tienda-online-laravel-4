@@ -41,6 +41,19 @@ class ClassifiedsController extends \BaseController {
 			->searchColumns('name','description', 'address')
 			->orderColumns('name','description', 'address');
 
+		$collection->addColumn('photo', function($model)
+		{
+
+
+			$links = '';
+			if($model->classified->hasPhotos()){
+					$photo = $model->classified->getFirstPhoto();
+					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'></a>";
+
+			}
+			return $links;
+		});
+
 		$collection->addColumn('name', function($model)
 		{
 			return $model->name;
@@ -116,11 +129,16 @@ class ClassifiedsController extends \BaseController {
 	public function store()
 	{
 		$input = Input::all();
-		//dd($input);
 		try
 		{
 			$classified = $this->classifiedRepository->createNewClassified($input);
-			return Response::json(trans('classifieds.response'));
+			if ($input['add_photos'] == 1) {
+				Session::put('classified_id', $classified->id);
+				return Response::json(array('message' => trans('classifieds.response'), 
+										'add_photos'=>$input['add_photos']
+				));
+			}
+			return Response::json(array('message' => trans('classifieds.response'), 'add_photos' => 0));
 		} 
 		catch (FormValidationException $e)
 		{
