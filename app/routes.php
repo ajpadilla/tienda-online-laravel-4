@@ -372,7 +372,7 @@ function () {
 		'uses' => 'PhotosClassifiedsController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('photos.store'), [
+	Route::post(LaravelLocalization::transRoute('photosClassifieds.store'), [
 		'as' => 'photosClassifieds.store',
 		'uses' => 'PhotosClassifiedsController@store'
 	]);
