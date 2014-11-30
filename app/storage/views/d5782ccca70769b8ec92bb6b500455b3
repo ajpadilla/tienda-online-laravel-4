@@ -1,0 +1,86 @@
+<?php $__env->startSection('title'); ?>
+    <?php /*<?php echo Lang::get('modulo.variable'); ?>*/ ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+	    <div class="row">
+	        <h2>New Products</h2>
+	        <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	    </div>
+	    <div class="row">
+	        <h2>Top Products</h2>
+	        <div class="sidebar col col-md-3">
+	            <?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	        </div>
+	        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        </div>
+        <div class="row">
+            <h2>New Classifieds</h2>
+            <?php /* Aquí va es top classifieds */ ?>
+            <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('in-situ-css'); ?>
+	<link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>"/>
+	<?php /*<link rel="stylesheet" href="<?php echo asset('assets/css/components.css'); ?>"/>
+	<link rel="stylesheet" href="<?php echo asset('assets/css/style-shop.css'); ?>"/>*/ ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('in-situ-js'); ?>
+	<script src="<?php echo asset('assets/js/plugins/zoom/jquery.zoom.min.js'); ?>" type="text/javascript"></script><!-- product zoom -->
+	<script src="<?php echo asset('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js'); ?>" type="text/javascript"></script><!-- product zoom -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+  <script>
+    var initImageZoom = function () {
+        jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
+	}
+
+    var initTouchspin = function () {
+	  jQuery(".product-quantity .form-control").TouchSpin({
+	      buttondown_class: "btn quantity-down",
+	      buttonup_class: "btn quantity-up"
+	  });
+	  jQuery(".quantity-down").html("<i class='fa fa-angle-down'></i>");
+	  jQuery(".quantity-up").html("<i class='fa fa-angle-up'></i>");
+	}
+
+
+
+    var handleFancybox = function () {
+        if (!jQuery.fancybox) {
+            return;
+        }
+
+        jQuery(".fancybox-fast-view").fancybox();
+
+        if (jQuery(".fancybox-button").size() > 0) {
+            jQuery(".fancybox-button").fancybox({
+                groupAttr: 'data-rel',
+                prevEffect: 'none',
+                nextEffect: 'none',
+                closeBtn: true,
+                helpers: {
+                    title: {
+                        type: 'inside'
+                    }
+                }
+            });
+
+            $('.fancybox-video').fancybox({
+                type: 'iframe'
+            });
+        }
+    }
+    $(document).ready(function(){
+		handleFancybox();
+		initImageZoom();
+		initTouchspin();
+    });
+  </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
