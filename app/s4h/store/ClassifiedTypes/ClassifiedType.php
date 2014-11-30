@@ -29,7 +29,7 @@ class ClassifiedType extends Eloquent {
 		foreach ($this->classifieds as $classified) {
 			$classified->delete();
 		}
-		ClassifiedTypeLang::where('classified_types_id','=', $classified_type_id)->delete();
+		ClassifiedTypeLang::where('classified_types_id','=', $this->id)->delete();
 		return parent::delete();
 	}
 
