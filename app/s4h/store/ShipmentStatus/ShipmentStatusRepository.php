@@ -58,6 +58,5 @@ class ShipmentStatusRepository {
 	{
 		$shipment_status = $this->getShipmentStatus($shipment_status_id);
 		$shipment_status->delete();
-		ShipmentStatusLang::where('shipment_status_id','=',$shipment_status_id)->delete();
 	}
 }
