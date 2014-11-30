@@ -1,7 +1,7 @@
 <?php 
 	return array(
-		"create" => "crear/fotoClasificado",
-		"store" => "agregar/fotoClasificado",
+		"create" => "crear/foto/Clasificado",
+		"store" => "agregar/foto/Clasificado",
 		"title" => "Agregar foto a clasificado",
 		"subtitle" => "Adjuntar fotos al clasificado",
 
