@@ -2,6 +2,7 @@
 	
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use s4h\store\ShipmentStatusLang\ShipmentStatusLang;
 /**
  * 
  */
@@ -17,6 +18,12 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
  	
  	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','shipment_status_lang','shipment_status_id','language_id')->withPivot('name','description');
+	}
+
+	public function delete()
+	{
+		ShipmentStatusLang::where('shipment_status_id','=',$this->id)->delete();
+		return parent::delete();
 	}
 
  } 

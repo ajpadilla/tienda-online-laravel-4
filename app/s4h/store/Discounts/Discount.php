@@ -2,6 +2,7 @@
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use s4h\store\DiscountsLang\DiscountLang;
 
 class Discount extends Eloquent {
 	use SoftDeletingTrait;
@@ -24,5 +25,11 @@ class Discount extends Eloquent {
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','discounts_lang','discount_id','language_id')->withPivot('name','description');
 	}	
+
+	public function delete()
+	{
+		DiscountLang::where('discount_id','=',$this->id)->delete();
+		return parent::delete();
+	}
 
 }

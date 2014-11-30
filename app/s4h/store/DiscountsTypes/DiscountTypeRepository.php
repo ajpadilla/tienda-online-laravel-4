@@ -55,7 +55,6 @@ class DiscountTypeRepository {
 	{
 		$discount_type = $this->getDiscountTypeId($discount_type_id);
 		$discount_type->delete();
-		DiscountTypeLang::where('discount_type_id','=', $discount_type_id)->delete();
 	}
 
 	public function getDiscountTypeId($discount_type_id)

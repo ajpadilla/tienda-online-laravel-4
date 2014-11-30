@@ -37,7 +37,6 @@ class InvoiceStatusRepository {
 	{
 		$invoiceStatus = $this->getInvoicetStatus($invoice_status_id);
 		$invoiceStatus->delete();
-		InvoiceStatusLang::where('invoice_status_id','=', $invoice_status_id)->delete();
 	}
 
 	public function getNameInvoiceStatus($data = array())

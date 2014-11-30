@@ -72,6 +72,5 @@ class DiscountRepository {
 	{
 		$discount = $this->getDiscountId($discount_id);
 		$discount->delete();
-		DiscountLang::where('discount_id','=',$discount_id)->delete();
 	}
 }
