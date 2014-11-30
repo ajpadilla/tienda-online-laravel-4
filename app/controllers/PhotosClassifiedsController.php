@@ -31,11 +31,11 @@ class PhotosClassifiedsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//$classified_id = Session::get('classified_id');
-		$classified_id = 1;
+		$classified_id = Session::get('classified_id');
+		$language_id = Session::get('language_id');
 		$classified = $this->classifiedRepository->getClassifiedId($classified_id);
-		$language = $this->languageRepository->returnLanguage();
-		$classified_language = $classified->languages()->where('language_id','=', $language->id)->first();
+		//$language = $this->languageRepository->returnLanguage();
+		$classified_language = $classified->languages()->where('language_id','=', $language_id)->first();
 		return View::make('photos_classifieds.create',compact('classified_id','classified_language','classified'));
 	}
 
