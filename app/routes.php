@@ -367,13 +367,13 @@ function () {
 		* ------------------------------ Rutas Photos -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('photosClassifieds.create'), [
-		'as' => 'photosClassifieds.create',
+	Route::get(LaravelLocalization::transRoute('photoClassified.create'), [
+		'as' => 'photoClassified.create',
 		'uses' => 'PhotosClassifiedsController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('photosClassifieds.store'), [
-		'as' => 'photosClassifieds.store',
+	Route::post(LaravelLocalization::transRoute('photoClassified.store'), [
+		'as' => 'photoClassified.store',
 		'uses' => 'PhotosClassifiedsController@store'
 	]);
 
