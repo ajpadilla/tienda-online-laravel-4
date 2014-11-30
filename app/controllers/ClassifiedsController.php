@@ -134,6 +134,7 @@ class ClassifiedsController extends \BaseController {
 			$classified = $this->classifiedRepository->createNewClassified($input);
 			if ($input['add_photos'] == 1) {
 				Session::put('classified_id', $classified->id);
+				Session::put('language_id', $input['language_id']);
 				return Response::json(array('message' => trans('classifieds.response'), 
 										'add_photos'=>$input['add_photos']
 				));
