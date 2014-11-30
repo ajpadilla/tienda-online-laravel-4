@@ -41,7 +41,6 @@ class ClassifiedConditionsRepository {
 	{
 		$classified_condition = $this->getClassifiedConditionId($classified_condition_id);
 		$classified_condition->delete();
-		ClassifiedConditionLang::where('classified_conditions_id','=', $classified_condition_id)->delete();
  	}
 
 	public function getName($data)

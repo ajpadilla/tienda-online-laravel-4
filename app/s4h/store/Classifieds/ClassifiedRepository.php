@@ -51,7 +51,6 @@ class ClassifiedRepository{
 	{
 		$classified = $this->getClassifiedId($classified_id);
 		$classified->delete();
-		ClassifiedsLang::where('classified_id','=', $classified_id)->delete();
  	}
 
 	public function getClassifiedId($classified_id)

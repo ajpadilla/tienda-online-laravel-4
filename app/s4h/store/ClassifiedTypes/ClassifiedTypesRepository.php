@@ -40,7 +40,6 @@ class ClassifiedTypesRepository {
 	{
 		$classified_type = $this->getClassifiedTypeId($classified_type_id);
 		$classified_type->delete();
-		ClassifiedTypeLang::where('classified_types_id','=', $classified_type_id)->delete();
  	}
 
 	public function getName($data)
