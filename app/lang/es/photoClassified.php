@@ -1,16 +1,18 @@
 <?php 
 	return array(
-		"create" => "crear/fotoClasificado",
-		"store" => "agregar/fotoClasificado",
+		
+		"create" => "crear/foto/Clasificado",
+		"store" => "agregar/foto/Clasificado",
 		"title" => "Agregar foto a clasificado",
-		"subtitle" => "Adjuntar fotos al clasificado",
+		"subtitle" => "Añadir foto a clasificado",
 
 		"labels" => array(
-			'add' => 'Agregar fotos...',
+			'add' => 'Agregar foto...',
 			'init' => 'Iniciar',
 			'cancel' => 'Cancelar',
 			'delete' => 'Eliminar'
  		),
+
 		"list" => array(
 			'title' => 'Lista de clasificados',
 			'Name' => 'Nombre',

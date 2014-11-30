@@ -1,8 +1,8 @@
 <?php 
 	return array(
 		
-		"create" => "create/photoClassified",
-		"store" => "add/photoClassified",
+		"create" => "create/photo/Classified",
+		"store" => "add/photo/Classified",
 		"title" => "Add photo to classified",
 		"subtitle" => "Attach photos to classified",
 
