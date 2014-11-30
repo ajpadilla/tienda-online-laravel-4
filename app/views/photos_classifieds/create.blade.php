@@ -96,7 +96,7 @@
 		previewNode.parentNode.removeChild(previewNode);
 
 		var myDropzone = new Dropzone(document.body, {
-			url: "{{ route('photosClassifieds.store') }}",
+			url: "{{ route('photoClassified.store') }}",
 			thumbnailWidth: 80,
             thumbnailHeight: 80,
 			addRemoveLinks: true,

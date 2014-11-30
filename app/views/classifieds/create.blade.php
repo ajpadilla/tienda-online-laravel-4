@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('classifieds.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateClassified']) }}
+					{{ Form::open(['url' => LaravelLocalization::transRoute('classifieds.store'),'class'=>'form-horizontal','id' => 'formCreateClassified']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('language_id', trans('classifieds.labels.language'),['class'=>'col-sm-2 control-label']) }}
@@ -184,8 +184,9 @@
 		});
 
 		var options = { 
+			 	dataType:  'json', 
 				beforeSubmit:  showRequest,  // pre-submit callback 
-				success:       showResponse,  // post-submit callback 
+				success:       processJson,  // post-submit callback 
 				url:  '{{URL::route('classifieds.store')}}',
         		type:'POST'
 			};
@@ -208,18 +209,17 @@
 			return $('#formCreateClassified').valid();
 		}
 
-		// post-submit callback
-		function showResponse(responseText, statusText, xhr, $form)  {
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText.message + '</h1>',
+		function processJson(data) { 
+    	// 'data' is the json object returned from the server 
+    		jQuery.fancybox({
+				'content' : '<h1>'+ data.message + '</h1>',
 				'autoScale' : true
 			});
 
-			if (responseText.add_photos == 1) {
-				document.location.href = '{{ URL::route('photosClassifieds.create') }}';
-			};
+    		if(data.add_photos == 1)
+				document.location.href = '{{ URL::route('photoClassified.create') }}';
 
-			
-		} 			
+   			//alert(data.message+' '+ data.add_photos); 
+		}	
 </script>
 @stop
