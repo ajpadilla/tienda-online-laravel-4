@@ -33,7 +33,6 @@ class PhotosClassifiedsController extends \BaseController {
 	{
 		$classified_id = Session::get('classified_id');
 		$classified = $this->classifiedRepository->getClassifiedId($classified_id);
-		//dd($classified);
 		$language = $this->languageRepository->returnLanguage();
 		$classified_language = $classified->languages()->where('language_id','=', $language->id)->first();
 		return View::make('photos_classifieds.create',compact('classified_id','classified_language','classified'));
