@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ trans('classifieds.labels.name')}}--}}
-{{	trans('classifieds.title') }}
+{{	trans('photoClassified.title') }}
 @stop
 
 
@@ -12,7 +12,7 @@
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h1 class="pagetitle nodesc">
-					Adjuntar fotos al clasificado {{ $classified_language->pivot->name }}
+					{{	trans('photoClassified.subtitle') }} {{ $classified_language->pivot->name }}
 				</h1>
 			</div>
 			<div class="ibox-content">
@@ -23,15 +23,15 @@
 								<!-- The fileinput-button span is used to style the file input field as button -->
 								<button id="addPhoto" class="btn btn-success fileinput-button dz-clickable">
 									<i class="glyphicon glyphicon-plus"></i>
-									<span>Agregar fotos...</span>
+									<span>{{ trans('photoClassified.labels.add') }}</span>
 								</button>
 								<button type="submit" class="btn btn-primary start">
 									<i class="glyphicon glyphicon-upload"></i>
-									<span>Iniciar</span>
+									<span>{{ trans('photoClassified.labels.init') }}</span>
 								</button>
 								<button type="reset" class="btn btn-warning cancel">
 									<i class="glyphicon glyphicon-ban-circle"></i>
-									<span>Cancelar</span>
+									<span>{{ trans('photoClassified.labels.cancel') }}</span>
 								</button>
 									{{--{{ Form::open(['route' => 'products.index', 'method' => 'get']) }}
 										<button type="submit" href="{{ route('products.index') }}" class="btn-alert">
@@ -67,15 +67,15 @@
 										<div class="col-lg-5">
 											<button class="btn btn-primary start">
 												<i class="glyphicon glyphicon-upload"></i>
-												<span>Iniciar</span>
+												<span>{{ trans('photoClassified.labels.init') }}</span>
 											</button>
 											<button data-dz-remove class="btn btn-warning cancel">
 												<i class="glyphicon glyphicon-ban-circle"></i>
-												<span>Cancelar</span>
+												<span>{{ trans('photoClassified.labels.cancel') }}</span>
 											</button>
 											<button data-dz-remove class="btn btn-danger delete">
 												<i class="glyphicon glyphicon-trash"></i>
-												<span>Eliminar</span>
+												<span>{{ trans('photoClassified.labels.delete') }}</span>
 											</button>
 										</div>
 									</div>
