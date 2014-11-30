@@ -2,6 +2,7 @@
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use s4h\store\ClassifiedsLang\ClassifiedsLang;
 /**
 * 
 */
@@ -45,5 +46,15 @@ class Classified extends Eloquent {
 		return false;
 	}
 
+	/*
+	*	Eliminar clasificado y relaciones
+	*/
+	public function delete()
+	{
+		if($this->hasPhotos())
+			$this->photos()->delete();
+		ClassifiedsLang::where('classified_id','=', $this->id)->delete();
+		return parent::delete();
+	}
 
 }
