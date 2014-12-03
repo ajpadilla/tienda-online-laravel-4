@@ -18,6 +18,7 @@
 			'name' =>'Nombre:',
 			'language' => 'Idioma',
 			'save' => 'Agregar',
+			'new' => 'Nuevo'
 		),
 
 		"list" => array(
@@ -26,7 +27,6 @@
 			'Actions' =>'Acciones',
 			'title'		=> 'Listado de descuentos',
 			'subtitle' => 'Lista de descuentos',
-			'new' => 'Nuevo'
 		),
 
 		"validation" => array(
@@ -45,18 +45,18 @@
 		'alert' => '¡El nombre ya se encuentra registrado!',
 
 		'edit_view' => array(
-			'title' => 'Edit discount type',
-			'subtitle' => 'Discount type Details'
+			'title' => 'Editar typo de descuento',
+			'subtitle' => 'Datos del tipo de descuento'
 		),
 
 		'show_data' => array(
-			'title' => 'See discount details',
+			'title' => 'Ver detalles del tipo de descuento',
 			'subtitle' => 'Tipo de descuento'
 		),
 
 		'actions' => array(
-			'Show' => 'Show   ',
-			'Edit' => 'Edit',
-			'Delete' => 'Delete'
+			'Show' => 'Ver   ',
+			'Edit' => 'Editar',
+			'Delete' => 'Borar'
 		)
 	);
