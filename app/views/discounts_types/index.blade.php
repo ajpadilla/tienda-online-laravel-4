@@ -35,18 +35,4 @@
 
 @section('scripts')
 	{{ $table->script() }}
-	<script>
-		jQuery(".btn.btn-info").fancybox({
-           		centerOnScroll: true,
-            	hideOnOverlayClick: true,
-            	type:'iframe',
-        });
-
-        jQuery(".btn.btn-warning").fancybox({
-           		centerOnScroll: true,
-            	hideOnOverlayClick: true,
-            	type:'iframe',
-        });
-        
-	</script>
 @stop
