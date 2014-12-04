@@ -25,7 +25,7 @@ class ProductPhotos extends Eloquent {
 		return $this->belongsTo('s4h\store\Users\User');
 	}
 
-	public function register(UploadedFile $file, $classified_id, $userId)
+	public function register(UploadedFile $file, $product_id, $userId)
 	{
 		$this->upload = new Upload($file);
 		$this->upload->process();
@@ -37,7 +37,7 @@ class ProductPhotos extends Eloquent {
 		$this->size = $this->upload->getSize();
 		$this->mimetype = $this->upload->getMimeType();
 		$this->user_id = $userId;
-		$this->classified_id = $classified_id;
+		$this->product_id = $product_id;
 		$this->save();
 	}
 }
