@@ -13,7 +13,7 @@ class ProductPhotos extends Eloquent {
 
 	protected $dates = ['deleted_at'];
 
-	protected $table = 'classified_photos';
+	protected $table = 'product_photos';
 
 	private $upload;
 
