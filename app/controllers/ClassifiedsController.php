@@ -43,8 +43,6 @@ class ClassifiedsController extends \BaseController {
 
 		$collection->addColumn('photo', function($model)
 		{
-
-
 			$links = '';
 			if($model->classified->hasPhotos()){
 					$photo = $model->classified->getFirstPhoto();
@@ -197,7 +195,14 @@ class ClassifiedsController extends \BaseController {
 		try
 		{
 			$classified = $this->classifiedRepository->updateClassified($input);
-			return Response::json(trans('classifieds.Actualiced'));
+			if ($input['add_photos'] == 1) {
+				Session::put('classified_id', $classified->id);
+				Session::put('language_id', $input['language_id']);
+				return Response::json(['message' => trans('classifieds.response'), 
+										'add_photos'=>$input['add_photos']
+				]);
+			}
+			return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
 		} 
 		catch (FormValidationException $e)
 		{
