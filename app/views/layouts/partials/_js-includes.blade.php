@@ -60,12 +60,18 @@
 		centerOnScroll: true,
 		hideOnOverlayClick: true,
 		type:'iframe',
+		autoScale: true,
+		width : '100%',
+		height : '70%'
 	});
 
 	jQuery(".btn.btn-warning.btn-circle").fancybox({
 		centerOnScroll: true,
 		hideOnOverlayClick: true,
 		type:'iframe',
+		autoScale: true,
+		width : '100%',
+		height : '70%'
 	});
 </script>
 
