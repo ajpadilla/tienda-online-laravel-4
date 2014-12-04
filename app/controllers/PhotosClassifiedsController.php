@@ -6,7 +6,7 @@ use s4h\store\Photos\ClassifiedPhotos;
 class PhotosClassifiedsController extends \BaseController {
 
 	private $classifiedRepository;
-		private $languageRepository;
+	private $languageRepository;
 
 	function __construct(ClassifiedRepository $classifiedRepository, LanguageRepository $languageRepository) {
 		$this->classifiedRepository = $classifiedRepository;
