@@ -211,9 +211,12 @@
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
 			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
+				'content' : '<h1>'+ responseText.message + '</h1>',
 				'autoScale' : true
 			});
+
+			if(responseText.add_photos == 1)
+				document.location.href = '{{ URL::route('photoClassified.create') }}';
 		} 			
 </script>
 @stop

@@ -55,6 +55,26 @@
 <!-- simplecolorpicker -->
 {{ HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'); }}
 
+<script>
+	jQuery(".btn.btn-info.btn-circle").fancybox({
+		centerOnScroll: true,
+		hideOnOverlayClick: true,
+		type:'iframe',
+		autoScale: true,
+		width : '100%',
+		height : '70%'
+	});
+
+	jQuery(".btn.btn-warning.btn-circle").fancybox({
+		centerOnScroll: true,
+		hideOnOverlayClick: true,
+		type:'iframe',
+		autoScale: true,
+		width : '100%',
+		height : '70%'
+	});
+</script>
+
 @yield('in-situ-js')
 
 @yield('scripts')
