@@ -145,11 +145,11 @@ class ClassifiedsController extends \BaseController {
 			if ($input['add_photos'] == 1) {
 				Session::put('classified_id', $classified->id);
 				Session::put('language_id', $input['language_id']);
-				return Response::json(array('message' => trans('classifieds.response'), 
+				return Response::json(['message' => trans('classifieds.response'), 
 										'add_photos'=>$input['add_photos']
-				));
+				]);
 			}
-			return Response::json(array('message' => trans('classifieds.response'), 'add_photos' => 0));
+			return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
 		} 
 		catch (FormValidationException $e)
 		{
