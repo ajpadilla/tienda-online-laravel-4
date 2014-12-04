@@ -45,6 +45,8 @@ class ClassifiedRepository{
 				'address' => $data['address']
 			));
 		}
+
+		return $classified;
 	}
 
 	public function delteClassified($classified_id)
