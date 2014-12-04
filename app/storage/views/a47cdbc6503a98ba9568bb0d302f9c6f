@@ -1,0 +1,39 @@
+<?php $__env->startSection('title'); ?>
+<?php /*<?php echo Lang::get('modulo.variable'); ?>*/ ?>
+<?php echo trans('discountType.list.title'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5><?php echo trans('discountType.list.title'); ?></h5>
+			</div>
+			<?php echo $__env->make('flash::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			<div class="ibox-content">
+				<?php
+					$columns = [
+						trans('discountType.list.Name'),
+						trans('discountType.list.Actions')
+				];
+				$table = Datatable::table()
+				->addColumn($columns)
+				->setUrl(route('api.discountType'))
+				->noScript();
+				?>
+				<div class="row"><br/></div>
+				<?php echo $table->render(); ?>
+
+			</div>
+		</div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<?php echo $table->script(); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
