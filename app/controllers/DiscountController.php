@@ -176,11 +176,11 @@ class DiscountController extends \BaseController {
 		});
 
 		$collection->addColumn('Actions', function ($model) {
-			$links = "<a class='btn btn-info' href='" . route('discounts.show', $model->discount->id) . "'>".trans('discounts.actions.Show')." <i class='fa fa-check'></i></a>
+			$links = "<a class='btn btn-info btn-circle' href='" . route('discounts.show', $model->discount->id) . "'><i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a a class='btn btn-warning' href='" . route('discounts.edit', $model->discount->id) . "'>".trans('discounts.actions.Edit')." <i class='fa fa-pencil'></i></a>
+			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('discounts.edit', $model->discount->id) . "'><i class='fa fa-pencil'></i></a>
 					<br />
-					<a class='btn btn-danger' href='" . route('discounts.destroy', $model->discount->id) . "'>".trans('products.actions.Delete')." <i class='fa fa-times'></i></a>";
+					<a class='btn btn-danger btn-circle' href='" . route('discounts.destroy', $model->discount->id) . "'><i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
