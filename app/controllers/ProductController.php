@@ -76,8 +76,15 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->registerProductForm->validate($input);
-				$this->productRepository->createNewProduct($input);
-				return Response::json(trans('products.response'));
+				$product = $this->productRepository->createNewProduct($input);
+				if ($input['add_photos'] == 1) {
+					Session::put('product_id', $product->id);
+					Session::put('language_id', $input['language_id']);
+					return Response::json(['message' => trans('classifieds.response'), 
+						'add_photos'=> $input['add_photos']
+					]);
+				}
+				return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
 			}
 			catch (FormValidationException $e)
 			{
