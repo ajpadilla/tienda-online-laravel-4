@@ -160,15 +160,20 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('photo', function($model)
 		{
-
-
-			/*$links = '';
-			if($model->product->hasPhotos()){
-					$photo = $model->product->getFirstPhoto();
-					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->name . "' src='" . asset($photo->path . $photo->name) . "'></a>";
-
+			$links = '';
+			$i = 0;
+			foreach ($model->product->photos as $photo) {
+				if ($i < 3) {
+					$links .= "	<a href='#'>
+									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
+								</a>";
+				} else {
+					break;
+				}
+				$i++;
 			}
-			return $links;*/
+
+			return $links;
 		});
 
 		$collection->addColumn('name', function($model)
