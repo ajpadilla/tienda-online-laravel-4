@@ -17,8 +17,8 @@ class ProductPhotos extends Eloquent {
 
 	private $upload;
 
-	public function classified(){
-		return $this->belongsTo('s4h\store\Classifieds\Classified');
+	public function product(){
+		return $this->belongsTo('s4h\store\Products\Product');
 	}
 
 	public function user(){
