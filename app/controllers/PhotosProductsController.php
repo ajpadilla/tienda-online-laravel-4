@@ -1,6 +1,17 @@
 <?php
 
+use s4h\store\Products\ProductRepository;
+use s4h\store\Languages\LanguageRepository;
+use s4h\store\Photos\ProductPhotos;
+
 class PhotosProductsController extends \BaseController {
+	private $languageRepository;
+	private $productRepository;
+
+	function __construct(ProductRepository $productRepository, LanguageRepository $languageRepository) {
+		$this->productRepository = $productRepository;
+		$this->languageRepository = $languageRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
