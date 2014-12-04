@@ -42,7 +42,23 @@ class PhotosProductsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		try {
+			$file = Input::file('file');
+			$product_id = Input::get('product_id');
+			$photo = new ProductPhotos();
+			$photo->register($file, $product_id, 1);
+		} catch(Exception $exception){
+			// Something went wrong. Log it.
+			Log::error($exception);
+			// Return error
+			return Response::json($exception->getMessage(), 400);
+		}
+		// If it now has an id, it should have been successful.
+		if ( $photo->id ) {
+			return Response::json(array('status' => 'success', 'file' => $photo->toArray()), 200);
+		} else {
+			return Response::json('Error', 400);
+		}
 	}
 
 
