@@ -196,6 +196,25 @@
 										</div>
 									</div>
 								</div>
+
+								<div class="form-group">
+									{{ Form::label('add_photos', trans('products.labels.add_photos'), ['class' => 'col-sm-4 control-label']) }}
+									<div class="col-sm-8">
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('add_photos', '1', 1)}}
+												<i></i> Yes
+											</label>
+										</div>
+										<div class="radio i-checks">
+											<label>
+												{{ Form::radio('add_photos', '0', 0)}}
+												<i></i> No
+											</label>
+										</div>
+									</div>
+								</div>
+								
 							</div>
 
 							<div class="col-lg-7">
@@ -426,9 +445,12 @@
 			// post-submit callback
 			function showResponse(responseText, statusText, xhr, $form)  {
 				jQuery.fancybox({
-					'content' : '<h1>'+ responseText + '</h1>',
+					'content' : '<h1>'+ responseText.message + '</h1>',
 					'autoScale' : true
 				});
+
+				if(responseText.add_photos == 1)
+					document.location.href = '{{ URL::route('photoProduct.create') }}';
 			}
 		});
 	</script>
