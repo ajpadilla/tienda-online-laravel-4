@@ -44,11 +44,6 @@ class ClassifiedsController extends \BaseController {
 		$collection->addColumn('photo', function($model)
 		{
 			$links = '';
-			/*if($model->classified->hasPhotos()){
-					$photo = $model->classified->getFirstPhoto();
-					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'></a>";
-			}*/
-
 			$i = 0;
 			foreach ($model->classified->photos as $photo) {
 				if ($i < 3) {
