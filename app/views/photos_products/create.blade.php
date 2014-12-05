@@ -2,7 +2,7 @@
 
 @section('title')
 {{--{{ trans('classifieds.labels.name')}}--}}
-{{	trans('photoClassified.title') }}
+{{	trans('photoProduct.title') }}
 @stop
 
 
@@ -12,7 +12,7 @@
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h1 class="pagetitle nodesc">
-					{{	trans('photoClassified.subtitle') }} {{ $classified_language->pivot->name }}
+					{{	trans('photoProduct.subtitle') }} {{ $product_language->pivot->name }}
 				</h1>
 			</div>
 			<div class="ibox-content">
@@ -23,15 +23,15 @@
 								<!-- The fileinput-button span is used to style the file input field as button -->
 								<button id="addPhoto" class="btn btn-success fileinput-button dz-clickable">
 									<i class="glyphicon glyphicon-plus"></i>
-									<span>{{ trans('photoClassified.labels.add') }}</span>
+									<span>{{ trans('photoProduct.labels.add') }}</span>
 								</button>
 								<button type="submit" class="btn btn-primary start">
 									<i class="glyphicon glyphicon-upload"></i>
-									<span>{{ trans('photoClassified.labels.init') }}</span>
+									<span>{{ trans('photoProduct.labels.init') }}</span>
 								</button>
 								<button type="reset" class="btn btn-warning cancel">
 									<i class="glyphicon glyphicon-ban-circle"></i>
-									<span>{{ trans('photoClassified.labels.cancel') }}</span>
+									<span>{{ trans('photoProduct.labels.cancel') }}</span>
 								</button>
 									{{--{{ Form::open(['route' => 'products.index', 'method' => 'get']) }}
 										<button type="submit" href="{{ route('products.index') }}" class="btn-alert">
@@ -67,15 +67,15 @@
 										<div class="col-lg-5">
 											<button class="btn btn-primary start">
 												<i class="glyphicon glyphicon-upload"></i>
-												<span>{{ trans('photoClassified.labels.init') }}</span>
+												<span>{{ trans('photoProduct.labels.init') }}</span>
 											</button>
 											<button data-dz-remove class="btn btn-warning cancel">
 												<i class="glyphicon glyphicon-ban-circle"></i>
-												<span>{{ trans('photoClassified.labels.cancel') }}</span>
+												<span>{{ trans('photoProduct.labels.cancel') }}</span>
 											</button>
 											<button data-dz-remove class="btn btn-danger delete">
 												<i class="glyphicon glyphicon-trash"></i>
-												<span>{{ trans('photoClassified.labels.delete') }}</span>
+												<span>{{ trans('photoProduct.labels.delete') }}</span>
 											</button>
 										</div>
 									</div>
@@ -96,7 +96,7 @@
 		previewNode.parentNode.removeChild(previewNode);
 
 		var myDropzone = new Dropzone(document.body, {
-			url: "{{ route('photoClassified.store') }}",
+			url: "{{ route('photoProduct.store') }}",
 			thumbnailWidth: 80,
             thumbnailHeight: 80,
 			addRemoveLinks: true,
@@ -119,7 +119,7 @@
 		});
 
 		myDropzone.on("sending", function(file, xhr, formData) {
-			formData.append('classified_id', '{{ $classified_id }}');
+			formData.append('product_id', '{{ $product_id }}');
 		  // Show the total progress bar when upload starts
 		  document.querySelector("#total-progress").style.opacity = "1";
 		  // And disable the start button

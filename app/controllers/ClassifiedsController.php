@@ -44,11 +44,6 @@ class ClassifiedsController extends \BaseController {
 		$collection->addColumn('photo', function($model)
 		{
 			$links = '';
-			/*if($model->classified->hasPhotos()){
-					$photo = $model->classified->getFirstPhoto();
-					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'></a>";
-			}*/
-
 			$i = 0;
 			foreach ($model->classified->photos as $photo) {
 				if ($i < 3) {
@@ -145,11 +140,11 @@ class ClassifiedsController extends \BaseController {
 			if ($input['add_photos'] == 1) {
 				Session::put('classified_id', $classified->id);
 				Session::put('language_id', $input['language_id']);
-				return Response::json(array('message' => trans('classifieds.response'), 
+				return Response::json(['message' => trans('classifieds.response'), 
 										'add_photos'=>$input['add_photos']
-				));
+				]);
 			}
-			return Response::json(array('message' => trans('classifieds.response'), 'add_photos' => 0));
+			return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
 		} 
 		catch (FormValidationException $e)
 		{

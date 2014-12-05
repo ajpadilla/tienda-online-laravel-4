@@ -76,8 +76,15 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->registerProductForm->validate($input);
-				$this->productRepository->createNewProduct($input);
-				return Response::json(trans('products.response'));
+				$product = $this->productRepository->createNewProduct($input);
+				if ($input['add_photos'] == 1) {
+					Session::put('product_id', $product->id);
+					Session::put('language_id', $input['language_id']);
+					return Response::json(['message' => trans('classifieds.response'), 
+						'add_photos'=> $input['add_photos']
+					]);
+				}
+				return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
 			}
 			catch (FormValidationException $e)
 			{
@@ -153,15 +160,20 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('photo', function($model)
 		{
-
-
-			/*$links = '';
-			if($model->product->hasPhotos()){
-					$photo = $model->product->getFirstPhoto();
-					$links = "<a href='#'><img class='mini-photo' alt='" . $photo->name . "' src='" . asset($photo->path . $photo->name) . "'></a>";
-
+			$links = '';
+			$i = 0;
+			foreach ($model->product->photos as $photo) {
+				if ($i < 3) {
+					$links .= "	<a href='#'>
+									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
+								</a>";
+				} else {
+					break;
+				}
+				$i++;
 			}
-			return $links;*/
+
+			return $links;
 		});
 
 		$collection->addColumn('name', function($model)

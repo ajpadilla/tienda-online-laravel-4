@@ -1,6 +1,17 @@
 <?php
 
+use s4h\store\Products\ProductRepository;
+use s4h\store\Languages\LanguageRepository;
+use s4h\store\Photos\ProductPhotos;
+
 class PhotosProductsController extends \BaseController {
+	private $languageRepository;
+	private $productRepository;
+
+	function __construct(ProductRepository $productRepository, LanguageRepository $languageRepository) {
+		$this->productRepository = $productRepository;
+		$this->languageRepository = $languageRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +31,11 @@ class PhotosProductsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$product_id = Session::get('product_id');
+		$language_id = Session::get('language_id');
+		$product = $this->productRepository->getProductId($product_id);
+		$product_language = $product->languages()->where('language_id','=', $language_id)->first();
+		return View::make('photos_products.create',compact('product_id','product_language','product'));
 	}
 
 
@@ -31,7 +46,23 @@ class PhotosProductsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		try {
+			$file = Input::file('file');
+			$product_id = Input::get('product_id');
+			$photo = new ProductPhotos();
+			$photo->register($file, $product_id, 1);
+		} catch(Exception $exception){
+			// Something went wrong. Log it.
+			Log::error($exception);
+			// Return error
+			return Response::json($exception->getMessage(), 400);
+		}
+		// If it now has an id, it should have been successful.
+		if ( $photo->id ) {
+			return Response::json(array('status' => 'success', 'file' => $photo->toArray()), 200);
+		} else {
+			return Response::json('Error', 400);
+		}
 	}
 
 

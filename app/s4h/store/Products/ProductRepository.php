@@ -56,6 +56,7 @@ class ProductRepository {
 		if (!is_null($data['categories']))
 			$product->categories()->sync($data['categories']);
 
+		return $product;
 	}
 
 	public function updateProduct($data = array())
@@ -92,6 +93,8 @@ class ProductRepository {
 				'description' => $data['description'])
 			);
 		}
+
+		return $product;
 	}
 
 	public function getProductId($product_id)

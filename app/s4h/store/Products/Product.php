@@ -29,7 +29,7 @@ class Product extends Eloquent{
 
 	public function photos()
 	{
-		return $this->hasMany('s4h\store\Photos\Photo');
+		return $this->hasMany('s4h\store\Photos\ProductPhotos');
 	}
 
 	public function ratings()
@@ -102,8 +102,8 @@ class Product extends Eloquent{
 	*/
 	public function delete()
 	{
-		/*if($this->hasPhotos())
-			$this->photos()->delete();*/
+		if($this->hasPhotos())
+			$this->photos()->delete();
 		if($this->hasRatings())
 			$this->ratings()->delete();
 		return parent::delete();

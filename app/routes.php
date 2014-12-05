@@ -364,7 +364,7 @@ function () {
 
 
 	/**
-		* ------------------------------ Rutas Photos -----------------------
+		* ------------------------------ Rutas Photos Clasificados-----------------------
 	**/
 
 	Route::get(LaravelLocalization::transRoute('photoClassified.create'), [
@@ -375,6 +375,20 @@ function () {
 	Route::post(LaravelLocalization::transRoute('photoClassified.store'), [
 		'as' => 'photoClassified.store',
 		'uses' => 'PhotosClassifiedsController@store'
+	]);
+
+	/**
+		* ------------------------------ Rutas Photos Productos-----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('photoProduct.create'), [
+		'as' => 'photoProduct.create',
+		'uses' => 'PhotosProductsController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('photoProduct.store'), [
+		'as' => 'photoProduct.store',
+		'uses' => 'PhotosProductsController@store'
 	]);
 
 });
