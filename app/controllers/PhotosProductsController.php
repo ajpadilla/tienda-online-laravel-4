@@ -1,15 +1,15 @@
 <?php
 
-use s4h\store\Classifieds\ClassifiedRepository;
+use s4h\store\Products\ProductRepository;
 use s4h\store\Languages\LanguageRepository;
-use s4h\store\Photos\ClassifiedPhotos;
-class PhotosClassifiedsController extends \BaseController {
+use s4h\store\Photos\ProductPhotos;
 
-	private $classifiedRepository;
+class PhotosProductsController extends \BaseController {
 	private $languageRepository;
+	private $productRepository;
 
-	function __construct(ClassifiedRepository $classifiedRepository, LanguageRepository $languageRepository) {
-		$this->classifiedRepository = $classifiedRepository;
+	function __construct(ProductRepository $productRepository, LanguageRepository $languageRepository) {
+		$this->productRepository = $productRepository;
 		$this->languageRepository = $languageRepository;
 	}
 
@@ -31,12 +31,11 @@ class PhotosClassifiedsController extends \BaseController {
 	 */
 	public function create()
 	{
-		$classified_id = Session::get('classified_id');
+		$product_id = Session::get('product_id');
 		$language_id = Session::get('language_id');
-		$classified = $this->classifiedRepository->getClassifiedId($classified_id);
-		//$language = $this->languageRepository->returnLanguage();
-		$classified_language = $classified->languages()->where('language_id','=', $language_id)->first();
-		return View::make('photos_classifieds.create',compact('classified_id','classified_language','classified'));
+		$product = $this->productRepository->getProductId($product_id);
+		$product_language = $product->languages()->where('language_id','=', $language_id)->first();
+		return View::make('photos_products.create',compact('product_id','product_language','product'));
 	}
 
 
@@ -49,9 +48,9 @@ class PhotosClassifiedsController extends \BaseController {
 	{
 		try {
 			$file = Input::file('file');
-			$classified_id = Input::get('classified_id');
-			$photo = new ClassifiedPhotos();
-			$photo->register($file, $classified_id, 1);
+			$product_id = Input::get('product_id');
+			$photo = new ProductPhotos();
+			$photo->register($file, $product_id, 1);
 		} catch(Exception $exception){
 			// Something went wrong. Log it.
 			Log::error($exception);
@@ -65,6 +64,7 @@ class PhotosClassifiedsController extends \BaseController {
 			return Response::json('Error', 400);
 		}
 	}
+
 
 	/**
 	 * Display the specified resource.

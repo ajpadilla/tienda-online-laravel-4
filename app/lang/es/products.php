@@ -37,6 +37,7 @@
 			'height' => 'Altura: ',
 			'depth' => 'Profundidad:',
 			'language' => 'Idioma:',
+			'add_photos' => 'Agregar foto',
 			'new' => 'Nuevo'		
 		),
 		"validation" => array(
