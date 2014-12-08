@@ -35,8 +35,8 @@ class CategoriesController extends \BaseController {
 		$collection->addColumn('name', function($model)
 		{
 			$language = $this->languageRepository->returnLanguage();
-			$category = $model->category->languages()->where('language_id','=',$language->id)->first();
-			return $category->pivot->name;
+			$categoryLanguage = $model->category->languages()->where('language_id','=',$language->id)->first();
+			return $categoryLanguage->pivot->name;
 		});
 
 		$collection->addColumn('parent_category', function($model)
@@ -44,11 +44,11 @@ class CategoriesController extends \BaseController {
 			$language = $this->languageRepository->returnLanguage();
 
 			if ($model->category->hasParent()) {
-				$parentCategory = $model->category->parent->languages()->where('language_id','=',$language->id)->first();
-				return $parentCategory->pivot->name;
+				$parentCategoryLanguage = $model->category->parent->languages()->where('language_id','=',$language->id)->first();
+				return $parentCategoryLanguage->pivot->name;
 			}else{
-				$category = $model->category->languages()->where('language_id','=',$language->id)->first();
-				return $category->pivot->name;
+				$categoryLanguage = $model->category->languages()->where('language_id','=',$language->id)->first();
+				return $categoryLanguage->pivot->name;
 			}
 		});
 
@@ -112,7 +112,13 @@ class CategoriesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$language = $this->languageRepository->returnLanguage();
+		$category = $this->categoryRepository->getCategoryId($id);
+		$categoryLanguage = $category->languages()->where('language_id','=',$language->id)->first();
+		if ($category->hasParent()) {
+			$parentCategoryLanguage = $category->parent->languages()->where('language_id','=',$language->id)->first();
+		}
+		return View::make('categories.show',compact('categoryLanguage','category','parentCategoryLanguage'));
 	}
 
 
