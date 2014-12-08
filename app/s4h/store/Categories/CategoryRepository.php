@@ -37,12 +37,18 @@ class CategoryRepository {
 		}
 
 		$category->save();
-		
+
 		if (count($category->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$category->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
 		}else{
 			$category->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
+	}
+
+	public function deleteCategory($categories_id)
+	{
+		$category = $this->getCategoryId($categories_id);
+		$category->delete();
 	}
 
 	public function getNameForLanguage()
@@ -60,4 +66,6 @@ class CategoryRepository {
 	{
 		return Category::find($categories_id);
 	}
+
+
 }
