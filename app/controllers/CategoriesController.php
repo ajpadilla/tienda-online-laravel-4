@@ -2,14 +2,17 @@
 
 use s4h\store\Categories\CategoryRepository;
 use s4h\store\Languages\LanguageRepository;
+use s4h\store\CategoriesLang\CategoryLangRepository;
 
 class CategoriesController extends \BaseController {
 	private $categoryRepository;
 	private $languageRepository;
+	private $categoryLangRepository;
 
-	function __construct(CategoryRepository $categoryRepository, LanguageRepository $languageRepository) {
+	function __construct(CategoryRepository $categoryRepository, LanguageRepository $languageRepository, CategoryLangRepository $categoryLangRepository) {
 		$this->categoryRepository = $categoryRepository;
 		$this->languageRepository = $languageRepository;
+		$this->categoryLangRepository = $categoryLangRepository;
 	}
 
 	/**
@@ -20,6 +23,47 @@ class CategoriesController extends \BaseController {
 	public function index()
 	{
 		return View::make('categories.index');
+	}
+
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->categoryLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name','parent_category')
+			->orderColumns('name','parent_category');
+
+		$collection->addColumn('name', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+			$category = $model->category->languages()->where('language_id','=',$language->id)->first();
+			return $category->pivot->name;
+		});
+
+		$collection->addColumn('parent_category', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+
+			if ($model->category->hasParent()) {
+				$parentCategory = $model->category->parent->languages()->where('language_id','=',$language->id)->first();
+				return $parentCategory->pivot->name;
+			}else{
+				$category = $model->category->languages()->where('language_id','=',$language->id)->first();
+				return $category->pivot->name;
+			}
+		});
+
+		$collection->addColumn('Actions',function($model){
+		
+			$links = "<a class='btn btn-info btn-circle' href='" . route('categories.show', $model->category->id) . "'><i class='fa fa-check'></i></a>
+					<br />";
+			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('categories.edit', $model->category->id) . "'><i class='fa fa-pencil'></i></a>
+					<br />
+					<a class='btn btn-danger btn-circle' href='" . route('categories.destroy', $model->category->id) . "'><i class='fa fa-times'></i></a>";
+
+			return $links;
+		});
+
+		return $collection->make();
 	}
 
 
