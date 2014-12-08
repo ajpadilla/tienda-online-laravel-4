@@ -9,8 +9,6 @@ class Category extends Eloquent{
 	protected $softDelete = true;
 	protected $dates = ['deleted_at'];
 
-	//protected $fillable = ['category_id'];
-
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','categories_lang','categories_id','language_id')->withPivot('name');
 	}	
