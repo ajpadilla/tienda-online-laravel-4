@@ -2,6 +2,7 @@
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use s4h\store\CategoriesLang\CategoryLang;
 
 class Category extends Eloquent{
 
@@ -19,7 +20,7 @@ class Category extends Eloquent{
 
 	public function categories()
 	{
-		return $this->hasMany('s4h\store\Categories\Category');
+		return $this->hasMany('s4h\store\Categories\Category','category_id');
 	}
 
 	public function parent()
@@ -33,6 +34,25 @@ class Category extends Eloquent{
 			return true;
 		}
 		return false;
+	}
+
+	public function hasCategories()
+	{
+		return $this->categories->count();
+	}
+
+	/*
+	*	Eliminar categoria y relaciones
+	*/
+	public function delete()
+	{
+		if($this->hasCategories())
+			$this->categories()->delete();
+		CategoryLang::where('categories_id','=',$this->id)->delete();
+		foreach ($this->categories as $category) {
+			CategoryLang::where('categories_id','=',$category->id)->delete();
+		}
+		return parent::delete();
 	}
 	
 }
