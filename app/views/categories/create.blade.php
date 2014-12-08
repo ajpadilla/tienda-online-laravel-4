@@ -56,6 +56,8 @@
 <script>
 	$(document).ready(function () 
 	{
+		// Iniciar select chosen
+		$('#parent_category').chosen();
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
