@@ -22,7 +22,6 @@ class ProductRepository {
 	{
 		$product = $this->getProductId($id);
 		$product->delete();
-		ProductLang::where('product_id','=',$id)->delete();
 	}
 
 	public function createNewProduct($data = array())
