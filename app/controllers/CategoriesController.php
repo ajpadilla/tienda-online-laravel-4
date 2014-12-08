@@ -1,6 +1,16 @@
 <?php
 
+use s4h\store\Categories\CategoryRepository;
+use s4h\store\Languages\LanguageRepository;
+
 class CategoriesController extends \BaseController {
+	private $categoryRepository;
+	private $languageRepository;
+
+	function __construct(CategoryRepository $categoryRepository, LanguageRepository $languageRepository) {
+		$this->categoryRepository = $categoryRepository;
+		$this->languageRepository = $languageRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +30,9 @@ class CategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();
+		return View::make('categories.create',compact('categories','languages'));
 	}
 
 
@@ -31,7 +43,20 @@ class CategoriesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if (Request::ajax()) 
+		{
+			$input = Input::all();
+			try
+			{
+				//$this->registerClassifiedConditionsForm->validate($input);
+				$this->categoryRepository->createNewCategory($input);
+				return Response::json(trans('categories.response'));
+			} 
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
