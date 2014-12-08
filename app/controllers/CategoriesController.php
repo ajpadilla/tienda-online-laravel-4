@@ -174,7 +174,9 @@ class CategoriesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$this->categoryRepository->deleteCategory($id);
+		Flash::message(trans('categories.Delete'));
+		return Redirect::route('categories.index');
 	}
 
 
