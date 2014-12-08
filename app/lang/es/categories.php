@@ -7,7 +7,7 @@ return array(
 	"edit"=>"editar/categoria/{id}",
 	"update"=>"actualizar/categoria/{id}",
 	"destroy"=>"eliminar/categoria/{id}",
-	"title" => "Agregar Tipo de categoria",
+	"title" => "Agregar categoria",
 	"subtitle" => "Crear categoria",
 	"sending" => "Agregando categoria",
 	"response" => "categoria agregada",
@@ -15,7 +15,8 @@ return array(
 	"Delete" => "¡categoria eliminada con exito!",
 
 	"labels" => array(
-		'Categoria_padre'=> 'Categoria padre:',
+		'language' => 'Idioma',
+		'parent_category'=> 'Categoria padre:',
 		'name' =>'Nombre:',
 		'save' => 'Agregar',
 		'new' => 'Nuevo'
