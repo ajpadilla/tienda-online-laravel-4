@@ -155,7 +155,7 @@ class CategoriesController extends \BaseController {
 			try
 			{
 				//$this->registerClassifiedConditionsForm->validate($input);
-				$this->categoryRepository->createNewCategory($input);
+				$this->categoryRepository->updateCategory($input);
 				return Response::json(trans('categories.response'));
 			} 
 			catch (FormValidationException $e)
