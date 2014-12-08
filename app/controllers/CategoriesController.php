@@ -76,6 +76,7 @@ class CategoriesController extends \BaseController {
 	{
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$categories = $this->categoryRepository->getNameForLanguage();
+		array_unshift($categories,"");
 		return View::make('categories.create',compact('categories','languages'));
 	}
 
@@ -135,6 +136,7 @@ class CategoriesController extends \BaseController {
 		$categoryLanguage = $category->languages()->where('language_id','=',$language->id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$categories = $this->categoryRepository->getNameForLanguage();
+		array_unshift($categories,"");
 		return View::make('categories.edit',compact('languages','categories','category','categoryLanguage'));
 	}
 
