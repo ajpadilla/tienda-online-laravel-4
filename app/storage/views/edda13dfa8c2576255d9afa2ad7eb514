@@ -9,6 +9,19 @@
 	  font-weight: normal;
 	  font-style: normal;
 	}
+
+	.mini-photo {
+		width: 74px;
+		height: 103px;
+		/*margin: 0 auto;*/
+		margin-right: 14px;
+	}
+		
+	td {
+	    vertical-align: middle;
+	    text-align: left;
+	}
+
 </style>
 <?php echo HTML::style('assets/font-awesome/css/font-awesome.css');; ?>
 
