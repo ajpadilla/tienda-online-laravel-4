@@ -10,6 +10,14 @@
                     <li>
                         <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
                     </li>
+                        
+                     <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Categoria - Producto</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{{URL::route('categories.create')}}">Crear</a></li>
+                            <li><a href="{{URL::route('categories.index')}}">Listar</a></li>
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Productos</span><span class="fa arrow"></span></a>
