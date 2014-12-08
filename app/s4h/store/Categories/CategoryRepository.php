@@ -15,6 +15,19 @@ class CategoryRepository {
 		return Category::all();
 	}
 
+	public function createNewCategory($data = array())
+	{
+		$category = new Category;
+
+		if (!empty($data['parent_category'])) {
+			$category->category_id = $data['parent_category'];
+		}
+		
+		$category->save();
+
+		$category->languages()->attach($data['language_id'], array('name'=> $data['name']));
+	}
+
 	public function getNameForLanguage()
 	{
 		$iso_code = LaravelLocalization::setLocale();
@@ -25,5 +38,4 @@ class CategoryRepository {
 			return array();
 		}
 	}
-
 }
