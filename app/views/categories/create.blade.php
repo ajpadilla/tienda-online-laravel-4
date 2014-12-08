@@ -26,7 +26,7 @@
 							<div class="form-group">
 								{{ Form::label('parent_category', trans('categories.labels.parent_category'),['class'=>'col-sm-2 control-label']) }}
 								<div class="col-sm-6">
-									{{ Form::select('parent_category',$categories,null,array('class' => 'form-control','id'=>'parent_category')) }}
+										{{ Form::select('parent_category',$categories,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a parent category...')) }}
 								</div>
 							</div>
 						@endif
@@ -57,7 +57,7 @@
 	$(document).ready(function () 
 	{
 		// Iniciar select chosen
-		$('#parent_category').chosen();
+		$('.chosen-select').chosen({allow_single_deselect: true});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
