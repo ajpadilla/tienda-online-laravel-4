@@ -432,7 +432,7 @@ function () {
 		'uses' => 'CategoriesController@destroy'
 	]);
 
-	Route::get('api/categories', array('as'=>'api.categories', 'uses'=>'ClassifiedsController@getDatatable'));
+	Route::get('api/categories', array('as'=>'api.categories', 'uses'=>'CategoriesController@getDatatable'));
 
 });
 
