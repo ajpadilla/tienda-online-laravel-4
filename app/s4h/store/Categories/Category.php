@@ -22,9 +22,17 @@ class Category extends Eloquent{
 		return $this->hasMany('s4h\store\Categories\Category');
 	}
 
-	public function category()
+	public function parent()
 	{
 		return $this->belongsTo('s4h\store\Categories\Category','category_id');
+	}
+
+	public function hasParent()
+	{
+		if (count($this->parent) > 0) {
+			return true;
+		}
+		return false;
 	}
 	
 }
