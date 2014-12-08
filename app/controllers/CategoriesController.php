@@ -130,7 +130,12 @@ class CategoriesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$language = $this->languageRepository->returnLanguage();
+		$category = $this->categoryRepository->getCategoryId($id);
+		$categoryLanguage = $category->languages()->where('language_id','=',$language->id)->first();
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();
+		return View::make('categories.edit',compact('languages','categories','category','categoryLanguage'));
 	}
 
 
@@ -142,7 +147,22 @@ class CategoriesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		if (Request::ajax()) 
+		{
+			$input = array();
+			$input = Input::all();
+			$input['category_id'] = $id;
+			try
+			{
+				//$this->registerClassifiedConditionsForm->validate($input);
+				$this->categoryRepository->createNewCategory($input);
+				return Response::json(trans('categories.response'));
+			} 
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
