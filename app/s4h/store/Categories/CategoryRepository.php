@@ -38,4 +38,9 @@ class CategoryRepository {
 			return array();
 		}
 	}
+
+	public function getCategoryId($categories_id)
+	{
+		return Category::find($categories_id);
+	}
 }
