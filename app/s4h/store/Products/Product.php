@@ -2,6 +2,7 @@
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use s4h\store\ProductsLang\ProductLang;
 
 class Product extends Eloquent{
 	use SoftDeletingTrait;
@@ -106,6 +107,7 @@ class Product extends Eloquent{
 			$this->photos()->delete();
 		if($this->hasRatings())
 			$this->ratings()->delete();
+		ProductLang::where('product_id','=',$this->id)->delete();
 		return parent::delete();
 	}
 }
