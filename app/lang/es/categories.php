@@ -26,7 +26,7 @@ return array(
 		'title' => 'Lista de categorias',
 		'subtitle' => 'Listado de categorias',
 		'Name' => 'Nombre',
-		'parent_category' => 'Categoria padre'
+		'parent_category' => 'Categoria padre',
 		'Actions' =>'Acciones'
 	),
 
