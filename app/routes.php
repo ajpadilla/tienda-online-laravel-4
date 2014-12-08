@@ -391,6 +391,49 @@ function () {
 		'uses' => 'PhotosProductsController@store'
 	]);
 
+
+	/**
+		* ------------------------------ Rutas Categories -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('categories.create'), [
+		'as' => 'categories.create',
+		'uses' => 'CategoriesController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('categories.store'), [
+		'as' => 'categories.store',
+		'uses' => 'CategoriesController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('categories.index'), [
+		'as' => 'categories.index',
+		'uses' => 'CategoriesController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('categories.show'), [
+		'as' => 'categories.show',
+		'uses' => 'CategoriesController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('categories.edit'), [
+		'as' => 'categories.edit',
+		'uses' => 'CategoriesController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('categories.update'), [
+		'as' => 'categories.update',
+		'uses' => 'CategoriesController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('categories.destroy'), [
+		'as' => 'categories.destroy',
+		'uses' => 'CategoriesController@destroy'
+	]);
+
+	Route::get('api/categories', array('as'=>'api.categories', 'uses'=>'CategoriesController@getDatatable'));
+
 });
 
 // Confide routes

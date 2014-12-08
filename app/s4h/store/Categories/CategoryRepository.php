@@ -15,6 +15,42 @@ class CategoryRepository {
 		return Category::all();
 	}
 
+	public function createNewCategory($data = array())
+	{
+		$category = new Category;
+
+		if (!empty($data['parent_category'])) {
+			$category->category_id = $data['parent_category'];
+		}
+		
+		$category->save();
+
+		$category->languages()->attach($data['language_id'], array('name'=> $data['name']));
+	}
+
+	public function updateCategory($data = array())
+	{
+		$category = $this->getCategoryId($data['category_id']);
+
+		if (!empty($data['parent_category'])) {
+			$category->category_id = $data['parent_category'];
+		}
+
+		$category->save();
+
+		if (count($category->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$category->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
+		}else{
+			$category->languages()->attach($data['language_id'], array('name' => $data['name']));
+		}
+	}
+
+	public function deleteCategory($categories_id)
+	{
+		$category = $this->getCategoryId($categories_id);
+		$category->delete();
+	}
+
 	public function getNameForLanguage()
 	{
 		$iso_code = LaravelLocalization::setLocale();
@@ -25,5 +61,11 @@ class CategoryRepository {
 			return array();
 		}
 	}
+
+	public function getCategoryId($categories_id)
+	{
+		return Category::find($categories_id);
+	}
+
 
 }
