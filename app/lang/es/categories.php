@@ -44,13 +44,13 @@ return array(
 	'alert' => '¡El nombre ya se encuentra registrado!',
 
 	'edit_view' => array(
-		'title' => 'Editar tipo de categoria',
-		'subtitle' => 'Datos del tipo de categoria'
+		'title' => 'Editar categoria',
+		'subtitle' => 'Datos categoria'
 	),
 
 	'show_data' => array(
-		'title' => 'Ver datos del tipo de categoria',
-		'subtitle' => 'Tipo de categoria'
+		'title' => 'Ver datos de la categoria',
+		'subtitle' => 'Datos de la Categoria'
 	),
 
 	'actions' => array(
