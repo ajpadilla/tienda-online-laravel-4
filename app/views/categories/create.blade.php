@@ -57,7 +57,9 @@
 	$(document).ready(function () 
 	{
 		// Iniciar select chosen
-		$('.chosen-select').chosen({allow_single_deselect: true});
+		$('.chosen-select').chosen({allow_single_deselect: true,
+			  create_option: true,
+		});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
