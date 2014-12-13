@@ -5,7 +5,7 @@ use s4h\store\AttributeTypesLang\AttributeTypeLang;
 /**
 * 
 */
-class AttributeTypeLangRepository extends AnotherClass
+class AttributeTypeLangRepository 
 {
 	public function getAllForLanguage($language_id)
   	{
