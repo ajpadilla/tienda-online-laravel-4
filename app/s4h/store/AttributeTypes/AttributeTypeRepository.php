@@ -36,17 +36,17 @@ class AttributeTypeRepository {
 		}
 	}
 
-	public function delteAttributeType($classified_type_id)
+	public function delteAttributeType($attribute_type_id)
 	{
-		$classified_type = $this->getAttributeTypeId($classified_type_id);
-		$classified_type->delete();
+		$attribute_type = $this->getAttributeTypeId($attribute_type_id);
+		$attribute_type->delete();
 	}
 
 	public function getName($data)
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
 		if (count($language) > 0) {
-			return $language->AttributeTypes()->wherePivot('name','=',$data['name'])->first();
+			return $language->attributeTypes()->wherePivot('name','=',$data['name'])->first();
 		}else{
 			return $language;
 		}
@@ -60,6 +60,6 @@ class AttributeTypeRepository {
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->AttributeTypes()->lists('name','classified_types_id');
+		return $language->attributeTypes()->lists('name','attribute_type_id');
 	}
 }
