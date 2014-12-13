@@ -23,7 +23,35 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('attribute_types.index');
+	}
+
+
+	public function getDatatable()
+	{
+		$collection = Datatable::collection($this->attributeTypeLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+			->searchColumns('name')
+			->orderColumns('name');
+
+		$collection->addColumn('name', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+			$attributeTypeLanguage = $model->attributeType->languages()->where('language_id','=',$language->id)->first();
+			return $attributeTypeLanguage->pivot->name;
+		});
+
+		$collection->addColumn('Actions',function($model){
+		
+			$links = "<a class='btn btn-info btn-circle' href='" . route('attributeType.show', $model->attributeType->id) . "'><i class='fa fa-check'></i></a>
+					<br />";
+			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('attributeType.edit', $model->attributeType->id) . "'><i class='fa fa-pencil'></i></a>
+					<br />
+					<a class='btn btn-danger btn-circle' href='" . route('attributeType.destroy', $model->attributeType->id) . "'><i class='fa fa-times'></i></a>";
+
+			return $links;
+		});
+
+		return $collection->make();
 	}
 
 
