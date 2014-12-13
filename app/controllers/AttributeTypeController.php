@@ -114,7 +114,12 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$attribute_type = $this->attributeTypeRepository->getAttributeTypeId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$attribute_types = $this->attributeTypeRepository->getNameForLanguage();
+		$attribute_type_language = $attribute_type->languages()->where('language_id','=', $language->id)->first();
+		return View::make('attribute_types.edit', compact('attribute_type','languages','attribute_type_language'));
 	}
 
 
@@ -126,7 +131,20 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		if(Request::ajax())
+		{
+			$input = array();
+			$input = Input::all();
+			$input['attribute_type_id'] = $id;
+			try
+			{
+				//$this->registerDiscountForm->validate($input);
+				$this->attributeTypeRepository->updateAttributeType($input);
+				return Response::json(trans('attributeType.Actualiced'));
+			} catch (FormValidationException $e) {
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -138,7 +156,7 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		
 	}
 
 
