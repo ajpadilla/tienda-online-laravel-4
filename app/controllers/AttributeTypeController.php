@@ -99,7 +99,10 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$attribute_type = $this->attributeTypeRepository->getAttributeTypeId($id);
+		$language = $this->languageRepository->returnLanguage();
+		$attribute_type_language = $attribute_type->languages()->where('language_id','=', $language->id)->first();
+		return View::make('attribute_types.show',compact('attribute_type_language'));
 	}
 
 
