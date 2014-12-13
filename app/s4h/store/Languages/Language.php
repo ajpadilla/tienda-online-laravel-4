@@ -57,4 +57,9 @@ class Language extends Eloquent
 	public function measure(){
 		return $this->belongsToMany('s4h\store\Measures\Measure','measures_lang','language_id','measures_id')->withPivot('name','abbreviation');
 	}
+
+	public function attributeTypes()
+	{
+		return $this->belongsToMany('s4h\store\AttributeTypes\AttributeType','attribute_types_lang','language_id','attribute_type_id')->withPivot('name');
+	}
 }
