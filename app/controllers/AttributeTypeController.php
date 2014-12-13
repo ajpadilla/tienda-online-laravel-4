@@ -46,7 +46,20 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		if (Request::ajax()) 
+		{
+			$input = Input::all();
+			try
+			{
+				//$this->registerClassifiedConditionsForm->validate($input);
+				$this->attributeTypeRepository->createNewAttributeType($input);
+				return Response::json(trans('attributeType.response'));
+			} 
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
