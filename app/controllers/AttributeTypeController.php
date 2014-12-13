@@ -156,7 +156,9 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		
+		$this->attributeTypeRepository->delteAttributeType($id);
+		Flash::message(trans('attributeType.Delete'));
+		return Redirect::route('attribute_types.index');
 	}
 
 
