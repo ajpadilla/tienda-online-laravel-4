@@ -80,11 +80,11 @@ class ProductController extends \BaseController {
 				if ($input['add_photos'] == 1) {
 					Session::put('product_id', $product->id);
 					Session::put('language_id', $input['language_id']);
-					return Response::json(['message' => trans('classifieds.response'), 
+					return Response::json(['message' => trans('products.response'), 
 						'add_photos'=> $input['add_photos']
 					]);
 				}
-				return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
+				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
 			}
 			catch (FormValidationException $e)
 			{
@@ -133,8 +133,15 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->editProductForm->validate($input);
-				$this->productRepository->updateProduct($input);
-				return Response::json(trans('products.Updated'));
+				$product = $this->productRepository->updateProduct($input);
+				if ($input['add_photos'] == 1) {
+					Session::put('product_id', $product->id);
+					Session::put('language_id', $input['language_id']);
+					return Response::json(['message' => trans('products.response'), 
+						'add_photos'=> $input['add_photos']
+						]);
+				}
+				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
 			}
 			catch (FormValidationException $e)
 			{

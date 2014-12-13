@@ -1,0 +1,15 @@
+<li class="dropdown">
+    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+        <i class="fa fa-flag fa-lg"> <?php echo Lang::get('menu.language'); ?></i>
+    </a>
+    <ul class="dropdown-menu">
+        <?php foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties): ?>
+        <li>
+            <a rel="alternate" id="<?php echo $localeCode; ?>" hreflang="<?php echo $localeCode; ?>" href="<?php echo LaravelLocalization::getLocalizedURL($localeCode); ?>">
+                <?php echo e($properties['native']); ?>
+
+            </a>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</li>

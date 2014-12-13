@@ -51,6 +51,14 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('ProductosLangTableSeeder');
 	     $this->call('ProductClassificationTableSeeder');
 	     $this->call('RatingsTableSeeder');
+	     $this->call('AttributeTypeTableSeeder');
+	     $this->call('AttributeTypeLangTableSeeder');
+	     $this->call('AttributeTableSeeder');
+	     $this->call('AttributeLangTableSeeder');
+	     $this->call('AttributeByProductTableSeeder');
+	     $this->call('AttributeValueTableSeeder');
+	     $this->call('AttributeValueLangTableSeeder');
+	     $this->call('AttributeByValueTableSeeder');
 	}
 
 }
