@@ -15,14 +15,39 @@ class CategoryRepository {
 		return Category::all();
 	}
 
-	public function getNameForLanguage()
+	public function get()
 	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		if (!empty($language)) {
-			return $language->categories()->lists('name','categories_id');
+			return $language->categories()->lists('name', 'category_id');
+			//return $this->getNested($language->categoriesLang());
 		}else{
 			return array();
+		}
+	}
+
+	public function getNested($categories){
+		$nested = [];
+		$first = false;
+		foreach ($categories as $categoryLang) {
+			if(!$first) {
+				$nested[] = $categoryLang->name;
+				$first = true;
+			}
+			$category = $categoryLang->category();
+			if($category->category_id) {
+				$this->searchIntoArray($categoryLang->name, $nested);
+			}
+		}
+	}
+
+	public function searchIntoArray($target, $array){
+		foreach($array as $key => $value) {
+			if($value == $target)
+				return $key;
+			elseif(is_array($value))
+				return $this->searchIntoArray($target, $value);
 		}
 	}
 

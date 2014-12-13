@@ -13,5 +13,13 @@ class Category extends Eloquent{
 
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','categories_lang','categories_id','language_id')->withPivot('name');
-	}	
+	}
+
+/*	public function parent(){
+		return $this->belongsTo('s4h\store\Categories\Category');
+	}
+
+	public function childrens(){
+		return $this->hasMany('s4h\store\Categories\Category');
+	}*/
 }
