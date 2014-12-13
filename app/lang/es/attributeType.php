@@ -10,8 +10,8 @@ return array(
 	"title" => "Agregar tipo de atributo",
 	"subtitle" => "Crear tipo de atributo",
 	"sending" => "Agregando tipo de atributo",
-	"response" => "Atributo agregada",
-	"Actualiced" => "Atributo actualizada",
+	"response" => "Atributo agregado",
+	"Actualiced" => "Atributo actualizado",
 	"Delete" => "Atributo eliminada con exito!",
 
 	"labels" => array(
