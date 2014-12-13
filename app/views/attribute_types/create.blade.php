@@ -60,9 +60,9 @@
 					required:!0,
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
-					remote:
+					/*remote:
 					{
-						/*url:'{{ URL::to('/checkNameClassifiedType/') }}',
+						url:'{{ URL::to('/checkNameClassifiedType/') }}',
 						type: 'POST',
 						data: {
 							language_id: function() {
@@ -75,8 +75,8 @@
 						dataFilter: function (respuesta) {
 							console.log('consulta:'+respuesta);
 							return respuesta;
-						}*/
-					}
+						}
+					}*/
 				},
 			},
 			messages:{
