@@ -434,6 +434,48 @@ function () {
 
 	Route::get('api/categories', array('as'=>'api.categories', 'uses'=>'CategoriesController@getDatatable'));
 
+	/**
+		* ------------------------------ Rutas Categories -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('attributeType.create'), [
+		'as' => 'attributeType.create',
+		'uses' => 'AttributeTypeController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('attributeType.store'), [
+		'as' => 'attributeType.store',
+		'uses' => 'AttributeTypeController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('attributeType.index'), [
+		'as' => 'attributeType.index',
+		'uses' => 'AttributeTypeController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('attributeType.show'), [
+		'as' => 'attributeType.show',
+		'uses' => 'AttributeTypeController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('attributeType.edit'), [
+		'as' => 'attributeType.edit',
+		'uses' => 'AttributeTypeController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('attributeType.update'), [
+		'as' => 'attributeType.update',
+		'uses' => 'AttributeTypeController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('attributeType.destroy'), [
+		'as' => 'attributeType.destroy',
+		'uses' => 'AttributeTypeController@destroy'
+	]);
+
+	Route::get('api/attributeType', array('as'=>'api.attributeType', 'uses'=>'AttributeTypeController@getDatatable'));
+
 });
 
 // Confide routes
