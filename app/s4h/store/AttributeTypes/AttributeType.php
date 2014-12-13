@@ -17,4 +17,8 @@ class AttributeType extends Eloquent
 
 	protected $table = 'attribute_types';
 
+	public function languages(){
+		return $this->belongsToMany('s4h\store\Languages\Language','attribute_types_lang','attribute_type_id','language_id')->withPivot('name');
+	}	
+
 }
