@@ -1,7 +1,7 @@
 <?php
 
 use s4h\store\Languages\LanguageRepository;
-use s4h\store\s4h\store\AttributeTypes\AttributeTypeRepository;
+use s4h\store\AttributeTypes\AttributeTypeRepository;
 use s4h\store\AttributeTypesLang\AttributeTypeLangRepository;
 
 class AttributeTypeController extends \BaseController {
@@ -34,7 +34,8 @@ class AttributeTypeController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		return View::make('attribute_types.create',compact('languages'));
 	}
 
 
