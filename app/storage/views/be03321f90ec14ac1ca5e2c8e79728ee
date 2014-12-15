@@ -1,6 +1,6 @@
 <?php $__env->startSection('title'); ?>
 <?php /*<?php echo Lang::get('modulo.variable'); ?>*/ ?>
-<?php echo trans('discountType.edit_view.title'); ?>
+<?php echo trans('attributeType.edit_view.title'); ?>
 
 <?php $__env->stopSection(); ?>
 
@@ -9,50 +9,44 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5><?php echo trans('discountType.edit_view.subtitle'); ?></h5>
+				<h5><?php echo trans('attributeType.edit_view.subtitle'); ?></h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					<?php echo Form::model($discount_type, array('route' => array('discountType.update', $discount_type->id),'id'=>'formEditDiscountType','class'=>'form-horizontal')); ?>
+					<?php echo Form::model($attribute_type, array('route' => array('attributeType.update', $attribute_type->id),'id'=>'formEditattributeType','class'=>'form-horizontal')); ?>
 
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
-							<?php echo Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']); ?>
+							<?php echo Form::label('language_id', trans('attributeType.labels.language'),['class'=>'col-sm-2 control-label']); ?>
 
 							<div class="col-sm-8">
-								<?php echo Form::select('language_id',$languages,$discount_type_language->id,array('class' => 'form-control','id'=>'language_id')); ?>
+								<?php echo Form::select('language_id',$languages,$attribute_type_language->id,array('class' => 'form-control','id'=>'language_id')); ?>
 
 							</div>
 						</div>
 						<div class="form-group">
-							<?php echo Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']); ?>
+							<?php echo Form::label('name',trans('attributeType.labels.name'),['class'=>'col-sm-2 control-label']); ?>
 
 							<div class="col-sm-8">
-								<?php echo Form::text('name',$discount_type_language->pivot->name, ['class' => 'form-control','id'=>'name']); ?>
+								<?php echo Form::text('name',$attribute_type_language->pivot->name, ['class' => 'form-control','id'=>'name']); ?>
 
 							</div>
 						</div>
-
+					</div>
+					<div class="col-sm-6">
 						<div class="form-group">
-						<?php echo Form::text('discount_type_id',$discount_type->id, ['class' => 'form-control','id'=>'discount_type_id','style'=>'display: none;']); ?>
+							<div class="col-sm-4 col-sm-offset-2">
+								<?php echo Form::submit(trans('attributeType.labels.save'), ['class' => 'btn btn-primary']); ?>
 
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<div class="col-sm-4 col-sm-offset-2">
-							<?php echo Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']); ?>
+					<?php echo Form::close(); ?>
 
-						</div>
-					</div>
 				</div>
-				<?php echo Form::close(); ?>
-
 			</div>
 		</div>
 	</div>
-</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -61,42 +55,38 @@
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-            }, '<?php echo trans('discountType.validation.onlyLettersNumbersAndSpaces'); ?>');
+            }, '<?php echo trans('attributeType.validation.onlyLettersNumbersAndSpaces'); ?>');
 
-		$('#formEditDiscountType').validate({
+		$('#formEditattributeType').validate({
 			rules:{
 				name:{
 					required:!0,
 					onlyLettersNumbersAndSpaces: true,
-					remote:
+					/*remote:
 						{
-							url:'<?php echo URL::to('/checkNameForEditDiscountType/'); ?>',
+							url:'<?php echo URL::to('/checkName/'); ?>',
 							type: 'POST',
 							data: {
 								name: function() {
 									return $('#name').val();
 								},
-								
 								language_id: function () {
 									return $('#language_id').val();
-								},
-
-								discount_type_id: function () {
-									return $('#discount_type_id').val();
 								}
+
 							},
 							dataFilter: function (respuesta) {
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						}
+						}*/
 				},
 			},
 			messages:{
 				name:{
-					required: '<?php echo trans('discountType.validation.required'); ?>',
-					rangelength: '<?php echo trans('discountType.validation.rangelength'); ?>'+'[2, 45]'+'<?php echo trans('discounts.validation.characters'); ?>',
-					remote: jQuery.validator.format('<?php echo trans('discountType.alert'); ?>')
+					required: '<?php echo trans('attributeType.validation.required'); ?>',
+					rangelength: '<?php echo trans('attributeType.validation.rangelength'); ?>'+'[2, 45]'+'<?php echo trans('discounts.validation.characters'); ?>',
+					remote: jQuery.validator.format('<?php echo trans('attributeType.alert'); ?>')
 				},
 			},
 			highlight:function(element){
@@ -113,17 +103,17 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '<?php echo URL::route('discountType.update',$discount_type->id); ?>',
+				url:  '<?php echo URL::route('attributeType.update',$attribute_type->id); ?>',
         		type:'POST'
 			};
-		$('#formEditDiscountType').ajaxForm(options);
+		$('#formEditattributeType').ajaxForm(options);
 
 	});
 
 	// pre-submit callback 
 		function showRequest(formData, jqForm, options) {          
 			setTimeout(jQuery.fancybox({
-				'content':'<h1>' + '<?php echo trans('discountType.sending'); ?>' + '</h1>',
+				'content': "<h1>"+'<?php echo trans('attributeType.sending'); ?>'+"</h1>",
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
@@ -133,7 +123,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false    
 			}), 5000 );  
-			return $('#formEditDiscountType').valid(); 
+			return $('#formEditattributeType').valid(); 
 		} 
 														     
 		// post-submit callback 
@@ -142,7 +132,7 @@
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
 			});
-			//$('#formEditDiscountType').resetForm();
+			//$('#formEditattributeType').resetForm();
 		} 						
 </script>
 <?php $__env->stopSection(); ?>
