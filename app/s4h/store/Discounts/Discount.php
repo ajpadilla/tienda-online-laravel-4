@@ -15,7 +15,7 @@ class Discount extends Eloquent {
 
 
 	public function getActivoShow() {
-		return ($this->active == 1) ? 'Yes' : 'No';
+		return ($this->active == 1) ? trans('discounts.active.Yes') : trans('discounts.active.No');
 	}
 
 	public function discountType(){
