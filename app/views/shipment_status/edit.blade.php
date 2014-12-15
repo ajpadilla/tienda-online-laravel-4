@@ -33,8 +33,8 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::textarea('description',$shipmentStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3']) }}
+							<div class="col-sm-8">
+								{{ Form::textarea('description',$shipmentStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3','id' => 'description']) }}
 							</div>
 						</div>
 						
@@ -58,6 +58,11 @@
 								,$shipmentStatus->color,['class' => 'form-control','id' => 'color']) }}
 							</div>
 						</div>
+						
+						<div class="form-group">
+						{{ Form::text('shipment_status_id',$shipmentStatus->id, ['class' => 'form-control','id'=>'shipment_status_id','style'=>'display: none;']) }}
+						</div>
+
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
 								{{ Form::submit(trans('shipmentStatus.labels.save'), ['class' => 'btn btn-primary']) }}
@@ -75,6 +80,8 @@
 <script>
 	$(document).ready(function () 
 	{
+		$('#description').summernote();
+
 		$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
@@ -93,9 +100,9 @@
 					required:!0,
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
-					/*remote:
+					remote:
 					{
-						url:'{{ URL::to('/checkNameShipmentStatus/') }}',
+						url:'{{ URL::to('/checkNameShipmentStatusEdit/') }}',
 						type: 'POST',
 						data: {
 							language_id: function() {
@@ -103,13 +110,16 @@
 							},
 							name: function() {
 								return $('#name').val();
+							},
+							shipment_status_id: function() {
+								return $('#shipment_status_id').val();
 							}
 						},
 						dataFilter: function (respuesta) {
 							console.log('consulta:'+respuesta);
 							return respuesta;
 						}
-					} */
+					} 
 				},
 				description:{
 					required:!0,
