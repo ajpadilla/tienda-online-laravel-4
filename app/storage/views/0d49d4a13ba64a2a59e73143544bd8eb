@@ -3,22 +3,49 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-	    <div class="row">
-	        <h2>New Products</h2>
-	        <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+    <div class="panel-heading">
+        <?php /*<div class="panel-title m-b-md"><h4>Productos</h4></div>*/ ?>
+        <div class="panel-options">
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#ventas">Productos para venta</a></li>
+                <li class=""><a data-toggle="tab" href="#trueques">Productos para trueque</a></li>
+                <li class=""><a data-toggle="tab" href="#clasificados">Clasificados</a></li>
+            </ul>
+        </div>
+    </div>
+
+	<div class="panel-body">
+		<div class="panel blank-panel">
+			<div class="tab-content">
+				<div id="ventas" class="tab-pane active">
+				    <div class="row">
+				        <h2>New Products</h2>
+				        <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				    </div>
+				    <div class="row">
+				        <h2>Top Products</h2>
+				        <?php /*<div class="sidebar col col-md-3">
+				            <?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				        </div>*/ ?>
+				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			        </div>
+			        <div class="row">
+			            <h2>New Classifieds</h2>
+			            <?php /* Aquí va es top classifieds */ ?>
+			            <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			        </div>
+			    </div>
+
+			    <div id="trueques" class="active">
+			    </div>
+
+			    <div id="clasificados" class="active">
+			    </div>
+		    </div>
 	    </div>
-	    <div class="row">
-	        <h2>Top Products</h2>
-	        <?php /*<div class="sidebar col col-md-3">
-	            <?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	        </div>*/ ?>
-	        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-        </div>
-        <div class="row">
-            <h2>New Classifieds</h2>
-            <?php /* Aquí va es top classifieds */ ?>
-            <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-        </div>
+    </div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('in-situ-css'); ?>
@@ -28,4 +55,7 @@
 <?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <?php echo $__env->make('products.partials._product-show-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+
+
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
