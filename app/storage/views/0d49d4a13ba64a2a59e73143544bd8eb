@@ -9,9 +9,9 @@
         <div class="panel-options">
 
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#ventas">Productos para venta</a></li>
-                <li class=""><a data-toggle="tab" href="#trueques">Productos para trueque</a></li>
-                <li class=""><a data-toggle="tab" href="#clasificados">Clasificados</a></li>
+                <li class="active"><a data-toggle="tab" href="#ventas">Tienda - Canjea tus Puntos</a></li>
+                <li class=""><a data-toggle="tab" href="#trueques">Venta de Garaje y Trueque</a></li>
+                <li class=""><a data-toggle="tab" href="#clasificados">Anuncios Clasificados</a></li>
             </ul>
         </div>
     </div>
@@ -21,20 +21,15 @@
 			<div class="tab-content">
 				<div id="ventas" class="tab-pane active">
 				    <div class="row">
-				        <h2>New Products</h2>
+				        <h2>Nuevos Productos</h2>
 				        <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 				    </div>
 				    <div class="row">
-				        <h2>Top Products</h2>
+				        <h2>Top de Productos</h2>
 				        <?php /*<div class="sidebar col col-md-3">
 				            <?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 				        </div>*/ ?>
 				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-			        </div>
-			        <div class="row">
-			            <h2>New Classifieds</h2>
-			            <?php /* Aquí va es top classifieds */ ?>
-			            <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			        </div>
 			    </div>
 

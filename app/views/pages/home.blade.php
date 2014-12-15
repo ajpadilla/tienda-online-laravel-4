@@ -11,9 +11,9 @@
         <div class="panel-options">
 
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#ventas">Productos para venta</a></li>
-                <li class=""><a data-toggle="tab" href="#trueques">Productos para trueque</a></li>
-                <li class=""><a data-toggle="tab" href="#clasificados">Clasificados</a></li>
+                <li class="active"><a data-toggle="tab" href="#ventas">Tienda - Canjea tus Puntos</a></li>
+                <li class=""><a data-toggle="tab" href="#trueques">Venta de Garaje y Trueque</a></li>
+                <li class=""><a data-toggle="tab" href="#clasificados">Anuncios Clasificados</a></li>
             </ul>
         </div>
     </div>
@@ -23,20 +23,15 @@
 			<div class="tab-content">
 				<div id="ventas" class="tab-pane active">
 				    <div class="row">
-				        <h2>New Products</h2>
+				        <h2>Nuevos Productos</h2>
 				        @include('products.partials._new-products')
 				    </div>
 				    <div class="row">
-				        <h2>Top Products</h2>
+				        <h2>Top de Productos</h2>
 				        {{--<div class="sidebar col col-md-3">
 				            @include('products.partials._category-sidebar')
 				        </div>--}}
 				        @include('products.partials._top-products')
-			        </div>
-			        <div class="row">
-			            <h2>New Classifieds</h2>
-			            {{-- Aquí va es top classifieds --}}
-			            @include('products.partials._new-products')
 			        </div>
 			    </div>
 
