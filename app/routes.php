@@ -187,7 +187,7 @@ function () {
 
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
-	Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
+    Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
 
 
 	/**
@@ -232,6 +232,7 @@ function () {
 
 	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
 	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
+    Route::post('checkNameInvoiceStatusEdit','InvoiceStatusController@checkNameForEdit');
 
 	/**
 		* ------------------------------ Rutas classified type -----------------------
