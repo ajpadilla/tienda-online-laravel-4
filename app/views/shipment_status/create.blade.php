@@ -34,7 +34,7 @@
 						<div class="form-group">
 							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
+								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3','id' => 'description']) }}
 							</div>
 						</div>
 						
@@ -75,6 +75,8 @@
 <script>
 	$(document).ready(function () 
 	{
+		$('#description').summernote();	
+			
 		$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
@@ -117,20 +119,6 @@
 				},
 				color:{
 					required:!0,
-					 /*remote:
-						{
-							url:'{{ URL::to('/checkColorShipmentStatus/') }}',
-							type: 'POST',
-							data: {
-								color: function() {
-									return $('#color').val();
-								}
-							},
-							dataFilter: function (respuesta) {
-								console.log('consulta:'+respuesta);
-								return respuesta;
-							}
-						} */
 				}
 			},
 			messages:{
