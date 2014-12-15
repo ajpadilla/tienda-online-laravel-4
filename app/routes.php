@@ -187,6 +187,8 @@ function () {
 
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
+	Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
+
 
 	/**
 		* ------------------------------ Rutas Invoice status  -----------------------
