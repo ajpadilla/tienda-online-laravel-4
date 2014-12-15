@@ -123,6 +123,7 @@ function () {
 	]);
 
 	Route::post('checkName','DiscountTypeController@checkName');
+	Route::post('checkNameForEditDiscountType','DiscountTypeController@checkNameForEdit');
 
 	Route::get('api/discountType', array('as'=>'api.discountType', 'uses'=>'DiscountTypeController@getDatatable'));
 
