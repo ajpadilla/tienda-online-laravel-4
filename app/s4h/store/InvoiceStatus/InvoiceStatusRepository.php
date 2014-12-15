@@ -54,4 +54,9 @@ class InvoiceStatusRepository {
 		return InvoiceStatus::find($invoice_status_id);
 	}
 
+	public function getNameForEdit($data = array())
+	{
+		return InvoiceStatusLang::select()->where('invoice_status_id','!=',$data['invoice_status_id'])->where('name','=',$data['name'])->first();
+	}
+
 }
