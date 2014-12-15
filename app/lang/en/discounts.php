@@ -82,7 +82,11 @@
 			'Show' => 'Show   ',
 			'Edit' => 'Edit',
 			'Delete' => 'Delete'
-		)
+		),
 		
+		"active" => array(
+			"Yes" => "Yes",
+			"No" => "No"
+		)
 	);
 

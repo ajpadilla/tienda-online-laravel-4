@@ -78,7 +78,11 @@
 			'Show' => 'Ver   ',
 			'Edit' => 'Editar',
 			'Delete' => 'Eliminar'
-		)
+		),
 
+		"active" => array(
+			"Yes" => "Si",
+			"No" => "No"
+		)
 	);
 
