@@ -275,6 +275,7 @@ function () {
 	]);
 
 	Route::post('checkNameClassifiedType','ClassifiedTypeController@checkName');
+    Route::post('checkNameClassifiedTypesEdit','ClassifiedTypeController@checkNameForEdit');
 
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
