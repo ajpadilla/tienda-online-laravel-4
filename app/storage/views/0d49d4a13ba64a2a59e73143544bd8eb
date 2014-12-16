@@ -7,7 +7,6 @@
     <div class="panel-heading">
         <?php /*<div class="panel-title m-b-md"><h4>Productos</h4></div>*/ ?>
         <div class="panel-options">
-
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#ventas">Tienda - Canjea tus Puntos</a></li>
                 <li class=""><a data-toggle="tab" href="#trueques">Venta de Garaje y Trueque</a></li>
