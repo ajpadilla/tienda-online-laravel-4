@@ -55,11 +55,11 @@ class ShipmentStatusController extends \BaseController {
 	
 		$collection->addColumn('Actions',function($model){
 			
-			$links = "<a class='btn btn-info' href='" . route('shipmentStatus.show', $model->shipmentStatus->id) . "'>".trans('shipmentStatus.actions.Show')." <i class='fa fa-check'></i></a>
+			$links = "<a class='btn btn-info btn-circle'' href='" . route('shipmentStatus.show', $model->shipmentStatus->id) . "'><i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a a class='btn btn-warning' href='" . route('shipmentStatus.edit', $model->shipmentStatus->id) . "'>".trans('shipmentStatus.actions.Edit')." <i class='fa fa-pencil'></i></a>
+			$links .= "<a a class='btn btn-warning btn-circle'' href='" . route('shipmentStatus.edit', $model->shipmentStatus->id) . "'><i class='fa fa-pencil'></i></a>
 					<br />
-					<a class='btn btn-danger' href='" . route('shipmentStatus.destroy', $model->shipmentStatus->id) . "'>".trans('shipmentStatus.actions.Delete')." <i class='fa fa-times'></i></a>";
+					<a class='btn btn-danger btn-circle'' href='" . route('shipmentStatus.destroy', $model->shipmentStatus->id) . "'><i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -196,6 +196,21 @@ class ShipmentStatusController extends \BaseController {
 			}else{
 				 return Response::json(true);
 			}
+	}
+
+
+	public function checkNameForEdit()
+	{
+		$response = array();
+		if (Request::ajax()) {
+			$shipment_status = $this->shipmentStatusRepository->getNameForEdit(Input::all());
+			if (count($shipment_status) > 0) {
+				return Response::json(false);
+			} else {
+				return Response::json(true);
+			}
+		}
+		return Response::json(array('response' => 'false'));
 	}
 
 }

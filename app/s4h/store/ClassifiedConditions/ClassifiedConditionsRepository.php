@@ -64,5 +64,10 @@ class ClassifiedConditionsRepository {
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
 		return $language->classifiedConditions()->lists('name','classified_conditions_id');
 	}
+
+	public function getNameForEdit($data = array())
+	{
+		return ClassifiedConditionLang::select()->where('classified_conditions_id','!=',$data['classified_conditions_id'])->where('name','=',$data['name'])->first();
+	}
 		
 }

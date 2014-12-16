@@ -5,6 +5,7 @@ use s4h\store\DiscountsTypes\DiscountTypeRepository;
 use s4h\store\DiscountTypesLang\DiscountTypeLangRepository;
 use s4h\store\Forms\RegisterDiscountTypeForm;
 use s4h\store\Languages\LanguageRepository;
+use s4h\store\Forms\EditDiscountTypeForm;
 
 class DiscountTypeController extends \BaseController {
 
@@ -12,12 +13,19 @@ class DiscountTypeController extends \BaseController {
 	private $registerDiscountTypeForm;
 	private $languageRepository;
 	private $discountTypeLangRepository;
+	private $editDiscountTypeForm;
 
-	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository, DiscountTypeLangRepository $discountTypeLangRepository){
+	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm,
+	 						DiscountTypeRepository $discountTypeRepository, 
+	 						LanguageRepository $languageRepository,
+	 						DiscountTypeLangRepository $discountTypeLangRepository,
+	 						EditDiscountTypeForm $editDiscountTypeForm){
+
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
 		$this->languageRepository = $languageRepository;
 		$this->discountTypeLangRepository = $discountTypeLangRepository;
+		$this->editDiscountTypeForm = $editDiscountTypeForm;
 	}
 
 	/**
@@ -135,6 +143,7 @@ class DiscountTypeController extends \BaseController {
 			$input['discount_type_id'] = $id;
 			try
 			{
+				$this->editDiscountTypeForm->validate($input);
 				$this->discountTypeRepository->updateDiscountType($input);
 				return Response::json(trans('discountType.Updated'));
 			}
@@ -169,7 +178,21 @@ class DiscountTypeController extends \BaseController {
 				return Response::json(true);
 			}
 		}
-		return Response::json(array('respuesta' => 'false'));
+		return Response::json(array('response' => 'false'));
+	}
+
+	public function checkNameForEdit()
+	{
+		$response = array();
+		if (Request::ajax()) {
+			$discount_type = $this->discountTypeRepository->getNameForEdit(Input::all());
+			if (count($discount_type) > 0) {
+				return Response::json(false);
+			} else {
+				return Response::json(true);
+			}
+		}
+		return Response::json(array('response' => 'false'));
 	}
 
 }

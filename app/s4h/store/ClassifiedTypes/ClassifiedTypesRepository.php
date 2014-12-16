@@ -62,4 +62,9 @@ class ClassifiedTypesRepository {
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
 		return $language->classifiedTypes()->lists('name','classified_types_id');
 	}
+
+	public function getNameForEdit($data = array())
+	{
+		return ClassifiedTypeLang::select()->where('classified_types_id','!=',$data['classified_types_id'])->where('name','=',$data['name'])->first();
+	}
 }

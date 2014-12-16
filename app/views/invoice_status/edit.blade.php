@@ -58,6 +58,11 @@
 								,$invoiceStatus->color,['class' => 'form-control','id' => 'color']) }}
 							</div>
 						</div>
+
+						<div class="form-group">
+						{{ Form::text('invoice_status_id',$invoiceStatus->id, ['class' => 'form-control','id'=>'invoice_status_id','style'=>'display: none;']) }}
+						</div>
+
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
 								{{ Form::submit(trans('invoiceStatus.labels.save'), ['class' => 'btn btn-primary']) }}
@@ -93,23 +98,28 @@
 					required:!0,
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
-					/*remote:
+					remote:
 					{
-						url:'{{ URL::to('/checkNameinvoiceStatus/') }}',
+						url:'{{ URL::to('/checkNameInvoiceStatusEdit/') }}',
 						type: 'POST',
 						data: {
 							language_id: function() {
 								return $('#language_id').val();
 							},
+							
 							name: function() {
 								return $('#name').val();
+							},
+
+							invoice_status_id: function() {
+								return $('#invoice_status_id').val();
 							}
 						},
 						dataFilter: function (respuesta) {
 							console.log('consulta:'+respuesta);
 							return respuesta;
 						}
-					} */
+					} 
 				},
 				description:{
 					required:!0,

@@ -94,9 +94,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('discount_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::text('discount_id',$discount->id,['class' => 'form-control','id'=>'discount_id']) }}
+								{{ Form::text('discount_id',$discount->id,['class' => 'form-control','id'=>'discount_id','style'=>'display: none;']) }}
 							</div>
 						</div>
 						<div class="form-group">

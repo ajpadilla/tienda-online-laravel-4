@@ -61,4 +61,10 @@ class DiscountTypeRepository {
 	{
 		return DiscountType::find($discount_type_id);
 	}
+
+
+	public function getNameForEdit($data = array())
+	{
+		return DiscountTypeLang::select()->where('discount_type_id','!=',$data['discount_type_id'])->where('name','=',$data['name'])->first();
+	}
 }
