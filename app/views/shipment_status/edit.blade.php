@@ -28,16 +28,15 @@
 								{{ Form::text('name',$shipmentStatusLanguage->pivot->name, ['class' => 'form-control', 'id' => 'name']) }}
 							</div>
 						</div>
-					</div>
-					
-					<div class="col-sm-6">
 						<div class="form-group">
 							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-8">
 								{{ Form::textarea('description',$shipmentStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3','id' => 'description']) }}
 							</div>
 						</div>
-						
+					</div>
+					
+					<div class="col-sm-6">
 						<div class="form-group">
 							{{ Form::label('color', trans('shipmentStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
