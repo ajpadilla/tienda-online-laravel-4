@@ -5,20 +5,26 @@ use s4h\store\Languages\LanguageRepository;
 use s4h\store\ClassifiedConditions\ClassifiedConditionsRepository;
 use s4h\store\Forms\RegisterClassifiedConditionsForm;
 use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLangRepository;
+use s4h\store\Forms\EditClassifiedConditionForm;
 
 class ClassifiedConditionController extends \BaseController {
 	private $languageRepository;
 	private $classifiedConditionsRepository;
 	private $registerClassifiedConditionsForm;
 	private $classifiedConditionLangRepository;
+	private $editClassifiedConditionForm;
 
-	function __construct(LanguageRepository $languageRepository, ClassifiedConditionsRepository $classifiedConditionsRepository, RegisterClassifiedConditionsForm $registerClassifiedConditionsForm,
-		ClassifiedConditionLangRepository $classifiedConditionLangRepository) {
+	function __construct(LanguageRepository $languageRepository, 
+		ClassifiedConditionsRepository $classifiedConditionsRepository, 
+		RegisterClassifiedConditionsForm $registerClassifiedConditionsForm,
+		ClassifiedConditionLangRepository $classifiedConditionLangRepository,
+		EditClassifiedConditionForm $editClassifiedConditionForm) {
 
 		$this->languageRepository = $languageRepository ;
 		$this->classifiedConditionsRepository = $classifiedConditionsRepository;
 		$this->registerClassifiedConditionsForm = $registerClassifiedConditionsForm;
 		$this->classifiedConditionLangRepository = $classifiedConditionLangRepository;
+		$this->editClassifiedConditionForm = $editClassifiedConditionForm;
 	}
 
 	/**
@@ -139,6 +145,7 @@ class ClassifiedConditionController extends \BaseController {
 			$input['classified_condition_id'] = $id;
 			try
 			{
+				$this->editClassifiedConditionForm->validate($input);
 				$this->classifiedConditionsRepository->updateClassifiedCondition($input);
 				return Response::json(trans('classifiedConditions.Actualiced'));
 			}
