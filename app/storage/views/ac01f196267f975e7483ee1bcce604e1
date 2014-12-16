@@ -32,9 +32,6 @@
 
 							</div>
 						</div>
-					</div>
-					
-					<div class="col-sm-6">
 						<div class="form-group">
 							<?php echo Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']); ?>
 
@@ -43,7 +40,9 @@
 
 							</div>
 						</div>
-						
+					</div>
+					
+					<div class="col-sm-6">
 						<div class="form-group">
 							<?php echo Form::label('color', trans('shipmentStatus.labels.color'),['class'=>'col-sm-2 control-label']); ?>
 
