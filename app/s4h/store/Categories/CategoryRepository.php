@@ -53,7 +53,6 @@ class CategoryRepository {
 
 	public function get()
 	{
-		//dd($this->getNested($this->getCategoriesWithoutParents()));
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		if (!empty($language))
@@ -89,9 +88,9 @@ class CategoryRepository {
 			$array = $this->getChildrenCategories($category);
 			if(!empty($category)) {
 				if(!empty($array))
-					$nested[$category->name] = $array;
+					$nested[] = ['id' => $category->categories_id, 'name' => $category->name, 'array' => $array];
 				else
-					$nested[$category->categories_id] = $category->name;
+					$nested[] = ['id' => $category->categories_id, 'name' => $category->name];
 			}
 		}
 		return $nested;
@@ -108,9 +107,9 @@ class CategoryRepository {
 				if(!empty($category)) {
 					$array = $this->getChildrenCategories($category);
 					if(!empty($array))
-						$childrens[$category->name] = $array;
+						$childrens[] = ['id' => $category->categories_id, 'name' => $category->name, 'array' => $array];
 					else
-						$childrens[$category->categories_id] = $category->name;
+						$childrens[] = ['id' => $category->categories_id, 'name' => $category->name];
 				}
 			}
 		}
