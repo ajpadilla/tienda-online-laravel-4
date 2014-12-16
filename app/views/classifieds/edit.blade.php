@@ -82,6 +82,11 @@
 								</div>
 							</div>
 						</div>
+					
+						<div class="form-group">
+						{{ Form::text('classified_id',$classified->id, ['class' => 'form-control','id'=>'classified_id','style'=>'display: none;']) }}
+						</div>
+
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
 								{{ Form::submit(trans('classifieds.labels.save'), ['class' => 'btn btn-primary']) }}
@@ -121,9 +126,9 @@
 					required:!0,
 					rangelength: [2, 255],
 					onlyLettersNumbersAndSpaces: true,
-					/*remote:
+					remote:
 					{
-						url:'{{ URL::to('/checkNameClassified/') }}',
+						url:'{{ URL::to('/checkNameClassifiedEdit/') }}',
 						type: 'POST',
 						data: {
 							language_id: function() {
@@ -131,13 +136,16 @@
 							},
 							name: function() {
 								return $('#name').val();
+							},
+							classified_id: function(){
+								return $('#classified_id').val();
 							}
 						},
 						dataFilter: function (respuesta) {
 							console.log('consulta:'+respuesta);
 							return respuesta;
 						}
-					}*/
+					}
 				},
 				description:{
 					required:!0,
