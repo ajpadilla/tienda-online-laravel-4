@@ -320,6 +320,8 @@ function () {
 	]);
 
 	Route::post('verificateNameClassifiedCondition','ClassifiedConditionController@checkNameClassifiedCondition');
+	Route::post('checkNameClassifiedConditionEdit','ClassifiedConditionController@checkNameForEdit');
+
 
 	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
 
