@@ -38,7 +38,7 @@
 						<div class="form-group">
 							{{ Form::label('description', trans('discounts.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('description',$discount_language->pivot->description, ['class' => 'form-control', 'rows' => '3','']) }}
+								{{ Form::textarea('description',$discount_language->pivot->description, ['class' => 'form-control', 'rows' => '3','id' =>'description']) }}
 							</div>
 						</div>
 						<div class="form-group">
@@ -114,6 +114,9 @@
 <script>
 	$(document).ready(function () 
 	{
+
+		$('#description').summernote();
+
 		$('.i-checks').iCheck({
 			checkboxClass: 'icheckbox_square-green',
 			radioClass: 'iradio_square-green',
