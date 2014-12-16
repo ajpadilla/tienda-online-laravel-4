@@ -28,16 +28,15 @@
 								{{ Form::text('name',$invoiceStatusLanguage->pivot->name, ['class' => 'form-control', 'id' => 'name']) }}
 							</div>
 						</div>
-					</div>
-					
-					<div class="col-sm-6">
 						<div class="form-group">
 							{{ Form::label('description', trans('invoiceStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('description',$invoiceStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3']) }}
+								{{ Form::textarea('description',$invoiceStatusLanguage->pivot->description, ['class' => 'form-control', 'rows' => '3', 'id' => 'description']) }}
 							</div>
 						</div>
-						
+					</div>
+					
+					<div class="col-sm-6">
 						<div class="form-group">
 							{{ Form::label('color', trans('invoiceStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
@@ -80,6 +79,8 @@
 <script>
 	$(document).ready(function () 
 	{
+		$('#description').summernote();
+
 		$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
