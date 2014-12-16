@@ -56,7 +56,7 @@ class ProductController extends \BaseController {
 	public function create()
 	{
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$categories = $this->categoryRepository->getNameForLanguage();
+		$categories = $this->categoryRepository->get();
 		$condition = $this->conditionRepository->getNameForLanguage();
 		$measures = $this->measureRepository->getNameForLanguage();
 		return View::make('products.create', compact('categories', 'condition', 'measures','languages'));

@@ -51,14 +51,56 @@ class CategoryRepository {
 		$category->delete();
 	}
 
-	public function getNameForLanguage()
+	public function get()
 	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		if (!empty($language)) {
-			return $language->categories()->lists('name','categories_id');
+			return $language->categories()->lists('name', 'category_id');
 		}else{
 			return array();
+		}
+	}
+
+	public function getNameArrayNested($nestedIds){
+
+	}
+
+	public function getCategoriesWithoutParents(){
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		if (!empty($language)) {
+			return Category::whereNull('category_id')->get();
+		}else{
+			return array();
+		}
+	}
+
+	public function getNested($categories){
+		$nested = [];
+		foreach ($categories as $category) {
+			$nested[$category->name] = $this->getChildrenCategories($category->id);
+		}
+		return $nested;
+	}
+
+	public function getChildrenCategories($categoryId){
+		$categories = Category::whereCategoryId($categoryId)->lists('id');
+		$childrens = [];
+		if($categories) {
+			foreach ($categories as $category) {
+				$childrens[$category] = $this->getChildrenCategories($category);
+			}
+		}
+		return $childrens;
+	}
+
+	public function searchIntoArray($target, $array){
+		foreach($array as $key => $value) {
+			if($value == $target)
+				return $key;
+			elseif(is_array($value))
+				return $this->searchIntoArray($target, $value);
 		}
 	}
 
@@ -66,6 +108,5 @@ class CategoryRepository {
 	{
 		return Category::find($categories_id);
 	}
-
 
 }
