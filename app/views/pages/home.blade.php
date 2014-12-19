@@ -44,10 +44,6 @@
     </div>
 @stop
 
-@section('in-situ-css')
-	<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/>
-@stop
-
 @include('products.partials._pop-up-products')
 
 @include('products.partials._product-show-js')

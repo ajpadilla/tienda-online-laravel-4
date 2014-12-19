@@ -42,10 +42,6 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('in-situ-css'); ?>
-	<link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>"/>
-<?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <?php echo $__env->make('products.partials._product-show-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

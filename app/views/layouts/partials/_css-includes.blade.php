@@ -20,8 +20,8 @@
 	    vertical-align: middle;
 	    text-align: left;
 	}
-
 </style>
+{{ HTML::style('assets/css/custom.css') }}
 {{ HTML::style('assets/font-awesome/css/font-awesome.css'); }}
 
 <!-- iCheck -->
@@ -73,6 +73,7 @@
 {{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-regularfont.css'); }}
 {{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css'); }}
 {{ HTML::style('assets/css/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css'); }}
+
 
 @yield('in-situ-css')
 
