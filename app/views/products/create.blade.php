@@ -89,19 +89,11 @@
 						required:true,
 						digits: true
 					},
-					available_for_order:{
-						required:true,
-						digits: true
-					},
-					show_price:{
+					point_price:{
 						required:true,
 						digits: true
 					},
 					accept_barter:{
-						required:true,
-						digits: true
-					},
-					product_for_barter:{
 						required:true,
 						digits: true
 					},
@@ -111,7 +103,6 @@
 					condition_id:{
 						required:true
 					}
-
 				},
 				messages:{
 					name:{
@@ -154,19 +145,11 @@
 						required: '{{ trans('products.validation.required') }}',
 						digits: '{{ trans('products.validation.digits') }}'
 					},
-					available_for_order:{
-						required: '{{ trans('products.validation.required') }}',
-						digits: '{{ trans('products.validation.digits') }}'
-					},
-					show_price:{
+					point_price:{
 						required: '{{ trans('products.validation.required') }}',
 						digits: '{{ trans('products.validation.digits') }}'
 					},
 					accept_barter:{
-						required: '{{ trans('products.validation.required') }}',
-						digits: '{{ trans('products.validation.digits') }}'
-					},
-					product_for_barter:{
 						required: '{{ trans('products.validation.required') }}',
 						digits: '{{ trans('products.validation.digits') }}'
 					},
