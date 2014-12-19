@@ -59,4 +59,9 @@ class ShipmentStatusRepository {
 		$shipment_status = $this->getShipmentStatus($shipment_status_id);
 		$shipment_status->delete();
 	}
+
+	public function getNameForEdit($data = array())
+	{
+		return ShipmentStatusLang::select()->where('shipment_status_id','!=',$data['shipment_status_id'])->where('name','=',$data['name'])->first();
+	}
 }

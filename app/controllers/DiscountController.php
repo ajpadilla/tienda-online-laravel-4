@@ -8,6 +8,7 @@ use s4h\store\Discounts\Discount;
 use s4h\store\Discounts\DiscountRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use s4h\store\Languages\LanguageRepository;
+use s4h\store\Forms\EditDiscountForm;
 
 class DiscountController extends \BaseController {
 
@@ -16,13 +17,22 @@ class DiscountController extends \BaseController {
 	private $discountTypeRepository;
 	private $languageRepository;
 	private $discountLangRepository;
+	private $editDiscountForm;
 
-	function __construct(RegisterDiscountForm $registerDiscountForm, DiscountRepository $discountRepository, DiscountTypeRepository $discountTypeRepository, LanguageRepository $languageRepository, DiscountLangRepository $discountLangRepository) {
+	function __construct(RegisterDiscountForm $registerDiscountForm, 
+							DiscountRepository $discountRepository, 
+							DiscountTypeRepository $discountTypeRepository, 
+							LanguageRepository $languageRepository, 
+							DiscountLangRepository $discountLangRepository,
+							EditDiscountForm $editDiscountForm
+						){
+
 		$this->registerDiscountForm = $registerDiscountForm;
 		$this->discountRepository = $discountRepository;
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->languageRepository = $languageRepository;
 		$this->discountLangRepository = $discountLangRepository;
+		$this->editDiscountForm = $editDiscountForm;
 	}
 
 	/**
@@ -112,7 +122,7 @@ class DiscountController extends \BaseController {
 			$input['discount_id'] = $id;
 			try
 			{
-				//$this->registerDiscountForm->validate($input);
+				$this->editDiscountForm->validate($input);
 				$this->discountRepository->updateDiscount($input);
 				return Response::json(trans('discounts.Updated'));
 			} catch (FormValidationException $e) {

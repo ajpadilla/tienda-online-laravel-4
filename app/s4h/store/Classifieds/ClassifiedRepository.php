@@ -70,4 +70,9 @@ class ClassifiedRepository{
 		}
 	}
 
+	public function getNameForEdit($data = array())
+	{
+		return ClassifiedsLang::select()->where('classified_id','!=',$data['classified_id'])->where('name','=',$data['name'])->first();
+	}
+
 }

@@ -40,7 +40,7 @@
 
 		'message1' =>'Discount',
 		'message2' =>'Successfully added!.',
-		'alert' => '¡The discount code is already registered!.',
+		'alert' => '¡The name already registered!.',
 
 		'edit_view' => array(
 			'title' => 'Edit discount type',

@@ -56,11 +56,11 @@ class InvoiceStatusController extends \BaseController {
 	
 		$collection->addColumn('Actions',function($model){
 			
-			$links = "<a class='btn btn-info' href='" . route('invoiceStatus.show', $model->invoiceStatus->id) . "'>".trans('invoiceStatus.actions.Show')." <i class='fa fa-check'></i></a>
+			$links = "<a class='btn btn-info btn-circle' href='" . route('invoiceStatus.show', $model->invoiceStatus->id) . "'><i class='fa fa-check'></i></a>
 					<br />";
-			$links .= "<a a class='btn btn-warning' href='" . route('invoiceStatus.edit', $model->invoiceStatus->id) . "'>".trans('invoiceStatus.actions.Edit')." <i class='fa fa-pencil'></i></a>
+			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('invoiceStatus.edit', $model->invoiceStatus->id) . "'><i class='fa fa-pencil'></i></a>
 					<br />
-					<a class='btn btn-danger' href='" . route('invoiceStatus.destroy', $model->invoiceStatus->id) . "'>".trans('invoiceStatus.actions.Delete')." <i class='fa fa-times'></i></a>";
+					<a class='btn btn-danger btn-circle' href='" . route('invoiceStatus.destroy', $model->invoiceStatus->id) . "'><i class='fa fa-times'></i></a>";
 
 			return $links;
 		});
@@ -190,5 +190,20 @@ class InvoiceStatusController extends \BaseController {
 			}
 		}
 	}
+
+	public function checkNameForEdit()
+	{
+		$response = array();
+		if (Request::ajax()) {
+			$invoice_status = $this->invoiceStatusRepository->getNameForEdit(Input::all());
+			if (count($invoice_status) > 0) {
+				return Response::json(false);
+			} else {
+				return Response::json(true);
+			}
+		}
+		return Response::json(array('response' => 'false'));
+	}
+
 
 }

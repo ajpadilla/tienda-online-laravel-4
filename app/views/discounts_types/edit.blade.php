@@ -28,19 +28,24 @@
 								{{ Form::text('name',$discount_type_language->pivot->name, ['class' => 'form-control','id'=>'name']) }}
 							</div>
 						</div>
-					</div>
-					<div class="col-sm-6">
+
 						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
-							</div>
+						{{ Form::text('discount_type_id',$discount_type->id, ['class' => 'form-control','id'=>'discount_type_id','style'=>'display: none;']) }}
 						</div>
 					</div>
-					{{ Form::close() }}
 				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<div class="col-sm-4 col-sm-offset-2">
+							{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
+						</div>
+					</div>
+				</div>
+				{{ Form::close() }}
 			</div>
 		</div>
 	</div>
+</div>
 @stop
 
 @section('scripts')
@@ -56,24 +61,28 @@
 				name:{
 					required:!0,
 					onlyLettersNumbersAndSpaces: true,
-					/*remote:
+					remote:
 						{
-							url:'{{ URL::to('/checkName/') }}',
+							url:'{{ URL::to('/checkNameForEditDiscountType/') }}',
 							type: 'POST',
 							data: {
 								name: function() {
 									return $('#name').val();
 								},
+								
 								language_id: function () {
 									return $('#language_id').val();
-								}
+								},
 
+								discount_type_id: function () {
+									return $('#discount_type_id').val();
+								}
 							},
 							dataFilter: function (respuesta) {
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						}*/
+						}
 				},
 			},
 			messages:{

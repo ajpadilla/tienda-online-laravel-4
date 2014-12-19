@@ -28,6 +28,11 @@
 								{{ Form::text('name',$classified_condition_language->pivot->name, ['class' => 'form-control','id'=>'name']) }}
 							</div>
 						</div>
+
+						<div class="form-group">
+						{{ Form::text('classified_conditions_id',$classified_condition->id, ['class' => 'form-control','id'=>'classified_conditions_id','style'=>'display: none;']) }}
+						</div>
+
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
@@ -56,24 +61,28 @@
 				name:{
 					required:!0,
 					onlyLettersNumbersAndSpaces: true,
-					/*remote:
+					remote:
 						{
-							url:'{{ URL::to('/checkName/') }}',
+							url:'{{ URL::to('/checkNameClassifiedConditionEdit/') }}',
 							type: 'POST',
 							data: {
 								name: function() {
 									return $('#name').val();
 								},
-								language_id: function () {
-									return $('#language_id').val();
-								}
 
+								language_id: function() {
+									return $('#language_id').val();
+								},
+
+								classified_conditions_id: function(){
+									return $('#classified_conditions_id').val();
+								}
 							},
 							dataFilter: function (respuesta) {
 								console.log('consulta:'+respuesta);
 								return respuesta;
 							}
-						}*/
+						}
 				},
 			},
 			messages:{

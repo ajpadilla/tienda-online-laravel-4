@@ -32,13 +32,13 @@
 						<div class="form-group">
 							{{ Form::label('description', trans('classifieds.labels.description'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3']) }}
+								{{ Form::textarea('description',null, ['class' => 'form-control summernote', 'rows' => '3']) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('address', trans('classifieds.labels.address'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::textarea('address',null, ['class' => 'form-control', 'rows' => '3']) }}
+								{{ Form::textarea('address',null, ['class' => 'form-control summernote', 'rows' => '3']) }}
 							</div>
 						</div>
 					</div>
@@ -99,6 +99,7 @@
 <script>
 	$(document).ready(function () 
 	{
+		$('.summernote').summernote();
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
          	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);

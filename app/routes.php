@@ -123,6 +123,7 @@ function () {
 	]);
 
 	Route::post('checkName','DiscountTypeController@checkName');
+	Route::post('checkNameForEditDiscountType','DiscountTypeController@checkNameForEdit');
 
 	Route::get('api/discountType', array('as'=>'api.discountType', 'uses'=>'DiscountTypeController@getDatatable'));
 
@@ -186,6 +187,8 @@ function () {
 
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
+    Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
+
 
 	/**
 		* ------------------------------ Rutas Invoice status  -----------------------
@@ -229,6 +232,7 @@ function () {
 
 	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
 	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
+    Route::post('checkNameInvoiceStatusEdit','InvoiceStatusController@checkNameForEdit');
 
 	/**
 		* ------------------------------ Rutas classified type -----------------------
@@ -271,6 +275,7 @@ function () {
 	]);
 
 	Route::post('checkNameClassifiedType','ClassifiedTypeController@checkName');
+    Route::post('checkNameClassifiedTypesEdit','ClassifiedTypeController@checkNameForEdit');
 
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
@@ -315,6 +320,8 @@ function () {
 	]);
 
 	Route::post('verificateNameClassifiedCondition','ClassifiedConditionController@checkNameClassifiedCondition');
+	Route::post('checkNameClassifiedConditionEdit','ClassifiedConditionController@checkNameForEdit');
+
 
 	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
 
@@ -359,6 +366,7 @@ function () {
 	]);
 
 	Route::post('checkNameClassified','ClassifiedsController@checkNameClassified');
+	Route::post('checkNameClassifiedEdit','ClassifiedsController@checkNameForEdit');
 
 	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedsController@getDatatable'));
 
