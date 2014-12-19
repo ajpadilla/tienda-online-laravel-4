@@ -10,14 +10,12 @@ class RegisterProductForm extends FormValidator{
                     'quantity' => 'required|integer',
                     'price' => 'required|numeric',
                     'width' => 'required|numeric',
+                    'point_price' => 'required|integer', 
                     'height' => 'required|numeric',
                     'depth' => 'required|numeric',
                     'weight' => 'required|numeric',
                     'active' => 'required|integer',
-                    'available_for_order' => 'required|integer',
-                    'show_price' => 'required|integer',
                     'accept_barter' => 'required|integer',
-                    'product_for_barter' => 'required|integer',
                     'condition_id' => 'required|integer'
                 ];
 }
