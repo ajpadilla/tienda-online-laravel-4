@@ -55,22 +55,25 @@ class CategoryRepository {
 	{
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();
-		if (!empty($language)) {
-			return $language->categories()->lists('name', 'category_id');
-		}else{
+		if (!empty($language))
+			return $language->categories()->lists('name', 'categories_id');
+			// return $this->getNested($this->getCategoriesWithoutParents());
+		else
 			return array();
-		}
 	}
 
 	public function getNameArrayNested($nestedIds){
-
+		$nameArrayNested = [];
+		foreach ($nestedIds as $key => $value) {
+			//if(is_int($key) && is_array())
+		}
 	}
 
 	public function getCategoriesWithoutParents(){
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		if (!empty($language)) {
-			return Category::whereNull('category_id')->get();
+			return Category::whereNull('category_id')->lists('id');
 		}else{
 			return array();
 		}
@@ -78,18 +81,36 @@ class CategoryRepository {
 
 	public function getNested($categories){
 		$nested = [];
-		foreach ($categories as $category) {
-			$nested[$category->name] = $this->getChildrenCategories($category->id);
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		foreach ($categories as $categoryId) {
+			$category = $language->categoriesLang()->whereCategoriesId($categoryId)->first();
+			$array = $this->getChildrenCategories($category);
+			if(!empty($category)) {
+				if(!empty($array))
+					$nested[] = ['id' => $category->categories_id, 'name' => $category->name, 'array' => $array];
+				else
+					$nested[] = ['id' => $category->categories_id, 'name' => $category->name];
+			}
 		}
 		return $nested;
 	}
 
-	public function getChildrenCategories($categoryId){
-		$categories = Category::whereCategoryId($categoryId)->lists('id');
+	public function getChildrenCategories($category){
+		$categories = Category::whereCategoryId($category->categories_id)->get();
 		$childrens = [];
-		if($categories) {
+		if(!empty($categories)) {
+			$isoCode = LaravelLocalization::setLocale();
+			$language = Language::select()->where('iso_code','=',$isoCode)->first();
 			foreach ($categories as $category) {
-				$childrens[$category] = $this->getChildrenCategories($category);
+				$category = $language->categoriesLang()->whereCategoriesId($category->id)->first();
+				if(!empty($category)) {
+					$array = $this->getChildrenCategories($category);
+					if(!empty($array))
+						$childrens[] = ['id' => $category->categories_id, 'name' => $category->name, 'array' => $array];
+					else
+						$childrens[] = ['id' => $category->categories_id, 'name' => $category->name];
+				}
 			}
 		}
 		return $childrens;

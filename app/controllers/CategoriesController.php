@@ -75,7 +75,7 @@ class CategoriesController extends \BaseController {
 	public function create()
 	{
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$categories = $this->categoryRepository->getNameForLanguage();
+		$categories = $this->categoryRepository->get();
 		array_unshift($categories,"");
 		return View::make('categories.create',compact('categories','languages'));
 	}

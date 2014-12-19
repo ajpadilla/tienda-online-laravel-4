@@ -20,6 +20,7 @@
         <div id="page-wrapper" class="gray-bg">
             @include('layouts.partials._nav-topbar')
             @include('layouts.partials._page-heading')
+            @include('layouts.partials._category-menu')
 			@include('layouts.partials._page-content-blank')
             <!--Fin Contenido-->
         </div>
@@ -28,5 +29,4 @@
     <!-- Fin Wrapper -->
     @include('layouts.partials._js-includes')
 </body>
-
 </html>

@@ -2,6 +2,8 @@
 
 class BaseController extends Controller {
 
+	private $categoryRepository;
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -17,12 +19,15 @@ class BaseController extends Controller {
 		$currentMenu = 'current';
 		$currentUser = Auth::user();
 		$currentRoute = Route::currentRouteName();
-/*		$products       =       new     ProductRepository();
-		$randomProducts =       $products->getRandom(5);
-		$topProducts    =       $products->getTop(5);
-		$newProducts    =       $products->getNew(5);
+		/*		$products       =       new     ProductRepository();
+				$randomProducts =       $products->getRandom(5);
+				$topProducts    =       $products->getTop(5);
+				$newProducts    =       $products->getNew(5);
 
-		View::share(compact('currentUser', 'currentMenu', 'currentRoute', 'randomProducts', 'topProducts', 'newProducts'));*/
+				View::share(compact('currentUser', 'currentMenu', 'currentRoute', 'randomProducts', 'topProducts', 'newProducts'));*/
+		$this->categoryRepository = new \s4h\store\Categories\CategoryRepository();
+		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
+		View::share(compact('categoriesMenu'));
 	}
 
 }

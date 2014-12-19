@@ -7,7 +7,6 @@
     <div class="panel-heading">
         <?php /*<div class="panel-title m-b-md"><h4>Productos</h4></div>*/ ?>
         <div class="panel-options">
-
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#ventas">Tienda - Canjea tus Puntos</a></li>
                 <li class=""><a data-toggle="tab" href="#trueques">Venta de Garaje y Trueque</a></li>
@@ -26,9 +25,6 @@
 				    </div>
 				    <div class="row">
 				        <h2>Top de Productos</h2>
-				        <?php /*<div class="sidebar col col-md-3">
-				            <?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-				        </div>*/ ?>
 				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			        </div>
 			    </div>
@@ -41,10 +37,6 @@
 		    </div>
 	    </div>
     </div>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('in-situ-css'); ?>
-	<link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>"/>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

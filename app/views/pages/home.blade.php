@@ -9,7 +9,6 @@
     <div class="panel-heading">
         {{--<div class="panel-title m-b-md"><h4>Productos</h4></div>--}}
         <div class="panel-options">
-
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#ventas">Tienda - Canjea tus Puntos</a></li>
                 <li class=""><a data-toggle="tab" href="#trueques">Venta de Garaje y Trueque</a></li>
@@ -28,9 +27,6 @@
 				    </div>
 				    <div class="row">
 				        <h2>Top de Productos</h2>
-				        {{--<div class="sidebar col col-md-3">
-				            @include('products.partials._category-sidebar')
-				        </div>--}}
 				        @include('products.partials._top-products')
 			        </div>
 			    </div>
@@ -43,10 +39,6 @@
 		    </div>
 	    </div>
     </div>
-@stop
-
-@section('in-situ-css')
-	<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/>
 @stop
 
 @include('products.partials._pop-up-products')

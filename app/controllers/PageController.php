@@ -1,5 +1,7 @@
 <?php
 
+use s4h\store\ProductsLang\ProductLangRepository;
+
 class PageController extends BaseController {
 
 	/*
@@ -15,9 +17,13 @@ class PageController extends BaseController {
 	|
 	*/
 
+	private $productLangRepository;
+
 	public function home()
 	{
-		return View::make('pages.home');
+		$this->productLangRepository = new ProductLangRepository();
+		$newProducts = $this->productLangRepository->getNewProducts();
+		return View::make('pages.home', compact('newProducts'));
 	}
 
 }

@@ -1,19 +1,23 @@
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="product-item">
-        <div class="pi-img-wrapper">
-            <img class="img-responsive" src="{{ asset('uploads/products/images/model1.jpg') }}" alt=""/>
-            <div>
-              <a href="{{ asset('uploads/products/images/model1.jpg') }}" class="btn btn-default fancybox-button"><i class="fa fa-search-plus fa-3x"></i>
-</a>
-              <a href="#product-pop-up" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
-            </div>
-        </div>
-        <h3>
-            <a href="{{ LaravelLocalization::transRoute('products.show') }}">Berry Lace Dress</a>
-        </h3>
-        <div class="pi-price">$29.00</div>
-        <a href="#" class="btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
-        <a href="#" class="btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
-        <div class="sticker sticker-sale"></div>
-    </div>
-</div>
+@if($newProducts)
+	@foreach($newProducts as $product)
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+		    <div class="product-item">
+		        <div class="pi-img-wrapper">
+		            <img class="img-responsive" src="{{ asset('uploads/products/images/model1.jpg') }}" alt=""/>
+		            <div>
+		              <a href="{{ asset('uploads/products/images/model1.jpg') }}" class="btn btn-default fancybox-button"><i class="fa fa-search-plus fa-3x"></i>
+		</a>
+		              <a href="#product-pop-up" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
+		            </div>
+		        </div>
+		        <h3>
+		            <a href="{{ LaravelLocalization::transRoute('products.show') }}">{{ $product->name }}</a>
+		        </h3>
+		        <div class="pi-price">{{ $product->price }}</div>
+		        <a href="#" class="btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
+		        <a href="#" class="btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
+		        <div class="sticker sticker-sale"></div>
+		    </div>
+		</div>
+    @endforeach
+@endif

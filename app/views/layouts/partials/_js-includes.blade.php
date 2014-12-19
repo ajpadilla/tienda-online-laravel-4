@@ -55,6 +55,8 @@
 <!-- simplecolorpicker -->
 {{ HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'); }}
 
+{{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.js') }}
+
 <script>
 	jQuery(".btn.btn-info.btn-circle").fancybox({
 		centerOnScroll: true,
@@ -73,6 +75,41 @@
 		width : '100%',
 		height : '70%'
 	});
+
+	var handleMenu = function() {
+        $(".header .navbar-toggle").click(function () {
+            if ($(".header .navbar-collapse").hasClass("open")) {
+                $(".header .navbar-collapse").slideDown(300)
+                .removeClass("open");
+            } else {
+                $(".header .navbar-collapse").slideDown(300)
+                .addClass("open");
+            }
+        });
+    }
+    var handleSubMenuExt = function() {
+        $(".header-navigation.dropdown").on("hover", function() {
+            alert('menu');
+            if ($(this).children(".header-navigation-content-ext").show()) {
+                if ($(".header-navigation-content-ext").height()>=$(".header-navigation-description").height()) {
+                    $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height()+22);
+                }
+            }
+        });
+    }
+
+    var handleSidebarMenu = function () {
+        $(".sidebar .dropdown a i").click(function (event) {
+            event.preventDefault();
+            if ($(this).parent("a").hasClass("collapsed") == false) {
+                $(this).parent("a").addClass("collapsed");
+                $(this).parent("a").siblings(".dropdown-menu").slideDown(300);
+            } else {
+                $(this).parent("a").removeClass("collapsed");
+                $(this).parent("a").siblings(".dropdown-menu").slideUp(300);
+            }
+        });
+    }
 </script>
 
 @yield('in-situ-js')
