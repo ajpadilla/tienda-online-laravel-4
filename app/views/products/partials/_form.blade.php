@@ -26,49 +26,49 @@
 	<div class="form-group">
 		{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
+			{{ Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => '']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Price']) }}
+			{{ Form::text('price', null, ['class' => 'form-control', 'placeholder' =>'']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('point_price', trans('products.labels.point_price'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('point_price', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
+			{{ Form::text('point_price', null, ['class' => 'form-control', 'placeholder' => '']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
+			{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => '']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => 'Height']) }}
+			{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => '']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
+			{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => '']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
+			{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => '']) }}
 			<!-- <span class="input-group-addon">pounds</span> -->
 		</div>
 	</div>
@@ -126,6 +126,26 @@
 			</div>
 		</div>
 	</div>
+	
+
+	<div class="form-group">
+		{{ Form::label('add_photos', trans('products.labels.add_photos'), ['class' => 'col-sm-4 control-label']) }}
+		<div class="col-sm-8">
+			<div class="radio i-checks">
+				<label>
+					{{ Form::radio('add_photos', '1', 1)}}
+					<i></i> Yes
+				</label>
+			</div>
+			<div class="radio i-checks">
+				<label>
+					{{ Form::radio('add_photos', '0', 0)}}
+					<i></i> No
+				</label>
+			</div>
+		</div>
+	</div>
+
 </div>
 
 <div class="col-lg-7">
