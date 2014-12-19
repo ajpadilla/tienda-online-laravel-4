@@ -27,9 +27,6 @@
 				    </div>
 				    <div class="row">
 				        <h2>Top de Productos</h2>
-				        {{--<div class="sidebar col col-md-3">
-				            @include('products.partials._category-sidebar')
-				        </div>--}}
 				        @include('products.partials._top-products')
 			        </div>
 			    </div>

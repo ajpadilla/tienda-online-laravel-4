@@ -25,9 +25,6 @@
 				    </div>
 				    <div class="row">
 				        <h2>Top de Productos</h2>
-				        <?php /*<div class="sidebar col col-md-3">
-				            <?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-				        </div>*/ ?>
 				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			        </div>
 			    </div>

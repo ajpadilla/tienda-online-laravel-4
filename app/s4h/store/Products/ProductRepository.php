@@ -100,6 +100,4 @@ class ProductRepository {
 	{
 		return Product::find($product_id);
 	}
-
-
 }
