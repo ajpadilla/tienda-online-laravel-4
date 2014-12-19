@@ -38,9 +38,9 @@
 	</div>
 
 	<div class="form-group">
-		{{ Form::label('measure_id', trans('products.labels.measure'), ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('point_price', trans('products.labels.point_price'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::select('measure_id',$measures,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')) }}
+			{{ Form::text('point_price', null, ['class' => 'form-control', 'placeholder' => 'Width']) }}
 		</div>
 	</div>
 
