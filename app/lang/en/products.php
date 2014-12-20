@@ -34,7 +34,8 @@
 			'depth' => 'depth',
 			'language' => 'Language:',
 			'add_photos' => 'Add photo',
-			'new' => 'New'	
+			'new' => 'New',
+			'measure' => 'Measure'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',

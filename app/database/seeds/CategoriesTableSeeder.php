@@ -14,7 +14,7 @@ class CategoriesTableSeeder extends Seeder {
 		for ($i = 0; $i < 8; $i++)
 		{
 			Category::create([
-				'category_id' => $i + 1 ,
+				'category_id' => rand(1, 8),
 			]);
 		}
 	}

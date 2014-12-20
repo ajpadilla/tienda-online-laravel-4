@@ -7,7 +7,7 @@
 		            <div>
 		              <a href="{{ asset('uploads/products/images/model1.jpg') }}" class="btn btn-default fancybox-button"><i class="fa fa-search-plus fa-3x"></i>
 		</a>
-		              <a href="#product-pop-up" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
+		              <a href="#product-pop-up-{{ $product->product_id }}" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
 		            </div>
 		        </div>
 		        <h3>

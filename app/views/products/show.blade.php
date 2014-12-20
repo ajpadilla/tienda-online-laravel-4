@@ -16,19 +16,18 @@
 			<div class="row">
 			@include('products.partials._show-photo')
 			<div class="col-md-6 col-sm-6">
-			  <h1>Cool green dress with red bell</h1>
+			  <h1>{{ $product->name }}</h1>
 			  <div class="price-availability-block clearfix">
 			    <div class="price">
-			      <strong><span>$</span>47.00</strong>
-			      <em>$<span>62.00</span></em>
+			      <strong><span>$</span>{{ $product->product->price }}</strong>
+			      <em>$<span>{{ $product->product->price }}</span></em>
 			    </div>
 			    <div class="availability">
-			      Availability: <strong>In Stock</strong>
+			      Availability: <strong>{{ $product->product->quantity }}</strong>
 			    </div>
 			  </div>
 			  <div class="description">
-			    <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat
-			Nostrud duis molestie at dolore.</p>
+			    <p>{{ $product->description }}</p>
 			  </div>
 			  <div class="product-page-options">
 			    <div class="pull-left">
@@ -83,5 +82,3 @@
 @stop
 
 @include('products.partials._product-show-js')
-
-@include('products.partials._pop-up-products')

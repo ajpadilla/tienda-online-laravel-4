@@ -17,7 +17,6 @@
 		{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			<div class="ibox-content no-padding">
-
 				{{ Form::textarea('description', null, array('class' => 'form-control')) }}
 			</div>
 		</div>
@@ -44,33 +43,39 @@
 		</div>
 	</div>
 
-	<div class="form-group">
-		{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
-		<div class="col-sm-10">
-			{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => '']) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']) }}
-		<div class="col-sm-10">
-			{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => '']) }}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{{ Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']) }}
-		<div class="col-sm-10">
-			{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => '']) }}
-		</div>
+	<div class="form-group"><label class="col-sm-2 control-label">{{ trans('products.labels.measure') }}</label>
+	    <div class="col-sm-10">
+	        <div class="row">
+	            <div class="col-md-3">{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.width')]) }}</div>
+	            <div class="col-md-3">{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.height')]) }}</div>
+	            <div class="col-md-3">{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.depth')]) }}</div>
+	            <div class="col-sm-3">
+	                {{
+	                    Form::select('measure_id', $measures, null,
+	                    array('class' => 'chosen-select form-control',
+	                    'data-placeholder' => trans('products.labels.measure')))
+	                }}
+	            </div>
+	        </div>
+	    </div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
-		<div class="col-sm-10">
-			{{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => '']) }}
-			<!-- <span class="input-group-addon">pounds</span> -->
-		</div>
+	    <div class="col-sm-10">
+	        <div class="input-group m-b">
+	            <div class="col-sm-6">
+	                {{ Form::text('weight', null, ['class' => 'form-control', 'placeholder' => '']) }}
+	            </div>
+	            <div class="col-sm-4">
+		            {{
+				        Form::select('weight_id', $measures, null,
+				        array('class' => 'chosen-select form-control',
+				        'data-placeholder' => trans('products.labels.measure')))
+				    }}
+			    </div>
+		    </div>
+	    </div>
 	</div>
 </div>
 
@@ -126,25 +131,6 @@
 			</div>
 		</div>
 	</div>
-	
-
-	<div class="form-group">
-		{{ Form::label('add_photos', trans('products.labels.add_photos'), ['class' => 'col-sm-4 control-label']) }}
-		<div class="col-sm-8">
-			<div class="radio i-checks">
-				<label>
-					{{ Form::radio('add_photos', '1', 1)}}
-					<i></i> Yes
-				</label>
-			</div>
-			<div class="radio i-checks">
-				<label>
-					{{ Form::radio('add_photos', '0', 0)}}
-					<i></i> No
-				</label>
-			</div>
-		</div>
-	</div>
 
 </div>
 
@@ -171,10 +157,13 @@
 	</div>
 </div>
 
-<div class="col-lg-12">
+<div class="col-lg-6 col-lg-offset-2">
 	<div class="form-group">
-		<div class="col-sm-4 col-sm-offset-2">
-			{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+		<div class="col-sm-3">
+			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="1">Guardar</button>
+		</div>
+		<div class="col-sm-3">
+			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="0">{{ trans('products.labels.add_photos') }}</button>
 		</div>
 	</div>
 </div>

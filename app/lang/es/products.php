@@ -36,7 +36,8 @@
 			'depth' => 'Profundidad:',
 			'language' => 'Idioma:',
 			'add_photos' => 'Agregar foto',
-			'new' => 'Nuevo'		
+			'new' => 'Nuevo',
+			'measure' => 'Medida'
 		),
 		"validation" => array(
 			'required' => 'Campo obligatorio.',

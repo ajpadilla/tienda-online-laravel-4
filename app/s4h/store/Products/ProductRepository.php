@@ -20,7 +20,7 @@ class ProductRepository {
 
 	public function deleteProduct($id)
 	{
-		$product = $this->getProductId($id);
+		$product = $this->getById($id);
 		$product->delete();
 	}
 
@@ -30,16 +30,14 @@ class ProductRepository {
 		$product->on_sale = $data['on_sale'];
 		$product->quantity = $data['quantity'];
 		$product->price = $data['price'];
-		$product->measure_id = $data['measure_id'];
 		$product->width = $data['width'];
 		$product->height = $data['height'];
 		$product->depth = $data['depth'];
 		$product->weight = $data['weight'];
 		$product->active = $data['active'];
-		$product->available_for_order = $data['available_for_order'];
-		$product->show_price = $data['show_price'];
+		$product->measure_id = $data['measure_type'];
+		$product->weight_id = $data['weight_type'];
 		$product->accept_barter = $data['accept_barter'];
-		$product->product_for_barter = $data['product_for_barter'];
 		$product->condition_id = $data['condition_id'];
 
 
@@ -48,8 +46,11 @@ class ProductRepository {
 
 		$product->save();
 
-		$product->languages()->attach($data['language_id'], array('name'=> $data['name'],
-			'description' => $data['description'])
+		$product->languages()->attach($data['language_id'],
+			array(
+				'name'=> $data['name'],
+				'description' => $data['description']
+			)
 		);
 
 		if (!is_null($data['categories']))
@@ -60,20 +61,18 @@ class ProductRepository {
 
 	public function updateProduct($data = array())
 	{
-		$product = $this->getProductId($data['product_id']);
+		$product = $this->getById($data['product_id']);
 		$product->on_sale = $data['on_sale'];
 		$product->quantity = $data['quantity'];
-		$product->measure_id = $data['measure_id'];
 		$product->price = $data['price'];
 		$product->width = $data['width'];
 		$product->height = $data['height'];
 		$product->depth = $data['depth'];
 		$product->weight = $data['weight'];
 		$product->active = $data['active'];
-		$product->available_for_order = $data['available_for_order'];
-		$product->show_price = $data['show_price'];
+		$product->measure_id = $data['measure_type'];
+		$product->weight_id = $data['weight_type'];
 		$product->accept_barter = $data['accept_barter'];
-		$product->product_for_barter = $data['product_for_barter'];
 		$product->condition_id = $data['condition_id'];
 		$product->save();
 
@@ -96,8 +95,8 @@ class ProductRepository {
 		return $product;
 	}
 
-	public function getProductId($product_id)
+	public function getById($product_id)
 	{
-		return Product::find($product_id);
+		return ProductLang::whereProductId($product_id)->first();
 	}
 }

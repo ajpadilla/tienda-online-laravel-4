@@ -77,7 +77,7 @@ class ProductController extends \BaseController {
 			{
 				$this->registerProductForm->validate($input);
 				$product = $this->productRepository->createNewProduct($input);
-				if ($input['add_photos'] == 1) {
+				if ($input['add_photos'] == 0) {
 					Session::put('product_id', $product->id);
 					Session::put('language_id', $input['language_id']);
 					return Response::json(['message' => trans('products.response'), 
@@ -93,9 +93,10 @@ class ProductController extends \BaseController {
 		}
 	}
 
-	public function show()
+	public function show($id)
 	{
-		return View::make('products.show');
+		$product = $this->productRepository->getById($id);
+		return View::make('products.show', compact('product'));
 	}
 
 	/**
@@ -106,7 +107,7 @@ class ProductController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$product = $this->productRepository->getProductId($id);
+		$product = $this->productRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$product_language = $product->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
