@@ -9,14 +9,84 @@ class CategoriesTableSeeder extends Seeder {
 	 *
 	 * @return void
 	 */
-	public function run()
-	{
-		for ($i = 0; $i < 8; $i++)
+		public function run()
 		{
-			Category::create([
-				'category_id' => rand(1, 8),
-			]);
-		}
-	}
 
-}
+			$date = new DateTime;
+
+			$categories [] = array(
+				'category_id' => NULL,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+			$categories [] = array(
+				'category_id' => 1,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+			$categories [] = array(
+				'category_id' => 1,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+  
+
+			$categories [] = array(
+				'category_id' => 1,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+
+			$categories [] = array(
+				'category_id' => NULL,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+
+			$categories [] = array(
+				'category_id' => 5,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+ 
+
+			$categories [] = array(
+				'category_id' => 5,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+			$categories [] = array(
+				'category_id' => NULL,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+ 
+			$categories [] = array(
+				'category_id' => 8,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+			$categories [] = array(
+				'category_id' => 8,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+ 
+
+			$categories [] = array(
+				'category_id' => 8,
+				'created_at' => $date->format('Y-m-d h:m:s'),
+				'updated_at' => $date->format('Y-m-d h:m:s')             
+			);  
+
+			// Uncomment the below to run the seeder
+			DB::table('categories')->insert($categories);
+		}
+
+	}

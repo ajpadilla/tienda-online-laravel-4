@@ -1,5 +1,4 @@
 <div class="row wrapper border-bottom white-bg page-heading" style="padding-bottom: 5px; padding-top: 5px">
-
 {{--    <div class="header-navigation">
         <ul>
         @if($categoriesMenu)
@@ -138,7 +137,7 @@
           </li>
         </ul>
     </div>--}}
-    
+
 	<nav class="navbar navbar-default" style="margin-bottom: 0px;" role="navigation">
 		<div>
 		@if($categoriesMenu)
