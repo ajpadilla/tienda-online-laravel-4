@@ -29,7 +29,7 @@
 			'accept_barter' => 'Accept barter',
 			'categories' => 'Categories:',
 			'condition' => 'Condition:',
-			'point_price' => 'Point price:',
+			'point_price' => 'Price in points:',
 			'height' => 'height:',
 			'depth' => 'depth',
 			'language' => 'Language:',
