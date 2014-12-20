@@ -76,6 +76,11 @@
 		height : '70%'
 	});
 
+	$('.tooltip-pop').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+
 	var handleMenu = function() {
         $(".header .navbar-toggle").click(function () {
             if ($(".header .navbar-collapse").hasClass("open")) {
