@@ -10,6 +10,7 @@ use s4h\store\Measures\MeasureRepository;
 use s4h\store\Forms\RegisterProductForm;
 use s4h\store\Forms\EditProductForm;
 use s4h\store\Languages\LanguageRepository;
+use s4h\store\Weights\WeightRepository;
 use Laracasts\Validation\FormValidationException;
 
 class ProductController extends \BaseController {
@@ -22,6 +23,7 @@ class ProductController extends \BaseController {
 	protected $measureRepository;
 	protected $languageRepository;
 	protected $productLangRepository;
+	protected $weightRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
@@ -30,7 +32,8 @@ class ProductController extends \BaseController {
 										MeasureRepository $measureRepository,
 										EditProductForm $editProductForm,
 										LanguageRepository $languageRepository,
-										ProductLangRepository $productLangRepository
+										ProductLangRepository $productLangRepository,
+										WeightRepository $weightRepository
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
@@ -41,6 +44,7 @@ class ProductController extends \BaseController {
 		$this->measureRepository = $measureRepository;
 		$this->languageRepository = $languageRepository;
 		$this->productLangRepository = $productLangRepository;
+		$this->weightRepository = $weightRepository;
 	}
 
 	public function index()
@@ -59,7 +63,8 @@ class ProductController extends \BaseController {
 		$categories = $this->categoryRepository->get();
 		$condition = $this->conditionRepository->getNameForLanguage();
 		$measures = $this->measureRepository->getNameForLanguage();
-		return View::make('products.create', compact('categories', 'condition', 'measures','languages'));
+		$weights = $this->weightRepository->getNameForLanguage();
+		return View::make('products.create', compact('categories', 'condition', 'measures','weights','languages'));
 	}
 
 
