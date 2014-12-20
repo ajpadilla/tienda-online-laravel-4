@@ -48,14 +48,14 @@ class CategoriesTableSeeder extends Seeder {
 
 
 			$categories [] = array(
-				'category_id' => 2,
+				'category_id' => 5,
 				'created_at' => $date->format('Y-m-d h:m:s'),
 				'updated_at' => $date->format('Y-m-d h:m:s')             
 			);  
  
 
 			$categories [] = array(
-				'category_id' => 2,
+				'category_id' => 5,
 				'created_at' => $date->format('Y-m-d h:m:s'),
 				'updated_at' => $date->format('Y-m-d h:m:s')             
 			);  
@@ -67,20 +67,20 @@ class CategoriesTableSeeder extends Seeder {
 			);  
  
 			$categories [] = array(
-				'category_id' => 3,
+				'category_id' => 8,
 				'created_at' => $date->format('Y-m-d h:m:s'),
 				'updated_at' => $date->format('Y-m-d h:m:s')             
 			);  
 
 			$categories [] = array(
-				'category_id' => 3,
+				'category_id' => 8,
 				'created_at' => $date->format('Y-m-d h:m:s'),
 				'updated_at' => $date->format('Y-m-d h:m:s')             
 			);  
  
 
 			$categories [] = array(
-				'category_id' => 3 ,
+				'category_id' => 8,
 				'created_at' => $date->format('Y-m-d h:m:s'),
 				'updated_at' => $date->format('Y-m-d h:m:s')             
 			);  
