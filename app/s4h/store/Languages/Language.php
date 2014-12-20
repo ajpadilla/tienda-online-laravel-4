@@ -66,4 +66,9 @@ class Language extends Eloquent
 	{
 		return $this->belongsToMany('s4h\store\AttributeTypes\AttributeType','attribute_types_lang','language_id','attribute_type_id')->withPivot('name');
 	}
+
+	public function weights(){
+		return $this->belongsToMany('s4h\store\Weights\Weight','weights_lang','language_id','weight_id')->withPivot('name','abbreviation');
+	}
+
 }
