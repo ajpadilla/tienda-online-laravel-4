@@ -15,290 +15,14 @@
 				<div class="row">
 					<?php echo Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct']); ?>
 
-					<div class="col-lg-7">
-						<div class="form-group">
-							<?php echo Form::label('language_id', trans('products.labels.language'),['class'=>'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<div class="ibox-content no-padding">
-
-									<?php echo Form::textarea('description', null, array('class' => 'form-control')); ?>
-
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => 'Quantity']); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Price']); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('measure_id', trans('products.labels.measure'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::select('measure_id',$measures,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('width', null, ['class' => 'form-control', 'placeholder' => 'Width']); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('height', null, ['class' => 'form-control', 'placeholder' => 'Height']); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('depth', null, ['class' => 'form-control', 'placeholder' => 'Depth']); ?>
-
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']); ?>
-
-							<div class="col-sm-10">
-								<?php echo Form::text('weight', null, ['class' => 'form-control', 'placeholder' => 'Weight']); ?>
-
-								<!-- <span class="input-group-addon">pounds</span> -->
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-5">
-						<div class="form-group">
-							<?php echo Form::label('on_sale', trans('products.labels.on_sale'), ['class' => 'col-sm-4 control-label']); ?>
-
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										<?php echo Form::radio('on_sale', '1', 1); ?>
-
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										<?php echo Form::radio('on_sale', '0', 0); ?>
-
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('active', trans('products.labels.active'), ['class' => 'col-sm-4 control-label']); ?>
-
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										<?php echo Form::radio('active', '1', 1); ?>
-
-										<i></i> Yes
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label>
-										<?php echo Form::radio('active', '0', 0); ?>
-
-										<i></i> No
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<?php echo Form::label('available_for_order', trans('products.labels.available_for_order'), ['class' => 'col-sm-4 control-label']); ?>
-
-							<div class="col-sm-8">
-								<div class="radio i-checks">
-									<label>
-										<?php echo Form::radio('available_for_order', '1', 1); ?>
-
-										<i></i> Yes </label>
-									</div>
-									<div class="radio i-checks">
-										<label>
-											<?php echo Form::radio('available_for_order', '0', 0); ?>
-
-											<i></i> No </label>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<?php echo Form::label('show_price', trans('products.labels.show_price'), ['class' => 'col-sm-4 control-label']); ?>
-
-									<div class="col-sm-8">
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('show_price', '1', 1); ?>
-
-												<i></i> Yes
-											</label>
-										</div>
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('show_price', '0', 0); ?>
-
-												<i></i> No
-											</label>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<?php echo Form::label('accept_barter', trans('products.labels.accept_barter'), ['class' => 'col-sm-4 control-label']); ?>
-
-									<div class="col-sm-8">
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('accept_barter', '1', 1); ?>
-
-												<i></i> Yes
-											</label>
-										</div>
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('accept_barter', '0', 0); ?>
-
-												<i></i> No
-											</label>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<?php echo Form::label('product_for_barter', trans('products.labels.product_for_barter'), ['class' => 'col-sm-4 control-label']); ?>
-
-									<div class="col-sm-8">
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('product_for_barter', '1', 1); ?>
-
-												<i></i> Yes
-											</label>
-										</div>
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('product_for_barter', '0', 0); ?>
-
-												<i></i> No
-											</label>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<?php echo Form::label('add_photos', trans('products.labels.add_photos'), ['class' => 'col-sm-4 control-label']); ?>
-
-									<div class="col-sm-8">
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('add_photos', '1', 1); ?>
-
-												<i></i> Yes
-											</label>
-										</div>
-										<div class="radio i-checks">
-											<label>
-												<?php echo Form::radio('add_photos', '0', 0); ?>
-
-												<i></i> No
-											</label>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-
-							<div class="col-lg-7">
-								<div class="form-group">
-									<?php echo Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']); ?>
-
-									<div class="col-sm-10">
-										<?php echo Form::select('categories[]',$categories,null,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')); ?>
-
-
-									</div>
-								</div>
-
-								<div class="form-group">
-									<?php echo Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']); ?>
-
-									<div class="col-sm-10">
-										<?php echo Form::select('condition_id',$condition,null,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')); ?>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="col-lg-12">
-								<div class="form-group">
-									<div class="col-sm-4 col-sm-offset-2">
-										<?php echo Form::submit('Save', ['class' => 'btn btn-primary']); ?>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="clearfix"></div>
-
-							<?php echo Form::close(); ?>
-
-						</div>
-					</div>
-
+						<?php echo $__env->make('products.partials._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					<?php echo Form::close(); ?>
 
 				</div>
-			</div>		
+			</div>
 		</div>
+	</div>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
@@ -323,6 +47,10 @@
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
 			}, '<?php echo trans('products.validation.onlyLettersNumbersAndDash'); ?>');
 
+			jQuery.validator.addMethod("decimalNumbers", function(value, element) {
+				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
+			}, '<?php echo trans('products.validation.maxlength'); ?>'+[20]+'<?php echo trans('products.validation.length'); ?>' + '<?php echo trans('products.validation.maxlengthDecimal'); ?>'+ [6] + '<?php echo trans('products.validation.decimal'); ?>');
+
 			$('#formCreateProduct').validate({
 				rules:{
 					name:{
@@ -336,27 +64,34 @@
 					},
 					quantity:{
 						required:true,
-						digits: true
+						digits: true,
+						maxlength: 10
 					},
 					price:{
 						required:true,
-						number: true
+						number: true,
+						decimalNumbers:true
 					},
 					width:{
 						required:true,
-						number: true
+						number: true,
+						decimalNumbers:true
+
 					},
 					height:{
 						required:true,
-						number: true
+						number: true,
+						decimalNumbers:true
 					},
 					depth:{
 						required:true,
-						number:true
+						number:true,
+						decimalNumbers:true
 					},
 					weight:{
 						required:true,
-						number:true
+						number:true,
+						decimalNumbers:true
 					},
 					on_sale:{
 						required:true,
@@ -366,19 +101,12 @@
 						required:true,
 						digits: true
 					},
-					available_for_order:{
+					point_price:{
 						required:true,
-						digits: true
-					},
-					show_price:{
-						required:true,
-						digits: true
+						digits: true,
+						maxlength: 10
 					},
 					accept_barter:{
-						required:true,
-						digits: true
-					},
-					product_for_barter:{
 						required:true,
 						digits: true
 					},
@@ -388,7 +116,6 @@
 					condition_id:{
 						required:true
 					}
-
 				},
 				messages:{
 					name:{
@@ -401,7 +128,8 @@
 					},
 					quantity:{
 						required: '<?php echo trans('products.validation.required'); ?>',
-						digits: '<?php echo trans('products.validation.digits'); ?>'
+						digits: '<?php echo trans('products.validation.digits'); ?>',
+						maxlength: '<?php echo trans('products.validation.maxlength'); ?>'+'[10]'+'<?php echo trans('products.validation.length'); ?>'
 					},
 					price:{
 						required: '<?php echo trans('products.validation.required'); ?>',
@@ -431,19 +159,12 @@
 						required: '<?php echo trans('products.validation.required'); ?>',
 						digits: '<?php echo trans('products.validation.digits'); ?>'
 					},
-					available_for_order:{
+					point_price:{
 						required: '<?php echo trans('products.validation.required'); ?>',
-						digits: '<?php echo trans('products.validation.digits'); ?>'
-					},
-					show_price:{
-						required: '<?php echo trans('products.validation.required'); ?>',
-						digits: '<?php echo trans('products.validation.digits'); ?>'
+						digits: '<?php echo trans('products.validation.digits'); ?>',
+						maxlength: '<?php echo trans('products.validation.maxlength'); ?>'+[10]+'<?php echo trans('products.validation.length'); ?>'
 					},
 					accept_barter:{
-						required: '<?php echo trans('products.validation.required'); ?>',
-						digits: '<?php echo trans('products.validation.digits'); ?>'
-					},
-					product_for_barter:{
 						required: '<?php echo trans('products.validation.required'); ?>',
 						digits: '<?php echo trans('products.validation.digits'); ?>'
 					},
