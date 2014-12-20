@@ -35,6 +35,7 @@ class ProductRepository {
 		$product->depth = $data['depth'];
 		$product->weight = $data['weight'];
 		$product->active = $data['active'];
+		$product->color = $data['color'];
 		$product->measure_id = $data['measure_type'];
 		$product->weight_id = $data['weight_type'];
 		$product->accept_barter = $data['accept_barter'];
@@ -70,6 +71,7 @@ class ProductRepository {
 		$product->depth = $data['depth'];
 		$product->weight = $data['weight'];
 		$product->active = $data['active'];
+		$product->color = $data['color'];
 		$product->measure_id = $data['measure_type'];
 		$product->weight_id = $data['weight_type'];
 		$product->accept_barter = $data['accept_barter'];
