@@ -43,6 +43,8 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('ClassifiedsLangTableSeeder');
 	     $this->call('ProductConditionTableSeeder');
 	     $this->call('ProductConditionsLangTableSeeder');
+	     $this->call('WeightTableSeeder');
+	     $this->call('WeightLangTableSeeder');
 	     $this->call('MeasureTableSeeder');
 	     $this->call('MeasureLangTableSeeder');
 	     $this->call('CategoriesTableSeeder');
@@ -59,8 +61,6 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeValueTableSeeder');
 	     $this->call('AttributeValueLangTableSeeder');
 	     $this->call('AttributeByValueTableSeeder');
-	     $this->call('WeightTableSeeder');
-	     $this->call('WeightLangTableSeeder');
 	}
 
 }
