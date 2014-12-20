@@ -4,6 +4,7 @@ use s4h\store\Products\Product;
 use s4h\store\Conditions\Condition;
 use s4h\store\Users\User;
 use s4h\store\Measures\Measure;
+use s4h\store\Weights\Weight;
 /**
 * 
 */
@@ -24,12 +25,15 @@ class ProductTableSeeder extends DatabaseSeeder{
 
 		$measures = Measure::all()->toArray();
 
+		$weights = Weight::all()->toArray();
+
 		for ($i=0; $i < 20; $i++) 
 		{ 
 			$productCondition = $faker->randomElement($productsConditions);
 			$user = $faker->randomElement($users);
 			$measur = $faker->randomElement($measures);
- 
+ 			$weight = $faker->randomElement($weights);
+
 			Product::create([
 				'on_sale' => $faker->numberBetween(0,1),
 				'quantity' => $faker->numberBetween(0, 100),
@@ -43,6 +47,8 @@ class ProductTableSeeder extends DatabaseSeeder{
 				'accept_barter' => $faker->numberBetween(0,1),
 				'condition_id' => $productCondition['id'],
 				'user_id' => $user['id'],
+				'measure_id' => $measur['id'],
+				'weight_id' => $weight['id']
 			]);
 		}
 
