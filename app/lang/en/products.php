@@ -43,6 +43,10 @@
 			'number' => 'The field must be a number.',
 			'digits' => 'Please enter whole numbers only.',
 			'date' => 'Please enter a valid date.',
+			'maxlength' => 'Please enter maximum ',
+			'length' => ' digits integers',
+			'maxlengthDecimal'=>' and maximum ',
+			'decimal' => ' digits decimals',
 			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces',
 			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.'
 		),

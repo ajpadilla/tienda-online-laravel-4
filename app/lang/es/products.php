@@ -45,6 +45,10 @@
 			'number' => 'Por favor, introduzca un número válido.',
 			'digits' => 'Por favor, ingrese sólo dígitos enteros.',
 			'date' => 'Por favor, Ingrese una fecha valida.',
+			'maxlength' => 'Por favor ingrese maximo ',
+			'length' => ' digitos enteros',
+			'maxlengthDecimal'=>' y maximo ',
+			'decimal' => ' digitos decimales',
 			'onlyLettersNumbersAndSpaces' => 'Ingrese solo letras, numeros y/o espacios en blanco',
 			'onlyLettersNumbersAndDash' => 'Ingrese solo letras, numeros y/o guiones.'
 		),

@@ -46,6 +46,10 @@
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
 			}, '{{ trans('products.validation.onlyLettersNumbersAndDash') }}');
 
+			jQuery.validator.addMethod("decimalNumbers", function(value, element) {
+				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
+			}, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
+
 			$('#formCreateProduct').validate({
 				rules:{
 					name:{
@@ -59,27 +63,34 @@
 					},
 					quantity:{
 						required:true,
-						digits: true
+						digits: true,
+						maxlength: 10
 					},
 					price:{
 						required:true,
-						number: true
+						number: true,
+						decimalNumbers:true
 					},
 					width:{
 						required:true,
-						number: true
+						number: true,
+						decimalNumbers:true
+
 					},
 					height:{
 						required:true,
-						number: true
+						number: true,
+						decimalNumbers:true
 					},
 					depth:{
 						required:true,
-						number:true
+						number:true,
+						decimalNumbers:true
 					},
 					weight:{
 						required:true,
-						number:true
+						number:true,
+						decimalNumbers:true
 					},
 					on_sale:{
 						required:true,
@@ -91,7 +102,8 @@
 					},
 					point_price:{
 						required:true,
-						digits: true
+						digits: true,
+						maxlength: 10
 					},
 					accept_barter:{
 						required:true,
@@ -115,7 +127,8 @@
 					},
 					quantity:{
 						required: '{{ trans('products.validation.required') }}',
-						digits: '{{ trans('products.validation.digits') }}'
+						digits: '{{ trans('products.validation.digits') }}',
+						maxlength: '{{trans('products.validation.maxlength')}}'+'[10]'+'{{trans('products.validation.length')}}'
 					},
 					price:{
 						required: '{{ trans('products.validation.required') }}',
@@ -147,7 +160,8 @@
 					},
 					point_price:{
 						required: '{{ trans('products.validation.required') }}',
-						digits: '{{ trans('products.validation.digits') }}'
+						digits: '{{ trans('products.validation.digits') }}',
+						maxlength: '{{trans('products.validation.maxlength')}}'+[10]+'{{trans('products.validation.length')}}'
 					},
 					accept_barter:{
 						required: '{{ trans('products.validation.required') }}',
