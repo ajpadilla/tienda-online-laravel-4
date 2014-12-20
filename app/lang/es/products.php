@@ -31,7 +31,7 @@
 			'accept_barter' => 'Trueque:',
 			'categories' => 'Categorias:',
 			'condition' => 'Condición:',
-			'point_price' => 'Punto por precio:',
+			'point_price' => 'Precio en puntos:',
 			'height' => 'Altura: ',
 			'depth' => 'Profundidad:',
 			'language' => 'Idioma:',
