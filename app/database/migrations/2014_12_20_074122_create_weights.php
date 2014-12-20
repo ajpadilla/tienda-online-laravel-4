@@ -28,7 +28,7 @@ class CreateWeights extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('weights');
+		Schema::dropIfExists('weights');
 	}
 
 }
