@@ -28,6 +28,9 @@
 <?php $__env->startSection('scripts'); ?>
 	<script type="text/javascript">
 		$(document).ready(function () {
+
+			$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+
 			// Iniciar checks
 			$('.i-checks').iCheck({
 				checkboxClass: 'icheckbox_square-green',
@@ -115,6 +118,9 @@
 					},
 					condition_id:{
 						required:true
+					},
+					color:{
+						required:true
 					}
 				},
 				messages:{
@@ -172,6 +178,9 @@
 						required: '<?php echo trans('products.validation.required'); ?>',
 					},
 					condition_id:{
+						required: '<?php echo trans('products.validation.required'); ?>',
+					},
+					color:{
 						required: '<?php echo trans('products.validation.required'); ?>',
 					}
 				},

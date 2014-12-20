@@ -231,6 +231,28 @@
 										{{ Form::select('condition_id',$condition,$product->condition->id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
 									</div>
 								</div>
+								
+								<div class="form-group">
+									{{ Form::label('color', trans('invoiceStatus.labels.color'),['class'=>'col-sm-4 control-label']) }}
+									<div class="col-sm-8">
+										{{ Form::select('color',array(
+											'#7bd148' => 'Green',
+											'#5484ed' =>'Bold blue',
+											'#a4bdfc' => 'Blue',
+											'#46d6db' => 'Turquoise',
+											'#7ae7bf' => 'Light green',
+											'#51b749' => 'Bold green',
+											'#fbd75b' => 'Yellow',
+											'#ffb878' => 'Orange',
+											'#ff887c' => 'Red',
+											'#dc2127' => 'Bold red',
+											'#dbadff' => 'Purple',
+											'#e1e1e1' => 'Gray',
+											)
+											,null,['class' => 'form-control','id' => 'color']) }}
+									</div>
+								</div>
+
 							</div>
 
 							<div class="col-lg-12">
@@ -332,8 +354,10 @@
 					},
 					condition_id:{
 						required:true
+					},
+					color:{
+						required: '{{ trans('products.validation.required') }}',
 					}
-
 				},
 				highlight:function(element){
 					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
