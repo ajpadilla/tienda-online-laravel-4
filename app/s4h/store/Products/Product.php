@@ -20,7 +20,7 @@ class Product extends Eloquent{
 	}
 
 	public function languages(){
-		return $this->belongsToMany('s4h\store\Languages\Language','products_lang','product_id','language_id')->withPivot('name','description');
+		return $this->belongsToMany('s4h\store\Languages\Language','products_lang','product_id','language_id')->withPivot('name','description')->withTimestamps();
 	}	
 
 	public function condition()
