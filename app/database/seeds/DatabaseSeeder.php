@@ -59,6 +59,8 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeValueTableSeeder');
 	     $this->call('AttributeValueLangTableSeeder');
 	     $this->call('AttributeByValueTableSeeder');
+	     $this->call('WeightTableSeeder');
+	     $this->call('WeightLangTableSeeder');
 	}
 
 }

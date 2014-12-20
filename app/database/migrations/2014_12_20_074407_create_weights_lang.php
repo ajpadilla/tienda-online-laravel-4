@@ -31,7 +31,7 @@ class CreateWeightsLang extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('weights_lang');
+		Schema::dropIfExists('weights_lang');
 	}
 
 }

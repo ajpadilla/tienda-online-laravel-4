@@ -20,6 +20,7 @@
         <div id="page-wrapper" class="gray-bg">
             <?php echo $__env->make('layouts.partials._nav-topbar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <?php echo $__env->make('layouts.partials._page-heading', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('layouts.partials._category-menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			<?php echo $__env->make('layouts.partials._page-content-blank', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <!--Fin Contenido-->
         </div>
@@ -28,5 +29,4 @@
     <!-- Fin Wrapper -->
     <?php echo $__env->make('layouts.partials._js-includes', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </body>
-
 </html>

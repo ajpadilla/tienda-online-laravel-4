@@ -69,7 +69,7 @@
 	            </div>
 	            <div class="col-sm-4">
 		            {{
-				        Form::select('weight_id', $measures, null,
+				        Form::select('weight_id', $weights, null,
 				        array('class' => 'chosen-select form-control',
 				        'data-placeholder' => trans('products.labels.measure')))
 				    }}
