@@ -18,6 +18,6 @@ use s4h\store\ProductsLang\ProductLang;
 	public function getNewProducts($quantity = 4){
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();
-		return ProductLang::whereLanguageId($language->id)->orderBy('created_at')->take($quantity)->get();
+		return ProductLang::whereLanguageId($language->id)->orderBy('created_at', 'DESC')->take($quantity)->get();
 	}
   }	
