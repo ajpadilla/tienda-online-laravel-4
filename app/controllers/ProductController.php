@@ -261,4 +261,18 @@ class ProductController extends \BaseController {
 		return View::make('products.whistlist');
 	}
 
+	public function filteredProducts() {
+		$filterWord = (Input::has('filter_word') ? Input::get('filter_word') : '');
+
+		$language_id = $this->languageRepository->returnLanguage()->id;
+
+		$productsSearch = $this->productRepository->filterProducts($filterWord, $language_id);
+		if (!$productsSearch->isEmpty()) {
+			return View::make('products.search', compact('productsSearch','language_id'));
+		} else {
+			Flash::warning('No se encontraron productos que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
+			return Redirect::intended();
+		}
+	}
+
 }
