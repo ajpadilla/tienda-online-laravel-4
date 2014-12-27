@@ -262,17 +262,39 @@ class ProductController extends \BaseController {
 	}
 
 	public function filteredProducts() {
+		$productResults = []; 
+
 		$filterWord = (Input::has('filter_word') ? Input::get('filter_word') : '');
 
 		$language_id = $this->languageRepository->returnLanguage()->id;
 
+		$categories = $this->categoryRepository->getAll();
+
 		$productsSearch = $this->productRepository->filterProducts($filterWord, $language_id);
+
+
+		foreach ($categories as $category) 
+		{
+			//$categoriesName [] = ['name' => $category->getName($language_id)];
+			foreach ($productsSearch as $productSearch) 
+			{
+				if ($productSearch->product->checkCategory($category->id)) {
+					$productResults[$category->getName($language_id)][] = $productSearch;
+				}
+				//print_r($productSearch->product->point_price);
+			}
+		}
+
+		//dd($productResults);
+
 		if (!$productsSearch->isEmpty()) {
-			return View::make('products.search', compact('productsSearch','language_id'));
+			return View::make('products.search', compact('productResults','language_id'));
 		} else {
 			Flash::warning('No se encontraron productos que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
 			return Redirect::intended();
 		}
+
+
 	}
 
 }
