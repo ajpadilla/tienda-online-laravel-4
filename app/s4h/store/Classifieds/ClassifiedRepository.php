@@ -75,4 +75,12 @@ class ClassifiedRepository{
 		return ClassifiedsLang::select()->where('classified_id','!=',$data['classified_id'])->where('name','=',$data['name'])->first();
 	}
 
+	public function filterClassifieds($filterWord, $language_id) {
+		$query = ClassifiedsLang::select();
+		if (!empty($filterWord)) {
+			$query->where('language_id', '=', $language_id)->where('name', 'LIKE', '%' . $filterWord . '%')->orWhere('description', 'LIKE', '%' . $filterWord . '%');
+		}
+		return $query->get();
+	}
+
 }
