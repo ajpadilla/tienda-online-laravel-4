@@ -30,6 +30,11 @@ class Classified extends Eloquent {
 		return $this->belongsTo('s4h\store\ClassifiedConditions\ClassifiedCondition','classified_condition_id');
 	}
 
+	public function categories()
+	{
+		return $this->belongsToMany('s4h\store\Categories\Category', 'classified_classification','classified_id','category_id');
+	}
+
 	public function photos()
 	{
 		return $this->hasMany('s4h\store\Photos\ClassifiedPhotos');
