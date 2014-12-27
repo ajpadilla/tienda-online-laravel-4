@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('title')
-	{{ trans('products.list.title') }}
+{{ trans('products.list.title') }}
 @stop
 
 @section('content')
@@ -14,41 +14,35 @@
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
-				@if (!$productsSearch->isEmpty())
+				@if (count($productResults) > 0)
+				@foreach ($productResults as $category => $products)
+				{{$category}}
 				<table class="row-border dataTable no-footer" cellspacing="0" width="100%">
 					<thead>
 						<tr role="row">
-							<th>Foto</th>
-
 							<th>Puntos</th>
-
 							<th>Nombre</th>
-
 							<th>Categorias</th>
-
 							<th>Precio</th>
-
 						</tr>
 					</thead>
-
 					<tbody>
-						@foreach ($productsSearch as $productSearch)
-							<tr role="row">
-								<td>{{ $productSearch->product->getFirstPhoto() }}</td>
-								<td>{{ $productSearch->product->point_price }}</td>
-								<td>{{ $productSearch->name }}</td>
-								<td>
-									@foreach ($productSearch->product->getCategories($language_id)  as $categoryName)
-										{{ $categoryName }}								
-									@endforeach
-								</td>
-								<td>{{ $productSearch->product->price }}</td>
-							</tr>
+						@foreach($products as $key => $productSearch)
+						<tr role="row">
+							<!--<td>{{ $key }}</td>-->
+							<td>{{ $productSearch->product->point_price }}</td>	
+							<td>{{ $productSearch->name }}</td>	
+							<td>
+								@foreach ($productSearch->product->getCategories($language_id) as $value)
+								{{ $value }}
+								@endforeach
+							</td>	
+							<td>{{ $productSearch->product->price }}</td>	
+						</tr>
 						@endforeach
 					</tbody>
 				</table>
-				@else
-				No hay productos registrados
+				@endforeach
 				@endif
 			</div>
 		</div>
