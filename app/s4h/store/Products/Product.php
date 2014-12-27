@@ -99,7 +99,7 @@ class Product extends Eloquent{
 
 	public function getCategories($language_id)
 	{
-		$categoryNames = [];
+		$categoriesNames = [];
 
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
@@ -107,11 +107,21 @@ class Product extends Eloquent{
 				$categories_languages =  $category->languages()->where('language_id','=',$language_id)->get();
 				foreach ($categories_languages as $language) 
 				{
-					$categoryNames[$language->pivot->name] = $language->pivot->name;
+					$categoriesNames[$language->pivot->name] = $language->pivot->name;
 				}
 			}
-			return $categoryNames;
-		}
+			return $categoriesNames;
+	}
+
+	public function checkCategory($category_id)
+	{
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+				if ($category->id == $category_id)
+					return true;
+			return false;
+		return false;
+	}
 
 	/*
 	*	Eliminar producto y relaciones
