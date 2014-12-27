@@ -14,6 +14,7 @@
 		"response" => "Product added",
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
+		"filter" => "search/results",
 
 		"labels" => array(
 			'name' =>'Name:',

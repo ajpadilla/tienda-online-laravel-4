@@ -30,6 +30,11 @@ class Classified extends Eloquent {
 		return $this->belongsTo('s4h\store\ClassifiedConditions\ClassifiedCondition','classified_condition_id');
 	}
 
+	public function categories()
+	{
+		return $this->belongsToMany('s4h\store\Categories\Category', 'classified_classification','classified_id','category_id');
+	}
+
 	public function photos()
 	{
 		return $this->hasMany('s4h\store\Photos\ClassifiedPhotos');
@@ -39,10 +44,40 @@ class Classified extends Eloquent {
 		return $this->photos->count();
 	}
 
+	public function hasCategories(){
+		return $this->categories->count();
+	}
+
 	public function getFirstPhoto(){
 		if($this->hasPhotos())
 			foreach ($this->photos as $photo)
 				return $photo;
+		return false;
+	}
+
+	public function getCategories($language_id)
+	{
+		$categoriesNames = [];
+
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+			{
+				$categories_languages =  $category->languages()->where('language_id','=',$language_id)->get();
+				foreach ($categories_languages as $language) 
+				{
+					$categoriesNames[$language->pivot->name] = $language->pivot->name;
+				}
+			}
+			return $categoriesNames;
+	}
+
+	public function checkCategory($category_id)
+	{
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+				if ($category->id == $category_id)
+					return true;
+			return false;
 		return false;
 	}
 

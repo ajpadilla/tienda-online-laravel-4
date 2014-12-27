@@ -11,6 +11,7 @@ use s4h\store\Forms\RegisterProductForm;
 use s4h\store\Forms\EditProductForm;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Weights\WeightRepository;
+use s4h\store\Classifieds\ClassifiedRepository;
 use Laracasts\Validation\FormValidationException;
 
 class ProductController extends \BaseController {
@@ -24,6 +25,7 @@ class ProductController extends \BaseController {
 	protected $languageRepository;
 	protected $productLangRepository;
 	protected $weightRepository;
+	protected $classifiedRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
@@ -33,7 +35,8 @@ class ProductController extends \BaseController {
 										EditProductForm $editProductForm,
 										LanguageRepository $languageRepository,
 										ProductLangRepository $productLangRepository,
-										WeightRepository $weightRepository
+										WeightRepository $weightRepository,
+										ClassifiedRepository $classifiedRepository
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
@@ -45,6 +48,7 @@ class ProductController extends \BaseController {
 		$this->languageRepository = $languageRepository;
 		$this->productLangRepository = $productLangRepository;
 		$this->weightRepository = $weightRepository;
+		$this->classifiedRepository = $classifiedRepository;
 	}
 
 	public function index()
@@ -259,6 +263,53 @@ class ProductController extends \BaseController {
 
 	public function showWhistList() {
 		return View::make('products.whistlist');
+	}
+
+	public function search() {
+		
+		$productResults = []; 
+
+		$categoryResult = [];
+
+		$filterWord = (Input::has('filter_word') ? Input::get('filter_word') : '');
+
+		$language_id = $this->languageRepository->returnLanguage()->id;
+
+		$categories = $this->categoryRepository->getAll();
+
+		$productsSearch = $this->productRepository->filterProducts($filterWord, $language_id);
+
+		$classifiedsSearch = $this->classifiedRepository->filterClassifieds($filterWord, $language_id);
+
+		foreach ($categories as $category) 
+		{
+			foreach ($productsSearch as $productSearch) 
+			{
+				if ($productSearch->product->checkCategory($category->id)){
+					$productResults[$category->getName($language_id)][] = $productSearch;
+				}
+			}
+		}
+
+		foreach ($categories as $category) 
+		{
+			foreach ($classifiedsSearch as $classifiedSearch) 
+			{
+				if ($classifiedSearch->classified->checkCategory($category->id)){
+					$categoryResults[$category->getName($language_id)][] = $classifiedSearch;
+				}
+			}
+		}
+
+		//dd($productResults);
+
+		if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
+			return View::make('products.search', compact('productResults','categoryResults','language_id'));
+		} else {
+			Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
+			return View::make('products.search');
+		}
+
 	}
 
 }

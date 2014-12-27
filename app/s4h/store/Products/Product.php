@@ -97,6 +97,31 @@ class Product extends Eloquent{
 		return false;
 	}
 
+	public function getCategories($language_id)
+	{
+		$categoriesNames = [];
+
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+			{
+				$categories_languages =  $category->languages()->where('language_id','=',$language_id)->get();
+				foreach ($categories_languages as $language) 
+				{
+					$categoriesNames[$language->pivot->name] = $language->pivot->name;
+				}
+			}
+			return $categoriesNames;
+	}
+
+	public function checkCategory($category_id)
+	{
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+				if ($category->id == $category_id)
+					return true;
+			return false;
+		return false;
+	}
 
 	/*
 	*	Eliminar producto y relaciones
