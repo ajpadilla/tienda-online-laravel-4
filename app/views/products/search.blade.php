@@ -14,7 +14,7 @@
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
-				@if (count($productResults) > 0)
+				@if (!empty($productResults))
 					@foreach ($productResults as $category => $products)
 					{{$category}}
 					<table class="row-border dataTable no-footer" cellspacing="0" width="100%">
@@ -44,7 +44,7 @@
 					</table>
 					@endforeach
 				@endif
-				@if (count($categoryResults) > 0)
+				@if (!empty($categoryResults))
 					@foreach ($categoryResults as $category => $classifieds)
 					{{$category}}
 					<table class="row-border dataTable no-footer" cellspacing="0" width="100%">
@@ -63,7 +63,7 @@
 								<!--<td>{{ $classifiedSearch->classified->price }}</td>-->
 								<td>{{ $classifiedSearch->name }}</td>	
 								<td>
-									@foreach ($classifiedSearch->product->getCategories($language_id) as $value)
+									@foreach ($classifiedSearch->classified->getCategories($language_id) as $value)
 									{{ $value }}
 									@endforeach
 								</td>	
