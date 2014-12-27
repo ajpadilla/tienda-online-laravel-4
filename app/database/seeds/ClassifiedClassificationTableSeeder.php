@@ -37,7 +37,7 @@ class ClassifiedClassificationTableSeeder extends DatabaseSeeder
           $id = $category["id"];
           ClassifiedClassification::create([
             "category_id"   => $id,
-            "classified_id  " => $classified->id,
+            "classified_id" => $classified->id,
           ]);
           $used[] = $category["id"];
         }
