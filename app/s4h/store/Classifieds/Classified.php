@@ -44,6 +44,10 @@ class Classified extends Eloquent {
 		return $this->photos->count();
 	}
 
+	public function hasCategories(){
+		return $this->categories->count();
+	}
+
 	public function getFirstPhoto(){
 		if($this->hasPhotos())
 			foreach ($this->photos as $photo)
