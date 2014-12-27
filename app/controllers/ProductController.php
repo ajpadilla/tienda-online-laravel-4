@@ -265,7 +265,8 @@ class ProductController extends \BaseController {
 		return View::make('products.whistlist');
 	}
 
-	public function filteredProducts() {
+	public function search() {
+		
 		$productResults = []; 
 
 		$categoryResult = [];
@@ -305,8 +306,8 @@ class ProductController extends \BaseController {
 		if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
 			return View::make('products.search', compact('productResults','categoryResults','language_id'));
 		} else {
-			Flash::warning('No se encontraron productos que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
-			return Redirect::intended();
+			Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
+			return View::make('products.search');
 		}
 
 	}
