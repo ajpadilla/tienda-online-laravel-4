@@ -39,7 +39,7 @@ function () {
 
 	Route::post(LaravelLocalization::transRoute('products.filter'), [
 		'as' => 'filtered_products_path',
-		'uses' => 'ProductController@filteredProducts'
+		'uses' => 'ProductController@search'
 	]);
 
 	/**
