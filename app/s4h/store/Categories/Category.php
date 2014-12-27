@@ -49,6 +49,12 @@ class Category extends Eloquent{
 		return $this->categories->count();
 	}
 
+	public function getName($language_id)
+	{
+		$categoryLanguageNane = $this->languages()->where('language_id','=', $language_id)->first();
+		return $categoryLanguageNane->pivot->name;
+	}
+
 	/*
 	*	Eliminar categoria y relaciones
 	*/
