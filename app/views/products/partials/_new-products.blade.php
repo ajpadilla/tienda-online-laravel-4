@@ -18,7 +18,7 @@
 		            </div>
 		        </div>
 		        <h3>
-		            <a href="{{ LaravelLocalization::transRoute('products.show') }}">{{ $product->name }}</a>
+		            <a href="{{ route('products.show', $product->product->id) }}">{{ $product->name }}</a>
 		        </h3>
 		        <div class="pi-price">{{ $product->price }}</div>
 		        <a href="#" class="btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
