@@ -9,7 +9,7 @@ class Product extends Eloquent{
 	protected $softDelete = true;
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id', 'measure_id'];
+	protected $fillable = ['on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id', 'measure_id', 'weight_id'];
 
 	/*
 	* Realaciones
