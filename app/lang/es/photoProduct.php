@@ -1,7 +1,7 @@
 <?php 
 	return array(
 		
-		"create" => "crear/foto/producto",
+		"create" => "crear/foto/producto/{productoId}/{languageId}",
 		"store" => "agregar/foto/producto",
 		"title" => "Agregar foto a producto",
 		"subtitle" => "Añadir foto a producto",
