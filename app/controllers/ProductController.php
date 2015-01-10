@@ -82,15 +82,16 @@ class ProductController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
+			$dataProduct = [];
 			try
 			{
 				$this->registerProductForm->validate($input);
 				$product = $this->productRepository->createNewProduct($input);
+				$dataProduct['product_id'] = $product->id;
+				$dataProduct['language_id'] = $input['language_id'];
 				if ($input['add_photos'] == 1) {
-					Session::put('product_id', $product->id);
-					Session::put('language_id', $input['language_id']);
 					return Response::json(['message' => trans('products.response'),
-						'add_photos'=> $input['add_photos']
+						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',array($product->id, $input['language_id']))
 					]);
 				}
 				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
@@ -146,10 +147,11 @@ class ProductController extends \BaseController {
 				$this->editProductForm->validate($input);
 				$product = $this->productRepository->updateProduct($input);
 				if ($input['add_photos'] == 1) {
-					Session::put('product_id', $product->id);
-					Session::put('language_id', $input['language_id']);
+					/*Session::put('product_id', $product->id);
+					Session::put('language_id', $input['language_id']);*/
 					return Response::json(['message' => trans('products.response'),
-						'add_photos'=> $input['add_photos']
+						'add_photos' => $input['add_photos'],'productId' => $product->id,
+						'languageId' => $input['language_id']
 						]);
 				}
 				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
@@ -248,11 +250,24 @@ class ProductController extends \BaseController {
 		});
 
 		$collection->addColumn('Actions',function($model){
+
+			$languageId = $this->languageRepository->returnLanguage()->id;
+
 			$links = "<a class='btn btn-info' href='" .route('products.show', $model->product->id). "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
 			$links .= "<a class='btn btn-warning' href='" .route('products.edit', $model->product->id). "'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />
 					<form action=".route('products.destroy', $model->id)." method='POST' >
 					<button class='btn btn-danger' > ".trans('products.actions.Delete')." <i class='fa fa-times'></i></button></form>";
 
+			if ($model->product->active)
+			{
+				$links.= "<a class='btn btn-info' href='#'> ".trans('products.actions.Activate')." <i class='fa fa-check'></i></a><br />";
+			}
+			else
+			{
+				$links.= "<a class='btn btn-info' href='#'> ".trans('products.actions.Deactivated')." <i class='fa fa-check'></i></a><br />";
+			}
+
+			$links.= "<a class='btn btn-info' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-check'></i></a><br />";
 
 			return $links;
 		});

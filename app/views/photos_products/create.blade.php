@@ -12,7 +12,7 @@
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h1 class="pagetitle nodesc">
-					{{	trans('photoProduct.subtitle') }} {{ $product_language->pivot->name }}
+					{{	trans('photoProduct.subtitle') }} {{ $productLanguage->pivot->name }}
 				</h1>
 			</div>
 			<div class="ibox-content">
@@ -119,7 +119,7 @@
 		});
 
 		myDropzone.on("sending", function(file, xhr, formData) {
-			formData.append('product_id', '{{ $product_id }}');
+			formData.append('product_id', '{{ $productoId }}');
 		  // Show the total progress bar when upload starts
 		  document.querySelector("#total-progress").style.opacity = "1";
 		  // And disable the start button

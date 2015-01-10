@@ -220,13 +220,16 @@
 
 			// post-submit callback
 			function showResponse(responseText, statusText, xhr, $form)  {
+
+				console.log(responseText);
+
 				jQuery.fancybox({
 					'content' : '<h1>'+ responseText.message + '</h1>',
 					'autoScale' : true
 				});
 
 				if(responseText.add_photos == 1)
-					document.location.href = '{{ URL::route('photoProduct.create') }}';
+					document.location.href = responseText.url;
 			}
 		});
 	</script>
