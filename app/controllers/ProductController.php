@@ -179,18 +179,16 @@ class ProductController extends \BaseController {
 		$collection->addColumn('photo', function($model)
 		{
 			$links = '';
-			$i = 0;
-			foreach ($model->product->photos as $photo) {
-				if ($i < 3) {
-					$links .= "	<a href='#'>
-									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
-								</a>";
-				} else {
-					break;
-				}
-				$i++;
-			}
+			
+			$photo = $model->product->getFirstPhoto();
 
+			if ($photo != false) {
+				$links .= "	<a href='#'>
+									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
+				</a>";
+			}
+			
+				
 			return $links;
 		});
 
