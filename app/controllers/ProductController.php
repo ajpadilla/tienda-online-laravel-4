@@ -91,7 +91,7 @@ class ProductController extends \BaseController {
 				$dataProduct['language_id'] = $input['language_id'];
 				if ($input['add_photos'] == 1) {
 					return Response::json(['message' => trans('products.response'),
-						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',array($product->id, $input['language_id']))
+						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
 					]);
 				}
 				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
@@ -147,8 +147,6 @@ class ProductController extends \BaseController {
 				$this->editProductForm->validate($input);
 				$product = $this->productRepository->updateProduct($input);
 				if ($input['add_photos'] == 1) {
-					/*Session::put('product_id', $product->id);
-					Session::put('language_id', $input['language_id']);*/
 					return Response::json(['message' => trans('products.response'),
 						'add_photos' => $input['add_photos'],'productId' => $product->id,
 						'languageId' => $input['language_id']
