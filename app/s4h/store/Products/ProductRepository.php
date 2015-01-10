@@ -101,7 +101,7 @@ class ProductRepository {
 
 	public function getById($product_id)
 	{
-		return ProductLang::whereProductId($product_id)->first();
+		return Product::findOrFail($product_id);
 	}
 
 	public function filterProducts($filterWord, $language_id) {
