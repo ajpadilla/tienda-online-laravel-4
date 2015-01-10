@@ -10,3 +10,4 @@ Thumbs.db
 *.log
 /app/config/local/
 /.idea
+/public/uploads/
