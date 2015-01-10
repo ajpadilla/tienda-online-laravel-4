@@ -22,7 +22,7 @@ class CategoryRepository {
 		if (!empty($data['parent_category'])) {
 			$category->category_id = $data['parent_category'];
 		}
-		
+
 		$category->save();
 
 		$category->languages()->attach($data['language_id'], array('name'=> $data['name']));
@@ -51,7 +51,7 @@ class CategoryRepository {
 		$category->delete();
 	}
 
-	public function get()
+	public function getNameForLanguage()
 	{
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();

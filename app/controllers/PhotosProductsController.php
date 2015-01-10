@@ -34,7 +34,7 @@ class PhotosProductsController extends \BaseController {
 		$product_id = Session::get('product_id');
 		$language_id = Session::get('language_id');
 		$product = $this->productRepository->getById($product_id);
-		$product_language = $product->languages()->where('language_id','=', $language_id)->first();
+		$product_language = $product->where('language_id','=', $language_id)->first();
 		return View::make('photos_products.create',compact('product_id','product_language','product'));
 	}
 

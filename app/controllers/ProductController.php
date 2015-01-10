@@ -116,9 +116,10 @@ class ProductController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+
 		$product = $this->productRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
-		$product_language = $product->languages()->where('language_id','=',$language_id)->first();
+		$product_language = $product->language()->find($language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$categories = $this->categoryRepository->getNameForLanguage();
 		$condition = $this->conditionRepository->getNameForLanguage();
