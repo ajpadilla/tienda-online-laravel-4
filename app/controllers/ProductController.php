@@ -250,11 +250,24 @@ class ProductController extends \BaseController {
 		});
 
 		$collection->addColumn('Actions',function($model){
+
+			$languageId = $this->languageRepository->returnLanguage()->id;
+
 			$links = "<a class='btn btn-info' href='" .route('products.show', $model->product->id). "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
 			$links .= "<a class='btn btn-warning' href='" .route('products.edit', $model->product->id). "'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />
 					<form action=".route('products.destroy', $model->id)." method='POST' >
 					<button class='btn btn-danger' > ".trans('products.actions.Delete')." <i class='fa fa-times'></i></button></form>";
 
+			if ($model->product->active)
+			{
+				$links.= "<a class='btn btn-info' href='#'> ".trans('products.actions.Activate')." <i class='fa fa-check'></i></a><br />";
+			}
+			else
+			{
+				$links.= "<a class='btn btn-info' href='#'> ".trans('products.actions.Deactivated')." <i class='fa fa-check'></i></a><br />";
+			}
+
+			$links.= "<a class='btn btn-info' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-check'></i></a><br />";
 
 			return $links;
 		});
