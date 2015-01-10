@@ -86,10 +86,10 @@ class ProductController extends \BaseController {
 			{
 				$this->registerProductForm->validate($input);
 				$product = $this->productRepository->createNewProduct($input);
-				if ($input['add_photos'] == 0) {
+				if ($input['add_photos'] == 1) {
 					Session::put('product_id', $product->id);
 					Session::put('language_id', $input['language_id']);
-					return Response::json(['message' => trans('products.response'), 
+					return Response::json(['message' => trans('products.response'),
 						'add_photos'=> $input['add_photos']
 					]);
 				}
@@ -147,7 +147,7 @@ class ProductController extends \BaseController {
 				if ($input['add_photos'] == 1) {
 					Session::put('product_id', $product->id);
 					Session::put('language_id', $input['language_id']);
-					return Response::json(['message' => trans('products.response'), 
+					return Response::json(['message' => trans('products.response'),
 						'add_photos'=> $input['add_photos']
 						]);
 				}
@@ -221,7 +221,7 @@ class ProductController extends \BaseController {
 		$collection->addColumn('category', function($model)
 		{
 			$language = $this->languageRepository->returnLanguage();
-			
+
 			if($model->product->hasCategories())
 			{
 				$product_categories = $model->product->categories()->get();
@@ -266,8 +266,8 @@ class ProductController extends \BaseController {
 	}
 
 	public function search() {
-		
-		$productResults = []; 
+
+		$productResults = [];
 
 		$categoryResult = [];
 
@@ -281,9 +281,9 @@ class ProductController extends \BaseController {
 
 		$classifiedsSearch = $this->classifiedRepository->filterClassifieds($filterWord, $language_id);
 
-		foreach ($categories as $category) 
+		foreach ($categories as $category)
 		{
-			foreach ($productsSearch as $productSearch) 
+			foreach ($productsSearch as $productSearch)
 			{
 				if ($productSearch->product->checkCategory($category->id)){
 					$productResults[$category->getName($language_id)][] = $productSearch;
@@ -291,9 +291,9 @@ class ProductController extends \BaseController {
 			}
 		}
 
-		foreach ($categories as $category) 
+		foreach ($categories as $category)
 		{
-			foreach ($classifiedsSearch as $classifiedSearch) 
+			foreach ($classifiedsSearch as $classifiedSearch)
 			{
 				if ($classifiedSearch->classified->checkCategory($category->id)){
 					$categoryResults[$category->getName($language_id)][] = $classifiedSearch;

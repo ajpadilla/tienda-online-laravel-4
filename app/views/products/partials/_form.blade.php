@@ -131,7 +131,7 @@
 			</div>
 		</div>
 	</div>
-		
+
 	<div class="form-group">
 		{{ Form::label('color', trans('invoiceStatus.labels.color'),['class'=>'col-sm-4 control-label']) }}
 		<div class="col-sm-8">
@@ -181,10 +181,10 @@
 <div class="col-lg-6 col-lg-offset-2">
 	<div class="form-group">
 		<div class="col-sm-3">
-			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="1">Guardar</button>
+			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="0">Guardar</button>
 		</div>
 		<div class="col-sm-3">
-			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="0">{{ trans('products.labels.add_photos') }}</button>
+			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="1">{{ trans('products.labels.add_photos') }}</button>
 		</div>
 	</div>
 </div>
