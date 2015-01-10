@@ -103,4 +103,12 @@ class ProductRepository {
 	{
 		return ProductLang::whereProductId($product_id)->first();
 	}
+
+	public function filterProducts($filterWord, $language_id) {
+		$query = ProductLang::select();
+		if (!empty($filterWord)) {
+			$query->where('language_id', '=', $language_id)->where('name', 'LIKE', '%' . $filterWord . '%')->orWhere('description', 'LIKE', '%' . $filterWord . '%');
+		}
+		return $query->get();
+	}
 }

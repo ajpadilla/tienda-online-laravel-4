@@ -37,6 +37,11 @@ function () {
 	//Datatable Products
 	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getDatatable'));
 
+	Route::post(LaravelLocalization::transRoute('products.filter'), [
+		'as' => 'filtered_products_path',
+		'uses' => 'ProductController@search'
+	]);
+
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
