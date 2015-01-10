@@ -80,7 +80,10 @@
 		'actions' => array(
 			'Show' => 'Ver   ',
 			'Edit' => 'Editar',
-			'Delete' => 'Eliminar'
+			'Delete' => 'Eliminar',
+			'Activate' => 'Activar',
+			'Deactivated' => 'Desactivar',
+			'Photo' => 'Foto'
 		)
 	);
 
