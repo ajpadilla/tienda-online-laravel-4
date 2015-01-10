@@ -45,14 +45,7 @@
 		                      </select>
 		                    </div>
 		                  </div>
-		                  <div class="product-page-cart">
-			                  <div class="product-quantity">
-			                      <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
-			                  </div>
-			                  <button class="btn btn-primary" style="margin-left: 20px" type="submit">Agregar al carrito</button>
-			                  <button class="btn btn-primary" style="margin-left: 20px" type="button">Lo deseo</button>
-					      </div>
-					      <a href="<?php echo route('products.show', $product->product_id); ?>" class="btn btn-default">Más detalles</a>
+		                  <?php echo $__env->make('products.partials._buttons-actions-set', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 		                </div>
 
 		                <div class="sticker sticker-sale"></div>
