@@ -12,7 +12,7 @@
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h1 class="pagetitle nodesc">
-					{{	trans('photoProduct.subtitle') }} {{ $productLanguage->pivot->name }}
+					{{	trans('photoProduct.subtitle') }} {{ $productLanguage->name }}
 				</h1>
 			</div>
 			<div class="ibox-content">
