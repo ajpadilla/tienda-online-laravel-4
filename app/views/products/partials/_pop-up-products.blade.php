@@ -5,13 +5,23 @@
 		              <div class="row">
 		                <div class="col-md-6 col-sm-6 col-xs-3">
 		                  <div class="product-main-image">
-		                    <img src="{{ asset('uploads/products/images/model1.jpg') }}" alt="Cool green dress with red bell" class="img-responsive">
-		                  </div>
-		                  <div class="product-other-images">
-		                    <a href="#" class="active"><img alt="Berry Lace Dress" src="{{ asset('uploads/products/images/model1.jpg') }}"></a>
-		                    <a href="#"><img alt="Berry Lace Dress" src="{{ asset('uploads/products/images/model4.jpg') }}"></a>
-		                    <a href="#"><img alt="Berry Lace Dress" src="{{ asset('uploads/products/images/model5.jpg') }}"></a>
-		                  </div>
+		                  	@if($product->product->hasPhotos())
+			                    <img src="{{ asset($product->product->getFirstPhoto()->complete_path) }}" alt="{{ $product->product->getFirstPhoto()->filename }}" class="img-responsive">
+			                  </div>
+			                  <div class="product-other-images">
+			                  	@foreach($product->product->photos as $photo)
+			                    	<a href="#" class="active"><img src="{{ asset($photo->complete_path) }}" alt="{{ $photo->filename }}"></a>
+			                    @endforeach
+			                  </div>
+		                  @else
+			                  <img src="{{ asset('uploads/products/images/model1.jpg') }}" alt="Cool green dress with red bell" class="img-responsive">
+			                  </div>
+			                  <div class="product-other-images">
+			                    <a href="#" class="active"><img alt="Berry Lace Dress" src="{{ asset('uploads/products/images/model1.jpg') }}"></a>
+			                    <a href="#"><img alt="Berry Lace Dress" src="{{ asset('uploads/products/images/model4.jpg') }}"></a>
+			                    <a href="#"><img alt="Berry Lace Dress" src="{{ asset('uploads/products/images/model5.jpg') }}"></a>
+			                  </div>
+		                  @endif
 		                </div>
 		                <div class="col-md-6 col-sm-6 col-xs-9">
 		                  <h2>{{ $product->name }}</h2>
