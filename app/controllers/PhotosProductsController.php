@@ -29,11 +29,10 @@ class PhotosProductsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($productoId, $languageId)
+	public function create($productoId)
 	{
-		$product = $this->productRepository->getById($productoId);
-		$productLanguage = $product->languages()->where('language_id','=', $languageId)->first();
-		return View::make('photos_products.create',compact('productoId','productLanguage','product'));
+		$productLanguage = $this->productRepository->getById($productoId);
+		return View::make('photos_products.create',compact('productoId','productLanguage'));
 	}
 
 
