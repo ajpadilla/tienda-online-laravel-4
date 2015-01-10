@@ -64,7 +64,7 @@ class ProductController extends \BaseController {
 	public function create()
 	{
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$categories = $this->categoryRepository->get();
+		$categories = $this->categoryRepository->getNameForLanguage();
 		$condition = $this->conditionRepository->getNameForLanguage();
 		$measures = $this->measureRepository->getNameForLanguage();
 		$weights = $this->weightRepository->getNameForLanguage();
