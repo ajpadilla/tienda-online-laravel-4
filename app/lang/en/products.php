@@ -82,7 +82,7 @@
 			'Delete' => 'Delete',
 			'Activate' => 'Activate',
 			'Deactivated' => 'Deactivated',
-			'Photo' => 'Photo'
+			'Photo' => 'Add photo'
 		)
 	);
 

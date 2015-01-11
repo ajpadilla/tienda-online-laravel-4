@@ -83,7 +83,7 @@
 			'Delete' => 'Eliminar',
 			'Activate' => 'Activar',
 			'Deactivated' => 'Desactivar',
-			'Photo' => 'Foto'
+			'Photo' => 'Agregar foto'
 		)
 	);
 
