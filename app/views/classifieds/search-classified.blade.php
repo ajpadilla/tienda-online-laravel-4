@@ -45,14 +45,14 @@
 						<div class="form-group">
 							{{ Form::label('classified_type_id', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('classified_type_id',array(''),null,array('class' => 'form-control','id'=>'classified_type_id')) }}
+								{{ Form::select('classified_type_id',$classifiedTypes,null,array('class' => 'form-control','id'=>'classified_type_id')) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('classified_condition_id', trans('classifieds.labels.classified_condition'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('classified_condition_id',array(''),null,array('class' => 'form-control','id'=>'classified_condition_id')) }}
+								{{ Form::select('classified_condition_id',$classifiedConditions,null,array('class' => 'form-control','id'=>'classified_condition_id')) }}
 							</div>
 						</div>
 
