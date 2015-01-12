@@ -71,4 +71,9 @@ class Language extends Eloquent
 		return $this->belongsToMany('s4h\store\Weights\Weight','weights_lang','language_id','weight_id')->withPivot('name','abbreviation');
 	}
 
+	public function countries(){
+		return $this->belongsToMany('s4h\store\Countries\Country','countries_lang','language_id','country_id')->withPivot('name')->withTimestamps();
+	}
+
+
 }
