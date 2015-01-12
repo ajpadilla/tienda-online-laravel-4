@@ -17,4 +17,8 @@ class Country extends Eloquent
 
 	protected $table = 'countries';
 
+	public function languages(){
+		return $this->belongsToMany('s4h\store\Languages\Language','countries_lang','country_id','language_id')->withPivot('name')->withTimestamps();
+	}	
+
 }
