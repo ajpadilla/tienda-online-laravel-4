@@ -265,7 +265,7 @@ class ProductController extends \BaseController {
 				$links.= "<a class='btn btn-danger' href='#'> ".trans('products.actions.Deactivated')." <i class='fa fa-check'></i></a><br />";
 			}
 
-			$links.= "<a class='btn btn-success' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-check'></i></a><br />";
+			$links.= "<a class='btn btn-success' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-camera'></i></a><br />";
 
 			return $links;
 		});
