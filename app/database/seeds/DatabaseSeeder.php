@@ -62,6 +62,10 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeValueLangTableSeeder');
 	     $this->call('AttributeByValueTableSeeder');
 	     $this->call('ClassifiedClassificationTableSeeder');
+	     $this->call('CountriesTableSeeder');
+	     $this->call('CountriesLangTableSeeder');
+	     $this->call('StatesTableSeeder');
+	     $this->call('CitiesTableSeeder');
 	}
 
 }
