@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder {
 	{
 		 Eloquent::unguard();
 
+		 $this->call('CountriesTableSeeder');
+	     $this->call('CountriesLangTableSeeder');
+	     $this->call('StatesTableSeeder');
+	     $this->call('CitiesTableSeeder');
 		 $this->call('LanguageTableSeeder');
 		 $this->call('DiscountsTypesTableSeeder');
 		 $this->call('DiscountsTypesLangTableSeeder');
@@ -62,10 +66,6 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeValueLangTableSeeder');
 	     $this->call('AttributeByValueTableSeeder');
 	     $this->call('ClassifiedClassificationTableSeeder');
-	     $this->call('CountriesTableSeeder');
-	     $this->call('CountriesLangTableSeeder');
-	     $this->call('StatesTableSeeder');
-	     $this->call('CitiesTableSeeder');
 	}
 
 }
