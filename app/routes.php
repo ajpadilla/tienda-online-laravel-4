@@ -336,44 +336,55 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('classifieds.create'), [
 		'as' => 'classifieds.create',
-		'uses' => 'ClassifiedsController@create'
+		'uses' => 'ClassifiedController@create'
 	]);
 
 	Route::post(LaravelLocalization::transRoute('classifieds.store'), [
 		'as' => 'classifieds.store',
-		'uses' => 'ClassifiedsController@store'
+		'uses' => 'ClassifiedController@store'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifieds.index'), [
 		'as' => 'classifieds.index',
-		'uses' => 'ClassifiedsController@index'
+		'uses' => 'ClassifiedController@index'
 	]);
 
 
 	Route::get(LaravelLocalization::transRoute('classifieds.show'), [
 		'as' => 'classifieds.show',
-		'uses' => 'ClassifiedsController@show'
+		'uses' => 'ClassifiedController@show'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifieds.edit'), [
 		'as' => 'classifieds.edit',
-		'uses' => 'ClassifiedsController@edit'
+		'uses' => 'ClassifiedController@edit'
 	]);
 
 	Route::post(LaravelLocalization::transRoute('classifieds.update'), [
 		'as' => 'classifieds.update',
-		'uses' => 'ClassifiedsController@update'
+		'uses' => 'ClassifiedController@update'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifieds.destroy'), [
 		'as' => 'classifieds.destroy',
-		'uses' => 'ClassifiedsController@destroy'
+		'uses' => 'ClassifiedController@destroy'
 	]);
 
-	Route::post('checkNameClassified','ClassifiedsController@checkNameClassified');
-	Route::post('checkNameClassifiedEdit','ClassifiedsController@checkNameForEdit');
+	Route::get(LaravelLocalization::transRoute('classifieds.search'), [
+		'as' => 'classifieds.search',
+		'uses' => 'ClassifiedController@searchClassifieds'
+	]);
 
-	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedsController@getDatatable'));
+	Route::get(LaravelLocalization::transRoute('classifieds.filteClassified'), [
+		'as' => 'classifieds.filteClassified',
+		'uses' => 'ClassifiedController@filteresults'
+	]);
+	
+
+	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
+	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
+
+	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedController@getDatatable'));
 
 
 	/**
