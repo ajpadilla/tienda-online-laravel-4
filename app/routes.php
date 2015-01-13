@@ -380,6 +380,7 @@ function () {
 		'uses' => 'ClassifiedController@filteresults'
 	]);
 	
+	Route::get('statesForCountry','ClassifiedController@statesForCountry');
 
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
