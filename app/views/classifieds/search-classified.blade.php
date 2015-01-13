@@ -17,21 +17,21 @@
 					{{ Form::open(['route' => 'classifieds.filteClassified','class'=>'form-horizontal','id' => 'formSearchClassified']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
-							{{ Form::label('country_id', trans('classifieds.searchs.Country'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('countryId', trans('classifieds.searchs.Country'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('country_id',$country,null,array('class' => 'form-control','id'=>'country_id')) }}
+								{{ Form::select('countryId',$country,null,array('class' => 'form-control','id'=>'countryId')) }}
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('state_id', trans('classifieds.searchs.State'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('stateId', trans('classifieds.searchs.State'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('state_id',array(''),null,array('class' => 'form-control','id'=>'state_id')) }}
+								{{ Form::select('stateId',array(''),null,array('class' => 'form-control','id'=>'stateId')) }}
 							</div>
 						</div>
 						<div class="form-group">
-							{{ Form::label('city_id', trans('classifieds.searchs.City'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('cityId', trans('classifieds.searchs.City'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('city_id',array(''),null,array('class' => 'form-control','id'=>'city_id')) }}
+								{{ Form::select('cityId',array(''),null,array('class' => 'form-control','id'=>'cityId')) }}
 							</div>
 						</div>
 						
@@ -43,16 +43,16 @@
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('classified_type_id', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('classifiedTypeId', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('classified_type_id',$classifiedTypes,null,array('class' => 'form-control','id'=>'classified_type_id')) }}
+								{{ Form::select('classifiedTypeId',$classifiedTypes,null,array('class' => 'form-control','id'=>'classifiedTypeId')) }}
 							</div>
 						</div>
 
 						<div class="form-group">
-							{{ Form::label('classified_condition_id', trans('classifieds.labels.classified_condition'),['class'=>'col-sm-2 control-label']) }}
+							{{ Form::label('classifiedConditionId', trans('classifieds.labels.classified_condition'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-6">
-								{{ Form::select('classified_condition_id',$classifiedConditions,null,array('class' => 'form-control','id'=>'classified_condition_id')) }}
+								{{ Form::select('classifiedConditionId',$classifiedConditions,null,array('class' => 'form-control','id'=>'classifiedConditionId')) }}
 							</div>
 						</div>
 
@@ -77,29 +77,50 @@
 	<script>
 		$(document).ready(function () 
 		{
-			$('#country_id').click(function() {
-				
+			$('#countryId').click(function() {
 				$.ajax({
 					type: 'GET',
 					url: '{{ URL::to('/statesForCountry/') }}',	
-					data: {'conutry_id': $('#country_id').val()},
+					data: {'countryId': $('#countryId').val()},
 					dataType: "JSON",
 					success: function(response) {
 						console.log(response.success);
 						console.log(response.states);
 						if (response.success == true) {
-							$('#state_id').html('');
-							$('#state_id').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
+							$('#stateId').html('');
+							$('#stateId').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
 							$.each(response.states,function (k,v){
-								$('#state_id').append('<option value=\"'+k+'\">'+v+'</option>');
+								$('#stateId').append('<option value=\"'+k+'\">'+v+'</option>');
 							});
 						}else{
-							$('#state_id').html('');
-							$('#state_id').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
+							$('#stateId').html('');
+							$('#stateId').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
 						}
 					}
 				});
+			});
 
+			$('#stateId').click(function() {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::to('/citiesForState/') }}',	
+					data: {'stateId': $('#stateId').val()},
+					dataType: "JSON",
+					success: function(response) {
+						console.log(response.success);
+						console.log(response.cities);
+						if (response.success == true) {
+							$('#cityId').html('');
+							$('#cityId').append('<option value=\"\"> {{ trans('classifieds.searchs.City') }} </option>');
+							$.each(response.cities,function (k,v){
+								$('#cityId').append('<option value=\"'+k+'\">'+v+'</option>');
+							});
+						}else{
+							$('#cityId').html('');
+							$('#cityId').append('<option value=\"\"> {{ trans('classifieds.searchs.City') }} </option>');
+						}
+					}
+				});
 			});
 		});
 	</script>
