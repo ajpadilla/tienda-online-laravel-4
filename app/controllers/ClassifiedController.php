@@ -291,4 +291,17 @@ class ClassifiedController extends \BaseController {
 		return View::make('classifieds.search-classified',compact('country','classifiedConditions','classifiedTypes'));
 	}
 
+	public function statesForCountry()
+	{
+		if (Request::ajax()) 
+		{
+			$states = $this->countryRepository->getlistOfStates(Input::get('conutry_id'));
+			if (count($states) > 0) {
+				return Response::json(['success' => true, 'states' => $states]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
 }
