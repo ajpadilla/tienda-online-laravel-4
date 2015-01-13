@@ -27,15 +27,22 @@ class CountryRepository {
 		}
 	}
 		
-	public function getId($country_id)
+	public function getId($countryId)
 	{
-		return Country::findOrFail($country_id);
+		return Country::findOrFail($countryId);
 	}
 
-	public function getlistOfStates($country_id)
+	public function getListOfStates($countryId)
 	{
-		$country = $this->getId($country_id);
-	 	$states = $country->states()->where('country_id', '=', $country_id)->lists('name', 'id');
+		$country = $this->getId($countryId);
+	 	$states = $country->states()->where('country_id', '=', $countryId)->lists('name', 'id');
 	 	return $states;
+	}
+
+	public function getListOfCities($stateId)
+	{
+		$state = State::findOrFail($stateId);
+		$cities = $state->cities()->where('states_id', '=', $stateId)->lists('name', 'id');
+		return $cities;
 	}
 }
