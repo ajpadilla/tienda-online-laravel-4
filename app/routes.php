@@ -381,6 +381,7 @@ function () {
 	]);
 	
 	Route::get('statesForCountry','ClassifiedController@statesForCountry');
+	Route::get('citiesForState','ClassifiedController@citiesForState');
 
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
