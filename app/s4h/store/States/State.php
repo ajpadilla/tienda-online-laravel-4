@@ -17,4 +17,7 @@ class State extends Eloquent
 
 	protected $table = 'states';
 
+	public function cities(){
+		return  $this->hasMany('s4h\store\Cities\City','states_id');
+	}
 }
