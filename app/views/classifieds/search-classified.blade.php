@@ -74,4 +74,33 @@
 @stop
 
 @section('scripts')
+	<script>
+		$(document).ready(function () 
+		{
+			$('#country_id').click(function() {
+				
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::to('/statesForCountry/') }}',	
+					data: {'conutry_id': $('#country_id').val()},
+					dataType: "JSON",
+					success: function(response) {
+						console.log(response.success);
+						console.log(response.states);
+						if (response.success == true) {
+							$('#state_id').html('');
+							$('#state_id').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
+							$.each(response.states,function (k,v){
+								$('#state_id').append('<option value=\"'+k+'\">'+v+'</option>');
+							});
+						}else{
+							$('#state_id').html('');
+							$('#state_id').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
+						}
+					}
+				});
+
+			});
+		});
+	</script>
 @stop
