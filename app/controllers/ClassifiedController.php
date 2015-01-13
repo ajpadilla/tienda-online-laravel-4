@@ -295,13 +295,31 @@ class ClassifiedController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			$states = $this->countryRepository->getlistOfStates(Input::get('conutry_id'));
-			if (count($states) > 0) {
-				return Response::json(['success' => true, 'states' => $states]);
-			}else{
-				return Response::json(['success' => false]);
+			if (Input::has('countryId')) 
+			{
+				$states = $this->countryRepository->getListOfStates(Input::get('countryId'));
+				if (count($states) > 0) {
+					return Response::json(['success' => true, 'states' => $states]);
+				}else{
+					return Response::json(['success' => false]);
+				}
 			}
 		}
 	}
 
+	public function citiesForState()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('stateId')) 
+			{
+				$cities = $this->countryRepository->getListOfCities(Input::get('stateId'));
+				if (count($cities) > 0) {
+					return Response::json(['success' => true, 'cities' => $cities]);
+				}else{
+					return Response::json(['success' => false]);
+				}
+			}
+		}
+	}
 }
