@@ -21,4 +21,8 @@ class Country extends Eloquent
 		return $this->belongsToMany('s4h\store\Languages\Language','countries_lang','country_id','language_id')->withPivot('name')->withTimestamps();
 	}	
 
+	public function states(){
+		return  $this->hasMany('s4h\store\States\State');
+	}
+
 }
