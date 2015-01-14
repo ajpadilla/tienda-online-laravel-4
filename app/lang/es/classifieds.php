@@ -7,7 +7,7 @@
 		"edit"=>"editar/clasificado/{id}",
 		"update"=>"actualizar/clasificado/{id}",
 		"destroy"=>"eliminar/clasificado/{id}",
-		"filteClassified" => "resultado/busqueda/clasificados", 
+		"filterClassified" => "resultado/busqueda/clasificados", 
 		"title" => "Agregar Tipo de clasificado",
 		"subtitle" => "Crear clasificado",
 		"sending" => "Agregando clasificado",

@@ -7,7 +7,7 @@
 		"edit"=>"edit/classified/{id}",
 		"update"=>"update/classified/{id}",
 		"destroy"=>"delete/classified/{id}",
-		"filteClassified" => "search/results/classifieds", 
+		"filterClassified" => "search/results/classifieds", 
 		"title" => "Add classified",
 		"subtitle" => "Create classified",
 		"sending" => "Adding classified",
