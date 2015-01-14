@@ -4,7 +4,7 @@ use s4h\store\Classifieds\Classified;
 use s4h\store\Users\User;
 use s4h\store\ClassifiedTypes\ClassifiedType;
 use s4h\store\ClassifiedConditions\ClassifiedCondition;
-use s4h\store\Countries\Country;
+use s4h\store\Cities\City;
 /**
 * 
 */
@@ -23,21 +23,21 @@ class ClassifiedsTableSeeder extends DatabaseSeeder{
 		$users = User::all()->toArray(); 
 		$classifiedsTypes = ClassifiedType::all()->toArray();
 		$classifiedsCondition = ClassifiedCondition::all()->toArray();
-		$countries = Country::all()->toArray();
+		$cities = City::all()->toArray();
 
 		for ($i=0; $i < 20; $i++) 
 		{ 
 			 $user = $faker->randomElement($users);
 			 $classifiedType = $faker->randomElement($classifiedsTypes);
 			 $classifiedCondition = $faker->randomElement($classifiedsCondition);
-			 $country = $faker->randomElement($countries);
+			 $city = $faker->randomElement($cities);
  
 			Classified::create([
 				'price' => $faker->randomFloat(20, 5, 100),
 				'user_id' =>  $user['id'],
 				'classified_type_id' =>  $classifiedType['id'],
 				'classified_condition_id' => $classifiedCondition['id'],
-				'country_id' => $country['id']
+				'city_id' => $city['id']
 			]);
 		}
 		
