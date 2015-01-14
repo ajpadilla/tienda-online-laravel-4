@@ -294,7 +294,9 @@ class ClassifiedController extends \BaseController {
 	public function searchClassified()
 	{
 		$classifiedsResult = $this->classifiedRepository->search(Input::all());
-		dd($classifiedsResult);
+		$languageId = $language = $this->languageRepository->returnLanguage()->id;
+		//dd($classifiedsResult);
+		return View::make('classifieds.filtered-classisied',compact('classifiedsResult','languageId'));
 	}
 
 	public function statesForCountry()
