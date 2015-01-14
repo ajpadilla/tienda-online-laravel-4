@@ -15,7 +15,7 @@ class CreateAddCountryClassifiedTable extends Migration {
 
 		Schema::table('classifieds', function($table)
 		{
-			$table->integer('country_id')->after('classified_condition_id');
+			$table->integer('city_id')->after('classified_condition_id');
 		});
 	}
 
