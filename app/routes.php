@@ -372,14 +372,14 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('classifieds.search'), [
 		'as' => 'classifieds.search',
-		'uses' => 'ClassifiedController@searchClassifieds'
+		'uses' => 'ClassifiedController@viewSearchClassifieds'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.filteClassified'), [
-		'as' => 'classifieds.filteClassified',
-		'uses' => 'ClassifiedController@filteresults'
+	Route::post(LaravelLocalization::transRoute('classifieds.filterClassified'), [
+		'as' => 'classifieds.filterClassified',
+		'uses' => 'ClassifiedController@searchClassified'
 	]);
-	
+		
 	Route::get('statesForCountry','ClassifiedController@statesForCountry');
 	Route::get('citiesForState','ClassifiedController@citiesForState');
 
