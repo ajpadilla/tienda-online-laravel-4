@@ -38,8 +38,12 @@
 			'language' => 'Idioma:',
 			'add_photos' => 'Agregar foto',
 			'new' => 'Nuevo',
-			'measure' => 'Medida'
+			'measure' => 'Medida',
+			'show_price' => 'Mostrar precio',
+			'product_for_barter' => 'Cambiar',
+			'save' => 'Guardar',
 		),
+
 		"validation" => array(
 			'required' => 'Campo obligatorio.',
 			'rangelength' => 'Por favor, introduzca un valor entre ',
@@ -70,7 +74,8 @@
 
 		'edit_view' => array(
 			'title' => 'Editar Producto',
-			'subtitle' => 'Datos del producto'
+			'subtitle' => 'Datos del producto',
+			'save' => 'Actualizar'
 		),
 
 		'show_data' => array(
@@ -82,6 +87,7 @@
 			'Edit' => 'Editar',
 			'Delete' => 'Eliminar',
 			'Activate' => 'Activar',
+			'product_for_barter' => 'Cambiar',
 			'Deactivated' => 'Desactivar',
 			'Photo' => 'Agregar foto'
 		)

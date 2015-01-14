@@ -79,6 +79,7 @@
                         <ul class="nav nav-second-level">
                             <li><a href="{{URL::route('classifieds.create')}}">Crear</a></li>
                             <li><a href="{{URL::route('classifieds.index')}}">Listar</a></li>
+                            <li><a href="{{URL::route('classifieds.search')}}">Buscar</a></li>
                         </ul>
                     </li>
                     <li>

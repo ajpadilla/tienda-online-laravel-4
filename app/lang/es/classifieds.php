@@ -7,12 +7,14 @@
 		"edit"=>"editar/clasificado/{id}",
 		"update"=>"actualizar/clasificado/{id}",
 		"destroy"=>"eliminar/clasificado/{id}",
+		"filterClassified" => "resultado/busqueda/clasificados", 
 		"title" => "Agregar Tipo de clasificado",
 		"subtitle" => "Crear clasificado",
 		"sending" => "Agregando clasificado",
 		"response" => "Clasificado agregado",
 		"Actualiced" => "Clasificado actualizado",
 		"Delete" => "¡Clasificado eliminado con exito!",
+		"search" => "buscar/clasificados",
 
 		"labels" => array(
 			'name' =>'Nombre:',
@@ -71,5 +73,18 @@
 			'Show' => 'Ver   ',
 			'Edit' => 'Editar',
 			'Delete' => 'Eliminar'
+		),
+
+		'searchs' => array(
+			'title' => 'Buscar clasificado',
+			'subtitle' => 'Buscar',
+			'Country' => 'País', 
+			'City' => 'Ciudad',
+			'State' => 'Estado',
+		),
+
+		'filtered' => array(
+			'title' => 'Resultados de la busqueda',
+			'subtitle' => 'Resultados'
 		)
 	);

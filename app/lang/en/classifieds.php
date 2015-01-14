@@ -7,12 +7,15 @@
 		"edit"=>"edit/classified/{id}",
 		"update"=>"update/classified/{id}",
 		"destroy"=>"delete/classified/{id}",
+		"filterClassified" => "search/results/classifieds", 
 		"title" => "Add classified",
 		"subtitle" => "Create classified",
 		"sending" => "Adding classified",
 		"response" => "Classified type added",
 		"Actualiced" => "Classified type updated",
 		"Delete" => "¡Classified type successfully removed!",
+		"search" => "search/classifieds",
+
 
 		"labels" => array(
 			'name' =>'Name:',
@@ -69,6 +72,19 @@
 			'Show' => 'Show   ',
 			'Edit' => 'Edit',
 			'Delete' => 'Delete'
+		),
+
+		'searchs' => array(
+			'title' => 'Search Classifieds',
+			'subtitle' => 'Search',
+			'Country' => 'País', 
+			'City' => 'Ciudad',
+			'State' => 'Estado',
+		),
+
+		'filtered' => array(
+			'title' => 'Search Results',
+			'subtitle' => 'Results'
 		)
 
 	);

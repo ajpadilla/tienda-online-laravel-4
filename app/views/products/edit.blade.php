@@ -14,18 +14,18 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{Form::open(['route' => ['products.update', $product->id], 'class' => 'form-horizontal', 'id' => 'formUpdateProduct'])}}
+					{{Form::open(['route' => ['products.update', $productLanguage->product->id], 'class' => 'form-horizontal', 'id' => 'formUpdateProduct'])}}
 					<div class="col-lg-7">
 						<div class="form-group">
 							{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::select('language_id',$languages,$product_language->id,array('class' => 'form-control','id'=>'language_id')) }}
+								{{ Form::select('language_id',$languages,$productLanguage->id,array('class' => 'form-control','id'=>'language_id')) }}
 							</div>
 						</div>
 						<div class="form-group">
 							{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('name', $product_language->pivot->name, ['class' => 'form-control', 'placeholder' => 'Name']) }}
+								{{ Form::text('name', $productLanguage->name, ['class' => 'form-control', 'placeholder' => 'Name']) }}
 							</div>
 						</div>
 
@@ -34,7 +34,7 @@
 							<div class="col-sm-10">
 								<div class="ibox-content no-padding">
 
-									{{ Form::textarea('description', $product_language->pivot->description, array('class' => 'form-control')) }}
+									{{ Form::textarea('description', $productLanguage->description, array('class' => 'form-control')) }}
 								</div>
 							</div>
 						</div>
@@ -42,49 +42,49 @@
 						<div class="form-group">
 							{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('quantity', $product->quantity, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
+								{{ Form::text('quantity', $productLanguage->product->quantity, ['class' => 'form-control', 'placeholder' => 'Quantity']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('price', $product->price, ['class' => 'form-control', 'placeholder' => 'Price']) }}
+								{{ Form::text('price', $productLanguage->product->price, ['class' => 'form-control', 'placeholder' => 'Price']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('measure_id', trans('products.labels.measure'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::select('measure_id',$measures,$product->measure_id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')) }}
+								{{ Form::select('measure_id',$measures,$productLanguage->product->measure_id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a measure...')) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('width', trans('products.labels.width'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('width', $product->width, ['class' => 'form-control', 'placeholder' => 'Width']) }}
+								{{ Form::text('width', $productLanguage->product->width, ['class' => 'form-control', 'placeholder' => 'Width']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('height', trans('products.labels.height'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('height', $product->height, ['class' => 'form-control', 'placeholder' => 'Height']) }}
+								{{ Form::text('height', $productLanguage->product->height, ['class' => 'form-control', 'placeholder' => 'Height']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('depth', trans('products.labels.depth'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('depth', $product->depth, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
+								{{ Form::text('depth', $productLanguage->product->depth, ['class' => 'form-control', 'placeholder' => 'Depth']) }}
 							</div>
 						</div>
 
 						<div class="form-group">
 							{{ Form::label('weight', trans('products.labels.weight'), ['class' => 'col-sm-2 control-label']) }}
 							<div class="col-sm-10">
-								{{ Form::text('weight', $product->weight, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
+								{{ Form::text('weight', $productLanguage->product->weight, ['class' => 'form-control', 'placeholder' => 'Weight']) }}
 								<!-- <span class="input-group-addon">pounds</span> -->
 							</div>
 						</div>
@@ -95,13 +95,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('on_sale', '1', $product->on_sale ? true : false)}}
+										{{ Form::radio('on_sale', '1', $productLanguage->product->on_sale ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('on_sale', '0', !$product->on_sale ? true : false)}}
+										{{ Form::radio('on_sale', '0', !$productLanguage->product->on_sale ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -113,13 +113,13 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('active', '1', $product->active ? true : false)}}
+										{{ Form::radio('active', '1', $productLanguage->product->active ? true : false)}}
 										<i></i> Yes
 									</label>
 								</div>
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('active', '0', !$product->active ? true : false)}}
+										{{ Form::radio('active', '0', !$productLanguage->product->active ? true : false)}}
 										<i></i> No
 									</label>
 								</div>
@@ -131,12 +131,12 @@
 							<div class="col-sm-8">
 								<div class="radio i-checks">
 									<label>
-										{{ Form::radio('available_for_order', '1', $product->available_for_order ? true : false)}}
+										{{ Form::radio('available_for_order', '1', $productLanguage->product->available_for_order ? true : false)}}
 										<i></i> Yes </label>
 									</div>
 									<div class="radio i-checks">
 										<label>
-											{{ Form::radio('available_for_order', '0', !$product->available_for_order ? true : false)}}
+											{{ Form::radio('available_for_order', '0', !$productLanguage->product->available_for_order ? true : false)}}
 											<i></i> No </label>
 										</div>
 									</div>
@@ -147,13 +147,13 @@
 									<div class="col-sm-8">
 										<div class="radio i-checks">
 											<label>
-												{{ Form::radio('show_price', '1', $product->show_price ? true : false)}}
+												{{ Form::radio('show_price', '1', $productLanguage->product->show_price ? true : false)}}
 												<i></i> Yes
 											</label>
 										</div>
 										<div class="radio i-checks">
 											<label>
-												{{ Form::radio('show_price', '0', !$product->show_price ? true : false)}}
+												{{ Form::radio('show_price', '0', !$productLanguage->product->show_price ? true : false)}}
 												<i></i> No
 											</label>
 										</div>
@@ -165,13 +165,13 @@
 									<div class="col-sm-8">
 										<div class="radio i-checks">
 											<label>
-												{{ Form::radio('accept_barter', '1', $product->accept_barter ? true : false)}}
+												{{ Form::radio('accept_barter', '1', $productLanguage->product->accept_barter ? true : false)}}
 												<i></i> Yes
 											</label>
 										</div>
 										<div class="radio i-checks">
 											<label>
-												{{ Form::radio('accept_barter', '0', !$product->accept_barter ? true : false)}}
+												{{ Form::radio('accept_barter', '0', !$productLanguage->product->accept_barter ? true : false)}}
 												<i></i> No
 											</label>
 										</div>
@@ -183,13 +183,13 @@
 									<div class="col-sm-8">
 										<div class="radio i-checks">
 											<label>
-												{{ Form::radio('product_for_barter', '1', $product->product_for_barter ? true : false)}}
+												{{ Form::radio('product_for_barter', '1', $productLanguage->product->product_for_barter ? true : false)}}
 												<i></i> Yes
 											</label>
 										</div>
 										<div class="radio i-checks">
 											<label>
-												{{ Form::radio('product_for_barter', '0', !$product->product_for_barter ? true : false)}}
+												{{ Form::radio('product_for_barter', '0', !$productLanguage->product->product_for_barter ? true : false)}}
 												<i></i> No
 											</label>
 										</div>
@@ -220,7 +220,7 @@
 								<div class="form-group">
 									{{ Form::label('categories', trans('products.labels.categories'), ['class' => 'col-sm-2 control-label']) }}
 									<div class="col-sm-10">
-										{{ Form::select('categories[]',$categories, $product->categories->lists('id') ,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
+										{{ Form::select('categories[]',$categories, $productLanguage->product->categories->lists('id') ,array('class' => 'chosen-select form-control', 'multiple' => 'multiple', 'data-placeholder' => 'Choose a Categories...')) }}
 
 									</div>
 								</div>
@@ -228,7 +228,7 @@
 								<div class="form-group">
 									{{ Form::label('condition_id', trans('products.labels.condition'), ['class' => 'col-sm-2 control-label']) }}
 									<div class="col-sm-10">
-										{{ Form::select('condition_id',$condition,$product->condition->id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
+										{{ Form::select('condition_id',$condition,$productLanguage->product->condition->id,array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...')) }}
 									</div>
 								</div>
 								
@@ -258,7 +258,7 @@
 							<div class="col-lg-12">
 								<div class="form-group">
 									<div class="col-sm-4 col-sm-offset-2">
-										{{ Form::submit('Save', ['class' => 'btn btn-primary']) }}
+										{{ Form::submit(trans('products.edit_view.save'), ['class' => 'btn btn-primary']) }}
 									</div>
 								</div>
 							</div>
@@ -285,6 +285,8 @@
 			$('.chosen-select').chosen();
 
 			 $('#description').summernote();
+
+			 $('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
@@ -373,7 +375,7 @@
 			var options = {
 					beforeSubmit:  showRequest,  // pre-submit callback
 					success:       showResponse,  // post-submit callback
-					url:  '{{URL::route('products.update', $product->id)}}',
+					url:  '{{URL::route('products.update', $productLanguage->product->id)}}',
 					type:'POST'
 				};
 			$('#formUpdateProduct').ajaxForm(options);
@@ -397,12 +399,9 @@
 			// post-submit callback
 			function showResponse(responseText, statusText, xhr, $form)  {
 				jQuery.fancybox({
-					'content' : '<h1>'+ responseText.message + '</h1>',
+					'content' : '<h1>'+ responseText + '</h1>',
 					'autoScale' : true
 				});
-
-				if(responseText.add_photos == 1)
-					document.location.href = '{{ URL::route('photoProduct.create') }}';
 			}
 		});
 	</script>
