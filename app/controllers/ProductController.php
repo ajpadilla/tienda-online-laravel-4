@@ -118,14 +118,14 @@ class ProductController extends \BaseController {
 	public function edit($id)
 	{
 
-		$product = $this->productRepository->getById($id);
+		$productLanguage = $this->productRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
-		$product_language = $product->languages()->where('language_id','=', $language_id)->first();
+		//$product_language = $product->languages()->where('language_id','=', $language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$categories = $this->categoryRepository->getNameForLanguage();
 		$condition = $this->conditionRepository->getNameForLanguage();
 		$measures = $this->measureRepository->getNameForLanguage();
-		return View::make('products.edit',compact('product','product_language','categories', 'condition', 'measures','languages'));
+		return View::make('products.edit',compact('productLanguage','categories', 'condition', 'measures','languages'));
 	}
 
 
@@ -146,13 +146,7 @@ class ProductController extends \BaseController {
 			{
 				$this->editProductForm->validate($input);
 				$product = $this->productRepository->updateProduct($input);
-				if ($input['add_photos'] == 1) {
-					return Response::json(['message' => trans('products.response'),
-						'add_photos' => $input['add_photos'],'productId' => $product->id,
-						'languageId' => $input['language_id']
-						]);
-				}
-				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
+				return Response::json(trans('products.Updated'));
 			}
 			catch (FormValidationException $e)
 			{
