@@ -81,6 +81,12 @@ class Classified extends Eloquent {
 		return false;
 	}
 
+	public function getDataForLanguage($languageId)
+	{
+		$classifiedLanguage = $this->languages()->where('language_id','=',$languageId)->first();
+		return $classifiedLanguage;
+	}
+
 	/*
 	*	Eliminar clasificado y relaciones
 	*/
