@@ -36,7 +36,9 @@
 			'language' => 'Language:',
 			'add_photos' => 'Add photo',
 			'new' => 'New',
-			'measure' => 'Measure'
+			'measure' => 'Measure',
+			'show_price' => 'Show price',
+			'product_for_barter' => 'Barter'
 		),
 		"validation" => array(
 			'required' => 'The field is required.',
