@@ -283,12 +283,18 @@ class ClassifiedController extends \BaseController {
 	}
 
 
-	public function searchClassifieds()
+	public function viewSearchClassifieds()
 	{
 		$country = $this->countryRepository->getNameForLanguage();
 		$classifiedConditions = $this->classifiedConditionsRepository->getNameForLanguage(); 
 		$classifiedTypes = $this->classifiedTypesRepository->getNameForLanguage();
 		return View::make('classifieds.search-classified',compact('country','classifiedConditions','classifiedTypes'));
+	}
+
+	public function searchClassified()
+	{
+		$classifiedsResult = $this->classifiedRepository->search(Input::all());
+		dd($classifiedsResult);
 	}
 
 	public function statesForCountry()
