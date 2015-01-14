@@ -4,11 +4,42 @@ use s4h\store\Classifieds\Classified;
 use s4h\store\Languages\Language;
 use s4h\store\Photos\ClassifiedPhotos;
 use s4h\store\ClassifiedsLang\ClassifiedsLang;
-
+use s4h\store\Base\BaseRepository;
 /**
 * 
 */
-class ClassifiedRepository{
+class ClassifiedRepository extends BaseRepository
+{
+
+	public function getModel()
+	{
+		return new Classified;
+	}
+
+	public $filters = ['cityId','price','classifiedTypeId','classifiedConditionId'];
+
+	//public $filters = ['cityId'];
+
+	public function filterByCityId($query, $value)
+	{
+		$query->where('city_id','=',$value);
+	}
+
+	public function filterByPrice($query, $value)
+	{
+		$query->where('price','>=',$value);
+	}
+
+	public function filterByClassifiedTypeId($query, $value)
+	{
+		$query->where('classified_type_id','=',$value);
+	}
+
+	public function filterByClassifiedConditionId($query, $value)
+	{
+		$query->where('classified_condition_id','=',$value);
+	}
+
 
 	public function createNewClassified($data = array())
 	{
