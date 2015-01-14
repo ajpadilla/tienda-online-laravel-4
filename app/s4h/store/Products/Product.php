@@ -123,6 +123,8 @@ class Product extends Eloquent{
 		return false;
 	}
 
+	
+
 	/*
 	*	Eliminar producto y relaciones
 	*/
