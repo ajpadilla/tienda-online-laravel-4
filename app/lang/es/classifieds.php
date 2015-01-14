@@ -81,5 +81,10 @@
 			'Country' => 'País', 
 			'City' => 'Ciudad',
 			'State' => 'Estado',
+		),
+
+		'filtered' => array(
+			'title' => 'Resultados de la busqueda',
+			'subtitle' => 'Resultados'
 		)
 	);
