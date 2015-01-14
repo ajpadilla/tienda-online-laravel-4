@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['route' => 'classifieds.filteClassified','class'=>'form-horizontal','id' => 'formSearchClassified']) }}
+					{{ Form::open(['route' => 'classifieds.filterClassified','class'=>'form-horizontal','id' => 'formSearchClassified']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('countryId', trans('classifieds.searchs.Country'),['class'=>'col-sm-2 control-label']) }}
@@ -61,7 +61,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('classifieds.labels.save'), ['class' => 'btn btn-primary']) }}
+								{{ Form::submit(trans('classifieds.searchs.subtitle'), ['class' => 'btn btn-primary']) }}
 							</div>
 						</div>
 					</div>
