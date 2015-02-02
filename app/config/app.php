@@ -129,8 +129,7 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Chumper\Datatable\DatatableServiceProvider',
-		'Laracasts\Flash\FlashServiceProvider',
-		'Intervention\Image\ImageServiceProvider'
+		'Laracasts\Flash\FlashServiceProvider'
 	),
 
 	/*
