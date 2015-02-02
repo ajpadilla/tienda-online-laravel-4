@@ -115,13 +115,13 @@
 						$('#measure_id').val(response.product.product.measure_id);
 						$('#weight').val(response.product.product.weight.toFixed(2));
 						$('#weight_id').val(response.product.product.weight_id);
-						if (response.product.product.color) {
+						if (response.product.product.color != null) {
 							$('select[name="color"]').simplecolorpicker('selectColor', response.product.product.color);
 						};
 						$('input[name="on_sale"]').val([response.product.product.on_sale]);
 						$('input[name="accept_barter"]').val([response.product.product.accept_barter]);
 						$('input[name="active"]').val([response.product.product.active]);
-						$('#categories').val([1,2,3]);
+						$('#categories').val(response.categories);
 						$('#condition_id').val(response.product.product.condition_id);
 
 						$('.chosen-select').trigger("chosen:updated");
