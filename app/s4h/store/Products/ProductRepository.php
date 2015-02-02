@@ -63,7 +63,7 @@ class ProductRepository {
 
 	public function updateProduct($data = array())
 	{
-		$product = $this->getById($data['product_id']);
+		$product = $this->getForId($data['product_id']);
 		$product->on_sale = $data['on_sale'];
 		$product->quantity = $data['quantity'];
 		$product->price = $data['price'];
@@ -105,6 +105,11 @@ class ProductRepository {
   		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		$product = Product::findOrFail($product_id);
 		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first();
+	}
+
+	public function getForId($product_id)
+	{
+		return Product::findOrFail($product_id);
 	}
 
 	public function filterProducts($filterWord, $language_id) {
