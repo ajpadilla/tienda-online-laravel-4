@@ -69,6 +69,35 @@
 
 	<script  type="text/javascript">
 		
+		$('.btn.btn-warning').fancybox({
+			openEffect	: 'elastic',
+    		closeEffect	: 'elastic',
+			centerOnScroll: true,
+			hideOnOverlayClick: true,
+			beforeLoad: loadData()
+		});
+
+		function loadData() 
+		{
+			$('.table').click(function(event)
+			{
+				var target = $( event.target );
+				if (target.is('a')) 
+				{
+					console.log($(target).attr('id'));
+
+					var id = $(target).attr('id');
+					var type = id ? id.split('_')[0] : '';
+					var numberId = id ? id.split('_')[1] : '';
+
+					if (type == "edit") {
+						loadDataToEdit(numberId);
+					}
+				}			
+			});
+		}
+
+		
 		function loadDataToEdit(id) {
 			$.ajax({
 				type: 'GET',
@@ -106,28 +135,7 @@
 		}
 
 
-		$('.table').click(function(event)
-		 {
-			var target = $( event.target );
-			if (target.is('a')) 
-			{
-				console.log($(target).attr('id'));
-
-				$(target).fancybox({
-					centerOnScroll: true,
-					hideOnOverlayClick: true,
-				});
-
-				var id = $(target).attr('id');
-				var type = id ? id.split('_')[0] : '';
-				var numberId = id ? id.split('_')[1] : '';
-
-				if (type == "edit") {
-					loadDataToEdit(numberId);
-				}
-			}			
-		});
-
+		
 	
 		$('.i-checks').iCheck({
 			checkboxClass: 'icheckbox_square-green',
