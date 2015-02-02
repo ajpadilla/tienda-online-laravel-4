@@ -330,7 +330,8 @@ class ProductController extends \BaseController {
 			if (Input::has('productId')) 
 			{
 				$productLanguage = $this->productRepository->getById(Input::get('productId'));
-				return Response::json(['success'=>true, 'product' => $productLanguage->toArray(), 'url'=> URL::route('products.update',Input::get('productId'))]);
+				$categories = $productLanguage->product->getCategorieIds();
+				return Response::json(['success'=>true, 'product' => $productLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
 			}else{
 				return Response::json(['success' => false]);
 			}
