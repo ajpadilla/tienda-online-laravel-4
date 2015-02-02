@@ -2,14 +2,22 @@
 	<div class="form-group">
 		{{ Form::label('language_id', trans('products.labels.language'),['class'=>'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
+			{{ Form::select('language_id',$languages,null,['class' => 'form-control','id'=>'language_id']) }}
 		</div>
 	</div>
+
+	<div class="form-group" style="display: none">
+		{{ Form::label('product_id','id', ['class' => 'col-sm-2 control-label']) }}
+		<div class="col-sm-10">
+			{{ Form::text('product_id', null, ['class' => 'form-control', 'placeholder' =>'','id'=> 'product_id']) }}
+		</div>
+	</div>
+
 
 	<div class="form-group">
 		{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) }}
+			{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name', 'id' => 'name']) }}
 		</div>
 	</div>
 
@@ -17,7 +25,7 @@
 		{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			<div class="ibox-content no-padding">
-				{{ Form::textarea('description', null, array('class' => 'form-control')) }}
+				{{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'description']) }}
 			</div>
 		</div>
 	</div>
@@ -25,35 +33,35 @@
 	<div class="form-group">
 		{{ Form::label('quantity', trans('products.labels.quantity'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => '']) }}
+			{{ Form::text('quantity', null, ['class' => 'form-control', 'placeholder' => '', 'id'=> 'quantity']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('price', trans('products.labels.price'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('price', null, ['class' => 'form-control', 'placeholder' =>'']) }}
+			{{ Form::text('price', null, ['class' => 'form-control', 'placeholder' =>'','id'=> 'price']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('point_price', trans('products.labels.point_price'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('point_price', null, ['class' => 'form-control', 'placeholder' => '']) }}
+			{{ Form::text('point_price', null, ['class' => 'form-control', 'placeholder' => '','id'=> 'point_price']) }}
 		</div>
 	</div>
 
 	<div class="form-group"><label class="col-sm-2 control-label">{{ trans('products.labels.measure') }}</label>
 	    <div class="col-sm-10">
 	        <div class="row">
-	            <div class="col-md-3">{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.width')]) }}</div>
-	            <div class="col-md-3">{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.height')]) }}</div>
-	            <div class="col-md-3">{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.depth')]) }}</div>
+	            <div class="col-md-3">{{ Form::text('width', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.width'), 'id' =>'width']) }}</div>
+	            <div class="col-md-3">{{ Form::text('height', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.height'), 'id' =>'height']) }}</div>
+	            <div class="col-md-3">{{ Form::text('depth', null, ['class' => 'form-control', 'placeholder' => trans('products.labels.depth'),'id'=>'depth']) }}</div>
 	            <div class="col-sm-3">
 	                {{
 	                    Form::select('measure_id', $measures, null,
-	                    array('class' => 'chosen-select form-control',
-	                    'data-placeholder' => trans('products.labels.measure')))
+	                    ['class' => 'chosen-select form-control',
+	                    'data-placeholder' => trans('products.labels.measure'),'id' =>'measure_id'])
 	                }}
 	            </div>
 	        </div>
@@ -70,8 +78,8 @@
 	            <div class="col-sm-4">
 		            {{
 				        Form::select('weight_id', $weights, null,
-				        array('class' => 'chosen-select form-control',
-				        'data-placeholder' => trans('products.labels.measure')))
+				        ['class' => 'chosen-select form-control',
+				        'data-placeholder' => trans('products.labels.measure'),'id' => 'weight_id'])
 				    }}
 			    </div>
 		    </div>
@@ -161,8 +169,8 @@
 		<div class="col-sm-10">
 			{{
 				Form::select('categories[]', $categories, null,
-				array('class' => 'chosen-select form-control',
-				'multiple' => 'multiple', 'data-placeholder' => 'Escoge Categorías...'))
+				['class' => 'chosen-select form-control',
+				'multiple' => 'multiple', 'data-placeholder' => 'Escoge Categorías...', 'id' =>'categories'])
 			}}
 		</div>
 	</div>
@@ -172,7 +180,7 @@
 		<div class="col-sm-10">
 			{{
 				Form::select('condition_id', $condition, null,
-				array('class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...'))
+				['class' => 'chosen-select form-control', 'data-placeholder' => 'Choose a Condition...', 'id' => 'condition_id'])
 			}}
 		</div>
 	</div>
