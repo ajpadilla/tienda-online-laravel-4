@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{Form::open(['route' => 'products.update', 'class' => 'form-horizontal', 'id' => 'formEditProduct'])}}
+					{{Form::open(['route' => 'products.update', 'class' => 'form-horizontal', 'id' => 'formUpdateProduct'])}}
 						@include('products.partials._form')
 					{{Form::close()}}
 				</div>
@@ -128,7 +128,7 @@
 			var options = {
 					beforeSubmit:  showRequest,  // pre-submit callback
 					success:       showResponse,  // post-submit callback
-					url:  '{{URL::route('products.update', $productLanguage->product->id)}}',
+					url:  '{{URL::route('products.update')}}',
 					type:'POST'
 				};
 			$('#formUpdateProduct').ajaxForm(options);
@@ -151,11 +151,15 @@
 
 			// post-submit callback
 			function showResponse(responseText, statusText, xhr, $form)  {
+				console.log(responseText);
+
 				jQuery.fancybox({
-					'content' : '<h1>'+ responseText + '</h1>',
+					'content' : '<h1>'+ responseText.message + '</h1>',
 					'autoScale' : true
 				});
-			}
+
+				if(responseText.add_photos == 1)
+					document.location.href = responseText.url;			}
 		});
 	</script>
 @stop
