@@ -42,6 +42,9 @@ function () {
 		'uses' => 'ProductController@search'
 	]);
 
+	Route::get('returnDataProduct','ProductController@returnDataProduct');
+
+
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
