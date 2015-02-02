@@ -7,7 +7,7 @@
 		"store" => "agregar/producto",
 		'index'=>'lista/productos',
 		'edit' => 'editar/producto/{id}',
-		'update' => 'actualizar/producto/{id}',
+		'update' => 'actualizar/producto',
 		'destroy' => 'eliminar/producto/{id}',
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
