@@ -144,7 +144,7 @@ class ProductController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				//$this->editProductForm->validate($input);
+				$this->editProductForm->validate($input);
 				$product = $this->productRepository->updateProduct($input);
 				if ($input['add_photos'] == 1) {
 					return Response::json(['message' => trans('products.Updated'),
