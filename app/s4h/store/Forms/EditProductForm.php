@@ -3,7 +3,7 @@
 use Laracasts\Validation\FormValidator;
 
 class EditProductForm extends FormValidator{
-	protected $rules = [
+        protected $rules = [
         'name' => 'required|max:64',
         'description' => 'required',
         'on_sale' => 'required|integer',
@@ -20,5 +20,5 @@ class EditProductForm extends FormValidator{
         'condition_id' => 'required|integer|exists:product_conditions,id',
         'measure_id' => 'required|exists:measures,id',
         'weight_id' => 'require|integer|exists:weights,id'
-	];
+        ];
 }
