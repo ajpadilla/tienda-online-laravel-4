@@ -53,7 +53,12 @@ class ProductController extends \BaseController {
 
 	public function index()
 	{
-		return View::make('products.index');
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$categories = $this->categoryRepository->getNameForLanguage();
+		$condition = $this->conditionRepository->getNameForLanguage();
+		$measures = $this->measureRepository->getNameForLanguage();
+		$weights = $this->weightRepository->getNameForLanguage();
+		return View::make('products.index',compact('languages','categories','condition','measures','weights'));
 	}
 
 	/**
@@ -82,13 +87,10 @@ class ProductController extends \BaseController {
 		if(Request::ajax())
 		{
 			$input = Input::all();
-			$dataProduct = [];
 			try
 			{
 				$this->registerProductForm->validate($input);
 				$product = $this->productRepository->createNewProduct($input);
-				$dataProduct['product_id'] = $product->id;
-				$dataProduct['language_id'] = $input['language_id'];
 				if ($input['add_photos'] == 1) {
 					return Response::json(['message' => trans('products.response'),
 						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
@@ -135,18 +137,21 @@ class ProductController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['product_id'] = $id;
 			try
 			{
 				$this->editProductForm->validate($input);
 				$product = $this->productRepository->updateProduct($input);
-				return Response::json(trans('products.Updated'));
+				if ($input['add_photos'] == 1) {
+					return Response::json(['message' => trans('products.Updated'),
+						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
+					]);
+				}
+				return Response::json(['message' => trans('products.Updated'), 'add_photos' => 0]);
 			}
 			catch (FormValidationException $e)
 			{
@@ -245,8 +250,8 @@ class ProductController extends \BaseController {
 
 			$languageId = $this->languageRepository->returnLanguage()->id;
 
-			$links = "<a class='btn btn-info' href='" .route('products.show', $model->product->id). "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
-			$links .= "<a class='btn btn-warning' href='" .route('products.edit', $model->product->id). "'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />
+			$links = "<a class='btn btn-info' href=''> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
+			$links .= "<a class='btn btn-warning' href='#fancybox-edit-product' id='edit_".$model->product->id."' value='".$model->product->id."'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />
 					<form action=".route('products.destroy', $model->id)." method='POST' >
 					<button class='btn btn-danger' > ".trans('products.actions.Delete')." <i class='fa fa-times'></i></button></form>";
 
@@ -316,6 +321,21 @@ class ProductController extends \BaseController {
 			return View::make('products.search');
 		}
 
+	}
+
+	public function returnDataProduct()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('productId')) 
+			{
+				$productLanguage = $this->productRepository->getById(Input::get('productId'));
+				$categories = $productLanguage->product->getCategorieIds();
+				return Response::json(['success'=>true, 'product' => $productLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
 	}
 
 }

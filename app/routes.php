@@ -31,7 +31,7 @@ function () {
 	Route::get(LaravelLocalization::transRoute('products.whistlist'), ['as' => 'products.whistlist', 'uses' => 'ProductController@showWhistList' ] );
 	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
 	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
-	Route::post('product/update/{id}' ,  ['as' => 'products.update','uses' => 'ProductController@update' ] );
+	Route::post(LaravelLocalization::transRoute('products.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
@@ -41,6 +41,9 @@ function () {
 		'as' => 'filtered_products_path',
 		'uses' => 'ProductController@search'
 	]);
+
+	Route::get('returnDataProduct','ProductController@returnDataProduct');
+
 
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------

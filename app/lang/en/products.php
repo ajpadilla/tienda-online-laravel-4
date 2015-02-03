@@ -6,7 +6,7 @@
 		"store" => "add/product",
 		'index'=>'list/product',
 		'edit' => 'edit/product/{id}',
-		'update' => 'update/product/{id}',
+		'update' => 'update/product',
 		'destroy' => 'delete/product/{id}',
 		"title" => "Add product",
 		"subtitle" => "Create new product",

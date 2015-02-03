@@ -113,6 +113,18 @@ class Product extends Eloquent{
 			return $categoriesNames;
 	}
 
+	public function getCategorieIds()
+	{
+		$categorieIds = [];
+
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+			{
+				$categorieIds[] = $category->id;
+			}
+			return $categorieIds;
+	}
+
 	public function checkCategory($category_id)
 	{
 		if($this->hasCategories())
