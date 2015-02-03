@@ -382,7 +382,7 @@ function () {
 		'as' => 'classifieds.filterClassified',
 		'uses' => 'ClassifiedController@searchClassified'
 	]);
-		
+
 	Route::get('statesForCountry','ClassifiedController@statesForCountry');
 	Route::get('citiesForState','ClassifiedController@citiesForState');
 
@@ -505,6 +505,23 @@ function () {
 
 	Route::get('api/attributeType', array('as'=>'api.attributeType', 'uses'=>'AttributeTypeController@getDatatable'));
 
+	/**
+		* ------------------------------ Rutas Carro de compras-----------------------
+	**/
+	Route::resource('cart', 'CartController', ['except' => ['create']]);
+	Route::get(LaravelLocalization::transRoute('cart.create'), [
+		'as' => 'cart.create',
+		'uses' => 'CartController@create'
+	]);
+
+	/**
+		* ------------------------------ Rutas Lista de Deseos-----------------------
+	**/
+	Route::resource('wishlist', 'WishlistController', ['except' => ['create']]);
+	Route::get(LaravelLocalization::transRoute('wishlist.create'), [
+		'as' => 'wishlist.create',
+		'uses' => 'WishlistController@create'
+	]);
 });
 
 // Confide routes
