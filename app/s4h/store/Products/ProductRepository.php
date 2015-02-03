@@ -119,4 +119,16 @@ class ProductRepository {
 		}
 		return $query->get();
 	}
+
+	public function addToUserWishList($productId, s4h\store\Users\User $user)
+	{
+		return Product::findOrFail($productId)->wishlistUsers()->save($user);
+		//$product->wishlistUsers()->
+	}
+
+	public function addToUserCart($productId, s4h\store\Users\User $user, $quantity = 1)
+	{
+		return Product::findOrFail($productId)->cartUsers()->save($user, ['quantity' => $quantity]);
+		//$product->wishlistUsers()->
+	}
 }

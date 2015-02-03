@@ -6,6 +6,9 @@
 
 @section('scripts')
   <script>
+
+    @include('wishlist.partials._add-to-wishlist-js')
+
     var initImageZoom = function () {
         jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
 	}
@@ -48,6 +51,7 @@
 		handleFancybox();
 		initImageZoom();
 		initTouchspin();
+        addToWishlist();
     });
   </script>
 @stop

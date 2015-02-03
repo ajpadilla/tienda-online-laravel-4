@@ -44,7 +44,3 @@
 @include('products.partials._pop-up-products')
 
 @include('products.partials._product-show-js')
-
-@include('wishlist.partials._add-to-wishlist-js')
-
-

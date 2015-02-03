@@ -1,6 +1,6 @@
 <?php
 
-class WishlistController extends \BaseController {
+class CartController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -22,8 +22,8 @@ class WishlistController extends \BaseController {
 	{
 		$response = ['success' => FALSE];
 		if(Request::ajax())
-			if(Auth::user() && (Auth::user()->isAdminClient() || Auth::user()->isReadClient()))
-				if($this->productRepository->addToUserWishList($id, Auth::user()))
+			if(Auth::user() && Auth::user()->isAdminClient())
+				if($this->productRepository->addToUserCart($id, Auth::user()))
 					$response['success'] = TRUE;
 		return Response::json($response);
 	}

@@ -38,6 +38,16 @@ class Product extends Eloquent{
 		return $this->hasMany('s4h\store\Ratings\Rating');
 	}
 
+	public function wishlistUsers()
+	{
+		return $this->belongsToMany('s4h\store\Users\User', 'wishlist', 'product_id', 'user_id');
+	}
+
+	public function cartUsers()
+	{
+		return $this->belongsToMany('s4h\store\Users\User', 'cart', 'product_id', 'user_id')->withPivot('quantity')->withTimestamps();
+	}
+
 	/*
 	*
 	*/
@@ -135,7 +145,7 @@ class Product extends Eloquent{
 		return false;
 	}
 
-	
+
 
 	/*
 	*	Eliminar producto y relaciones
