@@ -18,12 +18,12 @@ class CartController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($id)
+	public function create($id, $quantity = 1)
 	{
 		$response = ['success' => FALSE];
 		if(Request::ajax())
 			if(Auth::user() && Auth::user()->isAdminClient())
-				if($this->productRepository->addToUserCart($id, Auth::user()))
+				if($this->productRepository->addToUserCart($id, Auth::user(), $quantity))
 					$response['success'] = TRUE;
 		return Response::json($response);
 	}

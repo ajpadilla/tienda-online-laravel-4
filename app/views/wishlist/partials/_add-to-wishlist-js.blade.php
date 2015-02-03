@@ -1,4 +1,4 @@
-
+<script>
 	var addToWishlist = function () {
 		jQuery('.add_wishlist').click(function(){
 			var url = jQuery(this).attr('href');
@@ -21,3 +21,4 @@
             return false;
 		});
 	}
+</script>
