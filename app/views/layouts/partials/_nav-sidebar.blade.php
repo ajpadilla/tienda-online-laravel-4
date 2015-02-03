@@ -8,9 +8,9 @@
                         </div>
                     </li>
                     <li>
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+                        <a href="{{ route('pages.home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
                     </li>
-                        
+
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Categoria - Producto</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
