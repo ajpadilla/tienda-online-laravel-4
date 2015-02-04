@@ -11,6 +11,8 @@ class User extends ConfideUser {
 
 	protected $dates = ['deleted_at'];
 
+	protected $hidden = ['password'];
+
 	public function userdetail()
 	{
 		return $this->hasOne('Userdetail');

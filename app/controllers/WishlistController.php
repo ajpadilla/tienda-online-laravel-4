@@ -1,8 +1,17 @@
 <?php
 
 use \Entrust;
+use s4h\store\Wishlist\WishlistRepository;
 
 class WishlistController extends \BaseController {
+
+	protected $wishlistRepository;
+
+	function __construct(WishlistRepository $wishlistRepository)
+	{
+		$this->wishlistRepository = $wishlistRepository;
+	}
+
 
 	/**
 	 * Display a listing of the resource.
