@@ -17,10 +17,10 @@ function () {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
 	Route::get('/', [
+		'before' => 'auth',
 		'as' => 'pages.home',
 		'uses' => 'PageController@home'
 	]);
-
 
 	/**
 	* ------------------------------ Rutas para productos -----------------------
@@ -519,6 +519,7 @@ function () {
 	**/
 	Route::resource('wishlist', 'WishlistController', ['except' => ['create']]);
 	Route::get(LaravelLocalization::transRoute('wishlist.create'), [
+		'before' => 'add-to-wishlist',
 		'as' => 'wishlist.create',
 		'uses' => 'WishlistController@create'
 	]);

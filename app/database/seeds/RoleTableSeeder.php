@@ -1,10 +1,8 @@
 <?php
 
 use s4h\store\Users\Role;
-use s4h\store\Users\Permission;
-use s4h\store\Users\User;
 
-class RolePermissionTableSeeder extends DatabaseSeeder{
+class RoleTableSeeder extends DatabaseSeeder{
 
 	public function run()
 	{
@@ -31,20 +29,5 @@ class RolePermissionTableSeeder extends DatabaseSeeder{
 		$clientReader = new Role();
 		$clientReader->name = 'client-reader';
 		$clientReader->save();
-
-		// Creando permisos y adjuntando a sus roles respectivos
-		$addToWishList = new Permission();
-		$addToWishList->name = 'add-to-wishlist';
-		$addToWishList->display_name = 'Add to wishlist';
-		$addToWishList->save();
-
-		$clientAdmin->attachPermission($addToWishList);
-		$clientReader->attachPermission($addToWishList);
-
-		$clientAdminUser = User::find(5);
-		$clientReaderUser = User::find(6);
-
-		$clientAdminUser->attachRole($clientAdmin);
-		$clientReaderUser->attachRole($clientReaderUser);
 	}
 }

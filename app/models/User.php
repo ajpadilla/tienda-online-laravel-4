@@ -1,5 +1,5 @@
 <?php
-
+/*
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Entrust\HasRole;
 
@@ -25,4 +25,4 @@ class User extends ConfideUser {
     public function Person() {
         return $this->hasOne('Person');
     }
-}
+}*/

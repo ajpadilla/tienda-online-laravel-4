@@ -20,9 +20,9 @@ class UserTableSeeder extends DatabaseSeeder{
 		for ($i=0; $i < 6; $i++)
 			$codes[] = $faker->password;
 
-		$users = array();
+		$testUsers = array();
 
-		$users[] =	[
+		$testUsers[] =	[
 				'username' => 'admin',
 				'email' =>  'admin@tienda-online.com',
 				'password' => Hash::make('1234'),
@@ -30,7 +30,7 @@ class UserTableSeeder extends DatabaseSeeder{
 				'confirmed' => 1,
 				];
 
-		$users[] =	[
+		$testUsers[] =	[
 				'username' => 'lectura-general',
 				'email' =>  'lectura-general@tienda-online.com',
 				'password' => Hash::make('1234'),
@@ -38,7 +38,7 @@ class UserTableSeeder extends DatabaseSeeder{
 				'confirmed' => 1,
 				];
 
-		$users[] =	[
+		$testUsers[] =	[
 				'username' => 'proveedor-tienda',
 				'email' =>  'proveedor-tienda@tienda-online.com',
 				'password' => Hash::make('1234'),
@@ -46,7 +46,7 @@ class UserTableSeeder extends DatabaseSeeder{
 				'confirmed' => 1,
 				];
 
-		$users[] =	[
+		$testUsers[] =	[
 				'username' => 'lectura-tienda',
 				'email' =>  'lectura-tienda@tienda-online.com',
 				'password' => Hash::make('1234'),
@@ -54,7 +54,7 @@ class UserTableSeeder extends DatabaseSeeder{
 				'confirmed' => 1,
 				];
 
-		$users[] =	[
+		$testUsers[] =	[
 				'username' => 'cliente-admin',
 				'email' =>  'cliente-admin@tienda-online.com',
 				'password' => Hash::make('1234'),
@@ -62,7 +62,7 @@ class UserTableSeeder extends DatabaseSeeder{
 				'confirmed' => 1,
 				];
 
-		$users[] =	[
+		$testUsers[] =	[
 				'username' => 'cliente-lectura',
 				'email' =>  'cliente-lectura@tienda-online.com',
 				'password' => Hash::make('1234'),
@@ -70,8 +70,8 @@ class UserTableSeeder extends DatabaseSeeder{
 				'confirmed' => 1,
 				];
 
-		foreach ($users as $user)
-			User::create($user);
+		foreach ($testUsers as $testUser)
+			DB::table('users')->insert($testUser);
 
 	}
 

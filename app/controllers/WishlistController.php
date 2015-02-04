@@ -24,9 +24,8 @@ class WishlistController extends \BaseController {
 	{
 		$response = ['success' => FALSE];
 		if(Request::ajax())
-			if(Auth::user() && Entrust::can('add-to-wishlist'))
-				if($this->productRepository->addToUserWishList($id, Auth::user()))
-					$response['success'] = TRUE;
+			if($this->productRepository->addToUserWishList($id, Auth::user()))
+				$response['success'] = TRUE;
 		return Response::json($response);
 	}
 

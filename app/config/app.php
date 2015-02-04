@@ -200,6 +200,8 @@ return array(
 		'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
 		'Confide' => 'Zizaco\Confide\ConfideFacade',
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
+		'Permission' => 's4h\store\Users\Permission',
+		'Role' => 's4h\store\Users\Role',
 		'PDF' => 'Barryvdh\DomPDF\Facade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
