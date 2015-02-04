@@ -1,5 +1,7 @@
 <?php
 
+use \Entrust;
+
 class WishlistController extends \BaseController {
 
 	/**
@@ -22,7 +24,7 @@ class WishlistController extends \BaseController {
 	{
 		$response = ['success' => FALSE];
 		if(Request::ajax())
-			if(Auth::user() && (Auth::user()->isAdminClient() || Auth::user()->isReadClient()))
+			if(Auth::user() && Entrust::can('add-to-wishlist'))
 				if($this->productRepository->addToUserWishList($id, Auth::user()))
 					$response['success'] = TRUE;
 		return Response::json($response);
