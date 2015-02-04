@@ -97,10 +97,6 @@ Route::filter('csrf', function()
 
 Route::filter('add-to-wishlist', function()
 {
-	return \Entrust::can('add-to-wishlist');
-});
-
-Route::filter('add-to-wishlist', function()
-{
-	return \Entrust::can('add-to-wishlist');
+	if(!Entrust::can('add-to-wishlist'))
+		return Redirect::to('/');
 });

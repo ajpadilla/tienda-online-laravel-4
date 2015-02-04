@@ -29,5 +29,20 @@ class RoleTableSeeder extends DatabaseSeeder{
 		$clientReader = new Role();
 		$clientReader->name = 'client-reader';
 		$clientReader->save();
+
+		// Creando permisos y adjuntando a sus roles respectivos
+		$addToWishList = new Permission();
+		$addToWishList->name = 'add-to-wishlist';
+		$addToWishList->display_name = 'Add to wishlist';
+		$addToWishList->save();
+
+		$clientAdmin->attachPermission($addToWishList);
+		$clientReader->attachPermission($addToWishList);
+
+		$clientAdminUser = User::find(5);
+		$clientReaderUser = User::find(6);
+
+		$clientAdminUser->attachRole($clientAdmin);
+		$clientReaderUser->attachRole($clientReaderUser);
 	}
 }

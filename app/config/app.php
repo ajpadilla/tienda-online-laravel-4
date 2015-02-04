@@ -199,6 +199,7 @@ return array(
 		'View' => 'Illuminate\Support\Facades\View',
 		'LaravelLocalization' => 'Mcamara\LaravelLocalization\Facades\LaravelLocalization',
 		'Confide' => 'Zizaco\Confide\ConfideFacade',
+		'User' => 's4h\store\Users\User',
 		'Entrust' => 'Zizaco\Entrust\EntrustFacade',
 		'Permission' => 's4h\store\Users\Permission',
 		'Role' => 's4h\store\Users\Role',

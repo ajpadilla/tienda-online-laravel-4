@@ -33,7 +33,7 @@
             @include('products.partials._topbar-cart-list')
             @include('products.partials._topbar-wishlist')
             <li>
-                <a href="login.html">
+                <a href="{{ route('logout') }}">
                     <i class="fa fa-sign-out fa-lg"></i> {{ Lang::get('menu.log-out') }}
                 </a>
             </li>

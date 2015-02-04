@@ -10,6 +10,8 @@
 |
 */
 
+use s4h\store\Users\User;
+
 class UserController extends BaseController {
 	
 	public $profiles = array(
@@ -34,7 +36,7 @@ class UserController extends BaseController {
      */
     public function store()
     {
-        $user = new User;
+        $user = new User();
 
         $user->username = Input::get( 'username' );
         $user->email = Input::get( 'email' );
