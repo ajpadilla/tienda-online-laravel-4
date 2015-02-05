@@ -13,6 +13,7 @@ use s4h\store\Languages\LanguageRepository;
 use s4h\store\Weights\WeightRepository;
 use s4h\store\Classifieds\ClassifiedRepository;
 use Laracasts\Validation\FormValidationException;
+use s4h\store\Forms\EditLangProductoForm;
 
 class ProductController extends \BaseController {
 
@@ -26,6 +27,7 @@ class ProductController extends \BaseController {
 	protected $productLangRepository;
 	protected $weightRepository;
 	protected $classifiedRepository;
+	protected $editLangProductoForm;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
@@ -36,7 +38,8 @@ class ProductController extends \BaseController {
 										LanguageRepository $languageRepository,
 										ProductLangRepository $productLangRepository,
 										WeightRepository $weightRepository,
-										ClassifiedRepository $classifiedRepository
+										ClassifiedRepository $classifiedRepository,
+										EditLangProductoForm $editLangProductoForm
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
@@ -49,6 +52,7 @@ class ProductController extends \BaseController {
 		$this->productLangRepository = $productLangRepository;
 		$this->weightRepository = $weightRepository;
 		$this->classifiedRepository = $classifiedRepository;
+		$this->editLangProductoForm = $editLangProductoForm;
 	}
 
 	public function index()
@@ -356,6 +360,25 @@ class ProductController extends \BaseController {
 				 }
 			}else{
 				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function saveDataForLanguage()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editLangProductoForm->validate($input);
+				$this->productRepository->updateDataForProduct($input);
+				return Response::json([trans('products.Updated')]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
 			}
 		}
 	}
