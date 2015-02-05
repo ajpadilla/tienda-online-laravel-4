@@ -8,7 +8,7 @@
 	</div>
 
 	<div class="form-group" style="display: none">
-		{{ Form::label('product_id_language','id', ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('product_id','id', ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			{{ Form::text('product_id', null, ['class' => 'form-control', 'placeholder' =>'','id'=> 'product_id_language']) }}
 		</div>
@@ -16,17 +16,17 @@
 
 
 	<div class="form-group">
-		{{ Form::label('name_language',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('name_language', null, ['class' => 'form-control', 'placeholder' => 'Name', 'id' => 'name_language']) }}
+			{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name', 'id' => 'name_language']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
-		{{ Form::label('description_language', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			<div class="ibox-content no-padding">
-				{{ Form::textarea('description_language', null, ['class' => 'form-control', 'id' => 'description_language']) }}
+				{{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'description_language']) }}
 			</div>
 		</div>
 	</div>
