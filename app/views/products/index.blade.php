@@ -60,6 +60,29 @@
 	</section>
 </div>
 
+<div class="row" style="display: none">
+	<section id="fancybox-edit-product">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>{{	trans('products.subtitle') }}</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							{{Form::open(['route' => 'products.update', 'class' => 'form-horizontal', 'id' => 'formEditProductLanguage'])}}
+								@include('products.partials._form_language')
+							{{Form::close()}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+
 @stop
 
 @section('scripts')
