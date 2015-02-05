@@ -26,7 +26,8 @@
 
 @section('scripts')
 	<script type="text/javascript">
-		$(document).ready(function () {
+		$(document).ready(function () 
+		{
 
 			$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
@@ -201,6 +202,7 @@
 					type:'POST'
 				};
 			$('#formCreateProduct').ajaxForm(options);
+		});
 
 			// pre-submit callback
 			function showRequest(formData, jqForm, options) {
@@ -231,6 +233,6 @@
 				if(responseText.add_photos == 1)
 					document.location.href = responseText.url;
 			}
-		});
+			
 	</script>
 @stop
