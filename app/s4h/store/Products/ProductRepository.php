@@ -107,9 +107,9 @@ class ProductRepository {
 		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first();
 	}
 
-	public function getForId($product_id)
+	public function getForId($productId)
 	{
-		return Product::findOrFail($product_id);
+		return Product::findOrFail($productId);
 	}
 
 	public function filterProducts($filterWord, $language_id) {
@@ -118,5 +118,20 @@ class ProductRepository {
 			$query->where('language_id', '=', $language_id)->where('name', 'LIKE', '%' . $filterWord . '%')->orWhere('description', 'LIKE', '%' . $filterWord . '%');
 		}
 		return $query->get();
+	}
+
+	public function updateDataForProduct($data = array())
+	{
+		$product = $this->getForId($data['product_id']);
+		
+		if (count($product->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$product->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}else{
+			$product->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}
 	}
 }

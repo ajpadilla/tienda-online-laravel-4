@@ -44,6 +44,12 @@ function () {
 
 	Route::get('returnDataProduct','ProductController@returnDataProduct');
 
+	Route::get('returnDataProductLang','ProductController@returnDataProductLang');
+
+	Route::post(LaravelLocalization::transRoute('products.saveLang'), [
+		'as' => 'products.saveLang',
+		'uses' => 'ProductController@saveDataForLanguage'
+	]);
 
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------

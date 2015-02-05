@@ -44,7 +44,7 @@
             });
         }
     }
-    $(document).ready(function(){
+    jQuery(document).ready(function(){
 		handleFancybox();
 		initImageZoom();
 		initTouchspin();
