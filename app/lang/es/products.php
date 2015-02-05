@@ -89,7 +89,8 @@
 			'Activate' => 'Activar',
 			'product_for_barter' => 'Cambiar',
 			'Deactivated' => 'Desactivar',
-			'Photo' => 'Agregar foto'
+			'Photo' => 'Agregar foto',
+			'Language' => 'Idioma'
 		)
 	);
 

@@ -40,6 +40,7 @@
 			'show_price' => 'Show price',
 			'product_for_barter' => 'Barter'
 		),
+
 		"validation" => array(
 			'required' => 'The field is required.',
 			'rangelength' => 'Please enter a value between ',
@@ -84,7 +85,8 @@
 			'Delete' => 'Delete',
 			'Activate' => 'Activate',
 			'Deactivated' => 'Deactivated',
-			'Photo' => 'Add photo'
+			'Photo' => 'Add photo',
+			'Language' => 'Language'
 		)
 	);
 
