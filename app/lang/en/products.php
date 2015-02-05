@@ -15,6 +15,7 @@
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
 		"filter" => "search/results",
+		"saveLang" => 'saveLang',
 
 		"labels" => array(
 			'name' =>'Name:',
