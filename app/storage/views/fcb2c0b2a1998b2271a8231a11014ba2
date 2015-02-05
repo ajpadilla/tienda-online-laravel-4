@@ -2,84 +2,84 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
-                        @include('layouts.partials._profile-element')
+                        <?php echo $__env->make('layouts.partials._profile-element', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                         <div class="logo-element">
                             IN+
                         </div>
                     </li>
                     <li>
-                        <a href="{{ route('pages.home') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+                        <a href="<?php echo route('pages.home'); ?>"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
                     </li>
 
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Categoria - Producto</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('categories.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('categories.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('categories.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('categories.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Productos</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('products.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('products.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('products.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('products.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Descuentos</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('discounts.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('discounts.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('discounts.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('discounts.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Typos de descuentos</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('discountType.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('discountType.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('discountType.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('discountType.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Idiomas</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('languages.create')}}">Crear</a></li>
+                            <li><a href="<?php echo URL::route('languages.create'); ?>">Crear</a></li>
                         </ul>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Estatus del envío</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('shipmentStatus.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('shipmentStatus.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('shipmentStatus.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('shipmentStatus.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Estatus del factura</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('invoiceStatus.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('invoiceStatus.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('invoiceStatus.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('invoiceStatus.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Tipo de clasificado</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('classifiedTypes.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('classifiedTypes.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('classifiedTypes.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('classifiedTypes.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Condiciones de anuncios</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('classifiedConditions.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('classifiedConditions.index')}}">Listar</a></li>
+                            <li><a href="<?php echo URL::route('classifiedConditions.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('classifiedConditions.index'); ?>">Listar</a></li>
                         </ul>
                     </li>
                      <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Clasificados</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('classifieds.create')}}">Crear</a></li>
-                            <li><a href="{{URL::route('classifieds.index')}}">Listar</a></li>
-                            <li><a href="{{URL::route('classifieds.search')}}">Buscar</a></li>
+                            <li><a href="<?php echo URL::route('classifieds.create'); ?>">Crear</a></li>
+                            <li><a href="<?php echo URL::route('classifieds.index'); ?>">Listar</a></li>
+                            <li><a href="<?php echo URL::route('classifieds.search'); ?>">Buscar</a></li>
                         </ul>
                     </li>
                     <li>

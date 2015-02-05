@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 use s4h\store\ClassifiedTypes\ClassifiedType;
 /**
-* 
+*
 */
 class ClassifiedTypesTableSeeder extends DatabaseSeeder{
-	
+
 	/**
 	 * Run the database seeds.
 	 *

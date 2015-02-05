@@ -16,7 +16,7 @@
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
 		"filter" => "resultado/busqueda",
-		
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
