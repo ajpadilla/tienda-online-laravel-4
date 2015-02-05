@@ -70,7 +70,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'products.update', 'class' => 'form-horizontal', 'id' => 'formEditProductLanguage'])}}
+							{{Form::open(['route' => 'products.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditProductLanguage'])}}
 								@include('products.partials._form_language')
 							{{Form::close()}}
 						</div>
@@ -202,6 +202,9 @@
 						if (response.success == true) {
 							$('#name_language').val(response.productLang.name);
 							$('#description_language').code(response.productLang.description);
+						}else{
+							$('#name_language').val('');
+							$('#description_language').code('');
 						}
 					}
 				});
@@ -307,6 +310,29 @@
 					}
 				});
 
+				$('#formEditProductLanguage').validate({
+					rules:{
+						name_language:{
+							required:true,
+							rangelength: [2, 64],
+							onlyLettersNumbersAndSpaces: true
+						},
+						description_language:{
+							required:true,
+							rangelength: [10, 255]
+						},
+					},
+					highlight:function(element){
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					unhighlight:function(element){
+						$(element).closest('.form-group').removeClass('has-error');
+					},
+					success:function(element){
+						element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+					}
+				});
+
 				var options = {
 						beforeSubmit:  showRequest,  // pre-submit callback
 						success:       showResponse,  // post-submit callback
@@ -314,7 +340,16 @@
 						type:'POST'
 					};
 
+				var optionsProductLang = {
+					beforeSubmit:  showRequestLang,  // pre-submit callback
+					success:       showResponseLang,  // post-submit callback
+					url:  '{{ URL::route('products.saveLang') }}',
+					type:'POST'
+				}
+
 				$('#formEditProduct').ajaxForm(options);
+				$('#formEditProductLanguage').ajaxForm(optionsProductLang);
+				
 		});
 
 		// pre-submit callback
@@ -345,6 +380,33 @@
 			if(responseText.add_photos == 1)
 				document.location.href = responseText.url;
 		}
+
+		// pre-submit callback
+		function showRequestLang(formData, jqForm, options) {
+			setTimeout(jQuery.fancybox({
+				'content':'<h1>' + '{{ trans('products.sending') }}' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formEditProductLanguage').valid();
+		}
+
+		// post-submit callback
+		function showResponseLang(responseText, statusText, xhr, $form)  {
+			console.log(responseText);
+
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText + '</h1>',
+				'autoScale' : true
+			});
+		}
+
 	</script>
 @stop
 
