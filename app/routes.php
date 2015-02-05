@@ -44,6 +44,7 @@ function () {
 
 	Route::get('returnDataProduct','ProductController@returnDataProduct');
 
+	Route::get('returnDataProductLang','ProductController@returnDataProductLang');
 
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
