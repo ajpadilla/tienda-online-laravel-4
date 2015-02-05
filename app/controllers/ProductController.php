@@ -266,6 +266,9 @@ class ProductController extends \BaseController {
 
 			$links.= "<a class='btn btn-success' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-camera'></i></a><br />";
 
+			$links.= "<a class='btn btn-success language' href='#fancybox-edit-language-product' id='language_".$model->product->id."' > ".trans('products.actions.Language')."  <i class='fa fa-camera'></i></a><br />";
+
+
 			return $links;
 		});
 
@@ -338,4 +341,22 @@ class ProductController extends \BaseController {
 		}
 	}
 
+	public function returnDataProductLang()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('productId') && Input::has('languageId')) 
+			{
+				 $productLang = $this->productLangRepository->getProductForLanguage(Input::get('productId'), Input::get('languageId'));
+				 if (count($productLang) > 0) 
+				 {
+				 	return Response::json(['success' => true, 'productLang' => $productLang->toArray()]);
+				 }else{
+				 	return Response::json(['success' => false]);
+				 }
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
 }
