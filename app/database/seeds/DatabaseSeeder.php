@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		 Eloquent::unguard();
 
+		 $this->call('CurrenciesTableSeeder');
 		 $this->call('CountriesTableSeeder');
 	     $this->call('CountriesLangTableSeeder');
 	     $this->call('StatesTableSeeder');
@@ -66,6 +67,8 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeValueLangTableSeeder');
 	     $this->call('AttributeByValueTableSeeder');
 	     $this->call('ClassifiedClassificationTableSeeder');
+	     $this->call('CartsTableSeeder');
+	     $this->call('ProductCartTableSeeder');
 	}
 
 }
