@@ -17,7 +17,7 @@ class CreateCurrencyTable extends Migration {
 			$table->increments('id');
 			$table->string('name', 32);
 			$table->string('iso_code',3);
-			$table->string('sing',8);
+			$table->string('sign',8);
 			$table->tinyInteger('active');
 			$table->timestamps();
 			$table->softDeletes();

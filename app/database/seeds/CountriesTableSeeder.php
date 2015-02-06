@@ -18,6 +18,7 @@ class CountriesTableSeeder extends DatabaseSeeder{
         $countries[] = array(
             'active' => 1,
             'iso_code' => 'VEN',
+            'currency_id' => 1,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );  
@@ -25,6 +26,7 @@ class CountriesTableSeeder extends DatabaseSeeder{
         $countries[] = array(
             'active' => 1,
             'iso_code' => 'USA',
+            'currency_id' => 2,
             'created_at' => $date->format('Y-m-d h:m:s'),
             'updated_at' => $date->format('Y-m-d h:m:s')            
         );
