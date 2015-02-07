@@ -83,6 +83,12 @@
           <!-- END CONTENT -->
         </div>
         <!-- END SIDEBAR & CONTENT -->
+
+        {{ $wishlistProducts }}
+
+        @foreach ($wishlistProducts as $wishlistProduct)
+          {{ $wishlistProduct->product->id }}
+        @endforeach
 @stop
 
 @section('in-situ-css')
