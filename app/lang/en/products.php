@@ -8,7 +8,7 @@
 		'edit' => 'edit/product/{id}',
 		'update' => 'update/product',
 		'destroy' => 'delete/product/{id}',
-		'delete-ajax' => 'product/delete-ajax/{id}',
+		'delete-ajax' => 'product/delete-ajax',
 		"title" => "Add product",
 		"subtitle" => "Create new product",
 		"sending" => "Adding product",

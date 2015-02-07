@@ -9,7 +9,7 @@
 		'edit' => 'editar/producto/{id}',
 		'update' => 'actualizar/producto',
 		'destroy' => 'eliminar/producto/{id}',
-		'delete-ajax' => 'producto/eliminar-ajax/{id}',
+		'delete-ajax' => 'producto/eliminar-ajax',
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
 		"sending" => "Agregando producto",

@@ -169,8 +169,19 @@ class ProductController extends \BaseController {
 		$this->productRepository->deleteProduct($id);
 		Flash::message(trans('products.Delete'));
 		return Redirect::route('products.index');
+		return Response::json(['response' => $id]);
 	}
 
+	public function deleteAjax()
+	{
+		if (Request::ajax())
+		{
+			//if($productRepository->isInAnyBuy(Input::get('productId')) 
+			$this->productRepository->deleteProduct(Input::get('productId'));
+			return Response::json(['success' => true]);
+		}
+		return Response::json(['success' => false]);
+	}
 
 
 	public function getDatatable()

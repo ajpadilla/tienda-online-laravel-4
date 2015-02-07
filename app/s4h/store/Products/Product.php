@@ -16,7 +16,7 @@ class Product extends Eloquent{
 	*/
 	public function categories()
 	{
-		return $this->belongsToMany('s4h\store\Categories\Category', 'product_classification');
+		return $this->belongsToMany('s4h\store\Categories\Category', 'product_classification')->withTimestamps();;
 	}
 
 	public function languages(){
@@ -74,8 +74,21 @@ class Product extends Eloquent{
 		return $this->ratings->count();
 	}
 
+	public function hasLanguages(){
+		return $this->languages->count();
+	}
+
+	public function hasWishlistUsers(){
+		return $this->wishlistUsers->count();
+	}
+
+	public function hasCartUsers(){
+		return $this->cartUsers->count();
+	}
+
+
 	/*
-	* Obtener la priemra de
+	* Obtener la priemra de las fotos del producto
 	*/
 	public function getFirstPhoto(){
 		if($this->hasPhotos())
@@ -154,8 +167,16 @@ class Product extends Eloquent{
 	{
 		if($this->hasPhotos())
 			$this->photos()->delete();
+
 		if($this->hasRatings())
 			$this->ratings()->delete();
+
+		if ($this->hasWishlistUsers())
+			$this->wishlistUsers()->delete();
+
+		/*if ($this->hasCartUsers())
+			$this->cartUsers()->delete();*/
+
 		ProductLang::where('product_id','=',$this->id)->delete();
 		return parent::delete();
 	}
