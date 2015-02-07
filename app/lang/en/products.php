@@ -46,7 +46,7 @@
 			'Stock' => 'Stock',
 			'UnitPrice' => 'Price',
 			'MyWishList' => 'My Wish List',
-			'NewProducts' => 'Nuew Products',
+			'NewProducts' => 'New Products',
 			'TopProducts' => 'Top Products'
 		),
 
