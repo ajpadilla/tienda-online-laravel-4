@@ -265,7 +265,7 @@ class ProductController extends \BaseController {
 
 			$languageId = $this->languageRepository->returnLanguage()->id;
 
-			$links = "<a class='btn btn-info' href=''> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
+			$links = "<a class='btn btn-info' href='" . route('products.show', $model->product->id) . "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
 			$links .= "<a class='btn btn-warning' href='#fancybox-edit-product' id='edit_".$model->product->id."' value='".$model->product->id."'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />";
 			$links .= "<a class='btn btn-danger' href='#fancybox-edit-product' id='delet_".$model->product->id."' value='".$model->product->id."'> ".trans('products.actions.Delete')." <i class='fa fa-times'></i></a><br />";
 
