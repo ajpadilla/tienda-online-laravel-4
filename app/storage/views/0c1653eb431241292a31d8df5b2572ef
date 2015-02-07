@@ -95,6 +95,9 @@
 	<script  type="text/javascript">
 		$(document).ready(function () 
 		{
+
+			loadData();
+
 			$('.btn.btn-warning').fancybox({
 				openEffect	: 'elastic',
 	    		closeEffect	: 'elastic',
@@ -124,7 +127,8 @@
 						var type = id ? id.split('_')[0] : '';
 						var numberId = id ? id.split('_')[1] : '';
 
-						if (type == "edit") {
+						if (type == "edit") 
+						{
 							loadDataToEdit(numberId);
 						}
 						else
@@ -133,7 +137,15 @@
 							{
 								loadDataForLanguage(numberId);
 							}
+							else
+							{
+								if (type == "delet")
+								{
+									console.log("Eliminado products");
+								}
+							}
 						}
+
 					}			
 				});
 			}
@@ -216,7 +228,7 @@
 
 			}) ;
 
-		
+
 			$('.i-checks').iCheck({
 				checkboxClass: 'icheckbox_square-green',
 				radioClass: 'iradio_square-green',
