@@ -17,10 +17,10 @@
 		"Delete" => "¡Product successfully removed!",
 		"filter" => "search/results",
 		"saveLang" => 'saveLang',
-
+		
 		"labels" => array(
-			'name' =>'Name:',
-			'description' => 'Description:',
+			'name' =>'Name',
+			'description' => 'Description',
 			'on_sale' => 'On sale: :',
 			'quantity' => 'Quantity:',
 			'price' => 'Price:',
@@ -40,7 +40,12 @@
 			'new' => 'New',
 			'measure' => 'Measure',
 			'show_price' => 'Show price',
-			'product_for_barter' => 'Barter'
+			'product_for_barter' => 'Barter',
+			'image' => 'Not images found',
+			'Image' => 'Image',
+			'Stock' => 'Stock',
+			'UnitPrice' => 'Price',
+			'MyWishList' => 'My Wish List' 
 		),
 
 		"validation" => array(

@@ -20,8 +20,8 @@
 		"saveLang" =>"agregarIdioma",
 
 		"labels" => array(
-			'name' =>'Nombre:',
-			'description' => 'Descripción:',
+			'name' =>'Nombre',
+			'description' => 'Descripción',
 			'on_sale' => 'En venta:',
 			'quantity' => 'Cantidad:',
 			'price' => 'Precio:',
@@ -44,6 +44,11 @@
 			'show_price' => 'Mostrar precio',
 			'product_for_barter' => 'Cambiar',
 			'save' => 'Guardar',
+			'image' => 'No se han encontrado imágenes',
+			'Image' => 'Imagen',
+			'Stock' => 'Almacen',
+			'UnitPrice' => 'Precio',
+			'MyWishList' => 'Mi Lista de Deseos' 
 		),
 
 		"validation" => array(
