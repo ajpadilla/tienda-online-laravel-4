@@ -193,6 +193,6 @@ class ProductRepository {
 	}
 
 	public function isInAnyBuy(){
-		return false;
+		return FALSE;
 	}
 }
