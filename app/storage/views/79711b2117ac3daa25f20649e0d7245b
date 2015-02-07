@@ -36,7 +36,7 @@
             <?php echo $__env->make('products.partials._topbar-cart-list', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <?php echo $__env->make('products.partials._topbar-wishlist', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <li>
-                <a href="login.html">
+                <a href="<?php echo route('logout'); ?>">
                     <i class="fa fa-sign-out fa-lg"></i> <?php echo Lang::get('menu.log-out'); ?>
 
                 </a>
