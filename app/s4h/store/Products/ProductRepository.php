@@ -20,8 +20,9 @@ class ProductRepository {
 
 	public function deleteProduct($id)
 	{
-		$product = $this->getById($id);
-		$product->delete();
+		$product = $this->getForId($id);
+		if ($product)
+			$product->delete();
 	}
 
 	public function createNewProduct($data = array())
@@ -189,5 +190,9 @@ class ProductRepository {
 	public function addToUserCart($productId, s4h\store\Users\User $user, $quantity = 1)
 	{
 		return Product::findOrFail($productId)->cartUsers()->save($user, ['quantity' => $quantity]);
+	}
+
+	public function isInAnyBuy(){
+		return false;
 	}
 }
