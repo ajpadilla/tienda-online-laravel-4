@@ -24,16 +24,17 @@
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-7 col-sm-6">
-            <h1>My Wish List</h1>
+            <h1>{{ Lang::get('products.labels.MyWishList') }}</h1>
             <div class="goods-page">
               <div class="goods-data clearfix">
                 <div class="table-wrapper-responsive">
                   <table summary="Shopping cart">
                     <tr>
-                      <th class="goods-page-image">Image</th>
-                      <th class="goods-page-description">Description</th>
-                      <th class="goods-page-stock">Stock</th>
-                      <th class="goods-page-price" colspan="2">Unit price</th>
+                      <th class="goods-page-image">{{ Lang::get('products.labels.Image') }}</th>
+                      <th class="goods-page-description">{{ Lang::get('products.labels.name') }}</th>
+                      <th class="goods-page-description">{{ Lang::get('products.labels.description') }}</th>
+                      <th class="goods-page-stock">{{ Lang::get('products.labels.Stock') }}</th>
+                      <th class="goods-page-price" colspan="2">{{ Lang::get('products.labels.UnitPrice') }}</th>
                     </tr>
                     @if (!empty($wishlistProducts))
                     @foreach ($wishlistProducts as $wishlistProduct)
@@ -41,8 +42,16 @@
                       <td class="goods-page-image">
                        @if ($wishlistProduct->product->getFirstPhoto())
                        <a href="{{ URL::route('products.show',$wishlistProduct->product->id) }}"><img src="{{ asset($wishlistProduct->product->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
+                       @else 
+                        {{ Lang::get('products.labels.image') }}
                        @endif 
                      </td>
+                     <td class="goods-page-description">
+                      <!--<h3><a href="#">Cool green dress with red bell</a></h3>
+                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                      <em>More info is here</em>-->
+                      {{ $wishlistProduct->name }}
+                    </td>
                      <td class="goods-page-description">
                       <!--<h3><a href="#">Cool green dress with red bell</a></h3>
                       <p><strong>Item 1</strong> - Color: Green; Size: S</p>
@@ -55,10 +64,10 @@
                     <td class="goods-page-price">
                       <strong><span>$</span>{{ number_format($wishlistProduct->product->price,2) }}</strong>
                     </td>
-                    <td class="del-goods-col">
+                    <!--<td class="del-goods-col">
                       <a class="del-goods" href="#">&nbsp;</a>
                       <a class="add-goods" href="#">&nbsp;</a>
-                    </td>
+                    </td>-->
                   </tr>
                   @endforeach
                   @endif
