@@ -86,6 +86,10 @@
 			'title' => 'See product details',
 		),
 
+		'edit_language' => array(
+			'title' => 'Add language', 
+		),
+
 		'actions' => array(
 			'Show' => 'Show',
 			'Edit' => 'Edit',
@@ -93,7 +97,7 @@
 			'Activate' => 'Activate',
 			'Deactivated' => 'Deactivated',
 			'Photo' => 'Add photo',
-			'Language' => 'Language'
+			'Language' => 'Add language'
 		)
 	);
 

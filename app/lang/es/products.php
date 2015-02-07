@@ -89,6 +89,10 @@
 			'title' => 'Ver datos del producto',
 		),
 
+		'edit_language' => array(
+			'title' => 'Agregar Nuevo Idioma', 
+		),
+
 		'actions' => array(
 			'Show' => 'Ver   ',
 			'Edit' => 'Editar',
@@ -97,7 +101,7 @@
 			'product_for_barter' => 'Cambiar',
 			'Deactivated' => 'Desactivar',
 			'Photo' => 'Agregar foto',
-			'Language' => 'Idioma'
+			'Language' => 'AGREGAR IDIOMA'
 		)
 	);
 
