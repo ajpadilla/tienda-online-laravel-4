@@ -136,7 +136,7 @@
 							{
 								if (type == "delet")
 								{
-									console.log("Eliminado products");
+									deleteProduct(numberId);
 								}
 							}
 						}
@@ -168,7 +168,7 @@
 							$('#measure_id').val(response.product.product.measure_id);
 							$('#weight').val(response.product.product.weight.toFixed(2));
 							$('#weight_id').val(response.product.product.weight_id);
-							if (response.product.product.color != null) {
+							if (response.product.product.color != '') {
 								$('select[name="color"]').simplecolorpicker('selectColor', response.product.product.color);
 							};
 							$('input[name="on_sale"]').val([response.product.product.on_sale]);
@@ -223,6 +223,20 @@
 
 			}) ;
 
+
+			function deleteProduct(id) {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('products.delete-ajax') }}',
+					data: {'productId': id},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#delet_'+id).parent().parent().remove();
+						};
+					}
+				});
+			}
 
 			$('.i-checks').iCheck({
 				checkboxClass: 'icheckbox_square-green',
