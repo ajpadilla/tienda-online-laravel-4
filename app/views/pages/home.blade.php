@@ -22,11 +22,11 @@
 			<div class="tab-content">
 				<div id="ventas" class="tab-pane active">
 				    <div class="row">
-				        <h2>Nuevos Productos</h2>
+				        <h2>{{ Lang::get('products.labels.NewProducts') }}</h2>
 				        @include('products.partials._new-products')
 				    </div>
 				    <div class="row">
-				        <h2>Top de Productos</h2>
+				        <h2>{{ Lang::get('products.labels.TopProducts') }}</h2>
 				        @include('products.partials._top-products')
 			        </div>
 			    </div>
