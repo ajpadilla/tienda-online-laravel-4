@@ -28,53 +28,40 @@
             <div class="goods-page">
               <div class="goods-data clearfix">
                 <div class="table-wrapper-responsive">
-                <table summary="Shopping cart">
-                  <tr>
-                    <th class="goods-page-image">Image</th>
-                    <th class="goods-page-description">Description</th>
-                    <th class="goods-page-stock">Stock</th>
-                    <th class="goods-page-price" colspan="2">Unit price</th>
-                  </tr>
-                  <tr>
-                    <td class="goods-page-image">
-                      <a href="#"><img src="{{ asset('uploads/products/images/model3.jpg') }}" alt="Berry Lace Dress"></a>
-                    </td>
-                    <td class="goods-page-description">
-                      <h3><a href="#">Cool green dress with red bell</a></h3>
+                  <table summary="Shopping cart">
+                    <tr>
+                      <th class="goods-page-image">Image</th>
+                      <th class="goods-page-description">Description</th>
+                      <th class="goods-page-stock">Stock</th>
+                      <th class="goods-page-price" colspan="2">Unit price</th>
+                    </tr>
+                    @if (!empty($wishlistProducts))
+                    @foreach ($wishlistProducts as $wishlistProduct)
+                    <tr>
+                      <td class="goods-page-image">
+                       @if ($wishlistProduct->product->getFirstPhoto())
+                       <a href="{{ URL::route('products.show',$wishlistProduct->product->id) }}"><img src="{{ asset($wishlistProduct->product->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
+                       @endif 
+                     </td>
+                     <td class="goods-page-description">
+                      <!--<h3><a href="#">Cool green dress with red bell</a></h3>
                       <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                      <em>More info is here</em>
+                      <em>More info is here</em>-->
+                      {{ $wishlistProduct->description }}
                     </td>
                     <td class="goods-page-stock">
                       In Stock
                     </td>
                     <td class="goods-page-price">
-                      <strong><span>$</span>47.00</strong>
+                      <strong><span>$</span>{{ number_format($wishlistProduct->product->price,2) }}</strong>
                     </td>
                     <td class="del-goods-col">
                       <a class="del-goods" href="#">&nbsp;</a>
                       <a class="add-goods" href="#">&nbsp;</a>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="goods-page-image">
-                      <a href="#"><img src="{{ asset('uploads/products/images/model4.jpg') }}" alt="Berry Lace Dress"></a>
-                    </td>
-                    <td class="goods-page-description">
-                      <h3><a href="#">Cool green dress with red bell</a></h3>
-                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
-                      <em>More info is here</em>
-                    </td>
-                    <td class="goods-page-stock">
-                      In Stock
-                    </td>
-                    <td class="goods-page-price">
-                      <strong><span>$</span>47.00</strong>
-                    </td>
-                    <td class="del-goods-col">
-                      <a class="del-goods" href="#">&nbsp;</a>
-                      <a class="add-goods" href="#">&nbsp;</a>
-                    </td>
-                  </tr>
+                  @endforeach
+                  @endif
                 </table>
                 </div>
               </div>
@@ -83,12 +70,6 @@
           <!-- END CONTENT -->
         </div>
         <!-- END SIDEBAR & CONTENT -->
-
-        {{ $wishlistProducts }}
-
-        @foreach ($wishlistProducts as $wishlistProduct)
-          {{ $wishlistProduct->product->id }}
-        @endforeach
 @stop
 
 @section('in-situ-css')
