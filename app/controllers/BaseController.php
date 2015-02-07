@@ -4,6 +4,7 @@ class BaseController extends Controller {
 
 	private $categoryRepository;
 	private $productRepository;
+	private $classifiedsLangRepository;
 
 	/**
 	 * Setup the layout used by the controller.
