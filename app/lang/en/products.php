@@ -45,7 +45,9 @@
 			'Image' => 'Image',
 			'Stock' => 'Stock',
 			'UnitPrice' => 'Price',
-			'MyWishList' => 'My Wish List' 
+			'MyWishList' => 'My Wish List',
+			'NewProducts' => 'Nuew Products',
+			'TopProducts' => 'Top Products'
 		),
 
 		"validation" => array(

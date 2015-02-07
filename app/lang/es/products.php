@@ -48,7 +48,9 @@
 			'Image' => 'Imagen',
 			'Stock' => 'Almacen',
 			'UnitPrice' => 'Precio',
-			'MyWishList' => 'Mi Lista de Deseos' 
+			'MyWishList' => 'Mi Lista de Deseos' ,
+			'NewProducts' => 'Nuevos Productos',
+			'TopProducts' => 'Top de Productos'
 		),
 
 		"validation" => array(
@@ -76,7 +78,8 @@
 				'ratings'	=> 'Ratings',
 				'actions'	=> 'Acciones',
 				'title'		=> 'Listado de productos',
-				'subtitle' => 'Lista de productos'
+				'subtitle' => 'Lista de productos',
+
 		),
 
 		'edit_view' => array(
