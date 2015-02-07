@@ -33,7 +33,13 @@
 			    </div>
 
 			    <div id="clasificados" class="active">
+			    	<h2><?php echo Lang::get('classifieds.labels.NewClassifieds'); ?></h2>
+				    <?php echo $__env->make('products.partials._new-classifieds', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			    </div>
+			    <div class="row">
+				        <h2><?php echo Lang::get('classifieds.labels.TopClassifieds'); ?></h2>
+				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			        </div>
 		    </div>
 	    </div>
     </div>
