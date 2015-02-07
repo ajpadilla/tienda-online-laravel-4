@@ -107,6 +107,25 @@ class ProductRepository {
 		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first();
 	}
 
+	public function getArray($productId)
+	{
+  		$isoCode = LaravelLocalization::setLocale();
+  		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		$product = Product::findOrFail($productId);
+		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first()->toArray();
+	}
+
+	public function getArrayForTopWishlist($productId)
+	{
+		$product = $this->getById($productId);
+		return [
+			'name' => $product->name,
+			'url' => route('products.show', $productId),
+			'url-delete' => route('wishlist.delete-ajax', $productId)
+		];
+	}
+
+
 	public function getForId($product_id)
 	{
 		return Product::findOrFail($product_id);
@@ -118,6 +137,13 @@ class ProductRepository {
 			$query->where('language_id', '=', $language_id)->where('name', 'LIKE', '%' . $filterWord . '%')->orWhere('description', 'LIKE', '%' . $filterWord . '%');
 		}
 		return $query->get();
+	}
+
+	public function deleteFromUserWishlist($productId, User $user)
+	{
+		if ($this->existsInUserWishlist($productId, $user))
+			return $user->wishlistProducts()->detach($productId) > 0;
+		return FALSE;
 	}
 
 	public function addToUserWishlist($productId, User $user)
@@ -134,6 +160,14 @@ class ProductRepository {
     		$q->where('user_id', '=', $user->id);
 
 		})->count();
+	}
+
+	public function getWishlistForUser(User $user)
+	{
+  			$isoCode = LaravelLocalization::setLocale();
+  			$language = Language::select()->where('iso_code','=',$isoCode)->first();
+      		$productsId = $user->wishlistProducts->lists('id');
+			return ($productsId ? ProductLang::with('product')->whereIn('product_id', $productsId)->whereLanguageId($language->id)->get() : []);
 	}
 
 	public function addToUserCart($productId, s4h\store\Users\User $user, $quantity = 1)

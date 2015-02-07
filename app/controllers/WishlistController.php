@@ -35,8 +35,12 @@ class WishlistController extends \BaseController {
 	public function create($id)
 	{
 		$response = ['success' => FALSE];
-		if(Request::ajax() && Entrust::can('add-to-wishlist'))
-			$response['success'] = $this->productRepository->addToUserWishlist($id, Auth::user());
+		if(Request::ajax() && Entrust::can('add-to-wishlist')) {
+			if ($this->productRepository->addToUserWishlist($id, Auth::user())) {
+				$response['success'] = TRUE;
+				$response['product'] = $this->productRepository->getArrayForTopWishlist($id);
+			}
+		}
 		return Response::json($response);
 	}
 
@@ -99,5 +103,12 @@ class WishlistController extends \BaseController {
 		//
 	}
 
+	public function deleteAjax($id)
+	{
+		$response = ['success' => FALSE];
+		if(Request::ajax() && Entrust::can('add-to-wishlist'))
+			$response['success'] = $this->productRepository->deleteFromUserWishlist($id, Auth::user());
+		return Response::json($response);
+	}
 
 }

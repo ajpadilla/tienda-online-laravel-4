@@ -31,4 +31,9 @@ class User extends ConfideUser {
 	public function Person() {
 		return $this->hasOne('Person');
 	}
+
+	public function wishlistProducts()
+	{
+		return $this->belongsToMany('s4h\store\Products\Product', 'wishlist')->withTimestamps();
+	}
 }

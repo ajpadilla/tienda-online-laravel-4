@@ -31,7 +31,9 @@ function () {
 	Route::get(LaravelLocalization::transRoute('products.whistlist'), ['as' => 'products.whistlist', 'uses' => 'ProductController@showWhistList' ] );
 	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
 	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
+	Route::get(LaravelLocalization::transRoute('products.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
 	Route::post(LaravelLocalization::transRoute('products.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
+
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
@@ -521,6 +523,10 @@ function () {
 	Route::get(LaravelLocalization::transRoute('wishlist.create'), [
 		'as' => 'wishlist.create',
 		'uses' => 'WishlistController@create'
+	]);
+	Route::get(LaravelLocalization::transRoute('wishlist.delete-ajax'), [
+		'as' => 'wishlist.delete-ajax',
+		'uses' => 'WishlistController@deleteAjax'
 	]);
 });
 

@@ -1,6 +1,8 @@
 <!-- Mainly scripts -->
 <?php echo HTML::script('assets/js/jquery-1.10.2.js');; ?>
 
+<?php echo HTML::script('assets/js/mustache.min.js');; ?>
+
 <?php echo HTML::script('assets/js/bootstrap.min.js');; ?>
 
 <?php echo HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js');; ?>
