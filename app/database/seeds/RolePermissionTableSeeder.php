@@ -36,8 +36,15 @@ class RoleTableSeeder extends DatabaseSeeder{
 		$addToWishList->display_name = 'Add to wishlist';
 		$addToWishList->save();
 
+		$removeFromWishlist = new Permission();
+		$removeFromWishlist->name = 'remove-from-wishlist';
+		$removeFromWishlist->display_name = 'Remove from wishlist';
+		$removeFromWishlist->save();
+
 		$clientAdmin->attachPermission($addToWishList);
+		$clientAdmin->attachPermission($removeFromWishlist);
 		$clientReader->attachPermission($addToWishList);
+		$clientReader->attachPermission($removeFromWishlist);
 
 		$clientAdminUser = User::find(5);
 		$clientReaderUser = User::find(6);

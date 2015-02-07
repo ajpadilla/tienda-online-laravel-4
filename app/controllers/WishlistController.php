@@ -106,7 +106,7 @@ class WishlistController extends \BaseController {
 	public function deleteAjax($id)
 	{
 		$response = ['success' => FALSE];
-		if(Request::ajax() && Entrust::can('add-to-wishlist'))
+		if(Request::ajax() && Entrust::can('remove-from-wishlist'))
 			$response['success'] = $this->productRepository->deleteFromUserWishlist($id, Auth::user());
 		return Response::json($response);
 	}
