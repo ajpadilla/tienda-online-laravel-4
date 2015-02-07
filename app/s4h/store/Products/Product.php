@@ -171,10 +171,10 @@ class Product extends Eloquent{
 		if($this->hasRatings())
 			$this->ratings()->delete();
 
-		if ($this->hasWishlistUsers())
+		/*if ($this->hasWishlistUsers())
 			$this->wishlistUsers()->delete();
 
-		/*if ($this->hasCartUsers())
+		if ($this->hasCartUsers())
 			$this->cartUsers()->delete();*/
 
 		ProductLang::where('product_id','=',$this->id)->delete();
