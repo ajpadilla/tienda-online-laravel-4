@@ -40,7 +40,7 @@ class Product extends Eloquent{
 
 	public function wishlistUsers()
 	{
-		return $this->belongsToMany('s4h\store\Users\User', 'wishlist', 'product_id', 'user_id');
+		return $this->belongsToMany('s4h\store\Users\User', 'wishlist')->withTimestamps();
 	}
 
 	public function cartUsers()

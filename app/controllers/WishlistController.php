@@ -2,14 +2,17 @@
 
 use \Entrust;
 use s4h\store\Wishlist\WishlistRepository;
+use s4h\store\Products\ProductRepository;
 
 class WishlistController extends \BaseController {
 
 	protected $wishlistRepository;
+	protected $productRepository;
 
-	function __construct(WishlistRepository $wishlistRepository)
+	function __construct(WishlistRepository $wishlistRepository, ProductRepository $productRepository)
 	{
 		$this->wishlistRepository = $wishlistRepository;
+		$this->productRepository = $productRepository;
 	}
 
 
@@ -32,10 +35,8 @@ class WishlistController extends \BaseController {
 	public function create($id)
 	{
 		$response = ['success' => FALSE];
-		if(Request::ajax() && Entrust::can('add-to-wishlist')) {
-			if($this->productRepository->addToUserWishList($id, Auth::user()))
-				$response['success'] = TRUE;
-		}
+		if(Request::ajax() && Entrust::can('add-to-wishlist'))
+			$response['success'] = $this->productRepository->addToUserWishlist($id, Auth::user());
 		return Response::json($response);
 	}
 

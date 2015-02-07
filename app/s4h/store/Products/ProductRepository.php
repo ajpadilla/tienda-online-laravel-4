@@ -1,6 +1,6 @@
 <?php namespace s4h\store\Products;
 
-
+use s4h\store\Users\User;
 use s4h\store\Products\Product;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
@@ -120,15 +120,24 @@ class ProductRepository {
 		return $query->get();
 	}
 
-	public function addToUserWishList($productId, s4h\store\Users\User $user)
+	public function addToUserWishlist($productId, User $user)
 	{
-		return Product::findOrFail($productId)->wishlistUsers()->save($user);
-		//$product->wishlistUsers()->
+		if ($this->existsInUserWishlist($productId, $user))
+			return FALSE;
+		return Product::findOrFail($productId)->wishlistUsers()->attach($user->id) == NULL;
+	}
+
+	public function existsInUserWishlist($productId, User $user)
+	{
+		return Product::where('id', '=', $productId)->whereHas('wishlistUsers', function($q) use ($user)
+		{
+    		$q->where('user_id', '=', $user->id);
+
+		})->count();
 	}
 
 	public function addToUserCart($productId, s4h\store\Users\User $user, $quantity = 1)
 	{
 		return Product::findOrFail($productId)->cartUsers()->save($user, ['quantity' => $quantity]);
-		//$product->wishlistUsers()->
 	}
 }
