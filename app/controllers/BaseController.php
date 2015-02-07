@@ -28,7 +28,7 @@ class BaseController extends Controller {
 				View::share(compact('currentUser', 'currentMenu', 'currentRoute', 'randomProducts', 'topProducts', 'newProducts'));*/
 		$this->categoryRepository = new \s4h\store\Categories\CategoryRepository();
 		$this->productRepository = new \s4h\store\Products\ProductRepository();
-		$wishlistProducts = $this->productRepository->getWishlistForUser($currentUser);
+		$wishlistProducts = ($currentUser ? $this->productRepository->getWishlistForUser($currentUser) : NULL);
 		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
 		View::share(compact('categoriesMenu', 'wishlistProducts'));
 	}

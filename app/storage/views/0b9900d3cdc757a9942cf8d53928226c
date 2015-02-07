@@ -13,8 +13,9 @@
                             var template = jQuery('#wishlist-tpl').html();
                             var html = Mustache.to_html(template, product);
                             wishlist.prepend(html);
-                            var wishlistCount = jQuery('#wishlist-count').html();
-                            jQuery('#wishlist-count').html(parseInt(wishlistCount) + 1);
+                            var wishlistCount =  parseInt(jQuery('#wishlist-count').html());
+                            if(wishlistCount < 1) wishlistCount = 0;
+                            jQuery('#wishlist-count').html(wishlistCount + 1);
                     	} else {
                     		alert('No se pudo agregar el producto!');
                     	}
