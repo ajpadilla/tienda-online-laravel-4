@@ -3,6 +3,7 @@
 class BaseController extends Controller {
 
 	private $categoryRepository;
+	private $productRepository;
 
 	/**
 	 * Setup the layout used by the controller.
@@ -26,8 +27,10 @@ class BaseController extends Controller {
 
 				View::share(compact('currentUser', 'currentMenu', 'currentRoute', 'randomProducts', 'topProducts', 'newProducts'));*/
 		$this->categoryRepository = new \s4h\store\Categories\CategoryRepository();
+		$this->productRepository = new \s4h\store\Products\ProductRepository();
+		$wishlistProducts = $this->productRepository->getWishlistForUser($currentUser);
 		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
-		View::share(compact('categoriesMenu'));
+		View::share(compact('categoriesMenu', 'wishlistProducts'));
 	}
 
 }

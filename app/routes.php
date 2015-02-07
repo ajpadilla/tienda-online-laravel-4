@@ -17,10 +17,10 @@ function () {
 	/** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
 
 	Route::get('/', [
+		'before' => 'auth',
 		'as' => 'pages.home',
 		'uses' => 'PageController@home'
 	]);
-
 
 	/**
 	* ------------------------------ Rutas para productos -----------------------
@@ -31,7 +31,9 @@ function () {
 	Route::get(LaravelLocalization::transRoute('products.whistlist'), ['as' => 'products.whistlist', 'uses' => 'ProductController@showWhistList' ] );
 	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
 	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
+	Route::get(LaravelLocalization::transRoute('products.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
 	Route::post(LaravelLocalization::transRoute('products.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
+
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
@@ -528,6 +530,10 @@ function () {
 		'as' => 'wishlist.create',
 		'uses' => 'WishlistController@create'
 	]);
+	Route::get(LaravelLocalization::transRoute('wishlist.delete-ajax'), [
+		'as' => 'wishlist.delete-ajax',
+		'uses' => 'WishlistController@deleteAjax'
+	]);
 });
 
 // Confide routes
@@ -540,4 +546,7 @@ Route::get('user/forgot_password', 'UserController@forgot_password');
 Route::post('user/forgot_password', 'UserController@do_forgot_password');
 Route::get('user/reset_password/{token}', 'UserController@reset_password');
 Route::post('user/reset_password', 'UserController@do_reset_password');
-Route::get('user/logout', 'UserController@logout');
+Route::get('user/logout', [
+	'as' => 'logout',
+	'uses' => 'UserController@logout'
+]);

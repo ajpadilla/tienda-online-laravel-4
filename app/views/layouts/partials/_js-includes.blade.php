@@ -1,5 +1,6 @@
 <!-- Mainly scripts -->
 {{ HTML::script('assets/js/jquery-1.10.2.js'); }}
+{{ HTML::script('assets/js/mustache.min.js'); }}
 {{ HTML::script('assets/js/bootstrap.min.js'); }}
 {{ HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js'); }}
 

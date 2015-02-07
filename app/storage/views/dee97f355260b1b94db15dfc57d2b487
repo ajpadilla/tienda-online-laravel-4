@@ -6,6 +6,9 @@
 
 <?php $__env->startSection('scripts'); ?>
   <script>
+
+    <?php echo $__env->make('wishlist.partials._add-to-wishlist-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
     var initImageZoom = function () {
         jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
 	}
@@ -48,6 +51,7 @@
 		handleFancybox();
 		initImageZoom();
 		initTouchspin();
+        addToWishlist();
     });
   </script>
 <?php $__env->stopSection(); ?>
