@@ -38,7 +38,8 @@ class ClassifiedsTableSeeder extends DatabaseSeeder{
 				'user_id' =>  $user['id'],
 				'classified_type_id' =>  $classifiedType['id'],
 				'classified_condition_id' => $classifiedCondition['id'],
-				'city_id' => $city['id']
+				'city_id' => $city['id'],
+				'active' => $faker->numberBetween(0,1),
 			]);
 		}
 		
