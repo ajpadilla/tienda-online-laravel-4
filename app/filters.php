@@ -88,3 +88,15 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+|--------------------------------------------------------------------------
+| Custom filters
+|--------------------------------------------------------------------------
+*/
+
+Route::filter('add-to-wishlist', function()
+{
+	if(!Entrust::can('add-to-wishlist'))
+		return Redirect::to('/');
+});

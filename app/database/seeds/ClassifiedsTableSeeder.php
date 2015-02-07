@@ -1,10 +1,11 @@
 <?php 
 
 use s4h\store\Classifieds\Classified;
-use s4h\store\Users\User;
 use s4h\store\ClassifiedTypes\ClassifiedType;
 use s4h\store\ClassifiedConditions\ClassifiedCondition;
 use s4h\store\Cities\City;
+use s4h\store\Users\User;
+
 /**
 * 
 */
@@ -20,7 +21,7 @@ class ClassifiedsTableSeeder extends DatabaseSeeder{
 	
 		$faker = $this->getFaker();
 
-		$users = User::all()->toArray(); 
+		$users = User::all()->toArray();
 		$classifiedsTypes = ClassifiedType::all()->toArray();
 		$classifiedsCondition = ClassifiedCondition::all()->toArray();
 		$cities = City::all()->toArray();

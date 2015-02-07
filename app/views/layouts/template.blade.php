@@ -27,6 +27,7 @@
         <!-- Inicio Page Wrapper -->
     </div>
     <!-- Fin Wrapper -->
+    @include('wishlist.partials._product-wishlist-tpl')
     @include('layouts.partials._js-includes')
 </body>
 </html>

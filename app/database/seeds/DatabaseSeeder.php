@@ -66,6 +66,8 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeValueLangTableSeeder');
 	     $this->call('AttributeByValueTableSeeder');
 	     $this->call('ClassifiedClassificationTableSeeder');
+	     $this->call('RoleTableSeeder');
+	     $this->call('PermissionTableSeeder');
 	}
 
 }
