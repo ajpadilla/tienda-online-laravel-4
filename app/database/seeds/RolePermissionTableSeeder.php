@@ -2,7 +2,7 @@
 
 use s4h\store\Users\Role;
 
-class RoleTableSeeder extends DatabaseSeeder{
+class RolePermissionTableSeeder extends DatabaseSeeder{
 
 	public function run()
 	{

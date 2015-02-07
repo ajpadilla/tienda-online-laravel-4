@@ -52,6 +52,7 @@
 		initImageZoom();
 		initTouchspin();
         addToWishlist();
+        removeFromWishList();
     });
   </script>
 @stop

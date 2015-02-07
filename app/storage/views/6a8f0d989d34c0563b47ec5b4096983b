@@ -2,12 +2,14 @@
     <li class="dropdown">
         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
             <i class="fa fa-check-square-o fa-lg"></i>
-            <?php if($wishlistProducts): ?>
-                <span id="wishlist-count" class="label label-primary">
+            <span id="wishlist-count" class="label label-primary">
+                <?php if($wishlistProducts): ?>
                     <?php echo $wishlistProducts->count(); ?>
 
-                </span>
-            <?php endif; ?>
+                <?php else: ?>
+                    0
+                <?php endif; ?>
+            </span>
         </a>
         <ul id="products-wishlist" class="dropdown-menu dropdown-alerts">
             <?php if($wishlistProducts): ?>
