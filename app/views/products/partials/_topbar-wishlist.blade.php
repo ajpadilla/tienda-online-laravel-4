@@ -2,11 +2,13 @@
     <li class="dropdown">
         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
             <i class="fa fa-check-square-o fa-lg"></i>
-            @if($wishlistProducts)
-                <span id="wishlist-count" class="label label-primary">
+            <span id="wishlist-count" class="label label-primary">
+                @if($wishlistProducts)
                     {{ $wishlistProducts->count() }}
-                </span>
-            @endif
+                @else
+                    0
+                @endif
+            </span>
         </a>
         <ul id="products-wishlist" class="dropdown-menu dropdown-alerts">
             @if($wishlistProducts)

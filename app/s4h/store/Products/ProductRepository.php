@@ -158,7 +158,7 @@ class ProductRepository {
 
 	public function deleteFromUserWishlist($productId, User $user)
 	{
-		if ($this->existsInUserWishlist($productId, $user)) dd('entr');
+		if ($this->existsInUserWishlist($productId, $user))
 			return $user->wishlistProducts()->detach($productId) > 0;
 		return FALSE;
 	}

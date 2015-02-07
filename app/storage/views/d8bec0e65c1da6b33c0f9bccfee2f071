@@ -62,213 +62,381 @@
 	</section>
 </div>
 
+<div class="row" style="display: none">
+	<section id="fancybox-edit-language-product">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5><?php echo trans('products.subtitle'); ?></h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<?php echo Form::open(['route' => 'products.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditProductLanguage']); ?>
+
+								<?php echo $__env->make('products.partials._form_language', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+							<?php echo Form::close(); ?>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('scripts'); ?>
 	<?php echo $table->script(); ?>
 
 	<script  type="text/javascript">
-		
-		$('.btn.btn-warning').fancybox({
-			openEffect	: 'elastic',
-    		closeEffect	: 'elastic',
-			centerOnScroll: true,
-			hideOnOverlayClick: true,
-			beforeLoad: loadData()
-		});
-
-		function loadData() 
+		$(document).ready(function () 
 		{
-			$('.table').click(function(event)
+
+			loadData();
+
+			$('.btn.btn-warning').fancybox({
+				openEffect	: 'elastic',
+	    		closeEffect	: 'elastic',
+				centerOnScroll: true,
+				hideOnOverlayClick: true,
+				beforeLoad: loadData()
+			});
+
+			$('.language').fancybox({
+				openEffect	: 'elastic',
+	    		closeEffect	: 'elastic',
+				centerOnScroll: true,
+				hideOnOverlayClick: true,
+				beforeLoad: loadData()
+			});
+
+			function loadData() 
 			{
-				var target = $( event.target );
-				if (target.is('a')) 
+				$('.table').click(function(event)
 				{
-					console.log($(target).attr('id'));
+					var target = $( event.target );
+					if (target.is('a')) 
+					{
+						console.log($(target).attr('id'));
 
-					var id = $(target).attr('id');
-					var type = id ? id.split('_')[0] : '';
-					var numberId = id ? id.split('_')[1] : '';
+						var id = $(target).attr('id');
+						var type = id ? id.split('_')[0] : '';
+						var numberId = id ? id.split('_')[1] : '';
 
-					if (type == "edit") {
-						loadDataToEdit(numberId);
+						if (type == "edit") 
+						{
+							loadDataToEdit(numberId);
+						}
+						else
+						{
+							if (type == "language" ) 
+							{
+								loadDataForLanguage(numberId);
+							}
+							else
+							{
+								if (type == "delet")
+								{
+									deleteProduct(numberId);
+								}
+							}
+						}
+
+					}			
+				});
+			}
+
+			
+			function loadDataToEdit(id) 
+			{
+				$.ajax({
+					type: 'GET',
+					url: '<?php echo URL::to('/returnDataProduct/'); ?>',	
+					data: {'productId': id},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#product_id').val(response.product.product.id);
+							$('#language_id').val(response.product.language_id);
+							$('#name').val(response.product.name);
+							$('#description').code(response.product.description);
+							$('#quantity').val(response.product.product.quantity);
+							$('#price').val(response.product.product.price);
+							$('#point_price').val(response.product.product.point_price);
+							$('#width').val(response.product.product.width.toFixed(2));
+							$('#height').val(response.product.product.height.toFixed(2));
+							$('#depth').val(response.product.product.depth.toFixed(2));
+							$('#measure_id').val(response.product.product.measure_id);
+							$('#weight').val(response.product.product.weight.toFixed(2));
+							$('#weight_id').val(response.product.product.weight_id);
+							if (response.product.product.color != '') {
+								$('select[name="color"]').simplecolorpicker('selectColor', response.product.product.color);
+							};
+							$('input[name="on_sale"]').val([response.product.product.on_sale]);
+							$('input[name="accept_barter"]').val([response.product.product.accept_barter]);
+							$('input[name="active"]').val([response.product.product.active]);
+							$('#categories').val(response.categories);
+							$('#condition_id').val(response.product.product.condition_id);
+
+							$('.chosen-select').trigger("chosen:updated");
+							$('.i-checks').iCheck('update');
+						}
 					}
-				}			
-			});
-		}
+				});
+			}
 
-		
-		function loadDataToEdit(id) {
-			$.ajax({
-				type: 'GET',
-				url: '<?php echo URL::to('/returnDataProduct/'); ?>',	
-				data: {'productId': id},
-				dataType: "JSON",
-				success: function(response) {
-					if (response.success == true) {
-						$('#product_id').val(response.product.product.id);
-						$('#name').val(response.product.name);
-						$('#description').code(response.product.description);
-						$('#quantity').val(response.product.product.quantity);
-						$('#price').val(response.product.product.price);
-						$('#point_price').val(response.product.product.point_price);
-						$('#width').val(response.product.product.width.toFixed(2));
-						$('#height').val(response.product.product.height.toFixed(2));
-						$('#depth').val(response.product.product.depth.toFixed(2));
-						$('#measure_id').val(response.product.product.measure_id);
-						$('#weight').val(response.product.product.weight.toFixed(2));
-						$('#weight_id').val(response.product.product.weight_id);
-						if (response.product.product.color != null) {
-							$('select[name="color"]').simplecolorpicker('selectColor', response.product.product.color);
+			function loadDataForLanguage(id) {
+				$.ajax({
+					type: 'GET',
+					url: '<?php echo URL::to('/returnDataProduct/'); ?>',	
+					data: {'productId': id},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#product_id_language').val(response.product.product.id);
+							$('#lang_id').val(response.product.language_id);
+							$('#name_language').val(response.product.name);
+							$('#description_language').code(response.product.description);
+						}
+					}
+				});
+			}
+
+			$('#lang_id').click(function () {
+				console.log($('#product_id_language').val() +" "+ $('#lang_id').val());
+
+				$.ajax({
+					type: 'GET',
+					url: '<?php echo URL::to('/returnDataProductLang/'); ?>',	
+					data: {'productId':$('#product_id_language').val(), 'languageId':$('#lang_id').val()},
+					dataType: "JSON",
+					success: function(response) {
+						console.log(response);
+						if (response.success == true) {
+							$('#name_language').val(response.productLang.name);
+							$('#description_language').code(response.productLang.description);
+						}else{
+							$('#name_language').val('');
+							$('#description_language').code('');
+						}
+					}
+				});
+
+			}) ;
+
+
+			function deleteProduct(id) {
+				$.ajax({
+					type: 'GET',
+					url: '<?php echo URL::route('products.delete-ajax'); ?>',
+					data: {'productId': id},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#delet_'+id).parent().parent().remove();
 						};
-						$('input[name="on_sale"]').val([response.product.product.on_sale]);
-						$('input[name="accept_barter"]').val([response.product.product.accept_barter]);
-						$('input[name="active"]').val([response.product.product.active]);
-						$('#categories').val(response.categories);
-						$('#condition_id').val(response.product.product.condition_id);
-
-						$('.chosen-select').trigger("chosen:updated");
-						$('.i-checks').iCheck('update');
 					}
-				}
+				});
+			}
+
+			$('.i-checks').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
 			});
-		}
 
-
-		
-	
-		$('.i-checks').iCheck({
-			checkboxClass: 'icheckbox_square-green',
-			radioClass: 'iradio_square-green',
-		});
-
-			// Iniciar select chosen
+				// Iniciar select chosen
 			$('.chosen-select').chosen({width: "95%"});
 
-			 $('#description').summernote();
+			$('#description').summernote();
 
-			 $('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
+			$('#description_language').summernote();
+
+			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+					return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
 			}, 'only letters, numbers and spaces.');
 
 			$('#formEditProduct').validate({
-				rules:{
-					name:{
-						required:true,
-						rangelength: [2, 64],
-						onlyLettersNumbersAndSpaces: true
+					rules:{
+						name:{
+							required:true,
+							rangelength: [2, 64],
+							onlyLettersNumbersAndSpaces: true
+						},
+						description:{
+							required:true,
+							rangelength: [10, 255]
+						},
+						quantity:{
+							required:true,
+							digits: true
+						},
+						price:{
+							required:true,
+							number: true
+						},
+						width:{
+							required:true,
+							number: true
+						},
+						height:{
+							required:true,
+							number: true
+						},
+						depth:{
+							required:true,
+							number:true
+						},
+						weight:{
+							required:true,
+							number:true
+						},
+						on_sale:{
+							required:true,
+							digits: true
+						},
+						active:{
+							required:true,
+							digits: true
+						},
+						available_for_order:{
+							required:true,
+							digits: true
+						},
+						show_price:{
+							required:true,
+							digits: true
+						},
+						accept_barter:{
+							required:true,
+							digits: true
+						},
+						product_for_barter:{
+							required:true,
+							digits: true
+						},
+						'categories[]':{
+							required:true
+						},
+						condition_id:{
+							required:true
+						},
+						color:{
+							required: '<?php echo trans('products.validation.required'); ?>',
+						}
 					},
-					description:{
-						required:true,
-						rangelength: [10, 255]
+					highlight:function(element){
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 					},
-					quantity:{
-						required:true,
-						digits: true
+					unhighlight:function(element){
+						$(element).closest('.form-group').removeClass('has-error');
 					},
-					price:{
-						required:true,
-						number: true
-					},
-					width:{
-						required:true,
-						number: true
-					},
-					height:{
-						required:true,
-						number: true
-					},
-					depth:{
-						required:true,
-						number:true
-					},
-					weight:{
-						required:true,
-						number:true
-					},
-					on_sale:{
-						required:true,
-						digits: true
-					},
-					active:{
-						required:true,
-						digits: true
-					},
-					available_for_order:{
-						required:true,
-						digits: true
-					},
-					show_price:{
-						required:true,
-						digits: true
-					},
-					accept_barter:{
-						required:true,
-						digits: true
-					},
-					product_for_barter:{
-						required:true,
-						digits: true
-					},
-					'categories[]':{
-						required:true
-					},
-					condition_id:{
-						required:true
-					},
-					color:{
-						required: '<?php echo trans('products.validation.required'); ?>',
+					success:function(element){
+						element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
 					}
-				},
-				highlight:function(element){
-					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-				},
-				unhighlight:function(element){
-					$(element).closest('.form-group').removeClass('has-error');
-				},
-				success:function(element){
-					element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
-				}
-			});
-
-			var options = {
-					beforeSubmit:  showRequest,  // pre-submit callback
-					success:       showResponse,  // post-submit callback
-					url:  '<?php echo URL::route('products.update'); ?>',
-					type:'POST'
-				};
-			$('#formEditProduct').ajaxForm(options);
-
-			// pre-submit callback
-			function showRequest(formData, jqForm, options) {
-				setTimeout(jQuery.fancybox({
-					'content':'<h1>' + '<?php echo trans('products.sending'); ?>' + '</h1>',
-					'autoScale' : true,
-					'transitionIn' : 'none',
-					'transitionOut' : 'none',
-					'scrolling' : 'no',
-					'type' : 'inline',
-					'showCloseButton' : false,
-					'hideOnOverlayClick' : false,
-					'hideOnContentClick' : false
-				}), 5000 );
-				return $('#formEditProduct').valid();
-			}
-
-			// post-submit callback
-			function showResponse(responseText, statusText, xhr, $form)  {
-				console.log(responseText);
-
-				jQuery.fancybox({
-					'content' : '<h1>'+ responseText.message + '</h1>',
-					'autoScale' : true
 				});
 
-				if(responseText.add_photos == 1)
-					document.location.href = responseText.url;
-			}
+				$('#formEditProductLanguage').validate({
+					rules:{
+						name_language:{
+							required:true,
+							rangelength: [2, 64],
+							onlyLettersNumbersAndSpaces: true
+						},
+						description_language:{
+							required:true,
+							rangelength: [10, 255]
+						},
+					},
+					highlight:function(element){
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					unhighlight:function(element){
+						$(element).closest('.form-group').removeClass('has-error');
+					},
+					success:function(element){
+						element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+					}
+				});
+
+				var options = {
+						beforeSubmit:  showRequest,  // pre-submit callback
+						success:       showResponse,  // post-submit callback
+						url:  '<?php echo URL::route('products.update'); ?>',
+						type:'POST'
+					};
+
+				var optionsProductLang = {
+					beforeSubmit:  showRequestLang,  // pre-submit callback
+					success:       showResponseLang,  // post-submit callback
+					url:  '<?php echo URL::route('products.saveLang'); ?>',
+					type:'POST'
+				}
+
+				$('#formEditProduct').ajaxForm(options);
+				$('#formEditProductLanguage').ajaxForm(optionsProductLang);
+				
+		});
+
+		// pre-submit callback
+		function showRequest(formData, jqForm, options) {
+			setTimeout(jQuery.fancybox({
+				'content':'<h1>' + '<?php echo trans('products.sending'); ?>' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formEditProduct').valid();
+		}
+
+		// post-submit callback
+		function showResponse(responseText, statusText, xhr, $form)  {
+			console.log(responseText);
+
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText.message + '</h1>',
+				'autoScale' : true
+			});
+
+			if(responseText.add_photos == 1)
+				document.location.href = responseText.url;
+		}
+
+		// pre-submit callback
+		function showRequestLang(formData, jqForm, options) {
+			setTimeout(jQuery.fancybox({
+				'content':'<h1>' + '<?php echo trans('products.sending'); ?>' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formEditProductLanguage').valid();
+		}
+
+		// post-submit callback
+		function showResponseLang(responseText, statusText, xhr, $form)  {
+			console.log(responseText);
+
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText + '</h1>',
+				'autoScale' : true
+			});
+		}
 
 	</script>
 <?php $__env->stopSection(); ?>
@@ -281,5 +449,7 @@
 		}
 	</style>
 <?php $__env->stopSection(); ?>
+
+
 
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
