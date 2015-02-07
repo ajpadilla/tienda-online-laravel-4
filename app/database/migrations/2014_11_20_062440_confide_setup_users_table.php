@@ -40,8 +40,8 @@ class ConfideSetupUsersTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('password_reminders');
-        Schema::drop('users');
+        Schema::dropIfExists('password_reminders');
+        Schema::dropIfExists('users');
     }
 
 }
