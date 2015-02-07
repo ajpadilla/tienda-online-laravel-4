@@ -13,6 +13,7 @@ use s4h\store\Languages\LanguageRepository;
 use s4h\store\Weights\WeightRepository;
 use s4h\store\Classifieds\ClassifiedRepository;
 use Laracasts\Validation\FormValidationException;
+use s4h\store\Forms\EditLangProductoForm;
 
 class ProductController extends \BaseController {
 
@@ -26,6 +27,7 @@ class ProductController extends \BaseController {
 	protected $productLangRepository;
 	protected $weightRepository;
 	protected $classifiedRepository;
+	protected $editLangProductoForm;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
@@ -36,7 +38,8 @@ class ProductController extends \BaseController {
 										LanguageRepository $languageRepository,
 										ProductLangRepository $productLangRepository,
 										WeightRepository $weightRepository,
-										ClassifiedRepository $classifiedRepository
+										ClassifiedRepository $classifiedRepository,
+										EditLangProductoForm $editLangProductoForm
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
@@ -49,6 +52,7 @@ class ProductController extends \BaseController {
 		$this->productLangRepository = $productLangRepository;
 		$this->weightRepository = $weightRepository;
 		$this->classifiedRepository = $classifiedRepository;
+		$this->editLangProductoForm = $editLangProductoForm;
 	}
 
 	public function index()
@@ -266,6 +270,9 @@ class ProductController extends \BaseController {
 
 			$links.= "<a class='btn btn-success' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-camera'></i></a><br />";
 
+			$links.= "<a class='btn btn-success language' href='#fancybox-edit-language-product' id='language_".$model->product->id."' > ".trans('products.actions.Language')."  <i class='fa fa-pencil'></i></a><br />";
+
+
 			return $links;
 		});
 
@@ -338,4 +345,41 @@ class ProductController extends \BaseController {
 		}
 	}
 
+	public function returnDataProductLang()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('productId') && Input::has('languageId')) 
+			{
+				 $productLang = $this->productLangRepository->getProductForLanguage(Input::get('productId'), Input::get('languageId'));
+				 if (count($productLang) > 0) 
+				 {
+				 	return Response::json(['success' => true, 'productLang' => $productLang->toArray()]);
+				 }else{
+				 	return Response::json(['success' => false]);
+				 }
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function saveDataForLanguage()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editLangProductoForm->validate($input);
+				$this->productRepository->updateDataForProduct($input);
+				return Response::json([trans('products.Updated')]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
+	}
 }

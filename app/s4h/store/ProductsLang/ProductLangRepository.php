@@ -16,10 +16,17 @@ use s4h\store\Products\Product;
   	}
 
 
-  	public function getNewProducts($quantity = 4){
+    public function getProductForLanguage($productId, $languageId)
+    {
+      return ProductLang::where('product_id','=',$productId)->where('language_id','=',$languageId)->first();
+    }
+
+  	public function getNewProducts($quantity = 4)
+    {
   		$isoCode = LaravelLocalization::setLocale();
   		$language = Language::select()->where('iso_code','=',$isoCode)->first();
       $products = Product::whereActive(TRUE)->orderBy('created_at', 'DESC')->take($quantity)->lists('id');
   		return ProductLang::with('product')->whereIn('product_id', $products)->whereLanguageId($language->id)->get();
   	}
+    
   }

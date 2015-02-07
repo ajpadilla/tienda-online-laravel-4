@@ -17,6 +17,7 @@
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
 		"filter" => "resultado/busqueda",
+		"saveLang" =>"agregarIdioma",
 
 		"labels" => array(
 			'name' =>'Nombre:',
@@ -90,7 +91,8 @@
 			'Activate' => 'Activar',
 			'product_for_barter' => 'Cambiar',
 			'Deactivated' => 'Desactivar',
-			'Photo' => 'Agregar foto'
+			'Photo' => 'Agregar foto',
+			'Language' => 'Idioma'
 		)
 	);
 

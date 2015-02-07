@@ -99,6 +99,21 @@ class ProductRepository {
 		return $product;
 	}
 
+	public function updateDataForProduct($data = array())
+	{
+		$product = $this->getForId($data['product_id']);
+
+		if (count($product->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$product->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}else{
+			$product->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}
+	}
+
 	public function getById($product_id)
 	{
   		$isoCode = LaravelLocalization::setLocale();
@@ -106,6 +121,7 @@ class ProductRepository {
 		$product = Product::findOrFail($product_id);
 		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first();
 	}
+
 
 	public function getArray($productId)
 	{
@@ -125,10 +141,9 @@ class ProductRepository {
 		];
 	}
 
-
-	public function getForId($product_id)
+	public function getForId($productId)
 	{
-		return Product::findOrFail($product_id);
+		return Product::findOrFail($productId);
 	}
 
 	public function filterProducts($filterWord, $language_id) {
@@ -138,6 +153,7 @@ class ProductRepository {
 		}
 		return $query->get();
 	}
+
 
 	public function deleteFromUserWishlist($productId, User $user)
 	{
