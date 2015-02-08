@@ -1,17 +1,14 @@
 <?php
 
 use \Entrust;
-use s4h\store\Wishlist\WishlistRepository;
 use s4h\store\Products\ProductRepository;
 
 class WishlistController extends \BaseController {
 
-	protected $wishlistRepository;
 	protected $productRepository;
 
-	function __construct(WishlistRepository $wishlistRepository, ProductRepository $productRepository)
+	function __construct(ProductRepository $productRepository)
 	{
-		$this->wishlistRepository = $wishlistRepository;
 		$this->productRepository = $productRepository;
 	}
 

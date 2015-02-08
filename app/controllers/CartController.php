@@ -1,6 +1,16 @@
 <?php
 
+use \Entrust;
+use s4h\store\Products\ProductRepository;
+
 class CartController extends \BaseController {
+
+	protected $productRepository;
+
+	function __construct(ProductRepository $productRepository)
+	{
+		$this->productRepository = $productRepository;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -18,13 +28,15 @@ class CartController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($id, $quantity = 1)
+	public function create($id)
 	{
 		$response = ['success' => FALSE];
-		if(Request::ajax())
-			if(Auth::user() && Auth::user()->isAdminClient())
-				if($this->productRepository->addToUserCart($id, Auth::user(), $quantity))
-					$response['success'] = TRUE;
+		if(Request::ajax() && Entrust::can('add-to-cart')) {
+			if ($this->productRepository->addToUserCart($id, Auth::user())) {
+				$response['success'] = TRUE;
+				$response['product'] = $this->productRepository->getArrayForTopCart($id);
+			}
+		}
 		return Response::json($response);
 	}
 

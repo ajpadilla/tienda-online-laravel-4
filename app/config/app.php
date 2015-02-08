@@ -130,7 +130,8 @@ return array(
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Chumper\Datatable\DatatableServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
-		'Intervention\Image\ImageServiceProvider'
+		'Intervention\Image\ImageServiceProvider',
+		'Moltin\Cart\CartServiceProvider'
 	),
 
 	/*
@@ -207,7 +208,8 @@ return array(
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
 		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 		'Flash' => 'Laracasts\Flash\Flash',
-		'Image' => 'Intervention\Image\Facades\Image'
+		'Image' => 'Intervention\Image\Facades\Image',
+		'Cart' => 'Moltin\Cart\Facade'
 	),
 
 );

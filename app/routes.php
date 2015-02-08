@@ -534,6 +534,19 @@ function () {
 		'as' => 'wishlist.delete-ajax',
 		'uses' => 'WishlistController@deleteAjax'
 	]);
+
+	/**
+		* ------------------------------ Rutas Carrito de Compras-----------------------
+	**/
+	Route::resource('cart', 'CartController', ['except' => ['create']]);
+	Route::get(LaravelLocalization::transRoute('cart.create'), [
+		'as' => 'cart.create',
+		'uses' => 'CartController@create'
+	]);
+	Route::get(LaravelLocalization::transRoute('cart.delete-ajax'), [
+		'as' => 'cart.delete-ajax',
+		'uses' => 'CartController@deleteAjax'
+	]);
 });
 
 // Confide routes

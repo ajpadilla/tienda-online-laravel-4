@@ -132,16 +132,6 @@ class ProductRepository {
 		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first()->toArray();
 	}
 
-	public function getArrayForTopWishlist($productId)
-	{
-		$product = $this->getById($productId);
-		return [
-			'name' => $product->name,
-			'url' => route('products.show', $productId),
-			'url-delete' => route('wishlist.delete-ajax', $productId)
-		];
-	}
-
 	public function getForId($productId)
 	{
 		return Product::findOrFail($productId);
@@ -155,6 +145,19 @@ class ProductRepository {
 		return $query->get();
 	}
 
+	/**
+		* ------------------------------ Métodos para controlar la lista de deseos -----------------------
+	**/
+
+	public function getArrayForTopWishlist($productId)
+	{
+		$product = $this->getById($productId);
+		return [
+			'name' => $product->name,
+			'url' => route('products.show', $productId),
+			'url-delete' => route('wishlist.delete-ajax', $productId)
+		];
+	}
 
 	public function deleteFromUserWishlist($productId, User $user)
 	{
@@ -187,12 +190,48 @@ class ProductRepository {
 			return ($productsId ? ProductLang::with('product')->whereIn('product_id', $productsId)->whereLanguageId($language->id)->get() : []);
 	}
 
-	public function addToUserCart($productId, s4h\store\Users\User $user, $quantity = 1)
+	/**
+		* ------------------------------ Métodos para controlar el carro de compras -----------------------
+	**/
+
+	public function getArrayForTopCart($productId)
 	{
-		return Product::findOrFail($productId)->cartUsers()->save($user, ['quantity' => $quantity]);
+		$product = $this->getById($productId);
+		return [
+			'name' => $product->name,
+			'url' => route('products.show', $productId),
+			'url-delete' => route('wishlist.delete-ajax', $productId)
+		];
 	}
 
-	public function isInAnyBuy(){
+	public function deleteFromUserCart($productId, User $user)
+	{
+		if ($this->existsInUserCart($productId, $user))
+			return $user->cartProducts()->detach($productId) > 0;
 		return FALSE;
+	}
+
+	public function addToUserCart($productId, User $user)
+	{
+		if ($this->existsInUserCart($productId, $user))
+			return FALSE;
+		return Product::findOrFail($productId)->carttUsers()->attach($user->id) == NULL;
+	}
+
+	public function existsInUserCart($productId, User $user)
+	{
+		return Product::where('id', '=', $productId)->whereHas('carttUsers', function($q) use ($user)
+		{
+    		$q->where('user_id', '=', $user->id);
+
+		})->count();
+	}
+
+	public function getCartForUser(User $user)
+	{
+  			$isoCode = LaravelLocalization::setLocale();
+  			$language = Language::select()->where('iso_code','=',$isoCode)->first();
+      		$productsId = $user->cartProducts->lists('id');
+			return ($productsId ? ProductLang::with('product')->whereIn('product_id', $productsId)->whereLanguageId($language->id)->get() : []);
 	}
 }
