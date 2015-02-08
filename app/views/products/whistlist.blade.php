@@ -64,10 +64,9 @@
                     <td class="goods-page-price">
                       <strong><span>$</span>{{ number_format($wishlistProduct->product->price,2) }}</strong>
                     </td>
-                    <!--<td class="del-goods-col">
-                      <a class="del-goods" href="#">&nbsp;</a>
-                      <a class="add-goods" href="#">&nbsp;</a>
-                    </td>-->
+                    <td class="del-goods-col">
+                      <a href="#" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
+                    </td>
                   </tr>
                   @endforeach
                   @endif
