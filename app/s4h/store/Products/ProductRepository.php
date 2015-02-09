@@ -134,13 +134,6 @@ class ProductRepository {
   		return $this->getById($productId)->toArray();
 	}
 
-	public function getForLang($productId)
-	{
-		$isoCode = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$isoCode)->first();
-		return ProductLang::with('product')->whereLanguageId($language->id)->whereProductId($productId)->first();
-	}
-
 	public function filterProducts($filterWord, $language_id) {
 		$query = ProductLang::select();
 		if (!empty($filterWord)) {
