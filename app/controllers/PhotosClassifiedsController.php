@@ -29,14 +29,11 @@ class PhotosClassifiedsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($classifiedId)
 	{
-		$classified_id = Session::get('classified_id');
-		$language_id = Session::get('language_id');
-		$classified = $this->classifiedRepository->getClassifiedId($classified_id);
-		//$language = $this->languageRepository->returnLanguage();
-		$classified_language = $classified->languages()->where('language_id','=', $language_id)->first();
-		return View::make('photos_classifieds.create',compact('classified_id','classified_language','classified'));
+		$classified = $this->classifiedRepository->getById($classifiedId);
+		$classifiedLanguage = $classified->getInCurrentLangAttribute();
+		return View::make('photos_classifieds.create',compact('classifiedId','classifiedLanguage'));
 	}
 
 
@@ -49,9 +46,9 @@ class PhotosClassifiedsController extends \BaseController {
 	{
 		try {
 			$file = Input::file('file');
-			$classified_id = Input::get('classified_id');
+			$classifiedId = Input::get('classifiedId');
 			$photo = new ClassifiedPhotos();
-			$photo->register($file, $classified_id, 1);
+			$photo->register($file, $classifiedId, 1);
 		} catch(Exception $exception){
 			// Something went wrong. Log it.
 			Log::error($exception);
