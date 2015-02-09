@@ -49,10 +49,15 @@ class ClassifiedRepository extends BaseRepository
 		$classified->classified_type_id = $data['classified_type_id'];
 		$classified->classified_condition_id = $data['classified_condition_id'];
 		$classified->save();
+		
 		$classified->languages()->attach($data['language_id'], array('name'=> $data['name'],
 			'description'=> $data['description'],
 			'address' => $data['address']
 		));
+
+		if (!is_null($data['categories']))
+			$classified->categories()->sync($data['categories']);
+
 		return $classified;
 	}
 
@@ -75,6 +80,12 @@ class ClassifiedRepository extends BaseRepository
 				'description'=> $data['description'],
 				'address' => $data['address']
 			));
+		}
+
+		if (isset($data['categories'])){
+			$classified->categories()->sync($data['categories']);
+		}else{
+			$classified->categories()->detach();
 		}
 
 		return $classified;
