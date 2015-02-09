@@ -16,18 +16,18 @@
 			<div class="row">
 			@include('products.partials._show-photo')
 			<div class="col-md-6 col-sm-6">
-			  <h1>{{ $product->name }}</h1>
+			  <h1>{{ $product->inCurrentLang->name }}</h1>
 			  <div class="price-availability-block clearfix">
 			    <div class="price">
-			      <strong><span>$</span>{{ $product->product->price }}</strong>
-			      <em>$<span>{{ $product->product->price }}</span></em>
+			      <strong><span>$</span>{{ $product->price }}</strong>
+			      <em>$<span>{{ $product->price }}</span></em>
 			    </div>
 			    <div class="availability">
-			      Availability: <strong>{{ $product->product->quantity }}</strong>
+			      Availability: <strong>{{ $product->quantity }}</strong>
 			    </div>
 			  </div>
 			  <div class="description">
-			    <p>{{ $product->description }}</p>
+			    <p>{{ $product->inCurrentLang->description }}</p>
 			  </div>
 			  <div class="product-page-options">
 			    <div class="pull-left">

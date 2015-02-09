@@ -120,19 +120,13 @@ class ProductRepository {
 
 	public function getById($product_id)
 	{
-  		$isoCode = LaravelLocalization::setLocale();
-  		$language = Language::select()->where('iso_code','=',$isoCode)->first();
-		$product = Product::findOrFail($product_id);
-		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first();
+		return Product::findOrFail($product_id);
 	}
 
 
 	public function getArray($productId)
 	{
-  		$isoCode = LaravelLocalization::setLocale();
-  		$language = Language::select()->where('iso_code','=',$isoCode)->first();
-		$product = Product::findOrFail($productId);
-		return ProductLang::with('product')->whereProductId($product->id)->whereLanguageId($language->id)->first()->toArray();
+  		return $this->getById($productId)->toArray();
 	}
 
 	public function getForId($productId)

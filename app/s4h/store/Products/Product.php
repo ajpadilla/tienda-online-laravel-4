@@ -166,7 +166,9 @@ class Product extends Eloquent{
 		return false;
 	}
 
-
+	public function getPriceAttribute($value){
+		return number_format($value, '2');
+	}
 
 	/*
 	*	Eliminar producto y relaciones

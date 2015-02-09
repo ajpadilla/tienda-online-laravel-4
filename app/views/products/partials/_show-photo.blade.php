@@ -1,10 +1,10 @@
 <div class="col-md-6 col-sm-6">
 	<div class="product-main-image">
-  	@if($product->product->hasPhotos())
-        <img src="{{ asset($product->product->getFirstPhoto()->complete_path) }}" alt="{{ $product->product->getFirstPhoto()->filename }}" class="img-responsive" data-BigImgsrc="{{ asset($product->product->getFirstPhoto()->complete_path) }}">
+  	@if($product->hasPhotos())
+        <img src="{{ asset($product->getFirstPhoto()->complete_path) }}" alt="{{ $product->getFirstPhoto()->filename }}" class="img-responsive" data-BigImgsrc="{{ asset($product->getFirstPhoto()->complete_path) }}">
       </div>
       <div class="product-other-images">
-      	@foreach($product->product->photos as $photo)
+      	@foreach($product->photos as $photo)
         	<a href="#" class="active fancybox-button" rel="photos-lib"><img src="{{ asset($photo->complete_path) }}" alt="{{ $photo->filename }}"></a>
         @endforeach
       </div>
