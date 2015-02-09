@@ -15,79 +15,7 @@
 			<div class="ibox-content">
 				<div class="row">
 					{{ Form::open(['url' => LaravelLocalization::transRoute('classifieds.store'),'class'=>'form-horizontal','id' => 'formCreateClassified']) }}
-					<div class="col-sm-6 b-r">
-						<div class="form-group">
-							{{ Form::label('language_id', trans('classifieds.labels.language'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
-							</div>
-						</div>
-						
-						<div class="form-group">
-							{{ Form::label('name', trans('classifieds.labels.name'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::text('name',null, ['class' => 'form-control']) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('description', trans('classifieds.labels.description'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::textarea('description',null, ['class' => 'form-control summernote', 'rows' => '3']) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('address', trans('classifieds.labels.address'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::textarea('address',null, ['class' => 'form-control summernote', 'rows' => '3']) }}
-							</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
-						<div class="form-group">
-							{{ Form::label('price', trans('classifieds.labels.price'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::text('price',null, ['class' => 'form-control']) }}
-							</div>
-						</div>
-
-						<div class="form-group">
-							{{ Form::label('classified_type_id', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('classified_type_id',$classified_types,null,array('class' => 'form-control')) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('classified_condition_id', trans('classifieds.labels.classified_condition'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('classified_condition_id',$classified_conditions,null,array('class' => 'form-control')) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('add_photos', trans('classifieds.labels.add_photos'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-10">
-								<div class="radio i-checks">
-									<label> 
-										<!--<input type="radio" value="option1" name="a">-->
-										{{ Form::radio('add_photos', '1', 1)}}
-										<i></i> {{ trans('classifieds.labels.Yes') }}
-									</label>
-								</div>
-								<div class="radio i-checks">
-									<label> 
-										<!--<input type="radio" value="option1" name="a">--> 
-										{{ Form::radio('add_photos', '0', 0)}}
-										<i></i> {{ trans('classifieds.labels.No') }}
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('classifieds.labels.save'), ['class' => 'btn btn-primary']) }}
-							</div>
-						</div>
-					</div>
+						@include('classifieds.partials._form')
 					{{ Form::close() }}
 				</div>
 			</div>
@@ -211,16 +139,14 @@
 		}
 
 		function processJson(data) { 
-    	// 'data' is the json object returned from the server 
     		jQuery.fancybox({
 				'content' : '<h1>'+ data.message + '</h1>',
 				'autoScale' : true
 			});
 
     		if(data.add_photos == 1)
-				document.location.href = '{{ URL::route('photoClassified.create') }}';
+					document.location.href = data.url;
 
-   			//alert(data.message+' '+ data.add_photos); 
 		}	
 </script>
 @stop
