@@ -32,7 +32,7 @@ class CreateCartProductTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('cart_product');
+		Schema::dropIfExists('cart_product');
 	}
 
 }
