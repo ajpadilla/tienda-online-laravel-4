@@ -49,7 +49,7 @@
                       <strong><span>$</span>{{ number_format($wish->price,2) }}</strong>
                     </td>
                     <td class="del-goods-col">
-                      <a href="#" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
+                       <button href="#" class="btn btn-success btn-outline dim" style="margin-left: 20px" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Agregar al carro de compras" title="Agregar al carro de compras"><i class="fa fa-shopping-cart fa-2x"></i></button>
                     </td>
                   </tr>
                   @endforeach
