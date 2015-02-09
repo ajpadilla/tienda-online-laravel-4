@@ -51,7 +51,11 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('classifieds.index');
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage(); 
+		$classified_types = $this->classifiedTypesRepository->getNameForLanguage();
+		$categories = $this->categoryRepository->getNameForLanguage();
+		return View::make('classifieds.index', compact('languages','classified_conditions','classified_types','categories'));
 	}
 
 	public function getDatatable()
@@ -159,7 +163,8 @@ class ClassifiedController extends \BaseController {
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage(); 
 		$classified_types = $this->classifiedTypesRepository->getNameForLanguage();
-		return View::make('classifieds.create', compact('languages','classified_conditions','classified_types'));
+		$categories = $this->categoryRepository->getNameForLanguage();
+		return View::make('classifieds.create', compact('languages','classified_conditions','classified_types','categories'));
 	}
 
 
@@ -234,27 +239,33 @@ class ClassifiedController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		$input = Input::all();
-		//dd($input);
-		$input['classified_id'] = $id;
-		try
+		if(Request::ajax())
 		{
-			$this->editClassifiedForm->validate($input);
-			$classified = $this->classifiedRepository->updateClassified($input);
-			if ($input['add_photos'] == 1) {
-				Session::put('classified_id', $classified->id);
-				Session::put('language_id', $input['language_id']);
-				return Response::json(['message' => trans('classifieds.response'), 
-										'add_photos'=>$input['add_photos']
-				]);
+			$input = Input::all();
+			try
+			{
+				$this->editClassifiedForm->validate($input);
+				$classified = $this->classifiedRepository->updateClassified($input);
+				if (isset($input['add_photos'])) 
+				{
+					if ($input['add_photos'] == 1) 
+					{
+						return Response::json(['message' => trans('products.Updated'),
+						'add_photos' => $input['add_photos'], 'url' => URL::route('photoClassified.create',$classified->id)
+						]);
+					}else{
+						return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
+					}
+				}else{
+					return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
+				}
 			}
-			return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
-		} 
-		catch (FormValidationException $e)
-		{
-			return Response::json($e->getErrors()->all());
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
 		}
 	}
 
@@ -347,6 +358,23 @@ class ClassifiedController extends \BaseController {
 				}else{
 					return Response::json(['success' => false]);
 				}
+			}
+		}
+	}
+
+
+	public function returnDataClassified()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('classifiedId')) 
+			{
+				$classified = $this->classifiedRepository->getById(Input::get('classifiedId'));
+				$classifiedLanguage = $classified->getInCurrentLangAttribute();
+				$categories = $classifiedLanguage->classified->getCategorieIds();
+				return Response::json(['success'=>true, 'classified' => $classifiedLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
+			}else{
+				return Response::json(['success' => false]);
 			}
 		}
 	}
