@@ -20,19 +20,27 @@
 			<div class="tab-content">
 				<div id="ventas" class="tab-pane active">
 				    <div class="row">
-				        <h2>Nuevos Productos</h2>
+				        <h2><?php echo Lang::get('products.labels.NewProducts'); ?></h2>
 				        <?php echo $__env->make('products.partials._new-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 				    </div>
 				    <div class="row">
-				        <h2>Top de Productos</h2>
+				        <h2><?php echo Lang::get('products.labels.TopProducts'); ?></h2>
 				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			        </div>
 			    </div>
 
-			    <div id="trueques" class="active">
+			    <div id="trueques" class="tab-pane">
 			    </div>
 
-			    <div id="clasificados" class="active">
+			    <div id="clasificados" class="tab-pane">
+			    	<div class="row">
+				        <h2><?php echo Lang::get('classifieds.labels.NewClassifieds'); ?></h2>
+					    <?php echo $__env->make('products.partials._new-classifieds', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				    </div>
+				    <div class="row">
+				        <h2><?php echo Lang::get('classifieds.labels.TopClassifieds'); ?></h2>
+				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			        </div>
 			    </div>
 		    </div>
 	    </div>

@@ -28,6 +28,11 @@ class ProductRepository {
 			$product->delete();
 	}
 
+	public function getNewProducts($quantity = 4)
+	{
+		return Product::orderBy('created_at', 'DESC')->take($quantity)->get();
+	}
+
 	public function createNewProduct($data = array())
 	{
 		$product = new Product;
