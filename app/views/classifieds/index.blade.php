@@ -42,3 +42,12 @@
 @section('scripts')
 	{{ $table->script() }}
 @stop
+
+@section('styles')
+	<style type="text/css">
+		.mini-photo {
+			width: 70px;
+			height: 100px;
+		}
+	</style>
+@stop
