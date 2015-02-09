@@ -22,16 +22,17 @@
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-7 col-sm-6">
-            <h1>My Wish List</h1>
+            <h1><?php echo Lang::get('products.labels.MyWishList'); ?></h1>
             <div class="goods-page">
               <div class="goods-data clearfix">
                 <div class="table-wrapper-responsive">
                   <table summary="Shopping cart">
                     <tr>
-                      <th class="goods-page-image">Image</th>
-                      <th class="goods-page-description">Description</th>
-                      <th class="goods-page-stock">Stock</th>
-                      <th class="goods-page-price" colspan="2">Unit price</th>
+                      <th class="goods-page-image"><?php echo Lang::get('products.labels.Image'); ?></th>
+                      <th class="goods-page-description"><?php echo Lang::get('products.labels.name'); ?></th>
+                      <th class="goods-page-description"><?php echo Lang::get('products.labels.description'); ?></th>
+                      <th class="goods-page-stock"><?php echo Lang::get('products.labels.Stock'); ?></th>
+                      <th class="goods-page-price" colspan="2"><?php echo Lang::get('products.labels.UnitPrice'); ?></th>
                     </tr>
                     <?php if(!empty($wishlistProducts)): ?>
                     <?php foreach($wishlistProducts as $wishlistProduct): ?>
@@ -39,8 +40,18 @@
                       <td class="goods-page-image">
                        <?php if($wishlistProduct->product->getFirstPhoto()): ?>
                        <a href="<?php echo URL::route('products.show',$wishlistProduct->product->id); ?>"><img src="<?php echo asset($wishlistProduct->product->getFirstPhoto()->complete_path); ?>" alt="Berry Lace Dress"></a>
+                       <?php else: ?> 
+                        <?php echo Lang::get('products.labels.image'); ?>
+
                        <?php endif; ?> 
                      </td>
+                     <td class="goods-page-description">
+                      <!--<h3><a href="#">Cool green dress with red bell</a></h3>
+                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                      <em>More info is here</em>-->
+                      <?php echo $wishlistProduct->name; ?>
+
+                    </td>
                      <td class="goods-page-description">
                       <!--<h3><a href="#">Cool green dress with red bell</a></h3>
                       <p><strong>Item 1</strong> - Color: Green; Size: S</p>
@@ -55,8 +66,7 @@
                       <strong><span>$</span><?php echo number_format($wishlistProduct->product->price,2); ?></strong>
                     </td>
                     <td class="del-goods-col">
-                      <a class="del-goods" href="#">&nbsp;</a>
-                      <a class="add-goods" href="#">&nbsp;</a>
+                      <a href="#" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
                     </td>
                   </tr>
                   <?php endforeach; ?>

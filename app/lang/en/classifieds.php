@@ -30,7 +30,9 @@
 			'save' => 'Save',
 			'Yes' => 'Yes',
 			'No' => 'No',
-			'new' => 'New'
+			'new' => 'New',
+			'NewClassifieds' => 'New Classifieds',
+			'TopClassifieds' => 'Top Classifieds'
 		),
 
 		"list" => array(

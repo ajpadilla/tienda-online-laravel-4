@@ -6,7 +6,6 @@ use s4h\store\Products\ProductRepository;
 use s4h\store\Wishlist\WishlistRepository;
 
 class BaseController extends Controller {
-
 	protected $categoryRepository;
 	protected $productRepository;
 	protected $cartRepository;
@@ -27,12 +26,6 @@ class BaseController extends Controller {
 		$currentMenu = 'current';
 		$currentUser = Auth::user();
 		$currentRoute = Route::currentRouteName();
-		/*		$products       =       new     ProductRepository();
-				$randomProducts =       $products->getRandom(5);
-				$topProducts    =       $products->getTop(5);
-				$newProducts    =       $products->getNew(5);
-
-				View::share(compact('currentUser', 'currentMenu', 'currentRoute', 'randomProducts', 'topProducts', 'newProducts'));*/
 		$this->categoryRepository = new CategoryRepository();
 		$this->productRepository = new ProductRepository();
 		$this->cartRepository = new CartRepository();

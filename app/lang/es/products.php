@@ -19,8 +19,8 @@
 		"saveLang" =>"agregarIdioma",
 
 		"labels" => array(
-			'name' =>'Nombre:',
-			'description' => 'Descripción:',
+			'name' =>'Nombre',
+			'description' => 'Descripción',
 			'on_sale' => 'En venta:',
 			'quantity' => 'Cantidad:',
 			'price' => 'Precio:',
@@ -43,6 +43,13 @@
 			'show_price' => 'Mostrar precio',
 			'product_for_barter' => 'Cambiar',
 			'save' => 'Guardar',
+			'image' => 'No se han encontrado imágenes',
+			'Image' => 'Imagen',
+			'Stock' => 'Almacen',
+			'UnitPrice' => 'Precio',
+			'MyWishList' => 'Mi Lista de Deseos' ,
+			'NewProducts' => 'Nuevos Productos',
+			'TopProducts' => 'Top de Productos'
 		),
 
 		"validation" => array(
@@ -70,7 +77,8 @@
 				'ratings'	=> 'Ratings',
 				'actions'	=> 'Acciones',
 				'title'		=> 'Listado de productos',
-				'subtitle' => 'Lista de productos'
+				'subtitle' => 'Lista de productos',
+
 		),
 
 		'edit_view' => array(
@@ -83,6 +91,10 @@
 			'title' => 'Ver datos del producto',
 		),
 
+		'edit_language' => array(
+			'title' => 'Agregar Nuevo Idioma', 
+		),
+
 		'actions' => array(
 			'Show' => 'Ver   ',
 			'Edit' => 'Editar',
@@ -91,7 +103,7 @@
 			'product_for_barter' => 'Cambiar',
 			'Deactivated' => 'Desactivar',
 			'Photo' => 'Agregar foto',
-			'Language' => 'Idioma'
+			'Language' => 'AGREGAR IDIOMA'
 		)
 	);
 
