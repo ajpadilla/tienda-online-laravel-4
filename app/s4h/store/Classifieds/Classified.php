@@ -3,6 +3,8 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\ClassifiedsLang\ClassifiedsLang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
 /**
 * 
 */
@@ -96,6 +98,12 @@ class Classified extends Eloquent {
 			$this->photos()->delete();
 		ClassifiedsLang::where('classified_id','=', $this->id)->delete();
 		return parent::delete();
+	}
+
+	public function getInCurrentLangAttribute(){
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($language->id)->first();
 	}
 
 }
