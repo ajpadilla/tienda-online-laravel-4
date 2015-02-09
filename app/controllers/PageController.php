@@ -1,6 +1,6 @@
 <?php
 
-use s4h\store\ProductsLang\ProductLangRepository;
+use s4h\store\Products\ProductRepository;
 use s4h\store\ClassifiedsLang\ClassifiedsLangRepository;
 
 class PageController extends BaseController {
@@ -18,16 +18,18 @@ class PageController extends BaseController {
 	|
 	*/
 
-	private $productLangRepository;
+	protected $classifiedsLangRepository;
+
+	function __construct(ProductRepository $productRepository, ClassifiedsLangRepository $classifiedsLangRepository)
+	{
+		$this->productRepository = $productRepository;
+		$this->classifiedsLangRepository = $classifiedsLangRepository;
+	}
 
 	public function home()
 	{
-		$this->productLangRepository = new ProductLangRepository();
-		$newProducts = $this->productLangRepository->getNewProducts();
-
-		$this->classifiedsLangRepository = new ClassifiedsLangRepository();
+		$newProducts = $this->productRepository->getNewProducts();
 		$newClassifieds = $this->classifiedsLangRepository->getNewClassifieds();
-
 		return View::make('pages.home', compact('newProducts','newClassifieds'));
 	}
 

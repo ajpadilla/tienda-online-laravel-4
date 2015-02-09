@@ -5,11 +5,11 @@
 		              <div class="row">
 		                <div class="col-md-6 col-sm-6 col-xs-3">
 		                  <div class="product-main-image">
-		                  	@if($product->product->hasPhotos())
-			                    <img src="{{ asset($product->product->getFirstPhoto()->complete_path) }}" alt="{{ $product->product->getFirstPhoto()->filename }}" class="img-responsive">
+		                  	@if($product->hasPhotos())
+			                    <img src="{{ asset($product->getFirstPhoto()->complete_path) }}" alt="{{ $product->getFirstPhoto()->filename }}" class="img-responsive">
 			                  </div>
 			                  <div class="product-other-images">
-			                  	@foreach($product->product->photos as $photo)
+			                  	@foreach($product->photos as $photo)
 			                    	<a href="#" class="active"><img src="{{ asset($photo->complete_path) }}" alt="{{ $photo->filename }}"></a>
 			                    @endforeach
 			                  </div>
@@ -24,18 +24,18 @@
 		                  @endif
 		                </div>
 		                <div class="col-md-6 col-sm-6 col-xs-9">
-		                  <h2>{{ $product->name }}</h2>
+		                  <h2>{{ $product->inCurrentLang->name }}</h2>
 		                  <div class="price-availability-block clearfix">
 		                    <div class="price">
-		                      <strong><span>$</span>{{ $product->product->price }}</strong>
-		                      <em>$<span>{{ $product->product->price }}</span></em>
+		                      <strong><span>$</span>{{ $product->price }}</strong>
+		                      <em>$<span>{{ $product->price }}</span></em>
 		                    </div>
 		                    <div class="availability">
-		                      Availability: <strong>{{ $product->product->quantity }}</strong>
+		                      Disponibilidad: <strong>{{ $product->quantity }}</strong>
 		                    </div>
 		                  </div>
 		                  <div class="description">
-		                    <p>{{ $product->description }}</p>
+		                    <p>{{ $product->inCurrentLang->description }}</p>
 		                  </div>
 		                  <div class="product-page-options">
 		                    <div class="pull-left">

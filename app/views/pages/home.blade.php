@@ -31,17 +31,19 @@
 			        </div>
 			    </div>
 
-			    <div id="trueques" class="active">
+			    <div id="trueques" class="tab-pane">
 			    </div>
 
-			    <div id="clasificados" class="active">
-			    	<h2>{{ Lang::get('classifieds.labels.NewClassifieds') }}</h2>
-				    @include('products.partials._new-classifieds')
-			    </div>
-			    <div class="row">
+			    <div id="clasificados" class="tab-pane">
+			    	<div class="row">
+				        <h2>{{ Lang::get('classifieds.labels.NewClassifieds') }}</h2>
+					    @include('products.partials._new-classifieds')
+				    </div>
+				    <div class="row">
 				        <h2>{{ Lang::get('classifieds.labels.TopClassifieds') }}</h2>
 				        @include('products.partials._top-products')
 			        </div>
+			    </div>
 		    </div>
 	    </div>
     </div>
