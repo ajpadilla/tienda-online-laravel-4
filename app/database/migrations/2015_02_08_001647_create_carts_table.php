@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateCartsTable extends Migration {
 
@@ -15,13 +15,14 @@ class CreateCartsTable extends Migration {
 		Schema::create('carts', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('user_id')->index();
-			$table->integer('currency_id')->index();
-			$table->unique(array('user_id', 'currency_id'), 'carts_unique');
+			//$table->integer('currency_id');
+			$table->integer('user_id');
+			$table->boolean('active')->default(TRUE);
 			$table->timestamps();
 			$table->softDeletes();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -30,7 +31,7 @@ class CreateCartsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('carts');
+		Schema::drop('carts');
 	}
 
 }

@@ -28,6 +28,7 @@
     </div>
     <!-- Fin Wrapper -->
     @include('wishlist.partials._product-wishlist-tpl')
+    @include('carts.partials._product-cart-tpl')
     @include('layouts.partials._js-includes')
 </body>
 </html>

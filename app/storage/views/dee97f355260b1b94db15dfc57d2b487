@@ -8,6 +8,7 @@
   <script>
 
     <?php echo $__env->make('wishlist.partials._add-to-wishlist-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('carts.partials._add-to-cart-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
     var initImageZoom = function () {
         jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
@@ -53,6 +54,8 @@
 		initTouchspin();
         addToWishlist();
         removeFromWishList();
+        addToCart();
+        removeFromCart();
     });
   </script>
 <?php $__env->stopSection(); ?>

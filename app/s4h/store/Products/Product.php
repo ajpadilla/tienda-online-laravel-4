@@ -2,6 +2,8 @@
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 
 class Product extends Eloquent{
@@ -12,7 +14,7 @@ class Product extends Eloquent{
 	protected $fillable = ['on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id', 'measure_id', 'weight_id'];
 
 	/*
-	* Realaciones
+	* Relaciones
 	*/
 	public function categories()
 	{
@@ -21,6 +23,12 @@ class Product extends Eloquent{
 
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','products_lang','product_id','language_id')->withPivot('name','description')->withTimestamps();
+	}
+
+	public function getInCurrentLangAttribute(){
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		return ProductLang::whereProductId($this->id)->whereLanguageId($language->id)->first();
 	}
 
 	public function condition()
@@ -38,14 +46,14 @@ class Product extends Eloquent{
 		return $this->hasMany('s4h\store\Ratings\Rating');
 	}
 
-	public function wishlistUsers()
+	public function wishlist()
 	{
 		return $this->belongsToMany('s4h\store\Users\User', 'wishlist')->withTimestamps();
 	}
 
-	public function cartUsers()
+	public function carts()
 	{
-		return $this->belongsToMany('s4h\store\Users\User', 'cart', 'product_id', 'user_id')->withPivot('quantity')->withTimestamps();
+		return $this->belongsToMany('s4h\store\Carts\Cart')->withPivot('quantity')->withTimestamps();
 	}
 
 	/*
@@ -158,7 +166,9 @@ class Product extends Eloquent{
 		return false;
 	}
 
-
+	public function getPriceAttribute($value){
+		return number_format($value, '2');
+	}
 
 	/*
 	*	Eliminar producto y relaciones

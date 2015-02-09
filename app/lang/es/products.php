@@ -3,7 +3,6 @@
 		"show" => "ver/producto/{id}",
 		"create" => "crear/producto",
 		"show" => "ver/producto/{id}",
-		"whistlist" => "deseos",
 		"store" => "agregar/producto",
 		'index'=>'lista/productos',
 		'edit' => 'editar/producto/{id}',

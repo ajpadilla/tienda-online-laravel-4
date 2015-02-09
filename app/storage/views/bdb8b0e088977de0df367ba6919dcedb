@@ -1,28 +1,48 @@
-<li class="dropdown">
-	<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-	 <i class="fa fa-shopping-cart fa-lg"></i>
-	 <span class="label label-warning">16</span>
-	</a>
-	<ul class="dropdown-menu dropdown-messages">
-	 <li>
-	     <div class="dropdown-messages-box">
-	         <a href="profile.html" class="pull-left">
-	             <img alt="image" class="img-circle" src="img/a7.jpg">
-	         </a>
-	         <div class="media-body">
-	             <small class="pull-right">46h ago</small>
-	             <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-	             <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-	         </div>
-	     </div>
-	 </li>
-	 <li class="divider"></li>
-	 <li>
-	     <div class="text-center link-block">
-	         <a href="mailbox.html">
-	             <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-	         </a>
-	     </div>
-	 </li>
-	</ul>
-</li>
+ <?php /* <?php if($cart): ?> */ ?>
+    <li class="dropdown">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+            <i class="fa fa-shopping-cart fa-lg"></i>
+            <span id="cart-count" class="label label-warning">
+                <?php if($cart): ?>
+                    <?php echo $cart->products->count(); ?>
+
+                <?php else: ?>
+                    0
+                <?php endif; ?>
+            </span>
+        </a>
+        <ul id="products-cart" class="dropdown-menu dropdown-alerts">
+            <?php if($cart): ?>
+                <?php foreach($cart->products as $product): ?>
+                    <li class="li">
+                        <div class="row">
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <a href="<?php echo route('products.show', $product->id); ?>"><i class="fa fa-check fa-2x"></i> <?php echo $product->inCurrentLang->name; ?></a>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                                <?php echo $product->pivot->quantity; ?>
+
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <span class="pull-right text-muted small">
+                                    <a href="<?php echo route('cart.delete-ajax', $product->id); ?>" class="delete-from-cart">
+                                        <i class="fa fa-minus-circle fa-2x"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+                <li class="divider"></li>
+                <li>
+                    <div class="text-center link-block">
+                        <a href="notifications.html">
+                            <strong>More details</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </li>
+<?php /* <?php endif; ?> */ ?>

@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('AttributeByValueTableSeeder');
 	     $this->call('ClassifiedClassificationTableSeeder');
 	     $this->call('CartsTableSeeder');
-	     $this->call('ProductCartTableSeeder');
+	     $this->call('CartProductTableSeeder');
 	     $this->call('RolePermissionTableSeeder');
 	}
 

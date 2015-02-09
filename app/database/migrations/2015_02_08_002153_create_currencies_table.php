@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateCurrencyTable extends Migration {
+class CreateCurrenciesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,14 +15,15 @@ class CreateCurrencyTable extends Migration {
 		Schema::create('currencies', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 32);
-			$table->string('iso_code',3);
-			$table->string('sign',8);
-			$table->tinyInteger('active');
+			$table->string('name', 128);
+			$table->string('iso_code', 32);
+			$table->string('sign', 8);
+			$table->boolean('active')->default(TRUE);
 			$table->timestamps();
 			$table->softDeletes();
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -31,7 +32,7 @@ class CreateCurrencyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('currencies');
+		Schema::drop('currencies');
 	}
 
 }

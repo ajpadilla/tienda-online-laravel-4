@@ -41,10 +41,25 @@ class RolePermissionTableSeeder extends DatabaseSeeder{
 		$removeFromWishlist->display_name = 'Remove from wishlist';
 		$removeFromWishlist->save();
 
+		$addToCart = new Permission();
+		$addToCart->name = 'add-to-cart';
+		$addToCart->display_name = 'Add to cart';
+		$addToCart->save();
+
+		$removeFromCart = new Permission();
+		$removeFromCart->name = 'remove-from-cart';
+		$removeFromCart->display_name = 'Remove from cart';
+		$removeFromCart->save();
+
 		$clientAdmin->attachPermission($addToWishList);
+		$clientAdmin->attachPermission($addToCart);
 		$clientAdmin->attachPermission($removeFromWishlist);
+		$clientAdmin->attachPermission($removeFromCart);
+
 		$clientReader->attachPermission($addToWishList);
+		$clientReader->attachPermission($addToCart);
 		$clientReader->attachPermission($removeFromWishlist);
+		$clientReader->attachPermission($removeFromCart);
 
 		$clientAdminUser = User::find(5);
 		$clientReaderUser = User::find(6);

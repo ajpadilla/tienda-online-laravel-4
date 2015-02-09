@@ -24,10 +24,10 @@ class CartsTableSeeder extends DatabaseSeeder{
 
         $used = [];
 
-        for ($i=0; $i < rand(1, 8); $i++) 
+        for ($i=0; $i < 4; $i++)
         { 
 
-            $currency = $faker->randomElement($currencies);
+            //$currency = $faker->randomElement($currencies);
 
             $user = $faker->randomElement($users);
 
@@ -35,7 +35,8 @@ class CartsTableSeeder extends DatabaseSeeder{
             {
                 Cart::create([
                     'user_id' => $user['id'],
-                    'currency_id' => $currency['id']
+                    //'currency_id' => $currency['id']
+	                'active' => 0
                 ]);
                 $used[] = $user["id"];
             }

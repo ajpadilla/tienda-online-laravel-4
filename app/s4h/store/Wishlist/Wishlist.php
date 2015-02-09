@@ -6,7 +6,5 @@ class Wishlist extends Eloquent{
 	/*
 	 *  Wishlist relations
 	 */
-	public function (){
-		
-	}
+
 }
