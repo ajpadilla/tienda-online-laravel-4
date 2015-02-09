@@ -27,6 +27,9 @@
 <script>
 	$(document).ready(function () 
 	{
+
+		$('.chosen-select').chosen({width: "95%"});
+
 		$('.summernote').summernote();
 
 		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
