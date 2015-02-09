@@ -265,8 +265,9 @@ class ProductController extends \BaseController {
 
 			$languageId = $this->languageRepository->returnLanguage()->id;
 
-			$links = "<button href='#'  class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px; display: inline-block;' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i>
-					 </button><br/>";
+			$links = "<form action='".route('products.show',$model->product->id)."' method='get'>
+						<button href='#'  class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+					  </form>";
 
 			$links.= "<button href='#fancybox-edit-product' id='edit_".$model->product->id."' class='btn btn-warning btn-outline dim col-sm-6 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>";
