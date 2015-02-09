@@ -119,11 +119,32 @@ class ClassifiedController extends \BaseController {
 
 		$collection->addColumn('Actions',function($model){
 			
-			$links = "<a class='btn btn-info btn-circle' href='" . route('classifieds.show', $model->classified->id) . "'><i class='fa fa-check'></i></a>
-					<br />";
-			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('classifieds.edit', $model->classified->id) . "'><i class='fa fa-pencil'></i></a>
-					<br />
-					<a class='btn btn-danger btn-circle' href='" . route('classifieds.destroy', $model->classified->id) . "'><i class='fa fa-times'></i></a>";
+			$languageId = $this->languageRepository->returnLanguage()->id;
+
+			$links = "<form action='".route('classifieds.show',$model->classified->id)."' method='get'>
+						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('classifieds.actions.Show')."'  data-original-title='".trans('classifieds.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+					  </form>";
+
+			$links.= "<button href='#fancybox-edit-classified' id='edit_".$model->classified->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>";
+
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->classified->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>";
+					 
+			if ($model->classified->active)
+			{
+				$links.= "<button href='#' class='btn btn-primary btn-outline dim col-sm-8 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />";
+			}
+			else
+			{
+				$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8 activate' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Deactivated')."'  data-original-title='".trans('products.actions.Activate')."'> <i class='fa fa-check fa-2x'></i></button><br />";
+			}
+
+			$links.= "<form action='".route('photoProduct.create',array($model->classified->id, $languageId))."' method='get'>
+							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
+					  </form>";
+
+			$links.= "<button href='#fancybox-edit-language-product' id='language_".$model->classified->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
 
 			return $links;
 		});
