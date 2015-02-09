@@ -206,7 +206,7 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$classified = $this->classifiedRepository->getClassifiedId($id);
+		$classified = $this->classifiedRepository->getById($id);
 		$language = $this->languageRepository->returnLanguage();
 		$classifiedType = $classified->classifiedType->languages()->where('language_id','=',$language->id)->first();
 		$classifiedConditions = $classified->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
