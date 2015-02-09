@@ -5,7 +5,7 @@
 		"index" => "list/classified",
 		"show"=>"show/classified/{id}",
 		"edit"=>"edit/classified/{id}",
-		"update"=>"update/classified/{id}",
+		"update"=>"update/classified",
 		"destroy"=>"delete/classified/{id}",
 		"filterClassified" => "search/results/classifieds", 
 		"title" => "Add classified",

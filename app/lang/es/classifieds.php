@@ -5,7 +5,7 @@
 		"index" => "lista/clasificado",
 		"show"=>"ver/clasificado/{id}",
 		"edit"=>"editar/clasificado/{id}",
-		"update"=>"actualizar/clasificado/{id}",
+		"update"=>"actualizar/clasificado",
 		"destroy"=>"eliminar/clasificado/{id}",
 		"filterClassified" => "resultado/busqueda/clasificados", 
 		"title" => "Agregar clasificado",

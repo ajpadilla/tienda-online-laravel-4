@@ -396,6 +396,8 @@ function () {
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
 
+	Route::get('returnDataClassified','ClassifiedController@returnDataClassified');
+
 	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedController@getDatatable'));
 
 
