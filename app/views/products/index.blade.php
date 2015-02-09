@@ -93,12 +93,12 @@
 
 			loadData();
 
-			$('.btn.btn-success.btn-outline.dim.col-sm-6.show').fancybox({
+			/*$('.btn.btn-success.btn-outline.dim.col-sm-6.show').fancybox({
 				openEffect	: 'elastic',
 	    		closeEffect	: 'elastic',
 				centerOnScroll: true,
 				hideOnOverlayClick: true,
-			});
+			});*/
 
 
 			$('.btn.btn-warning.btn-outline.dim.col-sm-6.edit').fancybox({
