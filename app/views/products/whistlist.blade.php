@@ -1,4 +1,4 @@
-@extends('...layouts.template')
+@extends('layouts.template')
 
 @section('title')
     {{--{{ Lang::get('modulo.variable') }}--}}
@@ -7,8 +7,23 @@
 @section('content')
 <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-5">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home & Garden</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
           <!-- BEGIN CONTENT -->
-          <div class=" col-md-offset-1 col-md-10 col-sm-offset-1 col-sm-10">
+          <div class="col-md-7 col-sm-6">
             <h1>{{ Lang::get('products.labels.MyWishList') }}</h1>
             <div class="goods-page">
               <div class="goods-data clearfix">
@@ -21,35 +36,36 @@
                       <th class="goods-page-stock">{{ Lang::get('products.labels.Stock') }}</th>
                       <th class="goods-page-price" colspan="2">{{ Lang::get('products.labels.UnitPrice') }}</th>
                     </tr>
-                    @if (!empty($wishlist))
-                    @foreach ($wishlist as $wish)
+                    @if (!empty($wishlistProducts))
+                    @foreach ($wishlistProducts as $wishlistProduct)
                     <tr>
                       <td class="goods-page-image">
-                       @if ($wish->getFirstPhoto())
-                       <a href="{{ URL::route('products.show',$wish->id) }}"><img src="{{ asset($wish->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
+                       @if ($wishlistProduct->product->getFirstPhoto())
+                       <a href="{{ URL::route('products.show',$wishlistProduct->product->id) }}"><img src="{{ asset($wishlistProduct->product->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
                        @else 
                         {{ Lang::get('products.labels.image') }}
-                       @endif
+                       @endif 
                      </td>
                      <td class="goods-page-description">
                       <!--<h3><a href="#">Cool green dress with red bell</a></h3>
                       <p><strong>Item 1</strong> - Color: Green; Size: S</p>
                       <em>More info is here</em>-->
-                      {{ $wish->inCurrentLang->name }}
+                      {{ $wishlistProduct->name }}
                     </td>
                      <td class="goods-page-description">
-                      {{ $wish->inCurrentLang->description }}
+                      <!--<h3><a href="#">Cool green dress with red bell</a></h3>
+                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+                      <em>More info is here</em>-->
+                      {{ $wishlistProduct->description }}
                     </td>
                     <td class="goods-page-stock">
-                      @if($wish->quantity > 0) Disponibles
-                      @else Agotados
-                      @endif
+                      In Stock
                     </td>
                     <td class="goods-page-price">
-                      <strong><span>$</span>{{ number_format($wish->price,2) }}</strong>
+                      <strong><span>$</span>{{ number_format($wishlistProduct->product->price,2) }}</strong>
                     </td>
                     <td class="del-goods-col">
-                       <button href="#" class="btn btn-success btn-outline dim" style="margin-left: 20px" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Agregar al carro de compras" title="Agregar al carro de compras"><i class="fa fa-shopping-cart fa-2x"></i></button>
+                     <button href="#" class="btn btn-success btn-outline dim" style="margin-left: 20px" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Agregar al carro de compras" title="Agregar al carro de compras"><i class="fa fa-shopping-cart fa-2x"></i></button>
                     </td>
                   </tr>
                   @endforeach

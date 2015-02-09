@@ -23,7 +23,7 @@ class ProductRepository {
 
 	public function deleteProduct($id)
 	{
-		$product = $this->getForId($id);
+		$product = $this->getById($id);
 		if ($product)
 			$product->delete();
 	}
@@ -72,7 +72,7 @@ class ProductRepository {
 
 	public function updateProduct($data = array())
 	{
-		$product = $this->getForId($data['product_id']);
+		$product = $this->getById($data['product_id']);
 		$product->on_sale = $data['on_sale'];
 		$product->quantity = $data['quantity'];
 		$product->price = $data['price'];
@@ -110,7 +110,7 @@ class ProductRepository {
 
 	public function updateDataForProduct($data = array())
 	{
-		$product = $this->getForId($data['product_id']);
+		$product = $this->getById($data['product_id']);
 
 		if (count($product->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$product->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
@@ -123,20 +123,15 @@ class ProductRepository {
 		}
 	}
 
-	public function getById($product_id)
+	public function getById($productId)
 	{
-		return Product::findOrFail($product_id);
+		return Product::findOrFail($productId);
 	}
 
 
 	public function getArray($productId)
 	{
   		return $this->getById($productId)->toArray();
-	}
-
-	public function getForId($productId)
-	{
-		return Product::findOrFail($productId);
 	}
 
 	public function filterProducts($filterWord, $language_id) {

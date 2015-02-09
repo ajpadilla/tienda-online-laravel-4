@@ -265,23 +265,29 @@ class ProductController extends \BaseController {
 
 			$languageId = $this->languageRepository->returnLanguage()->id;
 
-			$links = "<a class='btn btn-info' href='" . route('products.show', $model->product->id) . "'> ".trans('products.actions.Show')." <i class='fa fa-check'></i></a><br />";
-			$links .= "<a class='btn btn-warning' href='#fancybox-edit-product' id='edit_".$model->product->id."' value='".$model->product->id."'> ".trans('products.actions.Edit')." <i class='fa fa-pencil'></i></a><br />";
-			$links .= "<a class='btn btn-danger' href='#fancybox-edit-product' id='delet_".$model->product->id."' value='".$model->product->id."'> ".trans('products.actions.Delete')." <i class='fa fa-times'></i></a><br />";
+			$links = "<button href='#'  class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px; display: inline-block;' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i>
+					 </button><br/>";
 
+			$links.= "<button href='#fancybox-edit-product' id='edit_".$model->product->id."' class='btn btn-warning btn-outline dim col-sm-6 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>";
+
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6' id='delet_".$model->product->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>";
+					 
 			if ($model->product->active)
 			{
-				$links.= "<a class='btn btn-primary' href='#'> ".trans('products.actions.Activate')." <i class='fa fa-check'></i></a><br />";
+				$links.= "<button href='#' class='btn btn-primary btn-outline dim col-sm-6 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />";
 			}
 			else
 			{
-				$links.= "<a class='btn btn-danger' href='#'> ".trans('products.actions.Deactivated')." <i class='fa fa-check'></i></a><br />";
+				$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6 activate' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Deactivated')."'  data-original-title='".trans('products.actions.Activate')."'> <i class='fa fa-check fa-2x'></i></button><br />";
 			}
 
-			$links.= "<a class='btn btn-success' href='" .route('photoProduct.create',array($model->product->id, $languageId)). "'> ".trans('products.actions.Photo')." <i class='fa fa-camera'></i></a><br />";
+			$links.= "<form action='".route('photoProduct.create',array($model->product->id, $languageId))."' method='get'>
+							<button href='#' class='btn btn-info btn-outline dim col-sm-6 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
+					  </form>";
 
-			$links.= "<a class='btn btn-success language' href='#fancybox-edit-language-product' id='language_".$model->product->id."' > ".trans('products.actions.Language')."  <i class='fa fa-pencil'></i></a><br />";
-
+			$links.= "<button href='#fancybox-edit-language-product' id='language_".$model->product->id."'  class='btn btn-success btn-outline dim col-sm-6 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
 
 			return $links;
 		});
@@ -342,7 +348,8 @@ class ProductController extends \BaseController {
 		{
 			if (Input::has('productId')) 
 			{
-				$productLanguage = $this->productRepository->getById(Input::get('productId'));
+				$product = $this->productRepository->getById(Input::get('productId'));
+				$productLanguage = $product->getInCurrentLangAttribute();
 				$categories = $productLanguage->product->getCategorieIds();
 				return Response::json(['success'=>true, 'product' => $productLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
 			}else{
