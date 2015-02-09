@@ -209,7 +209,7 @@ return array(
 		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 		'Flash' => 'Laracasts\Flash\Flash',
 		'Image' => 'Intervention\Image\Facades\Image',
-		'Cart' => 'Moltin\Cart\Facade'
+		'MoltinCart' => 'Moltin\Cart\Facade'
 	),
 
 );

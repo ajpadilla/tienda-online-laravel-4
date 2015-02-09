@@ -4,7 +4,7 @@
             <i class="fa fa-shopping-cart fa-lg"></i>
             <span id="cart-count" class="label label-warning">
                 @if($cart)
-                    {{ $cart->count() }}
+                    {{ $cart->products->count() }}
                 @else
                     0
                 @endif

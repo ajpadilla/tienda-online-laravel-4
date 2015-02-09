@@ -33,6 +33,9 @@ class CartController extends \BaseController {
 	{
 		$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('add-to-cart')) {
+			if (!$this->cartRepository->getActiveCartForUser(Auth::user()))
+				$this->cartRepository->createNewCartForUser(Auth::user());
+
 			if ($this->productRepository->addToUserCart($id, $quantity, Auth::user())) {
 				$response['success'] = TRUE;
 				$response['product'] = $this->productRepository->getArrayForTopCart(Auth::user(), $id);
@@ -98,6 +101,14 @@ class CartController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function deleteAjax($id)
+	{
+		$response = ['success' => FALSE];
+		if(Request::ajax() && Entrust::can('remove-from-cart'))
+			$response['success'] = $this->productRepository->deleteFromUserCart($id, Auth::user());
+		return Response::json($response);
 	}
 
 

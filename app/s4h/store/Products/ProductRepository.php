@@ -184,15 +184,6 @@ class ProductRepository {
 
 		})->count();
 	}
-
-	public function getWishlistForUser(User $user)
-	{
-  			$isoCode = LaravelLocalization::setLocale();
-  			$language = Language::select()->where('iso_code','=',$isoCode)->first();
-      		$productsId = $user->wishlist->lists('id');
-			return ($productsId ? ProductLang::with('product')->whereIn('product_id', $productsId)->whereLanguageId($language->id)->get() : []);
-	}
-
 	/**
 		* ------------------------------ Métodos para controlar el carro de compras -----------------------
 	**/
@@ -211,8 +202,10 @@ class ProductRepository {
 
 	public function deleteFromUserCart($productId, User $user)
 	{
-		if ($this->existsInUserCart($productId, $user))
-			return $user->cartProducts()->detach($productId) > 0;
+		if ($this->existsInUserCart($productId, $user)) {
+			$cart = CartRepository::getActiveCartForUser($user);
+			return $cart->products()->detach($productId) > 0;
+		}
 		return FALSE;
 	}
 
@@ -220,8 +213,7 @@ class ProductRepository {
 	{
 		if ($this->existsInUserCart($productId, $user))
 			return FALSE;
-		$this->cartRepository = new CartRepository();
-		$cart = $this->cartRepository->getActiveCartForUser($user);
+		$cart = CartRepository::getActiveCartForUser($user);
 		Product::findOrFail($productId);
 		return $cart->products()->attach([$productId => ['quantity' => $quantity]]) == NULL;
 	}
@@ -235,13 +227,5 @@ class ProductRepository {
 			    ->where('active', '=', TRUE);
 
 		})->count();
-	}
-
-	public function getCartForUser(User $user)
-	{
-  			$isoCode = LaravelLocalization::setLocale();
-  			$language = Language::select()->where('iso_code','=',$isoCode)->first();
-      		$productsId = $user->cartProducts->lists('id');
-			return ($productsId ? ProductLang::with('product')->whereIn('product_id', $productsId)->whereLanguageId($language->id)->get() : []);
 	}
 }

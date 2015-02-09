@@ -16,11 +16,11 @@
                     <li class="li">
                         <div class="row">
                             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                <a href="{{ route('products.show', $product->id) }}"><i class="fa fa-check fa-2x"></i> {{ $product->name }}</a>
+                                <a href="{{ route('products.show', $product->id) }}"><i class="fa fa-check fa-2x"></i> {{ $product->inCurrentLang->name }}</a>
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <span class="pull-right text-muted small">
-                                    <a href="{{ route('wishlist.delete-ajax', $product->product_id) }}" class="delete-from-wishlist">
+                                    <a href="{{ route('wishlist.delete-ajax', $product->id) }}" class="delete-from-wishlist">
                                         <i class="fa fa-minus-circle fa-2x"></i>
                                     </a>
                                 </span>

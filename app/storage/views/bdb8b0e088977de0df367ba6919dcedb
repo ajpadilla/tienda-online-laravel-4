@@ -4,7 +4,7 @@
             <i class="fa fa-shopping-cart fa-lg"></i>
             <span id="cart-count" class="label label-warning">
                 <?php if($cart): ?>
-                    <?php echo $cart->count(); ?>
+                    <?php echo $cart->products->count(); ?>
 
                 <?php else: ?>
                     0

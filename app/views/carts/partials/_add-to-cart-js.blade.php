@@ -1,7 +1,6 @@
 	var addToCart = function () {
 		jQuery('.add_cart').click(function(){
 			var url = jQuery(this).attr('href');
-			alert(url);
 			jQuery.ajax({
                 type: 'GET',
                 url: url,
