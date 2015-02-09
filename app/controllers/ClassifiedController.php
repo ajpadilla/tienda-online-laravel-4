@@ -63,18 +63,15 @@ class ClassifiedController extends \BaseController {
 		$collection->addColumn('photo', function($model)
 		{
 			$links = '';
-			$i = 0;
-			foreach ($model->classified->photos as $photo) {
-				if ($i < 3) {
-					$links .= "	<a href='#'>
-									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
-								</a>";
-				} else {
-					break;
-				}
-				$i++;
-			}
+			
+			$photo = $model->classified->getFirstPhoto();
 
+			if ($photo != false) {
+				$links .= "	<a href='#'>
+									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
+				</a>";
+			}
+				
 			return $links;
 		});
 
@@ -140,7 +137,7 @@ class ClassifiedController extends \BaseController {
 				$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8 activate' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Deactivated')."'  data-original-title='".trans('products.actions.Activate')."'> <i class='fa fa-check fa-2x'></i></button><br />";
 			}
 
-			$links.= "<form action='".route('photoProduct.create',array($model->classified->id, $languageId))."' method='get'>
+			$links.= "<form action='".route('photoClassified.create',array($model->classified->id, $languageId))."' method='get'>
 							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
 					  </form>";
 
@@ -173,23 +170,25 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		try
+		
+		if(Request::ajax())
 		{
-			$this->registerClassifiedForm->validate($input);
-			$classified = $this->classifiedRepository->createNewClassified($input);
-			if ($input['add_photos'] == 1) {
-				Session::put('classified_id', $classified->id);
-				Session::put('language_id', $input['language_id']);
-				return Response::json(['message' => trans('classifieds.response'), 
-										'add_photos'=>$input['add_photos']
-				]);
+			$input = Input::all();
+			try
+			{
+				$this->registerClassifiedForm->validate($input);
+				$classified = $this->classifiedRepository->createNewClassified($input);
+				if ($input['add_photos'] == 1) {
+					return Response::json(['message' => trans('classifieds.response'),
+						'add_photos' => $input['add_photos'], 'url' => URL::route('photoClassified.create',$classified->id)
+					]);
+				}
+				return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
 			}
-			return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
-		} 
-		catch (FormValidationException $e)
-		{
-			return Response::json($e->getErrors()->all());
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
 		}
 	}
 
