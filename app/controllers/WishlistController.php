@@ -20,7 +20,7 @@ class WishlistController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('wishlist.index');
 	}
 
 

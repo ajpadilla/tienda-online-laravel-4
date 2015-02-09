@@ -14,7 +14,7 @@
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Usuario</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="{{URL::route('products.whistlist')}}">Lista de deseos</a></li>
+                            <li><a href="{{URL::route('wishlist.index')}}">Lista de deseos</a></li>
                         </ul>
                     </li>
 

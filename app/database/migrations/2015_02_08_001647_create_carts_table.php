@@ -19,6 +19,7 @@ class CreateCartsTable extends Migration {
 			$table->integer('user_id');
 			$table->boolean('active')->default(TRUE);
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

@@ -1,4 +1,4 @@
-<?php namespace s4h\store\ProductsCarts;
+<?php namespace s4h\store\CartProduct;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 /**
 * 
 */
-class ProductCart extends Eloquent
+class CartProduct extends Eloquent
 {
 	
 	use SoftDeletingTrait;
@@ -15,6 +15,6 @@ class ProductCart extends Eloquent
 
 	protected $dates = ['deleted_at'];
 
-	protected $table = 'product_cart';
+	protected $table = 'cart_product';
 
 }

@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('...layouts.template')
 
 @section('title')
     {{--{{ Lang::get('modulo.variable') }}--}}
@@ -7,21 +7,6 @@
 @section('content')
 <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
-          <!-- BEGIN SIDEBAR -->
-          <div class="sidebar col-md-3 col-sm-5">
-            <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home & Garden</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
-            </ul>
-          </div>
-          <!-- END SIDEBAR -->
-
           <!-- BEGIN CONTENT -->
           <div class="col-md-7 col-sm-6">
             <h1>My Wish List</h1>
@@ -35,25 +20,25 @@
                       <th class="goods-page-stock">Stock</th>
                       <th class="goods-page-price" colspan="2">Unit price</th>
                     </tr>
-                    @if (!empty($wishlistProducts))
-                    @foreach ($wishlistProducts as $wishlistProduct)
+                    @if (!empty($wishlist))
+                    @foreach ($wishlist as $wish)
                     <tr>
                       <td class="goods-page-image">
-                       @if ($wishlistProduct->product->getFirstPhoto())
-                       <a href="{{ URL::route('products.show',$wishlistProduct->product->id) }}"><img src="{{ asset($wishlistProduct->product->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
+                       @if ($wish->product->getFirstPhoto())
+                       <a href="{{ URL::route('products.show',$wish->product->id) }}"><img src="{{ asset($wish->product->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
                        @endif 
                      </td>
                      <td class="goods-page-description">
                       <!--<h3><a href="#">Cool green dress with red bell</a></h3>
                       <p><strong>Item 1</strong> - Color: Green; Size: S</p>
                       <em>More info is here</em>-->
-                      {{ $wishlistProduct->description }}
+                      {{ $wish->description }}
                     </td>
                     <td class="goods-page-stock">
                       In Stock
                     </td>
                     <td class="goods-page-price">
-                      <strong><span>$</span>{{ number_format($wishlistProduct->product->price,2) }}</strong>
+                      <strong><span>$</span>{{ number_format($wish->product->price,2) }}</strong>
                     </td>
                     <td class="del-goods-col">
                       <a class="del-goods" href="#">&nbsp;</a>

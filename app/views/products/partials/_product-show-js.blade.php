@@ -8,6 +8,7 @@
   <script>
 
     @include('wishlist.partials._add-to-wishlist-js')
+    @include('carts.partials._add-to-cart-js')
 
     var initImageZoom = function () {
         jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
@@ -53,6 +54,8 @@
 		initTouchspin();
         addToWishlist();
         removeFromWishList();
+        addToCart();
+        removeFromCart();
     });
   </script>
 @stop

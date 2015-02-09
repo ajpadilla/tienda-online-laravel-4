@@ -28,7 +28,6 @@ function () {
 	Route::get(LaravelLocalization::transRoute('products.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
 	Route::post(LaravelLocalization::transRoute('products.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
 	Route::get(LaravelLocalization::transRoute('products.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
-	Route::get(LaravelLocalization::transRoute('products.whistlist'), ['as' => 'products.whistlist', 'uses' => 'ProductController@showWhistList' ] );
 	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
 	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
 	Route::get(LaravelLocalization::transRoute('products.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
@@ -525,10 +524,13 @@ function () {
 	/**
 		* ------------------------------ Rutas Lista de Deseos-----------------------
 	**/
-	Route::resource('wishlist', 'WishlistController', ['except' => ['create']]);
 	Route::get(LaravelLocalization::transRoute('wishlist.create'), [
 		'as' => 'wishlist.create',
 		'uses' => 'WishlistController@create'
+	]);
+	Route::get(LaravelLocalization::transRoute('wishlist.index'), [
+		'as' => 'wishlist.index',
+		'uses' => 'WishlistController@index'
 	]);
 	Route::get(LaravelLocalization::transRoute('wishlist.delete-ajax'), [
 		'as' => 'wishlist.delete-ajax',
@@ -538,10 +540,13 @@ function () {
 	/**
 		* ------------------------------ Rutas Carrito de Compras-----------------------
 	**/
-	Route::resource('cart', 'CartController', ['except' => ['create']]);
 	Route::get(LaravelLocalization::transRoute('cart.create'), [
 		'as' => 'cart.create',
 		'uses' => 'CartController@create'
+	]);
+	Route::get(LaravelLocalization::transRoute('cart.index'), [
+		'as' => 'cart.index',
+		'uses' => 'CartController@index'
 	]);
 	Route::get(LaravelLocalization::transRoute('cart.delete-ajax'), [
 		'as' => 'cart.delete-ajax',

@@ -17,8 +17,10 @@ class CreateCartProductTable extends Migration {
 			$table->increments('id');
 			$table->integer('cart_id');
 			$table->integer('product_id');
-			$table->integer('quantity')->default(1);
+			$table->smallInteger('quantity')->default(1);
+			$table->unique(array('cart_id', 'product_id'), 'cart_product_unique');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

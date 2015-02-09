@@ -1,6 +1,7 @@
 <?php
 
 use \Entrust;
+use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
 
 class CartController extends \BaseController {
@@ -28,13 +29,13 @@ class CartController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($id)
+	public function create($id, $quantity = 1)
 	{
 		$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('add-to-cart')) {
-			if ($this->productRepository->addToUserCart($id, Auth::user())) {
+			if ($this->productRepository->addToUserCart($id, $quantity, Auth::user())) {
 				$response['success'] = TRUE;
-				$response['product'] = $this->productRepository->getArrayForTopCart($id);
+				$response['product'] = $this->productRepository->getArrayForTopCart(Auth::user(), $id);
 			}
 		}
 		return Response::json($response);

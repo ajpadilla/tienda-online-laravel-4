@@ -1,9 +1,14 @@
 <?php
 
+use s4h\store\Carts\CartRepository;
+use s4h\store\Categories\CategoryRepository;
+use s4h\store\Products\ProductRepository;
+
 class BaseController extends Controller {
 
 	private $categoryRepository;
 	private $productRepository;
+	private $cartRepository;
 
 	/**
 	 * Setup the layout used by the controller.
@@ -26,11 +31,13 @@ class BaseController extends Controller {
 				$newProducts    =       $products->getNew(5);
 
 				View::share(compact('currentUser', 'currentMenu', 'currentRoute', 'randomProducts', 'topProducts', 'newProducts'));*/
-		$this->categoryRepository = new \s4h\store\Categories\CategoryRepository();
-		$this->productRepository = new \s4h\store\Products\ProductRepository();
-		$wishlistProducts = ($currentUser ? $this->productRepository->getWishlistForUser($currentUser) : NULL);
+		$this->categoryRepository = new CategoryRepository();
+		$this->productRepository = new ProductRepository();
+		$this->cartRepository = new CartRepository();
+		$wishlist = ($currentUser ? $this->productRepository->getWishlistForUser($currentUser) : NULL);
+		$cart = ($currentUser ? $this->cartRepository->getActiveCartForUser($currentUser) : NULL);
 		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
-		View::share(compact('categoriesMenu', 'wishlistProducts'));
+		View::share(compact('categoriesMenu', 'wishlist', 'cart'));
 	}
 
 }

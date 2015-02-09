@@ -1,6 +1,7 @@
 <?php
 	return array(
-		"create" => "wishlist/add/{id}",
+		"create" => "wistlist/add/{id}",
 		"store" => "wishlist/store",
-		'delete-ajax' => 'wishlist/delete-ajax/{id}',
+		'delete-ajax' => 'wistlist/delete-ajax/{id}',
+		"index" => "wistlist",
 	);
