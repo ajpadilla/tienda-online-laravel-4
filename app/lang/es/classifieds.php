@@ -15,6 +15,7 @@
 		"Actualiced" => "Clasificado actualizado",
 		"Delete" => "¡Clasificado eliminado con exito!",
 		"search" => "buscar/clasificados",
+		
 
 		"labels" => array(
 			'name' =>'Nombre:',
