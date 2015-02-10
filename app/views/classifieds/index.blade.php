@@ -109,6 +109,7 @@
 				beforeLoad: loadData()
 			});
 
+			loadData();
 
 			function loadData() 
 			{
@@ -133,13 +134,14 @@
 							{
 								loadDataForLanguageClassified(numberId);
 							}
-							/*else
+							else
 							{
 								if (type == "delet")
 								{
-									deleteProduct(numberId);
+									//console.log('delete');
+									deleteClassified(numberId);
 								}
-							}*/
+							}
 						}
 
 					}			
@@ -213,7 +215,19 @@
 
 			}) ;
 
-			
+			function deleteClassified(id){
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('classifieds.delete-ajax') }}',
+					data: {'classifiedId': id},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#delet_'+id).parent().parent().remove();
+						};
+					}
+				});
+			}
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);

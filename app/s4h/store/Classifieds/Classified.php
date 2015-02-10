@@ -17,7 +17,7 @@ class Classified extends Eloquent {
 	protected $table = 'classifieds';
 
 	public function languages(){
-		return $this->belongsToMany('s4h\store\Languages\Language','classifieds_lang','classified_id','language_id')->withPivot('name','description','address');
+		return $this->belongsToMany('s4h\store\Languages\Language','classifieds_lang','classified_id','language_id')->withPivot('name','description','address')->withTimestamps();
 	}	
 
 	public function user(){
@@ -34,7 +34,7 @@ class Classified extends Eloquent {
 
 	public function categories()
 	{
-		return $this->belongsToMany('s4h\store\Categories\Category', 'classified_classification','classified_id','category_id');
+		return $this->belongsToMany('s4h\store\Categories\Category', 'classified_classification','classified_id','category_id')->withTimestamps();
 	}
 
 	public function photos()
@@ -108,6 +108,14 @@ class Classified extends Eloquent {
 	{
 		if($this->hasPhotos())
 			$this->photos()->delete();
+
+		if ($this->hasCategories())
+			//$this->categories()->delete();
+			foreach ($this->categories as $category) {
+				$category->delete();
+			}
+
+
 		ClassifiedsLang::where('classified_id','=', $this->id)->delete();
 		return parent::delete();
 	}
@@ -118,7 +126,7 @@ class Classified extends Eloquent {
 		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($language->id)->first();
 	}
 
-	public function accessorinCurrentLang($languageId){
+	public function getAccessorInCurrentLang($languageId){
 		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($languageId)->first();
 	}
 }

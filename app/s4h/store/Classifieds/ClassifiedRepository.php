@@ -126,7 +126,7 @@ class ClassifiedRepository extends BaseRepository
 	}
 
 
-	public function updateCurrentLangAttribute(Classified $classified, $data = array()){
+	public function updateAttributeLang(Classified $classified, $data = array()){
 
 		if (count($classified->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$classified->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],

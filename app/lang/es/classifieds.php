@@ -16,6 +16,7 @@
 		"Delete" => "¡Clasificado eliminado con exito!",
 		"search" => "buscar/clasificados",
 		"saveLang" =>"agregarIdiomaClasificado",
+		"delete-ajax" => "clasificado/eliminar-ajax",
 
 		"labels" => array(
 			'name' =>'Nombre:',

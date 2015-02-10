@@ -133,7 +133,7 @@ class ClassifiedController extends \BaseController {
 			$links.= "<button href='#fancybox-edit-classified' id='edit_".$model->classified->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>";
 
-			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->classified->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8 delete' id='delet_".$model->classified->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>";
 					 
 			if ($model->classified->active)
@@ -392,7 +392,7 @@ class ClassifiedController extends \BaseController {
 			{
 				 $classified = $this->classifiedRepository->getById(Input::get('classifiedId'));
 
-				 $classifiedLang = $classified->accessorinCurrentLang(Input::get('languageId'));
+				 $classifiedLang = $classified->getAccessorInCurrentLang(Input::get('languageId'));
 
 				 if (count($classifiedLang) > 0) 
 				 {
@@ -416,7 +416,7 @@ class ClassifiedController extends \BaseController {
 			{
 				$this->editClassifiedLangForm->validate($input);
 				$classified = $this->classifiedRepository->getById($input['classified_id']);
-				$this->classifiedRepository->updateCurrentLangAttribute($classified, $input);
+				$this->classifiedRepository->updateAttributeLang($classified, $input);
 				return Response::json([trans('classifieds.Actualiced')]);
 			}
 			catch (FormValidationException $e)
@@ -425,4 +425,15 @@ class ClassifiedController extends \BaseController {
 			}
 		}
 	}
+
+	public function deleteAjax()
+	{
+		if (Request::ajax())
+		{
+			$this->classifiedRepository->delteClassified(Input::get('classifiedId'));
+			return Response::json(['success' => true]);
+		}
+		return Response::json(['success' => false]);
+	}
+
 }
