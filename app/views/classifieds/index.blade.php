@@ -60,26 +60,6 @@
 	</section>
 </div>
 
-<!--<div class="row" style="display: none">
-	<section id="fancybox-edit-language-classified">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>{{	trans('products.edit_language.title') }}</h5>
-					</div>
-					<div class="ibox-content">
-						<div class="row">
-							{{Form::open(['route' => 'products.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditProductLanguage'])}}
-								@include('products.partials._form_language')
-							{{Form::close()}}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-</div>-->
 
 @stop
 
@@ -182,26 +162,6 @@
 						required:!0,
 						rangelength: [2, 255],
 						onlyLettersNumbersAndSpaces: true,
-						remote:
-						{
-							url:'{{ URL::to('/checkNameClassifiedEdit/') }}',
-							type: 'POST',
-							data: {
-								language_id: function() {
-									return $('#language_id').val();
-								},
-								name: function() {
-									return $('#name').val();
-								},
-								classified_id: function(){
-									return $('#classified_id').val();
-								}
-							},
-							dataFilter: function (respuesta) {
-								console.log('consulta:'+respuesta);
-								return respuesta;
-							}
-						}
 					},
 					description:{
 						required:!0,
@@ -275,6 +235,13 @@
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
+
+			/*jQuery.fancybox({
+				'content' : '<h1>'+responseText + '</h1>',
+				'autoScale' : true
+			});*/
+
+
 			jQuery.fancybox({
 				'content' : '<h1>'+ responseText.message + '</h1>',
 				'autoScale' : true
@@ -283,6 +250,7 @@
     		if(responseText.add_photos == 1)
 					document.location.href = responseText.url;
 		} 
+
 	</script>
 @stop
 
