@@ -16,6 +16,7 @@
 		"Delete" => "¡Classified type successfully removed!",
 		"search" => "search/classifieds",
 		"saveLang" =>"agregarIdioma",
+		"delete-ajax" => "classified/delete-ajax",
 
 		"labels" => array(
 			'name' =>'Name:',

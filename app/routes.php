@@ -402,6 +402,8 @@ function () {
 		'uses' => 'ClassifiedController@saveCurrentLangAttribute'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('classifieds.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
+
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
 
