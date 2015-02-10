@@ -61,6 +61,27 @@
 </div>
 
 
+<div class="row" style="display: none">
+	<section id="fancybox-edit-language-classified">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>{{	trans('classifieds.edit_language.title') }}</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							{{Form::open(['route' => 'classifieds.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditClassifiedLanguage'])}}
+								@include('classifieds.partials._form_language')
+							{{Form::close()}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
 @stop
 
 @section('scripts')
@@ -68,6 +89,9 @@
 	<script type="text/javascript">
 		$(document).ready(function() 
 		{
+			$('.chosen-select').chosen({width: "95%"});
+
+			$('.summernote').summernote();
 
 			$('.btn.btn-warning.btn-outline.dim.col-sm-8.edit').fancybox({
 				openEffect	: 'elastic',
@@ -76,6 +100,15 @@
 				hideOnOverlayClick: true,
 				beforeLoad: loadData()
 			});
+
+			$('.btn.btn-success.btn-outline.dim.col-sm-8.language').fancybox({
+				openEffect	: 'elastic',
+	    		closeEffect	: 'elastic',
+				centerOnScroll: true,
+				hideOnOverlayClick: true,
+				beforeLoad: loadData()
+			});
+
 
 			function loadData() 
 			{
@@ -92,28 +125,28 @@
 
 						if (type == "edit") 
 						{
-							loadDataToEdit(numberId);
+							loadDataToEditClassified(numberId);
 						}
-						/*else
+						else
 						{
 							if (type == "language" ) 
 							{
-								loadDataForLanguage(numberId);
+								loadDataForLanguageClassified(numberId);
 							}
-							else
+							/*else
 							{
 								if (type == "delet")
 								{
 									deleteProduct(numberId);
 								}
-							}
-						}*/
+							}*/
+						}
 
 					}			
 				});
 			}
 
-			function loadDataToEdit(id) 
+			function loadDataToEditClassified(id) 
 			{
 				$.ajax({
 					type: 'GET',
@@ -137,9 +170,50 @@
 				});
 			}
 
-			$('.chosen-select').chosen({width: "95%"});
+			function loadDataForLanguageClassified(id) {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::to('/returnDataClassified/') }}',	
+					data: {'classifiedId': id},
+					dataType: "JSON",
+					success: function(response) {
+						console.log(response.classified);
+						if (response.success == true) {
+							$('#classified_id_language').val(response.classified.classified.id);
+							$('#lang_id').val(response.classified.language_id);
+							$('#name_language').val(response.classified.name);
+							$('#description_language').code(response.classified.description);
+							$('#address_language').code(response.classified.address);
+						}
+					}
+				});
+			}
 
-			$('.summernote').summernote();
+			$('#lang_id').click(function () {
+				console.log($('#classified_id_language').val() +" "+ $('#lang_id').val());
+
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::to('/returnDataClassifiedLang/') }}',	
+					data: {'classifiedId':$('#classified_id_language').val(), 'languageId':$('#lang_id').val()},
+					dataType: "JSON",
+					success: function(response) {
+						console.log(response);
+						if (response.success == true) {
+							$('#name_language').val(response.classifiedLang.name);
+							$('#description_language').code(response.classifiedLang.description);
+							$('#address_language').code(response.classifiedLang.address);
+						}else{
+							$('#name_language').val('');
+							$('#description_language').code('');
+							$('#address_language').code('');
+						}
+					}
+				});
+
+			}) ;
+
+			
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
@@ -206,15 +280,51 @@
 				}
 
 			});
-
+	
+			$('#formEditClassifiedLanguage').validate({
+					rules:{
+						name_language:{
+							required:true,
+							rangelength: [2, 64],
+							onlyLettersNumbersAndSpaces: true
+						},
+						description_language:{
+							required:true,
+							rangelength: [10, 255]
+						},
+						addres:{
+							required:!0,
+							rangelength: [10, 255]
+						}
+					},
+					highlight:function(element){
+						$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+					},
+					unhighlight:function(element){
+						$(element).closest('.form-group').removeClass('has-error');
+					},
+					success:function(element){
+						element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+					}
+				});
+	
 			var options = { 
-				beforeSubmit:  showRequest,  // pre-submit callback 
-				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::route('classifieds.update')}}',
-				type:'POST'
-			};
-			$('#formEditClassified').ajaxForm(options);
+					beforeSubmit:  showRequest,  // pre-submit callback 
+					success:       showResponse,  // post-submit callback 
+					url:  '{{URL::route('classifieds.update')}}',
+					type:'POST'
+				};
 
+			var optionsClassifiedLang = {
+					beforeSubmit:  showRequestLang,  // pre-submit callback
+					success:       showResponseLang,  // post-submit callback
+					url:  '{{ URL::route('classifieds.saveLang') }}',
+					type:'POST'
+				}
+
+			$('#formEditClassified').ajaxForm(options);
+			$('#formEditClassifiedLanguage').ajaxForm(optionsClassifiedLang);
+			
 		});
 
 		// pre-submit callback
@@ -250,6 +360,33 @@
     		if(responseText.add_photos == 1)
 					document.location.href = responseText.url;
 		} 
+
+			// pre-submit callback
+		function showRequestLang(formData, jqForm, options) {
+			setTimeout(jQuery.fancybox({
+				'content':'<h1>' + '{{ trans('classifieds.sending') }}' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formEditClassifiedLanguage').valid();
+		}
+
+		// post-submit callback
+		function showResponseLang(responseText, statusText, xhr, $form)  {
+			console.log(responseText);
+
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText + '</h1>',
+				'autoScale' : true
+			});
+		}
+
 
 	</script>
 @stop
