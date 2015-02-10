@@ -15,7 +15,7 @@
 		"Actualiced" => "Classified type updated",
 		"Delete" => "¡Classified type successfully removed!",
 		"search" => "search/classifieds",
-
+		"saveLang" =>"agregarIdioma",
 
 		"labels" => array(
 			'name' =>'Name:',
@@ -87,6 +87,10 @@
 		'filtered' => array(
 			'title' => 'Search Results',
 			'subtitle' => 'Results'
-		)
+		),
+
+		'edit_language' => array(
+			'title' => 'Add language', 
+		),
 
 	);

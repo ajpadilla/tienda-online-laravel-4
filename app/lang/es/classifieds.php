@@ -15,7 +15,7 @@
 		"Actualiced" => "Clasificado actualizado",
 		"Delete" => "¡Clasificado eliminado con exito!",
 		"search" => "buscar/clasificados",
-		
+		"saveLang" =>"agregarIdiomaClasificado",
 
 		"labels" => array(
 			'name' =>'Nombre:',
@@ -89,5 +89,10 @@
 		'filtered' => array(
 			'title' => 'Resultados de la busqueda',
 			'subtitle' => 'Resultados'
-		)
+		),
+
+		'edit_language' => array(
+			'title' => 'Agregar idioma', 
+		),
+
 	);
