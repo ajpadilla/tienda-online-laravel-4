@@ -178,6 +178,8 @@ class ClassifiedController extends \BaseController {
 		
 		if(Request::ajax())
 		{
+			$input = [];
+
 			$input = Input::all();
 			try
 			{
@@ -223,7 +225,7 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$classified = $this->classifiedRepository->getClassifiedId($id);
+		$classified = $this->classifiedRepository->getById($id);
 		$language = $this->languageRepository->returnLanguage();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage();
@@ -243,23 +245,22 @@ class ClassifiedController extends \BaseController {
 	{
 		if(Request::ajax())
 		{
+			$input = [];
 			$input = Input::all();
+			
 			try
 			{
 				$this->editClassifiedForm->validate($input);
 				$classified = $this->classifiedRepository->updateClassified($input);
-				if (isset($input['add_photos'])) 
+				
+				if ($input['add_photos'] == 1) 
 				{
-					if ($input['add_photos'] == 1) 
-					{
-						return Response::json(['message' => trans('products.Updated'),
+					return Response::json(['message' => trans('classifieds.Actualiced'),
 						'add_photos' => $input['add_photos'], 'url' => URL::route('photoClassified.create',$classified->id)
 						]);
-					}else{
-						return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
-					}
 				}else{
 					return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
+
 				}
 			}
 			catch (FormValidationException $e)
