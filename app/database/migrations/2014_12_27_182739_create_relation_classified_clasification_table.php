@@ -17,6 +17,7 @@ class CreateRelationClassifiedClasificationTable extends Migration {
 			$table->increments('id');
 			$table->integer('category_id');
 			$table->integer('classified_id');
+			$table->unique(array('category_id', 'classified_id'), 'classified_classification_unique');
 			$table->timestamps();
 			$table->softDeletes();
 		});
