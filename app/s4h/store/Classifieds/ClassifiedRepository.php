@@ -49,16 +49,21 @@ class ClassifiedRepository extends BaseRepository
 		$classified->classified_type_id = $data['classified_type_id'];
 		$classified->classified_condition_id = $data['classified_condition_id'];
 		$classified->save();
+		
 		$classified->languages()->attach($data['language_id'], array('name'=> $data['name'],
 			'description'=> $data['description'],
 			'address' => $data['address']
 		));
+
+		if (!is_null($data['categories']))
+			$classified->categories()->sync($data['categories']);
+
 		return $classified;
 	}
 
 	public function updateClassified($data = array())
 	{
-		$classified = $this->getClassifiedId($data['classified_id']);
+		$classified = $this->getById($data['classified_id']);
 		$classified->price = $data['price'];
 		$classified->user_id = 1;
 		$classified->classified_type_id = $data['classified_type_id'];
@@ -77,18 +82,24 @@ class ClassifiedRepository extends BaseRepository
 			));
 		}
 
+		if (isset($data['categories'])){
+			$classified->categories()->sync($data['categories']);
+		}else{
+			$classified->categories()->detach();
+		}
+
 		return $classified;
 	}
 
-	public function delteClassified($classified_id)
+	public function delteClassified($classifiedId)
 	{
-		$classified = $this->getClassifiedId($classified_id);
+		$classified = $this->getById($classifiedId);
 		$classified->delete();
  	}
 
-	public function getClassifiedId($classified_id)
+	public function getById($classifiedId)
 	{
-		return Classified::findOrFail($classified_id);
+		return Classified::findOrFail($classifiedId);
 	}	
 
 	public function getName($data)

@@ -5,16 +5,17 @@
 		"index" => "lista/clasificado",
 		"show"=>"ver/clasificado/{id}",
 		"edit"=>"editar/clasificado/{id}",
-		"update"=>"actualizar/clasificado/{id}",
+		"update"=>"actualizar/clasificado",
 		"destroy"=>"eliminar/clasificado/{id}",
 		"filterClassified" => "resultado/busqueda/clasificados", 
-		"title" => "Agregar Tipo de clasificado",
+		"title" => "Agregar clasificado",
 		"subtitle" => "Crear clasificado",
 		"sending" => "Agregando clasificado",
 		"response" => "Clasificado agregado",
 		"Actualiced" => "Clasificado actualizado",
 		"Delete" => "¡Clasificado eliminado con exito!",
 		"search" => "buscar/clasificados",
+		
 
 		"labels" => array(
 			'name' =>'Nombre:',
@@ -26,7 +27,7 @@
 			'classified_type' => 'Tipo de clasificado',
 			'classified_condition' => 'Condición del clasificado',
 			'address' => 'Dirección',
-			'save' => 'Agregar',
+			'save' => 'Guardar',
 			'Yes' => 'Si',
 			'No' => 'No',
 			'user' => 'Usuario',

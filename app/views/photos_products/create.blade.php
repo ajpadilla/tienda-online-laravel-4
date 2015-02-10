@@ -119,7 +119,7 @@
 		});
 
 		myDropzone.on("sending", function(file, xhr, formData) {
-			formData.append('product_id', '{{ $productoId }}');
+			formData.append('productoId', '{{ $productoId }}');
 		  // Show the total progress bar when upload starts
 		  document.querySelector("#total-progress").style.opacity = "1";
 		  // And disable the start button

@@ -31,7 +31,8 @@ class PhotosProductsController extends \BaseController {
 	 */
 	public function create($productoId)
 	{
-		$productLanguage = $this->productRepository->getById($productoId);
+		$product = $this->productRepository->getById($productoId);
+		$productLanguage = $product->getInCurrentLangAttribute();
 		return View::make('photos_products.create',compact('productoId','productLanguage'));
 	}
 
@@ -45,9 +46,9 @@ class PhotosProductsController extends \BaseController {
 	{
 		try {
 			$file = Input::file('file');
-			$product_id = Input::get('product_id');
+			$productoId = Input::get('productoId');
 			$photo = new ProductPhotos();
-			$photo->register($file, $product_id, 1);
+			$photo->register($file, $productoId, 1);
 		} catch(Exception $exception){
 			// Something went wrong. Log it.
 			Log::error($exception);
