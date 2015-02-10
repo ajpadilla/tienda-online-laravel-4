@@ -18,7 +18,7 @@ class Product extends Eloquent{
 	*/
 	public function categories()
 	{
-		return $this->belongsToMany('s4h\store\Categories\Category', 'product_classification')->withTimestamps();;
+		return $this->belongsToMany('s4h\store\Categories\Category', 'product_classification')->withTimestamps();
 	}
 
 	public function languages(){
