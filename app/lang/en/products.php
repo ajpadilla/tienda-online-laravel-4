@@ -15,7 +15,7 @@
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
 		"filter" => "search/results",
-		"saveLang" => 'saveLang',
+		"saveLang" => 'addLanguageClassified',
 		
 		"labels" => array(
 			'name' =>'Name',
