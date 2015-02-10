@@ -10,6 +10,7 @@ use s4h\store\ClassifiedsLang\ClassifiedsLangRepository;
 use s4h\store\Forms\RegisterClassifiedForm;
 use s4h\store\Forms\EditClassifiedForm;
 use s4h\store\Countries\CountryRepository;
+use s4h\store\Forms\EditClassifiedLangForm;
 
 class ClassifiedController extends \BaseController {
 
@@ -21,6 +22,7 @@ class ClassifiedController extends \BaseController {
 	private $registerClassifiedForm;
 	private $editClassifiedForm;
 	private $countryRepository;
+	private $editClassifiedLangForm;
 
 	function __construct(ClassifiedRepository $classifiedRepository, 
 		ClassifiedConditionsRepository $classifiedConditionsRepository, 
@@ -30,7 +32,8 @@ class ClassifiedController extends \BaseController {
 		ClassifiedsLangRepository $classifiedLangRepository,
 		RegisterClassifiedForm $registerClassifiedForm,
 		EditClassifiedForm $editClassifiedForm,
-		CountryRepository $countryRepository
+		CountryRepository $countryRepository,
+		EditClassifiedLangForm $editClassifiedLangForm
 	){
 
 		$this->classifiedRepository = $classifiedRepository;
@@ -42,6 +45,7 @@ class ClassifiedController extends \BaseController {
 		$this->registerClassifiedForm = $registerClassifiedForm;
 		$this->editClassifiedForm = $editClassifiedForm;
 		$this->countryRepository = $countryRepository;
+		$this->editClassifiedLangForm = $editClassifiedLangForm;
 	}
 
 	/**
@@ -145,7 +149,7 @@ class ClassifiedController extends \BaseController {
 							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
 					  </form>";
 
-			$links.= "<button href='#fancybox-edit-language-product' id='language_".$model->classified->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
+			$links.= "<button href='#fancybox-edit-language-classified' id='language_".$model->classified->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
 
 			return $links;
 		});
@@ -376,6 +380,48 @@ class ClassifiedController extends \BaseController {
 				return Response::json(['success'=>true, 'classified' => $classifiedLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
 			}else{
 				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function returnDataClassifiedLang()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('classifiedId') && Input::has('languageId')) 
+			{
+				 $classified = $this->classifiedRepository->getById(Input::get('classifiedId'));
+
+				 $classifiedLang = $classified->accessorinCurrentLang(Input::get('languageId'));
+
+				 if (count($classifiedLang) > 0) 
+				 {
+				 	return Response::json(['success' => true, 'classifiedLang' => $classifiedLang->toArray()]);
+				 }else{
+				 	return Response::json(['success' => false]);
+				 }
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function saveCurrentLangAttribute()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editClassifiedLangForm->validate($input);
+				$classified = $this->classifiedRepository->getById($input['classified_id']);
+				$this->classifiedRepository->updateCurrentLangAttribute($classified, $input);
+				return Response::json([trans('classifieds.Actualiced')]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
 			}
 		}
 	}
