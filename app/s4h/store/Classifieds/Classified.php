@@ -118,4 +118,7 @@ class Classified extends Eloquent {
 		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($language->id)->first();
 	}
 
+	public function accessorinCurrentLang($languageId){
+		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($languageId)->first();
+	}
 }

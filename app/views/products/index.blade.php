@@ -91,6 +91,21 @@
 		$(document).ready(function () 
 		{
 
+			$('.i-checks').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
+			});
+
+				// Iniciar select chosen
+			$('.chosen-select').chosen({width: "95%"});
+
+			$('#description').summernote();
+
+			$('#description_language').summernote();
+
+			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
+			
+
 			loadData();
 
 			/*$('.btn.btn-success.btn-outline.dim.col-sm-6.show').fancybox({
@@ -247,19 +262,7 @@
 				});
 			}
 
-			$('.i-checks').iCheck({
-				checkboxClass: 'icheckbox_square-green',
-				radioClass: 'iradio_square-green',
-			});
-
-				// Iniciar select chosen
-			$('.chosen-select').chosen({width: "95%"});
-
-			$('#description').summernote();
-
-			$('#description_language').summernote();
-
-			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
+			
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 					return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);

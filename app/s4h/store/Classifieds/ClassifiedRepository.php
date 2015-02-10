@@ -125,4 +125,21 @@ class ClassifiedRepository extends BaseRepository
 		return $query->get();
 	}
 
+
+	public function updateCurrentLangAttribute(Classified $classified, $data = array()){
+
+		if (count($classified->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classified->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description'=> $data['description'],
+				'address' => $data['address']
+			));
+		}else{
+			$classified->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description'=> $data['description'],
+				'address' => $data['address']
+			));
+		}
+
+	}
+
 }

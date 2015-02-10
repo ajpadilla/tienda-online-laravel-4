@@ -14,6 +14,8 @@ class ClassifiedsLangRepository{
 		return ClassifiedsLang::where('language_id','=',$language_id)->get();
 	}
 
+	
+
 	public function getNewClassifieds($quantity = 4)
 	{
 		$isoCode = LaravelLocalization::setLocale();
