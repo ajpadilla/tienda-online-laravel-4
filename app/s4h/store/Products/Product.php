@@ -5,8 +5,9 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
+use s4h\store\Base\BaseModel;
 
-class Product extends Eloquent{
+class Product extends BaseModel{
 	use SoftDeletingTrait;
 	protected $softDelete = true;
 	protected $dates = ['deleted_at'];
@@ -128,17 +129,19 @@ class Product extends Eloquent{
 		return false;
 	}
 
-	public function getCategories($language_id)
+	public function getCategories()
 	{
 		$categoriesNames = [];
+
+		$language = $this->getCurrentLang();
 
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
 			{
-				$categories_languages =  $category->languages()->where('language_id','=',$language_id)->get();
-				foreach ($categories_languages as $language)
+				$categoriesLanguages =  $category->languages()->where('language_id','=',$language->id)->get();
+				foreach ($categoriesLanguages as $categoryLanguage)
 				{
-					$categoriesNames[$language->pivot->name] = $language->pivot->name;
+					$categoriesNames[] = $categoryLanguage->pivot->name;
 				}
 			}
 			return $categoriesNames;
