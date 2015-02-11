@@ -59,17 +59,19 @@ class Classified extends BaseModel {
 		return false;
 	}
 
-	public function getCategories($language_id)
+	public function getCategories()
 	{
 		$categoriesNames = [];
+
+		$language = $this->getCurrentLang();
 
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
 			{
-				$categories_languages =  $category->languages()->where('language_id','=',$language_id)->get();
-				foreach ($categories_languages as $language) 
+				$categoriesLanguages =  $category->languages()->where('language_id','=',$language->id)->get();
+				foreach ($categoriesLanguages as $categoryLanguage) 
 				{
-					$categoriesNames[$language->pivot->name] = $language->pivot->name;
+					$categoriesNames[] = $categoryLanguage->pivot->name;
 				}
 			}
 			return $categoriesNames;
@@ -87,11 +89,11 @@ class Classified extends BaseModel {
 			return $categorieIds;
 	}
 
-	public function checkCategory($category_id)
+	public function checkCategory($categoryId)
 	{
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
-				if ($category->id == $category_id)
+				if ($category->id == $categoryId)
 					return true;
 			return false;
 		return false;
