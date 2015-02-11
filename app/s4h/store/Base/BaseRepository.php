@@ -1,10 +1,14 @@
 <?php namespace s4h\store\Base;
 
 
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
+
 /**
 * 
 */
-abstract class BaseRepository {
+abstract class BaseRepository 
+{
 
 	public $filters = [];
 
@@ -28,17 +32,31 @@ abstract class BaseRepository {
 
 			if(method_exists(get_called_class(), $filterMethod))
 			{
-				/*echo "Entro".'<br>';
-				$this->filterMethod($query, $value);*/
-				call_user_func_array(array($this, $filterMethod), array($query, $value, $data['operator']));
+				if ($filterMethod == 'filterByPrice') {
+					$this->filterByPrice($query, $value, $data['operator']);
+				} else {
+					call_user_func_array(array($this, $filterMethod), array($query, $value));
+				}
 			}
 			else
 			{
-				if ($data[$field] != $data['operator'])
+				if ($filterMethod != 'filterByPrice')
 					$query->where($field, $data[$field]);
 			}
 		}
 		return $query->get();
 	}
+
+	public function getCurrentLang(){
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		return $language;
+	}
+
+	public function filterByfilterWord($query, $value){
+		$language = $this->getCurrentLang();
+		$query->where('name', 'LIKE', '%' . $value . '%')->where('language_id','=',$language->id)->orWhere('description', 'LIKE', '%' . $value . '%')->where('language_id','=',$language->id);
+	}
+
 }
 
