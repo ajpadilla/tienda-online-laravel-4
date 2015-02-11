@@ -16,26 +16,26 @@ class ClassifiedRepository extends BaseRepository
 		return new Classified;
 	}
 
-	public $filters = ['cityId','price','classifiedTypeId','classifiedConditionId'];
+	public $filters = ['cityId','price','classifiedTypeId','classifiedConditionId','operator'];
 
 	//public $filters = ['cityId'];
 
-	public function filterByCityId($query, $value)
+	public function filterByCityId($query, $value, $operator)
 	{
 		$query->where('city_id','=',$value);
 	}
 
-	public function filterByPrice($query, $value)
+	public function filterByPrice($query, $value, $operator)
 	{
-		$query->where('price','>=',$value);
+		$query->where('price',''.$operator.'',$value);
 	}
 
-	public function filterByClassifiedTypeId($query, $value)
+	public function filterByClassifiedTypeId($query, $value, $operator)
 	{
 		$query->where('classified_type_id','=',$value);
 	}
 
-	public function filterByClassifiedConditionId($query, $value)
+	public function filterByClassifiedConditionId($query, $value, $operator)
 	{
 		$query->where('classified_condition_id','=',$value);
 	}
