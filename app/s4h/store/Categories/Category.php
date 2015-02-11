@@ -3,8 +3,9 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\CategoriesLang\CategoryLang;
+use s4h\store\Base\BaseModel;
 
-class Category extends Eloquent{
+class Category extends BaseModel{
 
 	use SoftDeletingTrait;
 
@@ -49,9 +50,10 @@ class Category extends Eloquent{
 		return $this->categories->count();
 	}
 
-	public function getName($language_id)
+	public function getName()
 	{
-		$categoryLanguageNane = $this->languages()->where('language_id','=', $language_id)->first();
+		$language = $this->getCurrentLang();
+		$categoryLanguageNane = $this->languages()->where('language_id','=', $language->id)->first();
 		return $categoryLanguageNane->pivot->name;
 	}
 
