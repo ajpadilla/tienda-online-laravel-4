@@ -3,12 +3,13 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\ClassifiedsLang\ClassifiedsLang;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
+use s4h\store\Base\BaseModel;
+
 /**
 * 
 */
-class Classified extends Eloquent {
+class Classified extends BaseModel {
 	
 	use SoftDeletingTrait;
 
@@ -18,6 +19,7 @@ class Classified extends Eloquent {
 
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','classifieds_lang','classified_id','language_id')->withPivot('name','description','address')->withTimestamps();
+		
 	}	
 
 	public function user(){
@@ -121,8 +123,7 @@ class Classified extends Eloquent {
 	}
 
 	public function getInCurrentLangAttribute(){
-		$isoCode = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		$language = $this->getCurrentLang();
 		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($language->id)->first();
 	}
 
