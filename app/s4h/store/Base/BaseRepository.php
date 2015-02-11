@@ -26,9 +26,9 @@ abstract class BaseRepository
 		{
 			$filterMethod = 'filterBy'.studly_case($field);
 
-			echo "field:".$field.'<br>';
-			echo "field:".$value.'<br>';
-			echo "Valor:".$filterMethod.'<br>';
+			/*echo "field:".$field.'<br>';
+			echo "value:".$value.'<br>';
+			echo "method:".$filterMethod.'<br>';*/
 
 			if(method_exists(get_called_class(), $filterMethod))
 			{
@@ -40,7 +40,7 @@ abstract class BaseRepository
 			}
 			else
 			{
-				if ($filterMethod != 'filterByPrice')
+				if ($field != 'operator')
 					$query->where($field, $data[$field]);
 			}
 		}
