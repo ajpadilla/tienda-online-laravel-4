@@ -3,6 +3,7 @@
 use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
 use s4h\store\ProductsLang\ProductLangRepository;
+use s4h\store\ClassifiedsLang\ClassifiedsLangRepository;
 use s4h\store\Products\RegisterProductCommand;
 use s4h\store\Categories\CategoryRepository;
 use s4h\store\Conditions\ConditionRepository;
@@ -28,6 +29,7 @@ class ProductController extends \BaseController {
 	protected $weightRepository;
 	protected $classifiedRepository;
 	protected $editLangProductoForm;
+	protected $classifiedsLangRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
@@ -39,7 +41,8 @@ class ProductController extends \BaseController {
 										ProductLangRepository $productLangRepository,
 										WeightRepository $weightRepository,
 										ClassifiedRepository $classifiedRepository,
-										EditLangProductoForm $editLangProductoForm
+										EditLangProductoForm $editLangProductoForm,
+										ClassifiedsLangRepository $classifiedsLangRepository
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
@@ -53,7 +56,8 @@ class ProductController extends \BaseController {
 		$this->weightRepository = $weightRepository;
 		$this->classifiedRepository = $classifiedRepository;
 		$this->editLangProductoForm = $editLangProductoForm;
-	}
+		$this->classifiedsLangRepository = $classifiedsLangRepository;
+	}	
 
 	public function index()
 	{
@@ -302,22 +306,22 @@ class ProductController extends \BaseController {
 
 		$categoryResult = [];
 
-		$filterWord = (Input::has('filter_word') ? Input::get('filter_word') : '');
-
-		$language_id = $this->languageRepository->returnLanguage()->id;
+		//$languageId = $this->languageRepository->returnLanguage()->id;
 
 		$categories = $this->categoryRepository->getAll();
 
-		$productsSearch = $this->productRepository->filterProducts($filterWord, $language_id);
+		$productsSearch = $this->productLangRepository->search(Input::all());
 
-		$classifiedsSearch = $this->classifiedRepository->filterClassifieds($filterWord, $language_id);
-
+		$classifiedsSearch = $this->classifiedsLangRepository->search(Input::all());
+		
+		//var_dump($productsSearch, $classifiedsSearch);
+		
 		foreach ($categories as $category)
 		{
 			foreach ($productsSearch as $productSearch)
 			{
 				if ($productSearch->product->checkCategory($category->id)){
-					$productResults[$category->getName($language_id)][] = $productSearch;
+					$productResults[$category->getName()][] = $productSearch;
 				}
 			}
 		}
@@ -327,20 +331,20 @@ class ProductController extends \BaseController {
 			foreach ($classifiedsSearch as $classifiedSearch)
 			{
 				if ($classifiedSearch->classified->checkCategory($category->id)){
-					$categoryResults[$category->getName($language_id)][] = $classifiedSearch;
+					$categoryResults[$category->getName()][] = $classifiedSearch;
 				}
 			}
 		}
 
 		//dd($productResults);
-
+		//dd($classifiedsSearch);
+		
 		if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
-			return View::make('products.search', compact('productResults','categoryResults','language_id'));
+			return View::make('products.search', compact('productResults','categoryResults'));
 		} else {
 			Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
 			return View::make('products.search');
 		}
-
 	}
 
 	public function returnDataProduct()
