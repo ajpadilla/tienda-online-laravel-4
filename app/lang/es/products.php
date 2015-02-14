@@ -17,6 +17,7 @@
 		"Delete" => "¡Producto eliminado con éxito!",
 		"filter" => "resultado/busqueda",
 		"saveLang" =>"agregarIdioma",
+		"Products" => "Productos",
 
 		"labels" => array(
 			'name' =>'Nombre',
@@ -104,6 +105,9 @@
 			'Deactivated' => 'Desactivar',
 			'Photo' => 'Agregar foto',
 			'Language' => 'AGREGAR IDIOMA'
+		),
+		'result_search' => array(
+			'title' => 'Resultados de la busqueda'
 		)
 	);
 
