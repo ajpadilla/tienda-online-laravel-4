@@ -17,6 +17,7 @@
 		"search" => "buscar/clasificados",
 		"saveLang" =>"agregarIdiomaClasificado",
 		"delete-ajax" => "clasificado/eliminar-ajax",
+		"Classifieds" => "Clasificados",
 
 		"labels" => array(
 			'name' =>'Nombre:',
@@ -34,7 +35,8 @@
 			'user' => 'Usuario',
 			'new' => 'Nuevo',
 			'NewClassifieds' => 'Nuevos Clasificados',
-			'TopClassifieds' => 'Top Clasificados'
+			'TopClassifieds' => 'Top Clasificados',
+			'image' => 'No se han encontrado imágenes',
 		),
 
 		"list" => array(

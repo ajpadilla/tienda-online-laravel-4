@@ -17,6 +17,7 @@
 		"search" => "search/classifieds",
 		"saveLang" =>"agregarIdioma",
 		"delete-ajax" => "classified/delete-ajax",
+		"Classifieds" => "Classifieds",
 
 		"labels" => array(
 			'name' =>'Name:',
@@ -33,7 +34,8 @@
 			'No' => 'No',
 			'new' => 'New',
 			'NewClassifieds' => 'New Classifieds',
-			'TopClassifieds' => 'Top Classifieds'
+			'TopClassifieds' => 'Top Classifieds',
+			'image' => 'Not images found',
 		),
 
 		"list" => array(
