@@ -3,14 +3,16 @@
 use \Entrust;
 use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
+use s4h\store\Users\UserRepository;
 
 class CartController extends \BaseController {
 
 	protected $productRepository;
 
-	function __construct(ProductRepository $productRepository)
+	function __construct(ProductRepository $productRepository, UserRepository $userRepository)
 	{
 		$this->productRepository = $productRepository;
+		$this->userRepository = $userRepository;
 	}
 
 	/**
@@ -62,9 +64,11 @@ class CartController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id, $user = Auth::user())
 	{
-		//
+		$user = (is_int($user) ? $this->userRepository->get($user) : $user);
+		$cart = $this->cartRepository->getActiveCartForUser($user);
+		View::make('carts.show', compact('cart'));
 	}
 
 

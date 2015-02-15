@@ -553,6 +553,10 @@ function () {
 	/**
 		* ------------------------------ Rutas Carrito de Compras-----------------------
 	**/
+	Route::get(LaravelLocalization::transRoute('cart.show'), [
+		'as' => 'cart.show',
+		'uses' => 'CartController@show'
+	]);
 	Route::get(LaravelLocalization::transRoute('cart.create'), [
 		'as' => 'cart.create',
 		'uses' => 'CartController@create'
