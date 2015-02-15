@@ -15,7 +15,7 @@
 
             {{ Form::open(['route' => 'filtered_products_path','roel' => 'search','class' => 'navbar-form-custom','method'=>'post','id' => 'filterForm']) }}
                 <div class="input-group" style="margin-top:13px;">
-                    {{ Form::text('filter_word', null, ['class' => 'form-control','placeholder' => Lang::get('menu.search'), 'id' => 'filter_word']) }}
+                    {{ Form::text('filterWord', null, ['class' => 'form-control','placeholder' => Lang::get('menu.search'), 'id' => 'filterWord']) }}
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary">
                             <i class="fa fa-search"></i>

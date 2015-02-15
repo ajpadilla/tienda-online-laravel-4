@@ -91,9 +91,32 @@
 		$(document).ready(function () 
 		{
 
+			$('.i-checks').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
+			});
+
+				// Iniciar select chosen
+			$('.chosen-select').chosen({width: "95%"});
+
+			$('#description').summernote();
+
+			$('#description_language').summernote();
+
+			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
+			
+
 			loadData();
 
-			$('.btn.btn-warning').fancybox({
+			/*$('.btn.btn-success.btn-outline.dim.col-sm-6.show').fancybox({
+				openEffect	: 'elastic',
+	    		closeEffect	: 'elastic',
+				centerOnScroll: true,
+				hideOnOverlayClick: true,
+			});*/
+
+
+			$('.btn.btn-warning.btn-outline.dim.col-sm-6.edit').fancybox({
 				openEffect	: 'elastic',
 	    		closeEffect	: 'elastic',
 				centerOnScroll: true,
@@ -101,7 +124,7 @@
 				beforeLoad: loadData()
 			});
 
-			$('.language').fancybox({
+			$('.btn.btn-success.btn-outline.dim.col-sm-6.language').fancybox({
 				openEffect	: 'elastic',
 	    		closeEffect	: 'elastic',
 				centerOnScroll: true,
@@ -114,7 +137,7 @@
 				$('.table').click(function(event)
 				{
 					var target = $( event.target );
-					if (target.is('a')) 
+					if (target.is('button')) 
 					{
 						console.log($(target).attr('id'));
 
@@ -191,6 +214,7 @@
 					data: {'productId': id},
 					dataType: "JSON",
 					success: function(response) {
+						console.log(response.product);
 						if (response.success == true) {
 							$('#product_id_language').val(response.product.product.id);
 							$('#lang_id').val(response.product.language_id);
@@ -238,19 +262,7 @@
 				});
 			}
 
-			$('.i-checks').iCheck({
-				checkboxClass: 'icheckbox_square-green',
-				radioClass: 'iradio_square-green',
-			});
-
-				// Iniciar select chosen
-			$('.chosen-select').chosen({width: "95%"});
-
-			$('#description').summernote();
-
-			$('#description_language').summernote();
-
-			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
+			
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 					return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);

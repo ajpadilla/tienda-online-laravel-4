@@ -3,10 +3,13 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\ClassifiedsLang\ClassifiedsLang;
+use s4h\store\Languages\Language;
+use s4h\store\Base\BaseModel;
+
 /**
 * 
 */
-class Classified extends Eloquent {
+class Classified extends BaseModel {
 	
 	use SoftDeletingTrait;
 
@@ -15,7 +18,8 @@ class Classified extends Eloquent {
 	protected $table = 'classifieds';
 
 	public function languages(){
-		return $this->belongsToMany('s4h\store\Languages\Language','classifieds_lang','classified_id','language_id')->withPivot('name','description','address');
+		return $this->belongsToMany('s4h\store\Languages\Language','classifieds_lang','classified_id','language_id')->withPivot('name','description','address')->withTimestamps();
+		
 	}	
 
 	public function user(){
@@ -32,7 +36,7 @@ class Classified extends Eloquent {
 
 	public function categories()
 	{
-		return $this->belongsToMany('s4h\store\Categories\Category', 'classified_classification','classified_id','category_id');
+		return $this->belongsToMany('s4h\store\Categories\Category', 'classified_classification','classified_id','category_id')->withTimestamps();
 	}
 
 	public function photos()
@@ -55,27 +59,41 @@ class Classified extends Eloquent {
 		return false;
 	}
 
-	public function getCategories($language_id)
+	public function getCategories()
 	{
 		$categoriesNames = [];
+
+		$language = $this->getCurrentLang();
 
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
 			{
-				$categories_languages =  $category->languages()->where('language_id','=',$language_id)->get();
-				foreach ($categories_languages as $language) 
+				$categoriesLanguages =  $category->languages()->where('language_id','=',$language->id)->get();
+				foreach ($categoriesLanguages as $categoryLanguage) 
 				{
-					$categoriesNames[$language->pivot->name] = $language->pivot->name;
+					$categoriesNames[] = $categoryLanguage->pivot->name;
 				}
 			}
 			return $categoriesNames;
 	}
 
-	public function checkCategory($category_id)
+	public function getCategorieIds()
+	{
+		$categorieIds = [];
+
+		if($this->hasCategories())
+			foreach ($this->categories as $category)
+			{
+				$categorieIds[] = $category->id;
+			}
+			return $categorieIds;
+	}
+
+	public function checkCategory($categoryId)
 	{
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
-				if ($category->id == $category_id)
+				if ($category->id == $categoryId)
 					return true;
 			return false;
 		return false;
@@ -94,8 +112,24 @@ class Classified extends Eloquent {
 	{
 		if($this->hasPhotos())
 			$this->photos()->delete();
+
+		if ($this->hasCategories())
+			//$this->categories()->delete();
+			foreach ($this->categories as $category) {
+				$category->delete();
+			}
+
+
 		ClassifiedsLang::where('classified_id','=', $this->id)->delete();
 		return parent::delete();
 	}
 
+	public function getInCurrentLangAttribute(){
+		$language = $this->getCurrentLang();
+		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($language->id)->first();
+	}
+
+	public function getAccessorInCurrentLang($languageId){
+		return ClassifiedsLang::whereClassifiedId($this->id)->whereLanguageId($languageId)->first();
+	}
 }

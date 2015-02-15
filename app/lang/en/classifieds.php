@@ -5,7 +5,7 @@
 		"index" => "list/classified",
 		"show"=>"show/classified/{id}",
 		"edit"=>"edit/classified/{id}",
-		"update"=>"update/classified/{id}",
+		"update"=>"update/classified",
 		"destroy"=>"delete/classified/{id}",
 		"filterClassified" => "search/results/classifieds", 
 		"title" => "Add classified",
@@ -15,7 +15,8 @@
 		"Actualiced" => "Classified type updated",
 		"Delete" => "¡Classified type successfully removed!",
 		"search" => "search/classifieds",
-
+		"saveLang" =>"agregarIdioma",
+		"delete-ajax" => "classified/delete-ajax",
 
 		"labels" => array(
 			'name' =>'Name:',
@@ -87,6 +88,10 @@
 		'filtered' => array(
 			'title' => 'Search Results',
 			'subtitle' => 'Results'
-		)
+		),
+
+		'edit_language' => array(
+			'title' => 'Add language', 
+		),
 
 	);

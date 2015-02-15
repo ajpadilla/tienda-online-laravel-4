@@ -33,7 +33,7 @@
 								<td>{{ $productSearch->product->point_price }}</td>	
 								<td>{{ $productSearch->name }}</td>	
 								<td>
-									@foreach ($productSearch->product->getCategories($language_id) as $value)
+									@foreach ($productSearch->product->getCategories() as $value)
 									{{ $value }}
 									@endforeach
 								</td>	
@@ -63,7 +63,7 @@
 								<!--<td>{{ $classifiedSearch->classified->price }}</td>-->
 								<td>{{ $classifiedSearch->name }}</td>	
 								<td>
-									@foreach ($classifiedSearch->classified->getCategories($language_id) as $value)
+									@foreach ($classifiedSearch->classified->getCategories() as $value)
 									{{ $value }}
 									@endforeach
 								</td>	

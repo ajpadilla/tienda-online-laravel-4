@@ -41,6 +41,20 @@
 								{{ Form::text('price',null, ['class' => 'form-control']) }}
 							</div>
 						</div>
+	
+						<div class="form-group">
+							{{ Form::label('operator', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}
+							<div class="col-sm-6">
+								{{ Form::select('operator',
+									array('>' => '>', 
+										  '<' => '<',
+										  '>=' => '>=',
+										  '<=' => '<=',
+										  '==' => '=='
+										,),
+									null,array('class' => 'form-control','id'=>'operator')) }}
+							</div>
+						</div>
 
 						<div class="form-group">
 							{{ Form::label('classifiedTypeId', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}

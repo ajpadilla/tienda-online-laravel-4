@@ -292,6 +292,7 @@ function () {
 	Route::post('checkNameClassifiedType','ClassifiedTypeController@checkName');
     Route::post('checkNameClassifiedTypesEdit','ClassifiedTypeController@checkNameForEdit');
 
+
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
 	/**
@@ -393,8 +394,20 @@ function () {
 	Route::get('statesForCountry','ClassifiedController@statesForCountry');
 	Route::get('citiesForState','ClassifiedController@citiesForState');
 
+
+	Route::get('returnDataClassifiedLang','ClassifiedController@returnDataClassifiedLang');
+
+	Route::post(LaravelLocalization::transRoute('classifieds.saveLang'), [
+		'as' => 'classifieds.saveLang',
+		'uses' => 'ClassifiedController@saveCurrentLangAttribute'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifieds.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
+
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
+
+	Route::get('returnDataClassified','ClassifiedController@returnDataClassified');
 
 	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedController@getDatatable'));
 

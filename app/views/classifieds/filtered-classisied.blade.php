@@ -25,7 +25,7 @@
 					</thead>
 					<tbody>
 						<tr role="row">
-							<td>{{ $classified->getDataForLanguage($languageId)->pivot->name }}</td>	
+							<td>{{ $classified->getInCurrentLangAttribute()->name }}</td>	
 							<td>{{ $classified->price }}</td>	
 						</tr>
 					</tbody>
