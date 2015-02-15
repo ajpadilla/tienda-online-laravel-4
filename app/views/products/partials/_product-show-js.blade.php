@@ -48,6 +48,13 @@
             });
         }
     }
+
+    var rating = function() {
+        jQuery("#rating").bind('rated', function (event, value) {
+            alert('You\'ve rated it: ' + value);
+        });
+    }
+
     jQuery(document).ready(function(){
 		handleFancybox();
 		initImageZoom();
@@ -56,6 +63,7 @@
         removeFromWishList();
         addToCart();
         removeFromCart();
+        rating();
     });
   </script>
 @stop
