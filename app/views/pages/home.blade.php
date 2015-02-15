@@ -1,9 +1,5 @@
 @extends('layouts.template')
 
-@section('title')
-    {{--{{ Lang::get('modulo.variable') }}--}}
-@stop
-
 @section('content')
 
     <div class="panel-heading">

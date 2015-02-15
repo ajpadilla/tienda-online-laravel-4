@@ -64,11 +64,11 @@ class CartController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id, $user = Auth::user())
+	public function show($id, $user = NULL)
 	{
-		$user = (is_int($user) ? $this->userRepository->get($user) : $user);
+		$user = (is_int($user) ? $this->userRepository->get($user) : Auth::user());
 		$cart = $this->cartRepository->getActiveCartForUser($user);
-		View::make('carts.show', compact('cart'));
+		return View::make('carts.show', compact('cart'));
 	}
 
 

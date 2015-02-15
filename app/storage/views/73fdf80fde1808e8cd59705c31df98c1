@@ -1,19 +1,19 @@
-@extends('layouts.template')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 	<div class="panel-body">
 		<div class="panel blank-panel">
 	        <div class="row margin-bottom-40">
 	          <!-- BEGIN CONTENT -->
 	          <div class="col-md-12 col-sm-12">
 	            <h1>Carro de Compras</h1>
-	            @if(!$cart)
+	            <?php if(!$cart): ?>
 		            <div class="shopping-cart-page">
 		              <div class="shopping-cart-data clearfix">
 		                <p>Tu carro de compras está vacío!</p>
 		              </div>
 		            </div>
-		        @else
+		        <?php else: ?>
 					<div class="goods-page">
 		              <div class="goods-data clearfix">
 		                <div class="table-wrapper-responsive">
@@ -25,7 +25,6 @@
 		                    <th class="goods-page-price">Unit price</th>
 		                    <th class="goods-page-total" colspan="2">Total</th>
 		                  </tr>
-		                  @foreach($cart->products as $product)
 		                  <tr>
 		                    <td class="goods-page-image">
 		                      <a href="#"><img src="../../assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
@@ -53,7 +52,6 @@
 		                      <a class="del-goods" href="#">&nbsp;</a>
 		                    </td>
 		                  </tr>
-		                  @endforeach
 		                </table>
 		                </div>
 
@@ -64,7 +62,7 @@
 		                      <strong class="price"><span>$</span>47.00</strong>
 		                    </li>
 		                    <li>
-		                      <em>Costo de envío</em>
+		                      <em>Shipping cost</em>
 		                      <strong class="price"><span>$</span>3.00</strong>
 		                    </li>
 		                    <li class="shopping-total-price">
@@ -77,14 +75,15 @@
 		              <button class="btn btn-default" type="submit">Continuar compra <i class="fa fa-shopping-cart"></i></button>
 		              <button class="btn btn-primary" type="submit">Pagar <i class="fa fa-check"></i></button>
 		            </div>
-		        @endif
+		        <?php endif; ?>
 	          </div>
 	          <!-- END CONTENT -->
 	        </div>
 	    </div>
     </div>
-@stop
+<?php $__env->stopSection(); ?>
 
- {{-- @include('products.partials._pop-up-products') --}}
+ <?php /* <?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
 
-@include('products.partials._product-show-js')
+<?php echo $__env->make('products.partials._product-show-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
