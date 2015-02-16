@@ -18,6 +18,10 @@
 		"saveLang" =>"agregarIdioma",
 		"delete-ajax" => "classified/delete-ajax",
 		"Classifieds" => "Classifieds",
+		"create-title" => "Create classified",
+		"index-title" => "List of classifieds",
+		"show-title" => "Show classified",
+		"search-title" => "Search classified",
 
 		"labels" => array(
 			'name' =>'Name:',

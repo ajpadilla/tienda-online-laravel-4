@@ -13,6 +13,9 @@
 		"response" => "Tipo de descuento agregado",
 		"Updated" => "Tipo de descuento actualizado",
 		"Delete" => "¡Tipo de descuento eliminado con éxito!",
+		"create-title"=> "Crear tipo de descuento",
+		"index-title" => "Lista de tipos de descuentos",
+		"show-title" => "Ver tipo de descuento",
 
 		"labels" => array(
 			'name' =>'Nombre:',

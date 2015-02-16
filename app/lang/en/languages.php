@@ -5,6 +5,8 @@
 		'index'=>'list/languages',
 		"title" => "Agregar lenguaje",
 		"subtitle" => "Crear nuevo lenguaje",
+		"create-title"=> "Create new language",
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'native_name' => 'Nombre natal:',

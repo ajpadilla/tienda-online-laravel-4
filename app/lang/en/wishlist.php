@@ -4,4 +4,5 @@
 		"store" => "wishlist/store",
 		'delete-ajax' => 'wistlist/delete-ajax/{id}',
 		"index" => "wistlist",
+		"index-title"=> "wish list",
 	);

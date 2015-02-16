@@ -13,6 +13,10 @@
 		"response" => "condition to classifieds added",
 		"Actualiced" => "Condition to classifieds update",
 		"Delete" => "¡Condition to classifieds successfully removed!",
+		"create-title"=> "Create condition classified",
+		"index-title" => "List of condition classified",
+		"show-title" => "Show condition classified",
+
 
 		"labels" => array(
 			'name' =>'Name:',

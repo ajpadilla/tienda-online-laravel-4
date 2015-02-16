@@ -16,6 +16,9 @@
 		"Delete" => "¡Product successfully removed!",
 		"filter" => "search/results",
 		"saveLang" => 'addLanguageClassified',
+		"create-title" => "Create Product",
+		"index-title" => "List of products",
+		"show-title" => "Show Product",
 		
 		"labels" => array(
 			'name' =>'Name',

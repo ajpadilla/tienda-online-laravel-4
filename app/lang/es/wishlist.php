@@ -4,4 +4,5 @@
 		"store" => "deseos/guardar",
 		'delete-ajax' => 'deseos/eliminar-ajax/{id}',
 		"index" => "deseos",
+		"index-title"=> "Lista de deseo",
 	);

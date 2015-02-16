@@ -13,6 +13,9 @@
 		"response" => "Discount type added",
 		"Updated" => "Discount type updated",
 		"Delete" => "¡Discount type successfully removed!",
+		"create-title"=> "Create discount type",
+		"index-title" => "List of discounts type",
+		"show-title" => "Show discounts type",
 
 		"labels" => array(
 			'name' =>'Name:',

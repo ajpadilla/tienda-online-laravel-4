@@ -13,6 +13,9 @@
 		"response" => "Tipo de clasificado agregado",
 		"Actualiced" => "Tipo de clasificado actualizado",
 		"Delete" => "¡Tipo de clasificado eliminado con exito!",
+		"create-title"=> "Crear condición de clasificado",
+		"index-title" => "Lista de condición de clasificado",
+		"show-title" => "Ver condición de clasificado",
 
 		"labels" => array(
 			'name' =>'Nombre:',

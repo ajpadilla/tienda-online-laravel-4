@@ -5,6 +5,7 @@
 		"store" => "add/photo/product",
 		"title" => "Add photo to product",
 		"subtitle" => "Attach photos to product",
+		"create-title"=> "Add photo",
 
 		"labels" => array(
 			'add' => 'Add photo...',

@@ -13,6 +13,9 @@
 		"response" => "Classified type added",
 		"Updated" => "Classified type updated",
 		"Delete" => "¡Classified type successfully removed!",
+		"create-title"=> "Create classified type",
+		"index-title" => "List of classified type",
+		"show-title" => "Show classified type",
 
 		"labels" => array(
 			'name' =>'Name:',

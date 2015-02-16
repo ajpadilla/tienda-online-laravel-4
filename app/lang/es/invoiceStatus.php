@@ -13,6 +13,9 @@
 		"response" => "Estatus para factura agregado",
 		"Updated" => "Estatus para factura actualizado",
 		"Delete" => "¡Estatus para factura eliminado con exito!",
+		"create-title"=> "Crear estatus de factura",
+		"index-title" => "Lista de estatus de factura",
+		"show-title" => "Ver estatus de factura",
 
 		"labels" => array(
 			'language' => 'Idioma',

@@ -13,6 +13,9 @@
 		"response" => "Shipment status added",
 		"Updated" => "Shipment status updated",
 		"Delete" => "¡Shipment status successfully removed!",
+		"create-title"=> "Create shipment status",
+		"index-title" => "List of shipment status",
+		"show-title" => "Show shipment status",
 
 		"labels" => array(
 			'language' => 'language',

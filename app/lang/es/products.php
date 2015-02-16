@@ -18,6 +18,9 @@
 		"filter" => "resultado/busqueda",
 		"saveLang" =>"agregarIdioma",
 		"Products" => "Productos",
+		"create-title" => "Crear Producto",
+		"index-title" => "Lista de productos",
+		"show-title" => "Ver Producto",
 
 		"labels" => array(
 			'name' =>'Nombre',

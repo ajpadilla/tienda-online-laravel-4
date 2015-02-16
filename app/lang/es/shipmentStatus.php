@@ -13,6 +13,9 @@
 		"response" => "Estatus de envio agregando",
 		"Updated" => "Estatus de envio actualizado",
 		"Delete" => "¡Estatus de envion eliminado con exito!",
+		"create-title"=> "Crear estatus de envío",
+		"index-title" => "Lista de estatus de envío",
+		"show-title" => "Ver estatus de envío",
 
 		"labels" => array(
 			'language' => 'Idioma',

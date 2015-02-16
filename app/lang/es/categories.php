@@ -13,6 +13,10 @@ return array(
 	"response" => "categoria agregada",
 	"Actualiced" => "categoria actualizada",
 	"Delete" => "¡categoria eliminada con exito!",
+	"create-title"=> "Crear categoria",
+	"index-title" => "Lista de categorias",
+	"show-title" => "Ver categoria",	
+
 
 	"labels" => array(
 		'language' => 'Idioma',

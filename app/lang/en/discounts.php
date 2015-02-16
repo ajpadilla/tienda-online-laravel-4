@@ -17,6 +17,10 @@
 		"response" => "Discount added",
 		"Updated" => "Discount updated",
 		"Delete" => "¡Discount successfully removed!",
+		"create-title"=> "Create discount",
+		"index-title" => "List of discounts",
+		"show-title" => "Show discounts",
+
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description:',

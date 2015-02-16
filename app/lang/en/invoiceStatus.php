@@ -13,6 +13,10 @@
 		"response" => "Invoice status added",
 		"Updated" => "Invoice status updated",
 		"Delete" => "¡Invoice status successfully removed!",
+		"create-title"=> "Create invoice status",
+		"index-title" => "List of invoice status",
+		"show-title" => "Show invoice status",
+
 
 		"labels" => array(
 			'language' => 'Language',

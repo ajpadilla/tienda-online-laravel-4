@@ -13,6 +13,10 @@
 		"response" => "Descuento agregado",
 		"Updated" => "Descuento actualizado",
 		"Delete" => "¡Descuento eliminado con éxito!",
+		"create-title"=> "Crear descuento",
+		"index-title" => "Lista de descuentos",
+		"show-title" => "Ver descuento",
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',
