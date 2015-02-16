@@ -1,0 +1,148 @@
+<!-- Mainly scripts -->
+<?php echo HTML::script('assets/js/jquery-1.10.2.js');; ?>
+
+<?php echo HTML::script('assets/js/mustache.min.js');; ?>
+
+<?php echo HTML::script('assets/js/bootstrap.min.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js');; ?>
+
+
+<!-- Custom and plugin javascript -->
+<?php echo HTML::script('assets/js/inspinia.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/pace/pace.min.js');; ?>
+
+<?php echo HTML::script('assets/js/jquery-ui.custom.min.js');; ?>
+
+
+<!-- DROPZONE -->
+<?php echo HTML::script('assets/js/plugins/dropzone/dropzone.js');; ?>
+
+
+<!-- Input Mask-->
+<?php echo HTML::script('assets/js/plugins/jasny/jasny-bootstrap.min.js');; ?>
+
+
+<!-- Date picker -->
+<?php echo HTML::script('assets/js/plugins/datapicker/bootstrap-datepicker.js');; ?>
+
+
+<!-- iCheck -->
+<?php echo HTML::script('assets/js/plugins/iCheck/icheck.min.js');; ?>
+
+
+<!-- Full Calendar -->
+<?php echo HTML::script('assets/js/plugins/fullcalendar/fullcalendar.min.js');; ?>
+
+
+<!-- Steps -->
+<?php echo HTML::script('assets/js/plugins/staps/jquery.steps.min.js');; ?>
+
+
+<!-- Jquery Validate -->
+<?php echo HTML::script('assets/js/plugins/validate/jquery.validate.min.js');; ?>
+
+
+<!-- Jquery preimage -->
+<?php echo HTML::script('assets/js/plugins/preimage/preimage.js');; ?>
+
+
+<!-- Jquery Form -->
+<?php echo HTML::script('assets/js/plugins/jQueryForm/jquery.form.min.js');; ?>
+
+
+<!-- Chosen -->
+<?php echo HTML::script('assets/js/plugins/chosen/chosen.jquery.js'); ?>
+
+
+<!-- Jquery Fancybox -->
+<?php echo HTML::script('assets/js/plugins/fancybox/jquery.fancybox.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/fancybox/jquery.fancybox.pack.js');; ?>
+
+
+<!-- summernote -->
+<?php echo HTML::script('assets/js/plugins/summernote/summernote.min.js');; ?>
+
+
+<!-- Jquery UI -->
+<?php echo HTML::script('assets/js/plugins/jquery-ui/jquery-ui.js');; ?>
+
+
+<!-- Datatable -->
+<?php echo HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js');; ?>
+
+
+<!-- simplecolorpicker -->
+<?php echo HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js');; ?>
+
+
+<?php echo HTML::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.js'); ?>
+
+
+<script>
+	jQuery(".btn.btn-info.btn-circle").fancybox({
+		centerOnScroll: true,
+		hideOnOverlayClick: true,
+		type:'iframe',
+		autoScale: true,
+		width : '100%',
+		height : '70%'
+	});
+
+	jQuery(".btn.btn-warning.btn-circle").fancybox({
+		centerOnScroll: true,
+		hideOnOverlayClick: true,
+		type:'iframe',
+		autoScale: true,
+		width : '100%',
+		height : '70%'
+	});
+
+	$('.tooltip-pop').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+
+	var handleMenu = function() {
+        $(".header .navbar-toggle").click(function () {
+            if ($(".header .navbar-collapse").hasClass("open")) {
+                $(".header .navbar-collapse").slideDown(300)
+                .removeClass("open");
+            } else {
+                $(".header .navbar-collapse").slideDown(300)
+                .addClass("open");
+            }
+        });
+    }
+    var handleSubMenuExt = function() {
+        $(".header-navigation.dropdown").on("hover", function() {
+            alert('menu');
+            if ($(this).children(".header-navigation-content-ext").show()) {
+                if ($(".header-navigation-content-ext").height()>=$(".header-navigation-description").height()) {
+                    $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height()+22);
+                }
+            }
+        });
+    }
+
+    var handleSidebarMenu = function () {
+        $(".sidebar .dropdown a i").click(function (event) {
+            event.preventDefault();
+            if ($(this).parent("a").hasClass("collapsed") == false) {
+                $(this).parent("a").addClass("collapsed");
+                $(this).parent("a").siblings(".dropdown-menu").slideDown(300);
+            } else {
+                $(this).parent("a").removeClass("collapsed");
+                $(this).parent("a").siblings(".dropdown-menu").slideUp(300);
+            }
+        });
+    }
+</script>
+
+<?php echo $__env->yieldContent('in-situ-js'); ?>
+
+<?php echo $__env->yieldContent('scripts'); ?>
