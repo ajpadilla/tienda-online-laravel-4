@@ -10,39 +10,35 @@
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('classifieds.searchs.subtitle') }}</h5>
+				<h5> {{ trans('classifieds.searchs.subtitle') }} </h5>
 			</div>
 			<div class="ibox-content">
 				<div class="row">
 					{{ Form::open(['route' => 'classifieds.filterClassified','class'=>'form-horizontal','id' => 'formSearchClassified']) }}
 						<div class="col-lg-12">
-							<div class="row">
-								<div class="form-group">
-									<div class="col-md-2">
-										<!--{{ Form::label('countryId', trans('classifieds.searchs.Country'),['class'=>'col-sm-2 control-label']) }}>-->
+							<div class="form-group">
+								 <div class="col-sm-12">
+								 	<div class="row">
+								 		<div class="col-md-2 ">
+											{{ Form::label('countryId', trans('classifieds.searchs.Country'),['class'=>'']) }}
 
-										 {{ Form::select('countryId',$country,null,array('class' => 'form-control','id'=>'countryId')) }}
-									</div class="col-md-2">
-											
-									<div class="col-md-2">
-										<!--{{ Form::label('stateId', trans('classifieds.searchs.State'),['class'=>'col-sm-1 control-label'])
-											}}-->
-										{{ Form::select('stateId',array(''),null,array('class' => 'form-control','id'=>'stateId')) }}
-									</div>
+											 {{ Form::select('countryId',$country,null,['class' => 'chosen-select form-control','id'=>'countryId']) }}
+										</div>
 
-									<div class="col-md-2">
-										<!--{{ Form::label('cityId', trans('classifieds.searchs.City'),['class'=>'col-sm-1 control-label']) }}-->
-										  		{{ Form::select('cityId',array(''),null,array('class' => 'form-control','id'=>'cityId')) }}
-									</div>
-												
-									<div class="col-md-2">
-										<!--{{ Form::label('price', trans('classifieds.labels.price'),['class'=>'col-sm-2 control-label']) }}-->
-										{{ Form::text('price',null, ['class' => 'form-control']) }}
-											
-									</div>
+										<div class="col-md-2">
+											{{ Form::label('stateId', trans('classifieds.searchs.State'),['class'=>''])
+											}}
 
-									<div class="col-md-2">
-										<!--{{ Form::label('operator', trans('classifieds.labels.precio'),['class'=>'col-md-2 control-label']) }}-->
+											{{ Form::select('stateId',array(''),null,array('class' => 'form-control','placeholder'=> trans('classifieds.searchs.State'),'id'=>'stateId')) }}
+										</div>
+										
+										<div class="col-md-2">
+											{{ Form::label('cityId', trans('classifieds.searchs.City'),['class'=>'']) }}
+											{{ Form::select('cityId',array(''),null,array('class' => 'form-control','id'=>'cityId')) }}
+										</div>
+
+										<div class="col-md-2">
+											{{ Form::label('operator', trans('classifieds.labels.operator'),['class'=>'col-md-2 control-label']) }}
 											{{ Form::select('operator',
 												array('>' => '>', 
 													'<' => '<',
@@ -51,29 +47,36 @@
 													'==' => '=='
 													,),
 													null,array('class' => 'form-control','id'=>'operator')) }}
-									</div>
-											
-									<div class="col-md-2">
-										<!--{{ Form::label('classifiedTypeId', trans('classifieds.labels.classified_type'),['class'=>'col-sm-2 control-label']) }}-->
+										</div>
 
-										{{ Form::select('classifiedTypeId',$classifiedTypes,null,array('class' => 'form-control','id'=>'classifiedTypeId')) }}
-									</div>
-								</div>
-								<div class="row">
-									
-									<div class="col-md-2">
-										<!--{{ Form::label('classifiedConditionId', trans('classifieds.labels.classified_condition'),['class'=>'col-sm-2 control-label']) }}-->
-									
-										{{ Form::select('classifiedConditionId',$classifiedConditions,null,array('class' => 'form-control','id'=>'classifiedConditionId')) }}
-									</div>
-									
-									<div class="col-md-4 col-lg-offset-1">
-										{{ Form::submit(trans('classifieds.searchs.subtitle'), ['class' => 'btn btn-primary']) }}
-									</div>
-								</div>
+										<div class="col-md-2">
+											{{ Form::label('price', trans('classifieds.labels.price'),['class'=>'']) }}
+											{{ Form::text('price',null, ['class' => 'form-control','placeholder' =>'']) }}
+											
+										</div>
+
+										<div class="col-md-2">
+											{{ Form::label('classifiedConditionId', trans('classifieds.labels.condition'),['class'=>'']) }}
+										
+											{{ Form::select('classifiedConditionId',$classifiedConditions,null,array('class' => 'form-control','id'=>'classifiedConditionId')) }}
+										</div>
+
+								 	</div>
+								 	<div class="row">
+								 		<div class="col-md-2">
+											{{ Form::label('classifiedTypeId', trans('classifieds.labels.Type'),['class'=>'']) }}
+
+											{{ Form::select('classifiedTypeId',$classifiedTypes,null,array('class' => 'form-control','id'=>'classifiedTypeId')) }}
+										</div>
+
+										<div class="col-md-4 col-lg-offset-2">
+											{{ Form::submit(trans('classifieds.labels.search'), ['class' => 'boton btn btn-primary']) }}
+										</div>
+								 	</div>
+								 </div>
 							</div>
-					{{ Form::close() }}
-					</div>
+						</div>
+					{{Form::close()}}
 				</div>
 			</div>
 		</div>
@@ -85,6 +88,14 @@
 	<script>
 		$(document).ready(function () 
 		{
+			/*$("#countryId").chosen();
+
+			$("#countryId").chosen().change(function(){
+				console.log($(this).val());
+			});
+				
+			$("#countryId").bind("change",function(){ console.log('hit'); });*/ 
+
 			$('#countryId').click(function() {
 				$.ajax({
 					type: 'GET',
@@ -96,7 +107,7 @@
 						console.log(response.states);
 						if (response.success == true) {
 							$('#stateId').html('');
-							$('#stateId').append('<option value=\"\"> </option>');
+							$('#stateId').append('<option value=\"\"> {{ trans('classifieds.searchs.State') }} </option>');
 							$.each(response.states,function (k,v){
 								$('#stateId').append('<option value=\"'+k+'\">'+v+'</option>');
 							});
@@ -132,4 +143,12 @@
 			});
 		});
 	</script>
+@stop
+
+@section('styles')
+	<style type="text/css">
+		.boton {
+			margin-top: 20px;
+		}
+	</style>
 @stop
