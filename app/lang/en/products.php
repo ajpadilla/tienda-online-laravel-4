@@ -99,6 +99,9 @@
 			'Deactivated' => 'Deactivated',
 			'Photo' => 'Add photo',
 			'Language' => 'Add language'
+		),
+		'result_search' => array(
+			'title' => 'Search results'
 		)
 	);
 
