@@ -53,7 +53,7 @@ h3
   padding-bottom: 4;
   text-transform: uppercase;
 }
-.product-item .add2cart :hover {
+.product-item .add2cart hover {
   color: #fff !important;
   background: #e84d1c !important;
   border-color: #e84d1c;
@@ -61,10 +61,10 @@ h3
 .product-item .add2cart a {
   color: #3e4d5c;
 }
-.product-item .add2cart :hover {
+.product-item .add2cart hover {
   box-shadow: 5px 5px rgba(234,234,234,0.9);
 }
-.product-item .btn:hover {
+.product-item .btnhover {
   background: #f00;
   border-color: #c8c8c8;
 }
@@ -91,7 +91,7 @@ h3
   top: 50%;
   font-size: 12px;
 }
-.product-item:hover .pi-img-wrapper div {
+.product-itemhover .pi-img-wrapper div {
   display: block;
 }
 .product-main-image {
@@ -133,7 +133,7 @@ h3
   height: auto;
   margin: 0 12px 12px 0;
 }
-.product-other-images a:hover img,
+.product-other-images ahover img,
 .product-other-images a.active img {
   box-shadow: 0 0 0 2px #c7ced5;
 }
@@ -257,14 +257,14 @@ a.btn.btn-default {
   background-color: #fff;
   border-color: #ccc;
 }
-a.btn.btn-default:hover {
+a.btn.btn-defaulthover {
   background: #7c7c7c;
 }
-a.btn.btn-default:hover .input-group,
-a.btn.btn-default:hover .input-group-btn {
+a.btn.btn-defaulthover .input-group,
+a.btn.btn-defaulthover .input-group-btn {
   position: static;
 }
-a.btn.btn-default:hover input.form-control {
+a.btn.btn-defaulthover input.form-control {
   border: none;
   background: #edeff1 !important;
   font: 300 23px 'Open Sans', sans-serif;
@@ -274,7 +274,7 @@ a.btn.btn-default:hover input.form-control {
   text-align: center;
   padding: 5px;
 }
-a.btn.btn-default:hover .btn i {
+a.btn.btn-defaulthover .btn i {
   position: relative;
   top: -2px;
   left: 1px;
@@ -459,44 +459,44 @@ a.btn.btn-default:hover .btn i {
 
 .header-navigation, .header-navigation .dropdown
   position static
-  
-.ecommerce .header-navigation 
+
+.ecommerce .header-navigation
   font 19px "PT Sans Narrow", sans-serif
   letter-spacing 1px
   margin 0
 
-.header-navigation, .header-navigation .dropdown 
+.header-navigation, .header-navigation .dropdown
   position static
-  
+
 .header-navigation ul
   margin 0
   padding 0
-  list-style none  
-  
-.ecommerce .header-navigation > ul > li > a 
+  list-style none
+
+.ecommerce .header-navigation > ul > li > a
   color #767f88
   padding 34px 12px 32px
 
 
-.header-navigation > ul > li > a 
+.header-navigation > ul > li > a
   color #333
   display block
   padding 29px 12px 30px
 
 
-a, afocus, ahover, aactive 
+a, afocus, ahover, aactive
   outline 0
   text-decoration none
 
-.ecommerce .header-navigation > ul > li > .dropdown-menu 
+.ecommerce .header-navigation > ul > li > .dropdown-menu
   margin-top -3px
 
-.header-navigation > ul > li > .dropdown-menu 
+.header-navigation > ul > li > .dropdown-menu
   margin-top -5px
   border-top solid 3px transparent
   z-index 1001
 
-.header-navigation .dropdown-menu 
+.header-navigation .dropdown-menu
   left auto
   top 100%
   padding 0
@@ -510,56 +510,56 @@ a, afocus, ahover, aactive
   border-radius 0
   z-index 9999
 
-.header-navigation .dropdown-menu > lifirst-child 
+.header-navigation .dropdown-menu > lifirst-child
   border-top 2px solid #EA4C1D
 
-.header-navigation .dropdown-menu lilast-child 
+.header-navigation .dropdown-menu lilast-child
   border none
 
-.header-navigation .dropdown-menu > lifirst-child 
+.header-navigation .dropdown-menu > lifirst-child
   border-top solid 2px #ea4c1d
 
-.header-navigation .dropdown-menu li 
+.header-navigation .dropdown-menu li
   padding 0
   margin 0
   border-bottom solid 1px #efefef
   position relative
   float none
 
-.header-navigation-content 
+.header-navigation-content
   padding 20px 30px
   min-width 600px
 
 .header-navigation-content .header-navigation-col
   padding 0
-  
-.header-navigation-content h4, .ecommerce .header-navigation-content h4 
+
+.header-navigation-content h4, .ecommerce .header-navigation-content h4
   font bold 15px 'Open Sans', Arial, sans-serif
   margin 0 0 6px
   padding 10px 10px 5px
   border-bottom solid 1px #f0f0f0
-  
-.header-navigation-content ul 
+
+.header-navigation-content ul
   padding 0
   margin 0 0 10px
   list-style none
-  
-.header-navigation .dropdown-menu li 
+
+.header-navigation .dropdown-menu li
   padding 0
   margin 0
   border-bottom solid 1px #efefef
   position relative
   float none
-  
-.header-navigation .dropdown-menu li > a 
+
+.header-navigation .dropdown-menu li > a
   padding 10px 15px
   font-weight 400
   color #767f88
 
-.header-navigation .dropdown-menu a 
+.header-navigation .dropdown-menu a
   position relative
 
-.header-navigation-content li > a 
+.header-navigation-content li > a
   display block*/
 .dropdown-submenu {
   position: relative;
@@ -573,10 +573,10 @@ a, afocus, ahover, aactive
   -moz-border-radius: 0 6px 6px;
   border-radius: 0 6px 6px 6px;
 }
-.dropdown-submenu:hover>.dropdown-menu {
+.dropdown-submenuhover>.dropdown-menu {
   display: block;
 }
-.dropdown-submenu>a:after {
+.dropdown-submenu>aafter {
   display: block;
   content: " ";
   float: right;
@@ -589,7 +589,7 @@ a, afocus, ahover, aactive
   margin-top: 5px;
   margin-right: -10px;
 }
-.dropdown-submenu:hover>a:after {
+.dropdown-submenuhover>aafter {
   border-left-color: #fff;
 }
 .dropdown-submenu.pull-left {
@@ -601,4 +601,78 @@ a, afocus, ahover, aactive
   -webkit-border-radius: 6px 0 6px 6px;
   -moz-border-radius: 6px 0 6px 6px;
   border-radius: 6px 0 6px 6px;
+}
+.shopping-total,
+.checkout-total-block {
+  width: 230px;
+  float: right;
+  padding-top: 9px;
+  color: #3e4d5c;
+}
+.shopping-total ul,
+.checkout-total-block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.shopping-total li,
+.checkout-total-block li {
+  border-bottom: solid 1px #ecebeb;
+  width: 100%;
+  overflow: hidden;
+  padding: 9px 0;
+}
+.shopping-total em,
+.checkout-total-block em {
+  font: 18px 'PT Sans Narrow', sans-serif;
+  float: left;
+  text-transform: uppercase;
+  position: relative;
+  top: 2px;
+}
+.shopping-total strong,
+.checkout-total-block strong {
+  color: #e84d1c;
+  font: 21px 'PT Sans Narrow', sans-serif;
+  font-weight: normal;
+  float: right;
+}
+.shopping-total strong span,
+.checkout-total-block strong span {
+  font-size: 17px;
+}
+.shopping-total lilast-child,
+.checkout-total-block lilast-child {
+  border: none;
+}
+.shopping-total li,
+.checkout-total-block li {
+  border-bottom: solid 1px #ecebeb;
+  width: 100%;
+  overflow: hidden;
+  padding: 9px 0;
+}
+.shopping-total-price,
+.checkout-total-price {
+  font-weight: bold;
+}
+.goods-page .btn-defaulthover {
+  border: 1px solid #408cc2;
+  background: #408cc2;
+}
+.goods-page .btn-default {
+  float: left;
+  border: 1px solid #5ea8dc;
+  background: #5ea8dc;
+  color: #fff;
+}
+.goods-page .btn-primary {
+  float: right;
+  margin-right: 10px;
+}
+.btn-primary {
+  background: #e94d1c;
+}
+.btn {
+  text-transform: uppercase;
 }

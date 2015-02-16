@@ -34,8 +34,8 @@
                 <li class="divider"></li>
                 <li>
                     <div class="text-center link-block">
-                        <a href="notifications.html">
-                            <strong>More details</strong>
+                        <a href="{{ route('cart.show', $cart->id) }}">
+                            <strong>Más Detalles</strong>
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </div>

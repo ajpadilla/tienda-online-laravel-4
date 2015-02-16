@@ -49,8 +49,8 @@
 			  </div>
 			  @include('products.partials._buttons-actions-set')
 			  <div class="review">
-			    <input type="range" value="4" step="0.25" id="backing4">
-			    <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+			    <input id="backing4" type="range" value="5" step="0.5">
+			    <div id="rating" class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
 			    </div>
 			    <a href="#">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Write a review</a>
 			  </div>

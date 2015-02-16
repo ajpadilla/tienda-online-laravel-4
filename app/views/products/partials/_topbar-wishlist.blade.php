@@ -32,7 +32,7 @@
                 <li>
                     <div class="text-center link-block">
                         <a href="{{ route('wishlist.index') }}">
-                            <strong>More details</strong>
+                            <strong>Más Detalles</strong>
                             <i class="fa fa-angle-right"></i>
                         </a>
                     </div>
