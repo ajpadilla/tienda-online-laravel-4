@@ -37,6 +37,10 @@
 			'NewClassifieds' => 'Nuevos Clasificados',
 			'TopClassifieds' => 'Top Clasificados',
 			'image' => 'No se han encontrado imágenes',
+			'operator' => 'Operador',
+			'condition' => 'Condición',
+			'Type'=> 'Tipo',
+			'search' => 'Buscar'
 		),
 
 		"list" => array(
@@ -83,7 +87,7 @@
 
 		'searchs' => array(
 			'title' => 'Buscar clasificado',
-			'subtitle' => 'Buscar',
+			'subtitle' => 'Buscar clasificado por:',
 			'Country' => 'País', 
 			'City' => 'Ciudad',
 			'State' => 'Estado',

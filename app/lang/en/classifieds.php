@@ -36,6 +36,10 @@
 			'NewClassifieds' => 'New Classifieds',
 			'TopClassifieds' => 'Top Classifieds',
 			'image' => 'Not images found',
+			'operator' => 'Operator',
+			'condition' => 'Condition',
+			'Type'=> 'Type',
+			'Search' => 'Buscar'
 		),
 
 		"list" => array(
