@@ -44,7 +44,8 @@
 	    </div>
     </div>
 @stop
-
-@include('products.partials._pop-up-products')
-
-@include('products.partials._product-show-js')
+@if($newProducts)
+	@foreach($newProducts as $product)
+		@include('products.partials._pop-up-products')
+	@endforeach		    
+@endif

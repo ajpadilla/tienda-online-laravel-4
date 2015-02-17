@@ -1,5 +1,4 @@
-@if($newProducts)
-	@foreach($newProducts as $product)
+		    
 		<div id="product-pop-up-{{ $product->product_id }}" style="display: none; width: 700px;">
 		            <div class="product-page product-pop-up">
 		              <div class="row">
@@ -62,5 +61,3 @@
 		              </div>
 		            </div>
 		    </div>
-	@endforeach
-@endif

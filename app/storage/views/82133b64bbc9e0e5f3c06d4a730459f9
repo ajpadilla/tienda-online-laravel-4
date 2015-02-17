@@ -83,6 +83,18 @@
 <?php echo HTML::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.js'); ?>
 
 
+<?php echo HTML::script('assets/js/plugins/rateit/jquery.rateit.min.js'); ?>
+
+<?php echo HTML::script('assets/js/plugins/zoom/jquery.zoom.min.js'); ?>
+
+<?php echo HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js'); ?>
+
+<?php echo HTML::script('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js'); ?>
+
+<!-- product zoom -->
+<?php echo HTML::script('assets/js/custom.js'); ?>
+
+
 <script>
 	jQuery(".btn.btn-info.btn-circle").fancybox({
 		centerOnScroll: true,

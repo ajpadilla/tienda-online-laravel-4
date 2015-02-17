@@ -14,12 +14,12 @@
 		"response" => "Product added",
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
-		"filter" => "search/results",
+		"search" => "products/search",
 		"saveLang" => 'addLanguageClassified',
 		"create-title" => "Create Product",
 		"index-title" => "List of products",
 		"show-title" => "Show Product",
-		
+
 		"labels" => array(
 			'name' =>'Name',
 			'description' => 'Description',
@@ -91,7 +91,7 @@
 		),
 
 		'edit_language' => array(
-			'title' => 'Add language', 
+			'title' => 'Add language',
 		),
 
 		'actions' => array(

@@ -1,5 +1,5 @@
-<div class="col-lg-9">
-    <h2>This is main title</h2>
+<div class="col-lg-8">
+    @yield('main-title')
     <ol class="breadcrumb">
         <li>
             <a href="index.html">This is</a>
