@@ -1,427 +1,451 @@
 .btn
-  text-transform uppercase
+  text-transform: uppercase
 
 .top-cart-info
-  background #f9f9f9
-  color #595f65
-  border solid 1px #ececec
-  border-radius 16px !important
-  float left
-  padding 8px 39px 6px 13px
-  line-height 1.2
+  background: #f9f9f9
+  color: #595f65
+  border: solid 1px #ececec
+  border-radius: 16px !important
+  float: left
+  padding: 8px 39px 6px 13px
+  line-height: 1.2
 
 .top-cart-content-wrapper
-  position absolute
-  right -2px
-  top 100%
-  z-index 99999
+  position: absolute
+  right: -2px
+  top: 100%
+  z-index: 99999
 
 .top-cart-content
-  padding 8px 0 10px
-  background #fcfafb
-  border-top solid 2px #ea4c1d
-  box-shadow 5px 5px rgba(91, 91, 91, 0.2)
-  width 364px
-  margin-top 12px
-  color #717880
-  display none
-  position relative
-  transition opacity .3s ease-in-out
-  -moz-transition opacity .3s ease-in-out
-  -webkit-transition opacity .3s ease-in-out
+  padding: 8px 0 10px
+  background: #fcfafb
+  border-top: solid 2px #ea4c1d
+  box-shadow: 5px 5px rgba(91,91,91,0.2)
+  width: 364px
+  margin-top: 12px
+  color: #717880
+  display: none
+  position: relative
+  transition: opacity 0.3s ease-in-out
+  -moz-transition: opacity 0.3s ease-in-out
+  -webkit-transition: opacity 0.3s ease-in-out
 
 .pi-price
-  color red
-  font 18px 'PT Sans Narrow', sans-serif
-  float left
-  padding-top 1px
+  color: #f00
+  font: 18px 'PT Sans Narrow', sans-serif
+  float: left
+  padding-top: 1px
 
 .product-item
-  margin-right 10px
-  padding 12px 12px 16px
-  background #fff
-  position relative
+  margin-right: 10px
+  padding: 12px 12px 16px
+  background: #fff
+  position: relative
 
-  .add2cart
-    float right
-    color #a8aeb3
-    border 1px #ededed solid
-    padding 3px 6px
+.product-item .add2cart
+  float: right
+  color: #a8aeb3
+  border: 1px #ededed solid
+  padding: 3px 6px
+h3
+  font: 300 14px 'Open Sans', sans-serif
+  padding-top: 10px
+  padding-bottom: 4
+  text-transform: uppercase
 
-    hover
-      color #fff !important
-      background #E84D1C !important
-      border-color #E84D1C
+.product-item .add2cart :hover
+  color: #fff !important
+  background: #e84d1c !important
+  border-color: #e84d1c
 
-    h3
-    font 300 14px 'Open Sans', sans-serif
-    padding-top 10px
-    padding-bottom 4
-    text-transform uppercase
+.product-item .add2cart a
+  color: #3e4d5c
 
-    a
-      color #3e4d5c
+.product-item .add2cart :hover
+  box-shadow: 5px 5px rgba(234,234,234,0.9)
 
-    hover
-      box-shadow 5px 5px rgba(234, 234, 234, 0.9)
-
-  .btnhover
-    background red
-    border-color #c8c8c8
+.product-item .btn:hover
+  background: #f00
+  border-color: #c8c8c8
 
 .pi-img-wrapper
-  position relative
+  position: relative
 
-  div
-    background rgba(0,0,0,0.3)
-    position absolute
-    left 0
-    top 0
-    display none
-    width 100%
-    height 100%
-    text-align center
+.pi-img-wrapper div
+  background: rgba(0,0,0,0.3)
+  position: absolute
+  left: 0
+  top: 0
+  display: none
+  width: 100%
+  height: 100%
+  text-align: center
 
 .btn-default
-    padding 3px 10px
-    color #fff
-    border 1px #fff solid
-    margin -13px 5px 0
-    background transparent
-    position relative
-    top 50%
-    font-size 12px
+  padding: 3px 10px
+  color: #fff
+  border: 1px #fff solid
+  margin: -13px 5px 0
+  background: transparent
+  position: relative
+  top: 50%
+  font-size: 12px
 
-
-.product-itemhover
-  .pi-img-wrapper
-    div
-      display block
+.product-item:hover .pi-img-wrapper div
+  display: block
 
 .product-main-image
-  margin-bottom 20px
+  margin-bottom: 20px
 
-  img
-    width 100%
+.product-main-image img
+  width: 100%
 
 .product-page
-  background #fff
-  padding 22px
-  position relative
-  margin-right 10px
+  background: #fff
+  padding: 22px
+  position: relative
+  margin-right: 10px
 
 .product-pop-up
-  padding 0
-  overflow-x hidden
-  background inherit
+  padding: 0
+  overflow-x: hidden
+  background: inherit
 
-  .product-quantity, .product-quantity .input-group
-    margin-right 15px
+.product-pop-up .product-quantity,
+.product-pop-up .product-quantity .input-group
+  margin-right: 15px
 
-  .btn-primary
-    margin-right 10px
+.product-pop-up .btn-primary
+  margin-right: 10px
 
-  .product-page-cart
-    .btn
-      padding 7px 5px
-    a.btn
-      padding 9px 5px 5px
-      display inline-block
+.product-pop-up .product-page-cart .btn
+  padding: 7px 5px
 
-.product-other-images
-  text-align left
-
-  img
-    width 58px
-    height auto
-    margin 0 12px 12px 0
+.product-pop-up .product-page-cart a.btn
+  padding: 9px 5px 5px
+  display: inline-block
 
 .product-other-images
-  ahover, a.active
-      img
-          box-shadow 0 0 0 2px #c7ced5
+  text-align: left
 
-.ecommerce
-  h2
-    font-size 20px
-  .sidebar
-    font 15px 'PT Sans Narrow' sans-serif
-    color #3E4D5C
-    text-transform uppercase
-    .list-group-item
-      background rgba(244,244,244,0.5)
-      border none
-      display block
-      margin-bottom 2px
-      padding 7px 10px
-      position relative
-      border-radius 0
-    .list-group-item
-      background #fff
-      padding 8px 10px 6px
-  .nav-tabs
-    text-transform uppercase
-    font 16px/1 "PT Sans Narrow", sans-serif
+.product-other-images img
+  width: 58px
+  height: auto
+  margin: 0 12px 12px 0
 
-.sidebar-menu
-  a
-    display block
-  .fa-angle-right
-    position relative
-    top 1px
-    margin-right 2px
-    float left
+.product-other-images a:hover img,
+.product-other-images a.active img
+  box-shadow: 0 0 0 2px #c7ced5
+
+.ecommerce h2
+  font-size: 20px
+
+.ecommerce .sidebar
+  font: 15px 'PT Sans Narrow' sans-serif
+  color: #3e4d5c
+  text-transform: uppercase
+
+.ecommerce .sidebar .list-group-item
+  background: rgba(244,244,244,0.5)
+  border: none
+  display: block
+  margin-bottom: 2px
+  padding: 7px 10px
+  position: relative
+  border-radius: 0
+
+.ecommerce .sidebar .list-group-item
+  background: #fff
+  padding: 8px 10px 6px
+
+.ecommerce .nav-tabs
+  text-transform: uppercase
+  font: 16px/1 "PT Sans Narrow", sans-serif
+
+.sidebar-menu a
+  display: block
+
+.sidebar-menu .fa-angle-right
+  position: relative
+  top: 1px
+  margin-right: 2px
+  float: left
 
 .margin-bottom-25
-  margin-bottom 25px !important
+  margin-bottom: 25px !important
 
 .price-availability-block
-  border-bottom 1px solid #f4f4f4
-  padding-bottom 12px
-  margin-bottom 17px
+  border-bottom: 1px solid #f4f4f4
+  padding-bottom: 12px
+  margin-bottom: 17px
 
-  .availability
-    float right
-    color #7b8a99
+.price-availability-block .availability
+  float: right
+  color: #7b8a99
 
-    strong
-      font-weight normal
-      color #3e4d5c
+.price-availability-block .availability strong
+  font-weight: normal
+  color: #3e4d5c
 
-  .price
-    float left
-    font-family 'PT Sans Narrow' sans-serif
+.price-availability-block .price
+  float: left
+  font-family: 'PT Sans Narrow' sans-serif
 
-    strong
-      color #e84d1c
-      font-size 35px
-      font-weight normal
+.price-availability-block .price strong
+  color: #e84d1c
+  font-size: 35px
+  font-weight: normal
 
-      span
-        font-size 25px
+.price-availability-block .price strong span
+  font-size: 25px
 
-    em
-      font-style normal
-      color #bbb
-      font-size 17px
+.price-availability-block .price em
+  font-style: normal
+  color: #bbb
+  font-size: 17px
 
-      span
-        font-size 23px
-        text-decoration line-through
+.price-availability-block .price em span
+  font-size: 23px
+  text-decoration: line-through
 
 .control-label
-  margin-top 1px
+  margin-top: 1px
 
 .product-page-options
-  border-top 1px solid #f4f4f4
-  border-bottom 1px solid #f4f4f4
-  padding 20px 0
-  margin-bottom 20px
-  width 100%
-  overflow hidden
+  border-top: 1px solid #f4f4f4
+  border-bottom: 1px solid #f4f4f4
+  padding: 20px 0
+  margin-bottom: 20px
+  width: 100%
+  overflow: hidden
 
-  select
-    .input-sm
-      float left
-      width auto
-      height 26px
+.product-page-options select .input-sm
+  float: left
+  width: auto
+  height: 26px
 
-  label
-    font-weight normal
-    text-transform uppercase
-    color #8e9ca8
-    font-family "PT Sans Narrow", sans-serif
-    float left
-    margin-right 10px
-    padding-top 2px
+.product-page-options label
+  font-weight: normal
+  text-transform: uppercase
+  color: #8e9ca8
+  font-family: "PT Sans Narrow", sans-serif
+  float: left
+  margin-right: 10px
+  padding-top: 2px
 
-  .pull-left
-    margin-right 40px
+.product-page-options .pull-left
+  margin-right: 40px
 
 .product-page-cart
-  border-bottom 1px solid #f4f4f4
-  padding-bottom 20px
-  margin-bottom 18px
+  border-bottom: 1px solid #f4f4f4
+  padding-bottom: 20px
+  margin-bottom: 18px
 
-  .btn
-    padding 7px 20px
-    font-size 13px
-    height 38px
+.product-page-cart .btn
+  padding: 7px 20px
+  font-size: 13px
+  height: 38px
 
 .product-quantity
-  width 70px
-  float left
-  margin-right 20px
-  position relative
+  width: 70px
+  float: left
+  margin-right: 20px
+  position: relative
+
 a.btn.btn-default
-  color #333333
-  background-color white
-  border-color #cccccc
+  color: #333
+  background-color: #fff
+  border-color: #ccc
 
-a.btn.btn-defaulthover
-  background #7C7C7C
+a.btn.btn-default:hover
+  background: #7c7c7c
 
-  .input-group
+a.btn.btn-default:hover .input-group,
+a.btn.btn-default:hover .input-group-btn
+  position: static
 
-  .input-group-btn
-    position static
+a.btn.btn-default:hover input.form-control
+  border: none
+  background: #edeff1 !important
+  font: 300 23px 'Open Sans', sans-serif
+  color: #647484
+  height: 38px
+  width: 50px
+  text-align: center
+  padding: 5px
 
-  input.form-control
-      border none
-      background #edeff1 !important
-      font 300 23px 'Open Sans', sans-serif
-      color #647484
-      height 38px
-      width 50px
-      text-align center
-      padding 5px
+a.btn.btn-default:hover .btn i
+  position: relative
+  top: -2px
+  left: 1px
 
-  .btn
-    i
-      position relative
-      top -2px
-      left 1px
+.product-page .review
+  color: #6e7a85
+  font-family: 'Open Sans', sans-serif
+  border-bottom: 1px solid #f4f4f4
+  padding-bottom: 18px
+  margin-bottom: 20px
+  font-weight: 300
 
-.product-page
-  .review
-    color #6e7a85
-    font-family 'Open Sans', sans-serif
-    border-bottom 1px solid #f4f4f4
-    padding-bottom 18px
-    margin-bottom 20px
-    font-weight 300
-    a
-      color #e6400c
-  .rateit
-    margin-right 27px
-    position relative
-    top 2px
-  .social-icons
-    li
-      a
-        background-position 0 -38px
-        opacity 1
-  .nav-tabs
-    margin-top 1px
+.product-page .review a
+  color: #e6400c
+
+.product-page .rateit
+  margin-right: 27px
+  position: relative
+  top: 2px
+
+.product-page .social-icons li a
+  background-position: 0 -38px
+  opacity: 1
+
+.product-page .nav-tabs
+  margin-top: 1px
 
 .social-icons
-  padding 0
-  margin 0
-  li
-    float left
-    display inline
-    list-style none
-    margin-right 5px
-    margin-bottom 5px
-    text-indent -9999px
+  padding: 0
+  margin: 0
+
+.social-icons li
+  float: left
+  display: inline
+  list-style: none
+  margin-right: 5px
+  margin-bottom: 5px
+  text-indent: -9999px
 
 .product-page-content
-  width 100%
-  overflow hidden
-  padding 50px 13px 0
+  width: 100%
+  overflow: hidden
+  padding: 50px 13px 0
 
 .nav-tabs
-  border-color #e6400c
+  border-color: #e6400c
 
 .sidebar-products
-  background #fff
-  padding 15px 15px 20px
-  h2
-    font-size 18px
-    margin-bottom 14px
-  .item
-    width 100%
-    overflow hidden
-    padding-bottom 15px
-    margin-bottom 15px
-    border-bottom solid 1px #eee
-  img
-    width 65px
-    height auto
-    float left
-  h3
-    font 300 13px 'Open Sans' sans-serif
-    /* text-transform none */
-    margin-left 80px
-    margin-bottom 2px
-  .price
-    margin-left 80px
-    color #E84D1C
-    font 16px 'PT Sans Narrow', sans-serif
+  background: #fff
+  padding: 15px 15px 20px
+
+.sidebar-products h2
+  font-size: 18px
+  margin-bottom: 14px
+
+.sidebar-products .item
+  width: 100%
+  overflow: hidden
+  padding-bottom: 15px
+  margin-bottom: 15px
+  border-bottom: solid 1px #eee
+
+.sidebar-products img
+  width: 65px
+  height: auto
+  float: left
+
+.sidebar-products h3
+  font: 300 13px 'Open Sans' sans-serif
+  /* text-transform none */
+  margin-left: 80px
+  margin-bottom: 2px
+
+.sidebar-products .price
+  margin-left: 80px
+  color: #e84d1c
+  font: 16px 'PT Sans Narrow', sans-serif
 
 .goods-data
-  background #fff
-  padding 20px
-  margin-bottom 20px
-  overflow-x auto
-  margin-right 10px
+  background: #fff
+  padding: 20px
+  margin-bottom: 20px
+  overflow-x: auto
+  margin-right: 10px
 
-.goods-page-image, .checkout-image
-  width 105px
+.goods-page-image,
+.checkout-image
+  width: 105px
 
-.goods-data a, .checkout-page .checkout-description a
-  color #e6400c
+.goods-data a,
+.checkout-page .checkout-description a
+  color: #e6400c
 
-.goods-data table, .checkout-page table
-  width 100%
-  font 300 13px 'Open Sans' sans-serif
+.goods-data table,
+.checkout-page table
+  width: 100%
+  font: 300 13px 'Open Sans' sans-serif
 
-.goods-data th, .checkout-page th
-  font 16px "PT Sans Narrow", sans-serif
-  text-transform uppercase
-  border-bottom solid 1px #ecebeb
-  padding-bottom 8px
+.goods-data th,
+.checkout-page th
+  font: 16px "PT Sans Narrow", sans-serif
+  text-transform: uppercase
+  border-bottom: solid 1px #ecebeb
+  padding-bottom: 8px
 
-.goods-page-image img, .checkout-image img
-  width 75px
+.goods-page-image img,
+.checkout-image img
+  width: 75px
 
-.goods-data h3, .checkout-page .checkout-description h3
-  font 300 14px 'Open Sans', sans-serif
-  text-transform inherit
-  padding 0
-  margin 0 0 5px
+.goods-data h3,
+.checkout-page .checkout-description h3
+  font: 300 14px 'Open Sans', sans-serif
+  text-transform: inherit
+  padding: 0
+  margin: 0 0 5px
 
-.goods-data p, .checkout-description p
-  margin-bottom 2px
+.goods-data p,
+.checkout-description p
+  margin-bottom: 2px
 
-.goods-page-description em, .checkout-description em
-  display block
-  font-style normal
+.goods-page-description em,
+.checkout-description em
+  display: block
+  font-style: normal
 
-.goods-data td, .checkout-page td
-  vertical-align top
-  padding 20px 20px 20px 0
-  border-bottom solid 1px #ecebeb
+.goods-data td,
+.checkout-page td
+  vertical-align: top
+  padding: 20px 20px 20px 0
+  border-bottom: solid 1px #ecebeb
 
-.goods-page-price, .goods-page-total, .checkout-price, .checkout-total
-  font-family 'PT Sans Narrow' sans-serif
+.goods-page-price,
+.goods-page-total,
+.checkout-price,
+.checkout-total
+  font-family: 'PT Sans Narrow' sans-serif
 
-.goods-page-price strong, .goods-page-total strong, .checkout-price strong, .checkout-total strong
-  color #e84d1c
-  font-size 21px
-  font-weight normal
+.goods-page-price strong,
+.goods-page-total strong,
+.checkout-price strong,
+.checkout-total strong
+  color: #e84d1c
+  font-size: 21px
+  font-weight: normal
 
-.goods-page-price strong span, .goods-page-total strong span, .checkout-price strong span, .checkout-total strong span
-  font-size 17px
+.goods-page-price strong span,
+.goods-page-total strong span,
+.checkout-price strong span,
+.checkout-total strong span
+  font-size: 17px
 
-.goods-data .del-goods, .goods-data .add-goods
-  margin-top 4px
+.goods-data .del-goods,
+.goods-data .add-goods
+  margin-top: 4px
 
 .del-goods
-  background #d7dde3 url(icons/del-goods.png) no-repeat 50% 50%
+  background: #d7dde3 url("icons/del-goods.png") no-repeat 50% 50%
 
 .add-goods
-  background #7bdd00 url(icons/add-goods.png) no-repeat 50% 50%
+  background: #7bdd00 url("icons/add-goods.png") no-repeat 50% 50%
 
-.del-goods, .add-goods
-  width 25px
-  height 25px
-  color #fff !important
-  border-radius 22px !important
-  float right
-  margin 10px 0 0 5px
-  line-height 1
-  font-size 16px
+.del-goods,
+.add-goods
+  width: 25px
+  height: 25px
+  color: #fff !important
+  border-radius: 22px !important
+  float: right
+  margin: 10px 0 0 5px
+  line-height: 1
+  font-size: 16px
 
 /*.header-navigation
   font 15px "Open Sans", sans-serif
@@ -537,47 +561,47 @@ a, afocus, ahover, aactive
 
 .header-navigation-content li > a
   display block*/
-
 .dropdown-submenu
-  position relative
+  position: relative
 
 .dropdown-submenu>.dropdown-menu
-  top 0
-  left 100%
-  margin-top -6px
-  margin-left -1px
-  -webkit-border-radius 0 6px 6px 6px
-  -moz-border-radius 0 6px 6px
-  border-radius 0 6px 6px 6px
+  top: 0
+  left: 100%
+  margin-top: -6px
+  margin-left: -1px
+  -webkit-border-radius: 0 6px 6px 6px
+  -moz-border-radius: 0 6px 6px
+  border-radius: 0 6px 6px 6px
 
-.dropdown-submenuhover>.dropdown-menu
-  display block
+.dropdown-submenu:hover>.dropdown-menu
+  display: block
 
-.dropdown-submenu>aafter
-  display block
-  content " "
-  float right
-  width 0
-  height 0
-  border-color transparent
-  border-style solid
-  border-width 5px 0 5px 5px
-  border-left-color #ccc
-  margin-top 5px
-  margin-right -10px
+.dropdown-submenu>a:after
+  display: block
+  content: " "
+  float: right
+  width: 0
+  height: 0
+  border-color: transparent
+  border-style: solid
+  border-width: 5px 0 5px 5px
+  border-left-color: #ccc
+  margin-top: 5px
+  margin-right: -10px
 
-.dropdown-submenuhover>aafter
-  border-left-color #fff
+.dropdown-submenu:hover>a:after
+  border-left-color: #fff
 
 .dropdown-submenu.pull-left
-  float none
+  float: none
 
 .dropdown-submenu.pull-left>.dropdown-menu
-  left -100%
-  margin-left 10px
-  -webkit-border-radius 6px 0 6px 6px
-  -moz-border-radius 6px 0 6px 6px
-  border-radius 6px 0 6px 6px
+  left: -100%
+  margin-left: 10px
+  -webkit-border-radius: 6px 0 6px 6px
+  -moz-border-radius: 6px 0 6px 6px
+  border-radius: 6px 0 6px 6px
+
 
 .shopping-total, .checkout-total-block
   width 230px
@@ -626,7 +650,7 @@ a, afocus, ahover, aactive
 .shopping-total-price, .checkout-total-price
   font-weight bold
 
-.goods-page .btn-defaulthover
+.goods-page .btn-default:hover
   border 1px solid #408cc2
   background #408cc2
 
@@ -761,7 +785,7 @@ div.checker, div.checker span, div.checker input
 .list-view *
   display none !important
 
-a, afocus, ahover, aactive
+a, afocus, a:hover, a:active
   outline 0
   text-decoration none
 
@@ -812,6 +836,6 @@ select.form-control
   border none
   color #868c93
 
-.pagination > li > span, .pagination > li > span:hover
+.pagination > li > span, .pagination > li > span::hover
   background #555
   color #fff

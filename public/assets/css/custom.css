@@ -47,13 +47,14 @@
   color: #a8aeb3;
   border: 1px #ededed solid;
   padding: 3px 6px;
-h3
+}
+h3 {
   font: 300 14px 'Open Sans', sans-serif;
   padding-top: 10px;
   padding-bottom: 4;
   text-transform: uppercase;
 }
-.product-item .add2cart hover {
+.product-item .add2cart :hover {
   color: #fff !important;
   background: #e84d1c !important;
   border-color: #e84d1c;
@@ -61,10 +62,10 @@ h3
 .product-item .add2cart a {
   color: #3e4d5c;
 }
-.product-item .add2cart hover {
+.product-item .add2cart :hover {
   box-shadow: 5px 5px rgba(234,234,234,0.9);
 }
-.product-item .btnhover {
+.product-item .btn:hover {
   background: #f00;
   border-color: #c8c8c8;
 }
@@ -91,7 +92,7 @@ h3
   top: 50%;
   font-size: 12px;
 }
-.product-itemhover .pi-img-wrapper div {
+.product-item:hover .pi-img-wrapper div {
   display: block;
 }
 .product-main-image {
@@ -133,7 +134,7 @@ h3
   height: auto;
   margin: 0 12px 12px 0;
 }
-.product-other-images ahover img,
+.product-other-images a:hover img,
 .product-other-images a.active img {
   box-shadow: 0 0 0 2px #c7ced5;
 }
@@ -257,14 +258,14 @@ a.btn.btn-default {
   background-color: #fff;
   border-color: #ccc;
 }
-a.btn.btn-defaulthover {
+a.btn.btn-default:hover {
   background: #7c7c7c;
 }
-a.btn.btn-defaulthover .input-group,
-a.btn.btn-defaulthover .input-group-btn {
+a.btn.btn-default:hover .input-group,
+a.btn.btn-default:hover .input-group-btn {
   position: static;
 }
-a.btn.btn-defaulthover input.form-control {
+a.btn.btn-default:hover input.form-control {
   border: none;
   background: #edeff1 !important;
   font: 300 23px 'Open Sans', sans-serif;
@@ -274,7 +275,7 @@ a.btn.btn-defaulthover input.form-control {
   text-align: center;
   padding: 5px;
 }
-a.btn.btn-defaulthover .btn i {
+a.btn.btn-default:hover .btn i {
   position: relative;
   top: -2px;
   left: 1px;
@@ -573,10 +574,10 @@ a, afocus, ahover, aactive
   -moz-border-radius: 0 6px 6px;
   border-radius: 0 6px 6px 6px;
 }
-.dropdown-submenuhover>.dropdown-menu {
+.dropdown-submenu:hover>.dropdown-menu {
   display: block;
 }
-.dropdown-submenu>aafter {
+.dropdown-submenu>a:after {
   display: block;
   content: " ";
   float: right;
@@ -589,7 +590,7 @@ a, afocus, ahover, aactive
   margin-top: 5px;
   margin-right: -10px;
 }
-.dropdown-submenuhover>aafter {
+.dropdown-submenu:hover>a:after {
   border-left-color: #fff;
 }
 .dropdown-submenu.pull-left {
@@ -656,7 +657,7 @@ a, afocus, ahover, aactive
 .checkout-total-price {
   font-weight: bold;
 }
-.goods-page .btn-defaulthover {
+.goods-page .btn-default:hover {
   border: 1px solid #408cc2;
   background: #408cc2;
 }
@@ -796,8 +797,8 @@ div.checker input {
 }
 a,
 afocus,
-ahover,
-aactive {
+a:hover,
+a:active {
   outline: 0;
   text-decoration: none;
 }
@@ -852,7 +853,7 @@ select.form-control {
   color: #868c93;
 }
 .pagination > li > span,
-.pagination > li > span:hover {
+.pagination > li > span::hover {
   background: #555;
   color: #fff;
 }
