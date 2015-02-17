@@ -57,7 +57,7 @@ class ProductController extends \BaseController {
 		$this->classifiedRepository = $classifiedRepository;
 		$this->editLangProductoForm = $editLangProductoForm;
 		$this->classifiedsLangRepository = $classifiedsLangRepository;
-	}	
+	}
 
 	public function index()
 	{
@@ -180,7 +180,7 @@ class ProductController extends \BaseController {
 	{
 		if (Request::ajax())
 		{
-			//if($productRepository->isInAnyBuy(Input::get('productId')) 
+			//if($productRepository->isInAnyBuy(Input::get('productId'))
 			$this->productRepository->deleteProduct(Input::get('productId'));
 			return Response::json(['success' => true]);
 		}
@@ -197,7 +197,7 @@ class ProductController extends \BaseController {
 		$collection->addColumn('photo', function($model)
 		{
 			$links = '';
-			
+
 			$photo = $model->product->getFirstPhoto();
 
 			if ($photo != false) {
@@ -205,8 +205,8 @@ class ProductController extends \BaseController {
 									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
 				</a>";
 			}
-			
-				
+
+
 			return $links;
 		});
 
@@ -278,7 +278,7 @@ class ProductController extends \BaseController {
 
 			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6' id='delet_".$model->product->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>";
-					 
+
 			if ($model->product->active)
 			{
 				$links.= "<button href='#' class='btn btn-primary btn-outline dim col-sm-6 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />";
@@ -300,6 +300,11 @@ class ProductController extends \BaseController {
 		return $collection->make();
 	}
 
+	public function buscar()
+	{
+		return View::make('products.search-style');
+	}
+
 	public function search() {
 
 		$productResults = [];
@@ -313,9 +318,9 @@ class ProductController extends \BaseController {
 		$productsSearch = $this->productLangRepository->search(Input::all());
 
 		$classifiedsSearch = $this->classifiedsLangRepository->search(Input::all());
-		
+
 		//var_dump($productsSearch, $classifiedsSearch);
-		
+
 		foreach ($categories as $category)
 		{
 			foreach ($productsSearch as $productSearch)
@@ -338,7 +343,7 @@ class ProductController extends \BaseController {
 
 		//dd($productResults);
 		//dd($classifiedsSearch);
-		
+
 		if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
 			return View::make('products.search', compact('productResults','categoryResults'));
 		} else {
@@ -349,9 +354,9 @@ class ProductController extends \BaseController {
 
 	public function returnDataProduct()
 	{
-		if (Request::ajax()) 
+		if (Request::ajax())
 		{
-			if (Input::has('productId')) 
+			if (Input::has('productId'))
 			{
 				$product = $this->productRepository->getById(Input::get('productId'));
 				$productLanguage = $product->getInCurrentLangAttribute();
@@ -365,12 +370,12 @@ class ProductController extends \BaseController {
 
 	public function returnDataProductLang()
 	{
-		if (Request::ajax()) 
+		if (Request::ajax())
 		{
-			if (Input::has('productId') && Input::has('languageId')) 
+			if (Input::has('productId') && Input::has('languageId'))
 			{
 				 $productLang = $this->productLangRepository->getProductForLanguage(Input::get('productId'), Input::get('languageId'));
-				 if (count($productLang) > 0) 
+				 if (count($productLang) > 0)
 				 {
 				 	return Response::json(['success' => true, 'productLang' => $productLang->toArray()]);
 				 }else{

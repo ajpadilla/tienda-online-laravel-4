@@ -1,9 +1,5 @@
 @extends('layouts.template')
 
-@section('title')
-{{ trans('products.list.title') }}
-@stop
-
 @section('content')
 @include('layouts.partials._error')
 <div class="row">
@@ -38,18 +34,18 @@
 										<td class="col-md-4">
 											@if ($productSearch->product->getFirstPhoto())
 												<a href="{{ URL::route('products.show',$productSearch->product->id) }}"><img class="mini-photo" src="{{ asset($productSearch->product->getFirstPhoto()->complete_path) }}" alt="$productSearch->product->getFirstPhoto()->filename"></a>
-											@else 
+											@else
 												{{ Lang::get('products.labels.image') }}
-											@endif 
+											@endif
 										</td>
-										<td class="col-md-4">{{ $productSearch->name }}</td>	
+										<td class="col-md-4">{{ $productSearch->name }}</td>
 										<td class="col-md-4">
 											@foreach ($productSearch->product->getCategories() as $value)
 												{{ $value }}
 											@endforeach
-										</td>	
-										<td class="col-md-4">{{ $productSearch->product->point_price }}</td>	
-										<td class="col-md-4">{{ $productSearch->product->price }}</td>	
+										</td>
+										<td class="col-md-4">{{ $productSearch->product->point_price }}</td>
+										<td class="col-md-4">{{ $productSearch->product->price }}</td>
 									</tr>
 								@endforeach
 							</tbody>
@@ -80,17 +76,17 @@
 										<td class="col-md-4">
 											@if ($classifiedSearch->classified->getFirstPhoto())
 												<a href="{{ URL::route('classifieds.show',$classifiedSearch->classified->id) }}"><img class="mini-photo" src="{{ asset($classifiedSearch->classified->getFirstPhoto()->complete_path) }}" alt="$classifiedSearch->classified->getFirstPhoto()->filename"></a>
-											@else 
+											@else
 												{{ Lang::get('classifieds.labels.image') }}
-											@endif 
+											@endif
 										</td>
-										<td class="col-md-4">{{ $classifiedSearch->name }}</td>	
+										<td class="col-md-4">{{ $classifiedSearch->name }}</td>
 										<td class="col-md-4">
 											@foreach ($classifiedSearch->classified->getCategories() as $value)
 												{{ $value }}
 											@endforeach
-										</td>	
-										<td class="col-md-4">{{ $classifiedSearch->classified->price }}</td>	
+										</td>
+										<td class="col-md-4">{{ $classifiedSearch->classified->price }}</td>
 									</tr>
 								@endforeach
 							</tbody>

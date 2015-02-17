@@ -16,6 +16,7 @@
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
 		"filter" => "resultado/busqueda",
+		"search" => "productos/busqueda",
 		"saveLang" =>"agregarIdioma",
 		"Products" => "Productos",
 		"create-title" => "Crear Producto",
@@ -96,7 +97,7 @@
 		),
 
 		'edit_language' => array(
-			'title' => 'Agregar Nuevo Idioma', 
+			'title' => 'Agregar Nuevo Idioma',
 		),
 
 		'actions' => array(
