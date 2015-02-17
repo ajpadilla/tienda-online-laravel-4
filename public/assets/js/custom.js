@@ -42,13 +42,13 @@ var handleFancybox = function () {
 }
 
 var initSliderRange = function () {
-    jQuery( "#slider-range" ).slider({
+    jQuery( "#slider-range-price" ).slider({
         range: true,
         min: 0,
         max: 9999,
         values: [ 1, 9999 ],
         slide: function( event, ui ) {
-            jQuery( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            jQuery( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
         },
         change: function(event, ui) {
             // when the user change the slider
@@ -61,8 +61,30 @@ var initSliderRange = function () {
             //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
         }
     });
-    jQuery( "#amount" ).val( "$" + jQuery( "#slider-range" ).slider( "values", 0 ) +
-    " - $" + jQuery( "#slider-range" ).slider( "values", 1 ) );
+    jQuery( "#price" ).val( "$" + jQuery( "#slider-range-price" ).slider( "values", 0 ) +
+    " - $" + jQuery( "#slider-range-price" ).slider( "values", 1 ) );
+
+    jQuery( "#slider-range-price-points" ).slider({
+        range: true,
+        min: 0,
+        max: 9999,
+        values: [ 1, 9999 ],
+        slide: function( event, ui ) {
+            jQuery( "#price-points" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        },
+        change: function(event, ui) {
+            // when the user change the slider
+        },
+        stop: function(event, ui) {
+            // when the user stopped changing the slider
+            var firstValue = ui.values[0];
+            var secondValue = ui.values[1];
+            //alert('First: '+firstValue);
+            //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
+        }
+    });
+    jQuery( "#price-points" ).val( "$" + jQuery( "#slider-range-price-points" ).slider( "values", 0 ) +
+    " - $" + jQuery( "#slider-range-price-points" ).slider( "values", 1 ) );
 }
 
 /*

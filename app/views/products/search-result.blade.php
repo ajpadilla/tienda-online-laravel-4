@@ -44,15 +44,15 @@
                   </form>
                 </div>
               </div>
-            </div>--}}             
+            </div>--}}
             <div class="row list-view-sorting clearfix">
               <div class="col-md-2 col-sm-2 list-view">
                 <a href="#"><i class="fa fa-th-large"></i></a>
                 <a href="#"><i class="fa fa-th-list"></i></a>
-              </div>	                       
+              </div>
               @include('products.partials.search._order-by-search')
             </div>
-			<!-- BEGIN PAGINATOR -->	
+			<!-- BEGIN PAGINATOR -->
             <div class="row">
               <div class="col-md-4 col-sm-4 items-info">Productos 1 a 9 de 10 en total</div>
               <div class="col-md-8 col-sm-8">
@@ -67,7 +67,7 @@
                 </ul>
               </div>
             </div>
-            <!-- END PAGINATOR -->            
+            <!-- END PAGINATOR -->
             <!-- BEGIN PRODUCT LIST -->
             <div class="row product-list">
               <!-- PRODUCT ITEM START -->
@@ -108,5 +108,5 @@
 @if($products)
 	@foreach($products as $product)
 		@include('products.partials._pop-up-products')
-	@endforeach		    
+	@endforeach
 @endif

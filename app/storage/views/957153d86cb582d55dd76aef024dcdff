@@ -6,12 +6,12 @@
       <a href="<?php echo asset($product->getFirstPhoto()->complete_path); ?>" class="btn btn-default fancybox-button" alt=" <?php echo $product->getFirstPhoto()->filename; ?>"><i class="fa fa-search-plus fa-3x"></i>
       </a>
       <?php else: ?>
-      <img class="img-responsive" src="<?php echo asset('/uploads/products/images/model1.jpg'); ?>" alt="not-path"/>
-      <div>
+        <img class="img-responsive" src="<?php echo asset('/uploads/products/images/model1.jpg'); ?>" alt="not-path"/>
+        <div>
         <a href="<?php echo asset('/uploads/products/images/model1.jpg'); ?>" class="btn btn-default fancybox-button" alt="not-path">
           <i class="fa fa-search-plus fa-3x"></i>
         </a>
-        <?php endif; ?>
+      <?php endif; ?>
         <a href="#product-pop-up-<?php echo $product->product_id; ?>" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
       </div>
     </div>
