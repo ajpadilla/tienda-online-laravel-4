@@ -1,10 +1,11 @@
 <div class="sidebar-filter margin-bottom-25">
   <h2>Opciones de Búsqueda</h2>
-  <h3>Disponibilidad</h3>
+  <h3>Condición</h3>
   <div class="checkbox-list">
-    <label><input type="checkbox"> No disponible (3)</label>
-    <label><input type="checkbox"> En stock (26)</label>
-    <label><input type="checkbox"> </label>
+    <label><input type="checkbox"> Nuevos</label>
+    <label><input type="checkbox"> Usados</label>
+    <label><input type="checkbox"> En venta</label>
+    <label><input type="checkbox"> Para trueque</label>
   </div>
 
   <h3>Precio</h3>

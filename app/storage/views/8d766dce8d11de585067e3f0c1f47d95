@@ -44,15 +44,15 @@
                   </form>
                 </div>
               </div>
-            </div>*/ ?>             
+            </div>*/ ?>
             <div class="row list-view-sorting clearfix">
               <div class="col-md-2 col-sm-2 list-view">
                 <a href="#"><i class="fa fa-th-large"></i></a>
                 <a href="#"><i class="fa fa-th-list"></i></a>
-              </div>	                       
+              </div>
               <?php echo $__env->make('products.partials.search._order-by-search', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
-			<!-- BEGIN PAGINATOR -->	
+			<!-- BEGIN PAGINATOR -->
             <div class="row">
               <div class="col-md-4 col-sm-4 items-info">Productos 1 a 9 de 10 en total</div>
               <div class="col-md-8 col-sm-8">
@@ -67,7 +67,7 @@
                 </ul>
               </div>
             </div>
-            <!-- END PAGINATOR -->            
+            <!-- END PAGINATOR -->
             <!-- BEGIN PRODUCT LIST -->
             <div class="row product-list">
               <!-- PRODUCT ITEM START -->
@@ -108,6 +108,6 @@
 <?php if($products): ?>
 	<?php foreach($products as $product): ?>
 		<?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-	<?php endforeach; ?>		    
+	<?php endforeach; ?>
 <?php endif; ?>
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
