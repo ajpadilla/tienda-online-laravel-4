@@ -1,0 +1,132 @@
+<?php $__env->startSection('title'); ?>
+<?php /*<?php echo trans('discounts.labels.name'); ?>*/ ?>
+<?php echo trans('discounts.show_data.title'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title">
+				<h5><?php echo trans('discounts.show_data.subtitle'); ?></h5>
+			</div>
+			<div class="ibox-content">
+				<div class="row">
+					<?php echo Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']); ?>
+
+					<div class="col-sm-6 b-r">
+						<div class="form-group">
+							<?php echo Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('code',$discount_language->name, ['class' => 'form-control','id' =>'code',
+								'readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('code', trans('discounts.labels.code'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('code',$discount->code, ['class' => 'form-control','id' =>'code',
+								'readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('name', trans('discounts.labels.name'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('name',$discount_language->pivot->name, ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('description', trans('discounts.labels.description'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::textarea('description',$discount_language->pivot->description, ['class' => 'form-control', 'rows' => '3','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('value',  trans('discounts.labels.value'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('value',$discount->value, ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('percent', trans('discounts.labels.percent'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('percent',$discount->percent, ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('quantity', trans('discounts.labels.quantity'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('quantity',$discount->quantity, ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6">
+						<div class="form-group">
+							<?php echo Form::label('quantity_per_user', trans('discounts.labels.quantity_per_user'),['class'=>'col-sm-4 control-label']); ?>
+
+							<div class="col-sm-6 ">
+								<?php echo Form::text('quantity_per_user',$discount->quantity_per_user, ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('active', trans('discounts.labels.active'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::select('active',array('1'=>'Si','2'=>'No'),$discount->active,array('class' => 'form-control','readonly')); ?>
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<?php echo Form::label('from', trans('discounts.labels.from'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('from',date($language->date_format ,strtotime($discount->from)), ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('to', trans('discounts.labels.to'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::text('to',date($language->date_format ,strtotime($discount->to)), ['class' => 'form-control','readonly']); ?>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<?php echo Form::label('discount_type_id', trans('discounts.labels.discount_type'),['class'=>'col-sm-2 control-label']); ?>
+
+							<div class="col-sm-6">
+								<?php echo Form::select('discount_type_id',$discountTypes,$discount->discountType->id,array('class' => 'form-control','selected')); ?>
+
+							</div>
+						</div>
+					</div>
+					<?php echo Form::close(); ?>
+
+				</div>
+		</div>
+	</div>
+</div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
