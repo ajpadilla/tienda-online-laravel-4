@@ -60,7 +60,7 @@
 
 {{ HTML::script('assets/js/plugins/rateit/jquery.rateit.min.js') }}
 {{ HTML::script('assets/js/plugins/zoom/jquery.zoom.min.js') }}
-{{-- HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js') --}}
+{{ HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js') }}
 {{ HTML::script('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js') }}
 <!-- product zoom -->
 {{ HTML::script('assets/js/custom.js') }}

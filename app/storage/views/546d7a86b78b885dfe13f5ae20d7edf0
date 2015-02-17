@@ -13,7 +13,7 @@
                 </div>
             </form>-->
 
-            <?php echo Form::open(['route' => 'filtered_products_path','roel' => 'search','class' => 'navbar-form-custom','method'=>'post','id' => 'filterForm']); ?>
+            <?php echo Form::open(['route' => 'products.search','roel' => 'search','class' => 'navbar-form-custom','method'=>'post','id' => 'filterForm']); ?>
 
                 <div class="input-group" style="margin-top:13px;">
                     <?php echo Form::text('filterWord', null, ['class' => 'form-control','placeholder' => Lang::get('menu.search'), 'id' => 'filterWord']); ?>

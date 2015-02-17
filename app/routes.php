@@ -32,15 +32,14 @@ function () {
 	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
 	Route::get(LaravelLocalization::transRoute('products.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
 	Route::post(LaravelLocalization::transRoute('products.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
-	Route::get(LaravelLocalization::transRoute('products.search'),  ['as' => 'products.search','uses' => 'ProductController@buscar' ] );
 
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
 	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getDatatable'));
 
-	Route::post(LaravelLocalization::transRoute('products.filter'), [
-		'as' => 'filtered_products_path',
+	Route::post(LaravelLocalization::transRoute('products.search'), [
+		'as' => 'products.search',
 		'uses' => 'ProductController@search'
 	]);
 

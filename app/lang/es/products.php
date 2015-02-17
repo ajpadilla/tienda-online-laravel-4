@@ -15,7 +15,6 @@
 		"response" => "Producto agregado",
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
-		"filter" => "resultado/busqueda",
 		"search" => "productos/busqueda",
 		"saveLang" =>"agregarIdioma",
 		"Products" => "Productos",

@@ -300,55 +300,58 @@ class ProductController extends \BaseController {
 		return $collection->make();
 	}
 
-	public function buscar()
-	{
-		return View::make('products.search-style');
-	}
-
 	public function search() {
-
-		$productResults = [];
-
-		$categoryResult = [];
-
-		//$languageId = $this->languageRepository->returnLanguage()->id;
-
-		$categories = $this->categoryRepository->getAll();
-
-		$productsSearch = $this->productLangRepository->search(Input::all());
-
-		$classifiedsSearch = $this->classifiedsLangRepository->search(Input::all());
-
-		//var_dump($productsSearch, $classifiedsSearch);
-
-		foreach ($categories as $category)
-		{
-			foreach ($productsSearch as $productSearch)
-			{
-				if ($productSearch->product->checkCategory($category->id)){
-					$productResults[$category->getName()][] = $productSearch;
-				}
-			}
-		}
-
-		foreach ($categories as $category)
-		{
-			foreach ($classifiedsSearch as $classifiedSearch)
-			{
-				if ($classifiedSearch->classified->checkCategory($category->id)){
-					$categoryResults[$category->getName()][] = $classifiedSearch;
-				}
-			}
-		}
-
-		//dd($productResults);
-		//dd($classifiedsSearch);
-
-		if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
-			return View::make('products.search', compact('productResults','categoryResults'));
+		if(Request::ajax()) {
+			// Aquí se realizará la busqueda en ajax y se retornará en json los resultados
 		} else {
-			Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
-			return View::make('products.search');
+			$productResults = [];
+
+			$categoryResult = [];
+
+			//$languageId = $this->languageRepository->returnLanguage()->id;
+
+			$categories = $this->categoryRepository->getAll();
+
+			$productsSearch = $this->productLangRepository->search(Input::all());
+
+			$classifiedsSearch = $this->classifiedsLangRepository->search(Input::all());
+
+			//var_dump($productsSearch, $classifiedsSearch);
+
+			foreach ($categories as $category)
+			{
+				foreach ($productsSearch as $productSearch)
+				{
+					if ($productSearch->product->checkCategory($category->id)){
+						$productResults[$category->getName()][] = $productSearch;
+					}
+				}
+			}
+
+			foreach ($categories as $category)
+			{
+				foreach ($classifiedsSearch as $classifiedSearch)
+				{
+					if ($classifiedSearch->classified->checkCategory($category->id)){
+						$categoryResults[$category->getName()][] = $classifiedSearch;
+					}
+				}
+			}
+
+			//dd($productResults);
+			//dd($classifiedsSearch);
+
+			if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
+				$products = $productResults;
+				// Lo siguiente es sólo para que la vista se pueda ver debido a que retornas un array
+				// y no una colección de objetos
+				$products = Product::all()->take(6);
+				return View::make('products.search-result', compact('products','categoryResults'));
+			} else {
+				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
+				return View::make('products.search');
+			}
+
 		}
 	}
 

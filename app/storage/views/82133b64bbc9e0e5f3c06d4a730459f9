@@ -87,7 +87,8 @@
 
 <?php echo HTML::script('assets/js/plugins/zoom/jquery.zoom.min.js'); ?>
 
-<?php /* HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js') */ ?>
+<?php echo HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js'); ?>
+
 <?php echo HTML::script('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js'); ?>
 
 <!-- product zoom -->

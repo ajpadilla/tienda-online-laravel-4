@@ -14,7 +14,6 @@
 		"response" => "Product added",
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
-		"filter" => "search/results",
 		"search" => "products/search",
 		"saveLang" => 'addLanguageClassified',
 		"create-title" => "Create Product",
