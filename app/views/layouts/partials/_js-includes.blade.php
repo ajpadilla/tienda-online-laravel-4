@@ -58,6 +58,13 @@
 
 {{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.js') }}
 
+{{ HTML::script('assets/js/plugins/rateit/jquery.rateit.min.js') }}
+{{ HTML::script('assets/js/plugins/zoom/jquery.zoom.min.js') }}
+{{ HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js') }}
+{{ HTML::script('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js') }}
+<!-- product zoom -->
+{{ HTML::script('assets/js/custom.js') }}
+
 <script>
 	jQuery(".btn.btn-info.btn-circle").fancybox({
 		centerOnScroll: true,

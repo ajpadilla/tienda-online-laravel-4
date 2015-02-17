@@ -46,5 +46,3 @@
 @stop
 
 @include('products.partials._pop-up-products')
-
-@include('products.partials._product-show-js')
