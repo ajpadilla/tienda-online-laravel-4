@@ -12,9 +12,11 @@ abstract class BaseRepository
 
 	public $filters = [];
 
+	const PAGINATE = true;
+
 	abstract public function getModel();
 
-	public function search(array $data = array())
+	public function search(array $data = array(), $paginate = false)
 	{
 		$data = array_only($data, $this->filters);
 
@@ -44,7 +46,9 @@ abstract class BaseRepository
 					$query->where($field, $data[$field]);
 			}
 		}
-		return $query->get();
+		return $paginate ?
+            $query->paginate()->appends($data)
+            : $query->get();
 	}
 
 	public function getCurrentLang(){
