@@ -188,9 +188,9 @@ class ProductController extends \BaseController {
 	}
 
 
-	public function getDatatable()
+	public function getAllProductsInCurrentLangData()
 	{
-		$collection = Datatable::collection($this->productLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
+		$collection = Datatable::collection($this->productRepository->getAllInCurrentLangData())
 			->searchColumns( 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
 			->orderColumns('name','price', 'quantity', 'active', 'accept_barter');
 
@@ -205,8 +205,6 @@ class ProductController extends \BaseController {
 									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
 				</a>";
 			}
-
-
 			return $links;
 		});
 
@@ -241,16 +239,12 @@ class ProductController extends \BaseController {
 
 			if($model->product->hasCategories())
 			{
-				$product_categories = $model->product->categories()->get();
+				$productCategoriesName = $model->product->getCategories();
 				$links = '<select class="form-control m-b">';
-				foreach ($product_categories as $category) {
-					$categories_languages =  $category->languages()->where('language_id','=',$language->id)->get();
-					foreach ($categories_languages as $language) {
-						$links .= '<option>'.$language->pivot->name.'</option>';
-					}
+				foreach ($productCategoriesName as $category) {
+					$links .= '<option>'.$category.'</option>';
 				}
 				$links .='</select>';
-
 				return $links;
 			}
 			return '';
@@ -330,10 +324,8 @@ class ProductController extends \BaseController {
 		{
 			if (Input::has('productId'))
 			{
-				$product = $this->productRepository->getById(Input::get('productId'));
-				$productLanguage = $product->getInCurrentLangAttribute();
-				$categories = $productLanguage->product->getCategorieIds();
-				return Response::json(['success'=>true, 'product' => $productLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
+				$product = $this->productRepository->getArrayInCurrentLangData(Input::get('productId'));
+				return Response::json($product);
 			}else{
 				return Response::json(['success' => false]);
 			}
@@ -346,13 +338,8 @@ class ProductController extends \BaseController {
 		{
 			if (Input::has('productId') && Input::has('languageId'))
 			{
-				 $productLang = $this->productLangRepository->getProductForLanguage(Input::get('productId'), Input::get('languageId'));
-				 if (count($productLang) > 0)
-				 {
-				 	return Response::json(['success' => true, 'productLang' => $productLang->toArray()]);
-				 }else{
-				 	return Response::json(['success' => false]);
-				 }
+				 $productLang = $this->productRepository->getDataForLanguage(Input::get('productId'), Input::get('languageId'));
+				 return Response::json($productLang);
 			}else{
 				return Response::json(['success' => false]);
 			}
