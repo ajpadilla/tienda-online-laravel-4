@@ -24,6 +24,12 @@ class ProductRepository extends BaseRepository{
 		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
 	}
 
+	public function getAllInCurrentLangData()
+	{
+		$language = $this->getCurrentLang();
+		return ProductLang::whereLanguageId($language->id)->get();
+	}
+
 	public function save(Product $product)
 	{
 		return $product->save();
@@ -235,4 +241,31 @@ class ProductRepository extends BaseRepository{
 
 		})->count();
 	}
+
+	public function getArrayInCurrentLangData($productId)
+	{
+		$product = $this->getById($productId);
+		$productLanguage = $product->getInCurrentLangAttribute();
+		$categories = $productLanguage->product->getCategorieIds();
+		return[
+			'success' => true, 
+			'product' => $productLanguage->toArray(),
+			'categories' => $categories,
+			'url'=> route('products.update',$productId)
+		];
+	}
+
+	public function getDataForLanguage($productId, $languageId)
+	{
+		$productLang = ProductLang::whereProductId($productId)->whereLanguageId($languageId)->first();
+		if(count($productLang) > 0){
+			return [
+				'success' => true, 
+				'productLang' => $productLang->toArray()
+			];
+		}else{
+			return ['success' => false];
+		}
+	}
+
 }
