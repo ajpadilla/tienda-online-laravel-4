@@ -301,56 +301,25 @@ class ProductController extends \BaseController {
 	}
 
 	public function search() {
+		$products = null;
 		if(Request::ajax()) {
-			// Aquí se realizará la busqueda en ajax y se retornará en json los resultados
+			$productsSearch= $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+
+			return Response::json($productsSearch);
 		} else {
-			$productResults = [];
 
-			$categoryResult = [];
+			/*$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
-			//$languageId = $this->languageRepository->returnLanguage()->id;
-
-			$categories = $this->categoryRepository->getAll();
-
-			$productsSearch = $this->productLangRepository->search(Input::all());
-
-			$classifiedsSearch = $this->classifiedsLangRepository->search(Input::all());
-
-			//var_dump($productsSearch, $classifiedsSearch);
-
-			foreach ($categories as $category)
+			if (!$productsSearch->isEmpty()) 
 			{
-				foreach ($productsSearch as $productSearch)
-				{
-					if ($productSearch->product->checkCategory($category->id)){
-						$productResults[$category->getName()][] = $productSearch;
-					}
-				}
-			}
-
-			foreach ($categories as $category)
-			{
-				foreach ($classifiedsSearch as $classifiedSearch)
-				{
-					if ($classifiedSearch->classified->checkCategory($category->id)){
-						$categoryResults[$category->getName()][] = $classifiedSearch;
-					}
-				}
-			}
-
-			//dd($productResults);
-			//dd($classifiedsSearch);
-
-			if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) {
-				$products = $productResults;
-				// Lo siguiente es sólo para que la vista se pueda ver debido a que retornas un array
-				// y no una colección de objetos
-				$products = Product::all()->take(6);
+				$products = $productsSearch;
 				return View::make('products.search-result', compact('products','categoryResults'));
 			} else {
-				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda: ' . $filterWord);
+				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
 				return View::make('products.search');
-			}
+			}*/
+
+			return View::make('products.search-result', compact('products','categoryResults'));
 
 		}
 	}
