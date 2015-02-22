@@ -10,13 +10,13 @@ use s4h\store\Languages\Language;
 abstract class BaseRepository 
 {
 
-	public $filters = [];
-
 	const PAGINATE = true;
+
+	public $filters = [];
 
 	abstract public function getModel();
 
-	public function search(array $data = array(), $paginate = false)
+	public function search(array $data = array(), $paginate = false, $numItems = 15)
 	{
 		$data = array_only($data, $this->filters);
 
@@ -30,25 +30,21 @@ abstract class BaseRepository
 
 			/*echo "field:".$field.'<br>';
 			echo "value:".$value.'<br>';
+			echo "data:".$data['filterWord'].'<br>';
 			echo "method:".$filterMethod.'<br>';*/
+
+			//return  ['method'=>$filterMethod,'data' =>$data];
 
 			if(method_exists(get_called_class(), $filterMethod))
 			{
-				if ($filterMethod == 'filterByPrice') {
-					$this->filterByPrice($query, $value, $data['operator']);
-				} else {
-					call_user_func_array(array($this, $filterMethod), array($query, $value));
-				}
+				call_user_func_array(array($this, $filterMethod), array($query, $data));
 			}
-			else
+			/*else
 			{
-				if ($field != 'operator')
-					$query->where($field, $data[$field]);
-			}
+				$query->where($field, $data[$field]);
+			}*/
 		}
-		return $paginate ?
-            $query->paginate()->appends($data)
-            : $query->get();
+		return $paginate ? $query->paginate($numItems)->appends($data): $query->get();
 	}
 
 	public function getCurrentLang(){
@@ -57,9 +53,12 @@ abstract class BaseRepository
 		return $language;
 	}
 
-	public function filterByfilterWord($query, $value){
+	public function filterByfilterWord($query, $value)
+	{
 		$language = $this->getCurrentLang();
-		$query->where('name', 'LIKE', '%' . $value . '%')->where('language_id','=',$language->id)->orWhere('description', 'LIKE', '%' . $value . '%')->where('language_id','=',$language->id);
+		$query->with('languages')->whereHas('languages', function($q) use ($value, $language){
+    		$q->where('language_id', '=', $language->id)->where('products_lang.name', 'LIKE', '%' . $value . '%')->orWhere('products_lang.description', 'LIKE', '%' . $value . '%')->where('language_id', '=', $language->id);
+		});
 	}
 
 }
