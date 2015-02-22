@@ -52,16 +52,26 @@ var initSliderRange = function () {
         },
         change: function(event, ui) {
             // when the user change the slider
+            var firstValue = ui.values[0];
+            var secondValue = ui.values[1];
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
             var firstValue = ui.values[0];
             var secondValue = ui.values[1];
             //alert('First: '+firstValue);
-            //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
+            $.ajax({
+                type: 'GET',
+                url: jQuery('#search').attr('href'), 
+                data: { 'price': 0, 'firstValue': ui.values[0], 'secondValue': ui.values[1] },
+                dataType: "JSON", 
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         }
     });
-    jQuery( "#price" ).val( "$" + jQuery( "#slider-range-price" ).slider( "values", 0 ) +
+    jQuery("#price").val( "$" + jQuery( "#slider-range-price" ).slider( "values", 0 ) +
     " - $" + jQuery( "#slider-range-price" ).slider( "values", 1 ) );
 
     jQuery( "#slider-range-price-points" ).slider({
@@ -81,6 +91,15 @@ var initSliderRange = function () {
             var secondValue = ui.values[1];
             //alert('First: '+firstValue);
             //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
+            $.ajax({
+                type: 'GET',
+                url: jQuery('#search').attr('href'), 
+                data: { 'firstValue': ui.values[0], 'secondValue':ui.values[1] },
+                dataType: "JSON", 
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         }
     });
     jQuery( "#price-points" ).val( "$" + jQuery( "#slider-range-price-points" ).slider( "values", 0 ) +

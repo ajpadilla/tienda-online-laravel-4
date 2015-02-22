@@ -6,10 +6,29 @@ use s4h\store\Products\Product;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
+use s4h\store\Base\BaseRepository;
 
-class ProductRepository {
+class ProductRepository extends BaseRepository{
 
 	protected $cartRepository;
+
+	public function getModel()
+    {
+      return new Product;
+    }
+
+    public $filters = ['filterWord','price','firstValue','secondValue'];
+	
+    public function filterByPrice($query, $data = array())
+	{
+		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
+	}
+
+	public function getAllInCurrentLangData()
+	{
+		$language = $this->getCurrentLang();
+		return ProductLang::whereLanguageId($language->id)->get();
+	}
 
 	public function save(Product $product)
 	{
@@ -222,4 +241,31 @@ class ProductRepository {
 
 		})->count();
 	}
+
+	public function getArrayInCurrentLangData($productId)
+	{
+		$product = $this->getById($productId);
+		$productLanguage = $product->getInCurrentLangAttribute();
+		$categories = $productLanguage->product->getCategorieIds();
+		return[
+			'success' => true, 
+			'product' => $productLanguage->toArray(),
+			'categories' => $categories,
+			'url'=> route('products.update',$productId)
+		];
+	}
+
+	public function getDataForLanguage($productId, $languageId)
+	{
+		$productLang = ProductLang::whereProductId($productId)->whereLanguageId($languageId)->first();
+		if(count($productLang) > 0){
+			return [
+				'success' => true, 
+				'productLang' => $productLang->toArray()
+			];
+		}else{
+			return ['success' => false];
+		}
+	}
+
 }
