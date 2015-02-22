@@ -6,10 +6,23 @@ use s4h\store\Products\Product;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
+use s4h\store\Base\BaseRepository;
 
-class ProductRepository {
+class ProductRepository extends BaseRepository{
 
 	protected $cartRepository;
+
+	public function getModel()
+    {
+      return new Product;
+    }
+
+    public $filters = ['filterWord','price','firstValue','secondValue'];
+	
+    public function filterByPrice($query, $data = array())
+	{
+		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
+	}
 
 	public function save(Product $product)
 	{
