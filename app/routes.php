@@ -209,6 +209,13 @@ function () {
 	Route::get(LaravelLocalization::transRoute('shipmentStatus.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
 
 
+	Route::get('returnDataShipmentStatusLang','ShipmentStatusController@returnDataShipmentStatusLang');
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.saveLang'), [
+		'as' => 'shipmentStatus.saveLang',
+		'uses' => 'ShipmentStatusController@saveDataForLanguage'
+	]);
+
 	/**
 		* ------------------------------ Rutas Invoice status  -----------------------
 	**/
