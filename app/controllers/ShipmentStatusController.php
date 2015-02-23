@@ -158,7 +158,7 @@ class ShipmentStatusController extends \BaseController {
 			try
 			{
 				$this->editShipmentStatusForm->validate($input);
-				$this->shipmentStatusRepository->updateShipmentStatu($input);
+				$this->shipmentStatusRepository->updateData($input);
 				return Response::json(trans('shipmentStatus.Updated'));
 			}
 			catch (FormValidationException $e)
