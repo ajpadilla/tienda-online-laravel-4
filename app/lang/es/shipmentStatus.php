@@ -7,6 +7,7 @@
 		"edit"=>"editar/estatus/envio/{id}",
 		"update"=>"actualizar/estatus/envio",
 		"destroy"=>"eliminar/estatus/envio/{id}",
+		'delete-ajax' => 'eliminar-status-envio/delete-ajax',
 		"title" => "Agregar estatus de envío",
 		"subtitle" => "Crear estatus de envío",
 		"sending" => "Agregando estatus de envio",

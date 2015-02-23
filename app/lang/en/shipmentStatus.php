@@ -7,6 +7,7 @@
 		"edit"=>"edit/shipment/status/{id}",
 		"update"=>"update/shipment/status",
 		"destroy"=>"delete/shipment/status/{id}",
+		'delete-ajax' => 'shipment-status/delete-ajax',
 		"title" => "Add shipment status",
 		"subtitle" => "Create shipment status",
 		"sending" => "Adding shipment status",
