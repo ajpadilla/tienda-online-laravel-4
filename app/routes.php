@@ -260,6 +260,21 @@ function () {
 	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
     Route::post('checkNameInvoiceStatusEdit','InvoiceStatusController@checkNameForEdit');
 
+
+    
+   	Route::get('returnDataInvoiceStatus','InvoiceStatusController@returnDataInvoiceStatus');
+	
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.delete-ajax'),  ['as' => 'invoiceStatus.delete-ajax','uses' => 'InvoiceStatusController@deleteAjax' ] );
+
+
+	Route::get('returnDatainvoiceStatusLang','InvoiceStatusController@returnDatainvoiceStatusLang');
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.saveLang'), [
+		'as' => 'invoiceStatus.saveLang',
+		'uses' => 'InvoiceStatusController@saveDataForLanguage'
+	]);
+
+
 	/**
 		* ------------------------------ Rutas classified type -----------------------
 	**/
