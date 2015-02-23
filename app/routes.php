@@ -204,6 +204,9 @@ function () {
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
     Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
 
+   	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
+
+
 
 	/**
 		* ------------------------------ Rutas Invoice status  -----------------------
