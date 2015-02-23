@@ -3,6 +3,7 @@
 use s4h\store\ShipmentStatus\Shipment_Status;
 use s4h\store\ShipmentStatusLang\ShipmentStatusLang;
 use s4h\store\Languages\Language;
+
 /**
 * 
 */
@@ -36,14 +37,14 @@ class ShipmentStatusRepository {
 		return $shipment_status;
 	}
 
-	public function getShipmentStatus($id)
+	public function getById($id)
 	{
-		return Shipment_Status::find($id);
+		return Shipment_Status::findOrFail($id);
 	}
 
 	public function updateShipmentStatu($data = array())
 	{
-		$shipment_status = $this->getShipmentStatus($data['shipment_status_id']);
+		$shipment_status = $this->getById($data['shipment_status_id']);
 		$shipment_status->color = $data['color'];
 		$shipment_status->save();
 
@@ -54,14 +55,25 @@ class ShipmentStatusRepository {
 		}
 	}
 
-	public function deleteShipmentStatu($shipment_status_id)
+	public function deleteShipmentStatu($shipmentStatusId)
 	{
-		$shipment_status = $this->getShipmentStatus($shipment_status_id);
+		$shipment_status = $this->getById($shipmentStatusId);
 		$shipment_status->delete();
 	}
 
 	public function getNameForEdit($data = array())
 	{
 		return ShipmentStatusLang::select()->where('shipment_status_id','!=',$data['shipment_status_id'])->where('name','=',$data['name'])->first();
+	}
+
+	public function getArrayInCurrentLangData($id)
+	{
+		$shipmentStatus = $this->getById($id);
+		$shipmentStatusLanguage = $shipmentStatus->getInCurrentLangAttribute();
+		return[
+			'success' => true, 
+			'shipment_status' => $shipmentStatus->toArray(),
+			'shipment_status_lang' => $shipmentStatusLanguage->toArray(),
+		];
 	}
 }
