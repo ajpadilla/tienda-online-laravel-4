@@ -21,6 +21,7 @@
 		"create-title" => "Crear Producto",
 		"index-title" => "Lista de productos",
 		"show-title" => "Ver Producto",
+		"search-title" => "Busqueda",
 
 		"labels" => array(
 			'name' =>'Nombre',
