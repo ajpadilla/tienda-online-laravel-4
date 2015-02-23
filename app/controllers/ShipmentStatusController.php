@@ -65,19 +65,10 @@ class ShipmentStatusController extends \BaseController {
 			$links.= "<button href='#fancybox-edit-shipment-status' id='edit_".$model->shipment_status->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>";
 
-			/*$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6' id='delet_".$model->product->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->shipment_status->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>";
 
-			if ($model->product->active)
-			{
-				$links.= "<button href='#' class='btn btn-primary btn-outline dim col-sm-6 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />";
-			}
-			else
-			{
-				$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6 activate' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Deactivated')."'  data-original-title='".trans('products.actions.Activate')."'> <i class='fa fa-check fa-2x'></i></button><br />";
-			}
-
-			$links.= "<form action='".route('photoProduct.create',array($model->product->id, $languageId))."' method='get'>
+			/*$links.= "<form action='".route('photoProduct.create',array($model->product->id, $languageId))."' method='get'>
 							<button href='#' class='btn btn-info btn-outline dim col-sm-6 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
 					  </form>";
 
@@ -193,6 +184,15 @@ class ShipmentStatusController extends \BaseController {
 		$this->shipmentStatusRepository->deleteShipmentStatu($id);
 		Flash::message(trans('shipmentStatus.Delete'));
 		return Redirect::route('shipmentStatus.index');
+	}
+
+	public function deleteAjax()
+	{
+		if (Request::ajax()){
+			$this->shipmentStatusRepository->deleteShipmentStatu(Input::get('shipmentStatusId'));
+			return Response::json(['success' => true]);
+		}
+		return Response::json(['success' => false]);
 	}
 
 	public function checkNameShipmentStatus()
