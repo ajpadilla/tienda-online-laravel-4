@@ -17,7 +17,7 @@
 		"create-title"=> "Create shipment status",
 		"index-title" => "List of shipment status",
 		"show-title" => "Show shipment status",
-		"saveLang" => "update-language",
+		"saveLang" => "update-language-shipment-status",
 
 		"labels" => array(
 			'language' => 'language',

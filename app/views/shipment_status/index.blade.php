@@ -66,7 +66,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'products.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditShipmentStatusLanguage'])}}
+							{{Form::open(['route' => 'shipmentStatus.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditShipmentStatusLanguage'])}}
 								@include('shipment_status.partials._form_language')
 							{{Form::close()}}
 						</div>
@@ -222,7 +222,36 @@
 				});
 			}
 
-			$('#formEditProductLanguage').validate({
+			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+					return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+			}, 'only letters, numbers and spaces.');
+
+
+
+			$('#formEditShipmentStatus').validate({
+				rules:{
+					name:{
+						required:true,
+						rangelength: [2, 64],
+						onlyLettersNumbersAndSpaces: true
+					},
+					description:{
+						required:true,
+						rangelength: [10, 255]
+					},
+				},
+				highlight:function(element){
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+				},
+				unhighlight:function(element){
+					$(element).closest('.form-group').removeClass('has-error');
+				},
+				success:function(element){
+					element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+				}
+			});
+
+			$('#formEditShipmentStatusLanguage').validate({
 				rules:{
 					name:{
 						required:true,

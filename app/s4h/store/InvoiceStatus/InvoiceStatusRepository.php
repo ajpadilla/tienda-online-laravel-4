@@ -21,21 +21,9 @@ class InvoiceStatusRepository {
 		$invoiceStatus->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}	
 
-	public function updateInvoiceStatu($data = array())
-	{
-		$invoice_status = $this->getInvoicetStatus($data['invoice_status_id']);
-		$invoice_status->color = $data['color'];
-		$invoice_status->save();
-		if (count($invoice_status->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$invoice_status->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
-		}else{
-			$invoice_status->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
-		}
-	}
-
 	public function deleteInvoiceStatu($invoice_status_id)
 	{
-		$invoiceStatus = $this->getInvoicetStatus($invoice_status_id);
+		$invoiceStatus = $this->getById($invoice_status_id);
 		$invoiceStatus->delete();
 	}
 
@@ -49,9 +37,9 @@ class InvoiceStatusRepository {
 		}
 	}
 
-	public function getInvoicetStatus($invoice_status_id)
+	public function getById($invoiceStatusId)
 	{
-		return InvoiceStatus::find($invoice_status_id);
+		return InvoiceStatus::findOrFail($invoiceStatusId);
 	}
 
 	public function getNameForEdit($data = array())
@@ -59,6 +47,48 @@ class InvoiceStatusRepository {
 		return InvoiceStatusLang::select()->where('invoice_status_id','!=',$data['invoice_status_id'])->where('name','=',$data['name'])->first();
 	}
 
+	public function getArrayInCurrentLangData($id)
+	{
+		$invoiceStatus = $this->getById($id);
+		$invoiceStatusLanguage = $invoiceStatus->getInCurrentLangAttribute();
+		return[
+			'success' => true, 
+			'invoice_status' => $invoiceStatus->toArray(),
+			'invoice_status_lang' => $invoiceStatusLanguage->toArray(),
+		];
+	}
+
+	public function updateData($data = array())
+	{
+		$invoiceStatus = $this->getById($data['invoice_status_id']);
+		if (isset($data['color'])) {
+			$invoiceStatus->color = $data['color'];
+		}
+		$invoiceStatus->save();
+
+		if (count($invoiceStatus->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+					$invoiceStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}else{
+					$invoiceStatus->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}
+	}
+
+	public function getDataForLanguage($invoiceStatusId, $languageId)
+	{
+		$invoiceStatusLang = InvoiceStatusLang::whereInvoiceStatusId($invoiceStatusId)->whereLanguageId($languageId)->first();
+		if(count($invoiceStatusLang) > 0){
+			return [
+				'success' => true, 
+				'invoiceStatusLang' => $invoiceStatusLang->toArray()
+			];
+		}else{
+			return ['success' => false];
+		}
+	}
 }
 
 

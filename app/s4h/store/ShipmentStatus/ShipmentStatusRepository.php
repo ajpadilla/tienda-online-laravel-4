@@ -42,19 +42,6 @@ class ShipmentStatusRepository {
 		return Shipment_Status::findOrFail($id);
 	}
 
-	public function updateShipmentStatu($data = array())
-	{
-		$shipment_status = $this->getById($data['shipment_status_id']);
-		$shipment_status->color = $data['color'];
-		$shipment_status->save();
-
-		if (count($shipment_status->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$shipment_status->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
-		}else{
-			$shipment_status->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
-		}
-	}
-
 	public function deleteShipmentStatu($shipmentStatusId)
 	{
 		$shipment_status = $this->getById($shipmentStatusId);
@@ -80,6 +67,10 @@ class ShipmentStatusRepository {
 	public function updateData($data = array())
 	{
 		$shipmentStatus = $this->getById($data['shipment_status_id']);
+		if (isset($data['color'])) {
+			$shipmentStatus->color = $data['color'];
+		}
+		$shipmentStatus->save();
 
 		if (count($shipmentStatus->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 					$shipmentStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],

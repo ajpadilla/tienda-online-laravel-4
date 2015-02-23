@@ -5,7 +5,7 @@
 		"index"=>'lista/estatus/factura',
 		"show"=>"ver/estatus/factura/{id}",
 		"edit"=>"editar/estatus/factura/{id}",
-		"update"=>"actualizar/estatus/factura/{id}",
+		"update"=>"actualizar/estatus/factura",
 		"destroy"=>"eliminar/estatus/factura/{id}",
 		"title" => "Agregar estatus para factura",
 		"subtitle" => "Crear estatus para factura",
@@ -16,6 +16,8 @@
 		"create-title"=> "Crear estatus de factura",
 		"index-title" => "Lista de estatus de factura",
 		"show-title" => "Ver estatus de factura",
+		'delete-ajax' => 'estatus-factura/borrar-ajax',
+		"saveLang" => "actualizar-idioma-estatus-factura",
 
 		"labels" => array(
 			'language' => 'Idioma',
