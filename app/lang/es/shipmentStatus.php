@@ -5,7 +5,7 @@
 		"index"=>'lista/estatus/envio',
 		"show"=>"ver/estatus/envio/{id}",
 		"edit"=>"editar/estatus/envio/{id}",
-		"update"=>"actualizar/estatus/envio/{id}",
+		"update"=>"actualizar/estatus/envio",
 		"destroy"=>"eliminar/estatus/envio/{id}",
 		"title" => "Agregar estatus de envío",
 		"subtitle" => "Crear estatus de envío",

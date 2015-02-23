@@ -5,7 +5,7 @@
 		"index"=>'list/shipment/status',
 		"show"=>"show/shipment/status/{id}",
 		"edit"=>"edit/shipment/status/{id}",
-		"update"=>"update/shipment/status/{id}",
+		"update"=>"update/shipment/status",
 		"destroy"=>"delete/shipment/status/{id}",
 		"title" => "Add shipment status",
 		"subtitle" => "Create shipment status",
