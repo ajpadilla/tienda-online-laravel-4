@@ -76,4 +76,34 @@ class ShipmentStatusRepository {
 			'shipment_status_lang' => $shipmentStatusLanguage->toArray(),
 		];
 	}
+
+	public function updateData($data = array())
+	{
+		$shipmentStatus = $this->getById($data['shipment_status_id']);
+
+		if (count($shipmentStatus->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+					$shipmentStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}else{
+					$shipmentStatus->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}
+	}
+
+	public function getDataForLanguage($shipmentStatusId, $languageId)
+	{
+		$shipmentStatusLang = ShipmentStatusLang::whereShipmentStatusId($shipmentStatusId)->whereLanguageId($languageId)->first();
+		if(count($shipmentStatusLang) > 0){
+			return [
+				'success' => true, 
+				'shipmentStatusLang' => $shipmentStatusLang->toArray()
+			];
+		}else{
+			return ['success' => false];
+		}
+	}
+
 }
+
