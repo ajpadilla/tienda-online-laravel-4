@@ -30,7 +30,8 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('invoice_status.index');
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		return View::make('invoice_status.index',compact('languages'));
 	}
 
 	public function getDatatable(){
@@ -56,11 +57,19 @@ class InvoiceStatusController extends \BaseController {
 	
 		$collection->addColumn('Actions',function($model){
 			
-			$links = "<a class='btn btn-info btn-circle' href='" . route('invoiceStatus.show', $model->invoiceStatus->id) . "'><i class='fa fa-check'></i></a>
-					<br />";
-			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('invoiceStatus.edit', $model->invoiceStatus->id) . "'><i class='fa fa-pencil'></i></a>
-					<br />
-					<a class='btn btn-danger btn-circle' href='" . route('invoiceStatus.destroy', $model->invoiceStatus->id) . "'><i class='fa fa-times'></i></a>";
+			$languageId = $this->languageRepository->returnLanguage()->id;
+
+			$links = "<form action='".route('invoiceStatus.show',$model->invoiceStatus->id)."' method='get'>
+						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+					  </form>";
+
+			$links.= "<button href='#fancybox-edit-invoice-status' id='edit_".$model->invoiceStatus->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>";
+
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->invoiceStatus->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>";
+			
+			$links.= "<button href='#fancybox-edit-language-invoice-status' id='language_".$model->invoiceStatus->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
 
 			return $links;
 		});
@@ -114,7 +123,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$invoiceStatus = $this->invoiceStatusRepository->getInvoicetStatus($id);
+		$invoiceStatus = $this->invoiceStatusRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$invoiceStatusLanguage = $invoiceStatus->languages()->where('language_id','=',$language_id)->first();
 		return View::make('invoice_status.show',compact('invoiceStatus','invoiceStatusLanguage'));
@@ -129,7 +138,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$invoiceStatus = $this->invoiceStatusRepository->getInvoicetStatus($id);
+		$invoiceStatus = $this->invoiceStatusRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$invoiceStatusLanguage = $invoiceStatus->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -143,17 +152,15 @@ class InvoiceStatusController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['invoice_status_id'] = $id;
 			try
 			{
-				$this->editInvoiceStatusForm ->validate($input);
-				$this->invoiceStatusRepository->updateInvoiceStatu($input);
+				//$this->editInvoiceStatusForm ->validate($input);
+				$this->invoiceStatusRepository->updateData($input);
 				return Response::json(trans('invoiceStatus.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -175,6 +182,21 @@ class InvoiceStatusController extends \BaseController {
 		$this->invoiceStatusRepository->deleteInvoiceStatu($id);
 		Flash::message(trans('invoiceStatus.Delete'));
 		return Redirect::route('invoiceStatus.index');
+	}
+
+	public function deleteAjax()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('invoiceStatusId')) 
+			{
+				$this->invoiceStatusRepository->deleteInvoiceStatu(Input::get('invoiceStatusId'));
+				return Response::json(['success' => true]);
+			} else {
+			 	return Response::json(['success' => false]);
+			}
+		}
+		return Response::json(['success' => false]);
 	}
 
 	public function checkNameInvoiceStatus()
@@ -205,5 +227,50 @@ class InvoiceStatusController extends \BaseController {
 		return Response::json(array('response' => 'false'));
 	}
 
+
+	public function returnDataInvoiceStatus(){
+		if (Request::ajax())
+		{
+			if (Input::has('invoiceStatusId'))
+			{
+				$shipmentStatus = $this->invoiceStatusRepository->getArrayInCurrentLangData(Input::get('invoiceStatusId'));
+				return Response::json($shipmentStatus);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function returnDatainvoiceStatusLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('invoiceStatusId') && Input::has('languageId'))
+			{
+				 $invoiceStatusLang = $this->invoiceStatusRepository->getDataForLanguage(Input::get('invoiceStatusId'), Input::get('languageId'));
+				 return Response::json($invoiceStatusLang);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function saveDataForLanguage()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->invoiceStatusRepository->updateData($input);
+				return Response::json([trans('invoiceStatus.Updated')]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
+	}
 
 }
