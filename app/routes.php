@@ -205,7 +205,8 @@ function () {
     Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
 
    	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
-
+	
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
 
 
 	/**
