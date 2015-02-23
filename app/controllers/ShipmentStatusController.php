@@ -67,12 +67,8 @@ class ShipmentStatusController extends \BaseController {
 
 			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->shipment_status->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>";
-
-			/*$links.= "<form action='".route('photoProduct.create',array($model->product->id, $languageId))."' method='get'>
-							<button href='#' class='btn btn-info btn-outline dim col-sm-6 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
-					  </form>";
-
-			$links.= "<button href='#fancybox-edit-language-product' id='language_".$model->product->id."'  class='btn btn-success btn-outline dim col-sm-6 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";*/
+			
+			$links.= "<button href='#fancybox-edit-language-shipment-status' id='language_".$model->shipment_status->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
 
 			return $links;
 		});
@@ -242,6 +238,39 @@ class ShipmentStatusController extends \BaseController {
 				return Response::json($shipmentStatus);
 			}else{
 				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function returnDataShipmentStatusLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('shipmentStatusId') && Input::has('languageId'))
+			{
+				 $shipmentStatusLang = $this->shipmentStatusRepository->getDataForLanguage(Input::get('shipmentStatusId'), Input::get('languageId'));
+				 return Response::json($shipmentStatusLang);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function saveDataForLanguage()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				//$this->editLangProductoForm->validate($input);
+				$this->shipmentStatusRepository->updateData($input);
+				return Response::json([trans('shipmentStatus.Updated')]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
 			}
 		}
 	}

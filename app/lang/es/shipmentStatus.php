@@ -17,6 +17,7 @@
 		"create-title"=> "Crear estatus de envío",
 		"index-title" => "Lista de estatus de envío",
 		"show-title" => "Ver estatus de envío",
+		"saveLang" => "actualizar-idioma",
 
 		"labels" => array(
 			'language' => 'Idioma',
