@@ -56,6 +56,29 @@
 </div>
 
 
+<div class="row" style="display: none">
+	<section id="fancybox-edit-language-shipment-status">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>{{	trans('products.edit_language.title') }}</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							{{Form::open(['route' => 'products.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditShipmentStatusLanguage'])}}
+								@include('shipment_status.partials._form_language')
+							{{Form::close()}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+
 @stop
 
 @section('scripts')
@@ -67,14 +90,24 @@
 
 			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
 
+			loadData();
+
 			$('.edit').fancybox({
 				openEffect	: 'elastic',
 	    		closeEffect	: 'elastic',
 				centerOnScroll: true,
 				hideOnOverlayClick: true,
+				beforeLoad: loadData()
 			});
 
-			loadData();
+
+			$('.language').fancybox({
+				openEffect	: 'elastic',
+	    		closeEffect	: 'elastic',
+				centerOnScroll: true,
+				hideOnOverlayClick: true,
+				beforeLoad: loadData()
+			});
 
 			function loadData() 
 			{
@@ -134,37 +167,37 @@
 				});
 			}
 
-			/*function loadDataForLanguage(id) {
+			function loadDataForLanguage(id) {
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataProduct/') }}',	
-					data: {'productId': id},
+					url: '{{ URL::to('/returnDatashipmentStatus/') }}',	
+					data: {'shipmentStatusId': id},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response.product);
+						//console.log(response.shipment_status_lang);
 						if (response.success == true) {
-							$('#product_id_language').val(response.product.product.id);
-							$('#lang_id').val(response.product.language_id);
-							$('#name_language').val(response.product.name);
-							$('#description_language').code(response.product.description);
+							$('#shipment_status_id_language').val(response.shipment_status_lang.shipment_status_id);
+							$('#lang_id').val(response.shipment_status_lang.language_id);
+							$('#name_language').val(response.shipment_status_lang.name);
+							$('#description_language').code(response.shipment_status_lang.description);
 						}
 					}
 				});
 			}
 
 			$('#lang_id').click(function () {
-				console.log($('#product_id_language').val() +" "+ $('#lang_id').val());
+				console.log($('#shipment_status_id_language').val() +" "+ $('#lang_id').val());
 
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataProductLang/') }}',	
-					data: {'productId':$('#product_id_language').val(), 'languageId':$('#lang_id').val()},
+					url: '{{ URL::to('/returnDataShipmentStatusLang/') }}',	
+					data: {'shipmentStatusId':$('#shipment_status_id_language').val(), 'languageId':$('#lang_id').val()},
 					dataType: "JSON",
 					success: function(response) {
 						console.log(response);
 						if (response.success == true) {
-							$('#name_language').val(response.productLang.name);
-							$('#description_language').code(response.productLang.description);
+							$('#name_language').val(response.shipmentStatusLang.name);
+							$('#description_language').code(response.shipmentStatusLang.description);
 						}else{
 							$('#name_language').val('');
 							$('#description_language').code('');
@@ -172,7 +205,7 @@
 					}
 				});
 
-			}) ;*/
+			});
 
 			
 			function deleteShipmentStatus(id) {
@@ -219,15 +252,15 @@
 						type:'POST'
 					};
 
-					/*var optionsProductLang = {
-					beforeSubmit:  showRequestLang,  // pre-submit callback
-					success:       showResponseLang,  // post-submit callback
-					url:  '{{ URL::route('products.saveLang') }}',
-					type:'POST'
-				}*/
+			var optionsLang = {
+				beforeSubmit:  showRequestLang,  // pre-submit callback
+				success:       showResponseLang,  // post-submit callback
+				url:  '{{ URL::route('shipmentStatus.saveLang') }}',
+				type:'POST'
+			}
 
 			$('#formEditShipmentStatus').ajaxForm(options);
-			//$('#formEditProductLanguage').ajaxForm(optionsProductLang);
+			$('#formEditShipmentStatusLanguage').ajaxForm(optionsLang);
 
 		});
 
@@ -249,6 +282,32 @@
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText + '</h1>',
+				'autoScale' : true
+			});
+		}
+
+		// pre-submit callback
+		function showRequestLang(formData, jqForm, options) {
+			setTimeout(jQuery.fancybox({
+				'content':'<h1>' + '{{ trans('shipmentStatus.sending') }}' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formEditShipmentStatusLanguage').valid();
+		}
+
+		// post-submit callback
+		function showResponseLang(responseText, statusText, xhr, $form)  {
+			console.log(responseText);
+
 			jQuery.fancybox({
 				'content' : '<h1>'+ responseText + '</h1>',
 				'autoScale' : true
