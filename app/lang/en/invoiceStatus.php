@@ -5,7 +5,7 @@
 		"index"=>'list/invoice/status',
 		"show"=>"show/invoice/status/{id}",
 		"edit"=>"edit/invoice/status/{id}",
-		"update"=>"update/invoice/status/{id}",
+		"update"=>"update/invoice/status",
 		"destroy"=>"delete/invoice/status/{id}",
 		"title" => "Add invoice status",
 		"subtitle" => "Create invoice status",
@@ -16,7 +16,8 @@
 		"create-title"=> "Create invoice status",
 		"index-title" => "List of invoice status",
 		"show-title" => "Show invoice status",
-
+		'delete-ajax' => 'shipment-status/delete-ajax',
+		"saveLang" => "update-language-invoice-status",
 
 		"labels" => array(
 			'language' => 'Language',
