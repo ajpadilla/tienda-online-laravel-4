@@ -93,7 +93,7 @@
 						{
 							loadDataToEdit(numberId);
 						}
-						/*else
+						else
 						{
 							if (type == "language" ) 
 							{
@@ -103,10 +103,10 @@
 							{
 								if (type == "delet")
 								{
-									deleteProduct(numberId);
+									deleteShipmentStatus(numberId);
 								}
 							}
-						}*/
+						}
 
 					}			
 				});
@@ -173,6 +173,21 @@
 				});
 
 			}) ;*/
+
+			
+			function deleteShipmentStatus(id) {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('shipmentStatus.delete-ajax') }}',
+					data: {'shipmentStatusId': id},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#delet_'+id).parent().parent().remove();
+						};
+					}
+				});
+			}
 
 			$('#formEditProductLanguage').validate({
 				rules:{
