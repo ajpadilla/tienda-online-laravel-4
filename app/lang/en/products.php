@@ -19,6 +19,7 @@
 		"create-title" => "Create Product",
 		"index-title" => "List of products",
 		"show-title" => "Show Product",
+		"search-title" => "Search",
 
 		"labels" => array(
 			'name' =>'Name',

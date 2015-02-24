@@ -12,6 +12,7 @@
   <p>
     <label for="price">Rango:</label>
     <input type="text" id="price" style="border:0; color:#f6931f; font-weight:bold;">
+    <a href="{{ URL::route('products.search') }}" id="search"></a>
   </p>
   <div id="slider-range-price"></div>
 

@@ -1,3 +1,4 @@
+
 @extends('layouts.template')
 
 @section('content')
@@ -6,11 +7,11 @@
 	        <div class="row margin-bottom-40">
 	          <!-- BEGIN CONTENT -->
 	          <div class="col-md-12 col-sm-12">
-	            <h1>Carro de Compras</h1>
+	            <h1>{{	trans('cart.title') }}</h1>
 	            @if(!$cart)
 		            <div class="shopping-cart-page">
 		              <div class="shopping-cart-data clearfix">
-		                <p>Tu carro de compras está vacío!</p>
+		                <p>{{	trans('cart.cart-empty') }}</p>
 		              </div>
 		            </div>
 		        @else
@@ -19,11 +20,11 @@
 		                <div class="table-wrapper-responsive">
 		                <table summary="Shopping cart">
 		                  <tr>
-		                    <th class="goods-page-image">Image</th>
-		                    <th class="goods-page-description">Description</th>
-		                    <th class="goods-page-quantity">Quantity</th>
-		                    <th class="goods-page-price">Unit price</th>
-		                    <th class="goods-page-total" colspan="2">Total</th>
+		                    <th class="goods-page-image">{{ Lang::get('cart.labels.Image') }}</th>
+		                    <th class="goods-page-description">{{ Lang::get('cart.labels.description') }}</th>
+		                    <th class="goods-page-quantity">{{ Lang::get('cart.labels.quantity') }}</th>
+		                    <th class="goods-page-price">{{ Lang::get('cart.labels.UnitPrice') }}</th>
+		                    <th class="goods-page-total" colspan="2">{{ Lang::get('cart.labels.total') }}</th>
 		                  </tr>
 		                  @foreach($cart->products as $product)
 		                  <tr>
@@ -60,22 +61,22 @@
 		                <div class="shopping-total">
 		                  <ul>
 		                    <li>
-		                      <em>Sub total</em>
+		                      <em>{{ Lang::get('cart.labels.sub-total') }}</em>
 		                      <strong class="price"><span>$</span>47.00</strong>
 		                    </li>
 		                    <li>
-		                      <em>Costo de envío</em>
+		                      <em>{{ Lang::get('cart.labels.cost') }}</em>
 		                      <strong class="price"><span>$</span>3.00</strong>
 		                    </li>
 		                    <li class="shopping-total-price">
-		                      <em>Total</em>
+		                      <em>{{ Lang::get('cart.labels.total') }}</em>
 		                      <strong class="price"><span>$</span>50.00</strong>
 		                    </li>
 		                  </ul>
 		                </div>
 		              </div>
-		              <button class="btn btn-default" type="submit">Continuar compra <i class="fa fa-shopping-cart"></i></button>
-		              <button class="btn btn-primary" type="submit">Pagar <i class="fa fa-check"></i></button>
+		              <button class="btn btn-default" type="submit">{{ Lang::get('cart.labels.continue-shopping') }}<i class="fa fa-shopping-cart"></i></button>
+		              <button class="btn btn-primary" type="submit">{{ Lang::get('cart.labels.pay') }}<i class="fa fa-check"></i></button>
 		            </div>
 		        @endif
 	          </div>

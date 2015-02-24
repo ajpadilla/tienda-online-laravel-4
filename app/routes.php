@@ -36,9 +36,9 @@ function () {
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
-	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getDatatable'));
+	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getAllProductsInCurrentLangData'));
 
-	Route::post(LaravelLocalization::transRoute('products.search'), [
+	Route::get(LaravelLocalization::transRoute('products.search'), [
 		'as' => 'products.search',
 		'uses' => 'ProductController@search'
 	]);
@@ -204,6 +204,17 @@ function () {
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
     Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
 
+   	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
+	
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
+
+
+	Route::get('returnDataShipmentStatusLang','ShipmentStatusController@returnDataShipmentStatusLang');
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.saveLang'), [
+		'as' => 'shipmentStatus.saveLang',
+		'uses' => 'ShipmentStatusController@saveDataForLanguage'
+	]);
 
 	/**
 		* ------------------------------ Rutas Invoice status  -----------------------
@@ -248,6 +259,21 @@ function () {
 	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
 	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
     Route::post('checkNameInvoiceStatusEdit','InvoiceStatusController@checkNameForEdit');
+
+
+    
+   	Route::get('returnDataInvoiceStatus','InvoiceStatusController@returnDataInvoiceStatus');
+	
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.delete-ajax'),  ['as' => 'invoiceStatus.delete-ajax','uses' => 'InvoiceStatusController@deleteAjax' ] );
+
+
+	Route::get('returnDatainvoiceStatusLang','InvoiceStatusController@returnDatainvoiceStatusLang');
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.saveLang'), [
+		'as' => 'invoiceStatus.saveLang',
+		'uses' => 'InvoiceStatusController@saveDataForLanguage'
+	]);
+
 
 	/**
 		* ------------------------------ Rutas classified type -----------------------

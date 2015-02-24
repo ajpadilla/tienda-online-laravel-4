@@ -29,7 +29,8 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('shipment_status.index');
+		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		return View::make('shipment_status.index',compact('languages'));
 	}
 
 	public function getDatatable(){
@@ -55,11 +56,19 @@ class ShipmentStatusController extends \BaseController {
 	
 		$collection->addColumn('Actions',function($model){
 			
-			$links = "<a class='btn btn-info btn-circle'' href='" . route('shipmentStatus.show', $model->shipmentStatus->id) . "'><i class='fa fa-check'></i></a>
-					<br />";
-			$links .= "<a a class='btn btn-warning btn-circle'' href='" . route('shipmentStatus.edit', $model->shipmentStatus->id) . "'><i class='fa fa-pencil'></i></a>
-					<br />
-					<a class='btn btn-danger btn-circle'' href='" . route('shipmentStatus.destroy', $model->shipmentStatus->id) . "'><i class='fa fa-times'></i></a>";
+			$languageId = $this->languageRepository->returnLanguage()->id;
+
+			$links = "<form action='".route('shipmentStatus.show',$model->shipment_status->id)."' method='get'>
+						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+					  </form>";
+
+			$links.= "<button href='#fancybox-edit-shipment-status' id='edit_".$model->shipment_status->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>";
+
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->shipment_status->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>";
+			
+			$links.= "<button href='#fancybox-edit-language-shipment-status' id='language_".$model->shipment_status->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
 
 			return $links;
 		});
@@ -112,7 +121,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$shipmentStatus = $this->shipmentStatusRepository->getShipmentStatus($id);
+		$shipmentStatus = $this->shipmentStatusRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$shipmentStatusLanguage = $shipmentStatus->languages()->where('language_id','=',$language_id)->first();
 		return View::make('shipment_status.show',compact('shipmentStatus','shipmentStatusLanguage'));
@@ -127,7 +136,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$shipmentStatus = $this->shipmentStatusRepository->getShipmentStatus($id);
+		$shipmentStatus = $this->shipmentStatusRepository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$shipmentStatusLanguage = $shipmentStatus->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -141,17 +150,15 @@ class ShipmentStatusController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['shipment_status_id'] = $id;
 			try
 			{
 				$this->editShipmentStatusForm->validate($input);
-				$this->shipmentStatusRepository->updateShipmentStatu($input);
+				$this->shipmentStatusRepository->updateData($input);
 				return Response::json(trans('shipmentStatus.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -173,6 +180,15 @@ class ShipmentStatusController extends \BaseController {
 		$this->shipmentStatusRepository->deleteShipmentStatu($id);
 		Flash::message(trans('shipmentStatus.Delete'));
 		return Redirect::route('shipmentStatus.index');
+	}
+
+	public function deleteAjax()
+	{
+		if (Request::ajax()){
+			$this->shipmentStatusRepository->deleteShipmentStatu(Input::get('shipmentStatusId'));
+			return Response::json(['success' => true]);
+		}
+		return Response::json(['success' => false]);
 	}
 
 	public function checkNameShipmentStatus()
@@ -211,6 +227,52 @@ class ShipmentStatusController extends \BaseController {
 			}
 		}
 		return Response::json(array('response' => 'false'));
+	}
+
+	public function returnDataShipmentStatus(){
+		if (Request::ajax())
+		{
+			if (Input::has('shipmentStatusId'))
+			{
+				$shipmentStatus = $this->shipmentStatusRepository->getArrayInCurrentLangData(Input::get('shipmentStatusId'));
+				return Response::json($shipmentStatus);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function returnDataShipmentStatusLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('shipmentStatusId') && Input::has('languageId'))
+			{
+				 $shipmentStatusLang = $this->shipmentStatusRepository->getDataForLanguage(Input::get('shipmentStatusId'), Input::get('languageId'));
+				 return Response::json($shipmentStatusLang);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+	}
+
+	public function saveDataForLanguage()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				//$this->editLangProductoForm->validate($input);
+				$this->shipmentStatusRepository->updateData($input);
+				return Response::json([trans('shipmentStatus.Updated')]);
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 }

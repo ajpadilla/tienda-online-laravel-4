@@ -5,8 +5,9 @@
 		"index"=>'list/shipment/status',
 		"show"=>"show/shipment/status/{id}",
 		"edit"=>"edit/shipment/status/{id}",
-		"update"=>"update/shipment/status/{id}",
+		"update"=>"update/shipment/status",
 		"destroy"=>"delete/shipment/status/{id}",
+		'delete-ajax' => 'shipment-status/delete-ajax',
 		"title" => "Add shipment status",
 		"subtitle" => "Create shipment status",
 		"sending" => "Adding shipment status",
@@ -16,6 +17,7 @@
 		"create-title"=> "Create shipment status",
 		"index-title" => "List of shipment status",
 		"show-title" => "Show shipment status",
+		"saveLang" => "update-language-shipment-status",
 
 		"labels" => array(
 			'language' => 'language',

@@ -13,7 +13,7 @@
                 </div>
             </form>-->
 
-            {{ Form::open(['route' => 'products.search','roel' => 'search','class' => 'navbar-form-custom','method'=>'post','id' => 'filterForm']) }}
+            {{ Form::open(['route' => 'products.search','roel' => 'search','class' => 'navbar-form-custom','method'=>'get','id' => 'filterForm']) }}
                 <div class="input-group" style="margin-top:13px;">
                     {{ Form::text('filterWord', null, ['class' => 'form-control','placeholder' => Lang::get('menu.search'), 'id' => 'filterWord']) }}
                     <span class="input-group-btn">

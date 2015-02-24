@@ -1,8 +1,3 @@
-<?php $__env->startSection('title'); ?>
-<?php echo trans('products.list.title'); ?>
-
-<?php $__env->stopSection(); ?>
-
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('layouts.partials._error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <div class="row">
@@ -39,20 +34,20 @@
 										<td class="col-md-4">
 											<?php if($productSearch->product->getFirstPhoto()): ?>
 												<a href="<?php echo URL::route('products.show',$productSearch->product->id); ?>"><img class="mini-photo" src="<?php echo asset($productSearch->product->getFirstPhoto()->complete_path); ?>" alt="$productSearch->product->getFirstPhoto()->filename"></a>
-											<?php else: ?> 
+											<?php else: ?>
 												<?php echo Lang::get('products.labels.image'); ?>
 
-											<?php endif; ?> 
+											<?php endif; ?>
 										</td>
-										<td class="col-md-4"><?php echo $productSearch->name; ?></td>	
+										<td class="col-md-4"><?php echo $productSearch->name; ?></td>
 										<td class="col-md-4">
 											<?php foreach($productSearch->product->getCategories() as $value): ?>
 												<?php echo $value; ?>
 
 											<?php endforeach; ?>
-										</td>	
-										<td class="col-md-4"><?php echo $productSearch->product->point_price; ?></td>	
-										<td class="col-md-4"><?php echo $productSearch->product->price; ?></td>	
+										</td>
+										<td class="col-md-4"><?php echo $productSearch->product->point_price; ?></td>
+										<td class="col-md-4"><?php echo $productSearch->product->price; ?></td>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>
@@ -85,19 +80,19 @@
 										<td class="col-md-4">
 											<?php if($classifiedSearch->classified->getFirstPhoto()): ?>
 												<a href="<?php echo URL::route('classifieds.show',$classifiedSearch->classified->id); ?>"><img class="mini-photo" src="<?php echo asset($classifiedSearch->classified->getFirstPhoto()->complete_path); ?>" alt="$classifiedSearch->classified->getFirstPhoto()->filename"></a>
-											<?php else: ?> 
+											<?php else: ?>
 												<?php echo Lang::get('classifieds.labels.image'); ?>
 
-											<?php endif; ?> 
+											<?php endif; ?>
 										</td>
-										<td class="col-md-4"><?php echo $classifiedSearch->name; ?></td>	
+										<td class="col-md-4"><?php echo $classifiedSearch->name; ?></td>
 										<td class="col-md-4">
 											<?php foreach($classifiedSearch->classified->getCategories() as $value): ?>
 												<?php echo $value; ?>
 
 											<?php endforeach; ?>
-										</td>	
-										<td class="col-md-4"><?php echo $classifiedSearch->classified->price; ?></td>	
+										</td>
+										<td class="col-md-4"><?php echo $classifiedSearch->classified->price; ?></td>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>

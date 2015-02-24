@@ -5,8 +5,9 @@
 		"index"=>'lista/estatus/envio',
 		"show"=>"ver/estatus/envio/{id}",
 		"edit"=>"editar/estatus/envio/{id}",
-		"update"=>"actualizar/estatus/envio/{id}",
+		"update"=>"actualizar/estatus/envio",
 		"destroy"=>"eliminar/estatus/envio/{id}",
+		'delete-ajax' => 'status-envio/borrar-ajax',
 		"title" => "Agregar estatus de envío",
 		"subtitle" => "Crear estatus de envío",
 		"sending" => "Agregando estatus de envio",
@@ -16,6 +17,7 @@
 		"create-title"=> "Crear estatus de envío",
 		"index-title" => "Lista de estatus de envío",
 		"show-title" => "Ver estatus de envío",
+		"saveLang" => "actualizar-idioma-estatus-envio",
 
 		"labels" => array(
 			'language' => 'Idioma',
