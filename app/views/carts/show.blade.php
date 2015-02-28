@@ -45,7 +45,7 @@
 		                    </td> --}}
 		                    <td class="goods-page-quantity">
 		                      <div class="product-quantity">
-		                          <input data-url="{{ route('cart.change-quantity', $product->id) }}" id="product-quantity" type="text" value="{{ $product->pivot->quantity }}" readonly class="form-control input-sm">
+		                          <input data-url="{{ route('cart.change-quantity', $product->id) }}" type="text" value="{{ $product->pivot->quantity }}" readonly class="product-quantity-change form-control input-sm">
 		                      </div>
 		                    </td>
 		                    <td class="goods-page-price">

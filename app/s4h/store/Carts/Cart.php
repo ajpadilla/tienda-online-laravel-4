@@ -45,7 +45,7 @@ class Cart extends Eloquent
 	{
 		$total = 0;
 		foreach ($this->products as $product)
-			$total += $product->price;
+			$total += $product->price * $product->pivot->quantity;
 		return $total;
 	}
 }

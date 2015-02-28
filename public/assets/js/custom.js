@@ -22,7 +22,7 @@ var initTouchspin = function() {
     jQuery(".quantity-down").html("<i class='fa fa-angle-down'></i>");
     jQuery(".quantity-up").html("<i class='fa fa-angle-up'></i>");
 
-    jQuery('#product-quantity').on('touchspin.on.stopspin', function () {
+    jQuery('.product-quantity-change').on('touchspin.on.stopspin', function () {
         $.ajax({
             type: 'GET',
             url: jQuery(this).attr('data-url') + '/' + jQuery(this).val(),
@@ -175,6 +175,29 @@ var removeFromWishList = function() {
                 if (response != null) {
                     if (response.success) {
                         element.closest('.li').remove();
+                        discountFromWishlist();
+                    } else {
+                        alert('No se pudo eliminar el producto!');
+                    }
+                } else {
+
+                }
+            }
+        });
+        return false;
+    });
+
+    jQuery(document).on('click', '.delete-from-wishlist-list', function() {
+        var element = jQuery(this);
+        var url = element.attr('href');
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function(response) {
+                if (response != null) {
+                    if (response.success) {
+                        element.closest('tr').remove();
                         discountFromWishlist();
                     } else {
                         alert('No se pudo eliminar el producto!');
