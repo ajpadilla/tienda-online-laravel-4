@@ -262,14 +262,22 @@ var discountFromcart = function() {
             cartCount--;
         jQuery('#cart-count').html(cartCount);
     }
-    /*
-     * ---------------------End Shopping Cart Logic ----------------------
-     */
+/*
+ * ---------------------End Shopping Cart Logic ----------------------
+ */
+
+/*
+ * --------------------- Rating Logic ----------------------
+ */
 var rating = function() {    
     jQuery("#rating").bind('rated', function(event, value) {
         alert('You\'ve rated it: ' + value);
     });
 }
+/*
+ * --------------------- End Rating Logic ----------------------
+ */
+
 
 jQuery(document).ready(function() {
     // Init de plugins --------------------------
