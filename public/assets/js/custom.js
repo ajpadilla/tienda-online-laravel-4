@@ -14,13 +14,26 @@ var initTouchspin = function() {
         buttonup_class: "btn quantity-up",
         min: 0,
         max: 100,
-        step: 0.1,
-        decimals: 2,
+        step: 1,
+        decimals: 0,
         boostat: 5,
         maxboostedstep: 10
     });
     jQuery(".quantity-down").html("<i class='fa fa-angle-down'></i>");
     jQuery(".quantity-up").html("<i class='fa fa-angle-up'></i>");
+
+    jQuery('#product-quantity').on('touchspin.on.stopspin', function () {
+        $.ajax({
+            type: 'GET',
+            url: jQuery(this).attr('data-url') + '/' + jQuery(this).val(),
+            //data: { 'quantity': jQuery(this).val() },
+            dataType: "JSON",
+            success: function(response) {
+                if(!response.success)
+                    alert('Hubo un error intentando cambiar la cantidad, intente de nuevo!');
+            }
+        });
+    });
 }
 
 var handleFancybox = function() {
@@ -237,6 +250,31 @@ var removeFromCart = function() {
                     if (response.success) {
                         element.closest('.li').remove();
                         discountFromcart();
+                    } else {
+                        alert('No se pudo eliminar el producto!');
+                    }
+                } else {
+
+                }
+            }
+        });
+        return false;
+    });
+
+    jQuery(document).on('click', '.delete-from-cart-list', function() {
+        var element = jQuery(this);
+        var url = element.attr('href');
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function(response) {
+                if (response != null) {
+                    if (response.success) {
+                        element.closest('tr').remove();
+                        discountFromcart();
+                        jQuery('#sub-total').text(response.total);
+                        jQuery('#total').text(response.total);
                     } else {
                         alert('No se pudo eliminar el producto!');
                     }

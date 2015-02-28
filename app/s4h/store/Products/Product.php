@@ -61,12 +61,12 @@ class Product extends BaseModel{
 	*
 	*/
 
-	public function getActivoShow()
+	public function getActivoShowAttribute()
 	{
 		return ($this->active == 1) ? 'Yes' : 'No';
 	}
 
-	public function getAcceptBarterShow()
+	public function getAcceptBarterShowAttribute()
 	{
 		return ($this->accept_barter == 1) ? 'Yes' : 'No';
 	}
@@ -99,14 +99,14 @@ class Product extends BaseModel{
 	/*
 	* Obtener la priemra de las fotos del producto
 	*/
-	public function getFirstPhoto(){
+	public function getFirstPhotoAttribute(){
 		if($this->hasPhotos())
 			foreach ($this->photos as $photo)
 				return $photo;
 		return false;
 	}
 
-	public function getFirstCategory(){
+	public function getFirstCategoryAttribute(){
 		if($this->hasCategories())
 			foreach ($this->categories as $category)
 				return $category;
@@ -117,7 +117,7 @@ class Product extends BaseModel{
 	* Obtener rating
 	*/
 
-	public function getRating()
+	public function getRatingAttribute()
 	{
 		if($this->hasRatings()){
 			$count = 0;
