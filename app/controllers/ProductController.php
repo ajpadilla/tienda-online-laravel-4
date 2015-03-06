@@ -300,29 +300,30 @@ class ProductController extends \BaseController {
 
 		if(Request::ajax()) 
 		{
-			//$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 			//return Response::json($productsSearch);
-			//
-			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			
+			//$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 			//return Response::json($classifiedsSearch);
-			return Response::json(['success' =>true, 'product' => $classifiedsSearch->toArray(), 'links' => (string)$classifiedsSearch->links() ]);
+			//return Response::json(['success' =>true, 'product' => $classifiedsSearch->toArray(), 'links' => (string)$classifiedsSearch->links() ]);
 			
 			//return Response::json(Input::all());
-			//return Response::json(['success' =>true, 'product' => $productsSearch->toArray(), 'links' => (string)$productsSearch->links() ]);
+			return Response::json(['success' =>true, 'product' => $productsSearch->toArray(), 'links' => (string)$productsSearch->links() ]);
 		} 
 		else {
 
-			/*$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
-			if (!$productsSearch->isEmpty()) 
+			if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) 
 			{
 				$products = $productsSearch;
-				return View::make('products.search-result', compact('products','categories'));
+				$classifieds = $classifiedsSearch;
+				return View::make('products.search-result', compact('products','classifieds','categories'));
 			} else {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
 				return View::make('products.search');
-			}*/
-			return View::make('products.search-result', compact('categories'));
+			}
 		}
 
 	}
