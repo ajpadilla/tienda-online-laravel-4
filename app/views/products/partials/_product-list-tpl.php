@@ -7,15 +7,15 @@
           <a href="{{ url_img }}" class="btn btn-default fancybox-button" alt="not-path">
             <i class="fa fa-search-plus fa-3x"></i>
           </a>
-          <a href="#product-pop-up-" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
+          <a href="#product-pop-up-{{ Id }}" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
         </div>
       </div>
       <h3>
-        <a href="">{{ name }}</a>
+        <a href="{{ url_show }}">{{ name }}</a>
       </h3>
       <div class="pi-price">{{ price }}</div>
-      <a href="" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
-      <a href="" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
+      <a href="{{ url_cart }}" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
+      <a href="{{ url_wishlist }}" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
       <div class="sticker sticker-sale"></div>
     </div>
   </div>
