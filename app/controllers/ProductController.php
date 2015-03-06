@@ -21,7 +21,7 @@ class ProductController extends \BaseController {
 	protected $productRepository;
 	protected $registerProductForm;
 	protected $EditProductForm;
-	protected $categoryRepository;
+	//protected $categoryRepository;
 	protected $conditionRepository;
 	protected $measureRepository;
 	protected $languageRepository;
@@ -33,7 +33,7 @@ class ProductController extends \BaseController {
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
-										CategoryRepository $categoryRepository,
+										//CategoryRepository $categoryRepository,
 										ConditionRepository $conditionRepository,
 										MeasureRepository $measureRepository,
 										EditProductForm $editProductForm,
@@ -48,7 +48,7 @@ class ProductController extends \BaseController {
 		$this->registerProductForm = $registerProductForm;
 		$this->productRepository = $productRepository;
 		$this->editProductForm = $editProductForm;
-		$this->categoryRepository = $categoryRepository;
+		//$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 		$this->measureRepository = $measureRepository;
 		$this->languageRepository = $languageRepository;
@@ -294,28 +294,37 @@ class ProductController extends \BaseController {
 		return $collection->make();
 	}
 
-	public function search() {
-		$products = null;
-		if(Request::ajax()) {
-			$productsSearch= $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+	public function search() 
+	{
+		$categories = $this->categoryRepository->getNameForLanguage();
 
-			return Response::json($productsSearch);
-		} else {
+		if(Request::ajax()) 
+		{
+			//$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			//return Response::json($productsSearch);
+			//
+			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			//return Response::json($classifiedsSearch);
+			return Response::json(['success' =>true, 'product' => $classifiedsSearch->toArray(), 'links' => (string)$classifiedsSearch->links() ]);
+			
+			//return Response::json(Input::all());
+			//return Response::json(['success' =>true, 'product' => $productsSearch->toArray(), 'links' => (string)$productsSearch->links() ]);
+		} 
+		else {
 
 			/*$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
 			if (!$productsSearch->isEmpty()) 
 			{
 				$products = $productsSearch;
-				return View::make('products.search-result', compact('products','categoryResults'));
+				return View::make('products.search-result', compact('products','categories'));
 			} else {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
 				return View::make('products.search');
 			}*/
-
-			return View::make('products.search-result', compact('products','categoryResults'));
-
+			return View::make('products.search-result', compact('categories'));
 		}
+
 	}
 
 	public function returnDataProduct()

@@ -3,6 +3,8 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\CategoriesLang\CategoryLang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Languages\Language;
 use s4h\store\Base\BaseModel;
 
 class Category extends BaseModel{
@@ -18,6 +20,13 @@ class Category extends BaseModel{
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','categories_lang','categories_id','language_id')->withPivot('name');
 	}
+
+	public function getInCurrentLangAttribute(){
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		return CategoryLang::whereCategoriesId($this->id)->whereLanguageId($language->id)->first();
+	}
+
 
 /*	public function parent(){
 		return $this->belongsTo('s4h\store\Categories\Category');

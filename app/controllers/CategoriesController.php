@@ -1,16 +1,16 @@
 <?php
 
-use s4h\store\Categories\CategoryRepository;
+//use s4h\store\Categories\CategoryRepository;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\CategoriesLang\CategoryLangRepository;
 
 class CategoriesController extends \BaseController {
-	private $categoryRepository;
+	//private $categoryRepository;
 	private $languageRepository;
 	private $categoryLangRepository;
 
-	function __construct(CategoryRepository $categoryRepository, LanguageRepository $languageRepository, CategoryLangRepository $categoryLangRepository) {
-		$this->categoryRepository = $categoryRepository;
+	function __construct(LanguageRepository $languageRepository, CategoryLangRepository $categoryLangRepository) {
+		//$this->categoryRepository = $categoryRepository;
 		$this->languageRepository = $languageRepository;
 		$this->categoryLangRepository = $categoryLangRepository;
 	}
@@ -181,5 +181,13 @@ class CategoriesController extends \BaseController {
 		return Redirect::route('categories.index');
 	}
 
+	public function returnDataCategoriesLang()
+	{
+		if (Request::ajax()) 
+		{
+			$categories = $this->categoryRepository->getNameForLanguage();
+			return Response::json(['success' =>true, 'categories' => $categories]);
+		}
 
+	}
 }

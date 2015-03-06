@@ -17,11 +17,34 @@ class ProductRepository extends BaseRepository{
       return new Product;
     }
 
-    public $filters = ['filterWord','price','firstValue','secondValue'];
+    public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsProducts',
+    'cityId','operator'];
 	
-    public function filterByPrice($query, $data = array())
-	{
+	public function filterByPrice($query, $data = array()){
+		$query->where('price',$data['operator'],$data['price']);
+	}
+
+    public function filterByPriceRange($query, $data = array()){
 		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
+	}
+
+	public function filterByConditionsProducts($query, $data = array()){
+		$query->where('condition_id','=',$data['conditionsProducts']);
+	}
+
+	public function filterByFilterWord($query, $data = array())
+	{
+		$language = $this->getCurrentLang();
+		$query->whereHas('languages', function($q) use ($data, $language){
+    		$q->where('language_id', '=', $language->id)->where('products_lang.name', 'LIKE', '%' . $data['filterWord'] . '%')->orWhere('products_lang.description', 'LIKE', '%' . $data['filterWord'] . '%')->where('language_id', '=', $language->id);
+		});
+	}
+
+	public function filterByCategories($query, $data = array())
+	{
+		$query->whereHas('categories', function($q) use ($data){
+    		$q->whereIn('product_classification.category_id', $data['categories']);
+		});
 	}
 
 	public function getAllInCurrentLangData()
@@ -151,14 +174,6 @@ class ProductRepository extends BaseRepository{
 	public function getArray($productId)
 	{
   		return $this->getById($productId)->toArray();
-	}
-
-	public function filterProducts($filterWord, $language_id) {
-		$query = ProductLang::select();
-		if (!empty($filterWord)) {
-			$query->where('language_id', '=', $language_id)->where('name', 'LIKE', '%' . $filterWord . '%')->orWhere('description', 'LIKE', '%' . $filterWord . '%');
-		}
-		return $query->get();
 	}
 
 	/**
