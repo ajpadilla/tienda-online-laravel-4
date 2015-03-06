@@ -4,12 +4,17 @@
 use s4h\store\Categories\Category;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
+use s4h\store\Base\BaseRepository;
 
-class CategoryRepository {
+class CategoryRepository extends BaseRepository{
 
 	public function save(Category $category){
 		return $category->save();
 	}
+
+	public function getModel(){
+      return new Category;
+    }
 
 	public function getAll(){
 		return Category::all();
@@ -53,8 +58,7 @@ class CategoryRepository {
 
 	public function getNameForLanguage()
 	{
-		$isoCode = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		$language = $this->getCurrentLang();
 		if (!empty($language))
 			return $language->categories()->lists('name', 'categories_id');
 			// return $this->getNested($this->getCategoriesWithoutParents());
