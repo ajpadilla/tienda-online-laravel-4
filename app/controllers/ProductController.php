@@ -308,7 +308,13 @@ class ProductController extends \BaseController {
 			//return Response::json(['success' =>true, 'product' => $classifiedsSearch->toArray(), 'links' => (string)$classifiedsSearch->links() ]);
 			
 			//return Response::json(Input::all());
-			return Response::json(['success' =>true, 'product' => $productsSearch->toArray(), 'links' => (string)$productsSearch->links() ]);
+			return Response::json(['success' =>true, 
+				'product' => $productsSearch->toArray(), 
+				'links' => (string)$productsSearch->links(),
+				'urlShow'=> route('products.show',''),
+				'urlCart' => route('cart.create',''),
+				'urlWishList' => route('wishlist.create','')	
+				]);
 		} 
 		else {
 
