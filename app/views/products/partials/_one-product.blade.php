@@ -23,3 +23,4 @@
     <a href="{{ route('wishlist.create', $product->id) }}" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
     <div class="sticker sticker-sale"></div>
 </div>
+
