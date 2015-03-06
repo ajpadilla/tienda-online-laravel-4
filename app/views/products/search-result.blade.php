@@ -3,11 +3,12 @@
   <h2 style="display: inline-block">Resultados para: <em class="content-search-product">producto</em></h2>
 @stop
 @section('action-heading')
-  <form class="content-search-form" action="#">
+  <form class="content-search-form" action="" >
     <div class="input-group">
-      <input type="text" placeholder="Buscar de nuevo" class="form-control">
+      <!--<input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">-->
+      {{ Form::text('search-again',null, ['class' => 'form-control','placeholder' =>'Buscar de nuevo','id'=> 'search-again']) }}
       <span class="input-group-btn">
-        <button class="btn btn-primary" type="submit">Buscar</button>
+        <button id="search-data" class="btn btn-primary" type="submit">Buscar</button>
       </span>
     </div>
   </form>
@@ -23,7 +24,7 @@
           <!-- BEGIN SIDEBAR -->
           <div class="sidebar col-md-3 col-sm-5">
             @include('products.partials.search._more-search-options')
-      @include('products.partials._bestsellers')
+            @include('products.partials._bestsellers')
           </div>
           <!-- END SIDEBAR -->
           <!-- BEGIN CONTENT -->
@@ -50,34 +51,34 @@
                 <a href="#"><i class="fa fa-th-large"></i></a>
                 <a href="#"><i class="fa fa-th-list"></i></a>
               </div>
-              {{--@include('products.partials.search._order-by-search')--}}
+              @include('products.partials.search._order-by-search')
             </div>
       <!-- BEGIN PAGINATOR -->
-            <div class="row">
-              <div class="col-md-4 col-sm-4 items-info">Productos  en total</div>
+            <div id="total-items-1" class="row">
+              {{--<div class="col-md-4 col-sm-4 items-info">Productos {{ $products->getTotal()}}  en total</div>--}}
               <div class="col-md-8 col-sm-8">
-                {{--{{ $products->links()}}--}}
+                 {{--{{ $products->links()}}>--}}
               </div>
             </div>
             <!-- END PAGINATOR -->
             <!-- BEGIN PRODUCT LIST -->
-            <div class="row product-list">
+            <div id="products-list" class="row product-list">
               <!-- PRODUCT ITEM START -->
               {{--@foreach($products as $product)
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-          @include('products.partials._one-product')
-        </div>
-        @endforeach--}}
+                    @include('products.partials._one-product')
+                </div>
+              @endforeach--}}
               <!-- PRODUCT ITEM END -->
             </div>
             <!-- END PRODUCT LIST -->
             <!-- BEGIN PAGINATOR -->
-            <div class="row">
+            {{--<div id="total-items-2" class="row">
               <div class="col-md-4 col-sm-4 items-info">Productos total</div>
               <div class="col-md-8 col-sm-8">
-                 {{--{{ $products->links()}}--}}
+                {{ $products->links()}}
               </div>
-            </div>
+            </div>--}}
             <!-- END PAGINATOR -->
           </div>
           <!-- END CONTENT -->
@@ -94,3 +95,15 @@
     @include('products.partials._pop-up-products')
   @endforeach
 @endif--}}
+
+@include('products.partials._product-list-tpl')
+
+@section('scripts')
+  <script type="text/javascript">
+    $(document).ready(function () 
+    {
+      // Iniciar select chosen
+      $('.chosen-select').chosen({ width: "95%" });
+    });
+  </script>
+@stop
