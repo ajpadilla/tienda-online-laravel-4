@@ -87,43 +87,9 @@ var initSliderRange = function() {
                 dataType: "JSON", 
                 success: function(response) {
                     jQuery('#products-list').html('');
-                    if (response.success == true) 
-                    {
-
-                        console.log(response.links);
-                        console.log(response.product);
-
-                        var paginator1 = jQuery('#total-items-1');
-                        var paginator2 = jQuery('#total-items-2');
-
-                        var paginator = {
-                                from: response.product.from,
-                                to: response.product.to,
-                                total: response.product.total,
-                                links: response.links
-                            };
-
-                        var templateP1 = jQuery('#total-items-1-tpl').html();
-                        var templateP2 = jQuery('#total-items-2-tpl').html();
-
-                        var html = Mustache.to_html(templateP1, paginator);
-                        var html2 = Mustache.to_html(templateP2, paginator);
-
-                        paginator1.prepend(html);
-                        paginator2.prepend(html2);
-
-                        $.each(response.product.data, function (index, element) {
-                            console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
-                            var productslist = jQuery('#products-list');
-                            var product = {
-                                name: element.languages[0].pivot.name,
-                                price: element.price,
-                                url_img: 'http://tienda.local/uploads/products/images/model1.jpg'
-                            };
-                            var template = jQuery('#product-list-tpl').html();
-                            var html = Mustache.to_html(template, product);
-                            productslist.prepend(html);
-                        });
+                    if (response.success == true) {
+                         loadPaginatorProducts(response);
+                         loadDataProducts(response);
                     }
                 }
             });
@@ -193,6 +159,51 @@ var searchData = function () {
             }
         });
         return false;
+    });
+}
+
+var loadPaginatorProducts = function(response) {
+    /*console.log(response.links);
+    console.log(response.product);*/
+
+    var paginator1 = jQuery('#total-items-1');
+    var paginator2 = jQuery('#total-items-2');
+
+    var paginator = {
+        from: response.product.from,
+        to: response.product.to,
+        total: response.product.total,
+        links: response.links
+    };
+
+    var templateP1 = jQuery('#total-items-1-tpl').html();
+    var templateP2 = jQuery('#total-items-2-tpl').html();
+
+    var html = Mustache.to_html(templateP1, paginator);
+    var html2 = Mustache.to_html(templateP2, paginator);
+
+    paginator1.prepend(html);
+    paginator2.prepend(html2);
+
+}
+
+var loadDataProducts = function(response) {
+    var url_img_model = 'http://tienda.local/uploads/products/images/model1.jpg';
+  $.each(response.product.data, function (index, element) {
+        //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
+        var productslist = jQuery('#products-list');
+        var product = {
+            Id: element.id,
+            name: element.languages[0].pivot.name,
+            price: element.price,
+            url_img: url_img_model,
+            url_show: response.urlShow +'/'+ element.id,
+            url_cart: response.urlCart +'/'+ element.id,
+            url_wishlist: response.urlWishList +'/'+ element.id,
+        };
+        var template = jQuery('#product-list-tpl').html();
+        var html = Mustache.to_html(template, product);
+        productslist.prepend(html);
     });
 }
 
