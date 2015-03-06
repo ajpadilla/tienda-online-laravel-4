@@ -16,4 +16,11 @@ class Condition extends Eloquent{
 		return $this->belongsToMany('s4h\store\Languages\Language','product_condition_lang','product_condition_id','language_id')->withPivot('name');
 	}	
 
+	public function getInCurrentLangAttribute(){
+		$isoCode = LaravelLocalization::setLocale();
+		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		return CategoryLang::whereCategoriesId($this->id)->whereLanguageId($language->id)->first();
+	}
+
+
 }
