@@ -205,7 +205,7 @@ function () {
     Route::post('checkNameShipmentStatusEdit','ShipmentStatusController@checkNameForEdit');
 
    	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
-	
+
 	Route::get(LaravelLocalization::transRoute('shipmentStatus.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
 
 
@@ -261,9 +261,9 @@ function () {
     Route::post('checkNameInvoiceStatusEdit','InvoiceStatusController@checkNameForEdit');
 
 
-    
+
    	Route::get('returnDataInvoiceStatus','InvoiceStatusController@returnDataInvoiceStatus');
-	
+
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.delete-ajax'),  ['as' => 'invoiceStatus.delete-ajax','uses' => 'InvoiceStatusController@deleteAjax' ] );
 
 
@@ -576,6 +576,11 @@ function () {
 	Route::get(LaravelLocalization::transRoute('cart.create'), [
 		'as' => 'cart.create',
 		'uses' => 'CartController@create'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('cart.change-quantity'), [
+		'as' => 'cart.change-quantity',
+		'uses' => 'CartController@changeQuantity'
 	]);
 
 	/**

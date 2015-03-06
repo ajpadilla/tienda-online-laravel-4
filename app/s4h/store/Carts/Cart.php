@@ -7,11 +7,11 @@ use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 
 /**
-* 
+*
 */
 class Cart extends Eloquent
 {
-	
+
 	use SoftDeletingTrait;
 
 	protected $softDelete = true;
@@ -35,5 +35,17 @@ class Cart extends Eloquent
 
 	public function currency(){
 		return $this->belongsTo('s4h\store\Currencies\Currency');
+	}
+
+	/*
+	 * ------------------ Custom Methods ---------------------
+	 */
+
+	public function getTotalAttribute()
+	{
+		$total = 0;
+		foreach ($this->products as $product)
+			$total += $product->price * $product->pivot->quantity;
+		return $total;
 	}
 }

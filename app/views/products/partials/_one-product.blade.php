@@ -12,7 +12,7 @@
           <i class="fa fa-search-plus fa-3x"></i>
         </a>
       @endif
-        <a href="#product-pop-up-{{ $product->product_id }}" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
+        <a href="#product-pop-up-{{ $product->id }}" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
       </div>
     </div>
     <h3>

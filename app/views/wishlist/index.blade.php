@@ -22,34 +22,39 @@
                       <th class="goods-page-price" colspan="2">{{ Lang::get('products.labels.UnitPrice') }}</th>
                     </tr>
                     @if (!empty($wishlist))
-                    @foreach ($wishlist as $wish)
+                    @foreach ($wishlist as $product)
                     <tr>
                       <td class="goods-page-image">
-                       @if ($wish->getFirstPhoto())
-                       <a href="{{ URL::route('products.show',$wish->id) }}"><img src="{{ asset($wish->getFirstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
-                       @else 
-                        {{ Lang::get('products.labels.image') }}
+                       @if ($product->firstPhoto)
+                       <a href="{{ URL::route('products.show', $product->id) }}"><img src="{{ asset($product->firstPhoto()->complete_path) }}" alt="Berry Lace Dress"></a>
+                       @else
+                        <a href="{{ URL::route('products.show', $product->id) }}">{{ Lang::get('products.labels.image') }}</a>
                        @endif
                      </td>
                      <td class="goods-page-description">
                       <!--<h3><a href="#">Cool green dress with red bell</a></h3>
                       <p><strong>Item 1</strong> - Color: Green; Size: S</p>
                       <em>More info is here</em>-->
-                      {{ $wish->inCurrentLang->name }}
+                      {{ $product->inCurrentLang->name }}
                     </td>
                      <td class="goods-page-description">
-                      {{ $wish->inCurrentLang->description }}
+                      {{ $product->inCurrentLang->description }}
                     </td>
                     <td class="goods-page-stock">
-                      @if($wish->quantity > 0) Disponibles
+                      @if($product->quantity) {{ $product->quantity }}
                       @else Agotados
                       @endif
                     </td>
                     <td class="goods-page-price">
-                      <strong><span>$</span>{{ number_format($wish->price,2) }}</strong>
+                      <strong><span>$</span>{{ number_format($product->price,2) }}</strong>
                     </td>
                     <td class="del-goods-col">
-                       <button href="#" class="btn btn-success btn-outline dim" style="margin-left: 20px" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Agregar al carro de compras" title="Agregar al carro de compras"><i class="fa fa-shopping-cart fa-2x"></i></button>
+                       <button href="{{ route('cart.create', $product->id) }}" class="add_cart btn btn-success btn-outline dim" style="margin-left: 20px" type="button" data-toggle="tooltip" data-placement="top" data-original-title="Agregar al carro de compras" title="Agregar al carro de compras"><i class="fa fa-shopping-cart fa"></i></button>
+                    </td>
+                    <td>
+                        <a href="{{ route('wishlist.delete-ajax', $product->id) }}" class="delete-from-wishlist-list">
+                          <i class="fa fa-minus-circle fa-2x"></i>
+                        </a>
                     </td>
                   </tr>
                   @endforeach

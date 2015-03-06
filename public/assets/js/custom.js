@@ -2,20 +2,41 @@
  * --------------- Config plugins ----------------
  */
 
-var initImageZoom = function () {
-    jQuery('.product-main-image').zoom({url: jQuery('.product-main-image img').attr('data-BigImgSrc')});
+var initImageZoom = function() {
+    jQuery('.product-main-image').zoom({
+        url: jQuery('.product-main-image img').attr('data-BigImgSrc')
+    });
 }
 
-var initTouchspin = function () {
+var initTouchspin = function() {
     jQuery(".product-quantity .form-control").TouchSpin({
-      buttondown_class: "btn quantity-down",
-      buttonup_class: "btn quantity-up"
+        buttondown_class: "btn quantity-down",
+        buttonup_class: "btn quantity-up",
+        min: 0,
+        max: 100,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10
     });
     jQuery(".quantity-down").html("<i class='fa fa-angle-down'></i>");
     jQuery(".quantity-up").html("<i class='fa fa-angle-up'></i>");
+
+    jQuery('.product-quantity-change').on('touchspin.on.stopspin', function () {
+        $.ajax({
+            type: 'GET',
+            url: jQuery(this).attr('data-url') + '/' + jQuery(this).val(),
+            //data: { 'quantity': jQuery(this).val() },
+            dataType: "JSON",
+            success: function(response) {
+                if(!response.success)
+                    alert('Hubo un error intentando cambiar la cantidad, intente de nuevo!');
+            }
+        });
+    });
 }
 
-var handleFancybox = function () {
+var handleFancybox = function() {
     if (!jQuery.fancybox) {
         return;
     }
@@ -41,8 +62,8 @@ var handleFancybox = function () {
     }
 }
 
-var initSliderRange = function () {
-    jQuery( "#slider-range-price" ).slider({
+var initSliderRange = function() {
+    jQuery("#slider-range-price").slider({
         range: true,
         min: 0,
         max: 9999,
@@ -109,19 +130,17 @@ var initSliderRange = function () {
         }
     });
 
-    
-
-
     jQuery("#priceRange").val( "$" + jQuery( "#slider-range-price" ).slider( "values", 0 ) +
     " - $" + jQuery( "#slider-range-price" ).slider( "values", 1 ) );
 
-    jQuery( "#slider-range-price-points" ).slider({
+
+    jQuery("#slider-range-price-points").slider({
         range: true,
         min: 0,
         max: 9999,
-        values: [ 1, 9999 ],
-        slide: function( event, ui ) {
-            jQuery( "#price-points" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+        values: [1, 9999],
+        slide: function(event, ui) {
+            jQuery("#price-points").val("$" + ui.values[0] + " - $" + ui.values[1]);
         },
         change: function(event, ui) {
             // when the user change the slider
@@ -134,17 +153,17 @@ var initSliderRange = function () {
             //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
             /*$.ajax({
                 type: 'GET',
-                url: jQuery('#search').attr('href'), 
+                url: jQuery('#search').attr('href'),
                 data: { 'firstValue': ui.values[0], 'secondValue':ui.values[1] },
-                dataType: "JSON", 
+                dataType: "JSON",
                 success: function(response) {
                     console.log(response);
                 }
             });*/
         }
     });
-    jQuery( "#price-points" ).val( "$" + jQuery( "#slider-range-price-points" ).slider( "values", 0 ) +
-    " - $" + jQuery( "#slider-range-price-points" ).slider( "values", 1 ) );
+    jQuery("#price-points").val("$" + jQuery("#slider-range-price-points").slider("values", 0) +
+        " - $" + jQuery("#slider-range-price-points").slider("values", 1));
 }
 
 var searchData = function () {
@@ -287,17 +306,16 @@ var loadCitiesForStates = function() {
  * --------------------- Wishlist Logic ----------------------
  */
 
-
-var addToWishlist = function () {
-    jQuery('.add_wishlist').click(function(){
+var addToWishlist = function() {
+    jQuery('.add_wishlist').click(function() {
         var url = jQuery(this).attr('href');
         jQuery.ajax({
             type: 'GET',
             url: url,
-            dataType:'json',
+            dataType: 'json',
             success: function(response) {
                 if (response != null) {
-                    if(response.success) {
+                    if (response.success) {
                         var wishlist = jQuery('#products-wishlist');
                         var product = response.product;
                         var template = jQuery('#wishlist-tpl').html();
@@ -307,7 +325,7 @@ var addToWishlist = function () {
                     } else {
                         alert('No se pudo agregar el producto!');
                     }
-                }else{
+                } else {
 
                 }
             }
@@ -316,23 +334,46 @@ var addToWishlist = function () {
     });
 }
 
-var removeFromWishList = function () {
+var removeFromWishList = function() {
     jQuery(document).on('click', '.delete-from-wishlist', function() {
         var element = jQuery(this);
         var url = element.attr('href');
         jQuery.ajax({
             type: 'GET',
             url: url,
-            dataType:'json',
+            dataType: 'json',
             success: function(response) {
                 if (response != null) {
-                    if(response.success) {
+                    if (response.success) {
                         element.closest('.li').remove();
                         discountFromWishlist();
                     } else {
                         alert('No se pudo eliminar el producto!');
                     }
-                }else{
+                } else {
+
+                }
+            }
+        });
+        return false;
+    });
+
+    jQuery(document).on('click', '.delete-from-wishlist-list', function() {
+        var element = jQuery(this);
+        var url = element.attr('href');
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function(response) {
+                if (response != null) {
+                    if (response.success) {
+                        element.closest('tr').remove();
+                        discountFromWishlist();
+                    } else {
+                        alert('No se pudo eliminar el producto!');
+                    }
+                } else {
 
                 }
             }
@@ -342,16 +383,16 @@ var removeFromWishList = function () {
 }
 
 var addCountToWishlist = function() {
-    var wishlistCount =  parseInt(jQuery('#wishlist-count').html());
-    if(isNaN(wishlistCount)) wishlistCount = 0;
+    var wishlistCount = parseInt(jQuery('#wishlist-count').html());
+    if (isNaN(wishlistCount)) wishlistCount = 0;
     jQuery('#wishlist-count').html(wishlistCount + 1);
 }
 
 var discountFromWishlist = function() {
-    var wishlistCount =  parseInt(jQuery('#wishlist-count').html());
-    if(isNaN(wishlistCount)) wishlistCount = 0;
-    if(wishlistCount > 0)
-        wishlistCount --;
+    var wishlistCount = parseInt(jQuery('#wishlist-count').html());
+    if (isNaN(wishlistCount)) wishlistCount = 0;
+    if (wishlistCount > 0)
+        wishlistCount--;
     jQuery('#wishlist-count').html(wishlistCount);
 }
 
@@ -362,16 +403,16 @@ var discountFromWishlist = function() {
 /*
  * --------------------- Shopping Cart Logic ----------------------
  */
-var addToCart = function () {
-    jQuery('.add_cart').click(function(){
+var addToCart = function() {
+    jQuery('.add_cart').click(function() {
         var url = jQuery(this).attr('href');
         jQuery.ajax({
             type: 'GET',
             url: url,
-            dataType:'json',
+            dataType: 'json',
             success: function(response) {
                 if (response != null) {
-                    if(response.success) {
+                    if (response.success) {
                         var cart = jQuery('#products-cart');
                         var product = response.product;
                         var template = jQuery('#cart-tpl').html();
@@ -381,7 +422,7 @@ var addToCart = function () {
                     } else {
                         alert('No se pudo agregar el producto!');
                     }
-                }else{
+                } else {
 
                 }
             }
@@ -390,23 +431,48 @@ var addToCart = function () {
     });
 }
 
-var removeFromCart = function () {
+var removeFromCart = function() {
     jQuery(document).on('click', '.delete-from-cart', function() {
         var element = jQuery(this);
         var url = element.attr('href');
         jQuery.ajax({
             type: 'GET',
             url: url,
-            dataType:'json',
+            dataType: 'json',
             success: function(response) {
                 if (response != null) {
-                    if(response.success) {
+                    if (response.success) {
                         element.closest('.li').remove();
                         discountFromcart();
                     } else {
                         alert('No se pudo eliminar el producto!');
                     }
-                }else{
+                } else {
+
+                }
+            }
+        });
+        return false;
+    });
+
+    jQuery(document).on('click', '.delete-from-cart-list', function() {
+        var element = jQuery(this);
+        var url = element.attr('href');
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function(response) {
+                if (response != null) {
+                    if (response.success) {
+                        element.closest('tr').remove();
+                        discountFromcart();
+                        jQuery('#sub-total').text(response.total);
+                        jQuery('#total').text(response.total);
+                    } else {
+                        alert('No se pudo eliminar el producto!');
+                    }
+                } else {
 
                 }
             }
@@ -416,28 +482,36 @@ var removeFromCart = function () {
 }
 
 var addCountTocart = function() {
-    var cartCount =  parseInt(jQuery('#cart-count').html());
-    if(isNaN(cartCount)) cartCount = 0;
+    var cartCount = parseInt(jQuery('#cart-count').html());
+    if (isNaN(cartCount)) cartCount = 0;
     jQuery('#cart-count').html(cartCount + 1);
 }
 
 var discountFromcart = function() {
-    var cartCount =  parseInt(jQuery('#cart-count').html());
-    if(isNaN(cartCount)) cartCount = 0;
-    if(cartCount > 0)
-        cartCount --;
-    jQuery('#cart-count').html(cartCount);
-}
+        var cartCount = parseInt(jQuery('#cart-count').html());
+        if (isNaN(cartCount)) cartCount = 0;
+        if (cartCount > 0)
+            cartCount--;
+        jQuery('#cart-count').html(cartCount);
+    }
 /*
  * ---------------------End Shopping Cart Logic ----------------------
  */
-var rating = function() {
-    jQuery("#rating").bind('rated', function (event, value) {
+
+/*
+ * --------------------- Rating Logic ----------------------
+ */
+var rating = function() {    
+    jQuery("#rating").bind('rated', function(event, value) {
         alert('You\'ve rated it: ' + value);
     });
 }
+/*
+ * --------------------- End Rating Logic ----------------------
+ */
 
-jQuery(document).ready(function(){
+
+jQuery(document).ready(function() {
     // Init de plugins --------------------------
     handleFancybox();
     initImageZoom();

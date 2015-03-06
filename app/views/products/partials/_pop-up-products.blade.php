@@ -1,5 +1,5 @@
-		    
-		<div id="product-pop-up-{{ $product->product_id }}" style="display: none; width: 700px;">
+
+		<div id="product-pop-up-{{ $product->id }}" style="display: none; width: 700px;">
 		            <div class="product-page product-pop-up">
 		              <div class="row">
 		                <div class="col-md-6 col-sm-6 col-xs-3">

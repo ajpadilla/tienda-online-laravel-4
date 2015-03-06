@@ -5,6 +5,7 @@
 		"create" => "cart/add/{id}/{quantity?}",
 		'delete-ajax' => 'cart/delete-ajax/{id}',
 		"store" => "cart/store",
+		'change-quantity' => "cart/change-quantity/{productId}/{quantity}",
 		"cart-empty" => "Your shopping cart is empty!",
 		"title" => "Cart",
 
