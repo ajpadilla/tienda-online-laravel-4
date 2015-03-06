@@ -7,6 +7,7 @@ use s4h\store\Forms\RegisterClassifiedConditionsForm;
 use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLangRepository;
 use s4h\store\Forms\EditClassifiedConditionForm;
 
+
 class ClassifiedConditionController extends \BaseController {
 	private $languageRepository;
 	private $classifiedConditionsRepository;
@@ -198,5 +199,14 @@ class ClassifiedConditionController extends \BaseController {
 		return Response::json(array('response' => 'false'));
 	}
 
+	public function returnDataForLang()
+	{
+		if (Request::ajax()) 
+		{
+			$classifiedsCoonditionsLang = $this->classifiedConditionsRepository->getNameForLanguage();
+			return Response::json(['success' => true, 'data'=> $classifiedsCoonditionsLang]);
+		}
+		return Response::json(['success' => false]);
+	}
 
 }
