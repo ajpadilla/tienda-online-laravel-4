@@ -334,6 +334,17 @@ class ClassifiedController extends \BaseController {
 		return View::make('classifieds.filtered-classisied',compact('classifiedsResult'));
 	}
 
+	public function countries()
+	{
+		if (Request::ajax()) 
+		{
+			$countries = $this->countryRepository->getNameForLanguage();
+			return Response::json(['success' => true, 'data'=> $countries]);
+		}else{
+			return Response::json(['success' => false]);
+		}
+	}
+
 	public function statesForCountry()
 	{
 		if (Request::ajax()) 
@@ -342,7 +353,7 @@ class ClassifiedController extends \BaseController {
 			{
 				$states = $this->countryRepository->getListOfStates(Input::get('countryId'));
 				if (count($states) > 0) {
-					return Response::json(['success' => true, 'states' => $states]);
+					return Response::json(['success' => true, 'location' => $states]);
 				}else{
 					return Response::json(['success' => false]);
 				}
@@ -358,7 +369,7 @@ class ClassifiedController extends \BaseController {
 			{
 				$cities = $this->countryRepository->getListOfCities(Input::get('stateId'));
 				if (count($cities) > 0) {
-					return Response::json(['success' => true, 'cities' => $cities]);
+					return Response::json(['success' => true, 'location' => $cities]);
 				}else{
 					return Response::json(['success' => false]);
 				}
