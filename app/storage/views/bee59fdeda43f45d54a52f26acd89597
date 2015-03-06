@@ -12,7 +12,7 @@
           <i class="fa fa-search-plus fa-3x"></i>
         </a>
       <?php endif; ?>
-        <a href="#product-pop-up-<?php echo $product->product_id; ?>" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
+        <a href="#product-pop-up-<?php echo $product->id; ?>" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
       </div>
     </div>
     <h3>
@@ -23,3 +23,4 @@
     <a href="<?php echo route('wishlist.create', $product->id); ?>" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
     <div class="sticker sticker-sale"></div>
 </div>
+

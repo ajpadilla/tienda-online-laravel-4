@@ -1,14 +1,13 @@
-
-		<div id="product-pop-up-<?php echo $product->id; ?>" style="display: none; width: 700px;">
+<div id="product-pop-up-<?php echo $classified->id; ?>" style="display: none; width: 700px;">
 		            <div class="product-page product-pop-up">
 		              <div class="row">
 		                <div class="col-md-6 col-sm-6 col-xs-3">
 		                  <div class="product-main-image">
-		                  	<?php if($product->hasPhotos()): ?>
-			                    <img src="<?php echo asset($product->getFirstPhoto()->complete_path); ?>" alt="<?php echo $product->getFirstPhoto()->filename; ?>" class="img-responsive">
+		                  	<?php if($classified->hasPhotos()): ?>
+			                    <img src="<?php echo asset($classified->getFirstPhoto()->complete_path); ?>" alt="<?php echo $classified->getFirstPhoto()->filename; ?>" class="img-responsive">
 			                  </div>
 			                  <div class="product-other-images">
-			                  	<?php foreach($product->photos as $photo): ?>
+			                  	<?php foreach($classified->photos as $photo): ?>
 			                    	<a href="#" class="active"><img src="<?php echo asset($photo->complete_path); ?>" alt="<?php echo $photo->filename; ?>"></a>
 			                    <?php endforeach; ?>
 			                  </div>
@@ -23,18 +22,18 @@
 		                  <?php endif; ?>
 		                </div>
 		                <div class="col-md-6 col-sm-6 col-xs-9">
-		                  <h2><?php echo $product->inCurrentLang->name; ?></h2>
+		                  <h2><?php echo $classified->getInCurrentLangAttribute()->name; ?></h2>
 		                  <div class="price-availability-block clearfix">
 		                    <div class="price">
-		                      <strong><span>$</span><?php echo $product->price; ?></strong>
-		                      <em>$<span><?php echo $product->price; ?></span></em>
+		                      <strong><span>$</span><?php echo $classified->price; ?></strong>
+		                      <em>$<span><?php echo $classified->price; ?></span></em>
 		                    </div>
-		                    <div class="availability">
-		                      Disponibilidad: <strong><?php echo $product->quantity; ?></strong>
-		                    </div>
+		                    <!--<div class="availability">
+		                      Disponibilidad: <strong><?php echo $classified->quantity; ?></strong>
+		                    </div>-->
 		                  </div>
 		                  <div class="description">
-		                    <p><?php echo $product->inCurrentLang->description; ?></p>
+		                    <p><?php echo $classified->getInCurrentLangAttribute()->description; ?></p>
 		                  </div>
 		                  <div class="product-page-options">
 		                    <div class="pull-left">
