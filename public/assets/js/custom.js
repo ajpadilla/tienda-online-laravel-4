@@ -157,7 +157,7 @@ var initSliderRange = function() {
         " - $" + jQuery("#slider-range-price-points").slider("values", 1));
 }
 
-var searchData = function () {
+var searchAgain = function () {
     jQuery('#search-data').click(function(){
         var url = jQuery('#search').attr('href');
         //console.log(url);
@@ -613,7 +613,7 @@ jQuery(document).ready(function() {
     addToCart();
     removeFromCart();
     rating();
-    searchData();
+    searchAgain();
     loadFieldsProduct();
     loadFieldsClassified();
     hideFields();
