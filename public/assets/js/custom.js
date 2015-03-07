@@ -78,18 +78,43 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
+            
+             data = {
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'conditionsProducts':  jQuery('#conditionsProducts').val(),
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
+                'classifiedType':  jQuery('#classifiedType').val(),
+                'cityId':  jQuery('#cityId').val(),
+                //'operator':  jQuery('#operator').val(),
+                //'price':  jQuery('#price').val(),
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                //'orderBy':  jQuery('#order-by-search').val(),*/
+                'filterWord': jQuery('#search-again').val(), 
+                'priceRange': 0, 
+                'firstValue': ui.values[0], 
+                'secondValue': ui.values[1] 
+             }
+             
             var firstValue = ui.values[0];
             var secondValue = ui.values[1];
             $.ajax({
                 type: 'GET',
                 url: jQuery('#search').attr('href'), 
-                data: { 'priceRange': 0, 'firstValue': ui.values[0], 'secondValue': ui.values[1] },
+                data: data,
                 dataType: "JSON", 
                 success: function(response) {
                     jQuery('#products-list').html('');
-                    if (response.success == true) {
-                         loadPaginatorProducts(response);
-                         loadDataProducts(response);
+                    jQuery('#classifieds-list').html('');
+                    if(response.success == true)
+                    {
+                        if(response.products){
+                            loadPaginatorProducts(response);
+                            loadDataProducts(response);
+                            loadPopUpProducts(response)
+                        } 
+                        if (response.classifieds){
+                            loadDataClassifieds(response);
+                        }
                     }
                 }
             });
@@ -163,16 +188,14 @@ var searchData = function () {
 }
 
 var loadPaginatorProducts = function(response) {
-    /*console.log(response.links);
-    console.log(response.product);*/
-
+    
     var paginator1 = jQuery('#total-items-1');
     var paginator2 = jQuery('#total-items-2');
 
     var paginator = {
-        from: response.product.from,
-        to: response.product.to,
-        total: response.product.total,
+        from: response.products.from,
+        to: response.products.to,
+        total: response.products.total,
         links: response.links
     };
 
@@ -188,15 +211,17 @@ var loadPaginatorProducts = function(response) {
 }
 
 var loadDataProducts = function(response) {
-    var url_img_model = 'http://tienda.local/uploads/products/images/model1.jpg';
-  $.each(response.product.data, function (index, element) {
+    var hostname = jQuery(location).attr('hostname');
+    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
+    //console.log( jQuery(location).attr('hostname'));
+  $.each(response.products.data, function (index, element) {
         //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
         var productslist = jQuery('#products-list');
         var product = {
             Id: element.id,
             name: element.languages[0].pivot.name,
             price: element.price,
-            url_img: url_img_model,
+            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
             url_show: response.urlShow +'/'+ element.id,
             url_cart: response.urlCart +'/'+ element.id,
             url_wishlist: response.urlWishList +'/'+ element.id,
@@ -204,6 +229,50 @@ var loadDataProducts = function(response) {
         var template = jQuery('#product-list-tpl').html();
         var html = Mustache.to_html(template, product);
         productslist.prepend(html);
+    });
+}
+
+var loadDataClassifieds = function(response) {
+    var hostname = jQuery(location).attr('hostname');
+    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
+    //console.log( jQuery(location).attr('hostname'));
+  $.each(response.classifieds.data, function (index, element) {
+        //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
+        var classifiedslist = jQuery('#classifieds-list');
+        var classified = {
+            Id: element.id,
+            name: element.languages[0].pivot.name,
+            price: element.price,
+            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
+            url_show: response.urlShow +'/'+ element.id,
+            url_cart: response.urlCart +'/'+ element.id,
+            url_wishlist: response.urlWishList +'/'+ element.id,
+        };
+        var template = jQuery('#classifieds-list-tpl').html();
+        var html = Mustache.to_html(template, classified);
+        classifiedslist.prepend(html);
+    });
+}
+
+var loadPopUpProducts = function(response) {
+    var hostname = jQuery(location).attr('hostname');
+    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
+    $.each(response.products.data, function (index, element) {
+        var productsPopUp = jQuery('.pop-up-product-view');
+        var product = {
+            Id: element.id,
+            name: element.languages[0].pivot.name,
+            description: element.languages[0].pivot.description,
+            price: element.price,
+            quantity : element.quantity,
+            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
+            url_show: response.urlShow +'/'+ element.id,
+            url_cart: response.urlCart +'/'+ element.id,
+            url_wishlist: response.urlWishList +'/'+ element.id,
+        };
+        var template = jQuery('#pop-up-products-tpl').html();
+        var html = Mustache.to_html(template, product);
+        productsPopUp.prepend(html);
     });
 }
 
