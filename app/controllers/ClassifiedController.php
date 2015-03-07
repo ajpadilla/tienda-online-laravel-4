@@ -98,14 +98,32 @@ class ClassifiedController extends \BaseController {
 			return $model->address;
 		});
 
-		$collection->addColumn('address', function($model)
+		$collection->addColumn('price', function($model)
 		{
-			return $model->address;
+			return $model->classified->price;
 		});
 
+		
 		$collection->addColumn('user', function($model)
 		{
 			return $model->classified->user->username;
+		});
+
+		$collection->addColumn('category', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+
+			if($model->classified->hasCategories())
+			{
+				$classifiedsCategoriesName = $model->classified->getCategories();
+				$links = '<select class="form-control m-b">';
+				foreach ($classifiedsCategoriesName as $category) {
+					$links .= '<option>'.$category.'</option>';
+				}
+				$links .='</select>';
+				return $links;
+			}
+			return '';
 		});
 
 		$collection->addColumn('classified_type', function($model)
