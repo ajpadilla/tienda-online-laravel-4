@@ -165,22 +165,31 @@ var searchData = function () {
             type: 'GET',
             url: url,
             data: {
-                //'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
-                //'conditionsProducts':  jQuery('#conditionsProducts').val(),
-                //'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
-                //'classifiedType':  jQuery('#classifiedType').val(),
-                //'cityId':  jQuery('#cityId').val(),
-                /*'operator':  jQuery('#operator').val(),
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'conditionsProducts':  jQuery('#conditionsProducts').val(),
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
+                'classifiedType':  jQuery('#classifiedType').val(),
+                'cityId':  jQuery('#cityId').val(),
+                'operator':  jQuery('#operator').val(),
                 'price':  jQuery('#price').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),*/
-                //'orderBy':  jQuery('#order-by-search').val(),*/
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                'orderBy':  jQuery('#order-by-search').val(),
                 'filterWord': jQuery('#search-again').val(),
                 //'check': $('input[name="select-search[]"]').serializeArray()
             },
             dataType:'json',
             success: function(response) {
-               //console.log(response.product);
+                jQuery('#products-list').html('');
+                jQuery('#classifieds-list').html('');
                console.log(response);
+               if(response.products){
+                    loadPaginatorProducts(response);
+                    loadDataProducts(response);
+                    loadPopUpProducts(response)
+                } 
+                if(response.classifieds){
+                    loadDataClassifieds(response);
+                }
             }
         });
         return false;
