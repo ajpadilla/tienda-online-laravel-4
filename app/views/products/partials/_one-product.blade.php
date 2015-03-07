@@ -1,9 +1,9 @@
 <div class="product-item">
   <div class="pi-img-wrapper">
     @if($product->hasPhotos())
-    <img class="img-responsive" src="{{ asset($product->getFirstPhoto()->complete_path) }}" alt="{{ $product->getFirstPhoto()->filename }}"/>
+    <img class="img-responsive" src="{{ asset($product->getFirstPhotoAttribute()->complete_path) }}" alt="{{ $product->getFirstPhotoAttribute()->filename }}"/>
     <div>
-      <a href="{{ asset($product->getFirstPhoto()->complete_path) }}" class="btn btn-default fancybox-button" alt=" {{ $product->getFirstPhoto()->filename }}"><i class="fa fa-search-plus fa-3x"></i>
+      <a href="{{ asset($product->getFirstPhotoAttribute()->complete_path) }}" class="btn btn-default fancybox-button" alt=" {{ $product->getFirstPhotoAttribute()->filename }}"><i class="fa fa-search-plus fa-3x"></i>
       </a>
       @else
         <img class="img-responsive" src="{{ asset('/uploads/products/images/model1.jpg') }}" alt="not-path"/>
