@@ -137,6 +137,8 @@
 
 
 @include('products.partials._product-list-tpl')
+@include('products.partials._pop-up-products-tpl')
+@include('classifieds.partials._classifieds-list-tpl')
 
 @section('scripts')
   <script type="text/javascript">

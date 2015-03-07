@@ -1,7 +1,7 @@
 <div class="col-md-6 col-sm-6">
 	<div class="product-main-image">
   	@if($product->hasPhotos())
-        <img src="{{ asset($product->getFirstPhoto()->complete_path) }}" alt="{{ $product->getFirstPhoto()->filename }}" class="img-responsive" data-BigImgsrc="{{ asset($product->getFirstPhoto()->complete_path) }}">
+        <img src="{{ asset($product->getFirstPhotoAttribute()->complete_path) }}" alt="{{ $product->getFirstPhotoAttribute()->filename }}" class="img-responsive" data-BigImgsrc="{{ asset($product->getFirstPhotoAttribute()->complete_path) }}">
       </div>
       <div class="product-other-images">
       	@foreach($product->photos as $photo)

@@ -18,7 +18,7 @@ use s4h\store\Forms\EditLangProductoForm;
 
 class ProductController extends \BaseController {
 
-	protected $productRepository;
+	//protected $productRepository;
 	protected $registerProductForm;
 	protected $EditProductForm;
 	//protected $categoryRepository;
@@ -46,7 +46,7 @@ class ProductController extends \BaseController {
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
-		$this->productRepository = $productRepository;
+		//$this->productRepository = $productRepository;
 		$this->editProductForm = $editProductForm;
 		//$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
@@ -198,7 +198,7 @@ class ProductController extends \BaseController {
 		{
 			$links = '';
 
-			$photo = $model->product->getFirstPhoto();
+			$photo = $model->product->getFirstPhotoAttribute();
 
 			if ($photo != false) {
 				$links .= "	<a href='#'>
@@ -225,12 +225,12 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('active', function($model)
 		{
-			return $model->product->getActivoShow();
+			return $model->product->getActivoShowAttribute();
 		});
 
 		$collection->addColumn('accept_barter', function($model)
 		{
-			return $model->product->getAcceptBarterShow();
+			return $model->product->getAcceptBarterShowAttribute();
 		});
 
 		$collection->addColumn('category', function($model)
@@ -250,11 +250,20 @@ class ProductController extends \BaseController {
 			return '';
 		});
 
+		$collection->addColumn('condition', function($model)
+		{
+			if($model->product->hasRatings())
+			{
+				return $model->product->condition->getInCurrentLangAttribute()->name;
+			}
+			return '';
+		});
+
 		$collection->addColumn('ratings', function($model)
 		{
 			if($model->product->hasRatings())
 			{
-				return $model->product->getRating();
+				return $model->product->getRatingAttribute();
 			}
 			return '';
 		});
@@ -301,14 +310,23 @@ class ProductController extends \BaseController {
 		if(Request::ajax()) 
 		{
 			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+
 			//return Response::json($productsSearch);
 			
 			//$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 			//return Response::json($classifiedsSearch);
-			//return Response::json(['success' =>true, 'product' => $classifiedsSearch->toArray(), 'links' => (string)$classifiedsSearch->links() ]);
 			
-			//return Response::json(Input::all());
-			return Response::json(['success' =>true, 'product' => $productsSearch->toArray(), 'links' => (string)$productsSearch->links() ]);
+			return Response::json(['success' =>true, 
+				'products' => $productsSearch->toArray(), 
+				'classifieds' => $classifiedsSearch->toArray(),
+				'links' => (string)$productsSearch->links(),
+				'urlShow'=> route('products.show',''),
+				'urlCart' => route('cart.create',''),
+				'urlWishList' => route('wishlist.create',''),
+				'urlShowClassified' => route('classifieds.show',''),
+				'path' => base_path()	
+			]);
 		} 
 		else {
 
