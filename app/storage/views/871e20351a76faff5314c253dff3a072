@@ -75,7 +75,7 @@
       </div>
 
       <div class="col-sm-8">
-        <?php echo Form::text('price',null, ['class' => 'form-control input-sm','placeholder' =>'','id'=> 'price']); ?>
+        <?php echo Form::text('price',null, ['class' => 'form-control input-sm','placeholder' =>'Precio','id'=> 'price']); ?>
 
       </div>
     </div>
