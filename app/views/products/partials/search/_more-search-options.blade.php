@@ -74,7 +74,7 @@
       </div>
 
       <div class="col-sm-8">
-        {{ Form::text('price',null, ['class' => 'form-control input-sm','placeholder' =>'','id'=> 'price']) }}
+        {{ Form::text('price',null, ['class' => 'form-control input-sm','placeholder' =>'Precio','id'=> 'price']) }}
       </div>
     </div>
 

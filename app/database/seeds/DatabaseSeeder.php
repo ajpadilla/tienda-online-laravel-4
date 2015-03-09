@@ -70,6 +70,8 @@ class DatabaseSeeder extends Seeder {
 	     $this->call('CartsTableSeeder');
 	     $this->call('CartProductTableSeeder');
 	     $this->call('RolePermissionTableSeeder');
+		 $this->call('AddressTableSeeder');
+		 $this->call('PeopleTableSeeder');
 	}
 
 }
