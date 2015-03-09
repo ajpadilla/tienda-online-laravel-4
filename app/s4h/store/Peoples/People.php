@@ -1,5 +1,8 @@
 <?php namespace s4h\store\Peoples;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 /**
 * 
 */
