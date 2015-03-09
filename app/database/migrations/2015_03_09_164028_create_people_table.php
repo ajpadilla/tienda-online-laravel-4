@@ -23,6 +23,7 @@ class CreatePeopleTable extends Migration {
 			$table->string('cellphone',50);
 			$table->integer('user_id')->unsigned();
 			$table->integer('role_id')->unsigned();
+			$table->integer('address_id')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();
 		});
