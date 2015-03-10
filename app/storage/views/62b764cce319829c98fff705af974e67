@@ -20,7 +20,9 @@
 						trans('classifieds.list.Name'),
 						trans('classifieds.list.Description'),
 						trans('classifieds.list.Address'),
+						trans('products.list.price'),
 						trans('classifieds.list.User'),
+						trans('products.list.category'),
 						trans('classifieds.list.Classifieds_types'),
 						trans('classifieds.list.Classified_condition'),
 						trans('classifieds.list.Actions')

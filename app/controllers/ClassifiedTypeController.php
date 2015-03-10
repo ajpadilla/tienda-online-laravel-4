@@ -198,4 +198,14 @@ class ClassifiedTypeController extends \BaseController {
 	}
 
 
+	public function returnDataForLang()
+	{
+		if (Request::ajax()) 
+		{
+			$classifiedsTypes = $this->classifiedTypesRepository->getNameForLanguage();
+			return Response::json(['success' => true,'data'=> $classifiedsTypes]);
+		}
+		return Response::json(['success' => false]);
+	}
+
 }

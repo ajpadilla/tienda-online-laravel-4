@@ -10,7 +10,7 @@
 	<div class="form-group" style="display: none">
 		{{ Form::label('shipment_status_id','id', ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('shipment_status_id', null, ['class' => 'form-control', 'placeholder' =>'','id'=> 'shipment_status_id_language']) }}
+			{{ Form::text('shipment_status_id', null, ['class' => 'form-control', 'placeholder' =>'','id'=> '']) }}
 		</div>
 	</div>
 

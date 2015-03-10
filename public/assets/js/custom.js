@@ -67,9 +67,9 @@ var initSliderRange = function() {
         range: true,
         min: 0,
         max: 9999,
-        values: [1, 9999],
-        slide: function(event, ui) {
-            jQuery("#price").val("$" + ui.values[0] + " - $" + ui.values[1]);
+        values: [ 1, 9999 ],
+        slide: function( event, ui ) {
+            jQuery( "#priceRange" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
         },
         change: function(event, ui) {
             // when the user change the slider
@@ -78,23 +78,52 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
+            
+             data = {
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'conditionsProducts':  jQuery('#conditionsProducts').val(),
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
+                'classifiedType':  jQuery('#classifiedType').val(),
+                'cityId':  jQuery('#cityId').val(),
+                //'operator':  jQuery('#operator').val(),
+                //'price':  jQuery('#price').val(),
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                //'orderBy':  jQuery('#order-by-search').val(),*/
+                'filterWord': jQuery('#search-again').val(), 
+                'priceRange': 0, 
+                'firstValue': ui.values[0], 
+                'secondValue': ui.values[1] 
+             }
+             
             var firstValue = ui.values[0];
             var secondValue = ui.values[1];
-            //alert('First: '+firstValue);
             $.ajax({
                 type: 'GET',
-                url: jQuery('#search').attr('href'),
-                data: { 'price': 0, 'firstValue': ui.values[0], 'secondValue': ui.values[1] },
-                dataType: "JSON",
+                url: jQuery('#search').attr('href'), 
+                data: data,
+                dataType: "JSON", 
                 success: function(response) {
-                    console.log(response);
+                    jQuery('#products-list').html('');
+                    jQuery('#classifieds-list').html('');
+                    if(response.success == true)
+                    {
+                        if(response.products){
+                            loadPaginatorProducts(response);
+                            loadDataProducts(response);
+                            loadPopUpProducts(response)
+                        } 
+                        if (response.classifieds){
+                            loadDataClassifieds(response);
+                        }
+                    }
                 }
             });
         }
     });
 
-    jQuery("#price").val("$" + jQuery("#slider-range-price").slider("values", 0) +
-        " - $" + jQuery("#slider-range-price").slider("values", 1));
+    jQuery("#priceRange").val( "$" + jQuery( "#slider-range-price" ).slider( "values", 0 ) +
+    " - $" + jQuery( "#slider-range-price" ).slider( "values", 1 ) );
+
 
     jQuery("#slider-range-price-points").slider({
         range: true,
@@ -113,7 +142,7 @@ var initSliderRange = function() {
             var secondValue = ui.values[1];
             //alert('First: '+firstValue);
             //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
-            $.ajax({
+            /*$.ajax({
                 type: 'GET',
                 url: jQuery('#search').attr('href'),
                 data: { 'firstValue': ui.values[0], 'secondValue':ui.values[1] },
@@ -121,12 +150,242 @@ var initSliderRange = function() {
                 success: function(response) {
                     console.log(response);
                 }
-            });
+            });*/
         }
     });
     jQuery("#price-points").val("$" + jQuery("#slider-range-price-points").slider("values", 0) +
         " - $" + jQuery("#slider-range-price-points").slider("values", 1));
 }
+
+var searchAgain = function () {
+    jQuery('#search-data').click(function(){
+        var url = jQuery('#search').attr('href');
+        //console.log(url);
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            data: {
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'conditionsProducts':  jQuery('#conditionsProducts').val(),
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
+                'classifiedType':  jQuery('#classifiedType').val(),
+                'cityId':  jQuery('#cityId').val(),
+                'operator':  jQuery('#operator').val(),
+                'price':  jQuery('#price').val(),
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                'orderBy':  jQuery('#order-by-search').val(),
+                'filterWord': jQuery('#search-again').val(),
+                //'check': $('input[name="select-search[]"]').serializeArray()
+            },
+            dataType:'json',
+            success: function(response) {
+                jQuery('#products-list').html('');
+                jQuery('#classifieds-list').html('');
+               console.log(response);
+               if(response.products){
+                    loadPaginatorProducts(response);
+                    loadDataProducts(response);
+                    loadPopUpProducts(response)
+                } 
+                if(response.classifieds){
+                    loadDataClassifieds(response);
+                }
+            }
+        });
+        return false;
+    });
+}
+
+var loadPaginatorProducts = function(response) {
+    
+    var paginator1 = jQuery('#total-items-1');
+    var paginator2 = jQuery('#total-items-2');
+
+    var paginator = {
+        from: response.products.from,
+        to: response.products.to,
+        total: response.products.total,
+        links: response.links
+    };
+
+    var templateP1 = jQuery('#total-items-1-tpl').html();
+    var templateP2 = jQuery('#total-items-2-tpl').html();
+
+    var html = Mustache.to_html(templateP1, paginator);
+    var html2 = Mustache.to_html(templateP2, paginator);
+
+    paginator1.prepend(html);
+    paginator2.prepend(html2);
+
+}
+
+var loadDataProducts = function(response) {
+    var hostname = jQuery(location).attr('hostname');
+    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
+    //console.log( jQuery(location).attr('hostname'));
+  $.each(response.products.data, function (index, element) {
+        //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
+        var productslist = jQuery('#products-list');
+        var product = {
+            Id: element.id,
+            name: element.languages[0].pivot.name,
+            price: element.price,
+            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
+            url_show: response.urlShow +'/'+ element.id,
+            url_cart: response.urlCart +'/'+ element.id,
+            url_wishlist: response.urlWishList +'/'+ element.id,
+        };
+        var template = jQuery('#product-list-tpl').html();
+        var html = Mustache.to_html(template, product);
+        productslist.prepend(html);
+    });
+}
+
+var loadDataClassifieds = function(response) {
+    var hostname = jQuery(location).attr('hostname');
+    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
+    //console.log( jQuery(location).attr('hostname'));
+  $.each(response.classifieds.data, function (index, element) {
+        //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
+        var classifiedslist = jQuery('#classifieds-list');
+        var classified = {
+            Id: element.id,
+            name: element.languages[0].pivot.name,
+            price: element.price,
+            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
+            url_show: response.urlShow +'/'+ element.id,
+            url_cart: response.urlCart +'/'+ element.id,
+            url_wishlist: response.urlWishList +'/'+ element.id,
+        };
+        var template = jQuery('#classifieds-list-tpl').html();
+        var html = Mustache.to_html(template, classified);
+        classifiedslist.prepend(html);
+    });
+}
+
+var loadPopUpProducts = function(response) {
+    var hostname = jQuery(location).attr('hostname');
+    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
+    $.each(response.products.data, function (index, element) {
+        var productsPopUp = jQuery('.pop-up-product-view');
+        var product = {
+            Id: element.id,
+            name: element.languages[0].pivot.name,
+            description: element.languages[0].pivot.description,
+            price: element.price,
+            quantity : element.quantity,
+            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
+            url_show: response.urlShow +'/'+ element.id,
+            url_cart: response.urlCart +'/'+ element.id,
+            url_wishlist: response.urlWishList +'/'+ element.id,
+        };
+        var template = jQuery('#pop-up-products-tpl').html();
+        var html = Mustache.to_html(template, product);
+        productsPopUp.prepend(html);
+    });
+}
+
+var hideFields = function() {
+    jQuery('#conditionProduct').hide();
+    jQuery('#conditionClassified').hide();
+    jQuery('#type').hide();
+}
+
+var loadFieldsProduct = function() {
+     jQuery('#product').click(function() {
+        var url = jQuery('#search-data-conditions-product-lang').attr('href');
+         jQuery('#conditionProduct').show();
+         loadFieldSelect(url, '#conditionsProducts');
+     });
+}
+
+var loadFieldsClassified = function() {
+    jQuery('#classified').click(function() {
+        var url = jQuery('#search-data-conditions-classified-lang').attr('href');
+        var urlClassifiedTypes = jQuery('#search-data-classified-type-lang').attr('href');
+        jQuery('#conditionClassified').show();
+        jQuery('#type').show();
+        loadFieldSelect(url, '#conditionsClassifieds');
+        loadFieldSelect(urlClassifiedTypes, '#classifiedType');
+     });
+}
+
+
+var loadFieldSelect = function(url,idField) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType:'json',
+        success: function(response) {
+            //console.log(response);
+            if (response.success == true) {
+                jQuery(idField).html('');
+                jQuery(idField).append('<option value=\"\"></option>');
+                $.each(response.data,function (k,v){
+                    jQuery(idField).append('<option value=\"'+k+'\">'+v+'</option>');
+                    $('.chosen-select').trigger("chosen:updated");
+                });
+            }else{
+                jQuery(idField).html('');
+                jQuery(idField).append('<option value=\"\"></option>');
+            }
+        }
+    });
+}
+
+var loadStatesForCountry = function() {
+    $('#countryId').click(function() {
+        var url = jQuery('#search-data-for-states').attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: {'countryId': $('#countryId').val()},
+            dataType: "JSON",
+            success: function(response) {
+                /*console.log(response.success);
+                console.log(response.states);*/
+                if (response.success == true) {
+                    $('#stateId').html('');
+                    $('#stateId').append('<option value=\"\">  </option>');
+                    $.each(response.location,function (k,v){
+                        $('#stateId').append('<option value=\"'+k+'\">'+v+'</option>');
+                    });
+                }else{
+                    $('#stateId').html('');
+                    $('#stateId').append('<option value=\"\">  </option>');
+                }
+            }
+        });
+    });
+} 
+
+
+var loadCitiesForStates = function() {
+    $('#stateId').click(function() {
+        var url = jQuery('#search-data-for-cities').attr('href');
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: {'stateId': $('#stateId').val()},
+            dataType: "JSON",
+            success: function(response) {
+                /*console.log(response.success);
+                console.log(response.states);*/
+                if (response.success == true) {
+                    $('#cityId').html('');
+                    $('#cityId').append('<option value=\"\">  </option>');
+                    $.each(response.location,function (k,v){
+                        $('#cityId').append('<option value=\"'+k+'\">'+v+'</option>');
+                    });
+                }else{
+                    $('#cityId').html('');
+                    $('#cityId').append('<option value=\"\">  </option>');
+                }
+            }
+        });
+    });
+} 
+
 
 /*
  * --------------- Custom scripts for bussiness logic ----------------
@@ -135,6 +394,7 @@ var initSliderRange = function() {
 /*
  * --------------------- Wishlist Logic ----------------------
  */
+
 var addToWishlist = function() {
     jQuery('.add_wishlist').click(function() {
         var url = jQuery(this).attr('href');
@@ -353,4 +613,13 @@ jQuery(document).ready(function() {
     addToCart();
     removeFromCart();
     rating();
+    searchAgain();
+    loadFieldsProduct();
+    loadFieldsClassified();
+    hideFields();
+    //load countries
+    loadFieldSelect(jQuery('#search-data-for-country').attr('href'), '#countryId');
+    loadStatesForCountry();
+    loadCitiesForStates()
 });
+

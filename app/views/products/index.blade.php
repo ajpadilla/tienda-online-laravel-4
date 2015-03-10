@@ -24,6 +24,7 @@
 						trans('products.list.active'),
 						trans('products.list.accept'),
 						trans('products.list.category'),
+						trans('products.labels.condition'),
 						trans('products.list.ratings'),
 						trans('products.list.actions')
 				];

@@ -98,14 +98,32 @@ class ClassifiedController extends \BaseController {
 			return $model->address;
 		});
 
-		$collection->addColumn('address', function($model)
+		$collection->addColumn('price', function($model)
 		{
-			return $model->address;
+			return $model->classified->price;
 		});
 
+		
 		$collection->addColumn('user', function($model)
 		{
 			return $model->classified->user->username;
+		});
+
+		$collection->addColumn('category', function($model)
+		{
+			$language = $this->languageRepository->returnLanguage();
+
+			if($model->classified->hasCategories())
+			{
+				$classifiedsCategoriesName = $model->classified->getCategories();
+				$links = '<select class="form-control m-b">';
+				foreach ($classifiedsCategoriesName as $category) {
+					$links .= '<option>'.$category.'</option>';
+				}
+				$links .='</select>';
+				return $links;
+			}
+			return '';
 		});
 
 		$collection->addColumn('classified_type', function($model)
@@ -334,6 +352,17 @@ class ClassifiedController extends \BaseController {
 		return View::make('classifieds.filtered-classisied',compact('classifiedsResult'));
 	}
 
+	public function countries()
+	{
+		if (Request::ajax()) 
+		{
+			$countries = $this->countryRepository->getNameForLanguage();
+			return Response::json(['success' => true, 'data'=> $countries]);
+		}else{
+			return Response::json(['success' => false]);
+		}
+	}
+
 	public function statesForCountry()
 	{
 		if (Request::ajax()) 
@@ -342,7 +371,7 @@ class ClassifiedController extends \BaseController {
 			{
 				$states = $this->countryRepository->getListOfStates(Input::get('countryId'));
 				if (count($states) > 0) {
-					return Response::json(['success' => true, 'states' => $states]);
+					return Response::json(['success' => true, 'location' => $states]);
 				}else{
 					return Response::json(['success' => false]);
 				}
@@ -358,7 +387,7 @@ class ClassifiedController extends \BaseController {
 			{
 				$cities = $this->countryRepository->getListOfCities(Input::get('stateId'));
 				if (count($cities) > 0) {
-					return Response::json(['success' => true, 'cities' => $cities]);
+					return Response::json(['success' => true, 'location' => $cities]);
 				}else{
 					return Response::json(['success' => false]);
 				}

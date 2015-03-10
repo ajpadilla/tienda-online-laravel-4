@@ -4,14 +4,20 @@ use s4h\store\ClassifiedConditions\ClassifiedCondition;
 use s4h\store\Languages\Language;
 use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Base\BaseRepository;
 /**
 * 
 */
-class ClassifiedConditionsRepository {
+class ClassifiedConditionsRepository extends BaseRepository{
 
 	public function save(ClassifiedCondition $classifiedCondition){
 		return $classifiedCondition->save();
 	}
+
+	public function getModel()
+    {
+      return new ClassifiedCondition;
+    }
 
 	public function getAll(){
 		return ClassifiedCondition::all();

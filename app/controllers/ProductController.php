@@ -18,10 +18,10 @@ use s4h\store\Forms\EditLangProductoForm;
 
 class ProductController extends \BaseController {
 
-	protected $productRepository;
+	//protected $productRepository;
 	protected $registerProductForm;
 	protected $EditProductForm;
-	protected $categoryRepository;
+	//protected $categoryRepository;
 	protected $conditionRepository;
 	protected $measureRepository;
 	protected $languageRepository;
@@ -33,7 +33,7 @@ class ProductController extends \BaseController {
 
 	public function __construct(RegisterProductForm $registerProductForm,
 										ProductRepository $productRepository,
-										CategoryRepository $categoryRepository,
+										//CategoryRepository $categoryRepository,
 										ConditionRepository $conditionRepository,
 										MeasureRepository $measureRepository,
 										EditProductForm $editProductForm,
@@ -46,9 +46,9 @@ class ProductController extends \BaseController {
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
-		$this->productRepository = $productRepository;
+		//$this->productRepository = $productRepository;
 		$this->editProductForm = $editProductForm;
-		$this->categoryRepository = $categoryRepository;
+		//$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 		$this->measureRepository = $measureRepository;
 		$this->languageRepository = $languageRepository;
@@ -198,7 +198,7 @@ class ProductController extends \BaseController {
 		{
 			$links = '';
 
-			$photo = $model->product->getFirstPhoto();
+			$photo = $model->product->getFirstPhotoAttribute();
 
 			if ($photo != false) {
 				$links .= "	<a href='#'>
@@ -225,12 +225,12 @@ class ProductController extends \BaseController {
 
 		$collection->addColumn('active', function($model)
 		{
-			return $model->product->getActivoShow();
+			return $model->product->getActivoShowAttribute();
 		});
 
 		$collection->addColumn('accept_barter', function($model)
 		{
-			return $model->product->getAcceptBarterShow();
+			return $model->product->getAcceptBarterShowAttribute();
 		});
 
 		$collection->addColumn('category', function($model)
@@ -250,11 +250,20 @@ class ProductController extends \BaseController {
 			return '';
 		});
 
+		$collection->addColumn('condition', function($model)
+		{
+			if($model->product->hasRatings())
+			{
+				return $model->product->condition->getInCurrentLangAttribute()->name;
+			}
+			return '';
+		});
+
 		$collection->addColumn('ratings', function($model)
 		{
 			if($model->product->hasRatings())
 			{
-				return $model->product->getRating();
+				return $model->product->getRatingAttribute();
 			}
 			return '';
 		});
@@ -294,28 +303,47 @@ class ProductController extends \BaseController {
 		return $collection->make();
 	}
 
-	public function search() {
-		$products = null;
-		if(Request::ajax()) {
-			$productsSearch= $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+	public function search() 
+	{
+		$categories = $this->categoryRepository->getNameForLanguage();
 
-			return Response::json($productsSearch);
-		} else {
+		if(Request::ajax()) 
+		{
+			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 
-			/*$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			//return Response::json($productsSearch);
+			
+			//$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			//return Response::json($classifiedsSearch);
+			
+			return Response::json(['success' =>true, 
+				'products' => $productsSearch->toArray(), 
+				'classifieds' => $classifiedsSearch->toArray(),
+				'links' => (string)$productsSearch->links(),
+				'urlShow'=> route('products.show',''),
+				'urlCart' => route('cart.create',''),
+				'urlWishList' => route('wishlist.create',''),
+				'urlShowClassified' => route('classifieds.show',''),
+				'path' => base_path()	
+			]);
+		} 
+		else {
 
-			if (!$productsSearch->isEmpty()) 
+			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+
+			if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) 
 			{
 				$products = $productsSearch;
-				return View::make('products.search-result', compact('products','categoryResults'));
+				$classifieds = $classifiedsSearch;
+				return View::make('products.search-result', compact('products','classifieds','categories'));
 			} else {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
 				return View::make('products.search');
-			}*/
-
-			return View::make('products.search-result', compact('products','categoryResults'));
-
+			}
 		}
+
 	}
 
 	public function returnDataProduct()

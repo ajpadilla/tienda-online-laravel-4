@@ -34,7 +34,7 @@ class Product extends BaseModel{
 
 	public function condition()
 	{
-		return $this->belongsto('s4h\store\Conditions\Condition');
+		return $this->belongsTo('s4h\store\Conditions\Condition');
 	}
 
 	public function photos()

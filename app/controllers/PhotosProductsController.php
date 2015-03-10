@@ -5,8 +5,8 @@ use s4h\store\Languages\LanguageRepository;
 use s4h\store\Photos\ProductPhotos;
 
 class PhotosProductsController extends \BaseController {
-	private $languageRepository;
-	private $productRepository;
+	protected $languageRepository;
+	protected $productRepository;
 
 	function __construct(ProductRepository $productRepository, LanguageRepository $languageRepository) {
 		$this->productRepository = $productRepository;

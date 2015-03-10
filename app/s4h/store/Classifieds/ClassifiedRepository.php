@@ -16,30 +16,42 @@ class ClassifiedRepository extends BaseRepository
 		return new Classified;
 	}
 
-	public $filters = ['cityId','price','classifiedTypeId','classifiedConditionId','operator','filterWord'];
+	public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsClassifieds',
+    'cityId','classifiedType','operator'];
 
-	//public $filters = ['cityId'];
-
-	public function filterByCityId($query, $value)
-	{
-		$query->where('city_id','=',$value);
+	public function filterByPrice($query, $data = array()){
+		$query->where('price',$data['operator'],$data['price']);
 	}
 
-	public function filterByPrice($query, $value, $operator)
-	{
-		$query->where('price',''.$operator.'',$value);
+    public function filterByPriceRange($query, $data = array()){
+		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
 	}
 
-	public function filterByClassifiedTypeId($query, $value)
-	{
-		$query->where('classified_type_id','=',$value);
+	public function filterByConditionsClassifieds($query, $data = array()){
+		$query->where('classified_condition_id','=',$data['conditionsClassifieds']);
 	}
 
-	public function filterByClassifiedConditionId($query, $value)
+	public function filterByFilterWord($query, $data = array())
 	{
-		$query->where('classified_condition_id','=',$value);
+		$language = $this->getCurrentLang();
+		$query->whereHas('languages', function($q) use ($data, $language){
+    		$q->where('language_id', '=', $language->id)
+    			->where('classifieds_lang.name', 'LIKE', '%' . $data['filterWord'] . '%')
+    			->orWhere('classifieds_lang.description', 'LIKE', '%' . $data['filterWord'] . '%')
+    			->where('language_id', '=', $language->id);
+		});
 	}
 
+	public function filterByCategories($query, $data = array())
+	{
+		$query->whereHas('categories', function($q) use ($data){
+    		$q->whereIn('classified_classification.category_id', $data['categories']);
+		});
+	}
+
+	public function filterByClassifiedType($query, $data = array()){
+		$query->where('classified_type_id','=',$data['classifiedType']);
+	}
 
 	public function createNewClassified($data = array())
 	{

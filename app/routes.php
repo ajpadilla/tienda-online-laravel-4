@@ -321,6 +321,8 @@ function () {
 
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
+	Route::get('returnDataForLangClassifiedTypes','ClassifiedTypeController@returnDataForLang');
+
 	/**
 		* ------------------------------ Rutas classified conditions -----------------------
 	**/
@@ -366,6 +368,14 @@ function () {
 
 
 	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
+
+	Route::get('returnDataForLangClassifiedCondition','ClassifiedConditionController@returnDataForLang');
+
+	/**
+		* ------------------------------ Rutas ProductConditions -----------------------
+	**/
+
+		Route::get('returnDataForLangProductCondition','ProductConditionController@returnDataForLang');
 
 	/**
 		* ------------------------------ Rutas classifieds -----------------------
@@ -417,6 +427,7 @@ function () {
 		'uses' => 'ClassifiedController@searchClassified'
 	]);
 
+	Route::get('countries','ClassifiedController@countries');
 	Route::get('statesForCountry','ClassifiedController@statesForCountry');
 	Route::get('citiesForState','ClassifiedController@citiesForState');
 
@@ -508,6 +519,13 @@ function () {
 	]);
 
 	Route::get('api/categories', array('as'=>'api.categories', 'uses'=>'CategoriesController@getDatatable'));
+
+	//Route::get('returnDataCategoriesLang','CategoriesController@returnDataCategoriesLang');	
+
+	Route::get('returnDataCategoriesLang', [
+		'as' => 'categories.dataLang',
+		'uses' => 'CategoriesController@returnDataCategoriesLang'
+	]);
 
 	/**
 		* ------------------------------ Rutas Categories -----------------------
