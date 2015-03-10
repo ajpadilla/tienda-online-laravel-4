@@ -42,4 +42,8 @@ class User extends ConfideUser {
 		return $this->hasMany('s4h\store\Carts\Cart');
 	}
 
+	public function products(){
+		return $this->hasMany('s4h\store\Products\Product');
+	}
+
 }
