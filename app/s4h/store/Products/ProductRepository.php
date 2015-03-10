@@ -47,6 +47,18 @@ class ProductRepository extends BaseRepository{
 		});
 	}
 
+	public function filterByCityId($query, $data = array()){
+		$query = $query->with(['user','user.people','user.people.address']);
+
+		$query->whereHas('user', function($q) use ($data){
+    		$q->whereHas('people',function($q) use ($data){
+    			$q->whereHas('address', function($q) use($data) {
+                    $q->where('city_id', '=', $data['cityId']);
+                });
+    		});
+		});
+	}
+
 	public function getAllInCurrentLangData()
 	{
 		$language = $this->getCurrentLang();
