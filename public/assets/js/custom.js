@@ -165,16 +165,16 @@ var searchAgain = function () {
             type: 'GET',
             url: url,
             data: {
-                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                /*'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
-                'classifiedType':  jQuery('#classifiedType').val(),
+                'classifiedType':  jQuery('#classifiedType').val(),*/
                 'cityId':  jQuery('#cityId').val(),
-                'operator':  jQuery('#operator').val(),
+                /*'operator':  jQuery('#operator').val(),
                 'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'orderBy':  jQuery('#order-by-search').val(),
-                'filterWord': jQuery('#search-again').val(),
+                'filterWord': jQuery('#search-again').val(),*/
                 //'check': $('input[name="select-search[]"]').serializeArray()
             },
             dataType:'json',
