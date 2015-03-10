@@ -54,7 +54,9 @@ class ClassifiedRepository extends BaseRepository
 	}
 
 	public function filterByCityId($query, $data = array()){
-		# code...
+		$query->whereHas('address', function($q) use ($data){
+    		$q->where('city_id', '=', $data['cityId']);
+		});
 	}
 
 	public function createNewClassified($data = array())
