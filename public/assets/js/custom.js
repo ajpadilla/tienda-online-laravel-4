@@ -2,7 +2,7 @@
  * --------------- Config plugins ----------------
  */
 
-var dataSearch;
+var dataSearchRange;
 
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
@@ -80,17 +80,17 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            dataSearch = {
-                /*'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+            dataSearchRange = {
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
                 'classifiedType':  jQuery('#classifiedType').val(),
-                'cityId':  jQuery('#cityId').val(),*/
+                'cityId':  jQuery('#cityId').val(),
                 //'operator':  jQuery('#operator').val(),
                 //'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                //'orderBy':  jQuery('#order-by-search').val(),*/
-                //'filterWord': jQuery('#search-again').val(), 
+                'orderBy':  jQuery('#order-by-search').val(),
+                'filterWord': jQuery('#search-again').val(), 
                 'priceRange': 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1] 
@@ -98,7 +98,7 @@ var initSliderRange = function() {
             $.ajax({
                 type: 'GET',
                 url: jQuery('#search').attr('href'), 
-                data: dataSearch,
+                data: dataSearchRange,
                 dataType: "JSON", 
                 success: function(response) {
                     jQuery('#result-section-search').html('');
@@ -155,30 +155,25 @@ var searchAgain = function () {
             type: 'GET',
             url: url,
             data: {
-                /*'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
-                'classifiedType':  jQuery('#classifiedType').val(),*/
-                //'cityId':  jQuery('#cityId').val(),
+                'classifiedType':  jQuery('#classifiedType').val(),
+                'cityId':  jQuery('#cityId').val(),
                 'operator':  jQuery('#operator').val(),
                 'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                //'orderBy':  jQuery('#order-by-search').val(),
-                //'filterWord': jQuery('#search-again').val(),
+                'orderBy':  jQuery('#order-by-search').val(),
+                'filterWord': jQuery('#search-again').val(),
                 //'check': $('input[name="select-search[]"]').serializeArray()
             },
             dataType:'json',
             success: function(response) {
-                jQuery('#products-list').html('');
-                jQuery('#classifieds-list').html('');
-                console.log(response);
-               if(response.products){
-                    loadPaginatorProducts(response);
-                    loadDataProducts(response);
-                    loadPopUpProducts(response)
-                } 
-                if(response.classifieds){
-                    loadDataClassifieds(response);
+                jQuery('#result-section-search').html('');
+                if(response.success == true){
+                    console.log(response);
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator()
                 }
             }
         });
@@ -186,11 +181,11 @@ var searchAgain = function () {
     });
 }
 
-$(window).on('hashchange',function(){
+/*$(window).on('hashchange',function(){
     page = wi
     ndow.location.hash.replace('#','');
     getProducts(page);
-});
+});*/
 
 
 var linksPaginator = function() {
@@ -205,16 +200,16 @@ function getDataForPage(page){
     $.ajax({
         type: 'GET',
         url: jQuery('#search').attr('href') +'?page='+ page,
-        data: dataSearch,
+        data: dataSearchRange,
         dataType:'json',
         success: function(response) {
-            console.log(dataSearch);
+            console.log(dataSearchRange);
             jQuery('#result-section-search').html(response.view);
         },
         error: function(objeto, quepaso, otroobj){
             console.log("Error al hacer la petición");
         }
-    })
+    });
 }
 
 var hideFields = function() {
@@ -539,7 +534,7 @@ jQuery(document).ready(function() {
     addToCart();
     removeFromCart();
     rating();
-    //searchAgain();
+    searchAgain();
     loadFieldsProduct();
     loadFieldsClassified();
 
