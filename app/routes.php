@@ -43,6 +43,8 @@ function () {
 		'uses' => 'ProductController@search'
 	]);
 
+	//Route::get('/ajax/search','ProductController@loadPage');
+
 	Route::get('returnDataProduct','ProductController@returnDataProduct');
 
 	Route::get('returnDataProductLang','ProductController@returnDataProductLang');
