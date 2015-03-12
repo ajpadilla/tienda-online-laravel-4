@@ -2,6 +2,9 @@
  * --------------- Config plugins ----------------
  */
 
+var dataResponse;
+var priceRamgeData;
+
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
         url: jQuery('.product-main-image img').attr('data-BigImgSrc')
@@ -78,18 +81,17 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            
-             data = {
-                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+            var data = {
+                /*'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
                 'classifiedType':  jQuery('#classifiedType').val(),
-                'cityId':  jQuery('#cityId').val(),
+                'cityId':  jQuery('#cityId').val(),*/
                 //'operator':  jQuery('#operator').val(),
                 //'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 //'orderBy':  jQuery('#order-by-search').val(),*/
-                'filterWord': jQuery('#search-again').val(), 
+                //'filterWord': jQuery('#search-again').val(), 
                 'priceRange': 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1] 
@@ -105,16 +107,22 @@ var initSliderRange = function() {
                 success: function(response) {
                     jQuery('#products-list').html('');
                     jQuery('#classifieds-list').html('');
+                    jQuery('#load-content').html('');
                     if(response.success == true)
                     {
-                        if(response.products){
-                            loadPaginatorProducts(response);
+                        //console.log(response);
+                        jQuery('#load-content').html(response.view);
+                        console.log(jQuery('#search').attr('href'));
+                        linksPaginator(data)
+                        //console.log(response);
+                        /*if(response.products){
+                            loadPaginator(response);
                             loadDataProducts(response);
                             loadPopUpProducts(response)
                         } 
                         if (response.classifieds){
                             loadDataClassifieds(response);
-                        }
+                        }*/
                     }
                 }
             });
@@ -169,19 +177,19 @@ var searchAgain = function () {
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
                 'classifiedType':  jQuery('#classifiedType').val(),*/
-                'cityId':  jQuery('#cityId').val(),
-                /*'operator':  jQuery('#operator').val(),
+                //'cityId':  jQuery('#cityId').val(),
+                'operator':  jQuery('#operator').val(),
                 'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                'orderBy':  jQuery('#order-by-search').val(),
-                'filterWord': jQuery('#search-again').val(),*/
+                //'orderBy':  jQuery('#order-by-search').val(),
+                //'filterWord': jQuery('#search-again').val(),
                 //'check': $('input[name="select-search[]"]').serializeArray()
             },
             dataType:'json',
             success: function(response) {
                 jQuery('#products-list').html('');
                 jQuery('#classifieds-list').html('');
-               console.log(response);
+                console.log(response);
                if(response.products){
                     loadPaginatorProducts(response);
                     loadDataProducts(response);
@@ -196,16 +204,19 @@ var searchAgain = function () {
     });
 }
 
-var loadPaginatorProducts = function(response) {
+var loadPaginator = function(response) {
     
-    var paginator1 = jQuery('#total-items-1');
-    var paginator2 = jQuery('#total-items-2');
+    var paginator1 = jQuery('#total-items-produts-1');
+    var paginator2 = jQuery('#total-items-produts-2');
+
+    paginator1.html('');
+    paginator2.html('');
 
     var paginator = {
         from: response.products.from,
         to: response.products.to,
         total: response.products.total,
-        links: response.links
+        links: jQuery('#links-products').html(response.links)
     };
 
     var templateP1 = jQuery('#total-items-1-tpl').html();
@@ -219,12 +230,40 @@ var loadPaginatorProducts = function(response) {
 
 }
 
+var linksPaginator = function(data) {
+    $(document).on('click','.pagination a', function(e){
+            e.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            console.log(page);
+            getDataForPage(page,data);
+    });
+}
+
+
+function getDataForPage(page,data){
+    $.ajax({
+        type: 'GET',
+        url: jQuery('#search').attr('href') +'?page='+ page,
+        data: data,
+        dataType:'json',
+        success: function(response) {
+            console.log('paginas');
+            console.log(response);
+            jQuery('#load-content').html(response.view);
+        },
+        error: function(objeto, quepaso, otroobj){
+            console.log("Error al hacer la petición");
+        }
+    })
+}
+
 var loadDataProducts = function(response) {
     var hostname = jQuery(location).attr('hostname');
     var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
     //console.log( jQuery(location).attr('hostname'));
   $.each(response.products.data, function (index, element) {
         //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
+        $('.pagination').html(data);
         var productslist = jQuery('#products-list');
         var product = {
             Id: element.id,
@@ -293,20 +332,14 @@ var hideFields = function() {
 
 var loadFieldsProduct = function() {
      jQuery('#product').click(function() {
-        var url = jQuery('#search-data-conditions-product-lang').attr('href');
-         jQuery('#conditionProduct').show();
-         loadFieldSelect(url, '#conditionsProducts');
+         jQuery('#conditionProduct').toggle();
      });
 }
 
 var loadFieldsClassified = function() {
     jQuery('#classified').click(function() {
-        var url = jQuery('#search-data-conditions-classified-lang').attr('href');
-        var urlClassifiedTypes = jQuery('#search-data-classified-type-lang').attr('href');
-        jQuery('#conditionClassified').show();
-        jQuery('#type').show();
-        loadFieldSelect(url, '#conditionsClassifieds');
-        loadFieldSelect(urlClassifiedTypes, '#classifiedType');
+        jQuery('#conditionClassified').toggle();
+        jQuery('#type').toggle();
      });
 }
 
@@ -616,10 +649,16 @@ jQuery(document).ready(function() {
     searchAgain();
     loadFieldsProduct();
     loadFieldsClassified();
+
     hideFields();
+
+    loadFieldSelect(jQuery('#search-data-conditions-product-lang').attr('href'), '#conditionsProducts');
+    loadFieldSelect(jQuery('#search-data-conditions-classified-lang').attr('href'), '#conditionsClassifieds');
+    loadFieldSelect(jQuery('#search-data-classified-type-lang').attr('href'), '#classifiedType');
+
     //load countries
     loadFieldSelect(jQuery('#search-data-for-country').attr('href'), '#countryId');
     loadStatesForCountry();
-    loadCitiesForStates()
+    loadCitiesForStates();
 });
 
