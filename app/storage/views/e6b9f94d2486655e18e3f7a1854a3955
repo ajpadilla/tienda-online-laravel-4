@@ -28,7 +28,7 @@
           </div>
           <!-- END SIDEBAR -->
           <!-- BEGIN CONTENT -->
-          <div class="col-md-9 col-sm-7">
+          <div id="load-content" class="col-md-9 col-sm-7">
             <!--<div class="content-search margin-bottom-20">
               <div class="row">
                 <div class="col-md-6">
@@ -54,11 +54,12 @@
               <?php echo $__env->make('products.partials.search._order-by-search', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
 
-            <?php if(!$products->isEmpty()): ?>
+            <div id="result-section-search">
+               <?php if(!$products->isEmpty()): ?>
             <!-- BEGIN PAGINATOR -->
-            <div id="total-items-1" class="row">
+            <div id="total-items-produts-1" class="row">
               <div class="col-md-4 col-sm-4 items-info">Productos <?php echo $products->getTotal(); ?>  en total</div>
-              <div class="col-md-8 col-sm-8">
+              <div class="col-md-8 col-sm-8 links-products">
                  <?php echo $products->links(); ?>
 
               </div>
@@ -76,47 +77,50 @@
             </div>
             <!-- END PRODUCT LIST -->
             <!-- BEGIN PAGINATOR -->
-            <div id="total-items-2" class="row">
+            <div id="total-items-produts-2" class="row">
               <div class="col-md-4 col-sm-4 items-info">Productos total</div>
-              <div class="col-md-8 col-sm-8">
+              <div class="col-md-8 col-sm-8 links-products">
                 <?php echo $products->links(); ?>
 
               </div>
             </div>
             <!-- END PAGINATOR -->
             <?php endif; ?>
-
-            <?php if(!$classifieds->isEmpty()): ?>
-            <!-- BEGIN PAGINATOR -->
-            <div id="total-items-classifieds-1" class="row margen">
+        
+             <?php if(!$classifieds->isEmpty()): ?>
+             <!-- BEGIN PAGINATOR -->
+             <div id="total-items-classifieds-1" class="row margen">
               <div class="col-md-4 col-sm-4 items-info">Clasificados <?php echo $classifieds->getTotal(); ?>  en total</div>
               <div class="col-md-8 col-sm-8">
-                 <?php echo $classifieds->links(); ?>
+               <?php echo $classifieds->links(); ?>
 
-              </div>
+             </div>
+           </div>
+           <!-- END PAGINATOR -->
+           <!-- BEGIN PRODUCT LIST -->
+           <div id="classifieds-list" class="row classified-list">
+            <!-- PRODUCT ITEM START -->
+            <?php foreach($classifieds as $classified): ?>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+              <?php echo $__env->make('classifieds.partials._one-classified', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
-            <!-- END PAGINATOR -->
-            <!-- BEGIN PRODUCT LIST -->
-            <div id="classifieds-list" class="row classified-list">
-              <!-- PRODUCT ITEM START -->
-              <?php foreach($classifieds as $classified): ?>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <?php echo $__env->make('classifieds.partials._one-classified', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                </div>
-              <?php endforeach; ?>
-              <!-- PRODUCT ITEM END -->
-            </div>
-            <!-- END PRODUCT LIST -->
-            <!-- BEGIN PAGINATOR -->
-            <div id="total-items-classifieds-2" class="row">
-              <div class="col-md-4 col-sm-4 items-info">Clasificados total</div>
-              <div class="col-md-8 col-sm-8">
-                <?php echo $classifieds->links(); ?>
+            <?php endforeach; ?>
+            <!-- PRODUCT ITEM END -->
+          </div>
+          <!-- END PRODUCT LIST -->
+          <!-- BEGIN PAGINATOR -->
+          <div id="total-items-classifieds-2" class="row">
+            <div class="col-md-4 col-sm-4 items-info">Clasificados total</div>
+            <div class="col-md-8 col-sm-8">
+              <?php echo $classifieds->links(); ?>
 
-              </div>
             </div>
-            <!-- END PAGINATOR -->
-            <?php endif; ?>
+          </div>
+          <!-- END PAGINATOR -->
+          <?php endif; ?>
+        </div>           
+
+           
           </div>
           <!-- END CONTENT -->
         </div>
@@ -143,6 +147,7 @@
 <?php echo $__env->make('products.partials._product-list-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php echo $__env->make('products.partials._pop-up-products-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php echo $__env->make('classifieds.partials._classifieds-list-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('products.partials._links-paginator-products-tpl', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <?php $__env->startSection('scripts'); ?>
   <script type="text/javascript">
@@ -161,7 +166,5 @@
     }
   </style>
 <?php $__env->stopSection(); ?>
-
-
 
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
