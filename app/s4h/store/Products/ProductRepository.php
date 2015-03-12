@@ -36,7 +36,10 @@ class ProductRepository extends BaseRepository{
 	{
 		$language = $this->getCurrentLang();
 		$query->whereHas('languages', function($q) use ($data, $language){
-    		$q->where('language_id', '=', $language->id)->where('products_lang.name', 'LIKE', '%' . $data['filterWord'] . '%')->orWhere('products_lang.description', 'LIKE', '%' . $data['filterWord'] . '%')->where('language_id', '=', $language->id);
+    		$q->where('language_id', '=', $language->id)
+    		->where('products_lang.name', 'LIKE', '%' . $data['filterWord'] . '%')
+    		->orWhere('products_lang.description', 'LIKE', '%' . $data['filterWord'] . '%')
+    		->where('language_id', '=', $language->id);
 		});
 	}
 
