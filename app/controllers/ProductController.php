@@ -310,27 +310,21 @@ class ProductController extends \BaseController {
 
 		if(Request::ajax()) 
 		{
-			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-
-			//return Response::json($productsSearch);
+			$products = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$classifieds = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 			
-			//$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			//return Response::json($classifiedsSearch);
-			$view = View::make('products.search',['products' => $productsSearch, 'classifieds' => $classifiedsSearch])->render();
-			return Response::json(['success' =>true, 
-				'products' => $productsSearch->toArray(), 
-				'classifieds' => $classifiedsSearch->toArray(),
+			//$viewProducts = View::make('products.result-products-paginator',['products' => $products])->render();
+
+			//$viewClassifieds = View::make('classifieds.result-classifieds-paginator',['classifieds' => $classifieds])->render();
+
+			$view = View::make('products.result-search-tpl',['products' => $products, 'classifieds' => $classifieds])->render();
+
+			return Response::json([
+				'success' => true, 
 				'view' => $view,
-				'urlShow'=> route('products.show',''),
-				'urlCart' => route('cart.create',''),
-				'urlWishList' => route('wishlist.create',''),
-				'urlShowClassified' => route('classifieds.show',''),
-				'path' => base_path()	
 			]);
 		} 
 		else {
-
 			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
@@ -341,23 +335,11 @@ class ProductController extends \BaseController {
 				return View::make('products.search-result', compact('products','classifieds','categories'));
 			} else {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
-				return View::make('products.search');
 			}
 		}
 
 	}
 
-	public function loadPage(){
-		/*$products = json_decode(Input::get('products'));
-		$classifieds = json_decode(Input::get('classifieds'));*/
-
-		$products = (Input::get('products'));
-		$classifieds = (Input::get('classifieds'));
-
-		$view = View::make('products.search',['products' => $products, 'classifieds' => $classifieds])->render();
-		//return Response::json(['products' => Input::get('products'), 'classifieds' => Input::get('classifieds')]);
-		return Response::json(['view' => $view]);
-	}
 
 	public function returnDataProduct()
 	{
