@@ -81,7 +81,7 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            var data = {
+            var dataSearch = {
                 /*'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
@@ -96,33 +96,17 @@ var initSliderRange = function() {
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1] 
              }
-             
-            var firstValue = ui.values[0];
-            var secondValue = ui.values[1];
             $.ajax({
                 type: 'GET',
                 url: jQuery('#search').attr('href'), 
-                data: data,
+                data: dataSearch,
                 dataType: "JSON", 
                 success: function(response) {
-                    jQuery('#products-list').html('');
-                    jQuery('#classifieds-list').html('');
-                    jQuery('#load-content').html('');
+                    jQuery('#result-section-search').html('');
                     if(response.success == true)
                     {
-                        //console.log(response);
-                        jQuery('#load-content').html(response.view);
-                        console.log(jQuery('#search').attr('href'));
-                        linksPaginator(data)
-                        //console.log(response);
-                        /*if(response.products){
-                            loadPaginator(response);
-                            loadDataProducts(response);
-                            loadPopUpProducts(response)
-                        } 
-                        if (response.classifieds){
-                            loadDataClassifieds(response);
-                        }*/
+                        jQuery('#result-section-search').html(response.view);
+                        linksPaginator(dataSearch)
                     }
                 }
             });
@@ -230,15 +214,19 @@ var loadPaginator = function(response) {
 
 }
 
+$(window).on('hashchange',function(){
+    page = window.location.hash.replace('#','');
+    getProducts(page);
+});
+
+
 var linksPaginator = function(data) {
     $(document).on('click','.pagination a', function(e){
-            e.preventDefault();
-            var page = $(this).attr('href').split('page=')[1];
-            console.log(page);
-            getDataForPage(page,data);
-    });
+       e.preventDefault();
+       var page = $(this).attr('href').split('page=')[1];
+       getDataForPage(page,data);
+   });
 }
-
 
 function getDataForPage(page,data){
     $.ajax({
@@ -247,9 +235,8 @@ function getDataForPage(page,data){
         data: data,
         dataType:'json',
         success: function(response) {
-            console.log('paginas');
-            console.log(response);
-            jQuery('#load-content').html(response.view);
+            console.log(data);
+            jQuery('#result-section-search').html(response.view);
         },
         error: function(objeto, quepaso, otroobj){
             console.log("Error al hacer la petición");
@@ -646,7 +633,7 @@ jQuery(document).ready(function() {
     addToCart();
     removeFromCart();
     rating();
-    searchAgain();
+    //searchAgain();
     loadFieldsProduct();
     loadFieldsClassified();
 
