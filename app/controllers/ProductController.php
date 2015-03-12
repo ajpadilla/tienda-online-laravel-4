@@ -312,10 +312,6 @@ class ProductController extends \BaseController {
 		{
 			$products = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 			$classifieds = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			
-			//$viewProducts = View::make('products.result-products-paginator',['products' => $products])->render();
-
-			//$viewClassifieds = View::make('classifieds.result-classifieds-paginator',['classifieds' => $classifieds])->render();
 
 			$view = View::make('products.result-search-tpl',['products' => $products, 'classifieds' => $classifieds])->render();
 
@@ -339,7 +335,6 @@ class ProductController extends \BaseController {
 		}
 
 	}
-
 
 	public function returnDataProduct()
 	{
