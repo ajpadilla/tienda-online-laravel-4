@@ -57,3 +57,15 @@
 </div>
 <!-- END PAGINATOR -->
 @endif
+
+@if($products)
+  @foreach($products as $product)
+    @include('products.partials._pop-up-products')
+  @endforeach
+@endif
+
+@if($classifieds)
+  @foreach($classifieds as $classified)
+    @include('classifieds.partials._pop-up-classifieds')
+  @endforeach
+@endif
