@@ -1,21 +1,20 @@
- <?php if(!$products->isEmpty()): ?>
+ @if(!$products->isEmpty())
  <!-- BEGIN PAGINATOR -->
  <div id="total-items-produts-1" class="row">
-  <div class="col-md-4 col-sm-4 items-info">Productos <?php echo $products->getTotal(); ?>  en total</div>
+  <div class="col-md-4 col-sm-4 items-info">Productos {{ $products->getTotal()}}  en total</div>
   <div class="col-md-8 col-sm-8 links-products">
-   <?php echo $products->links(); ?>
-
+   {{ $products->links() }}
  </div>
 </div>
 <!-- END PAGINATOR -->
 <!-- BEGIN PRODUCT LIST -->
 <div id="products-list" class="row product-list">
   <!-- PRODUCT ITEM START -->
-  <?php foreach($products as $product): ?>
+  @foreach($products as $product)
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-    <?php echo $__env->make('products.partials._one-product', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    @include('products.partials._one-product')
   </div>
-  <?php endforeach; ?>
+  @endforeach
   <!-- PRODUCT ITEM END -->
 </div>
 <!-- END PRODUCT LIST -->
@@ -23,9 +22,8 @@
 <div id="total-items-produts-2" class="row">
   <div class="col-md-4 col-sm-4 items-info">Productos total</div>
   <div class="col-md-8 col-sm-8 links-products">
-    <?php echo $products->links(); ?>
-
+    {{ $products->links()}}
   </div>
 </div>
 <!-- END PAGINATOR -->
-<?php endif; ?>
+@endif

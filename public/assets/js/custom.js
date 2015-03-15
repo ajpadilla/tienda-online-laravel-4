@@ -2,6 +2,8 @@
  * --------------- Config plugins ----------------
  */
 
+var dataSearchRange;
+
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
         url: jQuery('.product-main-image img').attr('data-BigImgSrc')
@@ -78,8 +80,7 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            
-             data = {
+            dataSearchRange = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
@@ -88,33 +89,22 @@ var initSliderRange = function() {
                 //'operator':  jQuery('#operator').val(),
                 //'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                //'orderBy':  jQuery('#order-by-search').val(),*/
+                'orderBy':  jQuery('#order-by-search').val(),
                 'filterWord': jQuery('#search-again').val(), 
                 'priceRange': 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1] 
              }
-             
-            var firstValue = ui.values[0];
-            var secondValue = ui.values[1];
             $.ajax({
                 type: 'GET',
                 url: jQuery('#search').attr('href'), 
-                data: data,
+                data: dataSearchRange,
                 dataType: "JSON", 
                 success: function(response) {
-                    jQuery('#products-list').html('');
-                    jQuery('#classifieds-list').html('');
-                    if(response.success == true)
-                    {
-                        if(response.products){
-                            loadPaginatorProducts(response);
-                            loadDataProducts(response);
-                            loadPopUpProducts(response)
-                        } 
-                        if (response.classifieds){
-                            loadDataClassifieds(response);
-                        }
+                    jQuery('#result-section-search').html('');
+                    if(response.success == true){
+                        jQuery('#result-section-search').html(response.view);
+                        linksPaginator()
                     }
                 }
             });
@@ -179,16 +169,11 @@ var searchAgain = function () {
             },
             dataType:'json',
             success: function(response) {
-                jQuery('#products-list').html('');
-                jQuery('#classifieds-list').html('');
-               console.log(response);
-               if(response.products){
-                    loadPaginatorProducts(response);
-                    loadDataProducts(response);
-                    loadPopUpProducts(response)
-                } 
-                if(response.classifieds){
-                    loadDataClassifieds(response);
+                jQuery('#result-section-search').html('');
+                if(response.success == true){
+                    console.log(response);
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator()
                 }
             }
         });
@@ -196,92 +181,34 @@ var searchAgain = function () {
     });
 }
 
-var loadPaginatorProducts = function(response) {
-    
-    var paginator1 = jQuery('#total-items-1');
-    var paginator2 = jQuery('#total-items-2');
+/*$(window).on('hashchange',function(){
+    page = wi
+    ndow.location.hash.replace('#','');
+    getProducts(page);
+});*/
 
-    var paginator = {
-        from: response.products.from,
-        to: response.products.to,
-        total: response.products.total,
-        links: response.links
-    };
 
-    var templateP1 = jQuery('#total-items-1-tpl').html();
-    var templateP2 = jQuery('#total-items-2-tpl').html();
-
-    var html = Mustache.to_html(templateP1, paginator);
-    var html2 = Mustache.to_html(templateP2, paginator);
-
-    paginator1.prepend(html);
-    paginator2.prepend(html2);
-
+var linksPaginator = function() {
+    $(document).on('click','.pagination a', function(e){
+       e.preventDefault();
+       var page = $(this).attr('href').split('page=')[1];
+       getDataForPage(page);
+   });
 }
 
-var loadDataProducts = function(response) {
-    var hostname = jQuery(location).attr('hostname');
-    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
-    //console.log( jQuery(location).attr('hostname'));
-  $.each(response.products.data, function (index, element) {
-        //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
-        var productslist = jQuery('#products-list');
-        var product = {
-            Id: element.id,
-            name: element.languages[0].pivot.name,
-            price: element.price,
-            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
-            url_show: response.urlShow +'/'+ element.id,
-            url_cart: response.urlCart +'/'+ element.id,
-            url_wishlist: response.urlWishList +'/'+ element.id,
-        };
-        var template = jQuery('#product-list-tpl').html();
-        var html = Mustache.to_html(template, product);
-        productslist.prepend(html);
-    });
-}
-
-var loadDataClassifieds = function(response) {
-    var hostname = jQuery(location).attr('hostname');
-    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
-    //console.log( jQuery(location).attr('hostname'));
-  $.each(response.classifieds.data, function (index, element) {
-        //console.log('El elemento con el índice '+ index +' contiene '+ element.languages[0].pivot.name);
-        var classifiedslist = jQuery('#classifieds-list');
-        var classified = {
-            Id: element.id,
-            name: element.languages[0].pivot.name,
-            price: element.price,
-            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
-            url_show: response.urlShow +'/'+ element.id,
-            url_cart: response.urlCart +'/'+ element.id,
-            url_wishlist: response.urlWishList +'/'+ element.id,
-        };
-        var template = jQuery('#classifieds-list-tpl').html();
-        var html = Mustache.to_html(template, classified);
-        classifiedslist.prepend(html);
-    });
-}
-
-var loadPopUpProducts = function(response) {
-    var hostname = jQuery(location).attr('hostname');
-    var url_img_model = 'http://'+ hostname +'/uploads/products/images/model1.jpg';
-    $.each(response.products.data, function (index, element) {
-        var productsPopUp = jQuery('.pop-up-product-view');
-        var product = {
-            Id: element.id,
-            name: element.languages[0].pivot.name,
-            description: element.languages[0].pivot.description,
-            price: element.price,
-            quantity : element.quantity,
-            url_img: element.photos[0] ? 'http://'+ hostname +'/'+ element.photos[0].complete_path : url_img_model,
-            url_show: response.urlShow +'/'+ element.id,
-            url_cart: response.urlCart +'/'+ element.id,
-            url_wishlist: response.urlWishList +'/'+ element.id,
-        };
-        var template = jQuery('#pop-up-products-tpl').html();
-        var html = Mustache.to_html(template, product);
-        productsPopUp.prepend(html);
+function getDataForPage(page){
+    $.ajax({
+        type: 'GET',
+        url: jQuery('#search').attr('href') +'?page='+ page,
+        data: dataSearchRange,
+        dataType:'json',
+        success: function(response) {
+            console.log(dataSearchRange);
+            jQuery('#result-section-search').html(response.view);
+        },
+        error: function(objeto, quepaso, otroobj){
+            console.log("Error al hacer la petición");
+        }
     });
 }
 
@@ -293,20 +220,14 @@ var hideFields = function() {
 
 var loadFieldsProduct = function() {
      jQuery('#product').click(function() {
-        var url = jQuery('#search-data-conditions-product-lang').attr('href');
-         jQuery('#conditionProduct').show();
-         loadFieldSelect(url, '#conditionsProducts');
+         jQuery('#conditionProduct').toggle();
      });
 }
 
 var loadFieldsClassified = function() {
     jQuery('#classified').click(function() {
-        var url = jQuery('#search-data-conditions-classified-lang').attr('href');
-        var urlClassifiedTypes = jQuery('#search-data-classified-type-lang').attr('href');
-        jQuery('#conditionClassified').show();
-        jQuery('#type').show();
-        loadFieldSelect(url, '#conditionsClassifieds');
-        loadFieldSelect(urlClassifiedTypes, '#classifiedType');
+        jQuery('#conditionClassified').toggle();
+        jQuery('#type').toggle();
      });
 }
 
@@ -616,10 +537,16 @@ jQuery(document).ready(function() {
     searchAgain();
     loadFieldsProduct();
     loadFieldsClassified();
+
     hideFields();
+
+    loadFieldSelect(jQuery('#search-data-conditions-product-lang').attr('href'), '#conditionsProducts');
+    loadFieldSelect(jQuery('#search-data-conditions-classified-lang').attr('href'), '#conditionsClassifieds');
+    loadFieldSelect(jQuery('#search-data-classified-type-lang').attr('href'), '#classifiedType');
+
     //load countries
     loadFieldSelect(jQuery('#search-data-for-country').attr('href'), '#countryId');
     loadStatesForCountry();
-    loadCitiesForStates()
+    loadCitiesForStates();
 });
 

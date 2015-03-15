@@ -53,6 +53,12 @@ class ClassifiedRepository extends BaseRepository
 		$query->where('classified_type_id','=',$data['classifiedType']);
 	}
 
+	public function filterByCityId($query, $data = array()){
+		$query->whereHas('address', function($q) use ($data){
+    		$q->where('city_id', '=', $data['cityId']);
+		});
+	}
+
 	public function createNewClassified($data = array())
 	{
 		$classified = new Classified;

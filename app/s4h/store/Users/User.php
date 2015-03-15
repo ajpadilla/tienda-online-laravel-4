@@ -28,8 +28,8 @@ class User extends ConfideUser {
 		return $this->hasMany('Calendar');
 	}
 
-	public function Person() {
-		return $this->hasOne('Person');
+	public function people() {
+		return $this->hasOne('s4h\store\Peoples\people','user_id');
 	}
 
 	public function wishlist()
@@ -40,6 +40,10 @@ class User extends ConfideUser {
 	public function carts()
 	{
 		return $this->hasMany('s4h\store\Carts\Cart');
+	}
+
+	public function products(){
+		return $this->hasMany('s4h\store\Products\Product');
 	}
 
 }

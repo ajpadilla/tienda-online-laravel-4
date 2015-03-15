@@ -53,7 +53,7 @@
 		                      </select>
 		                    </div>
 		                  </div>
-		                  @include('products.partials._buttons-actions-set')
+		                  {{--@include('products.partials._buttons-actions-set')--}}
 		                </div>
 
 		                <div class="sticker sticker-sale"></div>

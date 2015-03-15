@@ -22,6 +22,10 @@ class Classified extends BaseModel {
 		
 	}	
 
+	public function address(){
+		return $this->belongsTo('s4h\store\Address\Address','address_id');
+	}
+
 	public function user(){
 		return $this->belongsTo('s4h\store\Users\User','user_id');
 	}

@@ -43,6 +43,8 @@ function () {
 		'uses' => 'ProductController@search'
 	]);
 
+	Route::get('/ajax/paginator','ProductController@searchPaginator');
+
 	Route::get('returnDataProduct','ProductController@returnDataProduct');
 
 	Route::get('returnDataProductLang','ProductController@returnDataProductLang');
@@ -51,6 +53,10 @@ function () {
 		'as' => 'products.saveLang',
 		'uses' => 'ProductController@saveDataForLanguage'
 	]);
+
+	/*Route::get('algo',function(){
+		echo App::environment();
+	});*/
 
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------

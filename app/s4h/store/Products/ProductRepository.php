@@ -36,7 +36,10 @@ class ProductRepository extends BaseRepository{
 	{
 		$language = $this->getCurrentLang();
 		$query->whereHas('languages', function($q) use ($data, $language){
-    		$q->where('language_id', '=', $language->id)->where('products_lang.name', 'LIKE', '%' . $data['filterWord'] . '%')->orWhere('products_lang.description', 'LIKE', '%' . $data['filterWord'] . '%')->where('language_id', '=', $language->id);
+    		$q->where('language_id', '=', $language->id)
+    		->where('products_lang.name', 'LIKE', '%' . $data['filterWord'] . '%')
+    		->orWhere('products_lang.description', 'LIKE', '%' . $data['filterWord'] . '%')
+    		->where('language_id', '=', $language->id);
 		});
 	}
 
@@ -44,6 +47,18 @@ class ProductRepository extends BaseRepository{
 	{
 		$query->whereHas('categories', function($q) use ($data){
     		$q->whereIn('product_classification.category_id', $data['categories']);
+		});
+	}
+
+	public function filterByCityId($query, $data = array()){
+		$query = $query->with(['user','user.people','user.people.address']);
+
+		$query->whereHas('user', function($q) use ($data){
+    		$q->whereHas('people',function($q) use ($data){
+    			$q->whereHas('address', function($q) use($data) {
+                    $q->where('city_id', '=', $data['cityId']);
+                });
+    		});
 		});
 	}
 
