@@ -57,6 +57,10 @@ class Product extends BaseModel{
 		return $this->belongsToMany('s4h\store\Carts\Cart')->withPivot('quantity')->withTimestamps();
 	}
 
+	public function user(){
+		return $this->belongsTo('s4h\store\Users\User','user_id');
+	}
+
 	/*
 	*
 	*/

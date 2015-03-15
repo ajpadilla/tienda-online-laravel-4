@@ -10,6 +10,10 @@ class People extends Eloquent{
 	protected $table = 'people';
 
 	public function user() {
-		return $this->hasOne('s4h\store\Users\User');
+		return $this->belongsTo('s4h\store\Users\User','user_id');
+	}
+
+	public function address(){
+		return $this->belongsTo('s4h\store\Address\Address','address_id');
 	}
 }

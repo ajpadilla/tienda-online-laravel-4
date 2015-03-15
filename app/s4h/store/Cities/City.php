@@ -17,4 +17,9 @@ class City extends Eloquent
 
 	protected $table = 'cities';
 
+
+	public function address(){
+		return $this->hasMany('s4h\store\Address\Address','city_id');
+	}
+
 }

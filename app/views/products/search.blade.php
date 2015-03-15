@@ -1,109 +1,102 @@
-@extends('layouts.template')
+ <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-7">
+            <!--<div class="content-search margin-bottom-20">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>Search result for <em>shoes</em></h1>
+                </div>
+                <div class="col-md-6">
+                  <form action="#">
+                    <div class="input-group">
+                      <input type="text" placeholder="Search again" class="form-control">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>-->
+            <div class="row list-view-sorting clearfix">
+              <div class="col-md-2 col-sm-2 list-view">
+                <a href="#"><i class="fa fa-th-large"></i></a>
+                <a href="#"><i class="fa fa-th-list"></i></a>
+              </div>
+              @include('products.partials.search._order-by-search')
+            </div>
 
-@section('content')
-@include('layouts.partials._error')
-<div class="row">
-	<div class="col-lg-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-title">
-				<h5>{{trans('products.result_search.title')}}</h5>
-			</div>
-			@include('flash::message')
-			<div class="ibox-content">
-				<div class="row ol-md-12 text-left">
-					{{ trans('products.Products') }}
-				</div>
-				@if (!empty($productResults))
-					@foreach ($productResults as $category => $products)
-						<div class="row col-md-12 text-center">
-							{{$category}}
-						</div>
-						<table class="table table-bordered" cellspacing="0" width="100%">
-							<thead>
-								<tr class="row">
-									<th class="col-md-4">Foto</th>
-									<th class="col-md-4">Nombre</th>
-									<th class="col-md-4">Categorias</th>
-									<th class="col-md-4">Puntos</th>
-									<th class="col-md-4">Precio</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($products as $key => $productSearch)
-									<tr class="row">
-										<td class="col-md-4">
-											@if ($productSearch->product->getFirstPhoto())
-												<a href="{{ URL::route('products.show',$productSearch->product->id) }}"><img class="mini-photo" src="{{ asset($productSearch->product->getFirstPhoto()->complete_path) }}" alt="$productSearch->product->getFirstPhoto()->filename"></a>
-											@else
-												{{ Lang::get('products.labels.image') }}
-											@endif
-										</td>
-										<td class="col-md-4">{{ $productSearch->name }}</td>
-										<td class="col-md-4">
-											@foreach ($productSearch->product->getCategories() as $value)
-												{{ $value }}
-											@endforeach
-										</td>
-										<td class="col-md-4">{{ $productSearch->product->point_price }}</td>
-										<td class="col-md-4">{{ $productSearch->product->price }}</td>
-									</tr>
-								@endforeach
-							</tbody>
-						</table>
-					@endforeach
-				@endif
+            @if(!$products->isEmpty())
+            <!-- BEGIN PAGINATOR -->
+            <div id="total-items-produts-1" class="row">
+              <div class="col-md-4 col-sm-4 items-info">Productos {{ $products->getTotal()}}  en total pagina {{ $products->getCurrentPage() }}</div>
+              <div class="col-md-8 col-sm-8 links-products">
+                 {{ $products->links() }}
+              </div>
+            </div>
+            <!-- END PAGINATOR -->
+            <!-- BEGIN PRODUCT LIST -->
+            <div id="products-list" class="row product-list">
+              <!-- PRODUCT ITEM START -->
+              @foreach($products as $product)
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    @include('products.partials._one-product')
+                </div>
+              @endforeach
+              <!-- PRODUCT ITEM END -->
+            </div>
+            <!-- END PRODUCT LIST -->
+            <!-- BEGIN PAGINATOR -->
+            <div id="total-items-produts-2" class="row">
+              <div class="col-md-4 col-sm-4 items-info">Productos total</div>
+              <div class="col-md-8 col-sm-8 links-products">
+                {{ $products->links()}}
 
-				@if (!empty($categoryResults))
-					<div class="row ol-md-12 text-left">
-						{{ trans('classifieds.Classifieds') }}
-					</div>
-					@foreach ($categoryResults as $category => $classifieds)
-						<div class="row col-md-12 text-center">
-							{{$category}}
-						</div>
-						<table class="table table-bordered" cellspacing="0" width="100%">
-							<thead>
-								<tr class="row">
-									<th class="col-md-4">Foto</th>
-									<th class="col-md-4">Nombre</th>
-									<th class="col-md-4">Categorias</th>
-									<th class="col-md-4">Precio</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($classifieds as $key => $classifiedSearch)
-									<tr class="row">
-										<td class="col-md-4">
-											@if ($classifiedSearch->classified->getFirstPhoto())
-												<a href="{{ URL::route('classifieds.show',$classifiedSearch->classified->id) }}"><img class="mini-photo" src="{{ asset($classifiedSearch->classified->getFirstPhoto()->complete_path) }}" alt="$classifiedSearch->classified->getFirstPhoto()->filename"></a>
-											@else
-												{{ Lang::get('classifieds.labels.image') }}
-											@endif
-										</td>
-										<td class="col-md-4">{{ $classifiedSearch->name }}</td>
-										<td class="col-md-4">
-											@foreach ($classifiedSearch->classified->getCategories() as $value)
-												{{ $value }}
-											@endforeach
-										</td>
-										<td class="col-md-4">{{ $classifiedSearch->classified->price }}</td>
-									</tr>
-								@endforeach
-							</tbody>
-						</table>
-					@endforeach
-				@endif
-			</div>
-		</div>
-	</div>
-</div>
-@stop
+              </div>
+            </div>
+            <!-- END PAGINATOR -->
+            @endif
 
-@section('styles')
-	<style type="text/css">
-		.mini-photo {
-			width: 70px;
-			height: 100px;
-		}
-	</style>
-@stop
+            @if(!$classifieds->isEmpty())
+            <!-- BEGIN PAGINATOR -->
+            <div id="total-items-classifieds-1" class="row margen">
+              <div class="col-md-4 col-sm-4 items-info">Clasificados {{ $classifieds->getTotal()}}  en total</div>
+              <div class="col-md-8 col-sm-8">
+                 {{ $classifieds->links() }}
+              </div>
+            </div>
+            <!-- END PAGINATOR -->
+            <!-- BEGIN PRODUCT LIST -->
+            <div id="classifieds-list" class="row classified-list">
+              <!-- PRODUCT ITEM START -->
+              @foreach($classifieds as $classified)
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    @include('classifieds.partials._one-classified')
+                </div>
+              @endforeach
+              <!-- PRODUCT ITEM END -->
+            </div>
+            <!-- END PRODUCT LIST -->
+            <!-- BEGIN PAGINATOR -->
+            <div id="total-items-classifieds-2" class="row">
+              <div class="col-md-4 col-sm-4 items-info">Clasificados total</div>
+              <div class="col-md-8 col-sm-8">
+                {{ $classifieds->links()}}
+              </div>
+            </div>
+            <!-- END PAGINATOR -->
+            @endif
+          </div>
+          <!-- END CONTENT -->
+
+
+        @if($products)
+  @foreach($products as $product)
+    @include('products.partials._pop-up-products')
+  @endforeach
+@endif
+
+@if($classifieds)
+  @foreach($classifieds as $classified)
+    @include('classifieds.partials._pop-up-classifieds')
+  @endforeach
+@endif

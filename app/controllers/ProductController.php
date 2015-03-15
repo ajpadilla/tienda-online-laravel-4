@@ -1,3 +1,4 @@
+
 <?php
 
 use s4h\store\Products\Product;
@@ -309,27 +310,17 @@ class ProductController extends \BaseController {
 
 		if(Request::ajax()) 
 		{
-			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$products = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$classifieds = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 
-			//return Response::json($productsSearch);
-			
-			//$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			//return Response::json($classifiedsSearch);
-			
-			return Response::json(['success' =>true, 
-				'products' => $productsSearch->toArray(), 
-				'classifieds' => $classifiedsSearch->toArray(),
-				'links' => (string)$productsSearch->links(),
-				'urlShow'=> route('products.show',''),
-				'urlCart' => route('cart.create',''),
-				'urlWishList' => route('wishlist.create',''),
-				'urlShowClassified' => route('classifieds.show',''),
-				'path' => base_path()	
+			$view = View::make('products.result-search-tpl',['products' => $products, 'classifieds' => $classifieds])->render();
+
+			return Response::json([
+				'success' => true, 
+				'view' => $view,
 			]);
 		} 
 		else {
-
 			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
@@ -340,7 +331,6 @@ class ProductController extends \BaseController {
 				return View::make('products.search-result', compact('products','classifieds','categories'));
 			} else {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
-				return View::make('products.search');
 			}
 		}
 
