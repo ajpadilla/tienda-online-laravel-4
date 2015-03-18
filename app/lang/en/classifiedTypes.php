@@ -16,6 +16,7 @@
 		"create-title"=> "Create classified type",
 		"index-title" => "List of classified type",
 		"show-title" => "Show classified type",
+		'current-lang' =>'data-lang-type-classified',
 
 		"labels" => array(
 			'name' =>'Name:',
