@@ -105,8 +105,8 @@ var initSliderRange = function() {
                     jQuery('#result-section-search').html('');
                     if(response.success == true){
                         console.log(response.input);
-                        /*jQuery('#result-section-search').html(response.view);
-                        linksPaginator()*/
+                        jQuery('#result-section-search').html(response.view);
+                        linksPaginator()
                     }
                 }
             });
