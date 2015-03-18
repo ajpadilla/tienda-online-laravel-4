@@ -310,30 +310,41 @@ class ProductController extends \BaseController {
 
 		if(Request::ajax()) 
 		{
-			$products = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			$classifieds = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
 
-			$view = View::make('products.result-search-tpl',['products' => $products, 'classifieds' => $classifieds])->render();
+			$view = View::make('products.result-search-tpl',['products' => $productsResultsSearch, 'classifieds' => $classifiedsResultsSearch])->render();
 
 			return Response::json([
 				'success' => true, 
 				'view' => $view,
+				'input' => Input::all()
 			]);
 		} 
 		else {
-			$productsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
-			$classifiedsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			$classifiedsResultsSearch  = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
-			if (!$productsSearch->isEmpty() || !$classifiedsSearch->isEmpty()) 
+			if (!$productsResultsSearch->isEmpty() || !$classifiedsResultsSearch->isEmpty()) 
 			{
-				$products = $productsSearch;
-				$classifieds = $classifiedsSearch;
+				Session::put('word', Input::get('filterWord'));
+				$products = $productsResultsSearch;
+				$classifieds = $classifiedsResultsSearch;
 				return View::make('products.search-result', compact('products','classifieds','categories'));
 			} else {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
 			}
 		}
 
+	}
+
+	public function sortSearchResults(){
+		$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+		$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+	}
+
+	public function getCurrentFilterWorld(){
+		return Response::json(['success' => true, 'word' =>  Session::get('word')]);
 	}
 
 	public function returnDataProduct()
