@@ -306,15 +306,28 @@ class ProductController extends \BaseController {
 
 	public function search() 
 	{
+		$productsResultsSearch = null;
+		$classifiedsResultsSearch = null;
 		$categories = $this->categoryRepository->getNameForLanguage();
 
 		if(Request::ajax()) 
 		{
-			$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-
+			if(Input::has('check'))
+			{
+				if (count(Input::get('check')) == 1 && Input::get('check.0.value') == 'product'){
+					$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+				}elseif (count(Input::get('check')) == 1  && Input::get('check.0.value') == 'classified') {
+					$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+				}else{
+					$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+					$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+				}	
+			}else{
+				$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+				$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
+			}	
+			
 			$view = View::make('products.result-search-tpl',['products' => $productsResultsSearch, 'classifieds' => $classifiedsResultsSearch])->render();
-
 			return Response::json([
 				'success' => true, 
 				'view' => $view,
