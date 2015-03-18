@@ -22,6 +22,9 @@
 		"index-title" => "Lista de clasificados",
 		"show-title" => "Ver clasificado",
 		"search-title" => "Buscar clasificado",
+		"countries" => 'Paises',
+		"statesForCountry" =>"estados-por-pais",
+		"citiesForState" =>"ciudades-por-estado" ,
 
 		"labels" => array(
 			'name' =>'Nombre:',
