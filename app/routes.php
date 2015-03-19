@@ -54,9 +54,15 @@ function () {
 		'uses' => 'ProductController@saveDataForLanguage'
 	]);
 
-	/*Route::get('algo',function(){
-		echo App::environment();
-	});*/
+	Route::get(LaravelLocalization::transRoute('products.order-by-search'), [
+		'as' => 'products.order-by-search',
+		'uses' => 'ProductController@sortSearchResults'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('products.filterWord'), [
+		'as' => 'products.filterWord',
+		'uses' => 'ProductController@getCurrentFilterWorld'
+	]);
 
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
@@ -327,7 +333,10 @@ function () {
 
 	Route::get('api/classifiedTypes', array('as'=>'api.classifiedTypes', 'uses'=>'ClassifiedTypeController@getDatatable'));
 
-	Route::get('returnDataForLangClassifiedTypes','ClassifiedTypeController@returnDataForLang');
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.current-lang'), [
+		'as' => 'classifiedTypes.current-lang',
+		'uses' => 'ClassifiedTypeController@returnDataForLang'
+	]);
 
 	/**
 		* ------------------------------ Rutas classified conditions -----------------------
@@ -375,13 +384,21 @@ function () {
 
 	Route::get('api/classifiedConditions', array('as'=>'api.classifiedConditions', 'uses'=>'ClassifiedConditionController@getDatatable'));
 
-	Route::get('returnDataForLangClassifiedCondition','ClassifiedConditionController@returnDataForLang');
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.current-lang'), [
+		'as' => 'classifiedConditions.current-lang',
+		'uses' => 'ClassifiedConditionController@returnDataForLang'
+	]);
 
 	/**
 		* ------------------------------ Rutas ProductConditions -----------------------
 	**/
 
-		Route::get('returnDataForLangProductCondition','ProductConditionController@returnDataForLang');
+
+	Route::get(LaravelLocalization::transRoute('productCondition.current-lang'), [
+		'as' => 'productCondition.current-lang',
+		'uses' => 'ProductConditionController@returnDataForLang'
+	]);
+
 
 	/**
 		* ------------------------------ Rutas classifieds -----------------------
@@ -433,10 +450,20 @@ function () {
 		'uses' => 'ClassifiedController@searchClassified'
 	]);
 
-	Route::get('countries','ClassifiedController@countries');
-	Route::get('statesForCountry','ClassifiedController@statesForCountry');
-	Route::get('citiesForState','ClassifiedController@citiesForState');
+	Route::get(LaravelLocalization::transRoute('classifieds.countries'), [
+		'as' => 'classifieds.countries',
+		'uses' => 'ClassifiedController@countries'
+	]);
 
+	Route::get(LaravelLocalization::transRoute('classifieds.statesForCountry'), [
+		'as' => 'classifieds.statesForCountry',
+		'uses' => 'ClassifiedController@statesForCountry'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifieds.citiesForState'), [
+		'as' => 'classifieds.citiesForState',
+		'uses' => 'ClassifiedController@citiesForState'
+	]);
 
 	Route::get('returnDataClassifiedLang','ClassifiedController@returnDataClassifiedLang');
 

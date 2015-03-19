@@ -17,7 +17,7 @@ class ClassifiedRepository extends BaseRepository
 	}
 
 	public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsClassifieds',
-    'cityId','classifiedType','operator'];
+    'cityId','classifiedType','operator','orderBy'];
 
 	public function filterByPrice($query, $data = array()){
 		$query->where('price',$data['operator'],$data['price']);
@@ -57,6 +57,18 @@ class ClassifiedRepository extends BaseRepository
 		$query->whereHas('address', function($q) use ($data){
     		$q->where('city_id', '=', $data['cityId']);
 		});
+	}
+
+	public function orderByName($query, $order){
+		$language = $this->getCurrentLang();
+		$query->with(array('languages' => function($q) use ($language, $order){
+			$q->where('language_id', '=', $language->id)
+    		->orderBy('classifieds_lang.name',$order);
+		}));
+	}
+
+	public function orderByPrice($query, $order){
+		$query->orderBy('price',$order);
 	}
 
 	public function createNewClassified($data = array())

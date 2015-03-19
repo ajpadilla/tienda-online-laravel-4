@@ -22,6 +22,9 @@
 		"index-title" => "List of classifieds",
 		"show-title" => "Show classified",
 		"search-title" => "Search classified",
+		"countries" => 'Countries',
+		"statesForCountry" =>"states-for-country",
+		"citiesForState" =>"cities-for-state" ,
 
 		"labels" => array(
 			'name' =>'Name:',

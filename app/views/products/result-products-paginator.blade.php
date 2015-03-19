@@ -1,7 +1,7 @@
  @if(!$products->isEmpty())
  <!-- BEGIN PAGINATOR -->
  <div id="total-items-produts-1" class="row">
-  <div class="col-md-4 col-sm-4 items-info">Productos {{ $products->getTotal()}}  en total</div>
+  <div class="col-md-4 col-sm-4 items-info">Productos por pagina {{ $products->getPerPage() }} de {{ $products->getTotal()}}  en pagina {{ $products->count()  }} total</div>
   <div class="col-md-8 col-sm-8 links-products">
    {{ $products->links() }}
  </div>

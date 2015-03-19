@@ -22,7 +22,8 @@
 		"index-title" => "Lista de productos",
 		"show-title" => "Ver Producto",
 		"search-title" => "Busqueda",
-
+		"order-by-search" => "ordenar-resultados-busqueda",
+		"filterWord" => "filter-word",
 		"labels" => array(
 			'name' =>'Nombre',
 			'description' => 'Descripción',

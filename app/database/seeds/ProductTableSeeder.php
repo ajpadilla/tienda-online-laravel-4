@@ -27,7 +27,7 @@ class ProductTableSeeder extends DatabaseSeeder{
 
 		$weights = Weight::all()->toArray();
 
-		for ($i=0; $i < 20; $i++) 
+		for ($i=0; $i < 100; $i++) 
 		{ 
 			$productCondition = $faker->randomElement($productsConditions);
 			$user = $faker->randomElement($users);

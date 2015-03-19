@@ -16,6 +16,7 @@
 		"create-title"=> "Crear tipo de clasificado",
 		"index-title" => "Lista de tipos de clasificados",
 		"show-title" => "Ver clasificado",
+		'current-lang' =>'datos-lenguaje-tipo-clasificado',
 
 		"labels" => array(
 			'name' =>'Nombre:',

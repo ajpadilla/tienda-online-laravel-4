@@ -20,6 +20,8 @@
 		"index-title" => "List of products",
 		"show-title" => "Show Product",
 		"search-title" => "Search",
+		"order-by-search" => "order-search-results",
+		"filterWord" => "filtrar-palabra",
 
 		"labels" => array(
 			'name' =>'Name',

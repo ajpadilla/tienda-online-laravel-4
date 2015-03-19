@@ -10,7 +10,6 @@
   
   <div class="checkbox-list">
     <label><input type="checkbox" name="select-search[]" id="product" value="product"> Productos </label>
-    <a href="{{ URL::route('products.search') }}" id="search-data-product-lang"></a>
     <label><input type="checkbox" name="select-search[]" id="classified" value="classified"> Clasificados </label>
   </div>
 
@@ -27,7 +26,7 @@
       Form::select('conditionsProducts', array(), null,
           ['class' => 'chosen-select form-control', 'data-placeholder' => 'Condition product', 'id' => 'conditionsProducts'])
       }}
-    <a href="{{ URL::to('returnDataForLangProductCondition') }}" id="search-data-conditions-product-lang"></a>
+    <a href="{{ URL::route('productCondition.current-lang') }}" id="search-data-conditions-product-lang"></a>
   </div>
 
   <div class="col-sm-10" id="conditionClassified">
@@ -35,7 +34,7 @@
       Form::select('conditionsClassifieds', array(), null,
           ['class' => 'chosen-select form-control', 'data-placeholder' => 'Condition classified', 'id' => 'conditionsClassifieds'])
       }}
-    <a href="{{ URL::to('returnDataForLangClassifiedCondition') }}" id="search-data-conditions-classified-lang"></a>
+    <a href="{{ URL::route('classifiedConditions.current-lang') }}" id="search-data-conditions-classified-lang"></a>
   </div>
 
   <div class="col-sm-10" id="type">
@@ -43,24 +42,24 @@
       Form::select('classified_type', array(), null,
           ['class' => 'chosen-select form-control', 'data-placeholder' => 'Type classified', 'id' => 'classifiedType'])
       }}
-      <a href="{{ URL::to('returnDataForLangClassifiedTypes') }}" id="search-data-classified-type-lang"></a>
+      <a href="{{ URL::route('classifiedTypes.current-lang') }}" id="search-data-classified-type-lang"></a>
   </div>
 
   <div class="row">
 
     <div class="col-sm-8 ">
       {{ Form::select('countryId',array(),null,['class' => 'form-control input-sm','placeholder'=>'Estado','id'=>'countryId']) }}
-      <a href="{{ URL::to('countries') }}" id="search-data-for-country"></a>
+      <a href="{{ URL::route('classifieds.countries') }}" id="search-data-for-country"></a>
     </div>
 
     <div class="col-sm-8">
     {{ Form::select('stateId',array(''),null,array('class' => 'form-control input-sm','placeholder'=>'Estado','id'=>'stateId')) }}
-      <a href="{{ URL::to('statesForCountry') }}" id="search-data-for-states"></a>
+      <a href="{{ URL::route('classifieds.statesForCountry') }}" id="search-data-for-states"></a>
     </div>
 
   <div class="col-sm-8">
     {{ Form::select('cityId',array(''),null,array('class' => 'form-control input-sm','id'=>'cityId')) }}
-    <a href="{{ URL::to('citiesForState') }}" id="search-data-for-cities"></a>
+    <a href="{{ URL::route('classifieds.citiesForState') }}" id="search-data-for-cities"></a>
   </div>
 
   <div class="col-sm-8">
