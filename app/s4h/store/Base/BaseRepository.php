@@ -16,7 +16,7 @@ abstract class BaseRepository
 
 	abstract public function getModel();
 
-	public function search(array $data = array(), $paginate = false, $numItems = 5)
+	public function search(array $data = array(), $paginate = false, $numItems = 10)
 	{
 		$language = $this->getCurrentLang();
 		
@@ -33,8 +33,6 @@ abstract class BaseRepository
 			)
 		);
 
-		//return $data;
-
 		foreach($data as $field => $value)
 		{
 			$filterMethod = 'filterBy'.studly_case($field);
@@ -44,13 +42,35 @@ abstract class BaseRepository
 				call_user_func_array(array($this, $filterMethod), array($query, $data));
 			}
 		}
-		return $paginate ? $query->orderBy('price','desc')->paginate($numItems): $query->get();
+
+		$this->sortResults($query, $data);
+
+		return $paginate ? $query->paginate($numItems): $query->get();
 	}
 
 	public function getCurrentLang(){
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		return $language;
+	}
+
+	public function sortResults($query, array $data = array())
+	{
+		if (isset($data['orderBy'])) 
+		{
+			$value = explode('-',$data['orderBy']);
+
+			$field = $value[0];
+
+			$order = $value[1];
+
+			$orderByMethod = 'orderBy'.studly_case($field);
+
+			if(method_exists(get_called_class(), $orderByMethod))
+			{
+				call_user_func_array(array($this, $orderByMethod), array($query, $order));
+			}
+		}
 	}
 
 }

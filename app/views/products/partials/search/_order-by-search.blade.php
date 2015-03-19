@@ -26,12 +26,18 @@
 
   <div class="pull-right">
     <label class="control-label">Ordenar por:</label>
-
+    <a href="{{ URL::route('products.filterWord') }}" id="filter-current-word"></a>
       {{ Form::select(
         'paginate', 
         array(
-          'name-ASC' => 'Name (A - Z)',
-          'name-DESC' => 'Name (Z - A)',
+          'name-asc' => 'Name (A - Z)',
+          'name-desc' => 'Name (Z - A)',
+          'price-asc' => 'Price (Low - High)',
+          'price-desc' => 'Price (High - Low)',
+          'rating-asc' => 'Rating (Highest)',
+          'rating-desc' => 'Rating (Lowest)',
+          'condition-asc' => 'Condition (New - Used)',
+          'condition-desc' => 'Condition (Used - New)',
         ), 
         null,
         ['class' => 'form-control input-sm', 'id' => 'order-by-search'])

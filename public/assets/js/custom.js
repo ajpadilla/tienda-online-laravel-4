@@ -2,7 +2,8 @@
  * --------------- Config plugins ----------------
  */
 
-var dataSearchRange;
+var dataSearch = new Object();
+var currentWord;
 
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
@@ -80,29 +81,30 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            dataSearchRange = {
+            dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
                 'classifiedType':  jQuery('#classifiedType').val(),
                 'cityId':  jQuery('#cityId').val(),
-                //'operator':  jQuery('#operator').val(),
-                //'price':  jQuery('#price').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'orderBy':  jQuery('#order-by-search').val(),
                 'filterWord': jQuery('#search-again').val(), 
                 'priceRange': 0, 
                 'firstValue': ui.values[0], 
-                'secondValue': ui.values[1] 
-             }
+                'secondValue': ui.values[1],
+                'check': jQuery('input[name="select-search[]"]').serializeArray(),
+                'active' : 1
+             };
             $.ajax({
                 type: 'GET',
                 url: jQuery('#search').attr('href'), 
-                data: dataSearchRange,
+                data: dataSearch,
                 dataType: "JSON", 
                 success: function(response) {
                     jQuery('#result-section-search').html('');
                     if(response.success == true){
+                        console.log(response.input);
                         jQuery('#result-section-search').html(response.view);
                         linksPaginator()
                     }
@@ -150,11 +152,7 @@ var initSliderRange = function() {
 var searchAgain = function () {
     jQuery('#search-data').click(function(){
         var url = jQuery('#search').attr('href');
-        //console.log(url);
-        jQuery.ajax({
-            type: 'GET',
-            url: url,
-            data: {
+        dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val(),
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
@@ -165,8 +163,16 @@ var searchAgain = function () {
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'orderBy':  jQuery('#order-by-search').val(),
                 'filterWord': jQuery('#search-again').val(),
-                //'check': $('input[name="select-search[]"]').serializeArray()
-            },
+                'check': jQuery('input[name="select-search[]"]').serializeArray(),
+                'active' : 1
+        };
+
+        console.log(dataSearch);
+
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            data: dataSearch,
             dataType:'json',
             success: function(response) {
                 jQuery('#result-section-search').html('');
@@ -181,12 +187,6 @@ var searchAgain = function () {
     });
 }
 
-/*$(window).on('hashchange',function(){
-    page = wi
-    ndow.location.hash.replace('#','');
-    getProducts(page);
-});*/
-
 
 var linksPaginator = function() {
     $(document).on('click','.pagination a', function(e){
@@ -200,10 +200,10 @@ function getDataForPage(page){
     $.ajax({
         type: 'GET',
         url: jQuery('#search').attr('href') +'?page='+ page,
-        data: dataSearchRange,
+        data: dataSearch,
         dataType:'json',
         success: function(response) {
-            console.log(dataSearchRange);
+            console.log(dataSearch);
             jQuery('#result-section-search').html(response.view);
         },
         error: function(objeto, quepaso, otroobj){
@@ -307,6 +307,56 @@ var loadCitiesForStates = function() {
     });
 } 
 
+
+var currentFilterWord = function() {
+    var url = jQuery('#filter-current-word').attr('href');
+    $.ajax({
+        type: 'GET',
+        url: url, 
+        dataType: "JSON",
+        success: function(response) {
+            if (response.success == true){
+                currentWord = response.word;
+            }
+        }
+    });
+}
+
+var orderBySearch = function(){
+   jQuery('#order-by-search').click(function() {
+        var url = jQuery('#search').attr('href');
+
+        /*var orderBy = jQuery('#order-by-search').val().split('-');
+        console.log(orderBy);*/
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.orderBy = jQuery('#order-by-search').val();
+        }else{
+           dataSearch = {
+                'filterWord': currentWord,
+                'orderBy': jQuery('#order-by-search').val(),
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+
+            }
+        }
+
+        console.log(dataSearch);
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+   });
+}
 
 /*
  * --------------- Custom scripts for bussiness logic ----------------
@@ -548,5 +598,7 @@ jQuery(document).ready(function() {
     loadFieldSelect(jQuery('#search-data-for-country').attr('href'), '#countryId');
     loadStatesForCountry();
     loadCitiesForStates();
+    currentFilterWord();
+    orderBySearch();
 });
 

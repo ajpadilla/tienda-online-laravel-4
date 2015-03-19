@@ -16,6 +16,7 @@
 		"create-title"=> "Crear condición de clasificado",
 		"index-title" => "Lista de condición de clasificado",
 		"show-title" => "Ver condición de clasificado",
+		'current-lang' =>'datos-lenguaje-condicion-clasificado',
 
 		"labels" => array(
 			'name' =>'Nombre:',

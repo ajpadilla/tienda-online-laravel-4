@@ -26,7 +26,7 @@ class ClassifiedsTableSeeder extends DatabaseSeeder{
 		$classifiedsCondition = ClassifiedCondition::all()->toArray();
 		$addressAll = Address::all()->toArray();
 
-		for ($i=0; $i < 20; $i++) 
+		for ($i=0; $i < 100; $i++) 
 		{ 
 			$user = $faker->randomElement($users);
 			$classifiedType = $faker->randomElement($classifiedsTypes);

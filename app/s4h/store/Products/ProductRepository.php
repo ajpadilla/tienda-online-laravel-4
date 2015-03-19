@@ -18,7 +18,7 @@ class ProductRepository extends BaseRepository{
     }
 
     public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsProducts',
-    'cityId','operator'];
+    'cityId','operator','orderBy'];
 	
 	public function filterByPrice($query, $data = array()){
 		$query->where('price',$data['operator'],$data['price']);
@@ -60,6 +60,23 @@ class ProductRepository extends BaseRepository{
                 });
     		});
 		});
+	}
+
+	public function orderByName($query, $order){
+		$language = $this->getCurrentLang();
+		$query->with(array('languages' => function($q) use ($language, $order){
+			$q->orderBy('products_lang.name',$order);
+		}));
+	}
+
+	public function orderByPrice($query, $order){
+		$query->orderBy('price',$order);
+	}
+
+	public function orderByRating($query, $order){
+		$query->with(array('ratings' => function($q) use ($order){
+			$q->orderBy('points', $order);
+		}));
 	}
 
 	public function getAllInCurrentLangData()

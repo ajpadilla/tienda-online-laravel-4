@@ -1,7 +1,7 @@
- @if(!$products->isEmpty())
+ @if(!empty($products))
  <!-- BEGIN PAGINATOR -->
  <div id="total-items-produts-1" class="row">
-  <div class="col-md-4 col-sm-4 items-info">Productos {{ $products->getTotal()}}  en total</div>
+  <div class="col-md-4 col-sm-4 items-info">Productos por pagina {{ $products->getPerPage() }} de {{ $products->getTotal()}} total en pagina {{ $products->getCurrentPage()  }}</div>
   <div class="col-md-8 col-sm-8 links-products">
    {{ $products->links() }}
  </div>
@@ -20,7 +20,7 @@
 <!-- END PRODUCT LIST -->
 <!-- BEGIN PAGINATOR -->
 <div id="total-items-produts-2" class="row">
-<div class="col-md-4 col-sm-4 items-info">Productos total {{ $products->getTotal()}}</div>
+<div class="col-md-4 col-sm-4 items-info">Productos por pagina {{ $products->getPerPage() }} de {{ $products->getTotal()}} total en pagina {{ $products->getCurrentPage()  }}</div>
   <div class="col-md-8 col-sm-8 links-products">
     {{ $products->links()}}
   </div>
@@ -28,10 +28,10 @@
 <!-- END PAGINATOR -->
 @endif
 
-@if(!$classifieds->isEmpty())
+@if(!empty($classifieds))
 <!-- BEGIN PAGINATOR -->
 <div id="total-items-classifieds-1" class="row margen">
-  <div class="col-md-4 col-sm-4 items-info">Clasificados {{ $classifieds->getTotal()}}  en total</div>
+  <div class="col-md-4 col-sm-4 items-info">Clasificados por pagina {{ $classifieds->getPerPage() }} de {{ $classifieds->getTotal()}} total en pagina {{ $classifieds->getCurrentPage()  }}</div>
   <div class="col-md-8 col-sm-8">
    {{ $classifieds->links() }}
  </div>
@@ -50,7 +50,7 @@
 <!-- END PRODUCT LIST -->
 <!-- BEGIN PAGINATOR -->
 <div id="total-items-classifieds-2" class="row">
-  <div class="col-md-4 col-sm-4 items-info">Clasificados total {{ $classifieds->getTotal()}}</div>
+  <div class="col-md-4 col-sm-4 items-info">Clasificados por pagina {{ $classifieds->getPerPage() }} de {{ $classifieds->getTotal()}} total en pagina {{ $classifieds->getCurrentPage()  }}</div>
   <div class="col-md-8 col-sm-8">
     {{ $classifieds->links()}}
   </div>
@@ -58,13 +58,13 @@
 <!-- END PAGINATOR -->
 @endif
 
-@if($products)
+@if(!empty($products))
   @foreach($products as $product)
     @include('products.partials._pop-up-products')
   @endforeach
 @endif
 
-@if($classifieds)
+@if(!empty($classifieds))
   @foreach($classifieds as $classified)
     @include('classifieds.partials._pop-up-classifieds')
   @endforeach
