@@ -88,12 +88,12 @@ var initSliderRange = function() {
                 'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
                 'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                'orderBy':  jQuery('#order-by-search').val(),
+                 'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : "",
                 'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1],
-                'check': jQuery('input[name="select-search[]"]').serializeArray(),
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
                 'active' : 1
              };
             $.ajax({
@@ -161,9 +161,9 @@ var searchAgain = function () {
                 'operator':  jQuery('#operator').val(),
                 'price':  jQuery('#price').val() ? jQuery('#price').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                'orderBy':  jQuery('#order-by-search').val(),
+                'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : "",
-                'check': jQuery('input[name="select-search[]"]').serializeArray(),
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "" ,
                 'active' : 1
         };
 
