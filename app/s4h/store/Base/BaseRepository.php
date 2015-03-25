@@ -24,14 +24,7 @@ abstract class BaseRepository
 
 		$data = array_filter($data,'count');
 
-		$query = $this->getModel()->select()->with(
-			array(
-				'languages' => function($q) use ($language){
-					$q->where('language_id', '=', $language->id);
-				},
-				'photos'
-			)
-		);
+		$query = $this->getModel()->select();
 
 		foreach($data as $field => $value)
 		{
