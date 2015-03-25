@@ -84,7 +84,6 @@ class ProductRepository extends BaseRepository{
 		->join('ratings', 'ratings.product_id','=','products.id')
 		->groupBy('product_id')
 		->orderBy('rating', $order);
-		//->select('products.*');
 	}
 
 	public function getAllInCurrentLangData()
