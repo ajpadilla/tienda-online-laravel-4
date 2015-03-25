@@ -7,6 +7,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 use s4h\store\Base\BaseRepository;
+use DB;
 
 class ProductRepository extends BaseRepository{
 
@@ -79,9 +80,11 @@ class ProductRepository extends BaseRepository{
 	}
 
 	public function orderByRating($query, $order){
-		$query->with(array('ratings' => function($q) use ($order){
-			$q->orderBy('points', $order);
-		}));
+		$query->select(DB::raw('products.*, IFNULL(AVG(points), 0) as rating'))
+		->join('ratings', 'ratings.product_id','=','products.id')
+		->groupBy('product_id')
+		->orderBy('rating', $order);
+		//->select('products.*');
 	}
 
 	public function getAllInCurrentLangData()
