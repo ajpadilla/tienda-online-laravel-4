@@ -62,11 +62,14 @@ class ProductRepository extends BaseRepository{
 		});
 	}
 
-	public function orderByName($query, $order){
+	public function orderByName($query, $order)
+	{
+		$ids = $query->lists('id');
 		$language = $this->getCurrentLang();
-		$query->with(array('languages' => function($q) use ($language, $order){
-			$q->orderBy('products_lang.name',$order);
-		}));
+		$query->join('products_lang as lang','lang.product_id','=','products.id')
+		->whereIn('products.id',$ids)
+		->orderBy('lang.name', $order)
+		->select('products.*');
 	}
 
 	public function orderByPrice($query, $order){
