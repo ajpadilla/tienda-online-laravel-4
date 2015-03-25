@@ -3,7 +3,7 @@
  */
 
 var dataSearch = new Object();
-var currentWord;
+var currentWord = null;
 
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
@@ -337,7 +337,6 @@ var orderBySearch = function(){
                 'filterWord': currentWord,
                 'orderBy': jQuery('#order-by-search').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-
             }
         }
 
@@ -350,6 +349,7 @@ var orderBySearch = function(){
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
+                    console.log(response.products);
                     jQuery('#result-section-search').html(response.view);
                     linksPaginator();
                 }
