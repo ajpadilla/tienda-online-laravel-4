@@ -64,10 +64,13 @@ class ProductRepository extends BaseRepository{
 
 	public function orderByName($query, $order)
 	{
+		$language = $this->getCurrentLang();
+
 		$ids = $query->lists('id');
 		$language = $this->getCurrentLang();
 		$query->join('products_lang as lang','lang.product_id','=','products.id')
 		->whereIn('products.id',$ids)
+		->where('lang.language_id','=',$language->id)
 		->orderBy('lang.name', $order)
 		->select('products.*');
 	}
