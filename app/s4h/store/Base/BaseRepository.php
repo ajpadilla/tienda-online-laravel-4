@@ -22,7 +22,7 @@ abstract class BaseRepository
 		
 		$data = array_only($data, $this->filters);
 
-		$data = array_filter($data,'count');
+		$data = array_filter($data);
 
 		$query = $this->getModel()->select();
 
