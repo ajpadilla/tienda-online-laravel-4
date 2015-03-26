@@ -7,6 +7,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 use s4h\store\Base\BaseRepository;
+use DB;
 
 class ProductRepository extends BaseRepository{
 
@@ -61,11 +62,16 @@ class ProductRepository extends BaseRepository{
 		});
 	}
 
-	public function orderByName($query, $order){
+	public function orderByName($query, $order)
+	{
 		$language = $this->getCurrentLang();
-		$query->with(array('languages' => function($q) use ($language, $order){
-			$q->orderBy('products_lang.name',$order);
-		}));
+		$ids = $query->lists('id');
+		$language = $this->getCurrentLang();
+		$query->join('products_lang as lang','lang.product_id','=','products.id')
+		->whereIn('products.id',$ids)
+		->where('lang.language_id','=',$language->id)
+		->orderBy('lang.name', $order)
+		->select('products.*');
 	}
 
 	public function orderByPrice($query, $order){
@@ -73,9 +79,10 @@ class ProductRepository extends BaseRepository{
 	}
 
 	public function orderByRating($query, $order){
-		$query->with(array('ratings' => function($q) use ($order){
-			$q->orderBy('points', $order);
-		}));
+		$query->select(DB::raw('products.*, IFNULL(AVG(points), 0) as rating'))
+		->join('ratings', 'ratings.product_id','=','products.id')
+		->groupBy('product_id')
+		->orderBy('rating', $order);
 	}
 
 	public function getAllInCurrentLangData()
