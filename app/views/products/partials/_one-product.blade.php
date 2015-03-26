@@ -18,7 +18,8 @@
     <h3>
     <a href="{{ route('products.show', $product->id) }}">{{ $product->inCurrentLang->name }}</a>
     </h3>
-    <div class="pi-price">{{ $product->price }}</div>
+    <div class="pi-price">{{ $product->price }}</div><br>
+    <div class="pi-price">{{ $product->getRatingAttribute() }}</div>
     <a href="{{ route('cart.create', $product->id) }}" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
     <a href="{{ route('wishlist.create', $product->id) }}" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
     <div class="sticker sticker-sale"></div>

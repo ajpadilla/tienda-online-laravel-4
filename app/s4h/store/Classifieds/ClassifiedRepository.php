@@ -59,12 +59,16 @@ class ClassifiedRepository extends BaseRepository
 		});
 	}
 
-	public function orderByName($query, $order){
+	public function orderByName($query, $order)
+	{
 		$language = $this->getCurrentLang();
-		$query->with(array('languages' => function($q) use ($language, $order){
-			$q->where('language_id', '=', $language->id)
-    		->orderBy('classifieds_lang.name',$order);
-		}));
+		$ids = $query->lists('id');
+		$language = $this->getCurrentLang();
+		$query->join('classifieds_lang as lang','lang.classified_id','=','classifieds.id')
+		->whereIn('classifieds.id',$ids)
+		->where('lang.language_id','=',$language->id)
+		->orderBy('lang.name', $order)
+		->select('classifieds.*');
 	}
 
 	public function orderByPrice($query, $order){

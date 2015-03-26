@@ -3,7 +3,7 @@
  */
 
 var dataSearch = new Object();
-var currentWord;
+var currentWord = null;
 
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
@@ -83,17 +83,17 @@ var initSliderRange = function() {
             // when the user stopped changing the slider
             dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
-                'conditionsProducts':  jQuery('#conditionsProducts').val(),
-                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
-                'classifiedType':  jQuery('#classifiedType').val(),
-                'cityId':  jQuery('#cityId').val(),
+                'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0,
+                'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+                'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                'orderBy':  jQuery('#order-by-search').val(),
-                'filterWord': jQuery('#search-again').val(), 
-                'priceRange': 0, 
+                 'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
+                'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : "",
+                'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1],
-                'check': jQuery('input[name="select-search[]"]').serializeArray(),
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
                 'active' : 1
              };
             $.ajax({
@@ -104,8 +104,8 @@ var initSliderRange = function() {
                 success: function(response) {
                     jQuery('#result-section-search').html('');
                     if(response.success == true){
-                        console.log(response.input);
-                        jQuery('#result-section-search').html(response.view);
+                        console.log(response);
+                        $('#result-section-search').html(response.view);
                         linksPaginator()
                     }
                 }
@@ -154,16 +154,16 @@ var searchAgain = function () {
         var url = jQuery('#search').attr('href');
         dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
-                'conditionsProducts':  jQuery('#conditionsProducts').val(),
-                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val(),
-                'classifiedType':  jQuery('#classifiedType').val(),
-                'cityId':  jQuery('#cityId').val(),
+                'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ?  jQuery('#conditionsClassifieds').val(): 0,
+                'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+                'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'operator':  jQuery('#operator').val(),
-                'price':  jQuery('#price').val(),
+                'price':  jQuery('#price').val() ? jQuery('#price').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                'orderBy':  jQuery('#order-by-search').val(),
-                'filterWord': jQuery('#search-again').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray(),
+                'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
+                'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : "",
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "" ,
                 'active' : 1
         };
 
@@ -337,7 +337,6 @@ var orderBySearch = function(){
                 'filterWord': currentWord,
                 'orderBy': jQuery('#order-by-search').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-
             }
         }
 
@@ -350,6 +349,7 @@ var orderBySearch = function(){
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
+                    console.log(response.products);
                     jQuery('#result-section-search').html(response.view);
                     linksPaginator();
                 }

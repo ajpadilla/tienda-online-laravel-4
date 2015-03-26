@@ -331,7 +331,7 @@ class ProductController extends \BaseController {
 			return Response::json([
 				'success' => true, 
 				'view' => $view,
-				'input' => Input::all()
+				'input' => Input::all(),
 			]);
 		} 
 		else {
