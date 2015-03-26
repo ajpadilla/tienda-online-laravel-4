@@ -75,9 +75,9 @@
 		                    </li>
 		                  </ul>
 		                </div>
-		              </div>
-		              <a href="<?php echo route('pages.home'); ?>"><button class="btn btn-default" type="button"><?php echo Lang::get('cart.labels.continue-shopping'); ?><i class="fa fa-shopping-cart"></i></button></a>
-		              <button class="btn btn-primary" type="submit"><?php echo Lang::get('cart.labels.pay'); ?><i class="fa fa-check"></i></button>
+		              </div>		              
+		              <a href="<?php /* route('pages.home') */ ?>"><button class="btn btn-primary" style="background-color: blue" type="submit"><?php echo Lang::get('cart.labels.continue-shopping'); ?><i class="fa fa-shopping-cart"></i></button></a>
+		              <a href="<?php /* route('pages.home') */ ?>"><button class="btn btn-primary" type="submit"><?php echo Lang::get('cart.labels.pay'); ?><i class="fa fa-check"></i></button></a>
 		            </div>
 		        <?php endif; ?>
 	          </div>

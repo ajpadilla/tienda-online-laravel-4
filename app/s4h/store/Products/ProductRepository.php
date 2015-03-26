@@ -31,7 +31,6 @@ class ProductRepository extends BaseRepository{
 	public function filterByConditionsProducts($query, $data = array()){
 		$query->where('condition_id','=',$data['conditionsProducts']);
 	}
-
 	public function filterByFilterWord($query, $data = array())
 	{
 		$language = $this->getCurrentLang();

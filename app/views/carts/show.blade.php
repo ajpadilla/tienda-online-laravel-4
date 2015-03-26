@@ -78,9 +78,9 @@
 		                    </li>
 		                  </ul>
 		                </div>
-		              </div>
-		              <a href="{{ route('pages.home') }}"><button class="btn btn-default" type="button">{{ Lang::get('cart.labels.continue-shopping') }}<i class="fa fa-shopping-cart"></i></button></a>
-		              <button class="btn btn-primary" type="submit">{{ Lang::get('cart.labels.pay') }}<i class="fa fa-check"></i></button>
+		              </div>		              
+		              <a href="{{-- route('pages.home') --}}"><button class="btn btn-primary" style="background-color: blue" type="submit">{{ Lang::get('cart.labels.continue-shopping') }}<i class="fa fa-shopping-cart"></i></button></a>
+		              <a href="{{-- route('pages.home') --}}"><button class="btn btn-primary" type="submit">{{ Lang::get('cart.labels.pay') }}<i class="fa fa-check"></i></button></a>
 		            </div>
 		        @endif
 	          </div>
@@ -89,7 +89,3 @@
 	    </div>
     </div>
 @stop
-
- {{-- @include('products.partials._pop-up-products')
-
-@include('products.partials._product-show-js') --}}
