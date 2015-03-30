@@ -193,6 +193,7 @@ var linksPaginator = function() {
        e.preventDefault();
        var page = $(this).attr('href').split('page=')[1];
        getDataForPage(page);
+       //location.hash = page;
    });
 }
 
@@ -326,9 +327,6 @@ var orderBySearch = function(){
    jQuery('#order-by-search').click(function() {
         var url = jQuery('#search').attr('href');
 
-        /*var orderBy = jQuery('#order-by-search').val().split('-');
-        console.log(orderBy);*/
-
         if(dataSearch.hasOwnProperty('active')) 
         {
             dataSearch.orderBy = jQuery('#order-by-search').val();
@@ -349,13 +347,41 @@ var orderBySearch = function(){
             dataType: "JSON",
             success: function(response) {
                 if (response.success == true) {
-                    console.log(response.products);
                     jQuery('#result-section-search').html(response.view);
                     linksPaginator();
                 }
             }
         });
    });
+}
+
+var paginateQuantitySearch = function(){
+    jQuery('#paginate-quantity-search').click(function(){
+        var url = jQuery('#search').attr('href');
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.paginate = jQuery('#paginate-quantity-search').val();
+        }else{
+           dataSearch = {
+                'filterWord': currentWord,
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+            }
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+
+    });
 }
 
 /*
@@ -600,5 +626,6 @@ jQuery(document).ready(function() {
     loadCitiesForStates();
     currentFilterWord();
     orderBySearch();
+    paginateQuantitySearch()
 });
 
