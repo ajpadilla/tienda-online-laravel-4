@@ -183,7 +183,42 @@ var searchAgain = function () {
                 }
             }
         });
-        return false;
+    });
+}
+
+
+var checkBox = function(){
+
+    jQuery('input[name="select-search[]"]').click(function()
+    {
+        var url = jQuery('#search').attr('href');
+
+        if(!dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch = {
+                'filterWord': currentWord,
+                'orderBy': jQuery('#order-by-search').val(),
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
+            };
+        }
+
+        console.log(dataSearch);
+
+        jQuery.ajax({
+            type: 'GET',
+            url: url,
+            data: dataSearch,
+            dataType:'json',
+            success: function(response) {
+                jQuery('#result-section-search').html('');
+                if(response.success == true){
+                    console.log(response);
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator()
+                }
+            }
+        });
     });
 }
 
@@ -205,6 +240,7 @@ function getDataForPage(page){
             'filterWord': currentWord,
             'orderBy': jQuery('#order-by-search').val(),
             'paginate':  jQuery('#paginate-quantity-search').val(),
+            'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
         };
     }
 
@@ -347,6 +383,7 @@ var orderBySearch = function(){
                 'filterWord': currentWord,
                 'orderBy': jQuery('#order-by-search').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
             }
         }
 
@@ -376,7 +413,9 @@ var paginateQuantitySearch = function(){
         }else{
            dataSearch = {
                 'filterWord': currentWord,
+                'orderBy': jQuery('#order-by-search').val(),
                 'paginate':  jQuery('#paginate-quantity-search').val(),
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
             }
         }
 
@@ -638,5 +677,6 @@ jQuery(document).ready(function() {
     orderBySearch();
     paginateQuantitySearch();
     linksPaginator();
+    checkBox();
 });
 
