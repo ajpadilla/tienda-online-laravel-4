@@ -68,7 +68,7 @@ var handleFancybox = function() {
 var initSliderRange = function() {
     jQuery("#slider-range-price").slider({
         range: true,
-        min: 0,
+        min: 1,
         max: 9999,
         values: [ 1, 9999 ],
         slide: function( event, ui ) {
@@ -163,7 +163,7 @@ var searchAgain = function () {
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : "",
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "" ,
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
                 'active' : 1
         };
 
@@ -198,6 +198,18 @@ var linksPaginator = function() {
 }
 
 function getDataForPage(page){
+
+    if(!dataSearch.hasOwnProperty('active')) 
+    {
+        dataSearch = {
+            'filterWord': currentWord,
+            'orderBy': jQuery('#order-by-search').val(),
+            'paginate':  jQuery('#paginate-quantity-search').val(),
+        };
+    }
+
+    console.log(dataSearch);
+
     $.ajax({
         type: 'GET',
         url: jQuery('#search').attr('href') +'?page='+ page,
@@ -613,9 +625,7 @@ jQuery(document).ready(function() {
     searchAgain();
     loadFieldsProduct();
     loadFieldsClassified();
-
     hideFields();
-
     loadFieldSelect(jQuery('#search-data-conditions-product-lang').attr('href'), '#conditionsProducts');
     loadFieldSelect(jQuery('#search-data-conditions-classified-lang').attr('href'), '#conditionsClassifieds');
     loadFieldSelect(jQuery('#search-data-classified-type-lang').attr('href'), '#classifiedType');
@@ -626,6 +636,7 @@ jQuery(document).ready(function() {
     loadCitiesForStates();
     currentFilterWord();
     orderBySearch();
-    paginateQuantitySearch()
+    paginateQuantitySearch();
+    linksPaginator();
 });
 
