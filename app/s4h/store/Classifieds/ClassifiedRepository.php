@@ -54,20 +54,20 @@ class ClassifiedRepository extends BaseRepository
 	}
 
 	public function filterByCountryId($query, $data = array()){
-		$query->join('address','classifieds.address_id','=','address.id')
-		->join('cities', 'address.city_id', '=', 'cities.id')
-		->join('states', 'cities.states_id', '=', 'states.id')
-		->join('countries', 'states.country_id', '=', 'countries.id')
+		$query->join('address as addressC','classifieds.address_id','=','addressC.id')
+		->join('cities as citiesC', 'addressC.city_id', '=', 'citiesC.id')
+		->join('states as statesC', 'citiesC.states_id', '=', 'statesC.id')
+		->join('countries', 'statesC.country_id', '=', 'countries.id')
 		->where('countries.id','=',$data['countryId'])
 		->select('classifieds.*');
 	}
 
 
 	public function filterByStateId($query, $data = array()){
-		$query->join('address','classifieds.address_id','=','address.id')
-		->join('cities', 'address.city_id', '=', 'cities.id')
-		->join('states', 'cities.states_id', '=', 'states.id')
-		->where('states.id','=',$data['stateId'])
+		$query->join('address as dir','classifieds.address_id','=','dir.id')
+		->join('cities as citiesS', 'dir.city_id', '=', 'citiesS.id')
+		->join('states as statesS', 'citiesS.states_id', '=', 'statesS.id')
+		->where('statesS.id','=',$data['stateId'])
 		->select('classifieds.*');
 	}
 
