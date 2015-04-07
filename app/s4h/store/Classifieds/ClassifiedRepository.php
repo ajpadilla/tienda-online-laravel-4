@@ -17,7 +17,7 @@ class ClassifiedRepository extends BaseRepository
 	}
 
 	public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsClassifieds',
-    'cityId','classifiedType','operator','orderBy'];
+    'cityId','countryId','stateId','classifiedType','operator','orderBy'];
 
 	public function filterByPrice($query, $data = array()){
 		$query->where('price',$data['operator'],$data['price']);
@@ -51,6 +51,24 @@ class ClassifiedRepository extends BaseRepository
 
 	public function filterByClassifiedType($query, $data = array()){
 		$query->where('classified_type_id','=',$data['classifiedType']);
+	}
+
+	public function filterByCountryId($query, $data = array()){
+		$query->join('address','classifieds.address_id','=','address.id')
+		->join('cities', 'address.city_id', '=', 'cities.id')
+		->join('states', 'cities.states_id', '=', 'states.id')
+		->join('countries', 'states.country_id', '=', 'countries.id')
+		->where('countries.id','=',$data['countryId'])
+		->select('classifieds.*');
+	}
+
+
+	public function filterByStateId($query, $data = array()){
+		$query->join('address','classifieds.address_id','=','address.id')
+		->join('cities', 'address.city_id', '=', 'cities.id')
+		->join('states', 'cities.states_id', '=', 'states.id')
+		->where('states.id','=',$data['stateId'])
+		->select('classifieds.*');
 	}
 
 	public function filterByCityId($query, $data = array()){

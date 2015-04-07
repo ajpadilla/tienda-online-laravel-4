@@ -48,7 +48,7 @@
   <div class="row">
 
     <div class="col-sm-8 ">
-      {{ Form::select('countryId',array(),null,['class' => 'form-control input-sm','placeholder'=>'Estado','id'=>'countryId']) }}
+      {{ Form::select('countryId',array(),null,['class' => 'form-control input-sm','placeholder'=>'Pais','id'=>'countryId']) }}
       <a href="{{ URL::route('classifieds.countries') }}" id="search-data-for-country"></a>
     </div>
 
@@ -62,7 +62,7 @@
     <a href="{{ URL::route('classifieds.citiesForState') }}" id="search-data-for-cities"></a>
   </div>
 
-  <div class="col-sm-8">
+  <!--<div class="col-sm-8">
     {{ Form::select('operator',
       array(
           '>' => 'Mayor a', 
@@ -70,11 +70,12 @@
           '=' => 'Igual a'
         ,),
         null,array('class' => 'form-control input-sm','id'=>'operator')) }}
-      </div>
+  </div>
 
       <div class="col-sm-8">
         {{ Form::text('price',null, ['class' => 'form-control input-sm','placeholder' =>'Precio','id'=> 'price']) }}
-      </div>
+      </div>-->
+
     </div>
 
   <h3>Precio</h3>

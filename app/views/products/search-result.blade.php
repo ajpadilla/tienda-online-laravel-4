@@ -3,12 +3,11 @@
   <h2 style="display: inline-block">Resultados para: <em class="content-search-product">producto</em></h2>
 @stop
 @section('action-heading')
-  <form class="content-search-form" action="" >
+  <form action="#">
     <div class="input-group">
-      <!--<input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">-->
-      {{ Form::text('search-again',null, ['class' => 'form-control','placeholder' =>'Buscar de nuevo','id'=> 'search-again']) }}
+      <input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">
       <span class="input-group-btn">
-        <button id="search-data" class="btn btn-primary" type="submit">Buscar</button>
+        <button id="search-data-again" class="btn btn-primary">Buscar</button>
       </span>
     </div>
   </form>
