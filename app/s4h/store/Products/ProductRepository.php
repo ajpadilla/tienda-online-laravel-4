@@ -19,7 +19,7 @@ class ProductRepository extends BaseRepository{
     }
 
     public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsProducts',
-    'cityId','operator','orderBy'];
+    'cityId','operator','orderBy','country'];
 	
 	public function filterByPrice($query, $data = array()){
 		$query->where('price',$data['operator'],$data['price']);
@@ -61,6 +61,17 @@ class ProductRepository extends BaseRepository{
                 });
     		});
 		});
+	}
+
+	public function filterByCountry($query, $data = array()){
+		$query->join('users','products.user_id','=','users.id')
+		->join('people','users.id','=','people.user_id')
+		->join('address','people.address_id','=','address.id')
+		->join('cities','address.city_id','=','cities.id')
+		->join('states', 'cities.states_id', '=', 'states.id')
+		->join('countries', 'states.country_id', '=', 'countries.id')
+		->where('countries.id','=',$data['country'])
+		->select('products.*');
 	}
 
 	public function orderByName($query, $order)
