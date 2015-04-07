@@ -51,14 +51,6 @@ class ProductRepository extends BaseRepository{
 		});
 	}
 
-	public function filterByCityId($query, $data = array()){
-		$query->join('users','products.user_id','=','users.id')
-		->join('people','users.id','=','people.user_id')
-		->join('address','people.address_id','=','address.id')
-		->join('cities','address.city_id','=','cities.id')
-		->where('cities.id','=',$data['cityId'])
-		->select('products.*');
-	}
 
 	public function filterByCountryId($query, $data = array()){
 		$query->join('users','products.user_id','=','users.id')
@@ -82,6 +74,14 @@ class ProductRepository extends BaseRepository{
 		->select('products.*');
 	}
 
+	public function filterByCityId($query, $data = array()){
+		$query->join('users','products.user_id','=','users.id')
+		->join('people','users.id','=','people.user_id')
+		->join('address','people.address_id','=','address.id')
+		->join('cities','address.city_id','=','cities.id')
+		->where('cities.id','=',$data['cityId'])
+		->select('products.*');
+	}
 
 	public function orderByName($query, $order)
 	{
