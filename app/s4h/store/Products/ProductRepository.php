@@ -18,7 +18,7 @@ class ProductRepository extends BaseRepository{
       return new Product;
     }
 
-    public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsProducts',
+    public $filters = ['filterWord','price','priceRange','pointsRange','firstValue','secondValue','categories','conditionsProducts',
     'cityId','operator','orderBy','countryId','stateId'];
 	
 	public function filterByPrice($query, $data = array()){
@@ -27,6 +27,10 @@ class ProductRepository extends BaseRepository{
 
     public function filterByPriceRange($query, $data = array()){
 		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
+	}
+
+	public function filterByPointsRange($query, $data = array()){
+		$query->whereBetween('point_price',[$data['firstValue'], $data['secondValue']]);
 	}
 
 	public function filterByConditionsProducts($query, $data = array()){
