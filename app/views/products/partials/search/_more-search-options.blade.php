@@ -48,7 +48,7 @@
   <div class="row">
 
     <div class="col-sm-8 ">
-      {{ Form::select('countryId',array(),null,['class' => 'form-control input-sm','placeholder'=>'Estado','id'=>'countryId']) }}
+      {{ Form::select('countryId',array(),null,['class' => 'form-control input-sm','placeholder'=>'Pais','id'=>'countryId']) }}
       <a href="{{ URL::route('classifieds.countries') }}" id="search-data-for-country"></a>
     </div>
 
