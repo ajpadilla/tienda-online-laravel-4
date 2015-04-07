@@ -505,6 +505,62 @@ var searchConditionsProduct = function() {
     });
 }
 
+var searchConditionsClassifieds = function() {
+ jQuery('#conditionsClassifieds').change(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.conditionsClassifieds = jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0;
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.conditionsClassifieds = jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0;
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var searchClassifiedType = function() {
+    jQuery('#classifiedType').change(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.classifiedType = jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0;
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.classifiedType = jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0;
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
 var loadFieldSelect = function(url,idField) {
     $.ajax({
         type: 'GET',
@@ -835,5 +891,7 @@ jQuery(document).ready(function() {
     searchDataForCity();
     serachCategories();
     searchConditionsProduct();
+    searchConditionsClassifieds();
+    searchClassifiedType();
 });
 
