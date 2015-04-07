@@ -19,7 +19,7 @@ class ProductRepository extends BaseRepository{
     }
 
     public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsProducts',
-    'cityId','operator','orderBy','country'];
+    'cityId','operator','orderBy','countryId','stateId'];
 	
 	public function filterByPrice($query, $data = array()){
 		$query->where('price',$data['operator'],$data['price']);
@@ -63,16 +63,28 @@ class ProductRepository extends BaseRepository{
 		});
 	}
 
-	public function filterByCountry($query, $data = array()){
+	public function filterByCountryId($query, $data = array()){
 		$query->join('users','products.user_id','=','users.id')
 		->join('people','users.id','=','people.user_id')
 		->join('address','people.address_id','=','address.id')
 		->join('cities','address.city_id','=','cities.id')
 		->join('states', 'cities.states_id', '=', 'states.id')
 		->join('countries', 'states.country_id', '=', 'countries.id')
-		->where('countries.id','=',$data['country'])
+		->where('countries.id','=',$data['countryId'])
 		->select('products.*');
 	}
+
+
+	public function filterByStateId($query, $data = array()){
+		$query->join('users','products.user_id','=','users.id')
+		->join('people','users.id','=','people.user_id')
+		->join('address','people.address_id','=','address.id')
+		->join('cities','address.city_id','=','cities.id')
+		->join('states', 'cities.states_id', '=', 'states.id')
+		->where('states.id','=',$data['stateId'])
+		->select('products.*');
+	}
+
 
 	public function orderByName($query, $order)
 	{
