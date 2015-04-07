@@ -135,19 +135,37 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            var firstValue = ui.values[0];
-            var secondValue = ui.values[1];
-            //alert('First: '+firstValue);
-            //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
-            /*$.ajax({
+
+            dataSearch = {
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0,
+                'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+                'countryId': jQuery('#countryId').val() ? jQuery('#countryId').val() : 0,
+                'stateId': jQuery('#stateId').val() ? jQuery('#stateId').val() : 0,
+                'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : currentWord,
+                'pointsRange': jQuery('#price-points').val() ? jQuery('#price-points').val() : 0, 
+                'firstValue': ui.values[0], 
+                'secondValue': ui.values[1],
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+                'active' : 1
+             };
+            $.ajax({
                 type: 'GET',
-                url: jQuery('#search').attr('href'),
-                data: { 'firstValue': ui.values[0], 'secondValue':ui.values[1] },
-                dataType: "JSON",
+                url: jQuery('#search').attr('href'), 
+                data: dataSearch,
+                dataType: "JSON", 
                 success: function(response) {
-                    console.log(response);
+                    jQuery('#result-section-search').html('');
+                    if(response.success == true){
+                        console.log(response);
+                        $('#result-section-search').html(response.view);
+                        linksPaginator()
+                    }
                 }
-            });*/
+            });
         }
     });
     jQuery("#price-points").val("$" + jQuery("#slider-range-price-points").slider("values", 0) +
@@ -606,6 +624,7 @@ var loadStatesForCountry = function() {
                 }
             }
         });
+        $('#cityId').html('');
     });
 } 
 
