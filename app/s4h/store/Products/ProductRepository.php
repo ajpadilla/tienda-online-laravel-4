@@ -52,15 +52,12 @@ class ProductRepository extends BaseRepository{
 	}
 
 	public function filterByCityId($query, $data = array()){
-		$query = $query->with(['user','user.people','user.people.address']);
-
-		$query->whereHas('user', function($q) use ($data){
-    		$q->whereHas('people',function($q) use ($data){
-    			$q->whereHas('address', function($q) use($data) {
-                    $q->where('city_id', '=', $data['cityId']);
-                });
-    		});
-		});
+		$query->join('users','products.user_id','=','users.id')
+		->join('people','users.id','=','people.user_id')
+		->join('address','people.address_id','=','address.id')
+		->join('cities','address.city_id','=','cities.id')
+		->where('cities.id','=',$data['cityId'])
+		->select('products.*');
 	}
 
 	public function filterByCountryId($query, $data = array()){
