@@ -82,9 +82,9 @@ class ClassifiedRepository extends BaseRepository
 		$language = $this->getCurrentLang();
 		$ids = $query->lists('id');
 		$language = $this->getCurrentLang();
-		$query->join('classifieds_lang as lang','lang.classified_id','=','classifieds.id')
-		->whereIn('classifieds.id',$ids)
+		$query->join('classifieds_lang as lang','classifieds.id','=','lang.classified_id')
 		->where('lang.language_id','=',$language->id)
+		->whereIn('classifieds.id',$ids)
 		->orderBy('lang.name', $order)
 		->select('classifieds.*');
 	}
