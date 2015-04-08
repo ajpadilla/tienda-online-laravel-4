@@ -92,8 +92,8 @@ class ProductRepository extends BaseRepository{
 		$ids = $query->lists('id');
 		$language = $this->getCurrentLang();
 		$query->join('products_lang as lang','lang.product_id','=','products.id')
-		->whereIn('products.id',$ids)
 		->where('lang.language_id','=',$language->id)
+		->whereIn('products.id',$ids)
 		->orderBy('lang.name', $order)
 		->select('products.*');
 	}
@@ -115,8 +115,8 @@ class ProductRepository extends BaseRepository{
 		$query->join('products_lang as lang','lang.product_id','=','products.id')
 		->join('product_conditions as condition', 'condition.id','=','products.condition_id')
 		->join('product_condition_lang as lang_condition','lang_condition.product_condition_id','=','condition.id')
-		->whereIn('products.id',$ids)
 		->where('lang.language_id','=',$language->id)
+		->whereIn('products.id',$ids)
 		->orderBy('lang_condition.name', $order)
 		->select('products.*');
 	}
