@@ -309,6 +309,7 @@ class ProductController extends \BaseController {
 		$productsResultsSearch = null;
 		$classifiedsResultsSearch = null;
 		$categories = $this->categoryRepository->getNameForLanguage();
+		$input = null;
 
 		if(Request::ajax()) 
 		{
@@ -335,7 +336,9 @@ class ProductController extends \BaseController {
 			]);
 		} 
 		else {
-			$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
+			$input = Input::all();
+			$input['orderBy'] = 'rating-desc'; 
+			$productsResultsSearch = $this->productRepository->search($input,'s4h\store\Base\BaseRepository::PAGINATE');
 			$classifiedsResultsSearch  = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
 
 			if (!$productsResultsSearch->isEmpty() || !$classifiedsResultsSearch->isEmpty()) 
