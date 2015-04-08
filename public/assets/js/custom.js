@@ -82,8 +82,6 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            value1 = ui.values[0];
-            value2 =  ui.values[1];
 
             dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
@@ -95,7 +93,7 @@ var initSliderRange = function() {
                 'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : currentWord,
-                'priceRange':0, 
+                'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1],
                 'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
@@ -868,7 +866,7 @@ var discountFromcart = function() {
 /*
  * --------------------- Rating Logic ----------------------
  */
-var rating = function() {    
+var rating = function() {    
     jQuery("#rating").bind('rated', function(event, value) {
         alert('You\'ve rated it: ' + value);
     });
