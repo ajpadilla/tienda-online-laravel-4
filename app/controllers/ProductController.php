@@ -333,6 +333,7 @@ class ProductController extends \BaseController {
 				'success' => true, 
 				'view' => $view,
 				'input' => Input::all(),
+				'products' => $productsResultsSearch->toArray()
 			]);
 		} 
 		else {
