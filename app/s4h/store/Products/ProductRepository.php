@@ -26,7 +26,7 @@ class ProductRepository extends BaseRepository{
 	}
 
     public function filterByPriceRange($query, $data = array()){
-		$query->whereBetween('price',[$data['firstValue'], $data['secondValue']]);
+		$query->whereBetween('price',[(int)$data['firstValue'], (int)$data['secondValue']]);
 	}
 
 	public function filterByPointsRange($query, $data = array()){
