@@ -4,7 +4,8 @@
 
 var dataSearch = new Object();
 var currentWord = null;
-
+var value1 = null;
+var value2 = null;
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
         url: jQuery('.product-main-image img').attr('data-BigImgSrc')
@@ -81,15 +82,19 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
+            value1 = ui.values[0];
+            value2 =  ui.values[1];
+
             dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
                 'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0,
                 'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+                'countryId': jQuery('#countryId').val() ? jQuery('#countryId').val() : 0,
+                'stateId': jQuery('#stateId').val() ? jQuery('#stateId').val() : 0,
                 'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-                //'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
-                'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : "",
+                'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : currentWord,
                 'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1],
@@ -130,19 +135,37 @@ var initSliderRange = function() {
         },
         stop: function(event, ui) {
             // when the user stopped changing the slider
-            var firstValue = ui.values[0];
-            var secondValue = ui.values[1];
-            //alert('First: '+firstValue);
-            //$.POST("to.php",{first_value:ui.values[0], second_value:ui.values[1]},function(data){},'json');
-            /*$.ajax({
+
+            dataSearch = {
+                'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+                'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0,
+                'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+                'countryId': jQuery('#countryId').val() ? jQuery('#countryId').val() : 0,
+                'stateId': jQuery('#stateId').val() ? jQuery('#stateId').val() : 0,
+                'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
+                'paginate':  jQuery('#paginate-quantity-search').val(),
+                'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : currentWord,
+                'pointsRange': jQuery('#price-points').val() ? jQuery('#price-points').val() : 0, 
+                'firstValue': ui.values[0], 
+                'secondValue': ui.values[1],
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+                'active' : 1
+             };
+            $.ajax({
                 type: 'GET',
-                url: jQuery('#search').attr('href'),
-                data: { 'firstValue': ui.values[0], 'secondValue':ui.values[1] },
-                dataType: "JSON",
+                url: jQuery('#search').attr('href'), 
+                data: dataSearch,
+                dataType: "JSON", 
                 success: function(response) {
-                    console.log(response);
+                    jQuery('#result-section-search').html('');
+                    if(response.success == true){
+                        console.log(response);
+                        $('#result-section-search').html(response.view);
+                        linksPaginator()
+                    }
                 }
-            });*/
+            });
         }
     });
     jQuery("#price-points").val("$" + jQuery("#slider-range-price-points").slider("values", 0) +
@@ -152,18 +175,21 @@ var initSliderRange = function() {
 var searchAgain = function () {
     jQuery('#search-data-again').click(function(){
         var url = jQuery('#search').attr('href');
+
         dataSearch = {
                 'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
                 'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
-                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ?  jQuery('#conditionsClassifieds').val(): 0,
+                'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0,
                 'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+                'countryId': jQuery('#countryId').val() ? jQuery('#countryId').val() : 0,
+                'stateId': jQuery('#stateId').val() ? jQuery('#stateId').val() : 0,
                 'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
-                'operator':  jQuery('#operator').val(),
-                'price':  jQuery('#price').val() ? jQuery('#price').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
-               // 'orderBy':  jQuery('#order-by-search').val() ?  jQuery('#order-by-search').val() : "",
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : '',
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
+                'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
+                'firstValue': value1, 
+                'secondValue': value2,
+                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
                 'active' : 1
         };
 
@@ -186,6 +212,20 @@ var searchAgain = function () {
     });
 }
 
+var dataSearchNotActive = function() {
+    dataSearch = {
+        'categories': jQuery('#categories').val() ? jQuery('#categories').val() : [], 
+        'conditionsProducts':  jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0,
+        'conditionsClassifieds':  jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0,
+        'classifiedType':  jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0,
+        'countryId': jQuery('#countryId').val() ? jQuery('#countryId').val() : 0,
+        'stateId': jQuery('#stateId').val() ? jQuery('#stateId').val() : 0,
+        'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
+        'paginate':  jQuery('#paginate-quantity-search').val(),
+        'filterWord': currentWord,
+        'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+    };
+}
 
 var checkBox = function(){
 
@@ -193,15 +233,13 @@ var checkBox = function(){
     {
         var url = jQuery('#search').attr('href');
 
-        if(!dataSearch.hasOwnProperty('active')) 
+        if(dataSearch.hasOwnProperty('active')) 
         {
-            dataSearch = {
-                'filterWord': currentWord,
-                'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-            };
+            dataSearch.check = jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "";
+        }else{
+            dataSearchNotActive();
         }
+        dataSearch.check = jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "";
 
         console.log(dataSearch);
 
@@ -234,17 +272,10 @@ var linksPaginator = function() {
 
 function getDataForPage(page){
 
-    if(!dataSearch.hasOwnProperty('active')) 
-    {
-        dataSearch = {
-            'filterWord': currentWord,
-            'orderBy': jQuery('#order-by-search').val(),
-            'paginate':  jQuery('#paginate-quantity-search').val(),
-            'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-            'country': jQuery('#countryId').val()
-        };
+    if(!dataSearch.hasOwnProperty('active')){
+        dataSearchNotActive();
     }
-
+    dataSearch.orderBy = jQuery('#order-by-search').val();
     console.log(dataSearch);
 
     $.ajax({
@@ -281,6 +312,272 @@ var loadFieldsClassified = function() {
      });
 }
 
+var currentFilterWord = function() {
+    var url = jQuery('#filter-current-word').attr('href');
+    $.ajax({
+        type: 'GET',
+        url: url, 
+        dataType: "JSON",
+        success: function(response) {
+            if (response.success == true){
+                currentWord = response.word;
+            }
+        }
+    });
+}
+
+var orderBySearch = function(){
+   jQuery('#order-by-search').click(function() {
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.orderBy = jQuery('#order-by-search').val();
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.orderBy = jQuery('#order-by-search').val();
+
+        console.log(dataSearch);
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+   });
+}
+
+var paginateQuantitySearch = function(){
+    jQuery('#paginate-quantity-search').click(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.paginate = jQuery('#paginate-quantity-search').val();
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.paginate = jQuery('#paginate-quantity-search').val();
+        dataSearch.orderBy = jQuery('#order-by-search').val();
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+
+var searchDataForCountry = function() {
+    jQuery('#countryId').click(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.countryId = jQuery('#countryId').val();
+        }else{
+            dataSearchNotActive();
+        }
+        console.log(dataSearch);
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var searchDataForState = function() {
+    jQuery('#stateId').click(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.stateId = jQuery('#stateId').val();
+        }else{
+            dataSearchNotActive();
+        }
+        console.log(dataSearch);
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var searchDataForCity = function() {
+    jQuery('#cityId').click(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.cityId = jQuery('#cityId').val();
+        }else{
+            dataSearchNotActive();
+        }
+        console.log(dataSearch);
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var serachCategories = function() {
+     jQuery('#categories').change(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.categories = jQuery('#categories').val() ? jQuery('#categories').val() : [];
+        }else{
+            dataSearchNotActive();
+        }
+        
+        dataSearch.categories = jQuery('#categories').val() ? jQuery('#categories').val() : [];
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var searchConditionsProduct = function() {
+    jQuery('#conditionsProducts').change(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.conditionsProducts = jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0;
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.conditionsProducts = jQuery('#conditionsProducts').val() ? jQuery('#conditionsProducts').val() : 0;
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var searchConditionsClassifieds = function() {
+ jQuery('#conditionsClassifieds').change(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.conditionsClassifieds = jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0;
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.conditionsClassifieds = jQuery('#conditionsClassifieds').val() ? jQuery('#conditionsClassifieds').val() : 0;
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
+
+var searchClassifiedType = function() {
+    jQuery('#classifiedType').change(function(){
+        var url = jQuery('#search').attr('href');
+
+        if(dataSearch.hasOwnProperty('active')) 
+        {
+            dataSearch.classifiedType = jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0;
+        }else{
+            dataSearchNotActive();
+        }
+
+        dataSearch.classifiedType = jQuery('#classifiedType').val() ? jQuery('#classifiedType').val() : 0;
+
+        $.ajax({
+            type: 'GET',
+            url: url, 
+            data: dataSearch,
+            dataType: "JSON",
+            success: function(response) {
+                if (response.success == true) {
+                    jQuery('#result-section-search').html(response.view);
+                    linksPaginator();
+                }
+            }
+        });
+    });
+}
 
 var loadFieldSelect = function(url,idField) {
     $.ajax({
@@ -327,8 +624,7 @@ var loadStatesForCountry = function() {
                 }
             }
         });
-
-
+        $('#cityId').html('');
     });
 } 
 
@@ -360,194 +656,7 @@ var loadCitiesForStates = function() {
 } 
 
 
-var currentFilterWord = function() {
-    var url = jQuery('#filter-current-word').attr('href');
-    $.ajax({
-        type: 'GET',
-        url: url, 
-        dataType: "JSON",
-        success: function(response) {
-            if (response.success == true){
-                currentWord = response.word;
-            }
-        }
-    });
-}
 
-var orderBySearch = function(){
-   jQuery('#order-by-search').click(function() {
-        var url = jQuery('#search').attr('href');
-
-        if(dataSearch.hasOwnProperty('active')) 
-        {
-            dataSearch.orderBy = jQuery('#order-by-search').val();
-        }else{
-           dataSearch = {
-                'filterWord': currentWord,
-                'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-            }
-        }
-
-        console.log(dataSearch);
-
-        $.ajax({
-            type: 'GET',
-            url: url, 
-            data: dataSearch,
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    jQuery('#result-section-search').html(response.view);
-                    linksPaginator();
-                }
-            }
-        });
-   });
-}
-
-var paginateQuantitySearch = function(){
-    jQuery('#paginate-quantity-search').click(function(){
-        var url = jQuery('#search').attr('href');
-        if(dataSearch.hasOwnProperty('active')) 
-        {
-            dataSearch.paginate = jQuery('#paginate-quantity-search').val();
-        }else{
-           dataSearch = {
-                'filterWord': currentWord,
-                'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-            }
-        }
-
-        $.ajax({
-            type: 'GET',
-            url: url, 
-            data: dataSearch,
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    jQuery('#result-section-search').html(response.view);
-                    linksPaginator();
-                }
-            }
-        });
-    });
-}
-
-
-var searchDataForCountry = function() {
-    jQuery('#countryId').click(function(){
-        var url = jQuery('#search').attr('href');
-
-        if(!dataSearch.hasOwnProperty('active')){
-            dataSearch = {
-                'filterWord': currentWord,
-                //'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-                'countryId': jQuery('#countryId').val()
-            };
-        }
-        $.ajax({
-            type: 'GET',
-            url: url, 
-            data: dataSearch,
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    jQuery('#result-section-search').html(response.view);
-                    linksPaginator();
-                }
-            }
-        });
-    });
-}
-
-var searchDataForState = function() {
-    jQuery('#stateId').click(function(){
-        var url = jQuery('#search').attr('href');
-
-        if(!dataSearch.hasOwnProperty('active')){
-            dataSearch = {
-                'filterWord': currentWord,
-                //'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-                'stateId': jQuery('#stateId').val()
-            };
-        }
-        $.ajax({
-            type: 'GET',
-            url: url, 
-            data: dataSearch,
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    jQuery('#result-section-search').html(response.view);
-                    linksPaginator();
-                }
-            }
-        });
-    });
-}
-
-var searchDataForCity = function() {
-    jQuery('#cityId').click(function(){
-        var url = jQuery('#search').attr('href');
-
-        if(!dataSearch.hasOwnProperty('active')){
-            dataSearch = {
-                'filterWord': currentWord,
-                //'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-                'cityId': jQuery('#cityId').val()
-            };
-        }
-        $.ajax({
-            type: 'GET',
-            url: url, 
-            data: dataSearch,
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    jQuery('#result-section-search').html(response.view);
-                    linksPaginator();
-                }
-            }
-        });
-    });
-}
-
-var filterCategories = function() {
-     jQuery('#categories').click(function(){
-        var url = jQuery('#search').attr('href');
-        if(!dataSearch.hasOwnProperty('active')){
-            dataSearch = {
-                'filterWord': currentWord,
-                //'orderBy': jQuery('#order-by-search').val(),
-                'paginate':  jQuery('#paginate-quantity-search').val(),
-                'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : [] ,
-                'cityId': jQuery('#cityId').val()
-            };
-        }
-        $.ajax({
-            type: 'GET',
-            url: url, 
-            data: dataSearch,
-            dataType: "JSON",
-            success: function(response) {
-                if (response.success == true) {
-                    jQuery('#result-section-search').html(response.view);
-                    linksPaginator();
-                }
-            }
-        });
-    });
-}
 
 
 /*
@@ -764,6 +873,10 @@ var rating = function() {    
 
 
 jQuery(document).ready(function() {
+
+    // Load currentWord
+    currentFilterWord();
+    
     // Init de plugins --------------------------
     handleFancybox();
     initImageZoom();
@@ -788,7 +901,6 @@ jQuery(document).ready(function() {
     loadFieldSelect(jQuery('#search-data-for-country').attr('href'), '#countryId');
     loadStatesForCountry();
     loadCitiesForStates();
-    currentFilterWord();
     orderBySearch();
     paginateQuantitySearch();
     linksPaginator();
@@ -796,5 +908,9 @@ jQuery(document).ready(function() {
     searchDataForCountry();
     searchDataForState();
     searchDataForCity();
+    serachCategories();
+    searchConditionsProduct();
+    searchConditionsClassifieds();
+    searchClassifiedType();
 });
 
