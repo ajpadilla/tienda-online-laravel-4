@@ -4,8 +4,8 @@
 
 var dataSearch = new Object();
 var currentWord = null;
-var value1 = null;
-var value2 = null;
+var value1 = 0;
+var value2 = 0;
 var initImageZoom = function() {
     jQuery('.product-main-image').zoom({
         url: jQuery('.product-main-image img').attr('data-BigImgSrc')
@@ -95,10 +95,11 @@ var initSliderRange = function() {
                 'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : currentWord,
-                'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
+                'priceRange':0, 
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1],
                 'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+                'orderBy': jQuery('#order-by-search').val(),
                 'active' : 1
              };
             $.ajax({
@@ -150,6 +151,7 @@ var initSliderRange = function() {
                 'firstValue': ui.values[0], 
                 'secondValue': ui.values[1],
                 'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+                'orderBy': jQuery('#order-by-search').val(),
                 'active' : 1
              };
             $.ajax({
@@ -186,10 +188,11 @@ var searchAgain = function () {
                 'cityId':  jQuery('#cityId').val() ? jQuery('#cityId').val() : 0,
                 'paginate':  jQuery('#paginate-quantity-search').val(),
                 'filterWord': jQuery('#search-again').val() ? jQuery('#search-again').val() : '',
-                'priceRange': jQuery('#priceRange').val() ? jQuery('#priceRange').val() : 0, 
-                'firstValue': value1, 
-                'secondValue': value2,
+                'priceRange': 0, 
+                'firstValue': value1 ? value1 : 0, 
+                'secondValue': value2 ? value2 : 0,
                 'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+                'orderBy': jQuery('#order-by-search').val(),
                 'active' : 1
         };
 
@@ -224,6 +227,7 @@ var dataSearchNotActive = function() {
         'paginate':  jQuery('#paginate-quantity-search').val(),
         'filterWord': currentWord,
         'check': jQuery('input[name="select-search[]"]').serializeArray() ? jQuery('input[name="select-search[]"]').serializeArray() : "",
+        'orderBy': jQuery('#order-by-search').val()
     };
 }
 
@@ -314,6 +318,7 @@ var loadFieldsClassified = function() {
 
 var currentFilterWord = function() {
     var url = jQuery('#filter-current-word').attr('href');
+    
     $.ajax({
         type: 'GET',
         url: url, 
@@ -321,13 +326,14 @@ var currentFilterWord = function() {
         success: function(response) {
             if (response.success == true){
                 currentWord = response.word;
+                jQuery('#search-again').val(response.word);
             }
         }
     });
 }
 
 var orderBySearch = function(){
-   jQuery('#order-by-search').click(function() {
+   jQuery('#order-by-search').change(function() {
         var url = jQuery('#search').attr('href');
 
         if(dataSearch.hasOwnProperty('active')) 
@@ -357,7 +363,7 @@ var orderBySearch = function(){
 }
 
 var paginateQuantitySearch = function(){
-    jQuery('#paginate-quantity-search').click(function(){
+    jQuery('#paginate-quantity-search').change(function(){
         var url = jQuery('#search').attr('href');
 
         if(dataSearch.hasOwnProperty('active')) 
@@ -387,7 +393,7 @@ var paginateQuantitySearch = function(){
 
 
 var searchDataForCountry = function() {
-    jQuery('#countryId').click(function(){
+    jQuery('#countryId').change(function(){
         var url = jQuery('#search').attr('href');
 
         if(dataSearch.hasOwnProperty('active')) 
@@ -414,7 +420,7 @@ var searchDataForCountry = function() {
 }
 
 var searchDataForState = function() {
-    jQuery('#stateId').click(function(){
+    jQuery('#stateId').change(function(){
         var url = jQuery('#search').attr('href');
 
         if(dataSearch.hasOwnProperty('active')) 
@@ -441,7 +447,7 @@ var searchDataForState = function() {
 }
 
 var searchDataForCity = function() {
-    jQuery('#cityId').click(function(){
+    jQuery('#cityId').change(function(){
         var url = jQuery('#search').attr('href');
 
         if(dataSearch.hasOwnProperty('active')) 
@@ -602,7 +608,7 @@ var loadFieldSelect = function(url,idField) {
 }
 
 var loadStatesForCountry = function() {
-    $('#countryId').click(function() {
+    $('#countryId').change(function() {
         var url = jQuery('#search-data-for-states').attr('href');
         $.ajax({
             type: 'GET',
@@ -630,7 +636,7 @@ var loadStatesForCountry = function() {
 
 
 var loadCitiesForStates = function() {
-    $('#stateId').click(function() {
+    $('#stateId').change(function() {
         var url = jQuery('#search-data-for-cities').attr('href');
         $.ajax({
             type: 'GET',
