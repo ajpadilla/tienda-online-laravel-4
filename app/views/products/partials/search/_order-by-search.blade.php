@@ -39,7 +39,7 @@
           'condition-asc' => 'Condition (New - Used)',
           'condition-desc' => 'Condition (Used - New)',
         ), 
-        null,
+        'rating-desc',
         ['class' => 'form-control input-sm', 'id' => 'order-by-search'])
     }}
 
