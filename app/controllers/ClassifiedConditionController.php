@@ -204,6 +204,7 @@ class ClassifiedConditionController extends \BaseController {
 		if (Request::ajax()) 
 		{
 			$classifiedsCoonditionsLang = $this->classifiedConditionsRepository->getNameForLanguage();
+			array_unshift($classifiedsCoonditionsLang,trans('classifiedConditions.all-conditions'));
 			return Response::json(['success' => true, 'data'=> $classifiedsCoonditionsLang]);
 		}
 		return Response::json(['success' => false]);
