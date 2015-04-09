@@ -17,7 +17,7 @@
 		"index-title" => "Lista de condición de clasificado",
 		"show-title" => "Ver condición de clasificado",
 		'current-lang' =>'datos-lenguaje-condicion-clasificado',
-
+		'all-conditions' => 'Todos',
 		"labels" => array(
 			'name' =>'Nombre:',
 			'language' => 'Idioma',

@@ -149,7 +149,10 @@
     $(document).ready(function () 
     {
       // Iniciar select chosen
-      $('.chosen-select').chosen({ width: "95%" });
+      $('.chosen-select').chosen({ 
+        display_disabled_options:true,
+        width: "95%" 
+      });
     });
   </script>
 @stop

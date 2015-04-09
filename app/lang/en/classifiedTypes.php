@@ -17,7 +17,7 @@
 		"index-title" => "List of classified type",
 		"show-title" => "Show classified type",
 		'current-lang' =>'data-lang-type-classified',
-
+		'all-conditions' => 'All', 
 		"labels" => array(
 			'name' =>'Name:',
 			'language' => 'Language',
