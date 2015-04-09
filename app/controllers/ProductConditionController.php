@@ -95,6 +95,7 @@ class ProductConditionController extends \BaseController {
 		if (Request::ajax()) 
 		{
 			$conditionsProducts = $this->conditionRepository->getNameForLanguage();
+			array_unshift($conditionsProducts,trans('productCondition.all-conditions'));
 			return Response::json(['success' => true, 'data'=> $conditionsProducts]);
 		}
 		return Response::json(['success' => false]);
