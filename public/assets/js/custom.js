@@ -589,7 +589,7 @@ var loadFieldSelect = function(url,idField) {
         url: url,
         dataType:'json',
         success: function(response) {
-            //console.log(response);
+            console.log(response);
             if (response.success == true) {
                 jQuery(idField).html('');
                 jQuery(idField).append('<option value=\"\"></option>');
@@ -621,6 +621,7 @@ var loadStatesForCountry = function() {
                     $('#stateId').append('<option value=\"\">  </option>');
                     $.each(response.location,function (k,v){
                         $('#stateId').append('<option value=\"'+k+'\">'+v+'</option>');
+                        $("#stateId").trigger("chosen:updated");
                     });
                 }else{
                     $('#stateId').html('');
@@ -629,6 +630,7 @@ var loadStatesForCountry = function() {
             }
         });
         $('#cityId').html('');
+        $("#cityId").trigger("chosen:updated");
     });
 } 
 
@@ -649,6 +651,7 @@ var loadCitiesForStates = function() {
                     $('#cityId').append('<option value=\"\">  </option>');
                     $.each(response.location,function (k,v){
                         $('#cityId').append('<option value=\"'+k+'\">'+v+'</option>');
+                        $("#cityId").trigger("chosen:updated");
                     });
                 }else{
                     $('#cityId').html('');
@@ -659,7 +662,9 @@ var loadCitiesForStates = function() {
     });
 } 
 
-
+var clear = function() {
+    $("#autoship_option").trigger("liszt:updated");
+}
 
 
 
