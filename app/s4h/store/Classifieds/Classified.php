@@ -103,6 +103,10 @@ class Classified extends BaseModel {
 		return false;
 	}
 
+	public function getPriceAttribute($value){
+		return number_format($value, '2');
+	}
+
 	public function getDataForLanguage($languageId)
 	{
 		$classifiedLanguage = $this->languages()->where('language_id','=',$languageId)->first();

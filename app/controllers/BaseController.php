@@ -33,7 +33,7 @@ class BaseController extends Controller {
 		$wishlist = ($currentUser ? $this->wishlistRepository->getWishlistForUser($currentUser) : NULL);
 		$cart = ($currentUser ? $this->cartRepository->getActiveCartForUser($currentUser) : NULL);
 		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
-		View::share(compact('categoriesMenu', 'wishlist', 'cart', 'currentRoute'));
+		View::share(compact('currentUser', 'categoriesMenu', 'wishlist', 'cart', 'currentRoute'));
 	}
 
 }
