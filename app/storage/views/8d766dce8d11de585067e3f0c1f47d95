@@ -3,13 +3,11 @@
   <h2 style="display: inline-block">Resultados para: <em class="content-search-product">producto</em></h2>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('action-heading'); ?>
-  <form class="content-search-form" action="" >
+  <form action="#">
     <div class="input-group">
-      <!--<input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">-->
-      <?php echo Form::text('search-again',null, ['class' => 'form-control','placeholder' =>'Buscar de nuevo','id'=> 'search-again']); ?>
-
+      <input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">
       <span class="input-group-btn">
-        <button id="search-data" class="btn btn-primary" type="submit">Buscar</button>
+        <button id="search-data-again" class="btn btn-primary">Buscar</button>
       </span>
     </div>
   </form>
@@ -59,7 +57,7 @@
                <?php if(!$products->isEmpty()): ?>
             <!-- BEGIN PAGINATOR -->
             <div id="total-items-produts-1" class="row">
-              <div class="col-md-4 col-sm-4 items-info">Productos <?php echo $products->getTotal(); ?>  en total</div>
+              <div class="col-md-4 col-sm-4 items-info">Productos por pagina <?php echo $products->getPerPage(); ?> de <?php echo $products->getTotal(); ?> total en pagina <?php echo $products->getCurrentPage(); ?></div>
               <div class="col-md-8 col-sm-8 links-products">
                  <?php echo $products->links(); ?>
 
@@ -79,7 +77,7 @@
             <!-- END PRODUCT LIST -->
             <!-- BEGIN PAGINATOR -->
             <div id="total-items-produts-2" class="row">
-              <div class="col-md-4 col-sm-4 items-info">Productos total</div>
+              <div class="col-md-4 col-sm-4 items-info">Productos por pagina <?php echo $products->getPerPage(); ?> de <?php echo $products->getTotal(); ?> total en pagina <?php echo $products->getCurrentPage(); ?></div>
               <div class="col-md-8 col-sm-8 links-products">
                 <?php echo $products->links(); ?>
 
@@ -91,7 +89,7 @@
              <?php if(!$classifieds->isEmpty()): ?>
              <!-- BEGIN PAGINATOR -->
              <div id="total-items-classifieds-1" class="row margen">
-              <div class="col-md-4 col-sm-4 items-info">Clasificados <?php echo $classifieds->getTotal(); ?>  en total</div>
+              <div class="col-md-4 col-sm-4 items-info">Clasificados por pagina <?php echo $classifieds->getPerPage(); ?> de <?php echo $classifieds->getTotal(); ?> total en pagina <?php echo $classifieds->getCurrentPage(); ?></div>
               <div class="col-md-8 col-sm-8">
                <?php echo $classifieds->links(); ?>
 
@@ -111,7 +109,7 @@
           <!-- END PRODUCT LIST -->
           <!-- BEGIN PAGINATOR -->
           <div id="total-items-classifieds-2" class="row">
-            <div class="col-md-4 col-sm-4 items-info">Clasificados total</div>
+            <div class="col-md-4 col-sm-4 items-info">Clasificados por pagina <?php echo $classifieds->getPerPage(); ?> de <?php echo $classifieds->getTotal(); ?> total en pagina <?php echo $classifieds->getCurrentPage(); ?></div>
             <div class="col-md-8 col-sm-8">
               <?php echo $classifieds->links(); ?>
 
@@ -155,7 +153,10 @@
     $(document).ready(function () 
     {
       // Iniciar select chosen
-      $('.chosen-select').chosen({ width: "95%" });
+      $('.chosen-select').chosen({ 
+        display_disabled_options:true,
+        width: "95%" 
+      });
     });
   </script>
 <?php $__env->stopSection(); ?>
