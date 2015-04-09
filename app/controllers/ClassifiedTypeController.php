@@ -203,6 +203,7 @@ class ClassifiedTypeController extends \BaseController {
 		if (Request::ajax()) 
 		{
 			$classifiedsTypes = $this->classifiedTypesRepository->getNameForLanguage();
+			array_unshift($classifiedsTypes,trans('classifiedTypes.all-conditions'));
 			return Response::json(['success' => true,'data'=> $classifiedsTypes]);
 		}
 		return Response::json(['success' => false]);
