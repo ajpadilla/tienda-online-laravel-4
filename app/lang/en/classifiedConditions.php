@@ -17,6 +17,7 @@
 		"index-title" => "List of condition classified",
 		"show-title" => "Show condition classified",
 		'current-lang' =>'data-lang-condition-classified',
+		'all-conditions' => 'All',
 
 		"labels" => array(
 			'name' =>'Name:',

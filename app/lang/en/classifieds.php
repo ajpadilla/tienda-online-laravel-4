@@ -25,7 +25,7 @@
 		"countries" => 'Countries',
 		"statesForCountry" =>"states-for-country",
 		"citiesForState" =>"cities-for-state" ,
-
+		'all-conditions' => 'All',
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description',

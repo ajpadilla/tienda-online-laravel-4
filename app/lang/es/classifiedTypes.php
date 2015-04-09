@@ -17,7 +17,7 @@
 		"index-title" => "Lista de tipos de clasificados",
 		"show-title" => "Ver clasificado",
 		'current-lang' =>'datos-lenguaje-tipo-clasificado',
-
+		'all-conditions' => 'Todos', 
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'descripción',
