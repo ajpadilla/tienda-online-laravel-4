@@ -3,11 +3,13 @@
 use s4h\store\Carts\CartRepository;
 use s4h\store\Users\User;
 use s4h\store\Products\Product;
+use s4h\store\Ratings\Rating;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 use s4h\store\Base\BaseRepository;
 use DB;
+use Auth;
 
 class ProductRepository extends BaseRepository{
 
@@ -376,6 +378,24 @@ class ProductRepository extends BaseRepository{
 		}else{
 			return ['success' => false];
 		}
+	}
+
+	public function saveRating($productId, $points)
+	{
+		$product = Product::find($productId);
+
+		if(!$product) 
+			return FALSE;
+
+		if(($rating = Rating::whereProductId($productId)->whereUserId(Auth::user()->id)->first())) {
+			$rating->points = $points;			
+		} else {
+			$rating = new Rating;
+			$rating->points = $points;
+			$rating->user()->associate(Auth::user());
+			$rating->product()->associate($product);
+		}
+		return $rating->save();
 	}
 
 }

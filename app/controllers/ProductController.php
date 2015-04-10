@@ -409,4 +409,11 @@ class ProductController extends \BaseController {
 			}
 		}
 	}
+
+	public function saveRating($id, $rating)
+	{
+		if(Request::ajax() && is_numeric($rating) && $rating >=0 && $rating <=5) 
+			return Response::json(['success' => $this->productRepository->saveRating($id, $rating)]);
+		return Response::json(['success' => false]);
+	}
 }

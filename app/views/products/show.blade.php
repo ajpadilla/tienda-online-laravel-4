@@ -49,9 +49,8 @@
 			  </div>
 			  @include('products.partials._buttons-actions-set')
 			  <div class="review">
-			    <input id="backing4" type="range" value="{{ $product->rating }}" step="0.5">
-			    <div id="rating" class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-			    </div>
+			  	<input id="rating-input" type="range" data-url="{{ route('products.save-rating', $product->id) }}" type="range" value="{{ $product->rating }}" step="0.25">
+			    <div id="rating" class="rateit" data-rateit-backingfld="#rating-input" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5"></div>
 			    <a href="#">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Write a review</a>
 			  </div>
 			  <ul class="social-icons">
@@ -72,7 +71,7 @@
 
 @section('in-situ-css')
 	<link rel="stylesheet" href="{{ asset('assets/css/plugins/rateit/rateit.css') }}"/>
-	<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/>
+	{{-- <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"/> --}}
 @stop
 
-@include('products.partials._product-show-js')
+{{-- @include('products.partials._product-show-js') --}}

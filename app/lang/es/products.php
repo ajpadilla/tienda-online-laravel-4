@@ -1,5 +1,8 @@
 <?php
 	return array(
+		'routes' => array(
+			'save-rating' => 'producto/guardar-rating/{id}/{rating}'
+		),
 		"show" => "ver/producto/{id}",
 		"create" => "crear/producto",
 		"show" => "ver/producto/{id}",

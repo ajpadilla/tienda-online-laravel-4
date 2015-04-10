@@ -15,4 +15,9 @@ class Rating extends Eloquent {
 		return $this->belongsTo('s4h\store\Products\Product');
 	}
 
+	public function user()
+	{
+		return $this->belongsTo('s4h\store\Users\User');
+	}
+
 }

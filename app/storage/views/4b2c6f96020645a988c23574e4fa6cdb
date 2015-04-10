@@ -48,9 +48,8 @@
 			  </div>
 			  <?php echo $__env->make('products.partials._buttons-actions-set', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			  <div class="review">
-			    <input id="backing4" type="range" value="<?php echo $product->rating; ?>" step="0.5">
-			    <div id="rating" class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
-			    </div>
+			  	<input id="rating-input" type="range" data-url="<?php echo route('products.save-rating', $product->id); ?>" type="range" value="<?php echo $product->rating; ?>" step="0.25">
+			    <div id="rating" class="rateit" data-rateit-backingfld="#rating-input" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5"></div>
 			    <a href="#">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Write a review</a>
 			  </div>
 			  <ul class="social-icons">
@@ -71,9 +70,9 @@
 
 <?php $__env->startSection('in-situ-css'); ?>
 	<link rel="stylesheet" href="<?php echo asset('assets/css/plugins/rateit/rateit.css'); ?>"/>
-	<link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>"/>
+	<?php /* <link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>"/> */ ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('products.partials._product-show-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php /* <?php echo $__env->make('products.partials._product-show-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
 
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
