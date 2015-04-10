@@ -22,7 +22,6 @@ class CreatePeopleTable extends Migration {
 			$table->date('date_of_birth');
 			$table->string('cellphone',50);
 			$table->integer('user_id')->unsigned();
-			$table->integer('role_id')->unsigned();
 			$table->integer('address_id')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();

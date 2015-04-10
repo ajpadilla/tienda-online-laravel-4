@@ -27,8 +27,8 @@
 			<h2><?php echo $product->inCurrentLang->name; ?></h2>
 			<div class="price-availability-block clearfix">
 				<div class="price">
-					<strong><span>$</span><?php echo $product->price; ?></strong>
-					<em>$<span><?php echo $product->price; ?></span></em>
+					<strong><?php echo $product->priceWithCurrency; ?></strong>
+					<em><span><?php echo $product->priceWithCurrency; ?></span></em>
 				</div>
 				<div class="availability">
 					Disponibilidad: <strong><?php echo $product->quantity; ?></strong>

@@ -18,8 +18,8 @@
     <h3>
     <a href="{{ route('classifieds.show', $classified->id) }}">{{ $classified->inCurrentLang->name }}</a>
     </h3>
-    <div class="pi-price">{{ $classified->price }}</div><br>
+    <div class="pi-price">{{ $classified->priceWithCurrency }}</div><br>
     <a href="{{ route('cart.create', $classified->id) }}" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
     <a href="{{ route('wishlist.create', $classified->id) }}" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
-    <div class="sticker sticker-sale"></div>
+    <div class="sticker {{ $currentSticker }}"></div>
 </div>

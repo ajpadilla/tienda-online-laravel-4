@@ -25,8 +25,8 @@
 		                  <h2>{{ $classified->getInCurrentLangAttribute()->name }}</h2>
 		                  <div class="price-availability-block clearfix">
 		                    <div class="price">
-		                      <strong><span>$</span>{{ $classified->price }}</strong>
-		                      <em>$<span>{{ $classified->price }}</span></em>
+		                      <strong>{{ $classified->priceWithCurrency }}</strong>
+		                      <em><span>{{ $classified->priceWithCurrency }}</span></em>
 		                    </div>
 		                    <!--<div class="availability">
 		                      Disponibilidad: <strong>{{ $classified->quantity }}</strong>

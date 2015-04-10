@@ -19,8 +19,8 @@
 			  <h1>{{ $product->inCurrentLang->name }}</h1>
 			  <div class="price-availability-block clearfix">
 			    <div class="price">
-			      <strong><span>$</span>{{ $product->price }}</strong>
-			      <em>$<span>{{ $product->price }}</span></em>
+			      <strong>{{ $product->priceWithCurrency }}</strong>
+			      <em><span>{{ $product->priceWithCurrency }}</span></em>
 			    </div>
 			    <div class="availability">
 			      Availability: <strong>{{ $product->quantity }}</strong>
@@ -49,7 +49,7 @@
 			  </div>
 			  @include('products.partials._buttons-actions-set')
 			  <div class="review">
-			    <input id="backing4" type="range" value="5" step="0.5">
+			    <input id="backing4" type="range" value="{{ $product->rating }}" step="0.5">
 			    <div id="rating" class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
 			    </div>
 			    <a href="#">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Write a review</a>

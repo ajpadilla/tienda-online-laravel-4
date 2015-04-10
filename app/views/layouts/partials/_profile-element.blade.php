@@ -12,8 +12,8 @@
         </span> 
     </a>
     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-        <li><a href="#">Perfil</a></li>
+        <li><a href="#">{{ Lang::get('pages.partials.profile') }}</a></li>
         <li class="divider"></li>
-        <li><a href="{{ route('logout') }}">Salir</a></li>
+        <li><a href="{{ route('logout') }}">{{ Lang::get('pages.partials.logout') }}</a></li>
     </ul>
 </div>

@@ -30,7 +30,7 @@ class PageController extends BaseController {
 	{
 		$newProducts = $this->productRepository->getNewProducts();
 		$topProducts = $this->productRepository->getTopProducts();
-		$newClassifieds = $this->classifiedRepository->getNewClassifieds(8);
+		$newClassifieds = $this->classifiedRepository->getNewClassifieds(8);		
 		//$topClassifieds = $this->classifiedRepository->getTopClassifieds();
 		return View::make('pages.home', compact('newProducts', 'topProducts','newClassifieds'));
 	}

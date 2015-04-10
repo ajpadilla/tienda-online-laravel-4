@@ -23,6 +23,7 @@ class BaseController extends Controller {
 			$this->layout = View::make($this->layout);
 		}
 
+		$currentSticker = '';
 		$currentMenu = 'current';
 		$currentUser = Auth::user();
 		$currentRoute = Route::currentRouteName();
@@ -33,7 +34,7 @@ class BaseController extends Controller {
 		$wishlist = ($currentUser ? $this->wishlistRepository->getWishlistForUser($currentUser) : NULL);
 		$cart = ($currentUser ? $this->cartRepository->getActiveCartForUser($currentUser) : NULL);
 		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
-		View::share(compact('currentUser', 'categoriesMenu', 'wishlist', 'cart', 'currentRoute'));
+		View::share(compact('currentUser', 'currentStiker', 'categoriesMenu', 'wishlist', 'cart', 'currentRoute'));
 	}
 
 }

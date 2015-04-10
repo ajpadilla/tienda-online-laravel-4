@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddCurrencyIdToContriesTable extends Migration {
+class AddCurrencyIdToPeoplesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class AddCurrencyIdToContriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('countries', function($table)
+		Schema::table('people', function(Blueprint $table)
 		{
-			$table->integer('currency_id')->after('iso_code');
+			$table->integer('currency_id')->after('address_id');
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
@@ -25,7 +26,7 @@ class AddCurrencyIdToContriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('countries', function($table)
+		Schema::table('people', function(Blueprint $table)
 		{
 			$table->dropColumn('currency_id');
 		});
