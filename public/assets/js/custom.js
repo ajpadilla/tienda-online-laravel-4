@@ -873,8 +873,32 @@ var discountFromcart = function() {
  */
 var rating = function() {    
     jQuery("#rating").bind('rated', function(event, value) {
-        alert('You\'ve rated it: ' + value);
-    });
+        var test=true;
+        if(!test /*|| !$(this).valid()*/) {
+            alert('aja');
+        } else {
+            var url = jQuery('#reviews-form').attr('action');
+            var data = jQuery('#reviews-form').serialize();
+            jQuery.ajax({
+                type: 'POST',
+                url: url,                
+                dataType: 'json',
+                data: data,
+                success: function(response) {
+                    if (response != null) {
+                        if (response.success) {
+                            alert('Tu voto se ha realizado con éxito!');
+                        } else {
+                            alert('No se pudo realizar tu voto!');
+                        }
+                    } else {
+                        alert('No se pudo realizar tu voto!');
+                    }
+                }
+            });
+        }
+        return false;            
+    });    
 }
 /*
  * --------------------- End Rating Logic ----------------------

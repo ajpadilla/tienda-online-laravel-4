@@ -2,6 +2,7 @@
 
 use Zizaco\Confide\ConfideUser;
 use Zizaco\Entrust\HasRole;
+use s4h\store\Products\Product;
 
 class User extends ConfideUser {
 
@@ -44,6 +45,18 @@ class User extends ConfideUser {
 
 	public function products(){
 		return $this->hasMany('s4h\store\Products\Product');
+	}
+
+	public function ratings()
+	{
+		return $this->hasMany('s4h\store\Ratings\Rating');
+	}
+
+
+	// Custom accessors
+	public function ratingForProduct(Product $product)
+	{
+		return $this->ratings()->whereProductId($product->id)->first();
 	}
 
 }

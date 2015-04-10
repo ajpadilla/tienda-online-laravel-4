@@ -27,8 +27,8 @@
 			<h2>{{ $product->inCurrentLang->name }}</h2>
 			<div class="price-availability-block clearfix">
 				<div class="price">
-					<strong><span>$</span>{{ $product->price }}</strong>
-					<em>$<span>{{ $product->price }}</span></em>
+					<strong>{{ $product->priceWithCurrency }}</strong>
+					<em><span>{{ $product->priceWithCurrency }}</span></em>
 				</div>
 				<div class="availability">
 					Disponibilidad: <strong>{{ $product->quantity }}</strong>

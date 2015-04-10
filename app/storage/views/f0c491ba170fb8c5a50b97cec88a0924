@@ -26,14 +26,20 @@
 
   <div class="pull-right">
     <label class="control-label">Ordenar por:</label>
-
+    <a href="<?php echo URL::route('products.filterWord'); ?>" id="filter-current-word"></a>
       <?php echo Form::select(
         'paginate', 
         array(
-          'name-ASC' => 'Name (A - Z)',
-          'name-DESC' => 'Name (Z - A)',
+          'name-asc' => 'Name (A - Z)',
+          'name-desc' => 'Name (Z - A)',
+          'price-asc' => 'Price (Low - High)',
+          'price-desc' => 'Price (High - Low)',
+          'rating-desc' => 'Rating (Highest)',
+          'rating-asc' => 'Rating (Lowest)',
+          'condition-asc' => 'Condition (New - Used)',
+          'condition-desc' => 'Condition (Used - New)',
         ), 
-        null,
+        'rating-desc',
         ['class' => 'form-control input-sm', 'id' => 'order-by-search']); ?>
 
 

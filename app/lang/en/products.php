@@ -1,5 +1,8 @@
 <?php
 	return array(
+		'routes' => array(
+			'save-rating' => 'products/save-rating'
+		),
 		"show" => "show/products/{id}",
 		"create" => "create/product",
 		"store" => "add/product",

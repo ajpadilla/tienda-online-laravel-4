@@ -64,6 +64,11 @@ function () {
 		'uses' => 'ProductController@getCurrentFilterWorld'
 	]);
 
+	Route::post(LaravelLocalization::transRoute('products.routes.save-rating'), [
+		'as' => 'products.save-rating',
+		'uses' => 'ProductController@saveRating'
+	]);
+
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/

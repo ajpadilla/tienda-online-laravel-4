@@ -31,20 +31,27 @@
 			    <div id="clasificados" class="tab-pane">
 			    	<div class="row">
 				        <h2><?php echo Lang::get('classifieds.labels.NewClassifieds'); ?></h2>
-					    <?php echo $__env->make('products.partials._new-classifieds', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					    <?php echo $__env->make('classifieds.partials._new-classifieds', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 				    </div>
-				    <div class="row">
+				    <?php /* <div class="row">
 				        <h2><?php echo Lang::get('classifieds.labels.TopClassifieds'); ?></h2>
 				        <?php echo $__env->make('products.partials._top-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-			        </div>
+			        </div> */ ?>
 			    </div>
 		    </div>
 	    </div>
     </div>
 <?php $__env->stopSection(); ?>
+
 <?php if($newProducts): ?>
 	<?php foreach($newProducts as $product): ?>
 		<?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	<?php endforeach; ?>		    
+<?php endif; ?>
+
+<?php if($newClassifieds): ?>
+	<?php foreach($newClassifieds as $classified): ?>
+		<?php echo $__env->make('classifieds.partials._pop-up-classifieds', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php endforeach; ?>		    
 <?php endif; ?>
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
