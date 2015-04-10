@@ -380,7 +380,7 @@ class ProductRepository extends BaseRepository{
 		}
 	}
 
-	public function saveRating($productId, $points)
+	public function saveRating($productId, $points, $description)
 	{
 		$product = Product::find($productId);
 
@@ -388,10 +388,12 @@ class ProductRepository extends BaseRepository{
 			return FALSE;
 
 		if(($rating = Rating::whereProductId($productId)->whereUserId(Auth::user()->id)->first())) {
-			$rating->points = $points;			
+			$rating->points = $points;	
+			$rating->description = $description;		
 		} else {
 			$rating = new Rating;
 			$rating->points = $points;
+			$rating->description = $description;
 			$rating->user()->associate(Auth::user());
 			$rating->product()->associate($product);
 		}

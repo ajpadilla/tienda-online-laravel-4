@@ -48,17 +48,10 @@
 			  </div>
 			  <?php echo $__env->make('products.partials._buttons-actions-set', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			  <div class="review">
-			  	<input id="rating-input" type="range" data-url="<?php echo route('products.save-rating', $product->id); ?>" type="range" value="<?php echo $product->rating; ?>" step="0.25">
-			    <div id="rating" class="rateit" data-rateit-backingfld="#rating-input" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5"></div>
+			  	<div class="rateit" data-rateit-value="<?php echo $product->rating; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>			  
 			    <a href="#">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Write a review</a>
 			  </div>
-			  <ul class="social-icons">
-			    <li><a class="facebook" data-original-title="facebook" href="#"></a></li>
-			    <li><a class="twitter" data-original-title="twitter" href="#"></a></li>
-			    <li><a class="googleplus" data-original-title="googleplus" href="#"></a></li>
-			    <li><a class="evernote" data-original-title="evernote" href="#"></a></li>
-			    <li><a class="tumblr" data-original-title="tumblr" href="#"></a></li>
-			  </ul>
+			  <?php echo $__env->make('products.partials._social-icons', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 			</div>
 				<?php echo $__env->make('products.partials._show-content-product', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 				<div class="sticker sticker-sale"></div>
@@ -70,9 +63,5 @@
 
 <?php $__env->startSection('in-situ-css'); ?>
 	<link rel="stylesheet" href="<?php echo asset('assets/css/plugins/rateit/rateit.css'); ?>"/>
-	<?php /* <link rel="stylesheet" href="<?php echo asset('assets/css/custom.css'); ?>"/> */ ?>
 <?php $__env->stopSection(); ?>
-
-<?php /* <?php echo $__env->make('products.partials._product-show-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
-
 <?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

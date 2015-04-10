@@ -64,7 +64,7 @@ function () {
 		'uses' => 'ProductController@getCurrentFilterWorld'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('products.routes.save-rating'), [
+	Route::post(LaravelLocalization::transRoute('products.routes.save-rating'), [
 		'as' => 'products.save-rating',
 		'uses' => 'ProductController@saveRating'
 	]);

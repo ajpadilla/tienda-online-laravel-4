@@ -3,6 +3,8 @@
 // use Andrew13\Cabinet\CabinetUpload;
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
+use Carbon\Carbon;
+use Auth;
 
 // class Photo extends CabinetUpload {
 class Rating extends Eloquent {
@@ -20,4 +22,9 @@ class Rating extends Eloquent {
 		return $this->belongsTo('s4h\store\Users\User');
 	}
 
+	public function getCreatedAtAttribute($date)
+	{
+		return Carbon::createFromFormat('Y-m-d H:i:s', $date)
+			->format(Auth::user()->people->date_format . ' ' . Auth::user()->people->hour_format);
+	}
 }
