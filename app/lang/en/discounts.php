@@ -4,11 +4,13 @@
 		"routes" => array(
 			"create" => "discounts/create",
 			"store" => "discounts/store",
-			'index'=>'discounts/list',
 			"show"=>"discounts/show/{id}",
 			"edit"=>"discounts/edit/{id}",
 			"update"=>"discounts/update/{id}",
 			"destroy"=>"discounts/destroy/{id}",
+			"api" => array(
+				"index"=>'discounts/api/list-discounts',
+			),
 		),
 		"title" => "Add discount",
 		"subtitle" => "Create new discount",

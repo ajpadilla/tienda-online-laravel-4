@@ -4,11 +4,13 @@
 		"routes" => array(
 			"create" => "descuentos/crear",
 			"store" => "descuentos/agregar",
-			"index"=>'descuentos/lista',
 			"show"=>"descuentos/ver/{id}",
 			"edit"=>"descuentos/editar/{id}",
 			"update"=>"descuentos/actualizar/{id}",
 			"destroy"=>"descuentos/eliminar/{id}",
+			"api" => array(
+				"index"=>'descuentos/api/lista-descuentos',
+			),
 		),
 		"title" => "Agregar descuento",
 		"subtitle" => "Crear nuevo descuento",
