@@ -3,14 +3,14 @@
 		"routes" => array(
 			"create" => "estatus-de-envio/crear",
 			"store" => "estatus-de-envio/agreagr",
-			"index"=>'estatus-de-envio/lista',
 			"show"=>"estatus-de-envio/ver/{id}",
 			"edit"=>"estatus-de-envio/editar/{id}",
 			"update"=>"estatus-de-envio/actualizar",
 			"destroy"=>"estatus-de-envio/eliminar/{id}",
-			"saveLang" => "actualizar-idioma-estatus-de-envio",
 			"api" => array(
-				"delete-ajax" =>"estatus-de-envio/api/delete" 
+				"delete-ajax" =>"estatus-de-envio/api/borrar",
+				"index"=>'estatus-de-envio/api/lista-estatus-de-envio',
+				"saveLang" => "actualizar-idioma-estatus-de-envio/api/actualizar-idioma",
 			),
 		),
 		"title" => "Agregar estatus de envío",

@@ -4,14 +4,14 @@
 		"routes" => array(
 			"create" => "shipment-status/create",
 			"store" => "shipment-status/store",
-			"index"=>'shipment-status/list',
 			"show"=>"shipment-status/show/{id}",
 			"edit"=>"shipment-status/edit/{id}",
 			"update"=>"shipment-status/update",
 			"destroy"=>"shipment-status/destroy/{id}",
-			"saveLang" => "update-language-shipment-status",
 			"api" => array(
-				'delete-ajax' => 'shipment-status/api/delete-ajax',
+				"delete-ajax" =>"estatus-de-envio/api/borrar",
+				"index"=>'estatus-de-envio/lista',
+				"saveLang" => "actualizar-idioma-estatus-de-envio",
 			),
 		),
 		"title" => "Add shipment status",

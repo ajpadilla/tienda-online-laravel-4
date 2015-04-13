@@ -1,22 +1,27 @@
 <?php 
 	return array(
-		"create" => "crear/clasificado",
-		"store" => "agregar/clasificado",
-		"index" => "lista/clasificado",
-		"show"=>"ver/clasificado/{id}",
-		"edit"=>"editar/clasificado/{id}",
-		"update"=>"actualizar/clasificado",
-		"destroy"=>"eliminar/clasificado/{id}",
-		"filterClassified" => "resultado/busqueda/clasificados", 
+
+		"routes" => array(
+			"create" => "clasificados/crear",
+			"store" => "clasificados/agregar",
+			"show"=>"clasificados/ver/{id}",
+			"edit"=>"clasificados/editar/{id}",
+			"update"=>"clasificados/actualizar",
+			"destroy"=>"clasificados/eliminar/{id}",
+			"search" => "clasificados/buscar",
+			"filterClassified" => "clasificados/resultados-busqueda",
+			"api" => array(
+				"index" => "clasificados/api/lista-clasificados",
+				"delete-ajax" => "clasificado/api/eliminar-ajax",
+				"saveLang" =>"clasificados/api/idioma-actualizar-idioma",
+			)
+		),
 		"title" => "Agregar clasificado",
 		"subtitle" => "Crear clasificado",
 		"sending" => "Agregando clasificado",
 		"response" => "Clasificado agregado",
 		"Actualiced" => "Clasificado actualizado",
 		"Delete" => "¡Clasificado eliminado con exito!",
-		"search" => "buscar/clasificados",
-		"saveLang" =>"agregarIdiomaClasificado",
-		"delete-ajax" => "clasificado/eliminar-ajax",
 		"Classifieds" => "Clasificados",
 		"create-title" => "Crear clasificado",
 		"index-title" => "Lista de clasificados",
@@ -26,6 +31,7 @@
 		"statesForCountry" =>"estados-por-pais",
 		"citiesForState" =>"ciudades-por-estado" ,
 		'all-conditions' => 'Todos',
+
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción',

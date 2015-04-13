@@ -1,22 +1,28 @@
 <?php 
 	return array(
-		"create" => "create/classified",
-		"store" => "add/classified",
-		"index" => "list/classified",
-		"show"=>"show/classified/{id}",
-		"edit"=>"edit/classified/{id}",
-		"update"=>"update/classified",
-		"destroy"=>"delete/classified/{id}",
-		"filterClassified" => "search/results/classifieds", 
+
+		"routes" => array(
+			"create" => "classifieds/create",
+			"store" => "classifieds/store",
+			"show"=>"classifieds/show/{id}",
+			"edit"=>"classifieds/edit/{id}",
+			"update"=>"classifieds/update",
+			"destroy"=>"classifieds/delete/{id}",
+			"search" => "classifieds/search",
+			"filterClassified" => "classifieds/result-search",
+			"api" => array(
+				"index" => "classifieds/api/list-classifieds",
+				"delete-ajax" => "clasificado/api/delete-ajax",
+				"saveLang" =>"classifieds/api/language-update-idioma",
+			)
+		),
+
 		"title" => "Add classified",
 		"subtitle" => "Create classified",
 		"sending" => "Adding classified",
 		"response" => "Classified type added",
 		"Actualiced" => "Classified type updated",
 		"Delete" => "¡Classified type successfully removed!",
-		"search" => "search/classifieds",
-		"saveLang" =>"agregarIdioma",
-		"delete-ajax" => "classified/delete-ajax",
 		"Classifieds" => "Classifieds",
 		"create-title" => "Create classified",
 		"index-title" => "List of classifieds",
@@ -26,6 +32,7 @@
 		"statesForCountry" =>"states-for-country",
 		"citiesForState" =>"cities-for-state" ,
 		'all-conditions' => 'All',
+
 		"labels" => array(
 			'name' =>'Name:',
 			'description' => 'Description',

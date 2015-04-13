@@ -1,12 +1,18 @@
 <?php 
 	return array(
-		"create" => "create/condition/classified",
-		"store" => "add/condition/classified",
-		"index" => "list/condition/classifieds",
-		"show"=>"show/condition/classified/{id}",
-		"edit"=>"edit/condition/classified/{id}",
-		"update"=>"update/condition/classified/{id}",
-		"destroy"=>"delete/condition/classified/{id}",
+
+		"routes" => array(
+			"create" => "condition-classifieds/create",
+			"store" => "condition-classifieds/store",
+			"show"=>"condition-classifieds/show/{id}",
+			"edit"=>"condition-classifieds/edti/{id}",
+			"update"=>"condition-classifieds/update/{id}",
+			"destroy"=>"condition-classifieds/destroy/{id}",
+			"api" => array(
+				"index" => "condition-classifieds/api/list-condition-classifieds",
+			),
+		),
+
 		"title" => "Add Condition to classifieds",
 		"subtitle" => "create new condition to classifieds",
 		"sending" => "Adding condition to classifieds",
