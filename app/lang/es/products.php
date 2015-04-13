@@ -60,7 +60,8 @@
 			'UnitPrice' => 'Precio',
 			'MyWishList' => 'Mi Lista de Deseos' ,
 			'NewProducts' => 'Nuevos Productos',
-			'TopProducts' => 'Top de Productos'
+			'TopProducts' => 'Top de Productos',
+			'search' => 'Buscar'
 		),
 
 		"validation" => array(
@@ -118,6 +119,35 @@
 		),
 		'result_search' => array(
 			'title' => 'Resultados de la busqueda'
+		),
+
+		'search-blade' => array( 
+			'search-result' => 'Resultados para',
+			'search-again' => 'Buscar de nuevo',
+			'search-options' => "Opciones de Búsqueda",
+			'products' => 'Productos',
+			'classifieds' => 'Clasificados',
+			'categories' => 'Escoger Categorías...',
+			'condition-product' => 'Condición del producto',
+			'condition-classified' => 'Condición del clasificado',
+			'classified-type' => 'Tipo de clasificado',
+			'country' => 'País',
+			'state' => 'Estado',
+			'city' => 'Ciudad',
+			'price' => 'Precio' ,
+			'range' => 'Rango',
+			'point-price' => 'Precio en puntos',
+			'show' => 'Mostrar',
+			'order-by' => 'Ordenar por',
+			'name' => 'Nombre',
+			'rating' => 'Puntuación',
+			'condition' => 'Condición',
+			'low-high' => '(Bajo - Alto)',
+			'high-low' => '(Alto - Bajo)',
+			'highest' => '(Mayor)', 
+			'lowest' => '(Menor)', 
+			'new-used' => '(Nuevo - Usado)',
+			'used-new' => '(Usado - Nuevo)',
 		)
 	);
 
