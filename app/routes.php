@@ -114,38 +114,38 @@ function () {
 	/**
 		* ------------------------------ Rutas para Typo de descuento -----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('discountType.create'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.create'), [
 		'as' => 'discountType.create',
 		'uses' => 'DiscountTypeController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discountType.store'), [
+	Route::post(LaravelLocalization::transRoute('discountType.routes.store'), [
 		'as' => 'discountType.store',
 		'uses' => 'DiscountTypeController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.index'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.index'), [
 		'as' => 'discountType.index',
 		'uses' => 'DiscountTypeController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discountType.show'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.show'), [
 		'as' => 'discountType.show',
 		'uses' => 'DiscountTypeController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.edit'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.edit'), [
 		'as' => 'discountType.edit',
 		'uses' => 'DiscountTypeController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discountType.update'), [
+	Route::post(LaravelLocalization::transRoute('discountType.routes.update'), [
 		'as' => 'discountType.update',
 		'uses' => 'DiscountTypeController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.destroy'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.destroy'), [
 		'as' => 'discountType.destroy',
 		'uses' => 'DiscountTypeController@destroy'
 	]);

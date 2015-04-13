@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::model($discount_type, array('route' => array('discountType.update', $discount_type->id),'id'=>'formEditDiscountType','class'=>'form-horizontal')) }}
+					{{ Form::model($discount_type, array('route' => array('discountType.routes.update', $discount_type->id),'id'=>'formEditDiscountType','class'=>'form-horizontal')) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
@@ -106,7 +106,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{ URL::route('discountType.update',$discount_type->id) }}',
+				url:  '{{ URL::route('discountType.routes.update',$discount_type->id) }}',
         		type:'POST'
 			};
 		$('#formEditDiscountType').ajaxForm(options);

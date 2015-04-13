@@ -19,7 +19,6 @@
 		"create-title"=> "Crear descuento",
 		"index-title" => "Lista de descuentos",
 		"show-title" => "Ver descuento",
-
 		"labels" => array(
 			'name' =>'Nombre:',
 			'description' => 'Descripción:',

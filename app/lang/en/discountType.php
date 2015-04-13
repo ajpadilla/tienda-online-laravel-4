@@ -1,12 +1,15 @@
 <?php 
 	return array(
-		"create" => "create/discount/type",
-		"store" => "add/discount/type",
-		"index" => "list/discount/type",
-		"show"=>"show/discount/type/{id}",
-		"edit"=>"edit/discount/type/{id}",
-		"update"=>"update/discount/type/{id}",
-		"destroy"=>"delete/discount/type/{id}",
+
+		"routes" => array(
+			"create" => "discounts-type/create",
+			"store" => "discounts-type/store",
+			"index" => "discounts-type/index",
+			"show"=>"discounts-type/show/{id}",
+			"edit"=>"discounts-type/edit/{id}",
+			"update"=>"discounts-type/update/{id}",
+			"destroy"=>"discounts-type/destroy/{id}",
+		),
 		"title" => "Add Discount Type",
 		"subtitle" => "Create new discount type",
 		"sending" => "Adding discount type",

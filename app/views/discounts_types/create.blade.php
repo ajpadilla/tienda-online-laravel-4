@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 			<div class="row">
-				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
+				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
 				<div class="col-sm-6 b-r">
 					<div class="form-group">
 						{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
@@ -98,7 +98,7 @@
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
-				url:  '{{URL::to(LaravelLocalization::transRoute('discountType.store'))}}',
+				url:  '{{URL::to(LaravelLocalization::transRoute('discountType.routes.store'))}}',
         		type:'POST'
 			};
 		$('#formCreateDiscountType').ajaxForm(options);
@@ -128,7 +128,7 @@
 				'autoScale' : true
 			});
 			$('#formCreateDiscountType').resetForm();
-			 document.location.href = '{{URL::to(LaravelLocalization::transRoute('discountType.create'))}}';
+			 document.location.href = '{{URL::to(LaravelLocalization::transRoute('discountType.routes.create'))}}';
 		} 						
 </script>
 @stop
