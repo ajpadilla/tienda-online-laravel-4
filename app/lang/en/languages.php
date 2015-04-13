@@ -7,7 +7,9 @@
 		"routes" => array(
 			"create" => "languages/create",
 			"store" => "languages/store",
-			'index'=>'languages/index',
+			"api" => array(
+				'index'=>'languages/api/list-languages',
+			),
 		),
 		"labels" => array(
 			'name' =>'Nombre:',

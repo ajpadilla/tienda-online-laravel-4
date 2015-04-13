@@ -7,7 +7,9 @@
 		"routes" => array(
 			"create" => "idiomas/crear",
 			"store" => "idiomas/agregar",
-			'index'=>'idiomas/lista',
+			"api" => array(
+				'index'=>'idiomas/api/lista-idiomas',
+			),
 		),
 		"labels" => array(
 			'name' =>'Nombre:',
