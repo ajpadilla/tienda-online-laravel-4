@@ -1,29 +1,34 @@
 <?php
 	return array(
-		"show" => "ver/producto/{id}",
-		"create" => "crear/producto",
-		"show" => "ver/producto/{id}",
-		"store" => "agregar/producto",
-		'index'=>'lista/productos',
-		'edit' => 'editar/producto/{id}',
-		'update' => 'actualizar/producto',
-		'destroy' => 'eliminar/producto/{id}',
-		'delete-ajax' => 'producto/eliminar-ajax',
+
+
+		"index-title" => "Lista de productos",
+		"create-title" => "Creatar Producto",
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
 		"sending" => "Agregando producto",
 		"response" => "Producto agregado",
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
-		"search" => "productos/busqueda",
-		"saveLang" =>"agregarIdioma",
-		"Products" => "Productos",
-		"create-title" => "Crear Producto",
-		"index-title" => "Lista de productos",
-		"show-title" => "Ver Producto",
-		"search-title" => "Busqueda",
-		"order-by-search" => "ordenar-resultados-busqueda",
-		"filterWord" => "filter-word",
+		"saveLang" => 'Añadir idioma al producto',
+		"show-title" => "Ver producto",
+		"search-title" => "Buscar",
+		"routes" => array(
+			"show" => "ver/product/{id}",
+			"create" => "crear/producto",
+			"store" => "Agregar/producto",
+			'index'=>'lista-de-productos',
+			'edit' => 'editar/producto/{id}',
+			'update' => 'actualizar/producto',
+			'destroy' => 'eliminar/producto/{id}',
+			"search" => "buscar/producto",
+			"order-by-search" => "ordenar-resultados-busqueda",
+			"filterWord" => "palabra-a-filtrar",
+			"api" => array(
+				"delete-ajax" =>"productos/api/eliminar" 
+			),
+		),
+
 		"labels" => array(
 			'name' =>'Nombre',
 			'description' => 'Descripción',

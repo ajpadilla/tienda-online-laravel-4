@@ -1,28 +1,32 @@
 <?php
 	return array(
-		"routes" => array('' => , );
-		"show" => "show/products/{id}",
-		"create" => "create/product",
-		"store" => "add/product",
-		'index'=>'list/product',
-		'edit' => 'edit/product/{id}',
-		'update' => 'update/product',
-		'destroy' => 'delete/product/{id}',
-		'delete-ajax' => 'product/delete-ajax',
+
+		"index-title" => "List of products",
+		"create-title" => "Create Product",
 		"title" => "Add product",
 		"subtitle" => "Create new product",
 		"sending" => "Adding product",
 		"response" => "Product added",
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
-		"search" => "products/search",
 		"saveLang" => 'addLanguageClassified',
-		"create-title" => "Create Product",
-		"index-title" => "List of products",
 		"show-title" => "Show Product",
 		"search-title" => "Search",
-		"order-by-search" => "order-search-results",
-		"filterWord" => "filtrar-palabra",
+		"routes" => array(
+			"show" => "show/products/{id}",
+			"create" => "create/product",
+			"store" => "add/product",
+			'index'=>'list-of-products',
+			'edit' => 'edit/product/{id}',
+			'update' => 'update/product',
+			'destroy' => 'delete/product/{id}',
+			"search" => "products/search",
+			"order-by-search" => "order-search-results",
+			"filterWord" => "filter-word",
+			"api" => array(
+				"delete-ajax" =>"products/api/delete" 
+			),
+		),
 
 		"labels" => array(
 			'name' =>'Name',

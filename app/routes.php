@@ -25,22 +25,27 @@ function () {
 	/**
 	* ------------------------------ Rutas para productos -----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('products.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
-	Route::post(LaravelLocalization::transRoute('products.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
-	Route::get(LaravelLocalization::transRoute('products.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
-	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
-	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
-	Route::get(LaravelLocalization::transRoute('products.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
-	Route::post(LaravelLocalization::transRoute('products.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
+	Route::post(LaravelLocalization::transRoute('products.routes.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
+	Route::post(LaravelLocalization::transRoute('products.routes.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
 
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
 	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getAllProductsInCurrentLangData'));
 
-	Route::get(LaravelLocalization::transRoute('products.search'), [
+	Route::get(LaravelLocalization::transRoute('products.routes.search'), [
 		'as' => 'products.search',
 		'uses' => 'ProductController@search'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('products.routes.filterWord'), [
+		'as' => 'products.filterWord',
+		'uses' => 'ProductController@getCurrentFilterWorld'
 	]);
 
 	Route::get('/ajax/paginator','ProductController@searchPaginator');
@@ -59,10 +64,7 @@ function () {
 		'uses' => 'ProductController@sortSearchResults'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('products.filterWord'), [
-		'as' => 'products.filterWord',
-		'uses' => 'ProductController@getCurrentFilterWorld'
-	]);
+	
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
