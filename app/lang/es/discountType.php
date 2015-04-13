@@ -2,13 +2,15 @@
 	return array(
 
 		"routes" => array(
-			"create" => "tipo-descuentos/crear",
-			"store" => "tipo-descuentos/agregar",
-			"index" => "tipo-descuentos/lista",
-			"show"=>"tipo-descuentos/ver/{id}",
-			"edit"=>"tipo-descuentos/editar/{id}",
-			"update"=>"tipo-descuentos/actualizar/{id}",
-			"destroy"=>"tipo-descuentos/eliminar/{id}"
+			"create" => "tipos-de-descuentos/crear",
+			"store" => "tipos-de-descuentos/agregar",
+			"show"=>"tipos-de-descuentos/ver/{id}",
+			"edit"=>"tipos-de-descuentos/editar/{id}",
+			"update"=>"tipos-de-descuentos/actualizar/{id}",
+			"destroy"=>"tipos-de-descuentos/eliminar/{id}",
+			"api" => array(
+				"index" => "tipos-de-descuentos/api/lista-tipos-descuentos",
+			),
 		),
 		"title" => "Agregar Tipo de descuento",
 		"subtitle" => "Crear nuevo  tipo de descuento",

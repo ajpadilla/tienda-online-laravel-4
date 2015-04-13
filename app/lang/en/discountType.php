@@ -4,11 +4,13 @@
 		"routes" => array(
 			"create" => "discounts-type/create",
 			"store" => "discounts-type/store",
-			"index" => "discounts-type/index",
 			"show"=>"discounts-type/show/{id}",
 			"edit"=>"discounts-type/edit/{id}",
 			"update"=>"discounts-type/update/{id}",
 			"destroy"=>"discounts-type/destroy/{id}",
+			"api" => array(
+				"index" => "discounts-type/api/list-discounts-type",
+			),
 		),
 		"title" => "Add Discount Type",
 		"subtitle" => "Create new discount type",
