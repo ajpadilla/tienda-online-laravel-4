@@ -59,7 +59,7 @@ function () {
 		'uses' => 'ProductController@saveDataForLanguage'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('products.order-by-search'), [
+	Route::get(LaravelLocalization::transRoute('products.routes.order-by-search'), [
 		'as' => 'products.order-by-search',
 		'uses' => 'ProductController@sortSearchResults'
 	]);
@@ -69,39 +69,39 @@ function () {
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('discounts.create'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.create'), [
 		'as' => 'discounts.create',
 		'uses' => 'DiscountController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discounts.store'), [
+	Route::post(LaravelLocalization::transRoute('discounts.routes.store'), [
 		'as' => 'discounts.store',
 		'uses' => 'DiscountController@store'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discounts.index'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.index'), [
 		'as' => 'discounts.index',
 		'uses' => 'DiscountController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discounts.show'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.show'), [
 		'as' => 'discounts.show',
 		'uses' => 'DiscountController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discounts.edit'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.edit'), [
 		'as' => 'discounts.edit',
 		'uses' => 'DiscountController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discounts.update'), [
+	Route::post(LaravelLocalization::transRoute('discounts.routes.update'), [
 		'as' => 'discounts.update',
 		'uses' => 'DiscountController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discounts.destroy'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.destroy'), [
 		'as' => 'discounts.destroy',
 		'uses' => 'DiscountController@destroy'
 	]);

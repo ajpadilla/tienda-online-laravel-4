@@ -1,12 +1,15 @@
 <?php
 	return array(
-		"create" => "create/discount",
-		"store" => "add/discount",
-		'index'=>'list/discounts',
-		"show"=>"show/discount/{id}",
-		"edit"=>"edit/discount/{id}",
-		"update"=>"update/discount/{id}",
-		"destroy"=>"destroy/discount/{id}",
+
+		"routes" => array(
+			"create" => "create/discount",
+			"store" => "add/discount",
+			'index'=>'list/discounts',
+			"show"=>"show/discount/{id}",
+			"edit"=>"edit/discount/{id}",
+			"update"=>"update/discount/{id}",
+			"destroy"=>"destroy/discount/{id}",
+		),
 		"title" => "Add discount",
 		"subtitle" => "Create new discount",
 		"createCode" =>"create/discount_code", 
