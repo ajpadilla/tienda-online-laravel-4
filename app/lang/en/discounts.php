@@ -2,13 +2,13 @@
 	return array(
 
 		"routes" => array(
-			"create" => "create/discount",
-			"store" => "add/discount",
-			'index'=>'list/discounts',
-			"show"=>"show/discount/{id}",
-			"edit"=>"edit/discount/{id}",
-			"update"=>"update/discount/{id}",
-			"destroy"=>"destroy/discount/{id}",
+			"create" => "discounts/create",
+			"store" => "discounts/store",
+			'index'=>'discounts/list',
+			"show"=>"discounts/show/{id}",
+			"edit"=>"discounts/edit/{id}",
+			"update"=>"discounts/update/{id}",
+			"destroy"=>"discounts/destroy/{id}",
 		),
 		"title" => "Add discount",
 		"subtitle" => "Create new discount",
