@@ -9,14 +9,12 @@
 		"response" => "Product added",
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
-		"saveLang" => 'addLanguageClassified',
 		"show-title" => "Show Product",
 		"search-title" => "Search",
 		"routes" => array(
 			"show" => "products/show/{id}",
 			"create" => "products/create",
 			"store" => "products/store",
-			'index'=>'list-of-products',
 			'edit' => 'products/edit/{id}',
 			'update' => 'products/update',
 			'destroy' => 'products/destroy/{id}',
@@ -24,7 +22,9 @@
 			"order-by-search" => "order-search-results",
 			"filterWord" => "filter-word",
 			"api" => array(
-				"delete-ajax" =>"products/api/delete" 
+				'index'=>'products/api/list-products',
+				"delete-ajax" =>"products/api/delete-products",
+				"saveLang" => 'products/api/update-lang',
 			),
 		),
 

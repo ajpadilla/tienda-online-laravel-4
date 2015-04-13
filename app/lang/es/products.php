@@ -8,14 +8,12 @@
 		"response" => "Producto agregado",
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
-		"saveLang" => 'Añadir idioma al producto',
 		"show-title" => "Ver producto",
 		"search-title" => "Buscar",
 		"routes" => array(
 			"show" => "productos/ver/{id}",
 			"create" => "productos/crear",
 			"store" => "productos/agregar",
-			'index'=>'lista-de-productos',
 			'edit' => 'productos/editar/{id}',
 			'update' => 'productos/actualizar',
 			'destroy' => 'productos/eliminar/{id}',
@@ -23,7 +21,9 @@
 			"order-by-search" => "ordenar-resultados-busqueda",
 			"filterWord" => "palabra-a-filtrar",
 			"api" => array(
-				"delete-ajax" =>"productos/api/eliminar" 
+				'index'=>'productos/api/lista-productos',
+				"delete-ajax" =>"productos/api/eliminar" ,
+				"saveLang" => 'productos/api/actualizar-idioma',
 			),
 		),
 
