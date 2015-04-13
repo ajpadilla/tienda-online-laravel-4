@@ -1,13 +1,13 @@
 @extends('layouts.template')
 @section('main-title')
-  <h2 style="display: inline-block">Resultados para: <em class="content-search-product">producto</em></h2>
+  <h2 style="display: inline-block">{{ trans('products.search-blade.search-result') }}: <em class="content-search-product">producto</em></h2>
 @stop
 @section('action-heading')
   <form action="#">
     <div class="input-group">
-      <input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">
+      <input type="text" id="search-again" placeholder="{{ trans('products.search-blade.search-again') }}" class="form-control">
       <span class="input-group-btn">
-        <button id="search-data-again" class="btn btn-primary">Buscar</button>
+        <button id="search-data-again" class="btn btn-primary">{{ trans('products.labels.search') }}</button>
       </span>
     </div>
   </form>
