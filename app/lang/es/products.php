@@ -1,7 +1,5 @@
 <?php
 	return array(
-
-
 		"index-title" => "Lista de productos",
 		"create-title" => "Creatar Producto",
 		"title" => "Agregar producto",
