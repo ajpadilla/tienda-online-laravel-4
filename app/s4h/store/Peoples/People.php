@@ -16,4 +16,9 @@ class People extends Eloquent{
 	public function address(){
 		return $this->belongsTo('s4h\store\Address\Address','address_id');
 	}
+
+	public function currency()
+	{
+		return $this->belongsTo('s4h\store\Currencies\Currency', 'currency_id');
+	}
 }

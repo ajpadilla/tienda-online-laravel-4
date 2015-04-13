@@ -199,4 +199,26 @@ class ClassifiedRepository extends BaseRepository
 
 	}
 
+	public function getNewClassifieds($quantity = 4)
+	{
+		return Classified::orderBy('created_at', 'DESC')->take($quantity)->get();
+	}
+
+	public function getTopClassifieds($quantity = 4)
+	{
+		/*
+		SELECT p.id, sum(r.points) / count(p.id) AS avg FROM products p 
+		JOIN ratings r ON (p.id=r.product_id)
+		group by p.id
+		order by AVG DESC, r.updated_at DESC
+		*/
+		/*return Product::join('ratings', 'products.id', '=', 'ratings.product_id')
+			->select(['products.*', DB::raw('SUM(ratings.points)/COUNT(products.id) AS AVG')])
+			->groupBy('products.id')
+			->orderBy('AVG', 'DESC')
+			->orderBy('ratings.updated_at', 'DESC')
+			->take($quantity)
+			->get();*/
+	}	
+
 }

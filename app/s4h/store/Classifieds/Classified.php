@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\ClassifiedsLang\ClassifiedsLang;
 use s4h\store\Languages\Language;
 use s4h\store\Base\BaseModel;
-
+use Auth;
 /**
 * 
 */
@@ -102,6 +102,15 @@ class Classified extends BaseModel {
 			return false;
 		return false;
 	}
+
+	public function getPriceAttribute($value){
+		return number_format($value, '2');
+	}
+
+	public function getPriceWithCurrencyAttribute()
+	{
+		return Auth::user()->people->currency->sign . ' ' . $this->price;
+	}	
 
 	public function getDataForLanguage($languageId)
 	{

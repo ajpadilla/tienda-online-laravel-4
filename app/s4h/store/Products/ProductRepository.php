@@ -3,11 +3,13 @@
 use s4h\store\Carts\CartRepository;
 use s4h\store\Users\User;
 use s4h\store\Products\Product;
+use s4h\store\Ratings\Rating;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 use s4h\store\Base\BaseRepository;
 use DB;
+use Auth;
 
 class ProductRepository extends BaseRepository{
 
@@ -37,7 +39,6 @@ class ProductRepository extends BaseRepository{
 		if($data['conditionsProducts'] > 0)
 			$query->where('condition_id','=',$data['conditionsProducts']);
 	}
-
 	public function filterByFilterWord($query, $data = array())
 	{
 		$language = $this->getCurrentLang();
@@ -152,6 +153,23 @@ class ProductRepository extends BaseRepository{
 	public function getNewProducts($quantity = 4)
 	{
 		return Product::orderBy('created_at', 'DESC')->take($quantity)->get();
+	}
+
+	public function getTopProducts($quantity = 4)
+	{
+		/*
+		SELECT p.id, sum(r.points) / count(p.id) AS avg FROM products p 
+		JOIN ratings r ON (p.id=r.product_id)
+		group by p.id
+		order by AVG DESC, r.updated_at DESC
+		*/
+		return Product::join('ratings', 'products.id', '=', 'ratings.product_id')
+			->select(['products.*', DB::raw('SUM(ratings.points)/COUNT(products.id) AS AVG')])
+			->groupBy('products.id')
+			->orderBy('AVG', 'DESC')
+			->orderBy('ratings.updated_at', 'DESC')
+			->take($quantity)
+			->get();
 	}
 
 	public function createNewProduct($data = array())
@@ -360,6 +378,26 @@ class ProductRepository extends BaseRepository{
 		}else{
 			return ['success' => false];
 		}
+	}
+
+	public function saveRating($productId, $points, $description)
+	{
+		$product = Product::find($productId);
+
+		if(!$product) 
+			return FALSE;
+
+		if(($rating = Rating::whereProductId($productId)->whereUserId(Auth::user()->id)->first())) {
+			$rating->points = $points;	
+			$rating->description = $description;		
+		} else {
+			$rating = new Rating;
+			$rating->points = $points;
+			$rating->description = $description;
+			$rating->user()->associate(Auth::user());
+			$rating->product()->associate($product);
+		}
+		return $rating->save();
 	}
 
 }

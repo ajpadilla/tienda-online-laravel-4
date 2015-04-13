@@ -1,7 +1,7 @@
 <div class="col-md-6 col-sm-6">
 	<div class="product-main-image">
   	<?php if($product->hasPhotos()): ?>
-        <img src="<?php echo asset($product->getFirstPhoto()->complete_path); ?>" alt="<?php echo $product->getFirstPhoto()->filename; ?>" class="img-responsive" data-BigImgsrc="<?php echo asset($product->getFirstPhoto()->complete_path); ?>">
+        <img src="<?php echo asset($product->getFirstPhotoAttribute()->complete_path); ?>" alt="<?php echo $product->getFirstPhotoAttribute()->filename; ?>" class="img-responsive" data-BigImgsrc="<?php echo asset($product->getFirstPhotoAttribute()->complete_path); ?>">
       </div>
       <div class="product-other-images">
       	<?php foreach($product->photos as $photo): ?>

@@ -64,7 +64,11 @@ function () {
 		'uses' => 'ProductController@sortSearchResults'
 	]);
 
-	
+	Route::post(LaravelLocalization::transRoute('products.routes.save-rating'), [
+		'as' => 'products.save-rating',
+		'uses' => 'ProductController@saveRating'
+	]);
+
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
@@ -651,6 +655,14 @@ function () {
 	Route::get(LaravelLocalization::transRoute('cart.routes.api.delete-ajax'), [
 		'as' => 'cart.delete-ajax',
 		'uses' => 'CartController@deleteAjax'
+	]);
+
+	/**
+		* ------------------------------ Rutas Pagos -----------------------
+	**/
+	Route::get(LaravelLocalization::transRoute('payment.show'), [
+		'as' => 'payment.show',
+		'uses' => 'PaymentController@show'
 	]);
 });
 

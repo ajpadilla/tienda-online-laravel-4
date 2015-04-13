@@ -6,6 +6,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 use s4h\store\Base\BaseModel;
+use s4h\store\Users\User;
+use Auth;
 
 class Product extends BaseModel{
 	use SoftDeletingTrait;
@@ -95,8 +97,21 @@ class Product extends BaseModel{
 		return $this->wishlistUsers->count();
 	}
 
+	public function hasInWishlistForUser(User $user)
+	{
+		return $user->wishlist()->whereProductId($this->id)->count();	
+	}
+
 	public function hasCartUsers(){
 		return $this->cartUsers->count();
+	}
+
+	public function hasInCartForUser(User $user)
+	{
+		return $user->carts()
+		->join('cart_product', 'carts.id', '=', 'cart_product.cart_id')
+		->whereActive(TRUE)
+		->where('cart_product.product_id', '=', $this->id)->orderBy('carts.created_at', 'DESC')->count();
 	}
 
 
@@ -175,6 +190,11 @@ class Product extends BaseModel{
 
 	public function getPriceAttribute($value){
 		return number_format($value, '2');
+	}
+
+	public function getPriceWithCurrencyAttribute()
+	{
+		return Auth::user()->people->currency->sign . ' ' . $this->price;
 	}
 
 	/*

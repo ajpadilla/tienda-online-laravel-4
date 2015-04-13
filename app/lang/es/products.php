@@ -1,7 +1,9 @@
 <?php
 	return array(
+		
 		"index-title" => "Lista de productos",
 		"create-title" => "Creatar Producto",
+
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
 		"sending" => "Agregando producto",
@@ -20,6 +22,7 @@
 			"search" => "productos/buscar",
 			"order-by-search" => "ordenar-resultados-busqueda",
 			"filterWord" => "palabra-a-filtrar",
+			'save-rating' => 'producto/guardar-rating'
 			"api" => array(
 				'index'=>'productos/api/lista-productos',
 				"delete-ajax" =>"productos/api/eliminar" ,

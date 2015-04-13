@@ -32,7 +32,8 @@ class RatingsTableSeeder extends DatabaseSeeder {
 					{
 						$id = $user["id"];
 						Rating::create([
-							"points" => $faker->numberBetween(0, 100),
+							"points" => $faker->numberBetween(1, 5),
+							"description" => $faker->text,
 							"user_id"   => $id,
 							"product_id" => $product->id,
 							]);
