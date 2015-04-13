@@ -160,12 +160,12 @@ function () {
 		* ------------------------------ Rutas para lenguajes -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('languages.create'), [
+	Route::get(LaravelLocalization::transRoute('languages.routes.create'), [
 		'as' => 'languages.create',
 		'uses' => 'LanguageController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('languages.store'),'LanguageController@store');
+	Route::post(LaravelLocalization::transRoute('languages.routes.store'),'LanguageController@store');
 	Route::post('checkIsoCodeLang','LanguageController@checkIsoCodeLang');
 	Route::get('returnLanguages','LanguageController@returnLanguages');
 	Route::post('getIdLanguage','LanguageController@getIdLanguage');
