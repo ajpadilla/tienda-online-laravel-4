@@ -1,11 +1,13 @@
 <?php 
 	return array(
 		
-		"create" => "create/photo/classified/{classifiedId}",
-		"store" => "add/photo/Classified",
-		"title" => "Add photo to classified",
-		"subtitle" => "Attach photos to classified",
-		"create-title"=> "Add photo",
+		"routes" => array(
+			"create" => "photo-classifieds/create/{classifiedId}",
+			"store" => "photo-classifieds/store",
+		),
+		"title" => "Agregar foto a clasificado",
+		"subtitle" => "Añadir foto a clasificado",
+		"create-title"=> "Agregar foto",
 
 		"labels" => array(
 			'add' => 'Add photo...',

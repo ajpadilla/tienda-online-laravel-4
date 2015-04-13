@@ -1,12 +1,17 @@
 <?php 
 	return array(
-		"create" => "crear/tipo/descuento",
-		"store" => "agregar/tipo/descuento",
-		"index" => "lista/tipos/descuentos",
-		"show"=>"ver/tipo/descuento/{id}",
-		"edit"=>"editar/tipo/descuento/{id}",
-		"update"=>"actualizar/tipo/descuento/{id}",
-		"destroy"=>"eliminar/tipo/descuento/{id}",
+
+		"routes" => array(
+			"create" => "tipos-de-descuentos/crear",
+			"store" => "tipos-de-descuentos/agregar",
+			"show"=>"tipos-de-descuentos/ver/{id}",
+			"edit"=>"tipos-de-descuentos/editar/{id}",
+			"update"=>"tipos-de-descuentos/actualizar/{id}",
+			"destroy"=>"tipos-de-descuentos/eliminar/{id}",
+			"api" => array(
+				"index" => "tipos-de-descuentos/api/lista-tipos-descuentos",
+			),
+		),
 		"title" => "Agregar Tipo de descuento",
 		"subtitle" => "Crear nuevo  tipo de descuento",
 		"sending" => "Agregando tipo de descuento",

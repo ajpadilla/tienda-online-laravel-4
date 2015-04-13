@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('languages.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateLanguage']) }}
+					{{ Form::open(['url' => LaravelLocalization::transRoute('languages.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateLanguage']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('name',trans('languages.labels.name'),['class'=>'col-sm-4 control-label']) }}

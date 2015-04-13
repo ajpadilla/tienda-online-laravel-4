@@ -1,13 +1,19 @@
 <?php 
 	return array(
-		"create" => "create/shipment/status",
-		"store" => "add/shipment/status",
-		"index"=>'list/shipment/status',
-		"show"=>"show/shipment/status/{id}",
-		"edit"=>"edit/shipment/status/{id}",
-		"update"=>"update/shipment/status",
-		"destroy"=>"delete/shipment/status/{id}",
-		'delete-ajax' => 'shipment-status/delete-ajax',
+
+		"routes" => array(
+			"create" => "shipment-status/create",
+			"store" => "shipment-status/store",
+			"show"=>"shipment-status/show/{id}",
+			"edit"=>"shipment-status/edit/{id}",
+			"update"=>"shipment-status/update",
+			"destroy"=>"shipment-status/destroy/{id}",
+			"api" => array(
+				"delete-ajax" =>"estatus-de-envio/api/borrar",
+				"index"=>'estatus-de-envio/lista',
+				"saveLang" => "actualizar-idioma-estatus-de-envio",
+			),
+		),
 		"title" => "Add shipment status",
 		"subtitle" => "Create shipment status",
 		"sending" => "Adding shipment status",
@@ -17,7 +23,6 @@
 		"create-title"=> "Create shipment status",
 		"index-title" => "List of shipment status",
 		"show-title" => "Show shipment status",
-		"saveLang" => "update-language-shipment-status",
 
 		"labels" => array(
 			'language' => 'language',

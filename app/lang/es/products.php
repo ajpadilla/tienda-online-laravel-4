@@ -1,29 +1,32 @@
 <?php
 	return array(
-		"show" => "ver/producto/{id}",
-		"create" => "crear/producto",
-		"show" => "ver/producto/{id}",
-		"store" => "agregar/producto",
-		'index'=>'lista/productos',
-		'edit' => 'editar/producto/{id}',
-		'update' => 'actualizar/producto',
-		'destroy' => 'eliminar/producto/{id}',
-		'delete-ajax' => 'producto/eliminar-ajax',
+		"index-title" => "Lista de productos",
+		"create-title" => "Creatar Producto",
 		"title" => "Agregar producto",
 		"subtitle" => "Crear nuevo producto",
 		"sending" => "Agregando producto",
 		"response" => "Producto agregado",
 		"Updated" => "Producto actualizado",
 		"Delete" => "¡Producto eliminado con éxito!",
-		"search" => "productos/busqueda",
-		"saveLang" =>"agregarIdioma",
-		"Products" => "Productos",
-		"create-title" => "Crear Producto",
-		"index-title" => "Lista de productos",
-		"show-title" => "Ver Producto",
-		"search-title" => "Busqueda",
-		"order-by-search" => "ordenar-resultados-busqueda",
-		"filterWord" => "filter-word",
+		"show-title" => "Ver producto",
+		"search-title" => "Buscar",
+		"routes" => array(
+			"show" => "productos/ver/{id}",
+			"create" => "productos/crear",
+			"store" => "productos/agregar",
+			'edit' => 'productos/editar/{id}',
+			'update' => 'productos/actualizar',
+			'destroy' => 'productos/eliminar/{id}',
+			"search" => "productos/buscar",
+			"order-by-search" => "ordenar-resultados-busqueda",
+			"filterWord" => "palabra-a-filtrar",
+			"api" => array(
+				'index'=>'productos/api/lista-productos',
+				"delete-ajax" =>"productos/api/eliminar" ,
+				"saveLang" => 'productos/api/actualizar-idioma',
+			),
+		),
+
 		"labels" => array(
 			'name' =>'Nombre',
 			'description' => 'Descripción',
@@ -55,7 +58,8 @@
 			'UnitPrice' => 'Precio',
 			'MyWishList' => 'Mi Lista de Deseos' ,
 			'NewProducts' => 'Nuevos Productos',
-			'TopProducts' => 'Top de Productos'
+			'TopProducts' => 'Top de Productos',
+			'search' => 'Buscar'
 		),
 
 		"validation" => array(
@@ -113,6 +117,39 @@
 		),
 		'result_search' => array(
 			'title' => 'Resultados de la busqueda'
+		),
+
+		'search-blade' => array( 
+			'search-result' => 'Resultados para',
+			'search-again' => 'Buscar de nuevo',
+			'search-options' => "Opciones de Búsqueda",
+			'products' => 'Productos',
+			'classifieds' => 'Clasificados',
+			'categories' => 'Escoger Categorías...',
+			'condition-product' => 'Condición del producto',
+			'condition-classified' => 'Condición del clasificado',
+			'classified-type' => 'Tipo de clasificado',
+			'country' => 'País',
+			'state' => 'Estado',
+			'city' => 'Ciudad',
+			'price' => 'Precio' ,
+			'range' => 'Rango',
+			'point-price' => 'Precio en puntos',
+			'show' => 'Mostrar',
+			'order-by' => 'Ordenar por',
+			'name' => 'Nombre',
+			'rating' => 'Puntuación',
+			'condition' => 'Condición',
+			'low-high' => '(Bajo - Alto)',
+			'high-low' => '(Alto - Bajo)',
+			'highest' => '(Mayor)', 
+			'lowest' => '(Menor)', 
+			'new-used' => '(Nuevo - Usado)',
+			'used-new' => '(Usado - Nuevo)',
+			'products-for-page' => 'Productos por pagina',
+			'classified-for-page' => 'Clasificados por pagina',
+			'of' => 'de',
+			'in' => 'en total en pagina'
 		)
 	);
 

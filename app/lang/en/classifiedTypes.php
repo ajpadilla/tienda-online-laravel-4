@@ -1,12 +1,17 @@
 <?php 
 	return array(
-		"create" => "create/classified/type",
-		"store" => "add/classified/type",
-		"index" => "list/classified/type",
-		"show"=>"show/classified/type/{id}",
-		"edit"=>"edit/classified/type/{id}",
-		"update"=>"update/classified/type/{id}",
-		"destroy"=>"delete/classified/type/{id}",
+
+		"routes" => array(
+			"create" => "classifieds-type/create",
+			"store" => "classifieds-type/store",
+			"show"=>"classifieds-type/shiow/{id}",
+			"edit"=>"classifieds-type/edit/{id}",
+			"update"=>"classifieds-type/update/{id}",
+			"destroy"=>"classifieds-type/destroy/{id}",
+			"api" => array(
+				"index" => "classifieds-type/api/list-classifieds-type",
+			)
+		),
 		"title" => "Add classified type",
 		"subtitle" => "Create new  classified type",
 		"sending" => "Adding classified type",

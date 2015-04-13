@@ -1,12 +1,19 @@
 <?php 
 	return array(
-		"create" => "create/invoice/status",
-		"store" => "add/invoice/status",
-		"index"=>'list/invoice/status',
-		"show"=>"show/invoice/status/{id}",
-		"edit"=>"edit/invoice/status/{id}",
-		"update"=>"update/invoice/status",
-		"destroy"=>"delete/invoice/status/{id}",
+
+		"routes" => array(
+			"create" => "create/invoice/status",
+			"store" => "add/invoice/status",
+			"show"=>"show/invoice/status/{id}",
+			"edit"=>"edit/invoice/status/{id}",
+			"update"=>"update/invoice/status",
+			"destroy"=>"delete/invoice/status/{id}",
+			"api" => array(
+				"index"=>'invoice-status/api/list-invoice-status',
+				'delete-ajax' => 'invoice-status/api/delete-ajax',
+				"saveLang" => "invoice-status/api/lang-invoice-status",
+			)
+		),
 		"title" => "Add invoice status",
 		"subtitle" => "Create invoice status",
 		"sending" => "Adding invoice status",
@@ -16,8 +23,8 @@
 		"create-title"=> "Create invoice status",
 		"index-title" => "List of invoice status",
 		"show-title" => "Show invoice status",
-		'delete-ajax' => 'shipment-status/delete-ajax',
-		"saveLang" => "update-language-invoice-status",
+
+		
 
 		"labels" => array(
 			'language' => 'Language',

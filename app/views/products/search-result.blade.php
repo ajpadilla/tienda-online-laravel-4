@@ -1,13 +1,13 @@
 @extends('layouts.template')
 @section('main-title')
-  <h2 style="display: inline-block">Resultados para: <em class="content-search-product">producto</em></h2>
+  <h2 style="display: inline-block">{{ trans('products.search-blade.search-result') }}: <em class="content-search-product">producto</em></h2>
 @stop
 @section('action-heading')
   <form action="#">
     <div class="input-group">
-      <input type="text" id="search-again" placeholder="Buscar de nuevo" class="form-control">
+      <input type="text" id="search-again" placeholder="{{ trans('products.search-blade.search-again') }}" class="form-control">
       <span class="input-group-btn">
-        <button id="search-data-again" class="btn btn-primary">Buscar</button>
+        <button id="search-data-again" class="btn btn-primary">{{ trans('products.labels.search') }}</button>
       </span>
     </div>
   </form>
@@ -57,7 +57,7 @@
                @if(!$products->isEmpty())
             <!-- BEGIN PAGINATOR -->
             <div id="total-items-produts-1" class="row">
-              <div class="col-md-4 col-sm-4 items-info">Productos por pagina {{ $products->getPerPage() }} de {{ $products->getTotal()}} total en pagina {{ $products->getCurrentPage()  }}</div>
+          <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.products-for-page') }} {{ $products->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $products->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
               <div class="col-md-8 col-sm-8 links-products">
                  {{ $products->links() }}
               </div>
@@ -76,7 +76,7 @@
             <!-- END PRODUCT LIST -->
             <!-- BEGIN PAGINATOR -->
             <div id="total-items-produts-2" class="row">
-              <div class="col-md-4 col-sm-4 items-info">Productos por pagina {{ $products->getPerPage() }} de {{ $products->getTotal()}} total en pagina {{ $products->getCurrentPage()  }}</div>
+             <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.products-for-page') }} {{ $products->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $products->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
               <div class="col-md-8 col-sm-8 links-products">
                 {{ $products->links()}}
               </div>
@@ -87,7 +87,7 @@
              @if(!$classifieds->isEmpty())
              <!-- BEGIN PAGINATOR -->
              <div id="total-items-classifieds-1" class="row margen">
-              <div class="col-md-4 col-sm-4 items-info">Clasificados por pagina {{ $classifieds->getPerPage() }} de {{ $classifieds->getTotal()}} total en pagina {{ $classifieds->getCurrentPage()  }}</div>
+              <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.classified-for-page') }} {{ $products->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $products->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
               <div class="col-md-8 col-sm-8">
                {{ $classifieds->links() }}
              </div>
@@ -106,7 +106,7 @@
           <!-- END PRODUCT LIST -->
           <!-- BEGIN PAGINATOR -->
           <div id="total-items-classifieds-2" class="row">
-            <div class="col-md-4 col-sm-4 items-info">Clasificados por pagina {{ $classifieds->getPerPage() }} de {{ $classifieds->getTotal()}} total en pagina {{ $classifieds->getCurrentPage()  }}</div>
+             <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.classified-for-page') }} {{ $products->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $products->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
             <div class="col-md-8 col-sm-8">
               {{ $classifieds->links()}}
             </div>

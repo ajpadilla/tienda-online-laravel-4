@@ -1,11 +1,17 @@
 <?php
 	return array(
-		"show" => "cart/show/{id}/{user?}",
+
+		"routes" => array(
+			"show" => "cart/show/{id}/{user?}",
+			"create" => "cart/add/{id}/{quantity?}",
+			'change-quantity' => "cart/change-quantity/{productId}/{quantity}",
+			"store" => "cart/store",
+			"api" => array(
+				"index" => "cart/api/list-cart",
+				'delete-ajax' => 'cart/api/cart-delete-ajax/{id}',
+			)
+		),
 		"show-title" => "Show Cart",
-		"create" => "cart/add/{id}/{quantity?}",
-		'delete-ajax' => 'cart/delete-ajax/{id}',
-		"store" => "cart/store",
-		'change-quantity' => "cart/change-quantity/{productId}/{quantity}",
 		"cart-empty" => "Your shopping cart is empty!",
 		"title" => "Cart",
 

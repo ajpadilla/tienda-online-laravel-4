@@ -25,22 +25,27 @@ function () {
 	/**
 	* ------------------------------ Rutas para productos -----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('products.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
-	Route::post(LaravelLocalization::transRoute('products.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
-	Route::get(LaravelLocalization::transRoute('products.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
-	Route::get(LaravelLocalization::transRoute('products.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
-	Route::get(LaravelLocalization::transRoute('products.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
-	Route::get(LaravelLocalization::transRoute('products.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
-	Route::post(LaravelLocalization::transRoute('products.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.create'), ['as' => 'products.create', 'uses' => 'ProductController@create'] );
+	Route::post(LaravelLocalization::transRoute('products.routes.store'), ['as' => 'products.store', 'uses' => 'ProductController@store' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.api.index'),  ['as' => 'products.index','uses' => 'ProductController@index' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.api.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
+	Route::post(LaravelLocalization::transRoute('products.routes.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
 
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 
 	//Datatable Products
 	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getAllProductsInCurrentLangData'));
 
-	Route::get(LaravelLocalization::transRoute('products.search'), [
+	Route::get(LaravelLocalization::transRoute('products.routes.search'), [
 		'as' => 'products.search',
 		'uses' => 'ProductController@search'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('products.routes.filterWord'), [
+		'as' => 'products.filterWord',
+		'uses' => 'ProductController@getCurrentFilterWorld'
 	]);
 
 	Route::get('/ajax/paginator','ProductController@searchPaginator');
@@ -49,57 +54,54 @@ function () {
 
 	Route::get('returnDataProductLang','ProductController@returnDataProductLang');
 
-	Route::post(LaravelLocalization::transRoute('products.saveLang'), [
+	Route::post(LaravelLocalization::transRoute('products.routes.api.saveLang'), [
 		'as' => 'products.saveLang',
 		'uses' => 'ProductController@saveDataForLanguage'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('products.order-by-search'), [
+	Route::get(LaravelLocalization::transRoute('products.routes.order-by-search'), [
 		'as' => 'products.order-by-search',
 		'uses' => 'ProductController@sortSearchResults'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('products.filterWord'), [
-		'as' => 'products.filterWord',
-		'uses' => 'ProductController@getCurrentFilterWorld'
-	]);
+	
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('discounts.create'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.create'), [
 		'as' => 'discounts.create',
 		'uses' => 'DiscountController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discounts.store'), [
+	Route::post(LaravelLocalization::transRoute('discounts.routes.store'), [
 		'as' => 'discounts.store',
 		'uses' => 'DiscountController@store'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discounts.index'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.api.index'), [
 		'as' => 'discounts.index',
 		'uses' => 'DiscountController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discounts.show'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.show'), [
 		'as' => 'discounts.show',
 		'uses' => 'DiscountController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discounts.edit'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.edit'), [
 		'as' => 'discounts.edit',
 		'uses' => 'DiscountController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discounts.update'), [
+	Route::post(LaravelLocalization::transRoute('discounts.routes.update'), [
 		'as' => 'discounts.update',
 		'uses' => 'DiscountController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discounts.destroy'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.destroy'), [
 		'as' => 'discounts.destroy',
 		'uses' => 'DiscountController@destroy'
 	]);
@@ -112,38 +114,38 @@ function () {
 	/**
 		* ------------------------------ Rutas para Typo de descuento -----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('discountType.create'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.create'), [
 		'as' => 'discountType.create',
 		'uses' => 'DiscountTypeController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discountType.store'), [
+	Route::post(LaravelLocalization::transRoute('discountType.routes.store'), [
 		'as' => 'discountType.store',
 		'uses' => 'DiscountTypeController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.index'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.api.index'), [
 		'as' => 'discountType.index',
 		'uses' => 'DiscountTypeController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discountType.show'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.show'), [
 		'as' => 'discountType.show',
 		'uses' => 'DiscountTypeController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.edit'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.edit'), [
 		'as' => 'discountType.edit',
 		'uses' => 'DiscountTypeController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discountType.update'), [
+	Route::post(LaravelLocalization::transRoute('discountType.routes.update'), [
 		'as' => 'discountType.update',
 		'uses' => 'DiscountTypeController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.destroy'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.destroy'), [
 		'as' => 'discountType.destroy',
 		'uses' => 'DiscountTypeController@destroy'
 	]);
@@ -158,12 +160,12 @@ function () {
 		* ------------------------------ Rutas para lenguajes -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('languages.create'), [
+	Route::get(LaravelLocalization::transRoute('languages.routes.create'), [
 		'as' => 'languages.create',
 		'uses' => 'LanguageController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('languages.store'),'LanguageController@store');
+	Route::post(LaravelLocalization::transRoute('languages.routes.store'),'LanguageController@store');
 	Route::post('checkIsoCodeLang','LanguageController@checkIsoCodeLang');
 	Route::get('returnLanguages','LanguageController@returnLanguages');
 	Route::post('getIdLanguage','LanguageController@getIdLanguage');
@@ -173,37 +175,37 @@ function () {
 		* ------------------------------ Rutas shipment status  -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.create'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.create'), [
 		'as' => 'shipmentStatus.create',
 		'uses' => 'ShipmentStatusController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('shipmentStatus.store'), [
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.store'), [
 		'as' => 'shipmentStatus.store',
 		'uses' => 'ShipmentStatusController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.index'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.index'), [
 		'as' => 'shipmentStatus.index',
 		'uses' => 'ShipmentStatusController@index'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.edit'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.edit'), [
 		'as' => 'shipmentStatus.edit',
 		'uses' => 'ShipmentStatusController@edit'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.show'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.show'), [
 		'as' => 'shipmentStatus.show',
 		'uses' => 'ShipmentStatusController@show'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('shipmentStatus.update'), [
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.update'), [
 		'as' => 'shipmentStatus.update',
 		'uses' => 'ShipmentStatusController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.destroy'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.destroy'), [
 		'as' => 'shipmentStatus.destroy',
 		'uses' => 'ShipmentStatusController@destroy'
 	]);
@@ -217,12 +219,12 @@ function () {
 
    	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
 
 
 	Route::get('returnDataShipmentStatusLang','ShipmentStatusController@returnDataShipmentStatusLang');
 
-	Route::post(LaravelLocalization::transRoute('shipmentStatus.saveLang'), [
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.api.saveLang'), [
 		'as' => 'shipmentStatus.saveLang',
 		'uses' => 'ShipmentStatusController@saveDataForLanguage'
 	]);
@@ -231,37 +233,37 @@ function () {
 		* ------------------------------ Rutas Invoice status  -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.create'), [
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.create'), [
 		'as' => 'invoiceStatus.create',
 		'uses' => 'InvoiceStatusController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('invoiceStatus.store'), [
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.store'), [
 		'as' => 'invoiceStatus.store',
 		'uses' => 'InvoiceStatusController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.index'), [
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.index'), [
 		'as' => 'invoiceStatus.index',
 		'uses' => 'InvoiceStatusController@index'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.edit'), [
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.edit'), [
 		'as' => 'invoiceStatus.edit',
 		'uses' => 'InvoiceStatusController@edit'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.show'), [
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.show'), [
 		'as' => 'invoiceStatus.show',
 		'uses' => 'InvoiceStatusController@show'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('invoiceStatus.update'), [
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.update'), [
 		'as' => 'invoiceStatus.update',
 		'uses' => 'InvoiceStatusController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.destroy'), [
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.destroy'), [
 		'as' => 'invoiceStatus.destroy',
 		'uses' => 'InvoiceStatusController@destroy'
 	]);
@@ -275,12 +277,12 @@ function () {
 
    	Route::get('returnDataInvoiceStatus','InvoiceStatusController@returnDataInvoiceStatus');
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.delete-ajax'),  ['as' => 'invoiceStatus.delete-ajax','uses' => 'InvoiceStatusController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.delete-ajax'),  ['as' => 'invoiceStatus.delete-ajax','uses' => 'InvoiceStatusController@deleteAjax' ] );
 
 
 	Route::get('returnDatainvoiceStatusLang','InvoiceStatusController@returnDatainvoiceStatusLang');
 
-	Route::post(LaravelLocalization::transRoute('invoiceStatus.saveLang'), [
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.api.saveLang'), [
 		'as' => 'invoiceStatus.saveLang',
 		'uses' => 'InvoiceStatusController@saveDataForLanguage'
 	]);
@@ -290,38 +292,38 @@ function () {
 		* ------------------------------ Rutas classified type -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('classifiedTypes.create'), [
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.create'), [
 		'as' => 'classifiedTypes.create',
 		'uses' => 'ClassifiedTypeController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifiedTypes.store'), [
+	Route::post(LaravelLocalization::transRoute('classifiedTypes.routes.store'), [
 		'as' => 'classifiedTypes.store',
 		'uses' => 'ClassifiedTypeController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedTypes.index'), [
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.api.index'), [
 		'as' => 'classifiedTypes.index',
 		'uses' => 'ClassifiedTypeController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('classifiedTypes.show'), [
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.show'), [
 		'as' => 'classifiedTypes.show',
 		'uses' => 'ClassifiedTypeController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedTypes.edit'), [
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.edit'), [
 		'as' => 'classifiedTypes.edit',
 		'uses' => 'ClassifiedTypeController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifiedTypes.update'), [
+	Route::post(LaravelLocalization::transRoute('classifiedTypes.routes.update'), [
 		'as' => 'classifiedTypes.update',
 		'uses' => 'ClassifiedTypeController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedTypes.destroy'), [
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.destroy'), [
 		'as' => 'classifiedTypes.destroy',
 		'uses' => 'ClassifiedTypeController@destroy'
 	]);
@@ -341,38 +343,38 @@ function () {
 		* ------------------------------ Rutas classified conditions -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('classifiedConditions.create'), [
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.create'), [
 		'as' => 'classifiedConditions.create',
 		'uses' => 'ClassifiedConditionController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifiedConditions.store'), [
+	Route::post(LaravelLocalization::transRoute('classifiedConditions.routes.store'), [
 		'as' => 'classifiedConditions.store',
 		'uses' => 'ClassifiedConditionController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedConditions.index'), [
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.api.index'), [
 		'as' => 'classifiedConditions.index',
 		'uses' => 'ClassifiedConditionController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('classifiedConditions.show'), [
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.show'), [
 		'as' => 'classifiedConditions.show',
 		'uses' => 'ClassifiedConditionController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedConditions.edit'), [
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.edit'), [
 		'as' => 'classifiedConditions.edit',
 		'uses' => 'ClassifiedConditionController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifiedConditions.update'), [
+	Route::post(LaravelLocalization::transRoute('classifiedConditions.routes.update'), [
 		'as' => 'classifiedConditions.update',
 		'uses' => 'ClassifiedConditionController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedConditions.destroy'), [
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.destroy'), [
 		'as' => 'classifiedConditions.destroy',
 		'uses' => 'ClassifiedConditionController@destroy'
 	]);
@@ -403,48 +405,48 @@ function () {
 		* ------------------------------ Rutas classifieds -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('classifieds.create'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.create'), [
 		'as' => 'classifieds.create',
 		'uses' => 'ClassifiedController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifieds.store'), [
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.store'), [
 		'as' => 'classifieds.store',
 		'uses' => 'ClassifiedController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.index'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.index'), [
 		'as' => 'classifieds.index',
 		'uses' => 'ClassifiedController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('classifieds.show'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.show'), [
 		'as' => 'classifieds.show',
 		'uses' => 'ClassifiedController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.edit'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.edit'), [
 		'as' => 'classifieds.edit',
 		'uses' => 'ClassifiedController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifieds.update'), [
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.update'), [
 		'as' => 'classifieds.update',
 		'uses' => 'ClassifiedController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.destroy'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.destroy'), [
 		'as' => 'classifieds.destroy',
 		'uses' => 'ClassifiedController@destroy'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.search'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.search'), [
 		'as' => 'classifieds.search',
 		'uses' => 'ClassifiedController@viewSearchClassifieds'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifieds.filterClassified'), [
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.filterClassified'), [
 		'as' => 'classifieds.filterClassified',
 		'uses' => 'ClassifiedController@searchClassified'
 	]);
@@ -466,12 +468,12 @@ function () {
 
 	Route::get('returnDataClassifiedLang','ClassifiedController@returnDataClassifiedLang');
 
-	Route::post(LaravelLocalization::transRoute('classifieds.saveLang'), [
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.saveLang'), [
 		'as' => 'classifieds.saveLang',
 		'uses' => 'ClassifiedController@saveCurrentLangAttribute'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
 
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
@@ -485,12 +487,12 @@ function () {
 		* ------------------------------ Rutas Photos Clasificados-----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('photoClassified.create'), [
+	Route::get(LaravelLocalization::transRoute('photoClassified.routes.create'), [
 		'as' => 'photoClassified.create',
 		'uses' => 'PhotosClassifiedsController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('photoClassified.store'), [
+	Route::post(LaravelLocalization::transRoute('photoClassified.routes.store'), [
 		'as' => 'photoClassified.store',
 		'uses' => 'PhotosClassifiedsController@store'
 	]);
@@ -499,12 +501,12 @@ function () {
 		* ------------------------------ Rutas Photos Productos-----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('photoProduct.create'), [
+	Route::get(LaravelLocalization::transRoute('photoProduct.routes.create'), [
 		'as' => 'photoProduct.create',
 		'uses' => 'PhotosProductsController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('photoProduct.store'), [
+	Route::post(LaravelLocalization::transRoute('photoProduct.routes.store'), [
 		'as' => 'photoProduct.store',
 		'uses' => 'PhotosProductsController@store'
 	]);
@@ -514,38 +516,38 @@ function () {
 		* ------------------------------ Rutas Categories -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('categories.create'), [
+	Route::get(LaravelLocalization::transRoute('categories.routes.create'), [
 		'as' => 'categories.create',
 		'uses' => 'CategoriesController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('categories.store'), [
+	Route::post(LaravelLocalization::transRoute('categories.routes.store'), [
 		'as' => 'categories.store',
 		'uses' => 'CategoriesController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('categories.index'), [
+	Route::get(LaravelLocalization::transRoute('categories.routes.api.index'), [
 		'as' => 'categories.index',
 		'uses' => 'CategoriesController@index'
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('categories.show'), [
+	Route::get(LaravelLocalization::transRoute('categories.routes.show'), [
 		'as' => 'categories.show',
 		'uses' => 'CategoriesController@show'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('categories.edit'), [
+	Route::get(LaravelLocalization::transRoute('categories.routes.edit'), [
 		'as' => 'categories.edit',
 		'uses' => 'CategoriesController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('categories.update'), [
+	Route::post(LaravelLocalization::transRoute('categories.routes.update'), [
 		'as' => 'categories.update',
 		'uses' => 'CategoriesController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('categories.destroy'), [
+	Route::get(LaravelLocalization::transRoute('categories.routes.destroy'), [
 		'as' => 'categories.destroy',
 		'uses' => 'CategoriesController@destroy'
 	]);
@@ -560,7 +562,7 @@ function () {
 	]);
 
 	/**
-		* ------------------------------ Rutas Categories -----------------------
+		* ------------------------------ Rutas atributos -----------------------
 	**/
 
 	Route::get(LaravelLocalization::transRoute('attributeType.create'), [
@@ -605,12 +607,12 @@ function () {
 		* ------------------------------ Rutas Carro de compras-----------------------
 	**/
 	Route::resource('cart', 'CartController', ['except' => ['create']]);
-	Route::get(LaravelLocalization::transRoute('cart.create'), [
+	Route::get(LaravelLocalization::transRoute('cart.routes.create'), [
 		'as' => 'cart.create',
 		'uses' => 'CartController@create'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('cart.change-quantity'), [
+	Route::get(LaravelLocalization::transRoute('cart.routes.change-quantity'), [
 		'as' => 'cart.change-quantity',
 		'uses' => 'CartController@changeQuantity'
 	]);
@@ -618,15 +620,15 @@ function () {
 	/**
 		* ------------------------------ Rutas Lista de Deseos-----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('wishlist.create'), [
+	Route::get(LaravelLocalization::transRoute('wishlist.routes.create'), [
 		'as' => 'wishlist.create',
 		'uses' => 'WishlistController@create'
 	]);
-	Route::get(LaravelLocalization::transRoute('wishlist.index'), [
+	Route::get(LaravelLocalization::transRoute('wishlist.routes.api.index'), [
 		'as' => 'wishlist.index',
 		'uses' => 'WishlistController@index'
 	]);
-	Route::get(LaravelLocalization::transRoute('wishlist.delete-ajax'), [
+	Route::get(LaravelLocalization::transRoute('wishlist.routes.api.delete-ajax'), [
 		'as' => 'wishlist.delete-ajax',
 		'uses' => 'WishlistController@deleteAjax'
 	]);
@@ -634,19 +636,19 @@ function () {
 	/**
 		* ------------------------------ Rutas Carrito de Compras-----------------------
 	**/
-	Route::get(LaravelLocalization::transRoute('cart.show'), [
+	Route::get(LaravelLocalization::transRoute('cart.routes.show'), [
 		'as' => 'cart.show',
 		'uses' => 'CartController@show'
 	]);
-	Route::get(LaravelLocalization::transRoute('cart.create'), [
+	Route::get(LaravelLocalization::transRoute('cart.routes.create'), [
 		'as' => 'cart.create',
 		'uses' => 'CartController@create'
 	]);
-	Route::get(LaravelLocalization::transRoute('cart.index'), [
+	Route::get(LaravelLocalization::transRoute('cart.routes.api.index'), [
 		'as' => 'cart.index',
 		'uses' => 'CartController@index'
 	]);
-	Route::get(LaravelLocalization::transRoute('cart.delete-ajax'), [
+	Route::get(LaravelLocalization::transRoute('cart.routes.api.delete-ajax'), [
 		'as' => 'cart.delete-ajax',
 		'uses' => 'CartController@deleteAjax'
 	]);

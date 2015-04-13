@@ -1,8 +1,11 @@
 <?php 
 	return array(
 		
-		"create" => "crear/foto/producto/{productoId}",
-		"store" => "agregar/foto/producto",
+		"routes" => array(
+			"create" => "fotos-productos/crear/{productoId}",
+			"store" => "fotos-productos/agregar",
+		),
+
 		"title" => "Agregar foto a producto",
 		"subtitle" => "Añadir foto a producto",
 		"create-title"=> "Agregar foto",

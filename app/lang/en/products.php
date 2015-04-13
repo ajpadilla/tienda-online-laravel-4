@@ -1,28 +1,32 @@
 <?php
 	return array(
-		"routes" => array('' => , );
-		"show" => "show/products/{id}",
-		"create" => "create/product",
-		"store" => "add/product",
-		'index'=>'list/product',
-		'edit' => 'edit/product/{id}',
-		'update' => 'update/product',
-		'destroy' => 'delete/product/{id}',
-		'delete-ajax' => 'product/delete-ajax',
+
+		"index-title" => "List of products",
+		"create-title" => "Create Product",
 		"title" => "Add product",
 		"subtitle" => "Create new product",
 		"sending" => "Adding product",
 		"response" => "Product added",
 		"Updated" => "Product update",
 		"Delete" => "¡Product successfully removed!",
-		"search" => "products/search",
-		"saveLang" => 'addLanguageClassified',
-		"create-title" => "Create Product",
-		"index-title" => "List of products",
 		"show-title" => "Show Product",
 		"search-title" => "Search",
-		"order-by-search" => "order-search-results",
-		"filterWord" => "filtrar-palabra",
+		"routes" => array(
+			"show" => "products/show/{id}",
+			"create" => "products/create",
+			"store" => "products/store",
+			'edit' => 'products/edit/{id}',
+			'update' => 'products/update',
+			'destroy' => 'products/destroy/{id}',
+			"search" => "products/search",
+			"order-by-search" => "order-search-results",
+			"filterWord" => "filter-word",
+			"api" => array(
+				'index'=>'products/api/list-products',
+				"delete-ajax" =>"products/api/delete-products",
+				"saveLang" => 'products/api/update-lang',
+			),
+		),
 
 		"labels" => array(
 			'name' =>'Name',
@@ -53,7 +57,8 @@
 			'UnitPrice' => 'Price',
 			'MyWishList' => 'My Wish List',
 			'NewProducts' => 'New Products',
-			'TopProducts' => 'Top Products'
+			'TopProducts' => 'Top Products',
+			'search' => 'Search'
 		),
 
 		"validation" => array(
@@ -109,6 +114,39 @@
 		),
 		'result_search' => array(
 			'title' => 'Search results'
+		),
+
+		'search-blade' => array( 
+			'search-result' => 'Results for',
+			'search-again' => 'Search Again',
+			'search-options' => "Search Options",
+			'products' => 'Products',
+			'classifieds' => 'Classifieds',
+			'categories' => 'Choose categories ...',
+			'condition-product' => 'Condición del producto',
+			'condition-classified' => 'Condition classified',
+			'classified-type' => 'Classified Type',
+			'country' => 'Country',
+			'state' => 'State',
+			'city' => 'City' ,
+			'price' => 'Price',
+			'range' => 'Range',
+			'point-price' => 'Price in points',
+			'show' => 'Show',
+			'order-by' => 'Order by',
+			'name' => 'Name',
+			'rating' => 'Rating',
+			'condition' => 'Condition',
+			'low-high' => '(Low - High)',
+			'high-low' => '(High - Low)',
+			'highest' => '(Highest)', 
+			'lowest' => '(Lowest)', 
+			'new-used' => '(New - Used)',
+			'used-new' => '(Used - New)',
+			'products-for-page' => 'Products per page',
+			'classified-for-page' => 'Classifieds for page',
+			'of' => 'of',
+			'in' => 'Total in page'
 		)
 	);
 

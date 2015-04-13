@@ -1,12 +1,17 @@
 <?php 
 	return array(
-		"create" => "crear/condicion/clasificado",
-		"store" => "agregar/condicion/clasificado",
-		"index" => "lista/condicion/clasificados",
-		"show"=>"ver/condicion/clasificado/{id}",
-		"edit"=>"editar/condicion/clasificado/{id}",
-		"update"=>"actualizar/condicion/clasificado/{id}",
-		"destroy"=>"eliminar/condicion/clasificado/{id}",
+
+		"routes" => array(
+			"create" => "condiciones-clasificados/crear",
+			"store" => "condiciones-clasificados/agregar",
+			"show"=>"condiciones-clasificados/ver/{id}",
+			"edit"=>"condiciones-clasificados/editar/{id}",
+			"update"=>"condiciones-clasificados/actualizar/{id}",
+			"destroy"=>"condiciones-clasificados/elimiar/{id}",
+			"api" => array(
+				"index" => "condiciones-clasificados/api/lista-condiciones-clasificados",
+			),
+		),
 		"title" => "Agregar Condición para clasificados",
 		"subtitle" => "Crear Condición para clasificados",
 		"sending" => "Agregando tipo de clasificado",

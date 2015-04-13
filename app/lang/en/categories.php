@@ -1,12 +1,17 @@
 <?php 
 return array(
-	"create" => "create/category",
-	"store" => "add/category",
-	"index" => "list/category",
-	"show"=>"show/category/{id}",
-	"edit"=>"edit/category/{id}",
-	"update"=>"update/category/{id}",
-	"destroy"=>"delete/category/{id}",
+
+	"routes" => array(
+		"create" => "categories-products/create",
+		"store" => "categories-products/store",
+		"show"=>"categories-products/show/{id}",
+		"edit"=>"categories-products/edit/{id}",
+		"update"=>"categories-products/update/{id}",
+		"destroy"=>"categories-products/destroy/{id}",
+		"api" => array(
+			"index" => "categories-products/api/list-categories-products",
+		),
+	),
 	"title" => "Add category",
 	"subtitle" => "Create category",
 	"sending" => "Adding category",

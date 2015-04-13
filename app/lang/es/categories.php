@@ -1,12 +1,17 @@
 <?php 
 return array(
-	"create" => "crear/categoria",
-	"store" => "agregar/categoria",
-	"index" => "lista/categoria",
-	"show"=>"ver/categoria/{id}",
-	"edit"=>"editar/categoria/{id}",
-	"update"=>"actualizar/categoria/{id}",
-	"destroy"=>"eliminar/categoria/{id}",
+
+	"routes" => array(
+		"create" => "categorias-productos/crear",
+		"store" => "categorias-productos/agregar",
+		"show"=>"categorias-productos/ver/{id}",
+		"edit"=>"categorias-productos/editar/{id}",
+		"update"=>"categorias-productos/actualizar/{id}",
+		"destroy"=>"categorias-productos/eliminar/{id}",
+		"api" => array(
+			"index" => "categorias-productos/api/lista-categorias-productos",
+		),
+	),
 	"title" => "Agregar categoria",
 	"subtitle" => "Crear categoria",
 	"sending" => "Agregando categoria",

@@ -1,12 +1,16 @@
 <?php
 	return array(
-		"create" => "create/language",
-		"store" => "add/language",
-		'index'=>'list/languages',
+
 		"title" => "Agregar lenguaje",
 		"subtitle" => "Crear nuevo lenguaje",
 		"create-title"=> "Create new language",
-
+		"routes" => array(
+			"create" => "languages/create",
+			"store" => "languages/store",
+			"api" => array(
+				'index'=>'languages/api/list-languages',
+			),
+		),
 		"labels" => array(
 			'name' =>'Nombre:',
 			'native_name' => 'Nombre natal:',
