@@ -63,7 +63,6 @@ function () {
 		'as' => 'products.filterWord',
 		'uses' => 'ProductController@getCurrentFilterWorld'
 	]);
-
 	/**
 	* ------------------------------ Rutas para Descuentos ----------------------
 	**/
