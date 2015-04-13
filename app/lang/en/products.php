@@ -1,5 +1,6 @@
 <?php
 	return array(
+		"routes" => array('' => , );
 		"show" => "show/products/{id}",
 		"create" => "create/product",
 		"store" => "add/product",
