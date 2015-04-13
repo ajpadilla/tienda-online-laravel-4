@@ -1,12 +1,16 @@
 <?php 
 	return array(
-		"create" => "crear/tipo/clasificado",
-		"store" => "agregar/tipo/clasificado",
-		"index" => "lista/tipo/clasificado",
-		"show"=>"ver/tipo/clasificado/{id}",
-		"edit"=>"editar/tipo/clasificado/{id}",
-		"update"=>"actualizar/tipo/clasificado/{id}",
-		"destroy"=>"eliminar/tipo/clasificado/{id}",
+		"routes" => array(
+			"create" => "tipos-de-clasificados/crear",
+			"store" => "tipos-de-clasificados/agregar",
+			"show"=>"tipos-de-clasificados/ver/{id}",
+			"edit"=>"tipos-de-clasificados/editar/{id}",
+			"update"=>"tipos-de-clasificados/actualizar/{id}",
+			"destroy"=>"tipos-de-clasificados/eliminar/{id}",
+			"api" => array(
+				"index" => "tipos-de-clasificados/api/lista-tipos-de-clasificados",
+			)
+		),
 		"title" => "Agregar Tipo de clasificado",
 		"subtitle" => "Crear nuevo tipo de clasificado",
 		"sending" => "Agregando tipo de clasificado",
