@@ -175,37 +175,37 @@ function () {
 		* ------------------------------ Rutas shipment status  -----------------------
 	**/
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.create'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.create'), [
 		'as' => 'shipmentStatus.create',
 		'uses' => 'ShipmentStatusController@create'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('shipmentStatus.store'), [
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.store'), [
 		'as' => 'shipmentStatus.store',
 		'uses' => 'ShipmentStatusController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.index'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.index'), [
 		'as' => 'shipmentStatus.index',
 		'uses' => 'ShipmentStatusController@index'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.edit'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.edit'), [
 		'as' => 'shipmentStatus.edit',
 		'uses' => 'ShipmentStatusController@edit'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.show'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.show'), [
 		'as' => 'shipmentStatus.show',
 		'uses' => 'ShipmentStatusController@show'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('shipmentStatus.update'), [
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.update'), [
 		'as' => 'shipmentStatus.update',
 		'uses' => 'ShipmentStatusController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.destroy'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.destroy'), [
 		'as' => 'shipmentStatus.destroy',
 		'uses' => 'ShipmentStatusController@destroy'
 	]);
@@ -219,12 +219,12 @@ function () {
 
    	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
 
 
 	Route::get('returnDataShipmentStatusLang','ShipmentStatusController@returnDataShipmentStatusLang');
 
-	Route::post(LaravelLocalization::transRoute('shipmentStatus.saveLang'), [
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.saveLang'), [
 		'as' => 'shipmentStatus.saveLang',
 		'uses' => 'ShipmentStatusController@saveDataForLanguage'
 	]);

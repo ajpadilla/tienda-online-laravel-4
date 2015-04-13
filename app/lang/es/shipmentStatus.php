@@ -1,13 +1,18 @@
 <?php 
 	return array(
-		"create" => "crear/estatus/envio",
-		"store" => "agregar/estatus/envio",
-		"index"=>'lista/estatus/envio',
-		"show"=>"ver/estatus/envio/{id}",
-		"edit"=>"editar/estatus/envio/{id}",
-		"update"=>"actualizar/estatus/envio",
-		"destroy"=>"eliminar/estatus/envio/{id}",
-		'delete-ajax' => 'status-envio/borrar-ajax',
+		"routes" => array(
+			"create" => "estatus-de-envio/crear",
+			"store" => "estatus-de-envio/agreagr",
+			"index"=>'estatus-de-envio/lista',
+			"show"=>"estatus-de-envio/ver/{id}",
+			"edit"=>"estatus-de-envio/editar/{id}",
+			"update"=>"estatus-de-envio/actualizar",
+			"destroy"=>"estatus-de-envio/eliminar/{id}",
+			"saveLang" => "actualizar-idioma-estatus-de-envio",
+			"api" => array(
+				"delete-ajax" =>"estatus-de-envio/api/delete" 
+			),
+		),
 		"title" => "Agregar estatus de envío",
 		"subtitle" => "Crear estatus de envío",
 		"sending" => "Agregando estatus de envio",
@@ -17,7 +22,6 @@
 		"create-title"=> "Crear estatus de envío",
 		"index-title" => "Lista de estatus de envío",
 		"show-title" => "Ver estatus de envío",
-		"saveLang" => "actualizar-idioma-estatus-envio",
 
 		"labels" => array(
 			'language' => 'Idioma',

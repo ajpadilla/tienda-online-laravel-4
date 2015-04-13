@@ -1,13 +1,13 @@
 <?php
 	return array(
 
+		"title" => "Agregar lenguaje",
+		"subtitle" => "Crear nuevo lenguaje",
+		"create-title"=> "Create new language",
 		"routes" => array(
-			"create" => "create/language",
-			"store" => "add/language",
-			'index'=>'list/languages',
-			"title" => "Agregar lenguaje",
-			"subtitle" => "Crear nuevo lenguaje",
-			"create-title"=> "Create new language",
+			"create" => "languages/create",
+			"store" => "languages/store",
+			'index'=>'languages/index',
 		),
 		"labels" => array(
 			'name' =>'Nombre:',

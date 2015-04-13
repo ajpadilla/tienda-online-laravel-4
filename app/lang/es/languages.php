@@ -1,15 +1,14 @@
 <?php
 	return array(
 
+		"title" => "Agregar idioma",
+		"subtitle" => "Crear nuevo idioma",
+		"create-title"=> "Crear nuevo idioma",
 		"routes" => array(
-			"create" => "crear/idioma",
-			"store" => "agregar/idioma",
-			'index'=>'lista/idiomas',
-			"title" => "Agregar idioma",
-			"subtitle" => "Crear nuevo idioma",
-			"create-title"=> "Crear nuevo idioma",
+			"create" => "idiomas/crear",
+			"store" => "idiomas/agregar",
+			'index'=>'idiomas/lista',
 		),
-
 		"labels" => array(
 			'name' =>'Nombre:',
 			'native_name' => 'Nombre natal:',
