@@ -1,11 +1,17 @@
 <?php
 	return array(
-		"show" => "carrito/ver/{id}/{user?}",
+
+		"routes" => array(
+			"show" => "carrito/ver/{id}/{user?}",
+			"create" => "carrito/agregar/{id}/{quantity?}",
+			"store" => "carrito/guardar",
+			'change-quantity' => "carrito/cambiar-cantidad/{productId}/{quantity}",
+			"api" => array(
+				"index" => "carrito/api/lista-carrito",
+				'delete-ajax' => 'carrito/api/carrito-eliminar-ajax/{id}',
+			)
+		),
 		"show-title" => "Ver Carrito",
-		"create" => "carrito/agregar/{id}/{quantity?}",
-		'delete-ajax' => 'carrito/eliminar-ajax/{id}',
-		"store" => "carrito/guardar",
-		'change-quantity' => "carrito/cambiar-cantidad/{productId}/{quantity}",
 		"cart-empty" => "¿Tu carro de compras está vacío!",
 		"title" => "Carrito",
 
