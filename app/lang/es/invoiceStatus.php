@@ -1,12 +1,19 @@
 <?php 
 	return array(
-		"create" => "crear/estatus/factura",
-		"store" => "agregar/estatus/factura",
-		"index"=>'lista/estatus/factura',
-		"show"=>"ver/estatus/factura/{id}",
-		"edit"=>"editar/estatus/factura/{id}",
-		"update"=>"actualizar/estatus/factura",
-		"destroy"=>"eliminar/estatus/factura/{id}",
+
+		"routes" => array(
+			"create" => "estatus-de-factura/crear",
+			"store" => "estatus-de-factura/agregar",
+			"show"=>"estatus-de-factura/ver/{id}",
+			"edit"=>"estatus-de-factura/editar/{id}",
+			"update"=>"estatus-de-factura/actualizar",
+			"destroy"=>"estatus-de-factura/eliminar/{id}",
+			"api" => array(
+				"index"=>'estatus-de-factura/api/lista-estatus-de-factura',
+				"delete-ajax" =>"estatus-de-factura/api/borrar",
+				"saveLang" => "actualizar-idioma-estatus-factura/api/idioma-estatus-factura",
+			),
+		),
 		"title" => "Agregar estatus para factura",
 		"subtitle" => "Crear estatus para factura",
 		"sending" => "Agregando estatus para factura",
@@ -16,8 +23,6 @@
 		"create-title"=> "Crear estatus de factura",
 		"index-title" => "Lista de estatus de factura",
 		"show-title" => "Ver estatus de factura",
-		'delete-ajax' => 'estatus-factura/borrar-ajax',
-		"saveLang" => "actualizar-idioma-estatus-factura",
 
 		"labels" => array(
 			'language' => 'Idioma',
