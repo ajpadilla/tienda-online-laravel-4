@@ -148,6 +148,10 @@
 			'lowest' => '(Menor)', 
 			'new-used' => '(Nuevo - Usado)',
 			'used-new' => '(Usado - Nuevo)',
+			'products-for-page' => 'Productos por pagina',
+			'classified-for-page' => 'Clasificados por pagina',
+			'of' => 'de',
+			'in' => 'en total en pagina'
 		)
 	);
 

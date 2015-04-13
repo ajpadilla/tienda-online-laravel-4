@@ -142,7 +142,11 @@
 			'highest' => '(Highest)', 
 			'lowest' => '(Lowest)', 
 			'new-used' => '(New - Used)',
-			'used-new' => '(Used - New)'
+			'used-new' => '(Used - New)',
+			'products-for-page' => 'Products per page',
+			'classified-for-page' => 'Classifieds for page',
+			'of' => 'of',
+			'in' => 'Total in page'
 		)
 	);
 
