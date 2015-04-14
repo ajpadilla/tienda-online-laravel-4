@@ -18,7 +18,7 @@ class CreatePaynmentCredentialDetailsTable extends Migration {
 			$table->string('email', 255)->nullable(true)->default(true);
 			$table->string('credit_cart_number', 45)->nullable(true)->default(true);
 			$table->string('credit_cart_security_number', 45)->nullable(true)->default(true);
-			$table->date('credit_cart_expire_date')->nullable(true)->default(true);
+			$table->date('credit_cart_expire_date')->nullable(true);
 			$table->integer('payments_types_id')->unsigned();
 			$table->integer('users_id')->unsigned();
 			$table->integer('card_brands_id')->unsigned();
