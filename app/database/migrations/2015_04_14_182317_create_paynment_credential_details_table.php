@@ -12,7 +12,7 @@ class CreatePaynmentCredentialDetailsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('address', function(Blueprint $table)
+		Schema::create('payment_credential_details', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('email', 255)->nullable(true)->default(true);
@@ -34,7 +34,7 @@ class CreatePaynmentCredentialDetailsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('address');
+		Schema::dropIfExists('payment_credential_details');
 	}
 
 }
