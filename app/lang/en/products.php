@@ -21,7 +21,7 @@
 			"search" => "products/search",
 			"order-by-search" => "order-search-results",
 			"filterWord" => "filter-word",
-			'save-rating' => 'products/save-rating'
+			'save-rating' => 'products/save-rating',
 			"api" => array(
 				'index'=>'products/api/list-products',
 				"delete-ajax" =>"products/api/delete-products",
