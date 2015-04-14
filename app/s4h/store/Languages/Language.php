@@ -75,5 +75,8 @@ class Language extends Eloquent
 		return $this->belongsToMany('s4h\store\Countries\Country','countries_lang','language_id','country_id')->withPivot('name')->withTimestamps();
 	}
 
+	public function paymentsTypes(){
+		return $this->belongsToMany('s4h\store\PaymentsTypes\PaymentsTypes','payments_types_lang','languages_id','payments_types_id')->withPivot('name')->withTimestamps();
+	}
 
 }
