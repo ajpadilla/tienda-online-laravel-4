@@ -17,5 +17,9 @@ class PaymentsTypes extends BaseModel{
 	protected $dates = ['deleted_at'];
 
 	protected $table = 'payments_types';
+
+	public function languages(){
+		return $this->belongsToMany('s4h\store\Languages\Language','payments_types_lang','payments_types_id','languages_id')->withPivot('name')->withTimestamps();
+	}
 }
 
