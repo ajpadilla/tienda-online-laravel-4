@@ -6,11 +6,10 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\Base\BaseModel;
 
-
 /**
 * 
 */
-class ClassName extends AnotherClass
+class CardBrands extends BaseModel
 {
 	use SoftDeletingTrait;
 	protected $softDelete = true;
@@ -18,7 +17,7 @@ class ClassName extends AnotherClass
 	protected $dates = ['deleted_at'];
 
 	protected $table = 'card_brands';
-	
+
 	protected $fillable = ['name'];
 
 
