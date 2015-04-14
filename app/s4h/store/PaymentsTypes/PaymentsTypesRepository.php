@@ -1,4 +1,4 @@
-<?php namespace s4h\store\PaymentCredentialDetails;
+<?php namespace s4h\store\PaymentsTypes;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;

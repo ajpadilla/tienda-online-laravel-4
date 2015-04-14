@@ -1,4 +1,4 @@
-<?php namespace s4h\store\PaymentCredentialDetails;
+<?php namespace s4h\store\PaymentsTypes;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
