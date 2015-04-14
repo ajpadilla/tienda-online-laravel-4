@@ -15,6 +15,8 @@ class CreatePaymentsTypesTable extends Migration {
 		Schema::create('payments_types', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
