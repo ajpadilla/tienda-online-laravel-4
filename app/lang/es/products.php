@@ -22,7 +22,7 @@
 			"search" => "productos/buscar",
 			"order-by-search" => "ordenar-resultados-busqueda",
 			"filterWord" => "palabra-a-filtrar",
-			'save-rating' => 'producto/guardar-rating'
+			'save-rating' => 'producto/guardar-rating',
 			"api" => array(
 				'index'=>'productos/api/lista-productos',
 				"delete-ajax" =>"productos/api/eliminar" ,
