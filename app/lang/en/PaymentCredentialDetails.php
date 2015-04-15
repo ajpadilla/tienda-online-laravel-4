@@ -18,6 +18,7 @@ return array(
 			'index'=>'PaymentCredentialDetails/api/list-PaymentCredentialDetails',
 			"delete-ajax" =>"PaymentCredentialDetails/api/delete-PaymentCredentialDetails",
 			"saveLang" => 'PaymentCredentialDetails/api/update-lang',
+			"getData" => 'PaymentCredentialDetails/api/get-data',
 			),
 		),
 

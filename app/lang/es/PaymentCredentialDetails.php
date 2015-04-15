@@ -20,6 +20,7 @@ return array(
 			'index'=>'DetallesdecredencialesDePago/api/lista-DetallesdecredencialesDePago',
 			"delete-ajax" =>"DetallesdecredencialesDePago/api/eliminar-DetallesdecredencialesDePago",
 			"saveLang" => 'DetallesdecredencialesDePago/api/actualizar-idioma',
+			"getData" => 'DetallesdecredencialesDePago/api/obtener-datos', 
 			),
 		),
 	"labels" => array(
