@@ -26,4 +26,10 @@ class PaymentsTypesRepository extends BaseRepository
     {
     	//
     }
+
+    public function getNameForLanguage()
+    {
+        $language = $this->getCurrentLang();
+        return $language->paymentsTypes()->lists('name','payments_types_id');
+    }
 }
