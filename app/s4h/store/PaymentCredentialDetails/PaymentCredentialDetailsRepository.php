@@ -12,6 +12,11 @@ class PaymentCredentialDetailsRepository extends BaseRepository
       return new PaymentCredentialDetails;
     }
 
+    public function getAll()
+    {
+        return PaymentCredentialDetails::all();
+    }
+
     public function create($data = array())
     {
     	//
