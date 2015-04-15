@@ -74,6 +74,7 @@ class DatabaseSeeder extends Seeder {
 		 $this->call('PeopleTableSeeder');
 		 $this->call('PaymentsTypesTableSeeder');
 		 $this->call('PaymentsTypesLangTableSeeder');
+		 $this->call('CardBrandsTableSeeder');
 	}
 
 }
