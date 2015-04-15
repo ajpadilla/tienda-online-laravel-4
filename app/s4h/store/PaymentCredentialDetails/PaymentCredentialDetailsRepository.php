@@ -19,7 +19,7 @@ class PaymentCredentialDetailsRepository extends BaseRepository
 
     public function create($data = array())
     {
-    	//
+    	return PaymentCredentialDetails::create($data);
     }
 
     public function update($data = array())
