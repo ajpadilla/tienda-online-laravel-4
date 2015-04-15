@@ -7,6 +7,7 @@ return array(
 	"index-title" => "Lista de detalles de credenciales de pago",
 	"create-title" => "Crear detalles de credenciales de pago",
 	"sending" => 'Enviando datos',
+	"response" => 'Credenciales agregadas',
 
 	"routes" => array(
 		"show" => "DetallesdecredencialesDePago/ver/{id}",

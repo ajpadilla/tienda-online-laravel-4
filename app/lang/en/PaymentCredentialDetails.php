@@ -5,7 +5,8 @@ return array(
 	"index-title" => "List Details payment credentials",
 	"create-title" => "Create Details payment credentials",
 	"sending" => 'Sending data',
-	
+	"response" => 'Added credentials',
+
 	"routes" => array(
 		"show" => "PaymentCredentialDetails/show/{id}",
 		"create" => "PaymentCredentialDetails/create",
