@@ -31,4 +31,9 @@ class PaymentCredentialDetailsRepository extends BaseRepository
     {
     	//
     }
+
+    public function getById($credentialId)
+    {
+        return PaymentCredentialDetails::findOrFail($credentialId);
+    }
 }
