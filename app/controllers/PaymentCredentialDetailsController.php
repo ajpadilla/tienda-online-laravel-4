@@ -4,20 +4,25 @@ use s4h\store\PaymentCredentialDetails\PaymentCredentialDetailsRepository;
 use Laracasts\Validation\FormValidationException;
 use s4h\store\PaymentsTypes\PaymentsTypesRepository;
 use s4h\store\CardBrands\CardBrandsRepository;
+use s4h\store\Forms\RegisterCredentialsForm;
+
 
 class PaymentCredentialDetailsController extends \BaseController {
 
 	protected $paymentCredentialDetailsRepository;
 	protected $paymentsTypesRepository;
 	protected $cardBrandsRepository;
+	protected $registerCredentialsForm;
 
 	public function __construct(PaymentCredentialDetailsRepository $paymentCredentialDetailsRepository,
 		PaymentsTypesRepository	$paymentsTypesRepository,
-		CardBrandsRepository $cardBrandsRepository
+		CardBrandsRepository $cardBrandsRepository,
+		RegisterCredentialsForm $registerCredentialsForm
 		) {
 		$this->paymentCredentialDetailsRepository = $paymentCredentialDetailsRepository;
 		$this->paymentsTypesRepository = $paymentsTypesRepository;
 		$this->cardBrandsRepository = $cardBrandsRepository;
+		$this->registerCredentialsForm = $registerCredentialsForm;
 	}
 
 	/**
@@ -57,14 +62,10 @@ class PaymentCredentialDetailsController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registerProductForm->validate($input);
-				$product = $this->productRepository->createNewProduct($input);
-				if ($input['add_photos'] == 1) {
-					return Response::json(['message' => trans('products.response'),
-						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
-					]);
-				}
-				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
+				$input['users_id'] = Auth::user()->id;
+				$this->registerCredentialsForm->validate($input);
+				$credential = $this->paymentCredentialDetailsRepository->create($input);
+				return Response::json([trans('PaymentCredentialDetails.response')]);
 			}
 			catch (FormValidationException $e)
 			{
