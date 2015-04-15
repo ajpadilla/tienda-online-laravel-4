@@ -664,6 +664,50 @@ function () {
 		'as' => 'payment.show',
 		'uses' => 'PaymentController@show'
 	]);
+
+	/**
+		* ------------------------------ Rutas Detalles de credenciales de Pago -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.create'), [
+		'as' => 'PaymentCredentialDetails.create',
+		'uses' => 'PaymentCredentialDetailsController@create'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.store'), [
+		'as' => 'PaymentCredentialDetails.store',
+		'uses' => 'PaymentCredentialDetailsController@store'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.api.index'), [
+		'as' => 'PaymentCredentialDetails.index',
+		'uses' => 'PaymentCredentialDetailsController@index'
+	]);
+
+
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.show'), [
+		'as' => 'PaymentCredentialDetails.show',
+		'uses' => 'PaymentCredentialDetailsController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.edit'), [
+		'as' => 'PaymentCredentialDetails.edit',
+		'uses' => 'PaymentCredentialDetailsController@edit'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.update'), [
+		'as' => 'PaymentCredentialDetails.update',
+		'uses' => 'PaymentCredentialDetailsController@update'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.destroy'), [
+		'as' => 'PaymentCredentialDetails.destroy',
+		'uses' => 'PaymentCredentialDetailsController@destroy'
+	]);
+
+	Route::get('api/PaymentCredentialDetails', array('as'=>'api.PaymentCredentialDetails', 'uses'=>'PaymentCredentialDetailsController@getDatatable'));
+
+
 });
 
 
