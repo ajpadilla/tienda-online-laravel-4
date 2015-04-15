@@ -705,8 +705,7 @@ function () {
 		'uses' => 'PaymentCredentialDetailsController@destroy'
 	]);
 
-	Route::get('api/PaymentCredentialDetails', array('as'=>'api.PaymentCredentialDetails', 'uses'=>'PaymentCredentialDetailsController@getDatatable'));
-
+	Route::get('api/paymentCredentialDetails', array('as'=>'api.paymentCredentialDetails', 'uses'=>'PaymentCredentialDetailsController@getAllInCurrentLangData'));
 
 });
 
