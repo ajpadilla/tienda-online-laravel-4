@@ -707,6 +707,11 @@ function () {
 
 	Route::get('api/paymentCredentialDetails', array('as'=>'api.paymentCredentialDetails', 'uses'=>'PaymentCredentialDetailsController@getAllInCurrentLangData'));
 
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.api.getData'), [
+		'as' => 'PaymentCredentialDetails.getData',
+		'uses' => 'PaymentCredentialDetailsController@getData'
+	]);
+
 });
 
 
