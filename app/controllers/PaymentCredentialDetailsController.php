@@ -2,12 +2,19 @@
 
 use s4h\store\PaymentCredentialDetails\PaymentCredentialDetailsRepository;
 use Laracasts\Validation\FormValidationException;
+use s4h\store\PaymentsTypes\PaymentsTypesRepository;
+
+
 class PaymentCredentialDetailsController extends \BaseController {
 
 	protected $paymentCredentialDetailsRepository;
+	protected $paymentsTypesRepository;
 
-	public function __construct(PaymentCredentialDetailsRepository $paymentCredentialDetailsRepository) {
+	public function __construct(PaymentCredentialDetailsRepository $paymentCredentialDetailsRepository,
+		PaymentsTypesRepository	$paymentsTypesRepository
+		) {
 		$this->paymentCredentialDetailsRepository = $paymentCredentialDetailsRepository;
+		$this->paymentsTypesRepository = $paymentsTypesRepository;
 	}
 
 	/**
@@ -17,7 +24,8 @@ class PaymentCredentialDetailsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('payment_credential_details.index',compact(''));
+		$paymentsTypes = $this->paymentsTypesRepository->getNameForLanguage();
+		return View::make('payment_credential_details.index',compact('paymentsTypes'));
 	}
 
 	/**
@@ -27,7 +35,8 @@ class PaymentCredentialDetailsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('payment_credential_details.create', compact(''));
+		$paymentsTypes = $this->paymentsTypesRepository->getNameForLanguage();
+		return View::make('payment_credential_details.create', compact('paymentsTypes'));
 	}
 
 
