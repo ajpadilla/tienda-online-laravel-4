@@ -7,7 +7,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 	 *
 	 * @return void
 	 */
-		public function run()
+	public function run()
 	{
 		$date = new DateTime;
 
@@ -17,7 +17,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Cash',
@@ -25,7 +25,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Tarjeta de credito', 
@@ -33,7 +33,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Credit Card',
@@ -41,7 +41,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'PayPal', 
@@ -49,7 +49,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'PayPal',
@@ -57,7 +57,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Cheque', 
@@ -65,7 +65,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Cheque',
@@ -73,7 +73,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Débito Directo', 
@@ -81,7 +81,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Direct Debit',
@@ -89,7 +89,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Orden Permanente', 
@@ -97,7 +97,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Standing Order',
@@ -105,7 +105,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Transferencia Bancaria', 
@@ -113,7 +113,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Bank Transfer',
@@ -121,7 +121,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Pagare', 
@@ -129,7 +129,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 1,  
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')             
-		);  
+			);  
 
 		$payments_types_lang [] = array(
 			'name' => 'Note Payable',
@@ -137,7 +137,7 @@ class PaymentsTypesLangTableSeeder extends DatabaseSeeder {
 			'languages_id' => 2,
 			'created_at' => $date->format('Y-m-d h:m:s'),
 			'updated_at' => $date->format('Y-m-d h:m:s')    
-		);  
+			);  
 
 		// Uncomment the below to run the seeder
 		DB::table('payments_types_lang')->insert($payments_types_lang);
