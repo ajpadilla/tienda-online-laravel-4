@@ -21,4 +21,15 @@ class PaymentCredentialDetails extends BaseModel{
 
 	protected $fillable = ['email','credit_cart_number','credit_cart_security_numbe','credit_cart_expire_date','payments_types_id','users_id','card_brands_id'];
 	
+	public function paymentsTypes(){
+		return $this->belongsTo('s4h\store\PaymentsTypes\PaymentsTypes','payments_types_id');
+	}
+
+	public function user(){
+		return $this->belongsTo('s4h\store\Users\User','users_id');
+	}
+
+	public function cardBrand(){
+		return $this->belongsTo('s4h\store\CardBrands\CardBrands','card_brands_id');
+	}
 }
