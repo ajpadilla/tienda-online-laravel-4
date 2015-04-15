@@ -3,18 +3,21 @@
 use s4h\store\PaymentCredentialDetails\PaymentCredentialDetailsRepository;
 use Laracasts\Validation\FormValidationException;
 use s4h\store\PaymentsTypes\PaymentsTypesRepository;
-
+use s4h\store\CardBrands\CardBrandsRepository;
 
 class PaymentCredentialDetailsController extends \BaseController {
 
 	protected $paymentCredentialDetailsRepository;
 	protected $paymentsTypesRepository;
+	protected $cardBrandsRepository;
 
 	public function __construct(PaymentCredentialDetailsRepository $paymentCredentialDetailsRepository,
-		PaymentsTypesRepository	$paymentsTypesRepository
+		PaymentsTypesRepository	$paymentsTypesRepository,
+		CardBrandsRepository $cardBrandsRepository
 		) {
 		$this->paymentCredentialDetailsRepository = $paymentCredentialDetailsRepository;
 		$this->paymentsTypesRepository = $paymentsTypesRepository;
+		$this->cardBrandsRepository = $cardBrandsRepository;
 	}
 
 	/**
@@ -25,7 +28,8 @@ class PaymentCredentialDetailsController extends \BaseController {
 	public function index()
 	{
 		$paymentsTypes = $this->paymentsTypesRepository->getNameForLanguage();
-		return View::make('payment_credential_details.index',compact('paymentsTypes'));
+		$cardBrands = $this->cardBrandsRepository->listAll();
+		return View::make('payment_credential_details.index',compact('paymentsTypes','cardBrands'));
 	}
 
 	/**
@@ -36,7 +40,8 @@ class PaymentCredentialDetailsController extends \BaseController {
 	public function create()
 	{
 		$paymentsTypes = $this->paymentsTypesRepository->getNameForLanguage();
-		return View::make('payment_credential_details.create', compact('paymentsTypes'));
+		$cardBrands = $this->cardBrandsRepository->listAll();
+		return View::make('payment_credential_details.create', compact('paymentsTypes','cardBrands'));
 	}
 
 
