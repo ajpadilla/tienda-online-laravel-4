@@ -24,7 +24,7 @@ class PaymentCredentialDetailsTableSeeder extends DatabaseSeeder
 		{
 			$paymentType = $faker->randomElement($paymentsTypes);
 			$user = $faker->randomElement($users);
-			$cardBrand = $faker->randomElement($users);
+			$cardBrand = $faker->randomElement($cardBrands);
 
 			PaymentCredentialDetails::create([
 				'email' => $user['email'],
