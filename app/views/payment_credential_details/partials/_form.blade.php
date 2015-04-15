@@ -53,7 +53,7 @@
 		{{ Form::label('card_brand', trans('PaymentCredentialDetails.labels.card_brands'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			{{
-				Form::select('card_brand', array(), null,
+				Form::select('card_brand', $cardBrands, null,
 				['class' => 'chosen-select form-control', 'data-placeholder' => 'Card brands...', 'id' => 'card_brand'])
 			}}
 		</div>
