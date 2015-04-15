@@ -160,7 +160,17 @@ class PaymentCredentialDetailsController extends \BaseController {
 
 		$collection->addColumn('Actions', function($model)
 		{
-			return 0;
+			
+			$links =  "<button href='#fancybox-show-product' id='show_".$model->id."' class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Show')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Show')."' ><i class='fa fa-check fa-2x'></i>
+					 </button><br/>";
+
+			$links.= "<button href='#fancybox-edit-product' id='edit_".$model->id."' class='btn btn-warning btn-outline dim col-sm-6 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Edit')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>";
+
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6' id='delet_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Delete')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>";
+
+			return $links;
 		});
 
 		return $collection->make();
