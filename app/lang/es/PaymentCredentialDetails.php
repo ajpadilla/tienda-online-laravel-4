@@ -46,5 +46,10 @@ return array(
 		'subtitle' => 'Lista de detalles de credenciales de pago',
 		),
 
+		'actions' => array(
+			'Show' => 'Ver   ',
+			'Edit' => 'Editar',
+			'Delete' => 'Eliminar',
+		),
 	);
 

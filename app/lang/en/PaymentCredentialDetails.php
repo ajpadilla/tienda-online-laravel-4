@@ -30,7 +30,7 @@ return array(
 		'payments_types'		=> 'Payment  type',
 		'card_brands'	=> 'Card Brands',
 		'save' => 'Save'
-	),
+		),
 
 	'list' => array(
 		'email'	=> 'Email',
@@ -43,5 +43,11 @@ return array(
 		'card_brands'	=> 'Card Brands',
 		'title' => 'List Details payment credentials',
 		'subtitle' => 'List details of payment credentials',
+		),
+
+	'actions' => array(
+		'Show' => 'Show',
+		'Edit' => 'Edit',
+		'Delete' => 'Delete',
 		),
 	);
