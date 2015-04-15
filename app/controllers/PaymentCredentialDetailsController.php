@@ -161,19 +161,33 @@ class PaymentCredentialDetailsController extends \BaseController {
 		$collection->addColumn('Actions', function($model)
 		{
 			
-			$links =  "<button href='#fancybox-show-product' id='show_".$model->id."' class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Show')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Show')."' ><i class='fa fa-check fa-2x'></i>
+			$links =  "<button href='#fancybox-show-credential' id='show_".$model->id."' class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Show')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Show')."' ><i class='fa fa-check fa-2x'></i>
 					 </button><br/>";
 
-			$links.= "<button href='#fancybox-edit-product' id='edit_".$model->id."' class='btn btn-warning btn-outline dim col-sm-6 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Edit')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+			$links.= "<button href='#fancybox-edit-credential' id='edit_".$model->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Edit')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>";
 
-			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6' id='delet_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Delete')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('PaymentCredentialDetails.actions.Delete')."'  data-original-title='".trans('PaymentCredentialDetails.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>";
 
 			return $links;
 		});
 
 		return $collection->make();
+	}
+
+	public function getData()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('credentialId'))
+			{
+				 $credential = $this->paymentCredentialDetailsRepository->getById(Input::get('credentialId'), Input::get('languageId'));
+				 return Response::json(['success' => true, 'credential' => $credential]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
 	}
 
 }
