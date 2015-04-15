@@ -50,7 +50,6 @@
      					 email: true,
 					},
 					credit_cart_number:{
-						rangelength: [10, 255]
 					},
 				},
 				messages:{
