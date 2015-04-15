@@ -25,7 +25,7 @@
 	<div class="form-group">
 		{{ Form::label('credit_cart_security_number',  trans('PaymentCredentialDetails.labels.credit_cart_security_number') , ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('credit_cart_security_numbe', null, ['class' => 'form-control', 'placeholder' => 'Credit cart security number', 'id' => 'credit_cart_security_numbe']) }}
+			{{ Form::text('credit_cart_security_number', null, ['class' => 'form-control', 'placeholder' => 'Credit cart security number', 'id' => 'credit_cart_security_number']) }}
 		</div>
 	</div>
 
@@ -40,21 +40,21 @@
 
 <div class="col-lg-7">
 	<div class="form-group">
-		{{ Form::label('payments_types', trans('PaymentCredentialDetails.labels.payments_types'), ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('payments_types_id', trans('PaymentCredentialDetails.labels.payments_types'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			{{
-				Form::select('payments_types', $paymentsTypes, null,
-				['class' => 'chosen-select form-control','data-placeholder' => 'Payments Types', 'id' =>'payments_types'])
+				Form::select('payments_types_id', $paymentsTypes, null,
+				['class' => 'chosen-select form-control','data-placeholder' => 'Payments Types', 'id' =>'payments_types_id'])
 			}}
 		</div>
 	</div>
 
 	<div class="form-group">
-		{{ Form::label('card_brand', trans('PaymentCredentialDetails.labels.card_brands'), ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('card_brands_id', trans('PaymentCredentialDetails.labels.card_brands'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			{{
-				Form::select('card_brand', $cardBrands, null,
-				['class' => 'chosen-select form-control', 'data-placeholder' => 'Card brands...', 'id' => 'card_brand'])
+				Form::select('card_brands_id', $cardBrands, null,
+				['class' => 'chosen-select form-control', 'data-placeholder' => 'Card brands...', 'id' => 'card_brands_id'])
 			}}
 		</div>
 	</div>
