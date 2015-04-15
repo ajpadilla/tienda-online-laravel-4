@@ -9,9 +9,9 @@ use s4h\store\Base\BaseModel;
 /**
 * 
 */
-class CardBrands extends BaseModel
-{
+class CardBrands extends BaseModel{
 	use SoftDeletingTrait;
+
 	protected $softDelete = true;
 
 	protected $dates = ['deleted_at'];
