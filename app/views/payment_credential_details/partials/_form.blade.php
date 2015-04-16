@@ -63,7 +63,7 @@
 <div class="col-lg-6 col-lg-offset-2">
 	<div class="form-group">
 		<div class="col-sm-3">
-			<button type="submit" class="pull-right btn btn-primary" name="add_photos" value="0">{{ trans('PaymentCredentialDetails.labels.save') }}</button>
+			<button type="submit" class="pull-right btn btn-primary" name="save" value="0">{{ trans('PaymentCredentialDetails.labels.save') }}</button>
 		</div>
 	</div>
 </div>
