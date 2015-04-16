@@ -19,12 +19,14 @@ class PaymentCredentialDetailsRepository extends BaseRepository
 
     public function create($data = array())
     {
+        $data['credit_cart_expire_date'] = date("Y-m-d",strtotime($data['credit_cart_expire_date']));
     	return PaymentCredentialDetails::create($data);
     }
 
     public function update($data = array())
     {
         $credential = $this->getById($data['credential_id']);
+        $data['credit_cart_expire_date'] = date("Y-m-d",strtotime($data['credit_cart_expire_date']));
     	return $credential->update($data);
     }
 
