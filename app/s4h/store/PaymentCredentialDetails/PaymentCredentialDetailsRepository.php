@@ -24,7 +24,8 @@ class PaymentCredentialDetailsRepository extends BaseRepository
 
     public function update($data = array())
     {
-    	//
+        $credential = $this->getById($data['credential_id']);
+    	return $credential->update($data);
     }
 
     public function delete($id)
