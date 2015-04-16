@@ -13,7 +13,7 @@ return array(
 		"store" => "PaymentCredentialDetails/store",
 		'edit' => 'PaymentCredentialDetails/edit/{id}',
 		'update' => 'PaymentCredentialDetails/update',
-		'destroy' => 'PaymentCredentialDetails/destroy/{id}',
+		'destroy' => 'PaymentCredentialDetails/destroy',
 		"api" => array(
 			'index'=>'PaymentCredentialDetails/api/list-PaymentCredentialDetails',
 			"delete-ajax" =>"PaymentCredentialDetails/api/delete-PaymentCredentialDetails",

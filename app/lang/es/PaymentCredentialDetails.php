@@ -9,14 +9,13 @@ return array(
 	"date" => 'dd-mm-yy',
 	"sending" => 'Enviando datos',
 	"response" => 'Credenciales agregadas',
-
 	"routes" => array(
 		"show" => "DetallesdecredencialesDePago/ver/{id}",
 		"create" => "DetallesdecredencialesDePago/crear",
 		"store" => "DetallesdecredencialesDePago/agregar",
 		'edit' => 'DetallesdecredencialesDePago/editar/{id}',
 		'update' => 'DetallesdecredencialesDePago/actualizar',
-		'destroy' => 'DetallesdecredencialesDePago/eliminar/{id}',
+		'destroy' => 'DetallesdecredencialesDePago/eliminar',
 		"api" => array(
 			'index'=>'DetallesdecredencialesDePago/api/lista-DetallesdecredencialesDePago',
 			"delete-ajax" =>"DetallesdecredencialesDePago/api/eliminar-DetallesdecredencialesDePago",
