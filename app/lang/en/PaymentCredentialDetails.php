@@ -6,7 +6,7 @@ return array(
 	"create-title" => "Create Details payment credentials",
 	"sending" => 'Sending data',
 	"response" => 'Added credentials',
-
+	"date" => 'yy-mm-dd',
 	"routes" => array(
 		"show" => "PaymentCredentialDetails/show/{id}",
 		"create" => "PaymentCredentialDetails/create",

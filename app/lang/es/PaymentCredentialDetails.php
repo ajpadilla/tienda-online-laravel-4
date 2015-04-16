@@ -6,6 +6,7 @@ return array(
 	'subtitle' => 'Agregar detalles de credenciales de pago',
 	"index-title" => "Lista de detalles de credenciales de pago",
 	"create-title" => "Crear detalles de credenciales de pago",
+	"date" => 'dd-mm-yy',
 	"sending" => 'Enviando datos',
 	"response" => 'Credenciales agregadas',
 
@@ -27,7 +28,7 @@ return array(
 		'new' => 'Nuevo',
 		'email' => 'Email',
 		'credit_cart_number' => 'Nro de tarjeta de credito',
-		'credit_cart_security_numbe' => 'Nro de seguridad de tarjeta de credito',
+		'credit_cart_security_number' => 'Nro de seguridad de tarjeta de credito',
 		'credit_cart_expire_date'	=> 'Fecha de vencimiento tarjeta de credito',
 		'payments_types'		=> 'Tipo de pago ',
 		'card_brands'	=> 'Marca de la tarjeta',
