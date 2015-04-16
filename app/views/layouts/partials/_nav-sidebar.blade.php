@@ -86,9 +86,17 @@
                         <ul class="nav nav-second-level">
                             <li><a href="{{URL::route('classifieds.create')}}">Crear</a></li>
                             <li><a href="{{URL::route('classifieds.index')}}">Listar</a></li>
-                            <li><a href="{{URL::route('classifieds.search')}}">Buscar</a></li>
                         </ul>
                     </li>
+        
+                     <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Credenciales de pago</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{{ URL::route('PaymentCredentialDetails.create') }}">Crear</a></li>
+                            <li><a href="{{ URL::route('PaymentCredentialDetails.index') }}">Listar</a></li>
+                        </ul>
+                    </li>
+
                     <li>
                         <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
                         <ul class="nav nav-second-level">
