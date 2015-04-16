@@ -89,7 +89,8 @@
 		{
 			// Iniciar select chosen
 			$('.chosen-select').chosen({width: "95%"});
-
+			
+			//Iniciar datepicker
 			$('#credit_cart_expire_date').datepicker({
 				showButtonPanel: true,
 				changeMonth: true,
@@ -196,7 +197,6 @@
 				});
 			}
 
-
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
 			}, '{{ trans('products.validation.onlyLettersNumbersAndSpaces') }}');
@@ -208,7 +208,7 @@
 			jQuery.validator.addMethod("decimalNumbers", function(value, element) {
 				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
 			}, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
-			
+
 			jQuery.validator.addMethod('customDateValidator', function(value, element) {
 				try{
 					jQuery.datepicker.parseDate( '{{ trans('PaymentCredentialDetails.date') }}' , value);return true;}
@@ -256,7 +256,7 @@
 		// pre-submit callback
 		function showRequest(formData, jqForm, options) {
 			setTimeout($.fancybox({
-				'content':'<h1>' + '{{ trans('products.sending') }}' + '</h1>',
+				'content':'<h1>' + '{{ trans('PaymentCredentialDetails.sending') }}' + '</h1>',
 				'autoScale' : true,
 				'transitionIn' : 'none',
 				'transitionOut' : 'none',
