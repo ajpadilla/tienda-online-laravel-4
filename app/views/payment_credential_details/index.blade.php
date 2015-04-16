@@ -123,6 +123,8 @@
 							loadDataToEdit(numberId);
 						}else if(type == "show"){
 							loadDataToShow(numberId);
+						}else{
+							deleteData(numberId);
 						}
 					}			
 				});
@@ -172,6 +174,21 @@
 					}
 				});
 			}
+
+			function deleteData(credentialId) {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('PaymentCredentialDetails.delete-ajax') }}',
+					data: {'credentialId': credentialId},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#delet_'+credentialId).parent().parent().remove();
+						};
+					}
+				});
+			}
+
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
