@@ -136,9 +136,19 @@ class PaymentCredentialDetailsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		if (Request::ajax())
+		{
+			if (Input::has('credentialId'))
+			{
+				$this->paymentCredentialDetailsRepository->delete(Input::get('credentialId'));
+				return Response::json(['success' => true]);
+			}else{
+				return Response::json(['success' => false]);
+			}
+		}
+		return Response::json(['success' => false]);
 	}
 
 	public function getAllInCurrentLangData()
