@@ -46,6 +46,18 @@ return array(
 		'subtitle' => 'List details of payment credentials',
 		),
 
+	"validation" => array(
+			'required' => 'The field is required.',
+			'rangelength' => 'Please enter a value between ',
+			'characters' => 'Characters.',
+			'number' => 'The field must be a number.',
+			'digits' => 'Please enter whole numbers only.',
+			'date' => 'Please enter a valid date.',
+			'onlyLettersNumbersAndSpaces' => 'Enter only letters, numbers and/or spaces.',
+			'onlyLettersNumbersAndDash' => 'Enter only letters, numbers and/or dash.',
+			'email' => 'Please enter a valid email address.'
+		),
+
 	'actions' => array(
 		'Show' => 'Show',
 		'Edit' => 'Edit',
