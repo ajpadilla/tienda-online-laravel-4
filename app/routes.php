@@ -700,8 +700,8 @@ function () {
 		'uses' => 'PaymentCredentialDetailsController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.destroy'), [
-		'as' => 'PaymentCredentialDetails.destroy',
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.api.delete-ajax'), [
+		'as' => 'PaymentCredentialDetails.delete-ajax',
 		'uses' => 'PaymentCredentialDetailsController@destroy'
 	]);
 
@@ -711,6 +711,8 @@ function () {
 		'as' => 'PaymentCredentialDetails.getData',
 		'uses' => 'PaymentCredentialDetailsController@getData'
 	]);
+
+	
 
 });
 
