@@ -104,6 +104,7 @@
 				closeEffect	: 'elastic',
 				centerOnScroll: true,
 				hideOnOverlayClick: true,
+				hideOnContentClick : true,
 				beforeLoad: loadData()
 			});
 
@@ -112,6 +113,7 @@
 				closeEffect	: 'elastic',
 				centerOnScroll: true,
 				hideOnOverlayClick: true,
+				hideOnContentClick : true,
 				beforeLoad: loadData()
 			});
 
@@ -273,6 +275,18 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
+			
+			/*bootbox.dialog({
+				message: " ha sido Actualizado correctamente!",
+				title: "Éxito",
+				buttons: {
+					success: {
+						label: "Success!",
+						className: "btn-success"
+					}
+				}
+			});*/
+		
 			return $('#formEditCredential').valid();
 		}
 
@@ -286,5 +300,3 @@
 		}
 	</script>
 @stop
-
-
