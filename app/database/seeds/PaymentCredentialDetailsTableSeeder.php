@@ -24,15 +24,15 @@ class PaymentCredentialDetailsTableSeeder extends DatabaseSeeder
 		{
 			$paymentType = $faker->randomElement($paymentsTypes);
 			$user = $faker->randomElement($users);
-			$cardBrand = $faker->randomElement($users);
+			$cardBrand = $faker->randomElement($cardBrands);
 
 			PaymentCredentialDetails::create([
 				'email' => $user['email'],
 				'credit_cart_number' => $faker->creditCardNumber,
 				'credit_cart_security_number' => $faker->swiftBicNumber,
 				'credit_cart_expire_date' => $faker->creditCardExpirationDate,
-				'payments_types_id' =>$paymentType['id'],
-				'users_id' =>$user['id'],
+				'payments_types_id' => $paymentType['id'],
+				'users_id' => $user['id'],
 				'card_brands_id' =>$cardBrand['id'],
 			]);
 		}

@@ -12,18 +12,32 @@ class PaymentCredentialDetailsRepository extends BaseRepository
       return new PaymentCredentialDetails;
     }
 
+    public function getAll()
+    {
+        return PaymentCredentialDetails::all();
+    }
+
     public function create($data = array())
     {
-    	//
+        $data['credit_cart_expire_date'] = date("Y-m-d",strtotime($data['credit_cart_expire_date']));
+    	return PaymentCredentialDetails::create($data);
     }
 
     public function update($data = array())
     {
-    	//
+        $credential = $this->getById($data['credential_id']);
+        $data['credit_cart_expire_date'] = date("Y-m-d",strtotime($data['credit_cart_expire_date']));
+    	return $credential->update($data);
     }
 
-    public function delete($id)
+    public function delete($credentialId)
     {
-    	//
+    	 $credential = $this->getById($credentialId);
+         $credential->delete();
+    }
+
+    public function getById($credentialId)
+    {
+        return PaymentCredentialDetails::findOrFail($credentialId);
     }
 }

@@ -1,15 +1,25 @@
-<?php namespace s4h\store\PaymentsTypes;
+<?php namespace s4h\store\CardBrands;
 
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\Base\BaseRepository;
-use s4h\store\PaymentsTypes\PaymentsTypes;
+use s4h\store\CardBrands\CardBrands;
 
-class PaymentsTypesRepository extends BaseRepository
+class CardBrandsRepository extends BaseRepository
 {
 	public function getModel()
     {
-      return new PaymentsTypes;
+      return new CardBrands;
+    }
+
+    public function getAll()
+    {
+        return CardBrands::all();
+    }
+
+    public function listAll()
+    {
+        return CardBrands::all()->lists('name','id');
     }
 
     public function create($data = array())
@@ -27,9 +37,4 @@ class PaymentsTypesRepository extends BaseRepository
     	//
     }
 
-    public function getNameForLanguage()
-    {
-        $language = $this->getCurrentLang();
-        return $language->paymentsTypes()->lists('name','payments_types_id');
-    }
 }

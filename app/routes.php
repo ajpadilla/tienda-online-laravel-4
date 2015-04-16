@@ -700,13 +700,19 @@ function () {
 		'uses' => 'PaymentCredentialDetailsController@update'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.destroy'), [
-		'as' => 'PaymentCredentialDetails.destroy',
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.api.delete-ajax'), [
+		'as' => 'PaymentCredentialDetails.delete-ajax',
 		'uses' => 'PaymentCredentialDetailsController@destroy'
 	]);
 
-	Route::get('api/PaymentCredentialDetails', array('as'=>'api.PaymentCredentialDetails', 'uses'=>'PaymentCredentialDetailsController@getDatatable'));
+	Route::get('api/paymentCredentialDetails', array('as'=>'api.paymentCredentialDetails', 'uses'=>'PaymentCredentialDetailsController@getAllInCurrentLangData'));
 
+	Route::get(LaravelLocalization::transRoute('PaymentCredentialDetails.routes.api.getData'), [
+		'as' => 'PaymentCredentialDetails.getData',
+		'uses' => 'PaymentCredentialDetailsController@getData'
+	]);
+
+	
 
 });
 
