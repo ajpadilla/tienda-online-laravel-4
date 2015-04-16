@@ -32,6 +32,13 @@
 			// Iniciar select chosen
 			$('.chosen-select').chosen();
 
+			$('#credit_cart_expire_date').datepicker({
+				showButtonPanel: true,
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: '{{ trans('PaymentCredentialDetails.date') }}',
+			});
+
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
 			}, '{{ trans('products.validation.onlyLettersNumbersAndSpaces') }}');
@@ -44,16 +51,29 @@
 				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
 			}, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
 
+			jQuery.validator.addMethod('customDateValidator', function(value, element) {
+				try{
+					jQuery.datepicker.parseDate( '{{ trans('PaymentCredentialDetails.date') }}' , value);return true;}
+					catch(e){return false;}
+				},'{{ trans('discounts.validation.date') }}');
+
 			$('#formCreateCredentials').validate({
 				rules:{
 					email:{
      					 email: true,
 					},
 					credit_cart_number:{
+						onlyLettersNumbersAndSpaces:true
 					},
+					credit_cart_security_number:{
+						onlyLettersNumbersAndSpaces:true
+					},
+					credit_cart_expire_date:{
+						customDateValidator:true
+					}
 				},
 				messages:{
-					
+					email: '{{trans('PaymentCredentialDetails.validation.email')}}'
 				},
 				highlight:function(element){
 					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
