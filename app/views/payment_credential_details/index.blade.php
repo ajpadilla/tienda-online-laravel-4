@@ -90,6 +90,13 @@
 			// Iniciar select chosen
 			$('.chosen-select').chosen({width: "95%"});
 
+			$('#credit_cart_expire_date').datepicker({
+				showButtonPanel: true,
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: '{{ trans('PaymentCredentialDetails.date') }}',
+			});
+
 			$('.show').fancybox({
 				openEffect	: 'elastic',
 				closeEffect	: 'elastic',
