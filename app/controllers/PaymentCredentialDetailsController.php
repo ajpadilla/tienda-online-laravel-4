@@ -5,6 +5,7 @@ use Laracasts\Validation\FormValidationException;
 use s4h\store\PaymentsTypes\PaymentsTypesRepository;
 use s4h\store\CardBrands\CardBrandsRepository;
 use s4h\store\Forms\RegisterCredentialsForm;
+use s4h\store\Forms\EditCredentialForm;
 
 
 class PaymentCredentialDetailsController extends \BaseController {
@@ -13,16 +14,19 @@ class PaymentCredentialDetailsController extends \BaseController {
 	protected $paymentsTypesRepository;
 	protected $cardBrandsRepository;
 	protected $registerCredentialsForm;
+	protected $editCredentialForm;
 
 	public function __construct(PaymentCredentialDetailsRepository $paymentCredentialDetailsRepository,
 		PaymentsTypesRepository	$paymentsTypesRepository,
 		CardBrandsRepository $cardBrandsRepository,
-		RegisterCredentialsForm $registerCredentialsForm
+		RegisterCredentialsForm $registerCredentialsForm,
+		EditCredentialForm $editCredentialForm
 		) {
 		$this->paymentCredentialDetailsRepository = $paymentCredentialDetailsRepository;
 		$this->paymentsTypesRepository = $paymentsTypesRepository;
 		$this->cardBrandsRepository = $cardBrandsRepository;
 		$this->registerCredentialsForm = $registerCredentialsForm;
+		$this->editCredentialForm = $editCredentialForm;
 	}
 
 	/**
@@ -105,9 +109,24 @@ class PaymentCredentialDetailsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		//return Input::all();
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$input['users_id'] = Auth::user()->id;
+				$this->editCredentialForm->validate($input);
+				$credential = $this->paymentCredentialDetailsRepository->update($input);
+				return trans('PaymentCredentialDetails.response');
+			}
+			catch (FormValidationException $e)
+			{
+				return Response::json($e->getErrors()->all());
+			}
+		}
 	}
 
 
@@ -182,8 +201,12 @@ class PaymentCredentialDetailsController extends \BaseController {
 		{
 			if (Input::has('credentialId'))
 			{
-				 $credential = $this->paymentCredentialDetailsRepository->getById(Input::get('credentialId'), Input::get('languageId'));
-				 return Response::json(['success' => true, 'credential' => $credential]);
+				 $credential = $this->paymentCredentialDetailsRepository->getById(Input::get('credentialId'));
+				 return Response::json(['success' => true, 
+				 	'credential' => $credential,
+				 	'paymentTypes' => $credential->paymentsTypes->getInCurrentLangAttribute()->name,
+				 	'cardBrand' => $credential->cardBrand->name
+				 	]);
 			}else{
 				return Response::json(['success' => false]);
 			}
