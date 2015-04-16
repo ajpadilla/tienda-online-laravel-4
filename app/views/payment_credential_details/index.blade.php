@@ -89,7 +89,7 @@
 		{
 			// Iniciar select chosen
 			$('.chosen-select').chosen({width: "95%"});
-			
+
 			//Iniciar datepicker
 			$('#credit_cart_expire_date').datepicker({
 				showButtonPanel: true,
@@ -151,7 +151,8 @@
 							$('#email_show').val(response.credential.email);
 							$('#credit_cart_number_show').val(response.credential.credit_cart_number);
 							$('#credit_cart_security_number_show').val(response.credential.credit_cart_security_number);
-							$('#credit_cart_expire_date_show').val(response.credential.credit_cart_expire_date);
+							$('#credit_cart_expire_date_show').val($.datepicker.formatDate('{{ trans('PaymentCredentialDetails.date') }}', 
+								new Date(response.credential.credit_cart_expire_date)));
 							$('#payments_types_id_show').val(response.paymentTypes);
 							$('#card_brands_id_show').val(response.cardBrand);
 							$('.chosen-select').trigger("chosen:updated");
@@ -174,7 +175,12 @@
 							$('#email').val(response.credential.email);
 							$('#credit_cart_number').val(response.credential.credit_cart_number);
 							$('#credit_cart_security_number').val(response.credential.credit_cart_security_number);
-							$('#credit_cart_expire_date').val(response.credential.credit_cart_expire_date);
+							$('#credit_cart_expire_date').val(
+								$.datepicker.formatDate(
+									'{{ trans('PaymentCredentialDetails.date') }}', 
+									new Date(response.credential.credit_cart_expire_date)
+								)
+                        	);
 							$('#payments_types_id').val(response.credential.payments_types_id);
 							$('#card_brands_id').val(response.credential.card_brands_id);
 							$('.chosen-select').trigger("chosen:updated");
