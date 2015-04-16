@@ -87,6 +87,7 @@
 	<script type="text/javascript">
 		$(document).ready(function () 
 		{
+			
 			// Iniciar select chosen
 			$('.chosen-select').chosen({width: "95%"});
 
