@@ -70,7 +70,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'PaymentCredentialDetails.edit', 'class' => 'form-horizontal', 'id' => 'formEditCredential'])}}
+							{{Form::open(['route' => 'PaymentCredentialDetails.update', 'class' => 'form-horizontal', 'id' => 'formEditCredential'])}}
 								@include('payment_credential_details.partials._form')
 							{{Form::close()}}
 						</div>
@@ -92,7 +92,7 @@
 
 			$('.show').fancybox({
 				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
+				closeEffect	: 'elastic',
 				centerOnScroll: true,
 				hideOnOverlayClick: true,
 				beforeLoad: loadData()
@@ -100,7 +100,7 @@
 
 			$('.edit').fancybox({
 				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
+				closeEffect	: 'elastic',
 				centerOnScroll: true,
 				hideOnOverlayClick: true,
 				beforeLoad: loadData()
@@ -121,8 +121,32 @@
 
 						if (type == "edit") {
 							loadDataToEdit(numberId);
+						}else if(type == "show"){
+							loadDataToShow(numberId);
 						}
 					}			
+				});
+			}
+
+			function loadDataToShow(credentialId) {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('PaymentCredentialDetails.getData') }}',	
+					data: {'credentialId': credentialId},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							//console.log(response.credential)
+							$('#credential_id_show').val(response.credential.id);
+							$('#email_show').val(response.credential.email);
+							$('#credit_cart_number_show').val(response.credential.credit_cart_number);
+							$('#credit_cart_security_number_show').val(response.credential.credit_cart_security_number);
+							$('#credit_cart_expire_date_show').val(response.credential.credit_cart_expire_date);
+							$('#payments_types_id_show').val(response.paymentTypes);
+							$('#card_brands_id_show').val(response.cardBrand);
+							$('.chosen-select').trigger("chosen:updated");
+						}
+					}
 				});
 			}
 
@@ -135,7 +159,7 @@
 					dataType: "JSON",
 					success: function(response) {
 						if (response.success == true) {
-							console.log(response.credential)
+							//console.log(response.credential)
 							$('#credential_id').val(response.credential.id);
 							$('#email').val(response.credential.email);
 							$('#credit_cart_number').val(response.credential.credit_cart_number);
@@ -149,8 +173,73 @@
 				});
 			}
 
+			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+			}, '{{ trans('products.validation.onlyLettersNumbersAndSpaces') }}');
 
+			$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+			}, '{{ trans('products.validation.onlyLettersNumbersAndDash') }}');
+
+			jQuery.validator.addMethod("decimalNumbers", function(value, element) {
+				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
+			}, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
+
+			$('#formEditCredential').validate({
+				rules:{
+					email:{
+     					 email: true,
+					},
+					credit_cart_number:{
+					},
+				},
+				messages:{
+					
+				},
+				highlight:function(element){
+					$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+				},
+				unhighlight:function(element){
+					$(element).closest('.form-group').removeClass('has-error');
+				},
+				success:function(element){
+					element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+				}
+			});
+
+			var options = {
+					beforeSubmit:  showRequest,  // pre-submit callback
+					success:       showResponse,  // post-submit callback
+					url:  '{{ URL::route('PaymentCredentialDetails.update') }}',
+					type:'POST'
+				};
+			$('#formEditCredential').ajaxForm(options);
 		});
+
+		// pre-submit callback
+		function showRequest(formData, jqForm, options) {
+			setTimeout($.fancybox({
+				'content':'<h1>' + '{{ trans('products.sending') }}' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#formEditCredential').valid();
+		}
+
+		// post-submit callback
+		function showResponse(responseText, statusText, xhr, $form)  {
+			console.log(responseText);
+			$.fancybox({
+				'content' : '<h1>'+ responseText + '</h1>',
+				'autoScale' : true
+			});
+		}
 	</script>
 @stop
 
