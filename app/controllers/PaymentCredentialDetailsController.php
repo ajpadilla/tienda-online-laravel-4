@@ -120,7 +120,7 @@ class PaymentCredentialDetailsController extends \BaseController {
 				$input['users_id'] = Auth::user()->id;
 				$this->editCredentialForm->validate($input);
 				$credential = $this->paymentCredentialDetailsRepository->update($input);
-				return trans('PaymentCredentialDetails.response');
+				return Response::json(trans('PaymentCredentialDetails.response');
 			}
 			catch (FormValidationException $e)
 			{
@@ -223,4 +223,10 @@ class PaymentCredentialDetailsController extends \BaseController {
 		}
 	}
 
+	public function algo()
+	{
+		# code...
+	}
+
 }
+
