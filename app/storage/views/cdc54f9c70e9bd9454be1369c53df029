@@ -1,8 +1,0 @@
-<script id="product-list-tpl" type="text/x-handlebars-template">
-  
-              <div class="algo">
-                <?php echo name; ?>
-
-              </div>
-</script>
-

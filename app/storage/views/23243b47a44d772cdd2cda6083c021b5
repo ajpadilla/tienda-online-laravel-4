@@ -1,8 +1,0 @@
-<div class="row wrapper border-bottom white-bg page-heading">
-	<?php echo $__env->make('layouts.partials._page-breadcrumb', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <div class="col-lg-4">
-        <div class="title-action">
-        	<?php echo $__env->yieldContent('action-heading'); ?>
-        </div>
-    </div>
-</div>
