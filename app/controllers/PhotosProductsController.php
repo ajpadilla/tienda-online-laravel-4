@@ -1,15 +1,11 @@
 <?php
-
-use s4h\store\Products\ProductRepository;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Photos\ProductPhotos;
 
 class PhotosProductsController extends \BaseController {
 	protected $languageRepository;
-	protected $productRepository;
 
-	function __construct(ProductRepository $productRepository, LanguageRepository $languageRepository) {
-		$this->productRepository = $productRepository;
+	function __construct(LanguageRepository $languageRepository) {
 		$this->languageRepository = $languageRepository;
 	}
 
@@ -29,11 +25,11 @@ class PhotosProductsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($productoId)
+	public function create($productId, $languageId)
 	{
-		$product = $this->productRepository->getById($productoId);
-		$productLanguage = $product->getInCurrentLangAttribute();
-		return View::make('photos_products.create',compact('productoId','productLanguage'));
+		$product = $this->productRepository->get($productId);
+		$productLanguage = $product->getInCurrentLangId($languageId);
+		return View::make('photos_products.create',compact('productId','productLanguage'));
 	}
 
 
@@ -46,9 +42,9 @@ class PhotosProductsController extends \BaseController {
 	{
 		try {
 			$file = Input::file('file');
-			$productoId = Input::get('productoId');
+			$productId = Input::get('productId');
 			$photo = new ProductPhotos();
-			$photo->register($file, $productoId, 1);
+			$photo->register($file, $productId, 1);
 		} catch(Exception $exception){
 			// Something went wrong. Log it.
 			Log::error($exception);
