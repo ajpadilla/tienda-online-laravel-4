@@ -62,7 +62,7 @@ class ProductController extends \BaseController {
 
 	public function index()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$languages = $this->languageRepository->getAllForSelect();
 		$categories = $this->categoryRepository->getNameForLanguage();
 		$condition = $this->conditionRepository->getNameForLanguage();
 		$measures = $this->measureRepository->getNameForLanguage();
@@ -77,11 +77,11 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$categories = $this->categoryRepository->getNameForLanguage();
-		$condition = $this->conditionRepository->getNameForLanguage();
-		$measures = $this->measureRepository->getNameForLanguage();
-		$weights = $this->weightRepository->getNameForLanguage();
+		$languages = $this->languageRepository->getAllForSelect();
+		$categories = $this->categoryRepository->getAllForCurrentLang();
+		$condition = $this->conditionRepository->getAllForCurrentLang();
+		$measures = $this->measureRepository->getAllForCurrentLang();
+		$weights = $this->weightRepository->getAllForCurrentLang();
 		return View::make('products.create', compact('categories', 'condition', 'measures','weights','languages'));
 	}
 
@@ -99,19 +99,27 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->registerProductForm->validate($input);
-				$product = $this->productRepository->createNewProduct($input);
-				if ($input['add_photos'] == 1) {
-					return Response::json(['message' => trans('products.response'),
-						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
-					]);
+				$product = $this->productRepository->create($input);
+				$this->setSuccess(true);
+				if ($input['add_photos'] == 1) 
+				{
+					$this->addToResponseArray('message', trans('products.response'));
+					$this->addToResponseArray('add_photos', $input['add_photos']);
+					$this->addToResponseArray('url', URL::route('photoProduct.create',[$product->id, $input['language_id'] ]));
+					$this->addToResponseArray('data', $input);
+					return $this->getResponseArrayJson();	
 				}
-				return Response::json(['message' => trans('products.response'), 'add_photos' => 0]);
+				$this->addToResponseArray('message', trans('products.response'));
+				$this->addToResponseArray('add_photos', 0);
+				return $this->getResponseArrayJson();	
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function show($id)
