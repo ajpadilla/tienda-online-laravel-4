@@ -10,7 +10,7 @@ class BaseController extends Controller {
 	protected $productRepository;
 	protected $cartRepository;
 	protected $wishlistRepository;
-
+	protected $responseArray = array('success' => false);
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -35,6 +35,26 @@ class BaseController extends Controller {
 		$cart = ($currentUser ? $this->cartRepository->getActiveCartForUser($currentUser) : NULL);
 		$categoriesMenu     = $this->categoryRepository->getNested($this->categoryRepository->getCategoriesWithoutParents());
 		View::share(compact('currentUser', 'currentStiker', 'categoriesMenu', 'wishlist', 'cart', 'currentRoute'));
+	}
+
+	public function setSuccess($success = false)
+	{
+		$this->responseArray['success'] = $success;
+	}
+
+	public function getResponseArray()
+	{
+		return $this->responseArray;
+	}
+
+	public function getResponseArrayJson()
+	{
+		return Response::json($this->responseArray);
+	}	
+
+	public function addToResponseArray($key, $value)
+	{
+		$this->responseArray[$key] = $value;
 	}
 
 }
