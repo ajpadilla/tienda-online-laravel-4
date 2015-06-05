@@ -2,7 +2,7 @@
 	return array(
 		
 		"routes" => array(
-			"create" => "fotos-productos/crear/{productoId}",
+			"create" => "fotos-productos/crear/{productId}/{languageId}",
 			"store" => "fotos-productos/agregar",
 		),
 
