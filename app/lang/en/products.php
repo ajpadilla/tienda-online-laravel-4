@@ -59,7 +59,8 @@
 			'MyWishList' => 'My Wish List',
 			'NewProducts' => 'New Products',
 			'TopProducts' => 'Top Products',
-			'search' => 'Search'
+			'search' => 'Search',
+			'save' => 'Save',
 		),
 
 		"validation" => array(
