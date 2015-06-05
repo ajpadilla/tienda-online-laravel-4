@@ -14,7 +14,7 @@ class Product extends BaseModel{
 	protected $softDelete = true;
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter', 'product_for_barter', 'condition_id','user_id', 'measure_id', 'weight_id'];
+	protected $fillable = ['on_sale','quantity','price','width','height','depth','weight','active','available_for_barter', 'show_price', 'accept_barter','color','product_for_barter', 'condition_id','user_id', 'measure_id', 'weight_id'];
 
 	/*
 	* Relaciones
@@ -32,6 +32,11 @@ class Product extends BaseModel{
 		$isoCode = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$isoCode)->first();
 		return ProductLang::whereProductId($this->id)->whereLanguageId($language->id)->first();
+	}
+
+	public function getInCurrentLangId($languageId = '')
+	{
+		return ProductLang::whereProductId($this->id)->whereLanguageId($languageId)->first();
 	}
 
 	public function condition()
