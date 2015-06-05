@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{Form::open(['route' => 'products.store', 'class' => 'form-horizontal', 'id' => 'formCreateProduct'])}}
+					{{Form::open(['route' => 'products.routes.store', 'class' => 'form-horizontal', 'id' => 'create-product-form'])}}
 						@include('products.partials._form')
 					{{Form::close()}}
 				</div>
@@ -54,7 +54,7 @@
 				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
 			}, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
 
-			$('#formCreateProduct').validate({
+			$('#create-product-form').validate({
 				rules:{
 					name:{
 						required:true,
@@ -198,10 +198,10 @@
 			var options = {
 					beforeSubmit:  showRequest,  // pre-submit callback
 					success:       showResponse,  // post-submit callback
-					url:  '{{ URL::route('products.store') }}',
+					url:  '{{ URL::route('products.routes.store') }}',
 					type:'POST'
 				};
-			$('#formCreateProduct').ajaxForm(options);
+			$('#create-product-form').ajaxForm(options);
 		});
 
 			// pre-submit callback
@@ -217,7 +217,7 @@
 					'hideOnOverlayClick' : false,
 					'hideOnContentClick' : false
 				}), 5000 );
-				return $('#formCreateProduct').valid();
+				return $('#create-product-form').valid();
 			}
 
 			// post-submit callback
