@@ -6,18 +6,18 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /**
 * 
 */
-class WeightRepository {
+class WeightRepository 
+{
 	
-	public function getAll()
-	{
-		return Weight::all();
-	}
-
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->weights()->lists('abbreviation','weight_id');
+		if (!empty($language)) {
+			return $language->weights()->lists('abbreviation','weight_id');
+		}else{
+			return array();
+		}
 	}
 
 }

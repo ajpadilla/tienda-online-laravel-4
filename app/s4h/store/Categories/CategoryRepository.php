@@ -16,10 +16,6 @@ class CategoryRepository extends BaseRepository{
       return new Category;
     }
 
-	public function getAll(){
-		return Category::all();
-	}
-
 	public function createNewCategory($data = array())
 	{
 		$category = new Category;
@@ -56,7 +52,7 @@ class CategoryRepository extends BaseRepository{
 		$category->delete();
 	}
 
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
 		$language = $this->getCurrentLang();
 		if (!empty($language))

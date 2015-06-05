@@ -11,11 +11,7 @@ class ConditionRepository {
 		return $condition->save();
 	}
 
-	public function getAll(){
-		return Condition::all();
-	}
-
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();

@@ -2,18 +2,20 @@
 
 use	 s4h\store\Languages\Language;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use s4h\store\Base\BaseRepository;
 /**
 * 
 */
-class LanguageRepository{
+class LanguageRepository extends BaseRepository{
+
+	function __construct() {
+		$this->columns = [];
+		$this->setModel(new Language);
+		$this->setListAllRoute('');
+	}
 
 	public function save(Language $language){
 		return $language->save();
-	}
-
-	public function getAll(){
-		return Language::all();
 	}
 
 	public function createNewLanguage($data = array())

@@ -10,11 +10,7 @@ class MeasureRepository {
 		return $measure->save();
 	}
 
-	public function getAll(){
-		return Measure::all();
-	}
-
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
 		$iso_code = LaravelLocalization::setLocale();
 		$language = Language::select()->where('iso_code','=',$iso_code)->first();
