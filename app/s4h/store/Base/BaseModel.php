@@ -2,6 +2,8 @@
 
 use Eloquent;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Datatable;
+use Illuminate\Database\Eloquent\Collection;
 use s4h\store\Languages\Language;
 
 
