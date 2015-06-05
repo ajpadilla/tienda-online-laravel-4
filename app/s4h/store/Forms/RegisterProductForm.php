@@ -17,7 +17,7 @@ class RegisterProductForm extends FormValidator{
           'active' => 'required|integer',
           'color' =>'required',
           'accept_barter' => 'required|integer',
-          'condition_id' => 'required|integer',
+          'condition_id' => 'required|integer|exists:product_conditions,id',
           'measure_id' => 'required|exists:measures,id',
           'weight_id' => 'required|integer|exists:weights,id'
      ];
