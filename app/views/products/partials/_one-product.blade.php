@@ -1,3 +1,4 @@
+ @if(!empty($product->inCurrentLang))
 <div class="product-item">
   <div class="pi-img-wrapper">
     @if($product->hasPhotos())
@@ -30,6 +31,6 @@
     @else
       <a href="{{ route('wishlist.create', $product->id) }}" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
     @endif    
-    <div class="sticker {{ $currentSticker }}"></div>
+    <div class="sticker {{ $currentSticker }}"></div>  
 </div>
-
+@endif
