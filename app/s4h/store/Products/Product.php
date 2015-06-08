@@ -153,7 +153,7 @@ class Product extends BaseModel{
 		return false;
 	}
 
-	public function getCategories()
+	public function getCategoryNames()
 	{
 		$categoriesNames = [];
 
@@ -169,6 +169,13 @@ class Product extends BaseModel{
 				}
 			}
 			return $categoriesNames;
+	}
+
+	public function getConditionName()
+	{
+		$language = $this->getCurrentLang();
+		$condition = $this->condition->languages()->where('language_id','=',$language->id)->first();
+		return $condition->pivot->name;
 	}
 
 	public function getCategorieIds()
