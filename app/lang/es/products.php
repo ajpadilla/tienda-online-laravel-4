@@ -1,6 +1,8 @@
 <?php
 	return array(
 		
+		"prueba" => 'prueba',
+
 		"index-title" => "Lista de productos",
 		"create-title" => "Creatar Producto",
 
@@ -19,12 +21,13 @@
 			'edit' => 'productos/editar/{id}',
 			'update' => 'productos/actualizar',
 			'destroy' => 'productos/eliminar/{id}',
+			"index"=>'productos/lista-productos',
 			"search" => "productos/buscar",
 			"order-by-search" => "ordenar-resultados-busqueda",
 			"filterWord" => "palabra-a-filtrar",
 			'save-rating' => 'producto/guardar-rating',
 			"api" => array(
-				'index'=>'productos/api/lista-productos',
+				"list" => "productos/api/lista-productos",
 				"delete-ajax" =>"productos/api/eliminar" ,
 				"saveLang" => 'productos/api/actualizar-idioma',
 			),

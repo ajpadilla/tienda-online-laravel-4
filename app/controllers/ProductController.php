@@ -19,10 +19,8 @@ use s4h\store\Forms\EditLangProductoForm;
 
 class ProductController extends \BaseController {
 
-	//protected $productRepository;
 	protected $registerProductForm;
 	protected $EditProductForm;
-	//protected $categoryRepository;
 	protected $conditionRepository;
 	protected $measureRepository;
 	protected $languageRepository;
@@ -33,8 +31,6 @@ class ProductController extends \BaseController {
 	protected $classifiedsLangRepository;
 
 	public function __construct(RegisterProductForm $registerProductForm,
-										ProductRepository $productRepository,
-										//CategoryRepository $categoryRepository,
 										ConditionRepository $conditionRepository,
 										MeasureRepository $measureRepository,
 										EditProductForm $editProductForm,
@@ -47,9 +43,7 @@ class ProductController extends \BaseController {
 	)
 	{
 		$this->registerProductForm = $registerProductForm;
-		//$this->productRepository = $productRepository;
 		$this->editProductForm = $editProductForm;
-		//$this->categoryRepository = $categoryRepository;
 		$this->conditionRepository = $conditionRepository;
 		$this->measureRepository = $measureRepository;
 		$this->languageRepository = $languageRepository;
@@ -63,11 +57,12 @@ class ProductController extends \BaseController {
 	public function index()
 	{
 		$languages = $this->languageRepository->getAllForSelect();
-		$categories = $this->categoryRepository->getNameForLanguage();
-		$condition = $this->conditionRepository->getNameForLanguage();
-		$measures = $this->measureRepository->getNameForLanguage();
-		$weights = $this->weightRepository->getNameForLanguage();
-		return View::make('products.index',compact('languages','categories','condition','measures','weights'));
+		$categories = $this->categoryRepository->getAllForCurrentLang();
+		$condition = $this->conditionRepository->getAllForCurrentLang();
+		$measures = $this->measureRepository->getAllForCurrentLang();
+		$weights = $this->weightRepository->getAllForCurrentLang();
+		$table = $this->productRepository->getAllTable();
+		return View::make('products.index',compact('languages','categories','condition','measures','weights','table'));
 	}
 
 	/**
@@ -98,6 +93,7 @@ class ProductController extends \BaseController {
 			$input = Input::all();
 			try
 			{
+				$input['user_id'] = Auth::user()->id;
 				$this->registerProductForm->validate($input);
 				$product = $this->productRepository->create($input);
 				$this->setSuccess(true);
@@ -120,6 +116,11 @@ class ProductController extends \BaseController {
 			}
 		}
 		return $this->getResponseArrayJson();
+	}
+
+	public function prueba()
+	{
+		var_dump($this->productRepository);		
 	}
 
 	public function show($id)
@@ -282,7 +283,7 @@ class ProductController extends \BaseController {
 			$languageId = $this->languageRepository->returnLanguage()->id;
 
 			$links = "<form action='".route('products.show',$model->product->id)."' method='get'>
-						<button href='#'  class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
 					  </form>";
 
 			$links.= "<button href='#fancybox-edit-product' id='edit_".$model->product->id."' class='btn btn-warning btn-outline dim col-sm-6 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
@@ -427,5 +428,10 @@ class ProductController extends \BaseController {
 			]);
 		}
 		return Response::json(['success' => false]);
+	}
+
+	public function listApi()
+	{
+		return $this->productRepository->getDefaultTableForAll();
 	}
 }
