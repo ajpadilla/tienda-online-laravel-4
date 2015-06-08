@@ -44,7 +44,7 @@ class PhotosProductsController extends \BaseController {
 			$file = Input::file('file');
 			$productId = Input::get('productId');
 			$photo = new ProductPhotos();
-			$photo->register($file, $productId, 1);
+			$photo->register($file, $productId, Auth::user()->id);
 		} catch(Exception $exception){
 			// Something went wrong. Log it.
 			Log::error($exception);
