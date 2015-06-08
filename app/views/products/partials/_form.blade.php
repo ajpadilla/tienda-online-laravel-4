@@ -22,7 +22,7 @@
 	</div>
 
 	<div class="form-group">
-		{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label summernote']) }}
 		<div class="col-sm-10">
 			<div class="ibox-content no-padding">
 				{{ Form::textarea('description', null, ['class' => 'form-control', 'id' => 'description']) }}
