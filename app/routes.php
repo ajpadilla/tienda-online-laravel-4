@@ -38,9 +38,6 @@ function () {
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 	Route::get(LaravelLocalization::transRoute('products.routes.api.list'), ['as'=>'products.routes.api.list', 'uses'=>'ProductController@listApi']);
 
-	//Datatable Products
-	Route::get('api/products', array('as'=>'api.products', 'uses'=>'ProductController@getAllProductsInCurrentLangData'));
-
 	Route::get(LaravelLocalization::transRoute('products.routes.search'), [
 		'as' => 'products.search',
 		'uses' => 'ProductController@search'
