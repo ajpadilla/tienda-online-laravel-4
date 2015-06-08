@@ -31,10 +31,10 @@
 			    </div>
 
 			    <div id="clasificados" class="tab-pane">
-			    	<div class="row">
+			    	{{--<div class="row">
 				        <h2>{{ Lang::get('classifieds.labels.NewClassifieds') }}</h2>
 					    @include('classifieds.partials._new-classifieds')
-				    </div>
+				    </div>--}}
 				    {{-- <div class="row">
 				        <h2>{{ Lang::get('classifieds.labels.TopClassifieds') }}</h2>
 				        @include('products.partials._top-products')
