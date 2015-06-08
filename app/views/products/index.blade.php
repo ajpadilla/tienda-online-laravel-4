@@ -15,26 +15,9 @@
 			@include('flash::message')
 			<div class="ibox-content">
 				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> {{ trans('products.labels.new') }} </a>
-				<?php
-					$columns = [
-						trans('products.list.photo'),
-						trans('products.list.name'),
-						trans('products.list.price'),
-						trans('products.list.quantity'),
-						trans('products.list.active'),
-						trans('products.list.accept'),
-						trans('products.list.category'),
-						trans('products.labels.condition'),
-						trans('products.list.ratings'),
-						trans('products.list.actions')
-				];
-				$table = Datatable::table()
-				->addColumn($columns)
-				->setUrl(route('api.products'))
-				->noScript();
-				?>
+				
 				<div class="row"><br/></div>
-				{{ $table->render() }}
+				@include('partials._index-table')
 			</div>
 		</div>
 	</div>
