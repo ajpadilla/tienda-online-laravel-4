@@ -40,7 +40,9 @@
 			// Iniciar select chosen
 			$('.chosen-select').chosen();
 
-			 $('#description').summernote();
+			$('#description').summernote();
+
+			$.validator.setDefaults({ ignore: ":hidden:not(.chosen-select)" });
 
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
