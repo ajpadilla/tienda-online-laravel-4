@@ -55,7 +55,7 @@ function () {
 	Route::get('products/api-show-lang', ['as'=>'products.api.show-lang','uses' => 'ProductController@showApiLang']);
 
 	Route::post(LaravelLocalization::transRoute('products.routes.api.saveLang'), [
-		'as' => 'products.saveLang',
+		'as' => 'products.routes.api.saveLang',
 		'uses' => 'ProductController@saveDataForLanguage'
 	]);
 
