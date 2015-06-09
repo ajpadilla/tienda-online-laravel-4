@@ -32,7 +32,7 @@ function () {
 	Route::post(LaravelLocalization::transRoute('products.routes.store'), ['as' => 'products.routes.store', 'uses' => 'ProductController@store' ] );
 	Route::get(LaravelLocalization::transRoute('products.routes.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
 	Route::get(LaravelLocalization::transRoute('products.routes.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
-	Route::get(LaravelLocalization::transRoute('products.routes.api.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('products.routes.api.delete'),  ['as' => 'products.api.delete','uses' => 'ProductController@destroyApi' ] );
 	Route::post(LaravelLocalization::transRoute('products.routes.api.update'),  ['as' => 'products.api.update','uses' => 'ProductController@updateApi' ] );
 
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
@@ -56,7 +56,7 @@ function () {
 
 	Route::post(LaravelLocalization::transRoute('products.routes.api.saveLang'), [
 		'as' => 'products.routes.api.saveLang',
-		'uses' => 'ProductController@saveDataForLanguage'
+		'uses' => 'ProductController@updateApiLang'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('products.routes.order-by-search'), [
@@ -223,7 +223,7 @@ function () {
 
    	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.delete-ajax'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.destroyApi'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
 
 
 	Route::get('returnDataShipmentStatusLang','ShipmentStatusController@returnDataShipmentStatusLang');
