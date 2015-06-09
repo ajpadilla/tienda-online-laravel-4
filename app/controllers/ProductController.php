@@ -282,18 +282,21 @@ class ProductController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function returnDataProductLang()
+	public function showApiLang()
 	{
 		if (Request::ajax())
 		{
 			if (Input::has('productId') && Input::has('languageId'))
 			{
-				 $productLang = $this->productRepository->getDataForLanguage(Input::get('productId'), Input::get('languageId'));
-				 return Response::json($productLang);
+				$productLang = $this->productRepository->getDataForLanguage(Input::get('productId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('productLang', $productLang);
+				return $this->getResponseArrayJson();
 			}else{
-				return Response::json(['success' => false]);
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function saveDataForLanguage()
