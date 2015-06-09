@@ -15,7 +15,6 @@
 			@include('flash::message')
 			<div class="ibox-content">
 				<a class="btn btn-info " href="{{route('products.create')}}"><i class="fa fa-paste"></i> {{ trans('products.labels.new') }} </a>
-				
 				<div class="row"><br/></div>
 				@include('partials._index-table')
 			</div>
@@ -33,7 +32,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'products.update', 'class' => 'form-horizontal', 'id' => 'formEditProduct'])}}
+							{{Form::open(['route' => 'products.api.update', 'class' => 'form-horizontal', 'id' => 'form-edit-product'])}}
 								@include('products.partials._form')
 							{{Form::close()}}
 						</div>
@@ -45,7 +44,7 @@
 </div>
 
 <div class="row" style="display: none">
-	<section id="fancybox-edit-language-product">
+	<section id="fancybox-edit-product-lang">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="ibox float-e-margins">
@@ -54,7 +53,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'products.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditProductLanguage'])}}
+							{{Form::open(['route' => 'products.routes.api.saveLang', 'class' => 'form-horizontal', 'id' => 'form-edit-product-language'])}}
 								@include('products.partials._form_language')
 							{{Form::close()}}
 						</div>
@@ -64,17 +63,13 @@
 		</div>
 	</section>
 </div>
-
-
-
 @stop
 
 @section('scripts')
-	{{ $table->script() }}
 	<script  type="text/javascript">
 		$(document).ready(function () 
 		{
-
+			//console.log('product');
 			$('.i-checks').iCheck({
 				checkboxClass: 'icheckbox_square-green',
 				radioClass: 'iradio_square-green',
@@ -89,136 +84,96 @@
 
 			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
 			
-
-			loadData();
-
-			/*$('.btn.btn-success.btn-outline.dim.col-sm-6.show').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-			});*/
-
-
-			$('.btn.btn-warning.btn-outline.dim.col-sm-6.edit').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-				beforeLoad: loadData()
-			});
-
-			$('.btn.btn-success.btn-outline.dim.col-sm-6.language').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-				beforeLoad: loadData()
-			});
-
-			function loadData() 
-			{
-				$('.table').click(function(event)
-				{
-					var target = $( event.target );
-					if (target.is('button')) 
-					{
-						console.log($(target).attr('id'));
-
-						var id = $(target).attr('id');
-						var type = id ? id.split('_')[0] : '';
-						var numberId = id ? id.split('_')[1] : '';
-
-						if (type == "edit") 
-						{
-							loadDataToEdit(numberId);
-						}
-						else
-						{
-							if (type == "language" ) 
-							{
-								loadDataForLanguage(numberId);
-							}
-							else
-							{
-								if (type == "delet")
-								{
-									deleteProduct(numberId);
-								}
-							}
-						}
-
-					}			
-				});
-			}
-
+			$(".table").delegate(".edit-product", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	loadDataToEditProduct(action.number);
+        	});
 			
-			function loadDataToEdit(id) 
+			$(".table").delegate(".edit-product-lang", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	loadDataForProductLang(action.number);
+        	});
+			
+			$(".table").delegate(".delete-product", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	deleteProduct(action.number);
+        	});
+			
+
+			var loadDataToEditProduct = function(productId) 
 			{
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataProduct/') }}',	
-					data: {'productId': id},
+					url: '{{ URL::route('products.api.show') }}',	
+					data: {'productId': productId},
 					dataType: "JSON",
-					success: function(response) {
-						if (response.success == true) {
-							$('#product_id').val(response.product.product.id);
-							$('#language_id').val(response.product.language_id);
-							$('#name').val(response.product.name);
-							$('#description').code(response.product.description);
-							$('#quantity').val(response.product.product.quantity);
-							$('#price').val(response.product.product.price);
-							$('#point_price').val(response.product.product.point_price);
-							$('#width').val(response.product.product.width.toFixed(2));
-							$('#height').val(response.product.product.height.toFixed(2));
-							$('#depth').val(response.product.product.depth.toFixed(2));
-							$('#measure_id').val(response.product.product.measure_id);
-							$('#weight').val(response.product.product.weight.toFixed(2));
-							$('#weight_id').val(response.product.product.weight_id);
-							if (response.product.product.color != '') {
-								$('select[name="color"]').simplecolorpicker('selectColor', response.product.product.color);
+					success: function(response) 
+					{
+						//console.log(response);
+						if (response.success == true) 
+						{
+							$('#product_id').val(response.product.productLang.product.id);
+							$('#language_id').val(response.product.productLang.language_id);
+							$('#name').val(response.product.productLang.name);
+							$('#description').code(response.product.productLang.description);
+							$('#quantity').val(response.product.productLang.product.quantity);
+							$('#price').val(response.product.productLang.product.price);
+							$('#point_price').val(response.product.productLang.product.point_price);
+							$('#width').val(response.product.productLang.product.width.toFixed(2));
+							$('#height').val(response.product.productLang.product.height.toFixed(2));
+							$('#depth').val(response.product.productLang.product.depth.toFixed(2));
+							$('#measure_id').val(response.product.productLang.product.measure_id);
+							$('#weight').val(response.product.productLang.product.weight.toFixed(2));
+							$('#weight_id').val(response.product.productLang.product.weight_id);
+							if (response.product.productLang.product.color != '') {
+								$('select[name="color"]').simplecolorpicker('selectColor', response.product.productLang.product.color);
 							};
-							$('input[name="on_sale"]').val([response.product.product.on_sale]);
-							$('input[name="accept_barter"]').val([response.product.product.accept_barter]);
-							$('input[name="active"]').val([response.product.product.active]);
-							$('#categories').val(response.categories);
-							$('#condition_id').val(response.product.product.condition_id);
+							$('input[name="on_sale"]').val([response.product.productLang.product.on_sale]);
+							$('input[name="accept_barter"]').val([response.product.productLang.product.accept_barter]);
+							$('input[name="active"]').val([response.product.productLang.product.active]);
+							$('#categories').val(response.product.categories);
+							$('#condition_id').val(response.product.productLang.product.condition_id);
 
 							$('.chosen-select').trigger("chosen:updated");
 							$('.i-checks').iCheck('update');
+
+							showPopUpFancybox('#fancybox-edit-product');
 						}
 					}
 				});
 			}
 
-			function loadDataForLanguage(id) {
+			var loadDataForProductLang = function (productId) {
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataProduct/') }}',	
-					data: {'productId': id},
+					url: '{{ URL::route('products.api.show') }}',	
+					data: {'productId': productId},
 					dataType: "JSON",
 					success: function(response) {
 						console.log(response.product);
 						if (response.success == true) {
-							$('#product_id_language').val(response.product.product.id);
-							$('#lang_id').val(response.product.language_id);
-							$('#name_language').val(response.product.name);
-							$('#description_language').code(response.product.description);
+							$('#product_id_language').val(response.product.productLang.product.id);
+							$('#lang_id').val(response.product.productLang.language_id);
+							$('#name_language').val(response.product.productLang.name);
+							$('#description_language').code(response.product.productLang.description);
+							showPopUpFancybox('#fancybox-edit-product-lang');
 						}
 					}
 				});
 			}
 
 			$('#lang_id').click(function () {
-				console.log($('#product_id_language').val() +" "+ $('#lang_id').val());
-
+				//console.log($('#product_id_language').val() +" "+ $('#lang_id').val());
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataProductLang/') }}',	
+					url: '{{ URL::route('products.api.show-lang') }}',	
 					data: {'productId':$('#product_id_language').val(), 'languageId':$('#lang_id').val()},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response);
+						//console.log(response);
 						if (response.success == true) {
 							$('#name_language').val(response.productLang.name);
 							$('#description_language').code(response.productLang.description);
@@ -231,28 +186,26 @@
 
 			}) ;
 
-
-			function deleteProduct(id) {
+			var deleteProduct = function (productId) 
+			{
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::route('products.delete-ajax') }}',
-					data: {'productId': id},
+					url: '{{ URL::route('products.api.delete') }}',
+					data: {'productId': productId},
 					dataType: "JSON",
 					success: function(response) {
 						if (response.success == true) {
-							$('#delet_'+id).parent().parent().remove();
+							$('#delet_product_'+productId).parent().parent().remove();
 						};
 					}
 				});
 			}
 
-			
-
 			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
 					return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
 			}, 'only letters, numbers and spaces.');
 
-			$('#formEditProduct').validate({
+			$('#form-edit-product').validate({
 					rules:{
 						name:{
 							required:true,
@@ -332,7 +285,7 @@
 					}
 				});
 
-				$('#formEditProductLanguage').validate({
+				$('#form-edit-product-language').validate({
 					rules:{
 						name_language:{
 							required:true,
@@ -358,19 +311,19 @@
 				var options = {
 						beforeSubmit:  showRequest,  // pre-submit callback
 						success:       showResponse,  // post-submit callback
-						url:  '{{ URL::route('products.update') }}',
+						url:  '{{ URL::route('products.api.update') }}',
 						type:'POST'
 					};
 
 				var optionsProductLang = {
 					beforeSubmit:  showRequestLang,  // pre-submit callback
 					success:       showResponseLang,  // post-submit callback
-					url:  '{{ URL::route('products.saveLang') }}',
+					url:  '{{ URL::route('products.routes.api.saveLang') }}',
 					type:'POST'
 				}
 
-				$('#formEditProduct').ajaxForm(options);
-				$('#formEditProductLanguage').ajaxForm(optionsProductLang);
+				$('#form-edit-product').ajaxForm(options);
+				$('#form-edit-product-language').ajaxForm(optionsProductLang);
 				
 		});
 
@@ -387,20 +340,26 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formEditProduct').valid();
+			return $('#form-edit-product').valid();
 		}
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
-			console.log(responseText);
-
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText.message + '</h1>',
-				'autoScale' : true
-			});
-
-			if(responseText.add_photos == 1)
-				document.location.href = responseText.url;
+			//console.log(responseText);
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				if(responseText.add_photos == 1)
+					document.location.href = responseText.url;
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
 		}
 
 		// pre-submit callback
@@ -416,17 +375,25 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formEditProductLanguage').valid();
+			return $('#form-edit-product-language').valid();
 		}
 
 		// post-submit callback
 		function showResponseLang(responseText, statusText, xhr, $form)  {
-			console.log(responseText);
-
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
+			//console.log(responseText);
+			if (responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
+			
 		}
 
 	</script>
