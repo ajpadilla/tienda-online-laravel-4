@@ -195,15 +195,11 @@ class ProductController extends \BaseController {
 		return Response::json(['response' => $id]);
 	}
 
-	public function deleteAjax()
+	public function destroyApi()
 	{
-		if (Request::ajax())
-		{
-			//if($productRepository->isInAnyBuy(Input::get('productId'))
-			$this->productRepository->deleteProduct(Input::get('productId'));
-			return Response::json(['success' => true]);
-		}
-		return Response::json(['success' => false]);
+		if(Request::ajax())
+			$this->setSuccess($this->productRepository->delete(Input::get('productId')));
+		return $this->getResponseArrayJson();
 	}
 
 	public function search() 
@@ -299,7 +295,7 @@ class ProductController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function saveDataForLanguage()
+	public function updateApiLang()
 	{
 
 		if(Request::ajax())
@@ -308,12 +304,16 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->editLangProductoForm->validate($input);
-				$this->productRepository->updateDataForProduct($input);
-				return Response::json([trans('products.Updated')]);
+				$product = $this->productRepository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('products.Updated'));
+				$this->addToResponseArray('product', $product);
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
 	}
