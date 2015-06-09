@@ -33,7 +33,7 @@ function () {
 	Route::get(LaravelLocalization::transRoute('products.routes.show'), ['as' => 'products.show', 'uses' => 'ProductController@show' ] );
 	Route::get(LaravelLocalization::transRoute('products.routes.edit'),  ['as' => 'products.edit','uses' => 'ProductController@edit' ] );
 	Route::get(LaravelLocalization::transRoute('products.routes.api.delete-ajax'),  ['as' => 'products.delete-ajax','uses' => 'ProductController@deleteAjax' ] );
-	Route::post(LaravelLocalization::transRoute('products.routes.update'),  ['as' => 'products.update','uses' => 'ProductController@update' ] );
+	Route::post(LaravelLocalization::transRoute('products.routes.api.update'),  ['as' => 'products.api.update','uses' => 'ProductController@updateApi' ] );
 
 	Route::post('product/delete/{id}' ,  ['as' => 'products.destroy','uses' => 'ProductController@destroy' ] );
 	Route::get(LaravelLocalization::transRoute('products.routes.api.list'), ['as'=>'products.routes.api.list', 'uses'=>'ProductController@listApi']);
