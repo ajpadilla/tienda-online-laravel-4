@@ -145,7 +145,7 @@
         });
     }
 
-    var reloadDatatable = function (table) {
+    var reloadDataTable = function (table) {
         var table = typeof table !== 'undefined' ? table : 'datatable';
         if($(table).length) {
             var table = $(table).DataTable();
