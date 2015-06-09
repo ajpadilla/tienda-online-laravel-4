@@ -16,7 +16,6 @@
 			"create" => "products/create",
 			"store" => "products/store",
 			'edit' => 'products/edit/{id}',
-			'update' => 'products/update',
 			'destroy' => 'products/destroy/{id}',
 			"index"=>'products/list-products',
 			"search" => "products/search",
@@ -24,9 +23,10 @@
 			"filterWord" => "filter-word",
 			'save-rating' => 'products/save-rating',
 			"api" => array(
+				'update' => 'products/api/update',
 				"list" => "products/api/list-products",
 				"delete-ajax" =>"products/api/delete-products",
-				"saveLang" => 'products/api/update-lang',
+				"saveLang" => 'products/api/update-lang'
 			),
 		),
 
