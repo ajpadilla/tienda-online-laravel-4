@@ -343,15 +343,9 @@ class ProductRepository extends BaseRepository{
 
 	public function getDataForLanguage($productId, $languageId)
 	{
-		$productLang = ProductLang::whereProductId($productId)->whereLanguageId($languageId)->first();
-		if(count($productLang) > 0){
-			return [
-				'success' => true, 
-				'productLang' => $productLang->toArray()
-			];
-		}else{
-			return ['success' => false];
-		}
+		$product = $this->get($productId);
+		$productLang = $product->getInCurrentLangId($languageId);
+		return $productLang;
 	}
 
 	public function saveRating($productId, $points, $description)
@@ -399,7 +393,7 @@ class ProductRepository extends BaseRepository{
 			$this->addActionColumn("<form action='".route('photoProduct.create',array($model->id, $language->id))."' method='get'>
 							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
 					  </form>");
-			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='edit-product-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
