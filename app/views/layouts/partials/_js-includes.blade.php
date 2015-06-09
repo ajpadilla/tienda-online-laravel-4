@@ -145,6 +145,14 @@
         });
     }
 
+    var reloadDatatable = function (table) {
+        var table = typeof table !== 'undefined' ? table : 'datatable';
+        if($(table).length) {
+            var table = $(table).DataTable();
+            table.search('').draw();
+        }
+    }
+
 </script>
 
 @yield('in-situ-js')
