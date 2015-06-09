@@ -346,14 +346,12 @@ class ProductRepository extends BaseRepository{
 
 	public function getArrayInCurrentLangData($productId)
 	{
-		$product = $this->getById($productId);
-		$productLanguage = $product->getInCurrentLangAttribute();
+		$product = $this->get($productId);
+		$productLanguage = $product->InCurrentLang;
 		$categories = $productLanguage->product->getCategorieIds();
 		return[
-			'success' => true, 
-			'product' => $productLanguage->toArray(),
+			'productLang' => $productLanguage,
 			'categories' => $categories,
-			'url'=> route('products.update',$productId)
 		];
 	}
 
