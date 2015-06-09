@@ -151,14 +151,6 @@ class ProductRepository extends BaseRepository{
 		return $product->save();
 	}
 
-
-	public function deleteProduct($id)
-	{
-		$product = $this->getById($id);
-		if ($product)
-			$product->delete();
-	}
-
 	public function getNewProducts($quantity = 4)
 	{
 		return Product::orderBy('created_at', 'DESC')->take($quantity)->get();
@@ -223,9 +215,9 @@ class ProductRepository extends BaseRepository{
 		return $product;
 	}
 
-	public function updateDataForProduct($data = array())
+	public function updateLanguage($data = array())
 	{
-		$product = $this->getById($data['product_id']);
+		$product = $this->get($data['product_id']);
 
 		if (count($product->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$product->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
@@ -236,6 +228,7 @@ class ProductRepository extends BaseRepository{
 				'description' => $data['description'])
 			);
 		}
+		return $product;
 	}
 
 	public function getById($productId)
