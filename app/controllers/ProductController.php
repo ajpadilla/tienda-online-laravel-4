@@ -155,27 +155,36 @@ class ProductController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update()
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
 			$input = Input::all();
 			try
 			{
+				$input['user_id'] = Auth::user()->id;
 				$this->editProductForm->validate($input);
-				$product = $this->productRepository->updateProduct($input);
-				if ($input['add_photos'] == 1) {
-					return Response::json(['message' => trans('products.Updated'),
-						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
-					]);
+				$product = $this->productRepository->update($input);
+				$this->setSuccess(true);
+				if($input['add_photos'] == 1) 
+				{
+					$this->addToResponseArray('message', trans('products.Updated'));
+					$this->addToResponseArray('add_photos', $input['add_photos']);
+					$this->addToResponseArray('url', URL::route('photoProduct.create',[$product->id, $input['language_id'] ]));
+					$this->addToResponseArray('data', $input);
+					return $this->getResponseArrayJson();	
 				}
-				return Response::json(['message' => trans('products.Updated'), 'add_photos' => 0]);
+				$this->addToResponseArray('message', trans('products.Updated'));
+				$this->addToResponseArray('add_photos', 0);
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function destroy($id)
