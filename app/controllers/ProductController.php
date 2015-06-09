@@ -263,11 +263,14 @@ class ProductController extends \BaseController {
 			if (Input::has('productId'))
 			{
 				$product = $this->productRepository->getArrayInCurrentLangData(Input::get('productId'));
-				return Response::json($product);
+				$this->setSuccess(true);
+				$this->addToResponseArray('product', $product);
+				return $this->getResponseArrayJson();
 			}else{
-				return Response::json(['success' => false]);
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function returnDataProductLang()
