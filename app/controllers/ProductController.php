@@ -256,7 +256,7 @@ class ProductController extends \BaseController {
 		return Response::json(['success' => true, 'word' =>  Session::get('word')]);
 	}
 
-	public function returnDataProduct()
+	public function showApi()
 	{
 		if (Request::ajax())
 		{
