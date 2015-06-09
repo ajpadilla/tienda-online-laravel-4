@@ -28,7 +28,7 @@
 			"api" => array(
 				'update' => 'productos/api/actualizar',
 				"list" => "productos/api/lista-productos",
-				"delete-ajax" =>"productos/api/eliminar" ,
+				"delete" =>"productos/api/eliminar" ,
 				"saveLang" => 'productos/api/actualizar-idioma'
 			),
 		),

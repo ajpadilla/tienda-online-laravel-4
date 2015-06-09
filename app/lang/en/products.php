@@ -25,7 +25,7 @@
 			"api" => array(
 				'update' => 'products/api/update',
 				"list" => "products/api/list-products",
-				"delete-ajax" =>"products/api/delete-products",
+				"delete" =>"products/api/delete-products",
 				"saveLang" => 'products/api/update-lang'
 			),
 		),
