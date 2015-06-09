@@ -225,7 +225,7 @@
 			// post-submit callback
 			function showResponse(responseText, statusText, xhr, $form)  {
 
-				console.log(responseText);
+				//console.log(responseText);
 
 				if(responseText.success) 
 				{
