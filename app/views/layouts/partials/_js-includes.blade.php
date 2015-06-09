@@ -136,6 +136,15 @@
         return action;
     }
 
+    var showPopUpFancybox = function (selector) {
+        $.fancybox($(selector),{
+            openEffect  : 'elastic',
+            closeEffect : 'elastic',
+            centerOnScroll: true,
+            hideOnOverlayClick: true,
+        });
+    }
+
 </script>
 
 @yield('in-situ-js')
