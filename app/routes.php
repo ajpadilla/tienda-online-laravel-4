@@ -50,7 +50,8 @@ function () {
 
 	Route::get('/ajax/paginator','ProductController@searchPaginator');
 
-	Route::get('returnDataProduct','ProductController@returnDataProduct');
+	Route::get('products/api-show',  ['as' => 'products.api.show','uses' => 'ProductController@showApi' ] );
+
 
 	Route::get('returnDataProductLang','ProductController@returnDataProductLang');
 
