@@ -199,24 +199,10 @@ class ProductRepository extends BaseRepository{
 		return $product;
 	}
 
-	public function updateProduct($data = array())
+	public function update($data = array())
 	{
-		$product = $this->getById($data['product_id']);
-		$product->on_sale = $data['on_sale'];
-		$product->quantity = $data['quantity'];
-		$product->price = $data['price'];
-		$product->point_price = $data['point_price'];
-		$product->width = $data['width'];
-		$product->height = $data['height'];
-		$product->depth = $data['depth'];
-		$product->weight = $data['weight'];
-		$product->active = $data['active'];
-		$product->color = $data['color'];
-		$product->measure_id = $data['measure_id'];
-		$product->weight_id = $data['weight_id'];
-		$product->accept_barter = $data['accept_barter'];
-		$product->condition_id = $data['condition_id'];
-		$product->save();
+		$product = $this->get($data['product_id']);
+		$product->update($data);
 
 		if (isset($data['categories'])){
 			$product->categories()->sync($data['categories']);
