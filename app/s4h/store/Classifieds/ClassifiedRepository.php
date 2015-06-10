@@ -11,9 +11,21 @@ use s4h\store\Base\BaseRepository;
 class ClassifiedRepository extends BaseRepository
 {
 
-	public function getModel()
-	{
-		return new Classified;
+	function __construct() {
+		$this->columns = [
+			trans('classifieds.list.photo'),
+			trans('classifieds.list.Name'),
+			trans('classifieds.list.Description'),
+			trans('classifieds.list.Address'),
+			trans('products.list.price'),
+			trans('classifieds.list.User'),
+			trans('products.list.category'),
+			trans('classifieds.list.Classifieds_types'),
+			trans('classifieds.list.Classified_condition'),
+			trans('classifieds.list.Actions')
+		];
+		$this->setModel(new Classified);
+		$this->setListAllRoute('classifieds.routes.api.list');
 	}
 
 	public $filters = ['filterWord','price','priceRange','firstValue','secondValue','categories','conditionsClassifieds',
@@ -120,7 +132,7 @@ class ClassifiedRepository extends BaseRepository
 
 	public function updateClassified($data = array())
 	{
-		$classified = $this->getById($data['classified_id']);
+		$classified = $this->get($data['classified_id']);
 		$classified->price = $data['price'];
 		$classified->user_id = 1;
 		$classified->classified_type_id = $data['classified_type_id'];
@@ -150,14 +162,9 @@ class ClassifiedRepository extends BaseRepository
 
 	public function delteClassified($classifiedId)
 	{
-		$classified = $this->getById($classifiedId);
+		$classified = $this->get($classifiedId);
 		$classified->delete();
  	}
-
-	public function getById($classifiedId)
-	{
-		return Classified::findOrFail($classifiedId);
-	}	
 
 	public function getName($data)
 	{
