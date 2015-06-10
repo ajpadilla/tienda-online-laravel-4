@@ -14,7 +14,7 @@ use s4h\store\Forms\EditClassifiedLangForm;
 
 class ClassifiedController extends \BaseController {
 
-	private $classifiedRepository;
+	private $repository;
 	private $classifiedConditionsRepository;
 	private $classifiedTypesRepository;
 	private $userRepository;
@@ -24,7 +24,7 @@ class ClassifiedController extends \BaseController {
 	private $countryRepository;
 	private $editClassifiedLangForm;
 
-	function __construct(ClassifiedRepository $classifiedRepository, 
+	function __construct(ClassifiedRepository $repository, 
 		ClassifiedConditionsRepository $classifiedConditionsRepository, 
 		ClassifiedTypesRepository $classifiedTypesRepository, 
 		UserRepository $userRepository,
@@ -36,7 +36,7 @@ class ClassifiedController extends \BaseController {
 		EditClassifiedLangForm $editClassifiedLangForm
 	){
 
-		$this->classifiedRepository = $classifiedRepository;
+		$this->repository = $repository;
 		$this->classifiedConditionsRepository = $classifiedConditionsRepository;
 		$this->classifiedTypesRepository = $classifiedTypesRepository;
 		$this->userRepository = $userRepository;
@@ -182,10 +182,10 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage(); 
-		$classified_types = $this->classifiedTypesRepository->getNameForLanguage();
-		$categories = $this->categoryRepository->getNameForLanguage();
+		$languages = $this->languageRepository->getAllForSelect();
+		$classified_conditions = $this->classifiedConditionsRepository->getAllForCurrentLang(); 
+		$classified_types = $this->classifiedTypesRepository->getAllForCurrentLang();
+		$categories = $this->categoryRepository->getAllForCurrentLang();
 		return View::make('classifieds.create', compact('languages','classified_conditions','classified_types','categories'));
 	}
 
@@ -206,7 +206,7 @@ class ClassifiedController extends \BaseController {
 			try
 			{
 				$this->registerClassifiedForm->validate($input);
-				$classified = $this->classifiedRepository->createNewClassified($input);
+				$classified = $this->repository->createNewClassified($input);
 				if ($input['add_photos'] == 1) {
 					return Response::json(['message' => trans('classifieds.response'),
 						'add_photos' => $input['add_photos'], 'url' => URL::route('photoClassified.create',$classified->id)
@@ -230,7 +230,7 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$classified = $this->classifiedRepository->getById($id);
+		$classified = $this->repository->getById($id);
 		$language = $this->languageRepository->returnLanguage();
 		$classifiedType = $classified->classifiedType->languages()->where('language_id','=',$language->id)->first();
 		$classifiedConditions = $classified->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
@@ -247,7 +247,7 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$classified = $this->classifiedRepository->getById($id);
+		$classified = $this->repository->getById($id);
 		$language = $this->languageRepository->returnLanguage();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
 		$classified_conditions = $this->classifiedConditionsRepository->getNameForLanguage();
@@ -273,7 +273,7 @@ class ClassifiedController extends \BaseController {
 			try
 			{
 				$this->editClassifiedForm->validate($input);
-				$classified = $this->classifiedRepository->updateClassified($input);
+				$classified = $this->repository->updateClassified($input);
 				
 				if ($input['add_photos'] == 1) 
 				{
@@ -301,7 +301,7 @@ class ClassifiedController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->classifiedRepository->delteClassified($id);
+		$this->repository->delteClassified($id);
 		Flash::message(trans('classifieds.Delete'));
 		return Redirect::route('classifieds.index');
 	}
@@ -311,7 +311,7 @@ class ClassifiedController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$classified = $this->classifiedRepository->getName(Input::all());
+			$classified = $this->repository->getName(Input::all());
 			if (count($classified) > 0) {
 				return Response::json(false);
 			} else {
@@ -326,7 +326,7 @@ class ClassifiedController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$classified = $this->classifiedRepository->getNameForEdit(Input::all());
+			$classified = $this->repository->getNameForEdit(Input::all());
 			if (count($classified) > 0) {
 				return Response::json(false);
 			} else {
@@ -347,7 +347,7 @@ class ClassifiedController extends \BaseController {
 
 	public function searchClassified()
 	{
-		$classifiedsResult = $this->classifiedRepository->search(Input::all());
+		$classifiedsResult = $this->repository->search(Input::all());
 		//dd($classifiedsResult);
 		return View::make('classifieds.filtered-classisied',compact('classifiedsResult'));
 	}
@@ -405,7 +405,7 @@ class ClassifiedController extends \BaseController {
 		{
 			if (Input::has('classifiedId')) 
 			{
-				$classified = $this->classifiedRepository->getById(Input::get('classifiedId'));
+				$classified = $this->repository->getById(Input::get('classifiedId'));
 				$classifiedLanguage = $classified->getInCurrentLangAttribute();
 				$categories = $classifiedLanguage->classified->getCategorieIds();
 				return Response::json(['success'=>true, 'classified' => $classifiedLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
@@ -421,7 +421,7 @@ class ClassifiedController extends \BaseController {
 		{
 			if (Input::has('classifiedId') && Input::has('languageId')) 
 			{
-				 $classified = $this->classifiedRepository->getById(Input::get('classifiedId'));
+				 $classified = $this->repository->getById(Input::get('classifiedId'));
 
 				 $classifiedLang = $classified->getAccessorInCurrentLang(Input::get('languageId'));
 
@@ -446,8 +446,8 @@ class ClassifiedController extends \BaseController {
 			try
 			{
 				$this->editClassifiedLangForm->validate($input);
-				$classified = $this->classifiedRepository->getById($input['classified_id']);
-				$this->classifiedRepository->updateAttributeLang($classified, $input);
+				$classified = $this->repository->getById($input['classified_id']);
+				$this->repository->updateAttributeLang($classified, $input);
 				return Response::json([trans('classifieds.Actualiced')]);
 			}
 			catch (FormValidationException $e)
@@ -461,7 +461,7 @@ class ClassifiedController extends \BaseController {
 	{
 		if (Request::ajax())
 		{
-			$this->classifiedRepository->delteClassified(Input::get('classifiedId'));
+			$this->repository->delteClassified(Input::get('classifiedId'));
 			return Response::json(['success' => true]);
 		}
 		return Response::json(['success' => false]);
