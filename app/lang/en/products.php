@@ -62,6 +62,7 @@
 			'TopProducts' => 'Top Products',
 			'search' => 'Search',
 			'save' => 'Save',
+			'Yes' => 'Yes',
 		),
 
 		"validation" => array(

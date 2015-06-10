@@ -65,7 +65,8 @@
 			'MyWishList' => 'Mi Lista de Deseos' ,
 			'NewProducts' => 'Nuevos Productos',
 			'TopProducts' => 'Top de Productos',
-			'search' => 'Buscar'
+			'search' => 'Buscar',
+			'Yes' => 'Si',
 		),
 
 		"validation" => array(
