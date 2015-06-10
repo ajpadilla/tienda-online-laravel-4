@@ -9,8 +9,8 @@ class RegisterClassifiedForm extends FormValidator {
 
 		protected $rules = [
 			'price' => 'required|numeric',
-			'classified_type_id' => 'required|integer',
-			'classified_condition_id' => 'required|integer', 
+			'classified_type_id' => 'required|integer|exists:classified_types,id',
+			'classified_condition_id' => 'required|integer|exists:classified_conditions,id', 
 		];
 	
 }
