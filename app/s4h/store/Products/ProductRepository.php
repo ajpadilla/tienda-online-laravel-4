@@ -337,7 +337,7 @@ class ProductRepository extends BaseRepository{
 
 	public function saveRating($productId, $points, $description)
 	{
-		$product = Product::find($productId);
+		$product = $this->get($productId);
 
 		if(!$product) 
 			return FALSE;
