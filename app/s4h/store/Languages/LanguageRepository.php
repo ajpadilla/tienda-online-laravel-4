@@ -14,10 +14,6 @@ class LanguageRepository extends BaseRepository{
 		$this->setListAllRoute('');
 	}
 
-	public function save(Language $language){
-		return $language->save();
-	}
-
 	public function createNewLanguage($data = array())
 	{
 		$language = new Language;
@@ -32,13 +28,6 @@ class LanguageRepository extends BaseRepository{
 	public function getIsoCode($iso_code)
 	{
 		return Language::where('iso_code','=',$iso_code)->get();
-	}
-
-	public function returnLanguage()
-	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language;
 	}
 
 }
