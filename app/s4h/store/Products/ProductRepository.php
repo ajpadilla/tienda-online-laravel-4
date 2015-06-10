@@ -331,7 +331,7 @@ class ProductRepository extends BaseRepository{
 	public function getDataForLanguage($productId, $languageId)
 	{
 		$product = $this->get($productId);
-		$productLang = $product->getInCurrentLangId($languageId);
+		$productLang = $product->getAccessorInCurrentLang($languageId);
 		return $productLang;
 	}
 
