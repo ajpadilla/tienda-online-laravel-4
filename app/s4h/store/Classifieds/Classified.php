@@ -17,6 +17,8 @@ class Classified extends BaseModel {
 
 	protected $table = 'classifieds';
 
+	protected $fillable = ['price', 'user_id', 'classified_type_id', 'classified_condition_id', 'address_id', 'active'];
+
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','classifieds_lang','classified_id','language_id')->withPivot('name','description','address')->withTimestamps();
 		
