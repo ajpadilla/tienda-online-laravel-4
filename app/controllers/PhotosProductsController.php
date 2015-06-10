@@ -28,7 +28,7 @@ class PhotosProductsController extends \BaseController {
 	public function create($productId, $languageId)
 	{
 		$product = $this->productRepository->get($productId);
-		$productLanguage = $product->getInCurrentLangId($languageId);
+		$productLanguage = $product->getAccessorInCurrentLang($languageId);
 		return View::make('photos_products.create',compact('productId','productLanguage'));
 	}
 
