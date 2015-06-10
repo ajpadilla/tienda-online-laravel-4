@@ -19,10 +19,6 @@ class ClassifiedConditionsRepository extends BaseRepository{
       return new ClassifiedCondition;
     }
 
-	public function getAll(){
-		return ClassifiedCondition::all();
-	}
-
 	public function createNewClassifiedCondition($data = array())
 	{
 		$classified_condition = new ClassifiedCondition;
@@ -64,11 +60,13 @@ class ClassifiedConditionsRepository extends BaseRepository{
 		return ClassifiedCondition::find($classified_condition_id);
 	}
 
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->classifiedConditions()->lists('name','classified_conditions_id');
+		$language = $this->getCurrentLang();
+		if (!empty($language))
+			return $language->classifiedConditions()->lists('name','classified_conditions_id');
+		else
+			return array();
 	}
 
 	public function getNameForEdit($data = array())
