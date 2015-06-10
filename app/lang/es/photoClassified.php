@@ -2,7 +2,7 @@
 	return array(
 		
 		"routes" => array(
-			"create" => "foto-clasificados/crear/{classifiedId}",
+			"create" => "foto-clasificados/crear/{classifiedId}/{languageId}",
 			"store" => "foto-clasificados/agregar",
 		),
 
