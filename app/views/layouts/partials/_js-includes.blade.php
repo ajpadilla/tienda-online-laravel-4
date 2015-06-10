@@ -155,6 +155,24 @@
         }
     }
 
+    function fancyConfirm(msg, functionDelete, elementId)
+    {
+        jQuery.fancybox({
+            'modal' : true,
+            'content' : "<div style=\"margin:1px;width:240px;\">"+msg+"<div style=\"text-align:right;margin-top:10px;\"><input id=\"fancyconfirm_cancel\" style=\"margin:3px;padding:0px;\" type=\"button\" value=\"Cancel\"><input id=\"fancyConfirm_ok\" style=\"margin:3px;padding:0px;\" type=\"button\" value=\"Ok\"></div></div>",
+            'beforeShow' : function() {
+                jQuery("#fancyconfirm_cancel").click(function() {
+                    $.fancybox.close();
+                });
+
+                jQuery("#fancyConfirm_ok").click(function() {
+                    $.fancybox.close();
+                    functionDelete(elementId);
+                });
+            }
+        });
+    }
+
 </script>
 
 @yield('in-situ-js')
