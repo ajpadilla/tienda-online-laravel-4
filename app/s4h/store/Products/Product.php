@@ -74,12 +74,12 @@ class Product extends BaseModel{
 
 	public function getActivoShowAttribute()
 	{
-		return ($this->active == 1) ? 'Yes' : 'No';
+		return ($this->active == 1) ? trans('products.labels.Yes') : 'No';
 	}
 
 	public function getAcceptBarterShowAttribute()
 	{
-		return ($this->accept_barter == 1) ? 'Yes' : 'No';
+		return ($this->accept_barter == 1) ? trans('products.labels.Yes')  : 'No';
 	}
 
 	public function hasPhotos(){
