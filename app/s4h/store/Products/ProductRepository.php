@@ -151,14 +151,6 @@ class ProductRepository extends BaseRepository{
 		return $product->save();
 	}
 
-
-	public function deleteProduct($id)
-	{
-		$product = $this->getById($id);
-		if ($product)
-			$product->delete();
-	}
-
 	public function getNewProducts($quantity = 4)
 	{
 		return Product::orderBy('created_at', 'DESC')->take($quantity)->get();
@@ -199,24 +191,10 @@ class ProductRepository extends BaseRepository{
 		return $product;
 	}
 
-	public function updateProduct($data = array())
+	public function update($data = array())
 	{
-		$product = $this->getById($data['product_id']);
-		$product->on_sale = $data['on_sale'];
-		$product->quantity = $data['quantity'];
-		$product->price = $data['price'];
-		$product->point_price = $data['point_price'];
-		$product->width = $data['width'];
-		$product->height = $data['height'];
-		$product->depth = $data['depth'];
-		$product->weight = $data['weight'];
-		$product->active = $data['active'];
-		$product->color = $data['color'];
-		$product->measure_id = $data['measure_id'];
-		$product->weight_id = $data['weight_id'];
-		$product->accept_barter = $data['accept_barter'];
-		$product->condition_id = $data['condition_id'];
-		$product->save();
+		$product = $this->get($data['product_id']);
+		$product->update($data);
 
 		if (isset($data['categories'])){
 			$product->categories()->sync($data['categories']);
@@ -237,9 +215,9 @@ class ProductRepository extends BaseRepository{
 		return $product;
 	}
 
-	public function updateDataForProduct($data = array())
+	public function updateLanguage($data = array())
 	{
-		$product = $this->getById($data['product_id']);
+		$product = $this->get($data['product_id']);
 
 		if (count($product->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$product->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
@@ -250,6 +228,7 @@ class ProductRepository extends BaseRepository{
 				'description' => $data['description'])
 			);
 		}
+		return $product;
 	}
 
 	public function getById($productId)
@@ -346,28 +325,20 @@ class ProductRepository extends BaseRepository{
 
 	public function getArrayInCurrentLangData($productId)
 	{
-		$product = $this->getById($productId);
-		$productLanguage = $product->getInCurrentLangAttribute();
+		$product = $this->get($productId);
+		$productLanguage = $product->InCurrentLang;
 		$categories = $productLanguage->product->getCategorieIds();
 		return[
-			'success' => true, 
-			'product' => $productLanguage->toArray(),
+			'productLang' => $productLanguage,
 			'categories' => $categories,
-			'url'=> route('products.update',$productId)
 		];
 	}
 
 	public function getDataForLanguage($productId, $languageId)
 	{
-		$productLang = ProductLang::whereProductId($productId)->whereLanguageId($languageId)->first();
-		if(count($productLang) > 0){
-			return [
-				'success' => true, 
-				'productLang' => $productLang->toArray()
-			];
-		}else{
-			return ['success' => false];
-		}
+		$product = $this->get($productId);
+		$productLang = $product->getInCurrentLangId($languageId);
+		return $productLang;
 	}
 
 	public function saveRating($productId, $points, $description)
@@ -403,9 +374,9 @@ class ProductRepository extends BaseRepository{
 			$this->addActionColumn("<form action='".route('products.show',$model->id)."' method='get'>
 						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
 					  </form>");
-			$this->addActionColumn("<button href='#fancybox-edit-product' id='edit_product_".$model->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+			$this->addActionColumn("<button href='#fancybox-edit-product' id='edit_product_".$model->id."' class='edit-product btn btn-warning btn-outline dim col-sm-8' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>");
-			$this->addActionColumn("<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_product_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$this->addActionColumn("<button href='#' class='delete-product btn btn-danger btn-outline dim col-sm-8' id='delet_product_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>");
 			if($model->active)
 				$this->addActionColumn("<button href='#' class='btn btn-primary btn-outline dim col-sm-8 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />");
@@ -415,8 +386,7 @@ class ProductRepository extends BaseRepository{
 			$this->addActionColumn("<form action='".route('photoProduct.create',array($model->id, $language->id))."' method='get'>
 							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
 					  </form>");
-
-			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='edit-product-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
 			return implode(" ", $this->getActionColumn());
 		});
 	}

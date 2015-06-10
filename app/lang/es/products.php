@@ -19,7 +19,6 @@
 			"create" => "productos/crear",
 			"store" => "productos/agregar",
 			'edit' => 'productos/editar/{id}',
-			'update' => 'productos/actualizar',
 			'destroy' => 'productos/eliminar/{id}',
 			"index"=>'productos/lista-productos',
 			"search" => "productos/buscar",
@@ -27,9 +26,10 @@
 			"filterWord" => "palabra-a-filtrar",
 			'save-rating' => 'producto/guardar-rating',
 			"api" => array(
+				'update' => 'productos/api/actualizar',
 				"list" => "productos/api/lista-productos",
-				"delete-ajax" =>"productos/api/eliminar" ,
-				"saveLang" => 'productos/api/actualizar-idioma',
+				"delete" =>"productos/api/eliminar" ,
+				"saveLang" => 'productos/api/actualizar-idioma'
 			),
 		),
 

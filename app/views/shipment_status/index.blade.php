@@ -86,6 +86,7 @@
 	<script type="text/javascript">
 		$(document).ready(function () 
 		{
+			console.log('product');
 			$('.summernote').summernote();
 
 			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});

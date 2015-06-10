@@ -225,15 +225,22 @@
 			// post-submit callback
 			function showResponse(responseText, statusText, xhr, $form)  {
 
-				console.log(responseText);
+				//console.log(responseText);
 
-				jQuery.fancybox({
-					'content' : '<h1>'+ responseText.message + '</h1>',
-					'autoScale' : true
-				});
-
-				if(responseText.add_photos == 1)
-					document.location.href = responseText.url;
+				if(responseText.success) 
+				{
+					jQuery.fancybox({
+						'content' : '<h1>'+ responseText.message + '</h1>',
+						'autoScale' : true
+					});
+					if(responseText.add_photos == 1)
+						document.location.href = responseText.url;
+				}else{
+					jQuery.fancybox({
+						'content' : '<h1>'+ responseText.errors + '</h1>',
+						'autoScale' : true
+					});
+				}
 			}
 			
 	</script>

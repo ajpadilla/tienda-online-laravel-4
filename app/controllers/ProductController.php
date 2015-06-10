@@ -155,27 +155,36 @@ class ProductController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update()
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
 			$input = Input::all();
 			try
 			{
+				$input['user_id'] = Auth::user()->id;
 				$this->editProductForm->validate($input);
-				$product = $this->productRepository->updateProduct($input);
-				if ($input['add_photos'] == 1) {
-					return Response::json(['message' => trans('products.Updated'),
-						'add_photos' => $input['add_photos'], 'url' => URL::route('photoProduct.create',$product->id)
-					]);
+				$product = $this->productRepository->update($input);
+				$this->setSuccess(true);
+				if($input['add_photos'] == 1) 
+				{
+					$this->addToResponseArray('message', trans('products.Updated'));
+					$this->addToResponseArray('add_photos', $input['add_photos']);
+					$this->addToResponseArray('url', URL::route('photoProduct.create',[$product->id, $input['language_id'] ]));
+					$this->addToResponseArray('data', $input);
+					return $this->getResponseArrayJson();	
 				}
-				return Response::json(['message' => trans('products.Updated'), 'add_photos' => 0]);
+				$this->addToResponseArray('message', trans('products.Updated'));
+				$this->addToResponseArray('add_photos', 0);
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function destroy($id)
@@ -186,131 +195,11 @@ class ProductController extends \BaseController {
 		return Response::json(['response' => $id]);
 	}
 
-	public function deleteAjax()
+	public function destroyApi()
 	{
-		if (Request::ajax())
-		{
-			//if($productRepository->isInAnyBuy(Input::get('productId'))
-			$this->productRepository->deleteProduct(Input::get('productId'));
-			return Response::json(['success' => true]);
-		}
-		return Response::json(['success' => false]);
-	}
-
-
-	public function getAllProductsInCurrentLangData()
-	{
-		$collection = Datatable::collection($this->productRepository->getAllInCurrentLangData())
-			->searchColumns( 'name','price', 'quantity', 'active', 'accept_barter', 'category', 'ratings')
-			->orderColumns('name','price', 'quantity', 'active', 'accept_barter');
-
-		$collection->addColumn('photo', function($model)
-		{
-			$links = '';
-
-			$photo = $model->product->getFirstPhotoAttribute();
-
-			if ($photo != false) {
-				$links .= "	<a href='#'>
-									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
-				</a>";
-			}
-			return $links;
-		});
-
-		$collection->addColumn('name', function($model)
-		{
-			 return $model->name;
-		});
-
-		$collection->addColumn('price', function($model)
-		{
-			return $model->product->price;
-		});
-
-		$collection->addColumn('quantity', function($model)
-		{
-			return $model->product->quantity;
-		});
-
-		$collection->addColumn('active', function($model)
-		{
-			return $model->product->getActivoShowAttribute();
-		});
-
-		$collection->addColumn('accept_barter', function($model)
-		{
-			return $model->product->getAcceptBarterShowAttribute();
-		});
-
-		$collection->addColumn('category', function($model)
-		{
-			$language = $this->languageRepository->returnLanguage();
-
-			if($model->product->hasCategories())
-			{
-				$productCategoriesName = $model->product->getCategories();
-				$links = '<select class="form-control m-b">';
-				foreach ($productCategoriesName as $category) {
-					$links .= '<option>'.$category.'</option>';
-				}
-				$links .='</select>';
-				return $links;
-			}
-			return '';
-		});
-
-		$collection->addColumn('condition', function($model)
-		{
-			if($model->product->hasRatings())
-			{
-				return $model->product->condition->getInCurrentLangAttribute()->name;
-			}
-			return '';
-		});
-
-		$collection->addColumn('ratings', function($model)
-		{
-			if($model->product->hasRatings())
-			{
-				return $model->product->getRatingAttribute();
-			}
-			return '';
-		});
-
-		$collection->addColumn('Actions',function($model){
-
-			$languageId = $this->languageRepository->returnLanguage()->id;
-
-			$links = "<form action='".route('products.show',$model->product->id)."' method='get'>
-						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
-					  </form>";
-
-			$links.= "<button href='#fancybox-edit-product' id='edit_".$model->product->id."' class='btn btn-warning btn-outline dim col-sm-6 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
-					 </button><br/>";
-
-			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6' id='delet_".$model->product->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
-					 </button><br/>";
-
-			if ($model->product->active)
-			{
-				$links.= "<button href='#' class='btn btn-primary btn-outline dim col-sm-6 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />";
-			}
-			else
-			{
-				$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-6 activate' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Deactivated')."'  data-original-title='".trans('products.actions.Activate')."'> <i class='fa fa-check fa-2x'></i></button><br />";
-			}
-
-			$links.= "<form action='".route('photoProduct.create',array($model->product->id, $languageId))."' method='get'>
-							<button href='#' class='btn btn-info btn-outline dim col-sm-6 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
-					  </form>";
-
-			$links.= "<button href='#fancybox-edit-language-product' id='language_".$model->product->id."'  class='btn btn-success btn-outline dim col-sm-6 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
-
-			return $links;
-		});
-
-		return $collection->make();
+		if(Request::ajax())
+			$this->setSuccess($this->productRepository->delete(Input::get('productId')));
+		return $this->getResponseArrayJson();
 	}
 
 	public function search() 
@@ -372,35 +261,41 @@ class ProductController extends \BaseController {
 		return Response::json(['success' => true, 'word' =>  Session::get('word')]);
 	}
 
-	public function returnDataProduct()
+	public function showApi()
 	{
 		if (Request::ajax())
 		{
 			if (Input::has('productId'))
 			{
 				$product = $this->productRepository->getArrayInCurrentLangData(Input::get('productId'));
-				return Response::json($product);
+				$this->setSuccess(true);
+				$this->addToResponseArray('product', $product);
+				return $this->getResponseArrayJson();
 			}else{
-				return Response::json(['success' => false]);
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
-	public function returnDataProductLang()
+	public function showApiLang()
 	{
 		if (Request::ajax())
 		{
 			if (Input::has('productId') && Input::has('languageId'))
 			{
-				 $productLang = $this->productRepository->getDataForLanguage(Input::get('productId'), Input::get('languageId'));
-				 return Response::json($productLang);
+				$productLang = $this->productRepository->getDataForLanguage(Input::get('productId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('productLang', $productLang);
+				return $this->getResponseArrayJson();
 			}else{
-				return Response::json(['success' => false]);
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
-	public function saveDataForLanguage()
+	public function updateApiLang()
 	{
 
 		if(Request::ajax())
@@ -409,12 +304,16 @@ class ProductController extends \BaseController {
 			try
 			{
 				$this->editLangProductoForm->validate($input);
-				$this->productRepository->updateDataForProduct($input);
-				return Response::json([trans('products.Updated')]);
+				$product = $this->productRepository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('products.Updated'));
+				$this->addToResponseArray('product', $product);
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
 	}

@@ -127,8 +127,36 @@
             }
         });
     }
+
+    var getAttributeIdActionSelect = function (id) {
+        var action = new Object(); 
+        action.typeAction = id ? id.split('_')[0] : '';
+        action.view = id ? id.split('_')[1] : '';
+        action.number = id ? id.split('_')[2] : '';
+        return action;
+    }
+
+    var showPopUpFancybox = function (selector) {
+        $.fancybox($(selector),{
+            openEffect  : 'elastic',
+            closeEffect : 'elastic',
+            centerOnScroll: true,
+            hideOnOverlayClick: true,
+            width : '70%',
+            height : '70%'
+        });
+    }
+
+    var reloadDataTable = function (table) {
+        var table = typeof table !== 'undefined' ? table : 'datatable';
+        if($(table).length) {
+            var table = $(table).DataTable();
+            table.search('').draw();
+        }
+    }
+
 </script>
 
 @yield('in-situ-js')
-
+@yield('table')
 @yield('scripts')
