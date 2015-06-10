@@ -200,25 +200,31 @@ class ClassifiedController extends \BaseController {
 		
 		if(Request::ajax())
 		{
-			$input = [];
-
 			$input = Input::all();
 			try
 			{
+				$input['user_id'] = Auth::user()->id;
 				$this->registerClassifiedForm->validate($input);
-				$classified = $this->repository->createNewClassified($input);
+				$classified = $this->repository->create($input);
+				$this->setSuccess(true);
 				if ($input['add_photos'] == 1) {
-					return Response::json(['message' => trans('classifieds.response'),
-						'add_photos' => $input['add_photos'], 'url' => URL::route('photoClassified.create',$classified->id)
-					]);
+					$this->addToResponseArray('message', trans('classifieds.response'));
+					$this->addToResponseArray('add_photos', $input['add_photos']);
+					$this->addToResponseArray('url', URL::route('photoClassified.create',[$classified->id, $input['language_id'] ]));
+					$this->addToResponseArray('data', $input);
+					return $this->getResponseArrayJson();
 				}
-				return Response::json(['message' => trans('classifieds.response'), 'add_photos' => 0]);
+				$this->addToResponseArray('message', trans('classifieds.response'));
+				$this->addToResponseArray('add_photos', 0);
+				return $this->getResponseArrayJson();	
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 
