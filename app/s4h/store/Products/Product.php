@@ -34,7 +34,7 @@ class Product extends BaseModel{
 		return ProductLang::whereProductId($this->id)->whereLanguageId($language->id)->first();
 	}
 
-	public function getInCurrentLangId($languageId = '')
+	public function getAccessorInCurrentLang($languageId = '')
 	{
 		return ProductLang::whereProductId($this->id)->whereLanguageId($languageId)->first();
 	}
