@@ -231,15 +231,9 @@ class ProductRepository extends BaseRepository{
 		return $product;
 	}
 
-	public function getById($productId)
-	{
-		return Product::findOrFail($productId);
-	}
-
-
 	public function getArray($productId)
 	{
-  		return $this->getById($productId)->toArray();
+  		return $this->get($productId)->toArray();
 	}
 
 	/**
@@ -248,7 +242,7 @@ class ProductRepository extends BaseRepository{
 
 	public function getArrayForTopWishlist($productId)
 	{
-		$product = $this->getById($productId);
+		$product = $this->get($productId);
 		return [
 			'name' => $product->name,
 			'url' => route('products.show', $productId),
@@ -284,7 +278,7 @@ class ProductRepository extends BaseRepository{
 
 	public function getArrayForTopCart(User $user, $productId)
 	{
-		$product = $this->getById($productId);
+		$product = $this->get($productId);
 		$this->cartRepository = new CartRepository();
 		return [
 			'name' => $product->name,
