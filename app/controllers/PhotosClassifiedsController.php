@@ -29,10 +29,10 @@ class PhotosClassifiedsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($classifiedId)
+	public function create($classifiedId, $languageId)
 	{
-		$classified = $this->classifiedRepository->getById($classifiedId);
-		$classifiedLanguage = $classified->getInCurrentLangAttribute();
+		$classified = $this->classifiedRepository->get($classifiedId);
+		$classifiedLanguage = $classified->getAccessorInCurrentLang($languageId);
 		return View::make('photos_classifieds.create',compact('classifiedId','classifiedLanguage'));
 	}
 
