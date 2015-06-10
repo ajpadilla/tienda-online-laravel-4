@@ -110,14 +110,9 @@ class ClassifiedRepository extends BaseRepository
 		$query->orderBy('price',$order);
 	}
 
-	public function createNewClassified($data = array())
+	public function create($data = array())
 	{
-		$classified = new Classified;
-		$classified->price = $data['price'];
-		$classified->user_id = 1;
-		$classified->classified_type_id = $data['classified_type_id'];
-		$classified->classified_condition_id = $data['classified_condition_id'];
-		$classified->save();
+		$classified = $this->model->create($data);
 		
 		$classified->languages()->attach($data['language_id'], array('name'=> $data['name'],
 			'description'=> $data['description'],
