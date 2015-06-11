@@ -362,16 +362,6 @@ class ClassifiedController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
-	public function deleteAjax()
-	{
-		if (Request::ajax())
-		{
-			$this->repository->delteClassified(Input::get('classifiedId'));
-			return Response::json(['success' => true]);
-		}
-		return Response::json(['success' => false]);
-	}
-
 	public function destroyApi()
 	{
 		if(Request::ajax())
