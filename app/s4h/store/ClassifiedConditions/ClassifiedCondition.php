@@ -23,6 +23,11 @@ class ClassifiedCondition extends Eloquent {
 		return $this->hasMany('s4h\store\Classifieds\Classified');
 	}
 
+	public function getInCurrentLangAttribute(){
+		$language = $this->getCurrentLang();
+		return ClassifiedConditionLang::classifiedConditionsId($this->id)->whereLanguageId($language->id)->first();
+	}
+
 	// Override methods
 	public function delete()
 	{
