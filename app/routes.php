@@ -445,6 +445,7 @@ function () {
 		'uses' => 'ClassifiedController@destroy'
 	]);
 
+
 	Route::get(LaravelLocalization::transRoute('classifieds.routes.search'), [
 		'as' => 'classifieds.search',
 		'uses' => 'ClassifiedController@viewSearchClassifieds'
@@ -479,7 +480,9 @@ function () {
 		'uses' => 'ClassifiedController@updateLangApi'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.delete'),  
+		['as' => 'classifieds.api.delete','uses' => 'ClassifiedController@destroyApi' 
+	]);
 
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
