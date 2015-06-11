@@ -181,7 +181,7 @@ class ClassifiedRepository extends BaseRepository
 	}
 
 
-	public function updateAttributeLang(Classified $classified, $data = array()){
+	public function updateLanguage(Classified $classified, $data = array()){
 
 		if (count($classified->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$classified->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
@@ -230,7 +230,7 @@ class ClassifiedRepository extends BaseRepository
 					  </form>");
 			$this->addActionColumn("<button href='#fancybox-edit-classified' id='edit_classified_".$model->id."' class='edit-classified btn btn-warning btn-outline dim col-sm-8' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>");
-			$this->addActionColumn("<button href='#' class='btn btn-danger btn-outline dim col-sm-8 delete' id='delet_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$this->addActionColumn("<button href='#' class='delete-classified btn btn-danger btn-outline dim col-sm-8 delete' id='delete_classified_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>");
 			if($model->active)
 				$this->addActionColumn("<button href='#' class='btn btn-primary btn-outline dim col-sm-8 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />");
@@ -240,7 +240,7 @@ class ClassifiedRepository extends BaseRepository
 			$this->addActionColumn("<form action='".route('photoClassified.create',array($model->id, $language->id))."' method='get'>
 							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
 					  </form>");
-			$this->addActionColumn("<button href='#fancybox-edit-language-classified' id='language_classified_".$model->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			$this->addActionColumn("<button href='#fancybox-edit-language-classified' id='language_classified_".$model->id."'  class='edit-classified-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
