@@ -428,7 +428,7 @@ class ProductRepository extends BaseRepository{
 			return $model->AcceptBarterShow;
 		});
 
-		$this->collection->addColumn('category', function($model)
+		$this->collection->addColumn('categories', function($model)
 		{
 			if($model->hasCategories())
 			{
