@@ -33,7 +33,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'classifieds.update', 'class' => 'form-horizontal', 'id' => 'form-edit-classified'])}}
+							{{Form::open(['route' => 'classifieds.routes.api.update', 'class' => 'form-horizontal', 'id' => 'form-edit-classified'])}}
 								@include('classifieds.partials._form')
 							{{Form::close()}}
 						</div>
@@ -91,7 +91,9 @@
 					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
-						if (response.success == true) {
+						//console.log(response);
+						if (response.success == true) 
+						{
 							$('#classified_id').val(response.classified.classified.id);
 							$('#language_id').val(response.classified.language_id);
 							$('#name').val(response.classified.name);
@@ -261,7 +263,7 @@
 			var options = { 
 					beforeSubmit:  showRequest,  // pre-submit callback 
 					success:       showResponse,  // post-submit callback 
-					url:  '{{URL::route('classifieds.update')}}',
+					url:  '{{URL::route('classifieds.routes.api.update')}}',
 					type:'POST'
 				};
 
@@ -295,20 +297,22 @@
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
-
-			/*jQuery.fancybox({
-				'content' : '<h1>'+responseText + '</h1>',
-				'autoScale' : true
-			});*/
-
-
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText.message + '</h1>',
-				'autoScale' : true
-			});
-
-    		if(responseText.add_photos == 1)
+			//console.log(responseText);
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				reloadDataTable('#datatable');
+				if(responseText.add_photos == 1)
 					document.location.href = responseText.url;
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
 		} 
 
 			// pre-submit callback
