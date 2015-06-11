@@ -314,29 +314,31 @@ class ClassifiedController extends \BaseController {
 		return $this->getResponseArrayJson();	
 	}
 
-	public function returnDataClassifiedLang()
+	public function showApiLang()
 	{
 		if (Request::ajax()) 
 		{
 			if (Input::has('classifiedId') && Input::has('languageId')) 
 			{
-				 $classified = $this->repository->getById(Input::get('classifiedId'));
-
+				 $classified = $this->repository->get(Input::get('classifiedId'));
 				 $classifiedLang = $classified->getAccessorInCurrentLang(Input::get('languageId'));
 
 				 if (count($classifiedLang) > 0) 
 				 {
-				 	return Response::json(['success' => true, 'classifiedLang' => $classifiedLang->toArray()]);
+				 	$this->setSuccess(true);
+					$this->addToResponseArray('classifiedLang', $classifiedLang);
+					return $this->getResponseArrayJson();	
 				 }else{
-				 	return Response::json(['success' => false]);
+				 	return $this->getResponseArrayJson();	
 				 }
 			}else{
-				return Response::json(['success' => false]);
+				return $this->getResponseArrayJson();	
 			}
 		}
+		return $this->getResponseArrayJson();	
 	}
 
-	public function saveCurrentLangAttribute()
+	public function updateLangApi()
 	{
 
 		if(Request::ajax())
@@ -345,15 +347,19 @@ class ClassifiedController extends \BaseController {
 			try
 			{
 				$this->editClassifiedLangForm->validate($input);
-				$classified = $this->repository->getById($input['classified_id']);
-				$this->repository->updateAttributeLang($classified, $input);
-				return Response::json([trans('classifieds.Actualiced')]);
+				$classified = $this->repository->get($input['classified_id']);
+				$this->repository->updateLanguage($classified, $input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifieds.Actualiced'));
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	public function deleteAjax()
