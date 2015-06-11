@@ -419,7 +419,7 @@ function () {
 		'uses' => 'ClassifiedController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.index'), [
 		'as' => 'classifieds.index',
 		'uses' => 'ClassifiedController@index'
 	]);
@@ -484,8 +484,7 @@ function () {
 
 	Route::get('returnDataClassified','ClassifiedController@returnDataClassified');
 
-	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedController@getDatatable'));
-
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.list'), ['as'=>'classifieds.routes.api.list', 'uses'=>'ClassifiedController@listApi']);
 
 	/**
 		* ------------------------------ Rutas Photos Clasificados-----------------------
