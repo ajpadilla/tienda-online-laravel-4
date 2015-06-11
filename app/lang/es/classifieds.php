@@ -14,8 +14,8 @@
 			"api" => array(
 				'update' => 'clasificados/api/actualizar',
 				"list" => "clasificados/api/list-clasificados",
-				"delete-ajax" => "clasificado/api/eliminar-ajax",
 				"saveLang" =>"clasificados/api/idioma-actualizar-idioma",
+				"delete" =>"clasificados/api/eliminar-clasificados",
 			)
 		),
 		"title" => "Agregar clasificado",

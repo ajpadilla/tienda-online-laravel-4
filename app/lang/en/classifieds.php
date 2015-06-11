@@ -14,8 +14,8 @@
 			"api" => array(
 				'update' => 'classifieds/api/update',
 				"list" => "classifieds/api/list-classifieds",
-				"delete-ajax" => "clasificado/api/delete-ajax",
 				"saveLang" =>"classifieds/api/language-update-idioma",
+				"delete" =>"classifieds/api/delete-classifieds",
 			)
 		),
 
