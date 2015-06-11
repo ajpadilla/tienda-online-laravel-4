@@ -56,11 +56,11 @@ class ClassifiedController extends \BaseController {
 	public function index()
 	{
 		$languages = $this->languageRepository->getAllForSelect();
-		$classified_conditions = $this->classifiedConditionsRepository->getAllForCurrentLang(); 
-		$classified_types = $this->classifiedTypesRepository->getAllForCurrentLang();
+		$classifiedConditions = $this->classifiedConditionsRepository->getAllForCurrentLang(); 
+		$classifiedTypes = $this->classifiedTypesRepository->getAllForCurrentLang();
 		$categories = $this->categoryRepository->getAllForCurrentLang();
 		$table = $this->repository->getAllTable();
-		return View::make('classifieds.index', compact('languages','classified_conditions','classified_types','categories','table'));
+		return View::make('classifieds.index', compact('languages','classifiedConditions','classifiedTypes','categories','table'));
 	}
 
 	
