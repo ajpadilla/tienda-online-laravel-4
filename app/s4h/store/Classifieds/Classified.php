@@ -58,14 +58,14 @@ class Classified extends BaseModel {
 		return $this->categories->count();
 	}
 
-	public function getFirstPhoto(){
+	public function getFirstPhotoAttribute(){
 		if($this->hasPhotos())
 			foreach ($this->photos as $photo)
 				return $photo;
 		return false;
 	}
 
-	public function getCategories()
+	public function getCategoryNames()
 	{
 		$categoriesNames = [];
 
