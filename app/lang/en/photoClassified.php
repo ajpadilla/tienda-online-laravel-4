@@ -2,7 +2,7 @@
 	return array(
 		
 		"routes" => array(
-			"create" => "photo-classifieds/create/{classifiedId}",
+			"create" => "photo-classifieds/create/{classifiedId}/{languageId}",
 			"store" => "photo-classifieds/store",
 		),
 		"title" => "Agregar foto a clasificado",

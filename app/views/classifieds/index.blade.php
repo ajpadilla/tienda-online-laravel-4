@@ -15,26 +15,8 @@
 			@include('flash::message')
 			<div class="ibox-content">
 			<a class="btn btn-info " href="{{route('classifieds.create')}}"><i class="fa fa-paste"></i> {{ trans('classifieds.labels.new') }} </a>
-				<?php
-					$columns = [
-						trans('classifieds.list.photo'),
-						trans('classifieds.list.Name'),
-						trans('classifieds.list.Description'),
-						trans('classifieds.list.Address'),
-						trans('products.list.price'),
-						trans('classifieds.list.User'),
-						trans('products.list.category'),
-						trans('classifieds.list.Classifieds_types'),
-						trans('classifieds.list.Classified_condition'),
-						trans('classifieds.list.Actions')
-				];
-				$table = Datatable::table()
-				->addColumn($columns)
-				->setUrl(route('api.classifieds'))
-				->noScript();
-				?>
 				<div class="row"><br/></div>
-				{{ $table->render() }}
+				@include('partials._index-table')
 			</div>
 		</div>
 	</div>
@@ -51,7 +33,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'classifieds.update', 'class' => 'form-horizontal', 'id' => 'formEditClassified'])}}
+							{{Form::open(['route' => 'classifieds.routes.api.update', 'class' => 'form-horizontal', 'id' => 'form-edit-classified'])}}
 								@include('classifieds.partials._form')
 							{{Form::close()}}
 						</div>
@@ -73,7 +55,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'classifieds.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditClassifiedLanguage'])}}
+							{{Form::open(['route' => 'classifieds.routes.api.saveLang', 'class' => 'form-horizontal', 'id' => 'form-edit-classified-lang'])}}
 								@include('classifieds.partials._form_language')
 							{{Form::close()}}
 						</div>
@@ -95,70 +77,35 @@
 
 			$('.summernote').summernote();
 
-			$('.btn.btn-warning.btn-outline.dim.col-sm-8.edit').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-				beforeLoad: loadData()
-			});
+			$(".table").delegate(".edit-classified", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	loadDataToEditClassified(action.number);
+        	});
 
-			$('.btn.btn-success.btn-outline.dim.col-sm-8.language').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-				beforeLoad: loadData()
-			});
+        	$(".table").delegate(".edit-classified-lang", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	loadDataForLanguageClassified(action.number);
+        	});
 
-			loadData();
+        	$(".table").delegate(".delete-classified", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	console.log(action);
+             	fancyConfirm('Are you sure you want to delete?', deleteClassified , action.number);
+        	});
 
-			function loadData() 
-			{
-				$('.table').click(function(event)
-				{
-					var target = $( event.target );
-					if (target.is('button')) 
-					{
-						console.log($(target).attr('id'));
-
-						var id = $(target).attr('id');
-						var type = id ? id.split('_')[0] : '';
-						var numberId = id ? id.split('_')[1] : '';
-
-						if (type == "edit") 
-						{
-							loadDataToEditClassified(numberId);
-						}
-						else
-						{
-							if (type == "language" ) 
-							{
-								loadDataForLanguageClassified(numberId);
-							}
-							else
-							{
-								if (type == "delet")
-								{
-									//console.log('delete');
-									deleteClassified(numberId);
-								}
-							}
-						}
-
-					}			
-				});
-			}
-
-			function loadDataToEditClassified(id) 
+			var loadDataToEditClassified = function (classifiedId) 
 			{
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataClassified/') }}',	
-					data: {'classifiedId': id},
+					url: '{{ URL::route('classifieds.api.show') }}',	
+					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
-						if (response.success == true) {
+						//console.log(response);
+						if (response.success == true) 
+						{
 							$('#classified_id').val(response.classified.classified.id);
 							$('#language_id').val(response.classified.language_id);
 							$('#name').val(response.classified.name);
@@ -169,40 +116,41 @@
 							$('#classified_condition_id').val(response.classified.classified.classified_condition_id);
 							$('#categories').val(response.categories);
 							$('.chosen-select').trigger("chosen:updated");
+							showPopUpFancybox('#fancybox-edit-classified');
 						}
 					}
 				});
 			}
 
-			function loadDataForLanguageClassified(id) {
+			var loadDataForLanguageClassified = function (classifiedId) {
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataClassified/') }}',	
-					data: {'classifiedId': id},
+					url: '{{ URL::route('classifieds.api.show') }}',	
+					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response.classified);
+						//console.log(response.classified);
 						if (response.success == true) {
 							$('#classified_id_language').val(response.classified.classified.id);
 							$('#lang_id').val(response.classified.language_id);
 							$('#name_language').val(response.classified.name);
 							$('#description_language').code(response.classified.description);
 							$('#address_language').code(response.classified.address);
+							showPopUpFancybox('#fancybox-edit-language-classified');
 						}
 					}
 				});
 			}
 
 			$('#lang_id').click(function () {
-				console.log($('#classified_id_language').val() +" "+ $('#lang_id').val());
-
+				//console.log($('#classified_id_language').val() +" "+ $('#lang_id').val());
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataClassifiedLang/') }}',	
+					url: '{{ URL::route('classifieds.api.show-lang') }}',	
 					data: {'classifiedId':$('#classified_id_language').val(), 'languageId':$('#lang_id').val()},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response);
+						//console.log(response);
 						if (response.success == true) {
 							$('#name_language').val(response.classifiedLang.name);
 							$('#description_language').code(response.classifiedLang.description);
@@ -217,15 +165,16 @@
 
 			}) ;
 
-			function deleteClassified(id){
+			var deleteClassified = function (classifiedId){
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::route('classifieds.delete-ajax') }}',
-					data: {'classifiedId': id},
+					url: '{{ URL::route('classifieds.api.delete') }}',
+					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
 						if (response.success == true) {
-							$('#delet_'+id).parent().parent().remove();
+							$('#delete__classified_'+classifiedId).parent().parent().remove();
+							reloadDataTable('#datatable');
 						};
 					}
 				});
@@ -245,7 +194,7 @@
 					catch(e){return false;}
 				},'{{ trans('classifieds.validation.date') }}');
 
-			$('#formEditClassified').validate({
+			$('#form-edit-classified').validate({
 
 				rules:{
 					name:{
@@ -297,7 +246,7 @@
 
 			});
 	
-			$('#formEditClassifiedLanguage').validate({
+			$('#form-edit-classified-lang').validate({
 					rules:{
 						name_language:{
 							required:true,
@@ -327,19 +276,19 @@
 			var options = { 
 					beforeSubmit:  showRequest,  // pre-submit callback 
 					success:       showResponse,  // post-submit callback 
-					url:  '{{URL::route('classifieds.update')}}',
+					url:  '{{URL::route('classifieds.routes.api.update')}}',
 					type:'POST'
 				};
 
 			var optionsClassifiedLang = {
 					beforeSubmit:  showRequestLang,  // pre-submit callback
 					success:       showResponseLang,  // post-submit callback
-					url:  '{{ URL::route('classifieds.saveLang') }}',
+					url:  '{{ URL::route('classifieds.routes.api.saveLang') }}',
 					type:'POST'
 				}
 
-			$('#formEditClassified').ajaxForm(options);
-			$('#formEditClassifiedLanguage').ajaxForm(optionsClassifiedLang);
+			$('#form-edit-classified').ajaxForm(options);
+			$('#form-edit-classified-lang').ajaxForm(optionsClassifiedLang);
 			
 		});
 
@@ -356,25 +305,27 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formEditClassified').valid();
+			return $('#form-edit-classified').valid();
 		}
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
-
-			/*jQuery.fancybox({
-				'content' : '<h1>'+responseText + '</h1>',
-				'autoScale' : true
-			});*/
-
-
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText.message + '</h1>',
-				'autoScale' : true
-			});
-
-    		if(responseText.add_photos == 1)
+			//console.log(responseText);
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				reloadDataTable('#datatable');
+				if(responseText.add_photos == 1)
 					document.location.href = responseText.url;
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
 		} 
 
 			// pre-submit callback
@@ -390,17 +341,26 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formEditClassifiedLanguage').valid();
+			return $('#form-edit-classified-lang').valid();
 		}
 
 		// post-submit callback
 		function showResponseLang(responseText, statusText, xhr, $form)  {
-			console.log(responseText);
-
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
+			//console.log(responseText);
+			if (responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				reloadDataTable('#datatable');
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
+			
 		}
 
 

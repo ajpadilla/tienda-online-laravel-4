@@ -419,7 +419,7 @@ function () {
 		'uses' => 'ClassifiedController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.index'), [
 		'as' => 'classifieds.index',
 		'uses' => 'ClassifiedController@index'
 	]);
@@ -435,15 +435,16 @@ function () {
 		'uses' => 'ClassifiedController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifieds.routes.update'), [
-		'as' => 'classifieds.update',
-		'uses' => 'ClassifiedController@update'
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.update'), [
+		'as' => 'classifieds.routes.api.update',
+		'uses' => 'ClassifiedController@updateApi'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifieds.routes.destroy'), [
 		'as' => 'classifieds.destroy',
 		'uses' => 'ClassifiedController@destroy'
 	]);
+
 
 	Route::get(LaravelLocalization::transRoute('classifieds.routes.search'), [
 		'as' => 'classifieds.search',
@@ -470,22 +471,25 @@ function () {
 		'uses' => 'ClassifiedController@citiesForState'
 	]);
 
-	Route::get('returnDataClassifiedLang','ClassifiedController@returnDataClassifiedLang');
-
-	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.saveLang'), [
-		'as' => 'classifieds.saveLang',
-		'uses' => 'ClassifiedController@saveCurrentLangAttribute'
+	Route::get('classifieds/api-show-lang',[ 'as' => 'classifieds.api.show-lang',
+		'uses' => 'ClassifiedController@showApiLang'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.saveLang'), [
+		'as' => 'classifieds.routes.api.saveLang',
+		'uses' => 'ClassifiedController@updateLangApi'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.delete'),  
+		['as' => 'classifieds.api.delete','uses' => 'ClassifiedController@destroyApi' 
+	]);
 
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
 
-	Route::get('returnDataClassified','ClassifiedController@returnDataClassified');
+	Route::get('classifieds/api-show',  ['as' => 'classifieds.api.show','uses' => 'ClassifiedController@showApi' ] );
 
-	Route::get('api/classifieds', array('as'=>'api.classifieds', 'uses'=>'ClassifiedController@getDatatable'));
-
+	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.list'), ['as'=>'classifieds.routes.api.list', 'uses'=>'ClassifiedController@listApi']);
 
 	/**
 		* ------------------------------ Rutas Photos Clasificados-----------------------

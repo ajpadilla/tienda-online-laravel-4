@@ -3,10 +3,11 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\ClassifiedTypesLang\ClassifiedTypeLang;
+use s4h\store\Base\BaseModel;
 /**
 * 
 */
-class ClassifiedType extends Eloquent {
+class ClassifiedType extends BaseModel {
 	
 	use SoftDeletingTrait;
 
@@ -21,6 +22,11 @@ class ClassifiedType extends Eloquent {
 	public function classifieds()
 	{
 		return $this->hasMany('s4h\store\Classifieds\Classified');
+	}
+
+	public function getInCurrentLangAttribute(){
+		$language = $this->getCurrentLang();
+		return ClassifiedTypeLang::whereClassifiedTypesId($this->id)->whereLanguageId($language->id)->first();
 	}
 
 	// Override methods

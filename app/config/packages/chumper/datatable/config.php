@@ -54,6 +54,8 @@ return array(
 
             "bProcessing" => false,
 
+            "retrieve" => true,
+
             'language' => array(
                 'processing'=>     'Procesando...',
                 'lengthMenu'=>     'Mostrar: _MENU_',

@@ -3,18 +3,15 @@
 use s4h\store\ClassifiedTypes\ClassifiedType;
 use s4h\store\Languages\Language;
 use s4h\store\ClassifiedTypesLang\ClassifiedTypeLang;
+use s4h\store\Base\BaseRepository;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /**
 * 
 */
-class ClassifiedTypesRepository {
+class ClassifiedTypesRepository extends BaseRepository{
 	
 	public function save(ClassifiedType $classifiedType){
 		return $classifiedType->save();
-	}
-
-	public function getAll(){
-		return ClassifiedType::all();
 	}
 
 	public function createNewClassifiedType($data = array())
@@ -56,11 +53,13 @@ class ClassifiedTypesRepository {
 	{
 		return ClassifiedType::find($classified_type_id);
 	}
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->classifiedTypes()->lists('name','classified_types_id');
+		$language = $this->getCurrentLang();
+		if (!empty($language))
+			return $language->classifiedTypes()->lists('name','classified_types_id');
+		else
+			return array();
 	}
 
 	public function getNameForEdit($data = array())

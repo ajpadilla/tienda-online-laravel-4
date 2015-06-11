@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('classifieds.store'),'class'=>'form-horizontal','id' => 'formCreateClassified']) }}
+					{{ Form::open(['route' => 'classifieds.store','class'=>'form-horizontal','id' => 'form-create-classified']) }}
 						@include('classifieds.partials._form')
 					{{ Form::close() }}
 				</div>
@@ -46,7 +46,7 @@
         	catch(e){return false;}
     	},'{{ trans('classifieds.validation.date') }}');
 
-		$('#formCreateClassified').validate({
+		$('#form-create-classified').validate({
 
 			rules:{
 				name:{
@@ -66,7 +66,7 @@
 							}
 						},
 						dataFilter: function (respuesta) {
-							console.log('consulta:'+respuesta);
+							//console.log('consulta:'+respuesta);
 							return respuesta;
 						}
 					}
@@ -122,7 +122,7 @@
 				url:  '{{URL::route('classifieds.store')}}',
         		type:'POST'
 			};
-		$('#formCreateClassified').ajaxForm(options);
+		$('#form-create-classified').ajaxForm(options);
 	});
 
 	// pre-submit callback
@@ -138,17 +138,17 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formCreateClassified').valid();
+			return $('#form-create-classified').valid();
 		}
 
-		function processJson(data) { 
+		function processJson(response) { 
     		jQuery.fancybox({
-				'content' : '<h1>'+ data.message + '</h1>',
+				'content' : '<h1>'+ response.message + '</h1>',
 				'autoScale' : true
 			});
 
-    		if(data.add_photos == 1)
-					document.location.href = data.url;
+    		if(response.add_photos == 1)
+					document.location.href = response.url;
 
 		}	
 </script>

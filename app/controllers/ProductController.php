@@ -125,7 +125,7 @@ class ProductController extends \BaseController {
 
 	public function show($id)
 	{
-		$product = $this->productRepository->getById($id);
+		$product = $this->productRepository->get($id);
 		return View::make('products.show', compact('product'));
 	}
 
@@ -138,7 +138,7 @@ class ProductController extends \BaseController {
 	public function edit($id)
 	{
 
-		$productLanguage = $this->productRepository->getById($id);
+		$productLanguage = $this->productRepository->get($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		//$product_language = $product->languages()->where('language_id','=', $language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
