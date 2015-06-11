@@ -156,7 +156,7 @@ class ClassifiedController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update()
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
