@@ -293,20 +293,24 @@ class ClassifiedController extends \BaseController {
 	}
 
 
-	public function returnDataClassified()
+	public function showApi()
 	{
 		if (Request::ajax()) 
 		{
 			if (Input::has('classifiedId')) 
 			{
-				$classified = $this->repository->getById(Input::get('classifiedId'));
-				$classifiedLanguage = $classified->getInCurrentLangAttribute();
+				$classified = $this->repository->get(Input::get('classifiedId'));
+				$classifiedLanguage = $classified->InCurrentLang;
 				$categories = $classifiedLanguage->classified->getCategorieIds();
-				return Response::json(['success'=>true, 'classified' => $classifiedLanguage->toArray(), 'categories' => $categories,'url'=> URL::route('products.update',Input::get('productId'))]);
+				$this->setSuccess(true);
+				$this->addToResponseArray('classified', $classifiedLanguage);
+				$this->addToResponseArray('categories',  $categories);
+				return $this->getResponseArrayJson();	
 			}else{
-				return Response::json(['success' => false]);
+				return $this->getResponseArrayJson();	
 			}
 		}
+		return $this->getResponseArrayJson();	
 	}
 
 	public function returnDataClassifiedLang()
