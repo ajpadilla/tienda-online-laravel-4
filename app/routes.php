@@ -470,11 +470,13 @@ function () {
 		'uses' => 'ClassifiedController@citiesForState'
 	]);
 
-	Route::get('classifieds/api-show-lang','ClassifiedController@showApiLang');
+	Route::get('classifieds/api-show-lang',[ 'as' => 'classifieds.api.show-lang',
+		'uses' => 'ClassifiedController@showApiLang'
+	]);
 
 	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.saveLang'), [
-		'as' => 'classifieds.saveLang',
-		'uses' => 'ClassifiedController@saveCurrentLangAttribute'
+		'as' => 'classifieds.routes.api.saveLang',
+		'uses' => 'ClassifiedController@updateLangApi'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.delete-ajax'),  ['as' => 'classifieds.delete-ajax','uses' => 'ClassifiedController@deleteAjax' ] );
