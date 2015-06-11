@@ -55,7 +55,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'classifieds.saveLang', 'class' => 'form-horizontal', 'id' => 'form-edit-classified-lang'])}}
+							{{Form::open(['route' => 'classifieds.routes.api.saveLang', 'class' => 'form-horizontal', 'id' => 'form-edit-classified-lang'])}}
 								@include('classifieds.partials._form_language')
 							{{Form::close()}}
 						</div>
@@ -81,6 +81,12 @@
              	action = getAttributeIdActionSelect($(this).attr('id'));
              	//console.log(action);
              	loadDataToEditClassified(action.number);
+        	});
+
+        	$(".table").delegate(".edit-classified-lang", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	loadDataForLanguageClassified(action.number);
         	});
 
 			var loadDataToEditClassified = function (classifiedId) 
@@ -110,35 +116,35 @@
 				});
 			}
 
-			function loadDataForLanguageClassified(id) {
+			var loadDataForLanguageClassified = function (classifiedId) {
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataClassified/') }}',	
-					data: {'classifiedId': id},
+					url: '{{ URL::route('classifieds.api.show') }}',	
+					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response.classified);
+						//console.log(response.classified);
 						if (response.success == true) {
 							$('#classified_id_language').val(response.classified.classified.id);
 							$('#lang_id').val(response.classified.language_id);
 							$('#name_language').val(response.classified.name);
 							$('#description_language').code(response.classified.description);
 							$('#address_language').code(response.classified.address);
+							showPopUpFancybox('#fancybox-edit-language-classified');
 						}
 					}
 				});
 			}
 
 			$('#lang_id').click(function () {
-				console.log($('#classified_id_language').val() +" "+ $('#lang_id').val());
-
+				//console.log($('#classified_id_language').val() +" "+ $('#lang_id').val());
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataClassifiedLang/') }}',	
+					url: '{{ URL::route('classifieds.api.show-lang') }}',	
 					data: {'classifiedId':$('#classified_id_language').val(), 'languageId':$('#lang_id').val()},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response);
+						//console.log(response);
 						if (response.success == true) {
 							$('#name_language').val(response.classifiedLang.name);
 							$('#description_language').code(response.classifiedLang.description);
@@ -270,7 +276,7 @@
 			var optionsClassifiedLang = {
 					beforeSubmit:  showRequestLang,  // pre-submit callback
 					success:       showResponseLang,  // post-submit callback
-					url:  '{{ URL::route('classifieds.saveLang') }}',
+					url:  '{{ URL::route('classifieds.routes.api.saveLang') }}',
 					type:'POST'
 				}
 
@@ -333,12 +339,21 @@
 
 		// post-submit callback
 		function showResponseLang(responseText, statusText, xhr, $form)  {
-			console.log(responseText);
-
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
+			//console.log(responseText);
+			if (responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				reloadDataTable('#datatable');
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
+			
 		}
 
 
