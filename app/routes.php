@@ -470,7 +470,7 @@ function () {
 		'uses' => 'ClassifiedController@citiesForState'
 	]);
 
-	Route::get('returnDataClassifiedLang','ClassifiedController@returnDataClassifiedLang');
+	Route::get('classifieds/api-show-lang','ClassifiedController@showApiLang');
 
 	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.saveLang'), [
 		'as' => 'classifieds.saveLang',
