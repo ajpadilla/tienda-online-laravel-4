@@ -223,4 +223,106 @@ class ClassifiedRepository extends BaseRepository
 			->get();*/
 	}	
 
+	public function setDefaultActionColumn() {
+		$this->addColumnToCollection('Actions', function($model)
+		{
+			$language = $this->getCurrentLang();
+
+			$this->cleanActionColumn();
+			$this->addActionColumn("<form action='".route('classifieds.show',$model->id)."' method='get'>
+						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('classifieds.actions.Show')."'  data-original-title='".trans('classifieds.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+					  </form>");
+			$this->addActionColumn("<button href='#fancybox-edit-classified' id='edit_classified_".$model->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>");
+			$this->addActionColumn("<button href='#' class='btn btn-danger btn-outline dim col-sm-8 delete' id='delet_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>");
+			if($model->active)
+				$this->addActionColumn("<button href='#' class='btn btn-primary btn-outline dim col-sm-8 deactivated' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Activate')."'  data-original-title='".trans('products.actions.Deactivated')."'> <i class='fa fa-check fa-2x'></i></button><br />");
+			else
+				$this->addActionColumn("<button href='#' class='btn btn-danger btn-outline dim col-sm-8 activate' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Deactivated')."'  data-original-title='".trans('products.actions.Activate')."'> <i class='fa fa-check fa-2x'></i></button><br />");
+			
+			$this->addActionColumn("<form action='".route('photoClassified.create',array($model->id, $language->id))."' method='get'>
+							<button href='#' class='btn btn-info btn-outline dim col-sm-8 photo' style='margin-left: 20px' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Photo')."'  data-original-title='".trans('products.actions.Photo')."'> <i class='fa fa-camera fa-2x'></i></button><br />
+					  </form>");
+			$this->addActionColumn("<button href='#fancybox-edit-language-classified' id='language_classified_".$model->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
+	public function setBodyTableSettings()
+	{
+		$this->collection->searchColumns('name','description', 'address');
+		$this->collection->orderColumns('name','description', 'address');
+
+		$this->collection->addColumn('photo', function($model)
+		{
+			$links = '';
+			
+			$photo = $model->FirstPhoto;
+
+			if ($photo != false) {
+				$links .= "	<a href='#'>
+									<img class='mini-photo' alt='" . $photo->filename . "' src='" . asset($photo->complete_path) . "'>
+				</a>";
+			}
+				
+			return $links;
+		});
+
+		$this->collection->addColumn('name', function($model)
+		{
+			return $model->InCurrentLang->name;
+		});
+		
+		$this->collection->addColumn('description', function($model)
+		{
+			return $model->InCurrentLang->description;
+		});
+
+		$this->collection->addColumn('address', function($model)
+		{
+			return $model->address->description;
+		});
+
+		$this->collection->addColumn('price', function($model)
+		{
+			return $model->price;
+		});
+
+		
+		$this->collection->addColumn('user', function($model)
+		{
+			return $model->user->username;
+		});
+
+		$this->collection->addColumn('categories', function($model)
+		{
+			if($model->hasCategories())
+			{
+				$categoryNames = $model->getCategoryNames();
+				$links = '<select class="form-control m-b">';
+				foreach ($categoryNames as $category) {
+					$links .= '<option>'.$category.'</option>';
+				}
+				$links .='</select>';
+				return $links;
+			}
+			return '';	
+		});
+
+		$this->collection->addColumn('classified_type', function($model)
+		{
+			$language = $this->model->getCurrentLang();
+			$classifiedTypeLanguage = $model->classifiedType->languages()->where('language_id','=',$language->id)->first();
+			return $classifiedTypeLanguage->pivot->name;
+		});
+
+		$this->collection->addColumn('classified_condition', function($model)
+		{
+			$language = $this->model->getCurrentLang();
+			$classifiedConditionLanguage = $model->classifiedCondition->languages()->where('language_id','=',$language->id)->first();
+			return $classifiedConditionLanguage->pivot->name;
+		});
+	}
+
 }
