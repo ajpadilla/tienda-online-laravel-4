@@ -482,7 +482,7 @@ function () {
 	Route::post('checkNameClassified','ClassifiedController@checkNameClassified');
 	Route::post('checkNameClassifiedEdit','ClassifiedController@checkNameForEdit');
 
-	Route::get('returnDataClassified','ClassifiedController@returnDataClassified');
+	Route::get('classifieds/api-show',  ['as' => 'classifieds.api.show','uses' => 'ClassifiedController@showApi' ] );
 
 	Route::get(LaravelLocalization::transRoute('classifieds.routes.api.list'), ['as'=>'classifieds.routes.api.list', 'uses'=>'ClassifiedController@listApi']);
 
