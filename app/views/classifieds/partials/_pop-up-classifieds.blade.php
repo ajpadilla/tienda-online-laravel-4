@@ -4,7 +4,7 @@
 		                <div class="col-md-6 col-sm-6 col-xs-3">
 		                  <div class="product-main-image">
 		                  	@if($classified->hasPhotos())
-			                    <img src="{{ asset($classified->getFirstPhoto()->complete_path) }}" alt="{{ $classified->getFirstPhoto()->filename }}" class="img-responsive">
+			                    <img src="{{ asset($classified->FirstPhoto->complete_path) }}" alt="{{ $classified->FirstPhoto->filename }}" class="img-responsive">
 			                  </div>
 			                  <div class="product-other-images">
 			                  	@foreach($classified->photos as $photo)
