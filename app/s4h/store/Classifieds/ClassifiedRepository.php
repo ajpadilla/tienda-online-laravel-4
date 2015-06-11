@@ -151,12 +151,6 @@ class ClassifiedRepository extends BaseRepository
 		return $classified;
 	}
 
-	public function delteClassified($classifiedId)
-	{
-		$classified = $this->get($classifiedId);
-		$classified->delete();
- 	}
-
 	public function getName($data)
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
