@@ -435,9 +435,9 @@ function () {
 		'uses' => 'ClassifiedController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('classifieds.routes.update'), [
-		'as' => 'classifieds.update',
-		'uses' => 'ClassifiedController@update'
+	Route::post(LaravelLocalization::transRoute('classifieds.routes.api.update'), [
+		'as' => 'classifieds.routes.api.update',
+		'uses' => 'ClassifiedController@updateApi'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifieds.routes.destroy'), [
