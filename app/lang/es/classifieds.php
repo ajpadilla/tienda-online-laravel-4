@@ -5,13 +5,14 @@
 			"create" => "clasificados/crear",
 			"store" => "clasificados/agregar",
 			"show"=>"clasificados/ver/{id}",
+			"index" => "clasificados/lista-clasificados",
 			"edit"=>"clasificados/editar/{id}",
 			"update"=>"clasificados/actualizar",
 			"destroy"=>"clasificados/eliminar/{id}",
 			"search" => "clasificados/buscar",
 			"filterClassified" => "clasificados/resultados-busqueda",
 			"api" => array(
-				"index" => "clasificados/api/lista-clasificados",
+				"list" => "clasificados/api/list-clasificados",
 				"delete-ajax" => "clasificado/api/eliminar-ajax",
 				"saveLang" =>"clasificados/api/idioma-actualizar-idioma",
 			)

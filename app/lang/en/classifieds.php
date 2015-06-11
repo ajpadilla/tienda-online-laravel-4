@@ -5,13 +5,14 @@
 			"create" => "classifieds/create",
 			"store" => "classifieds/store",
 			"show"=>"classifieds/show/{id}",
+			"index" => "classifieds/list-classifieds",
 			"edit"=>"classifieds/edit/{id}",
 			"update"=>"classifieds/update",
 			"destroy"=>"classifieds/delete/{id}",
 			"search" => "classifieds/search",
 			"filterClassified" => "classifieds/result-search",
 			"api" => array(
-				"index" => "classifieds/api/list-classifieds",
+				"list" => "classifieds/api/list-classifieds",
 				"delete-ajax" => "clasificado/api/delete-ajax",
 				"saveLang" =>"classifieds/api/language-update-idioma",
 			)
