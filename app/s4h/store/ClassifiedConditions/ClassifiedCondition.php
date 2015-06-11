@@ -3,10 +3,11 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\ClassifiedConditionsLang\ClassifiedConditionLang;
+use s4h\store\Base\BaseModel;
 /**
 * 
 */
-class ClassifiedCondition extends Eloquent {
+class ClassifiedCondition extends BaseModel {
 	
 	use SoftDeletingTrait;
 
@@ -25,7 +26,7 @@ class ClassifiedCondition extends Eloquent {
 
 	public function getInCurrentLangAttribute(){
 		$language = $this->getCurrentLang();
-		return ClassifiedConditionLang::classifiedConditionsId($this->id)->whereLanguageId($language->id)->first();
+		return ClassifiedConditionLang::whereClassifiedConditionsId($this->id)->whereLanguageId($language->id)->first();
 	}
 
 	// Override methods
