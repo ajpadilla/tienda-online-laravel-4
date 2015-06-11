@@ -12,6 +12,7 @@
 			"search" => "clasificados/buscar",
 			"filterClassified" => "clasificados/resultados-busqueda",
 			"api" => array(
+				'update' => 'clasificados/api/actualizar',
 				"list" => "clasificados/api/list-clasificados",
 				"delete-ajax" => "clasificado/api/eliminar-ajax",
 				"saveLang" =>"clasificados/api/idioma-actualizar-idioma",
