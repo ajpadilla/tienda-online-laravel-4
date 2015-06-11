@@ -33,7 +33,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'classifieds.update', 'class' => 'form-horizontal', 'id' => 'formEditClassified'])}}
+							{{Form::open(['route' => 'classifieds.update', 'class' => 'form-horizontal', 'id' => 'form-edit-classified'])}}
 								@include('classifieds.partials._form')
 							{{Form::close()}}
 						</div>
@@ -55,7 +55,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="row">
-							{{Form::open(['route' => 'classifieds.saveLang', 'class' => 'form-horizontal', 'id' => 'formEditClassifiedLanguage'])}}
+							{{Form::open(['route' => 'classifieds.saveLang', 'class' => 'form-horizontal', 'id' => 'form-edit-classified-lang'])}}
 								@include('classifieds.partials._form_language')
 							{{Form::close()}}
 						</div>
@@ -77,67 +77,18 @@
 
 			$('.summernote').summernote();
 
-			$('.btn.btn-warning.btn-outline.dim.col-sm-8.edit').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-				beforeLoad: loadData()
-			});
+			$(".table").delegate(".edit-classified", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	//console.log(action);
+             	loadDataToEditClassified(action.number);
+        	});
 
-			$('.btn.btn-success.btn-outline.dim.col-sm-8.language').fancybox({
-				openEffect	: 'elastic',
-	    		closeEffect	: 'elastic',
-				centerOnScroll: true,
-				hideOnOverlayClick: true,
-				beforeLoad: loadData()
-			});
-
-			loadData();
-
-			function loadData() 
-			{
-				$('.table').click(function(event)
-				{
-					var target = $( event.target );
-					if (target.is('button')) 
-					{
-						console.log($(target).attr('id'));
-
-						var id = $(target).attr('id');
-						var type = id ? id.split('_')[0] : '';
-						var numberId = id ? id.split('_')[1] : '';
-
-						if (type == "edit") 
-						{
-							loadDataToEditClassified(numberId);
-						}
-						else
-						{
-							if (type == "language" ) 
-							{
-								loadDataForLanguageClassified(numberId);
-							}
-							else
-							{
-								if (type == "delet")
-								{
-									//console.log('delete');
-									deleteClassified(numberId);
-								}
-							}
-						}
-
-					}			
-				});
-			}
-
-			function loadDataToEditClassified(id) 
+			var loadDataToEditClassified = function (classifiedId) 
 			{
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::to('/returnDataClassified/') }}',	
-					data: {'classifiedId': id},
+					url: '{{ URL::route('classifieds.api.show') }}',	
+					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
 						if (response.success == true) {
@@ -151,6 +102,7 @@
 							$('#classified_condition_id').val(response.classified.classified.classified_condition_id);
 							$('#categories').val(response.categories);
 							$('.chosen-select').trigger("chosen:updated");
+							showPopUpFancybox('#fancybox-edit-classified');
 						}
 					}
 				});
@@ -227,7 +179,7 @@
 					catch(e){return false;}
 				},'{{ trans('classifieds.validation.date') }}');
 
-			$('#formEditClassified').validate({
+			$('#form-edit-classified').validate({
 
 				rules:{
 					name:{
@@ -279,7 +231,7 @@
 
 			});
 	
-			$('#formEditClassifiedLanguage').validate({
+			$('#form-edit-classified-lang').validate({
 					rules:{
 						name_language:{
 							required:true,
@@ -320,8 +272,8 @@
 					type:'POST'
 				}
 
-			$('#formEditClassified').ajaxForm(options);
-			$('#formEditClassifiedLanguage').ajaxForm(optionsClassifiedLang);
+			$('#form-edit-classified').ajaxForm(options);
+			$('#form-edit-classified-lang').ajaxForm(optionsClassifiedLang);
 			
 		});
 
@@ -338,7 +290,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formEditClassified').valid();
+			return $('#form-edit-classified').valid();
 		}
 
 		// post-submit callback
@@ -372,7 +324,7 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formEditClassifiedLanguage').valid();
+			return $('#form-edit-classified-lang').valid();
 		}
 
 		// post-submit callback
