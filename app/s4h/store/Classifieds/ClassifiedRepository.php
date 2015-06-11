@@ -125,14 +125,10 @@ class ClassifiedRepository extends BaseRepository
 		return $classified;
 	}
 
-	public function updateClassified($data = array())
+	public function update($data = array())
 	{
 		$classified = $this->get($data['classified_id']);
-		$classified->price = $data['price'];
-		$classified->user_id = 1;
-		$classified->classified_type_id = $data['classified_type_id'];
-		$classified->classified_condition_id = $data['classified_condition_id'];
-		$classified->save();
+		$classified->update($data);
 
 		if (count($classified->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$classified->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
