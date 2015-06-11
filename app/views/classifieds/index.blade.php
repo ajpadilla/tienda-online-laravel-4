@@ -89,6 +89,12 @@
              	loadDataForLanguageClassified(action.number);
         	});
 
+        	$(".table").delegate(".delete-classified", "click", function() {
+             	action = getAttributeIdActionSelect($(this).attr('id'));
+             	console.log(action);
+             	fancyConfirm('Are you sure you want to delete?', deleteClassified , action.number);
+        	});
+
 			var loadDataToEditClassified = function (classifiedId) 
 			{
 				$.ajax({
@@ -159,15 +165,16 @@
 
 			}) ;
 
-			function deleteClassified(id){
+			var deleteClassified = function (classifiedId){
 				$.ajax({
 					type: 'GET',
-					url: '{{ URL::route('classifieds.delete-ajax') }}',
-					data: {'classifiedId': id},
+					url: '{{ URL::route('classifieds.api.delete') }}',
+					data: {'classifiedId': classifiedId},
 					dataType: "JSON",
 					success: function(response) {
 						if (response.success == true) {
-							$('#delet_'+id).parent().parent().remove();
+							$('#delete__classified_'+classifiedId).parent().parent().remove();
+							reloadDataTable('#datatable');
 						};
 					}
 				});
