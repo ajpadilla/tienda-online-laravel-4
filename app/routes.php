@@ -84,7 +84,7 @@ function () {
 	]);
 
 
-	Route::get(LaravelLocalization::transRoute('discounts.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('discounts.routes.index'), [
 		'as' => 'discounts.index',
 		'uses' => 'DiscountController@index'
 	]);
@@ -110,10 +110,12 @@ function () {
 		'uses' => 'DiscountController@destroy'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('discounts.routes.api.list'), ['as'=>'discounts.routes.api.list', 'uses'=>'DiscountController@listApi']);
+
 	Route::get('delete/{id}','DiscountController@destroy');
 	Route::post('checkCode','DiscountController@checkCode');
 	Route::post('checkCodeForEdit','DiscountController@checkCodeForEdit');
-	Route::get('api/discounts', array('as'=>'api.discounts', 'uses'=>'DiscountController@getDatatable'));
+
 
 	/**
 		* ------------------------------ Rutas para Typo de descuento -----------------------
