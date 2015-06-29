@@ -8,8 +8,9 @@
 			"edit"=>"descuentos/editar/{id}",
 			"update"=>"descuentos/actualizar/{id}",
 			"destroy"=>"descuentos/eliminar/{id}",
+			"index"=>'descuentos/lista-descuentos',
 			"api" => array(
-				"index"=>'descuentos/api/lista-descuentos',
+				"list"=>'descuentos/api/lista-descuentos',
 			),
 		),
 		"title" => "Agregar descuento",
@@ -85,7 +86,8 @@
 		'actions' => array(
 			'Show' => 'Ver   ',
 			'Edit' => 'Editar',
-			'Delete' => 'Eliminar'
+			'Delete' => 'Eliminar',
+			'Language' => 'Editar Idioma'
 		),
 
 		"active" => array(

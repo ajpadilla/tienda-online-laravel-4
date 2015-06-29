@@ -8,8 +8,9 @@
 			"edit"=>"discounts/edit/{id}",
 			"update"=>"discounts/update/{id}",
 			"destroy"=>"discounts/destroy/{id}",
+			"index"=>'discounts/list-products',
 			"api" => array(
-				"index"=>'discounts/api/list-discounts',
+				"list"=>'discounts/api/list-discounts',
 			),
 		),
 		"title" => "Add discount",
@@ -90,7 +91,8 @@
 		'actions' => array(
 			'Show' => 'Show   ',
 			'Edit' => 'Edit',
-			'Delete' => 'Delete'
+			'Delete' => 'Delete',
+			'Language' => 'Edit Language'
 		),
 		
 		"active" => array(
