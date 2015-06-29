@@ -4,7 +4,9 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.2.*",
+		"laravel/framework": "4.2.17",
+		"greggilbert/recaptcha": "1.*",
+		"torann/geoip": "0.1.*@dev",
 		"doctrine/dbal": "v2.4.2",
 		"mcamara/laravel-localization": "0.14.*",
         "laracasts/commander": "~1.0",
@@ -23,7 +25,7 @@
         "moltin/laravel-cart": "dev-master",
 		"barryvdh/laravel-dompdf": "0.4.*",
 		"stripe/stripe-php" : "dev-master",
-		"anouar/paypalpayment": "dev-master",
+		"anouar/paypalpayment": "1.*",
 		"bkwld/croppa": "~3.0",
 		"aws/aws-sdk-php-laravel": "1.*",
 		"fzaninotto/faker" : "dev-master"
@@ -31,7 +33,7 @@
 	"require-dev": {
 		"codeception/codeception": "2.0.*",
 		"barryvdh/laravel-debugbar": "1.x",
-		"fzaninotto/faker": "1.5.x-dev",
+		"fzaninotto/faker": "1.6.x-dev",
 		"way/generators": "~2.0",
 		"laracasts/testdummy": "~1.0"
 	},
