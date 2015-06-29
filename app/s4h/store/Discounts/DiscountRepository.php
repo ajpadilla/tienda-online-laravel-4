@@ -8,19 +8,32 @@ use s4h\store\Base\BaseRepository;
 
 class DiscountRepository extends BaseRepository{
 
-	public function createNewDiscount($data = array())
+	function __construct() {
+		$this->columns = [
+			trans('products.list.photo'),
+			trans('products.list.name'),
+			trans('products.list.price'),
+			trans('products.list.quantity'),
+			trans('products.list.active'),
+			trans('products.list.accept'),
+			trans('products.list.category'),
+			trans('products.labels.condition'),
+			trans('products.list.ratings'),
+			trans('products.list.actions')
+		];
+		$this->setModel(new Discount);
+		$this->setListAllRoute('');
+	}
+
+
+	public function create($data = array())
 	{
-		$discount = new Discount;
-		$discount->value = $data['value'];
-		$discount->percent = number_format($data['percent'], 2, ".", " ");
-		$discount->quantity = $data['quantity'];
-		$discount->quantity_per_user = $data['quantity_per_user'];
-		$discount->code = $data['code'];
-		$discount->active = $data['active'];
-		$discount->from = date("Y-m-d",strtotime($data['from']));
-		$discount->to = date("Y-m-d",strtotime($data['to']));
-		$discount->discount_type_id = $data['discount_type_id'];
-		$discount->save();
+		$data['percent'] = number_format($data['percent'], 2, ".", " ");
+		$data['from'] = date("Y-m-d",strtotime($data['from']));
+		$data['to'] = date("Y-m-d",strtotime($data['to']));
+
+		$discount = $this->model->create($data);
+
 		$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}
 
