@@ -10,19 +10,18 @@ class DiscountRepository extends BaseRepository{
 
 	function __construct() {
 		$this->columns = [
-			trans('products.list.photo'),
-			trans('products.list.name'),
-			trans('products.list.price'),
-			trans('products.list.quantity'),
-			trans('products.list.active'),
-			trans('products.list.accept'),
-			trans('products.list.category'),
-			trans('products.labels.condition'),
-			trans('products.list.ratings'),
-			trans('products.list.actions')
+			trans('discounts.list.Code'),
+			trans('discounts.list.Name'),
+			trans('discounts.list.Discount_type'),
+			trans('discounts.list.Value'),
+			trans('discounts.list.Percent'),
+			trans('discounts.list.Active'),
+			trans('discounts.list.From'),
+			trans('discounts.list.To'),
+			trans('discounts.list.Actions')
 		];
 		$this->setModel(new Discount);
-		$this->setListAllRoute('');
+		$this->setListAllRoute('discounts.routes.api.list');
 	}
 
 
@@ -78,4 +77,71 @@ class DiscountRepository extends BaseRepository{
 		$discount = $this->getDiscountId($discount_id);
 		$discount->delete();
 	}
+
+	public function setBodyTableSettings()
+	{
+
+		$this->collection->searchColumns('code','discount_type_id', 'value', 'percent', 'active', 'from', 'to');
+		$this->collection->orderColumns('code','discount_type_id','value', 'percent', 'active', 'from', 'to');
+
+		$this->collection->addColumn('code', function ($model) {
+			return $model->code;
+		});
+
+		$this->collection->addColumn('name', function ($model) {
+			return $model->InCurrentLang->name;
+		});
+
+		$this->collection->addColumn('discount_type_id', function($model)
+		{
+			/*$language = $this->languageRepository->returnLanguage();
+			$discount_type_language = $model->discount->discountType->languages()->where('language_id','=',$language->id)->first();
+			return $discount_type_language->pivot->name;*/
+			return 0;
+		});
+
+		$this->collection->addColumn('value', function ($model) {
+			return $model->value;
+		});
+
+		$this->collection->addColumn('percent', function ($model) {
+			return $model->percent;
+		});
+
+		$this->collection->addColumn('active', function ($model) {
+			return $model->ActivoShow;
+		});
+
+		$this->collection->addColumn('from', function($model)
+		{
+			//return date($model->language->date_format ,strtotime($model->discount->from));
+			return 0;
+		});
+
+		$this->collection->addColumn('to', function($model)
+		{
+			//return date($model->language->date_format ,strtotime($model->discount->to));
+			return 0;
+		});
+	}
+
+	public function setDefaultActionColumn()
+	{
+		$this->addColumnToCollection('Actions', function($model)
+		{
+			$language = $this->getCurrentLang();
+
+			$this->cleanActionColumn();
+			$this->addActionColumn("<form action='".route('discounts.show',$model->id)."' method='get'>
+				<button href='#'  class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Show')."'  data-original-title='".trans('discounts.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+			</form>");
+			$this->addActionColumn("<button href='#fancybox-edit-product' id='edit_product_".$model->id."' class='edit-product btn btn-warning btn-outline dim col-sm-6' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Edit')."'  data-original-title='".trans('discounts.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+		</button><br/>");
+			$this->addActionColumn("<button href='#' class='delete-product btn btn-danger btn-outline dim col-sm-6' id='delet_product_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Delete')."'  data-original-title='".trans('discounts.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+		</button><br/>");
+			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='edit-product-lang btn btn-success btn-outline dim col-sm-6' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Language')."'  data-original-title='".trans('discounts.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
 }
