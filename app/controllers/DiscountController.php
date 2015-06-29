@@ -13,14 +13,14 @@ use s4h\store\Forms\EditDiscountForm;
 class DiscountController extends \BaseController {
 
 	private $registerDiscountForm;
-	private $discountRepository;
+	private $repository;
 	private $discountTypeRepository;
 	private $languageRepository;
 	private $discountLangRepository;
 	private $editDiscountForm;
 
 	function __construct(RegisterDiscountForm $registerDiscountForm, 
-							DiscountRepository $discountRepository, 
+							DiscountRepository $repository, 
 							DiscountTypeRepository $discountTypeRepository, 
 							LanguageRepository $languageRepository, 
 							DiscountLangRepository $discountLangRepository,
@@ -28,7 +28,7 @@ class DiscountController extends \BaseController {
 						){
 
 		$this->registerDiscountForm = $registerDiscountForm;
-		$this->discountRepository = $discountRepository;
+		$this->repository = $repository;
 		$this->discountTypeRepository = $discountTypeRepository;
 		$this->languageRepository = $languageRepository;
 		$this->discountLangRepository = $discountLangRepository;
@@ -68,14 +68,18 @@ class DiscountController extends \BaseController {
 			try
 			{
 				$this->registerDiscountForm->validate($input);
-				$this->discountRepository->createNewDiscount($input);
-				return Response::json(trans('discounts.response'));
+				$this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('discounts.response'));
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	/**
@@ -85,7 +89,7 @@ class DiscountController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id) {
-		$discount = $this->discountRepository->getDiscountId($id);
+		$discount = $this->repository->getDiscountId($id);
 		$language = $this->languageRepository->returnLanguage();
 		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
@@ -99,7 +103,7 @@ class DiscountController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($id) {
-		$discount = $this->discountRepository->getDiscountId($id);
+		$discount = $this->repository->getDiscountId($id);
 		$language = $this->languageRepository->returnLanguage();
 		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
@@ -123,7 +127,7 @@ class DiscountController extends \BaseController {
 			try
 			{
 				$this->editDiscountForm->validate($input);
-				$this->discountRepository->updateDiscount($input);
+				$this->repository->updateDiscount($input);
 				return Response::json(trans('discounts.Updated'));
 			} catch (FormValidationException $e) {
 				return Response::json($e->getErrors()->all());
@@ -138,7 +142,7 @@ class DiscountController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroy($id) {
-		$this->discountRepository->deleteDiscount($id);
+		$this->repository->deleteDiscount($id);
 		Flash::message(trans('discounts.Delete'));
 		return Redirect::route('discounts.index');
 	}
@@ -200,7 +204,7 @@ class DiscountController extends \BaseController {
 
 	public function checkCode() {
 		if (Request::ajax()) {
-			$discount = $this->discountRepository->getCode(Input::get('code'));
+			$discount = $this->repository->getCode(Input::get('code'));
 			if (count($discount) > 0) {
 				return Response::json(false);
 			} else {
@@ -212,7 +216,7 @@ class DiscountController extends \BaseController {
 
 	public function checkCodeForEdit() {
 		if (Request::ajax()) {
-			$discount = $this->discountRepository->getCodeEdit(Input::all());
+			$discount = $this->repository->getCodeEdit(Input::all());
 			if (count($discount) > 0) {
 				return Response::json(false);
 			} else {
