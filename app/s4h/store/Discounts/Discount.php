@@ -15,7 +15,7 @@ class Discount extends BaseModel {
 	protected $fillable = ['value','percent','quantity','quantity_per_user','code','active','from','to','discount_type_id'];
 
 
-	public function getActivoShow() {
+	public function getActivoShowAttribute() {
 		return ($this->active == 1) ? trans('discounts.active.Yes') : trans('discounts.active.No');
 	}
 
@@ -32,5 +32,11 @@ class Discount extends BaseModel {
 		DiscountLang::where('discount_id','=',$this->id)->delete();
 		return parent::delete();
 	}
+
+	public function getInCurrentLangAttribute(){
+		$language = $this->getCurrentLang();
+		return DiscountLang::whereDiscountId($this->id)->whereLanguageId($language->id)->first();
+	}
+
 
 }
