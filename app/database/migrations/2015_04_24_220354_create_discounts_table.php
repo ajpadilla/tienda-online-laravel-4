@@ -16,7 +16,7 @@ class CreateDiscountsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->decimal('value', 17,2)->nullable();
-			$table->decimal('percent', 3,2)->nullable();
+			$table->decimal('percent', 5,2)->nullable();
 			$table->smallInteger('quantity');
 			$table->smallInteger('quantity_per_user');
 			$table->string('code', 255)->nullable();
