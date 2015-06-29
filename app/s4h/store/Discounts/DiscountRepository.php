@@ -6,7 +6,7 @@ use s4h\store\DiscountTypesLang\DiscountTypeLang;
 use s4h\store\DiscountsLang\DiscountLang;
 use s4h\store\Base\BaseRepository;
 
-class DiscountRepository {
+class DiscountRepository extends BaseRepository{
 
 	public function createNewDiscount($data = array())
 	{
