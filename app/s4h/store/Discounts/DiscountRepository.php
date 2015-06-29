@@ -4,16 +4,9 @@ use s4h\store\Discounts\Discount;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\DiscountTypesLang\DiscountTypeLang;
 use s4h\store\DiscountsLang\DiscountLang;
+use s4h\store\Base\BaseRepository;
 
 class DiscountRepository {
-
-	public function save(Discount $discount){
-		return $discount->save();
-	}
-
-	public function getAll(){
-		return Discount::all();
-	}
 
 	public function createNewDiscount($data = array())
 	{
