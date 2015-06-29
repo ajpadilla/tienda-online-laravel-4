@@ -4,16 +4,9 @@ use s4h\store\DiscountsTypes\DiscountType;
 use s4h\store\Languages\Language;
 use s4h\store\DiscountTypesLang\DiscountTypeLang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use s4h\store\Base\BaseRepository;
 
-class DiscountTypeRepository {
-
-	public function save(DiscountType $discountType){
-		return $discountType->save();
-	}
-
-	public function getAll(){
-		return DiscountType::all();
-	}
+class DiscountTypeRepository extends BaseRepository{
 
 	public function getName($data)
 	{
@@ -25,11 +18,13 @@ class DiscountTypeRepository {
 		}
 	}
 	
-	public function getNameForLanguage()
+	public function getAllForCurrentLang()
 	{
-		$iso_code = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$iso_code)->first();
-		return $language->discounts_types()->lists('name','discount_type_id');
+		$language = $this->getCurrentLang();
+		if (!empty($language))
+			return $language->discounts_types()->lists('name','discount_type_id');
+		else
+			return array();
 	}
 
 	public function createNewDiscountType($data = array())
