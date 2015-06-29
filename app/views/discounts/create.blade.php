@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('discounts.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscount']) }}
+					{{ Form::open(['route' =>'discounts.store','class'=>'form-horizontal','method' => 'POST','id' => 'form-create-discount']) }}
 					<div class="col-sm-6 b-r">
 						<div class="form-group">
 							{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
@@ -157,7 +157,7 @@
         	catch(e){return false;}
     	},'{{ trans('discounts.validation.date') }}');
 
-		$('#formCreateDiscount').validate({
+		$('#form-create-discount').validate({
 
 			rules:{
 				name:{
@@ -284,7 +284,7 @@
 				url:  '{{URL::route('discounts.store')}}',
         		type:'POST'
 			};
-		$('#formCreateDiscount').ajaxForm(options);
+		$('#form-create-discount').ajaxForm(options);
 	});
 
 	// pre-submit callback
@@ -300,15 +300,23 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formCreateDiscount').valid();
+			return $('#form-create-discount').valid();
 		}
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
 		} 						
 
 </script>
