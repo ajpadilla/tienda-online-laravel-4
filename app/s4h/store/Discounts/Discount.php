@@ -4,6 +4,7 @@ use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\DiscountsLang\DiscountLang;
 use s4h\store\Base\BaseModel;
+use Carbon\Carbon;
 
 class Discount extends BaseModel {
 	use SoftDeletingTrait;
@@ -26,6 +27,18 @@ class Discount extends BaseModel {
 	public function languages(){
 		return $this->belongsToMany('s4h\store\Languages\Language','discounts_lang','discount_id','language_id')->withPivot('name','description');
 	}	
+
+	public function getFromShowAttribute()
+	{
+		$language = $this->getCurrentLang();
+		return Carbon::createFromFormat('Y-m-d', $this->from)->format($language->date_format);
+	}
+
+	public function getToShowAttribute()
+	{
+		$language = $this->getCurrentLang();
+		return Carbon::createFromFormat('Y-m-d', $this->to)->format($language->date_format);
+	}
 
 	public function delete()
 	{
