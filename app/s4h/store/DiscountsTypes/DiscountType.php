@@ -3,8 +3,9 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\DiscountTypesLang\DiscountTypeLang;
+use s4h\store\Base\BaseModel;
 
-class DiscountType extends Eloquent {
+class DiscountType extends BaseModel {
 	
 	use SoftDeletingTrait;
 
@@ -19,6 +20,12 @@ class DiscountType extends Eloquent {
 	public function discounts()
 	{
 		return $this->hasMany('s4h\store\Discounts\Discount');
+	}
+
+
+	public function getInCurrentLangAttribute(){
+		$language = $this->getCurrentLang();
+		return DiscountTypeLang::whereDiscountTypeId($this->id)->whereLanguageId($language->id)->first();
 	}
 
 	public function delete()
