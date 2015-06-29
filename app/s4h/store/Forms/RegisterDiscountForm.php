@@ -14,6 +14,6 @@ class RegisterDiscountForm extends FormValidator{
 						'active' => 'required|integer',
 						'from' => 'required|date',
 						'to' => 'required|date',
-						'discount_type_id' =>'required|integer'
+						'discount_type_id' =>'required|integer|exists:discounts_types,id'
 	];
 }
