@@ -14,7 +14,6 @@ class CreateDiscountsTypesTable extends Migration {
 	{
 		Schema::create('discounts_types', function(Blueprint $table){
 			$table->increments('id');
-			$table->string('name', 45);
 			$table->timestamps();
 			$table->softDeletes();
 		});
