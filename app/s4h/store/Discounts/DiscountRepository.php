@@ -28,7 +28,6 @@ class DiscountRepository extends BaseRepository{
 
 	public function create($data = array())
 	{
-		$data['percent'] = number_format($data['percent'], 2, ".", " ");
 		$data['from'] = date("Y-m-d",strtotime($data['from']));
 		$data['to'] = date("Y-m-d",strtotime($data['to']));
 
