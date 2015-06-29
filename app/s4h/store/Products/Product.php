@@ -29,8 +29,7 @@ class Product extends BaseModel{
 	}
 
 	public function getInCurrentLangAttribute(){
-		$isoCode = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		$language = $this->getCurrentLang();
 		return ProductLang::whereProductId($this->id)->whereLanguageId($language->id)->first();
 	}
 
