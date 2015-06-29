@@ -94,10 +94,7 @@ class DiscountRepository extends BaseRepository{
 
 		$this->collection->addColumn('discount_type_id', function($model)
 		{
-			/*$language = $this->languageRepository->returnLanguage();
-			$discount_type_language = $model->discount->discountType->languages()->where('language_id','=',$language->id)->first();
-			return $discount_type_language->pivot->name;*/
-			return 0;
+			return $model->discountType->InCurrentLang->name;
 		});
 
 		$this->collection->addColumn('value', function ($model) {
@@ -114,14 +111,12 @@ class DiscountRepository extends BaseRepository{
 
 		$this->collection->addColumn('from', function($model)
 		{
-			//return date($model->language->date_format ,strtotime($model->discount->from));
-			return 0;
+			return $model->FromShow;
 		});
 
 		$this->collection->addColumn('to', function($model)
 		{
-			//return date($model->language->date_format ,strtotime($model->discount->to));
-			return 0;
+			return $model->ToShow;
 		});
 	}
 
