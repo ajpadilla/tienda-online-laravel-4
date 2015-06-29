@@ -3,8 +3,9 @@
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\DiscountsLang\DiscountLang;
+use s4h\store\Base\BaseModel;
 
-class Discount extends Eloquent {
+class Discount extends BaseModel {
 	use SoftDeletingTrait;
 
     protected $dates = ['deleted_at'];
