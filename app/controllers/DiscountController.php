@@ -41,7 +41,8 @@ class DiscountController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		return View::make('discounts.index');
+		$table = $this->repository->getAllTable();
+		return View::make('discounts.index',compact('table'));
 	}
 
 	/**
@@ -147,60 +148,6 @@ class DiscountController extends \BaseController {
 		return Redirect::route('discounts.index');
 	}
 
-	public function getDatatable() {
-		$collection = Datatable::collection($this->discountLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-		->searchColumns('code', 'name', 'discount_type_id', 'name', 'value', 'percent', 'active', 'from', 'to')
-		->orderColumns('code', 'name', 'discount_type_id', 'name', 'value', 'percent', 'active', 'from', 'to');
-
-		$collection->addColumn('code', function ($model) {
-			return $model->discount->code;
-		});
-
-		$collection->addColumn('discount_type_id', function($model)
-		{
-			$language = $this->languageRepository->returnLanguage();
-			$discount_type_language = $model->discount->discountType->languages()->where('language_id','=',$language->id)->first();
-			return $discount_type_language->pivot->name;
-		});
-
-		$collection->addColumn('name', function ($model) {
-			return $model->name;
-		});
-
-		$collection->addColumn('value', function ($model) {
-			return $model->discount->value;
-		});
-
-		$collection->addColumn('percent', function ($model) {
-			return $model->discount->percent;
-		});
-
-		$collection->addColumn('active', function ($model) {
-			return $model->discount->getActivoShow();
-		});
-
-		$collection->addColumn('from', function($model)
-		{
-			return date($model->language->date_format ,strtotime($model->discount->from));
-		});
-
-		$collection->addColumn('to', function($model)
-		{
-			return date($model->language->date_format ,strtotime($model->discount->to));
-		});
-
-		$collection->addColumn('Actions', function ($model) {
-			$links = "<a class='btn btn-info btn-circle' href='" . route('discounts.show', $model->discount->id) . "'><i class='fa fa-check'></i></a>
-					<br />";
-			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('discounts.edit', $model->discount->id) . "'><i class='fa fa-pencil'></i></a>
-					<br />
-					<a class='btn btn-danger btn-circle' href='" . route('discounts.destroy', $model->discount->id) . "'><i class='fa fa-times'></i></a>";
-
-			return $links;
-		});
-
-		return $collection->make();
-	}
 
 	public function checkCode() {
 		if (Request::ajax()) {
@@ -223,5 +170,10 @@ class DiscountController extends \BaseController {
 				return Response::json(true);
 			}
 		}
+	}
+
+	public function listApi()
+	{
+		return $this->repository->getDefaultTableForAll();
 	}
 }
