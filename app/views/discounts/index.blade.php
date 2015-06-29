@@ -6,34 +6,18 @@
 @stop
 
 @section('content')
+@include('layouts.partials._error')
 <div class="row">
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
-				<h5>{{ trans('discounts.list.subtitle') }}</h5>
+				<h5>{{trans('discounts.list.subtitle')}}</h5>
 			</div>
 			@include('flash::message')
 			<div class="ibox-content">
-			<a class="btn btn-info " href="{{route('discounts.create')}}"><i class="fa fa-paste"></i> {{ trans('discounts.labels.new') }} </a>
-				<?php
-					$columns = [
-						trans('discounts.list.Code'),
-						trans('discounts.list.Discount_type'),
-						trans('discounts.list.Name'),
-						trans('discounts.list.Value'),
-						trans('discounts.list.Percent'),
-						trans('discounts.list.Active'),
-						trans('discounts.list.From'),
-						trans('discounts.list.To'),
-						trans('discounts.list.Actions')
-				];
-				$table = Datatable::table()
-				->addColumn($columns)
-				->setUrl(route('api.discounts'))
-				->noScript();
-				?>
+				<a class="btn btn-info " href="{{route('discounts.create')}}"><i class="fa fa-paste"></i> {{ trans('discounts.labels.new') }} </a>
 				<div class="row"><br/></div>
-				{{ $table->render() }}
+				@include('partials._index-table')
 			</div>
 		</div>
 	</div>
@@ -41,5 +25,4 @@
 @stop
 
 @section('scripts')
-	{{ $table->script() }}
 @stop
