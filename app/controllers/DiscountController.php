@@ -50,8 +50,8 @@ class DiscountController extends \BaseController {
 	 * @return Response
 	 */
 	public function create() {
-		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$discountTypes = $this->discountTypeRepository->getAllForCurrentLang();
+		$languages = $this->languageRepository->getAllForSelect();
 		return View::make('discounts.create', compact('discountTypes', 'languages'));
 	}
 
