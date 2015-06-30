@@ -12,7 +12,8 @@
 			"api" => array(
 				"list" => 'descuentos/api/lista-descuentos',
 				'update' => 'descuentos/api/actualizar',
-				'delete' => 'descuentos/api/eliminar'
+				'delete' => 'descuentos/api/eliminar',
+				"saveLang" => 'descuentos/api/actualizar-idioma'
 			),
 		),
 		"title" => "Agregar descuento",
