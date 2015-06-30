@@ -14,7 +14,9 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					@include('discounts.partials._form')
+					{{ Form::open(['route' =>'discounts.store','class'=>'form-horizontal','method' => 'POST','id' => 'form-create-discount']) }}
+						@include('discounts.partials._form')
+					{{ Form::close() }}
 				</div>
 			</div>
 		</div>
