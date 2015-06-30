@@ -12,6 +12,7 @@
 			"api" => array(
 				"list"=>'discounts/api/list-discounts',
 				"update" => 'discounts/api/update',
+				"delete" => 'discounts/api/delete'
 			),
 		),
 		"title" => "Add discount",

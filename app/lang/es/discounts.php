@@ -11,7 +11,8 @@
 			"index"=>'descuentos/lista-descuentos',
 			"api" => array(
 				"list" => 'descuentos/api/lista-descuentos',
-				'update' => 'descuentos/api/actualizar'
+				'update' => 'descuentos/api/actualizar',
+				'delete' => 'descuentos/api/eliminar'
 			),
 		),
 		"title" => "Agregar descuento",
