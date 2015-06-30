@@ -70,27 +70,28 @@
 {{ HTML::script('assets/js/custom.js') }}
 
 <script>
-	jQuery(".btn.btn-info.btn-circle").fancybox({
-		centerOnScroll: true,
-		hideOnOverlayClick: true,
-		type:'iframe',
-		autoScale: true,
-		width : '100%',
-		height : '70%'
-	});
 
-	jQuery(".btn.btn-warning.btn-circle").fancybox({
-		centerOnScroll: true,
-		hideOnOverlayClick: true,
-		type:'iframe',
-		autoScale: true,
-		width : '100%',
-		height : '70%'
-	});
+    $('.chosen-select').chosen({width: "95%"});
+
+    $('.summernote').summernote();
+
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
 
 	$('.tooltip-pop').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
+    });
+
+
+    $('.datepicker').datepicker({
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2014:2030',
+        dateFormat: '{{ trans('discounts.date') }}',
     });
 
 	var handleMenu = function() {
