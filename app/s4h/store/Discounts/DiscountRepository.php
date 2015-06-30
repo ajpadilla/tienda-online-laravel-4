@@ -35,19 +35,13 @@ class DiscountRepository extends BaseRepository{
 		$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}
 
-	public function updateDiscount($data = array())
+	public function update($data = array())
 	{
-		$discount = $this->getDiscountId($data['discount_id']);
-		$discount->value = $data['value'];
-		$discount->percent = number_format($data['percent'], 2, ".", "");
-		$discount->quantity = $data['quantity'];
-		$discount->quantity_per_user = $data['quantity_per_user'];
-		$discount->code = $data['code'];
-		$discount->active = $data['active'];
-		$discount->from = date("Y-m-d",strtotime($data['from']));
-		$discount->to = date("Y-m-d",strtotime($data['to']));
-		$discount->discount_type_id = $data['discount_type_id'];
-		$discount->save();
+		$data['from'] = date("Y-m-d",strtotime($data['from']));
+		$data['to'] = date("Y-m-d",strtotime($data['to']));
+
+		$discount = $this->get($data['discount_id']);
+		$discount->update($data);
 
 		if (count($discount->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
 			$discount->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
@@ -55,6 +49,18 @@ class DiscountRepository extends BaseRepository{
 			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 		}
 		
+	}
+
+	public function getArrayInCurrentLangData($discountId)
+	{
+		$discount = $this->get($discountId);
+		$discountLanguage = $discount->InCurrentLang;
+		return[
+			'attributes' => $discount, 
+			'from' => $discount->FromShow,
+			'to' => $discount->ToShow, 
+			'language' => $discountLanguage
+		];
 	}
 
 	public function getCode($code)
@@ -130,11 +136,11 @@ class DiscountRepository extends BaseRepository{
 			$this->addActionColumn("<form action='".route('discounts.show',$model->id)."' method='get'>
 				<button href='#'  class='btn btn-success btn-outline dim col-sm-6 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Show')."'  data-original-title='".trans('discounts.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
 			</form>");
-			$this->addActionColumn("<button href='#fancybox-edit-product' id='edit_product_".$model->id."' class='edit-product btn btn-warning btn-outline dim col-sm-6' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Edit')."'  data-original-title='".trans('discounts.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+			$this->addActionColumn("<button href='#fancybox-edit-discount' id='edit_discount_".$model->id."' class='edit-discount btn btn-warning btn-outline dim col-sm-6' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Edit')."'  data-original-title='".trans('discounts.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 		</button><br/>");
-			$this->addActionColumn("<button href='#' class='delete-product btn btn-danger btn-outline dim col-sm-6' id='delet_product_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Delete')."'  data-original-title='".trans('discounts.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$this->addActionColumn("<button href='#' class='delete-discount btn btn-danger btn-outline dim col-sm-6' id='delet_discount_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Delete')."'  data-original-title='".trans('discounts.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 		</button><br/>");
-			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='edit-product-lang btn btn-success btn-outline dim col-sm-6' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Language')."'  data-original-title='".trans('discounts.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			$this->addActionColumn("<button href='#fancybox-edit-language-discount' id='language_discount_".$model->id."'  class='edit-discount-lang btn btn-success btn-outline dim col-sm-6' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discounts.actions.Language')."'  data-original-title='".trans('discounts.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
