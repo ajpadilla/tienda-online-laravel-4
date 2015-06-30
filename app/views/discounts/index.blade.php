@@ -6,7 +6,9 @@
 @stop
 
 @section('content')
+
 @include('layouts.partials._error')
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="ibox float-e-margins">
@@ -43,6 +45,28 @@
 		</div>
 	</section>
 </div>
+
+<div class="row" style="display: none">
+	<section id="fancybox-edit-discount-lang">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>{{	trans('products.edit_language.title') }}</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							{{Form::open(['route' => 'discounts.routes.api.saveLang', 'class' => 'form-horizontal', 'id' => 'form-edit-discount-language'])}}
+								@include('discounts.partials._form_language')
+							{{Form::close()}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
 @stop
 
 @section('scripts')
@@ -59,6 +83,12 @@
         	action = getAttributeIdActionSelect($(this).attr('id'));
             //console.log(action);
             fancyConfirm('Are you sure you want to delete?', deleteDiscount , action.number);
+        });
+
+        $(".table").delegate(".edit-discount-lang", "click", function() {
+        	action = getAttributeIdActionSelect($(this).attr('id'));
+            //console.log(action);
+            loadDataToDiscountLang(action.number);
         });
 
 
@@ -95,6 +125,46 @@
 					}
 				});
 			}
+
+			var loadDataToDiscountLang = function (discountId) {
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('discounts.api.show') }}',	
+					data: {'discountId': discountId},
+					dataType: "JSON",
+					success: function(response) {
+						//console.log(response);
+						if (response.success == true) {
+							$('#discount-edit-id').val(response.discount.attributes.id);
+							$('#language-edit-id').val(response.discount.language.id);
+							$('#discount-name-edit-lang').val(response.discount.language.name);
+							$('#discount-description-edit-lang').code(response.discount.language.description);
+							showPopUpFancybox('#fancybox-edit-discount-lang');
+						}
+					}
+				});
+			}
+
+			$('#language-edit-id').click(function () {
+				//console.log($('#product_id_language').val() +" "+ $('#lang_id').val());
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('discounts.api.show-lang') }}',	
+					data: {'discountId':$('#discount-edit-id').val(), 'languageId':$('#language-edit-id').val()},
+					dataType: "JSON",
+					success: function(response) {
+						console.log(response);
+						if (response.success == true) {
+							$('#discount-name-edit-lang').val(response.discountLang.name);
+							$('#discount-description-edit-lang').code(response.discountLang.description);
+						}else{
+							$('#discount-name-edit-lang').val('');
+							$('#discount-description-edit-lang').code('');
+						}
+					}
+				});
+
+			}) ;
 
 			var deleteDiscount = function (discountId) 
 			{
@@ -232,13 +302,44 @@
 
 		});
 
+		$('#form-edit-discount-language').validate({
+			rules:{
+				name:{
+					required:true,
+					rangelength: [2, 64],
+					onlyLettersNumbersAndSpaces: true
+				},
+				description:{
+					required:true,
+					rangelength: [10, 255]
+				},
+			},
+			highlight:function(element){
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight:function(element){
+				$(element).closest('.form-group').removeClass('has-error');
+			},
+			success:function(element){
+				element.addClass('valid').closest('.form-group').removeClass('has-error').addClass('has-success');
+			}
+		});
+
 		var options = { 
 				beforeSubmit:  showRequest,  // pre-submit callback 
 				success:       showResponse,  // post-submit callback 
 				url:  '{{URL::route('discounts.api.update')}}',
         		type:'POST'
 			};
+
+		var optionsDiscountLang = {
+					beforeSubmit:  showRequestLang,  // pre-submit callback
+					success:       showResponseLang,  // post-submit callback
+					url:  '{{ URL::route('discounts.routes.api.saveLang') }}',
+					type:'POST'
+			}
 		$('#form-edit-discount').ajaxForm(options);
+		$('#form-edit-discount-language').ajaxForm(optionsDiscountLang);
 	});
 
 	// pre-submit callback
@@ -272,6 +373,41 @@
 				'autoScale' : true
 			});
 		}
-	}						
+	}	
+
+	// pre-submit callback
+		function showRequestLang(formData, jqForm, options) {
+			setTimeout(jQuery.fancybox({
+				'content':'<h1>' + '{{ trans('discounts.sending') }}' + '</h1>',
+				'autoScale' : true,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'scrolling' : 'no',
+				'type' : 'inline',
+				'showCloseButton' : false,
+				'hideOnOverlayClick' : false,
+				'hideOnContentClick' : false
+			}), 5000 );
+			return $('#form-edit-discount-language').valid();
+		}
+
+		// post-submit callback
+		function showResponseLang(responseText, statusText, xhr, $form)  {
+			//console.log(responseText);
+			if (responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				reloadDataTable('#datatable');
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
+			
+		}					
  </script>
 @stop
