@@ -55,8 +55,15 @@
             loadDataToEditDiscount(action.number);
         });
 
+ 		$(".table").delegate(".delete-discount", "click", function() {
+        	action = getAttributeIdActionSelect($(this).attr('id'));
+            //console.log(action);
+            fancyConfirm('Are you sure you want to delete?', deleteDiscount , action.number);
+        });
+
+
  		var loadDataToEditDiscount = function(discountId) 
-			{
+		{
 				$.ajax({
 					type: 'GET',
 					url: '{{ URL::route('discounts.api.show') }}',	
@@ -85,6 +92,22 @@
 
 							showPopUpFancybox('#fancybox-edit-discount');
 						}
+					}
+				});
+			}
+
+			var deleteDiscount = function (discountId) 
+			{
+				$.ajax({
+					type: 'GET',
+					url: '{{ URL::route('discounts.api.delete') }}',
+					data: {'discountId': discountId},
+					dataType: "JSON",
+					success: function(response) {
+						if (response.success == true) {
+							$('#delet_discount_'+discountId).parent().parent().remove();
+                    		reloadDataTable('#datatable');
+						};
 					}
 				});
 			}
