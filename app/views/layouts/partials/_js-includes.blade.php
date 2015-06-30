@@ -71,6 +71,21 @@
 
 <script>
 
+    $.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+      return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+    }, '{{ trans('discounts.validation.onlyLettersNumbersAndSpaces') }}');
+
+    $.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+      return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+    }, '{{ trans('discounts.validation.onlyLettersNumbersAndDash') }}');
+
+    jQuery.validator.addMethod('customDateValidator', function(value, element) {
+        try{
+            jQuery.datepicker.parseDate( '{{ trans('discounts.date') }}' , value);return true;}
+            catch(e){return false;}
+        },'{{ trans('discounts.validation.date') }}'
+    );
+
     $('.chosen-select').chosen({width: "95%"});
 
     $('.summernote').summernote();
