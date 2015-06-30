@@ -41,8 +41,10 @@ class DiscountController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
+		$discountTypes = $this->discountTypeRepository->getAllForCurrentLang();
+		$languages = $this->languageRepository->getAllForSelect();
 		$table = $this->repository->getAllTable();
-		return View::make('discounts.index',compact('table'));
+		return View::make('discounts.index',compact('table', 'discountTypes', 'languages'));
 	}
 
 	/**
@@ -91,10 +93,27 @@ class DiscountController extends \BaseController {
 	 */
 	public function show($id) {
 		$discount = $this->repository->getDiscountId($id);
-		$language = $this->languageRepository->returnLanguage();
+		$language = $this->languageRepository->getAllForSelect();
 		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
 		return View::make('discounts.show',compact('discount','discount_language','discountTypes','language'));
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('discountId'))
+			{
+				$discount = $this->repository->getArrayInCurrentLangData(Input::get('discountId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('discount', $discount);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
 	}
 
 	/**
@@ -105,7 +124,7 @@ class DiscountController extends \BaseController {
 	 */
 	public function edit($id) {
 		$discount = $this->repository->getDiscountId($id);
-		$language = $this->languageRepository->returnLanguage();
+		$language = $this->languageRepository->getAllForSelect();
 		$discount_language = $discount->languages()->where('language_id','=',$language->id)->first();
 		$discountTypes = $this->discountTypeRepository->getNameForLanguage();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -118,22 +137,25 @@ class DiscountController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function updateApi()
 	{
 		if(Request::ajax())
 		{
 			$input = array();
 			$input = Input::all();
-			$input['discount_id'] = $id;
 			try
 			{
 				$this->editDiscountForm->validate($input);
-				$this->repository->updateDiscount($input);
-				return Response::json(trans('discounts.Updated'));
+				$this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('discounts.Updated'));
+				return $this->getResponseArrayJson();
 			} catch (FormValidationException $e) {
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	/**
