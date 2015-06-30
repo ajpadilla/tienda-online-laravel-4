@@ -48,7 +48,31 @@ class DiscountRepository extends BaseRepository{
 		}else{
 			$discount->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 		}
-		
+
+		return $discount;
+	}
+
+	public function updateLanguage($data = array())
+	{
+		$product = $this->get($data['discount_id']);
+
+		if (count($product->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$product->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}else{
+			$product->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}
+		return $product;
+	}
+
+	public function getDataForLanguage($discountId, $languageId)
+	{
+		$discount = $this->get($discountId);
+		$discountLang = $discount->getAccessorInCurrentLang($languageId);
+		return $discountLang;
 	}
 
 	public function getArrayInCurrentLangData($discountId)
