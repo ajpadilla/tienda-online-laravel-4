@@ -11,6 +11,7 @@
 			"index"=>'discounts/list-products',
 			"api" => array(
 				"list"=>'discounts/api/list-discounts',
+				"update" => 'discounts/api/update',
 			),
 		),
 		"title" => "Add discount",

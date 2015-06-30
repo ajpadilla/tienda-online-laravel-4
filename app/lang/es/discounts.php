@@ -10,7 +10,8 @@
 			"destroy"=>"descuentos/eliminar/{id}",
 			"index"=>'descuentos/lista-descuentos',
 			"api" => array(
-				"list"=>'descuentos/api/lista-descuentos',
+				"list" => 'descuentos/api/lista-descuentos',
+				'update' => 'descuentos/api/actualizar'
 			),
 		),
 		"title" => "Agregar descuento",
