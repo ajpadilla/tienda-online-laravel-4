@@ -170,6 +170,13 @@ class DiscountController extends \BaseController {
 		return Redirect::route('discounts.index');
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('discountId')));
+		return $this->getResponseArrayJson();
+	}
+
 
 	public function checkCode() {
 		if (Request::ajax()) {
