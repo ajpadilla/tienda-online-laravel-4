@@ -109,6 +109,8 @@ function () {
 		'uses' => 'DiscountController@updateApi'
 	]);
 
+	Route::get('discounts/api-show-lang', ['as'=>'discounts.api.show-lang','uses' => 'DiscountController@showApiLang']);
+
 	Route::get(LaravelLocalization::transRoute('discounts.routes.destroy'), [
 		'as' => 'discounts.destroy',
 		'uses' => 'DiscountController@destroy'
@@ -120,7 +122,13 @@ function () {
 	Route::post('checkCode','DiscountController@checkCode');
 	Route::post('checkCodeForEdit','DiscountController@checkCodeForEdit');
 
+	Route::post(LaravelLocalization::transRoute('discounts.routes.api.saveLang'), [
+		'as' => 'discounts.routes.api.saveLang',
+		'uses' => 'DiscountController@updateApiLang'
+	]);
 
+
+	
 	/**
 		* ------------------------------ Rutas para Typo de descuento -----------------------
 	**/
