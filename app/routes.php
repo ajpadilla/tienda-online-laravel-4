@@ -96,7 +96,8 @@ function () {
 	]);
 
 	Route::get('discounts/api-show',  ['as' => 'discounts.api.show','uses' => 'DiscountController@showApi' ] );
-	
+
+	Route::get(LaravelLocalization::transRoute('discounts.routes.api.delete'),  ['as' => 'discounts.api.delete','uses' => 'DiscountController@destroyApi' ] );
 
 	Route::get(LaravelLocalization::transRoute('discounts.routes.edit'), [
 		'as' => 'discounts.edit',
