@@ -95,14 +95,17 @@ function () {
 		'uses' => 'DiscountController@show'
 	]);
 
+	Route::get('discounts/api-show',  ['as' => 'discounts.api.show','uses' => 'DiscountController@showApi' ] );
+	
+
 	Route::get(LaravelLocalization::transRoute('discounts.routes.edit'), [
 		'as' => 'discounts.edit',
 		'uses' => 'DiscountController@edit'
 	]);
 
-	Route::post(LaravelLocalization::transRoute('discounts.routes.update'), [
-		'as' => 'discounts.update',
-		'uses' => 'DiscountController@update'
+	Route::post(LaravelLocalization::transRoute('discounts.routes.api.update'), [
+		'as' => 'discounts.api.update',
+		'uses' => 'DiscountController@updateApi'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('discounts.routes.destroy'), [
