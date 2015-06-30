@@ -1,4 +1,3 @@
-{{ Form::open(['route' =>'discounts.store','class'=>'form-horizontal','method' => 'POST','id' => 'form-create-discount']) }}
 <div class="col-sm-6 b-r">
 	<div class="form-group">
 		{{ Form::label('language_id', trans('discounts.labels.language'),['class'=>'col-sm-2 control-label']) }}
@@ -102,4 +101,3 @@
 		</div>
 	</div>
 </div>
-{{ Form::close() }}
