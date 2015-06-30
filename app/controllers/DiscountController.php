@@ -9,6 +9,7 @@ use s4h\store\Discounts\DiscountRepository;
 use s4h\store\Forms\RegisterDiscountForm;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\EditDiscountForm;
+use s4h\store\Forms\EditDiscountLangForm;
 
 class DiscountController extends \BaseController {
 
@@ -18,13 +19,15 @@ class DiscountController extends \BaseController {
 	private $languageRepository;
 	private $discountLangRepository;
 	private $editDiscountForm;
+	private $editDiscountLangForm;
 
 	function __construct(RegisterDiscountForm $registerDiscountForm, 
 							DiscountRepository $repository, 
 							DiscountTypeRepository $discountTypeRepository, 
 							LanguageRepository $languageRepository, 
 							DiscountLangRepository $discountLangRepository,
-							EditDiscountForm $editDiscountForm
+							EditDiscountForm $editDiscountForm,
+							EditDiscountLangForm $editDiscountLangForm
 						){
 
 		$this->registerDiscountForm = $registerDiscountForm;
@@ -33,6 +36,7 @@ class DiscountController extends \BaseController {
 		$this->languageRepository = $languageRepository;
 		$this->discountLangRepository = $discountLangRepository;
 		$this->editDiscountForm = $editDiscountForm;
+		$this->editDiscountLangForm = $editDiscountLangForm;
 	}
 
 	/**
@@ -204,5 +208,46 @@ class DiscountController extends \BaseController {
 	public function listApi()
 	{
 		return $this->repository->getDefaultTableForAll();
+	}
+
+
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('discountId') && Input::has('languageId'))
+			{
+				$discountLang = $this->repository->getDataForLanguage(Input::get('discountId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('discountLang', $discountLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function updateApiLang()
+	{
+
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editDiscountLangForm->validate($input);
+				$discount = $this->repository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('discounts.Updated'));
+				$this->addToResponseArray('discount', $discount);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 	}
 }
