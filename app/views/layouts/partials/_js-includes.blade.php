@@ -99,8 +99,7 @@
         radioClass: 'iradio_square-green',
     });
 
-    $('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
-
+    
 	$('.tooltip-pop').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
