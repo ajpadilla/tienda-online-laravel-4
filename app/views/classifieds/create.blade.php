@@ -27,27 +27,7 @@
 <script>
 	$(document).ready(function () 
 	{
-
-		$('.chosen-select').chosen({width: "95%"});
-
-		$('.summernote').summernote();
-
-		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-       	}, '{{ trans('classifieds.validation.onlyLettersNumbersAndSpaces') }}');
-
-		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-        }, '{{ trans('classifieds.validation.onlyLettersNumbersAndDash') }}');
-
-		jQuery.validator.addMethod('customDateValidator', function(value, element) {
-       	 	try{
-       	 		jQuery.datepicker.parseDate( '{{ trans('classifieds.date') }}' , value);return true;}
-        	catch(e){return false;}
-    	},'{{ trans('classifieds.validation.date') }}');
-
 		$('#form-create-classified').validate({
-
 			rules:{
 				name:{
 					required:!0,

@@ -73,10 +73,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() 
 		{
-			$('.chosen-select').chosen({width: "95%"});
-
-			$('.summernote').summernote();
-
 			$(".table").delegate(".edit-classified", "click", function() {
              	action = getAttributeIdActionSelect($(this).attr('id'));
              	//console.log(action);
@@ -106,15 +102,15 @@
 						//console.log(response);
 						if (response.success == true) 
 						{
-							$('#classified_id').val(response.classified.classified.id);
-							$('#language_id').val(response.classified.language_id);
-							$('#name').val(response.classified.name);
-							$('#description').code(response.classified.description);
-							$('#address').code(response.classified.address);
-							$('#price').val(response.classified.classified.price);
-							$('#classified_type_id').val(response.classified.classified.classified_type_id);
-							$('#classified_condition_id').val(response.classified.classified.classified_condition_id);
-							$('#categories').val(response.categories);
+							$('#classified_id').val(response.classified.attributes.id);
+							$('#language_id').val(response.classified.classifiedLang.language_id);
+							$('#name').val(response.classified.classifiedLang.name);
+							$('#description').code(response.classified.classifiedLang.description);
+							$('#address').code(response.classified.attributes.address);
+							$('#price').val(response.classified.attributes.price);
+							$('#classified_type_id').val(response.classified.attributes.classified_type_id);
+							$('#classified_condition_id').val(response.classified.attributes.classified_condition_id);
+							$('#categories').val(response.classified.categories);
 							$('.chosen-select').trigger("chosen:updated");
 							showPopUpFancybox('#fancybox-edit-classified');
 						}
@@ -131,11 +127,11 @@
 					success: function(response) {
 						//console.log(response.classified);
 						if (response.success == true) {
-							$('#classified_id_language').val(response.classified.classified.id);
-							$('#lang_id').val(response.classified.language_id);
-							$('#name_language').val(response.classified.name);
-							$('#description_language').code(response.classified.description);
-							$('#address_language').code(response.classified.address);
+							$('#classified_id_language').val(response.classified.attributes.id);
+							$('#lang_id').val(response.classified.classifiedLang.language_id);
+							$('#name_language').val(response.classified.classifiedLang.name);
+							$('#description_language').code(response.classified.classifiedLang.description);
+							//$('#address_language').code(response.classified.address);
 							showPopUpFancybox('#fancybox-edit-language-classified');
 						}
 					}
@@ -154,7 +150,7 @@
 						if (response.success == true) {
 							$('#name_language').val(response.classifiedLang.name);
 							$('#description_language').code(response.classifiedLang.description);
-							$('#address_language').code(response.classifiedLang.address);
+							//$('#address_language').code(response.classifiedLang.address);
 						}else{
 							$('#name_language').val('');
 							$('#description_language').code('');
@@ -180,19 +176,6 @@
 				});
 			}
 
-			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-			}, '{{ trans('classifieds.validation.onlyLettersNumbersAndSpaces') }}');
-
-			$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
-				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-			}, '{{ trans('classifieds.validation.onlyLettersNumbersAndDash') }}');
-
-			jQuery.validator.addMethod('customDateValidator', function(value, element) {
-				try{
-					jQuery.datepicker.parseDate( '{{ trans('classifieds.date') }}' , value);return true;}
-					catch(e){return false;}
-				},'{{ trans('classifieds.validation.date') }}');
 
 			$('#form-edit-classified').validate({
 
