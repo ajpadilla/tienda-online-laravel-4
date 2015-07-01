@@ -151,6 +151,18 @@ class ClassifiedRepository extends BaseRepository
 		return $classified;
 	}
 
+	public function getArrayInCurrentLangData($classifiedId)
+	{
+		$classified = $this->get($classifiedId);
+		$classifiedLanguage = $classified->InCurrentLang;
+		$categories = $classified->getCategorieIds();
+		return[
+			'attributes' => $classified, 
+			'classifiedLang' => $classifiedLanguage,
+			'categories' => $categories,
+		];
+	}
+
 	public function getName($data)
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
