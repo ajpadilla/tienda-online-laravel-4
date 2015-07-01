@@ -1,18 +1,21 @@
 <?php
 
-//use s4h\store\Categories\CategoryRepository;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\CategoriesLang\CategoryLangRepository;
+use s4h\store\Forms\RegisterCategorieForm;
 
 class CategoriesController extends \BaseController {
-	//private $categoryRepository;
 	private $languageRepository;
 	private $categoryLangRepository;
+	private $registerCategorieForm;
 
-	function __construct(LanguageRepository $languageRepository, CategoryLangRepository $categoryLangRepository) {
-		//$this->categoryRepository = $categoryRepository;
+	function __construct(LanguageRepository $languageRepository, 
+		CategoryLangRepository $categoryLangRepository,
+		RegisterCategorieForm $registerCategorieForm) {
+
 		$this->languageRepository = $languageRepository;
 		$this->categoryLangRepository = $categoryLangRepository;
+		$this->registerCategorieForm = $registerCategorieForm;
 	}
 
 	/**
@@ -74,8 +77,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		$categories = $this->categoryRepository->get();
+		$languages = $this->languageRepository->getAllForSelect();
+		$categories = $this->categoryRepository->getAllForCurrentLang();
 		array_unshift($categories,"");
 		return View::make('categories.create',compact('categories','languages'));
 	}
@@ -93,15 +96,19 @@ class CategoriesController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				//$this->registerClassifiedConditionsForm->validate($input);
-				$this->categoryRepository->createNewCategory($input);
-				return Response::json(trans('categories.response'));
+				$this->registerCategorieForm->validate($input);
+				$this->categoryRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('categories.response'));
+				return $this->getResponseArrayJson();
 			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 
