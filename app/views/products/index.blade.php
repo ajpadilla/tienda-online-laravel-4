@@ -69,18 +69,6 @@
 	<script  type="text/javascript">
 		$(document).ready(function () 
 		{
-			//console.log('product');
-			$('.i-checks').iCheck({
-				checkboxClass: 'icheckbox_square-green',
-				radioClass: 'iradio_square-green',
-			});
-
-				// Iniciar select chosen
-			$('.chosen-select').chosen({width: "95%"});
-
-			$('#description').summernote();
-
-			$('#description_language').summernote();
 
 			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
 			
@@ -114,27 +102,27 @@
 						//console.log(response);
 						if (response.success == true) 
 						{
-							$('#product_id').val(response.product.productLang.product.id);
+							$('#product_id').val(response.product.attributes.id);
 							$('#language_id').val(response.product.productLang.language_id);
 							$('#name').val(response.product.productLang.name);
 							$('#description').code(response.product.productLang.description);
-							$('#quantity').val(response.product.productLang.product.quantity);
-							$('#price').val(response.product.productLang.product.price);
-							$('#point_price').val(response.product.productLang.product.point_price);
-							$('#width').val(response.product.productLang.product.width.toFixed(2));
-							$('#height').val(response.product.productLang.product.height.toFixed(2));
-							$('#depth').val(response.product.productLang.product.depth.toFixed(2));
-							$('#measure_id').val(response.product.productLang.product.measure_id);
-							$('#weight').val(response.product.productLang.product.weight.toFixed(2));
-							$('#weight_id').val(response.product.productLang.product.weight_id);
-							if (response.product.productLang.product.color != '') {
-								$('select[name="color"]').simplecolorpicker('selectColor', response.product.productLang.product.color);
+							$('#quantity').val(response.product.attributes.quantity);
+							$('#price').val(response.product.attributes.price);
+							$('#point_price').val(response.product.attributes.point_price);
+							$('#width').val(response.product.attributes.width.toFixed(2));
+							$('#height').val(response.product.attributes.height.toFixed(2));
+							$('#depth').val(response.product.attributes.depth.toFixed(2));
+							$('#measure_id').val(response.product.attributes.measure_id);
+							$('#weight').val(response.product.attributes.weight.toFixed(2));
+							$('#weight_id').val(response.product.attributes.weight_id);
+							if (response.product.attributes.color != '') {
+								$('select[name="color"]').simplecolorpicker('selectColor', response.product.attributes.color);
 							};
-							$('input[name="on_sale"]').val([response.product.productLang.product.on_sale]);
-							$('input[name="accept_barter"]').val([response.product.productLang.product.accept_barter]);
-							$('input[name="active"]').val([response.product.productLang.product.active]);
+							$('input[name="on_sale"]').val([response.product.attributes.on_sale]);
+							$('input[name="accept_barter"]').val([response.product.attributes.accept_barter]);
+							$('input[name="active"]').val([response.product.attributes.active]);
 							$('#categories').val(response.product.categories);
-							$('#condition_id').val(response.product.productLang.product.condition_id);
+							$('#condition_id').val(response.product.attributes.condition_id);
 
 							$('.chosen-select').trigger("chosen:updated");
 							$('.i-checks').iCheck('update');
@@ -154,7 +142,7 @@
 					success: function(response) {
 						console.log(response.product);
 						if (response.success == true) {
-							$('#product_id_language').val(response.product.productLang.product.id);
+							$('#product_id_language').val(response.product.attributes.id);
 							$('#lang_id').val(response.product.productLang.language_id);
 							$('#name_language').val(response.product.productLang.name);
 							$('#description_language').code(response.product.productLang.description);

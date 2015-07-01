@@ -28,7 +28,8 @@
 	<script type="text/javascript">
 		$(document).ready(function () 
 		{
-
+			$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
+			
 			$('#create-product-form').validate({
 				rules:{
 					name:{
