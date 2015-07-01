@@ -86,6 +86,10 @@
         },'{{ trans('discounts.validation.date') }}'
     );
 
+    jQuery.validator.addMethod("decimalNumbers", function(value, element) {
+        return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
+    }, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
+
     $('.chosen-select').chosen({width: "95%"});
 
     $('.summernote').summernote();
@@ -94,6 +98,8 @@
         checkboxClass: 'icheckbox_square-green',
         radioClass: 'iradio_square-green',
     });
+
+    $('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
 	$('.tooltip-pop').tooltip({
         selector: "[data-toggle=tooltip]",
