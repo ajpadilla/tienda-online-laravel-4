@@ -56,15 +56,6 @@
 <script>
 	$(document).ready(function () 
 	{
-		// Iniciar select chosen
-		$('.chosen-select').chosen({allow_single_deselect: true,
-			  create_option: true,
-		});
-
-		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-       	}, '{{ trans('categories.validation.onlyLettersNumbersAndSpaces') }}');
-
 		$('#formCratecategories').validate({
 
 			rules:{
@@ -136,11 +127,18 @@
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
-			location.reload();
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
 		} 						
 </script>
 @stop
