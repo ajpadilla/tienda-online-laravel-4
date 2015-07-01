@@ -576,6 +576,26 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('categories.routes.api.list'), ['as'=>'categories.api.list', 'uses'=>'CategoriesController@listApi']);
 
+	Route::get('categories/api-show',  ['as' => 'categories.api.show','uses' => 'CategoriesController@showApi' ] );
+
+	Route::post(LaravelLocalization::transRoute('categories.routes.api.update'), [
+		'as' => 'categories.api.update',
+		'uses' => 'CategoriesController@updateApi'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('categories.routes.api.delete'),  
+		['as' => 'categories.api.delete','uses' => 'CategoriesController@destroyApi' 
+	]);
+
+	Route::get('categories/api-show-lang',[ 'as' => 'categories.api.show-lang',
+		'uses' => 'CategoriesController@showApiLang'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('categories.routes.api.saveLang'), [
+		'as' => 'categories.routes.api.saveLang',
+		'uses' => 'CategoriesController@updateApiLang'
+	]);
+
 	//Route::get('returnDataCategoriesLang','CategoriesController@returnDataCategoriesLang');	
 
 	Route::get('returnDataCategoriesLang', [
