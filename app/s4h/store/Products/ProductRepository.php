@@ -323,6 +323,7 @@ class ProductRepository extends BaseRepository{
 		$productLanguage = $product->InCurrentLang;
 		$categories = $productLanguage->product->getCategorieIds();
 		return[
+			'attributes' => $product, 
 			'productLang' => $productLanguage,
 			'categories' => $categories,
 		];
