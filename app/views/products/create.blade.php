@@ -29,33 +29,6 @@
 		$(document).ready(function () 
 		{
 
-			$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
-
-			// Iniciar checks
-			$('.i-checks').iCheck({
-				checkboxClass: 'icheckbox_square-green',
-				radioClass: 'iradio_square-green',
-			});
-
-			// Iniciar select chosen
-			$('.chosen-select').chosen();
-
-			$('#description').summernote();
-
-			$.validator.setDefaults({ ignore: ":hidden:not(.chosen-select)" });
-
-			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-				return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-			}, '{{ trans('products.validation.onlyLettersNumbersAndSpaces') }}');
-
-			$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
-				return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-			}, '{{ trans('products.validation.onlyLettersNumbersAndDash') }}');
-
-			jQuery.validator.addMethod("decimalNumbers", function(value, element) {
-				return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
-			}, '{{trans('products.validation.maxlength')}}'+[20]+'{{trans('products.validation.length')}}' + '{{trans('products.validation.maxlengthDecimal')}}'+ [6] + '{{trans('products.validation.decimal')}}');
-
 			$('#create-product-form').validate({
 				rules:{
 					name:{
