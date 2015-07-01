@@ -25,7 +25,7 @@ return array(
 	"create-title"=> "Crear categoria",
 	"index-title" => "Lista de categorias",
 	"show-title" => "Ver categoria",	
-
+	"Update" => 'Categoria Actualizada',
 
 	"labels" => array(
 		'language' => 'Idioma',

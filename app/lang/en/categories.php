@@ -25,6 +25,7 @@ return array(
 	"create-title"=> "Create category",
 	"index-title" => "List of category",
 	"show-title" => "Show category",
+	"Update" => 'Update category',
 
 	"labels" => array(
 		'language' => 'Language',
