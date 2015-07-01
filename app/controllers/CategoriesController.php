@@ -3,6 +3,7 @@
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\CategoriesLang\CategoryLangRepository;
 use s4h\store\Forms\RegisterCategorieForm;
+use Laracasts\Validation\FormValidationException;
 
 class CategoriesController extends \BaseController {
 	private $languageRepository;
@@ -26,7 +27,10 @@ class CategoriesController extends \BaseController {
 	public function index()
 	{
 		$table = $this->categoryRepository->getAllTable();
-		return View::make('categories.index',compact('table'));
+		$languages = $this->languageRepository->getAllForSelect();
+		$categories = $this->categoryRepository->getAllForCurrentLang();
+		array_unshift($categories,"");
+		return View::make('categories.index',compact('table', 'languages', 'categories'));
 	}
 
 	/**
@@ -113,24 +117,26 @@ class CategoriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function updateApi()
 	{
 		if (Request::ajax()) 
 		{
-			$input = array();
 			$input = Input::all();
-			$input['category_id'] = $id;
 			try
 			{
-				//$this->registerClassifiedConditionsForm->validate($input);
-				$this->categoryRepository->updateCategory($input);
-				return Response::json(trans('categories.response'));
+				$this->registerCategorieForm->validate($input);
+				$this->categoryRepository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('categories.Update'));
+				return $this->getResponseArrayJson();
 			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 
@@ -147,6 +153,13 @@ class CategoriesController extends \BaseController {
 		return Redirect::route('categories.index');
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->categoryRepository->delete(Input::get('categoryId')));
+		return $this->getResponseArrayJson();
+	}
+
 	public function returnDataCategoriesLang()
 	{
 		if (Request::ajax()) 
@@ -160,4 +173,62 @@ class CategoriesController extends \BaseController {
 	{
 		return $this->categoryRepository->getDefaultTableForAll();
 	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('categoryId'))
+			{
+				$category = $this->categoryRepository->getArrayInCurrentLangData(Input::get('categoryId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('category', $category);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('categoryId') && Input::has('languageId'))
+			{
+				$categoryLang = $this->categoryRepository->getDataForLanguage(Input::get('categoryId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('categoryLang', $categoryLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function updateApiLang()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->registerCategorieForm->validate($input);
+				$category = $this->categoryRepository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('categories.Updated'));
+				$this->addToResponseArray('category', $category);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
 }
