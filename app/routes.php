@@ -548,7 +548,7 @@ function () {
 		'uses' => 'CategoriesController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('categories.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('categories.routes.index'), [
 		'as' => 'categories.index',
 		'uses' => 'CategoriesController@index'
 	]);
@@ -574,7 +574,7 @@ function () {
 		'uses' => 'CategoriesController@destroy'
 	]);
 
-	Route::get('api/categories', array('as'=>'api.categories', 'uses'=>'CategoriesController@getDatatable'));
+	Route::get(LaravelLocalization::transRoute('categories.routes.api.list'), ['as'=>'categories.api.list', 'uses'=>'CategoriesController@listApi']);
 
 	//Route::get('returnDataCategoriesLang','CategoriesController@returnDataCategoriesLang');	
 
