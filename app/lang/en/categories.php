@@ -67,7 +67,8 @@ return array(
 	'actions' => array(
 		'Show' => 'Ver   ',
 		'Edit' => 'Editar',
-		'Delete' => 'Eliminar'
+		'Delete' => 'Eliminar',
+		'Language' => 'Edit Language'
 	)
 
 );

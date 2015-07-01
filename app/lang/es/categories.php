@@ -8,7 +8,7 @@ return array(
 		"edit"=>"categorias/editar/{id}",
 		"update"=>"categorias/actualizar/{id}",
 		"destroy"=>"categorias/eliminar/{id}",
-		"index" => "categorias/api/lista-categorias",
+		"index" => "categorias/lista-categorias",
 		"api" => array(
 			'update' => 'categorias/api/actualizar',
 			"list" => "categorias/api/lista-categorias",
@@ -69,7 +69,8 @@ return array(
 	'actions' => array(
 		'Show' => 'Ver   ',
 		'Edit' => 'Editar',
-		'Delete' => 'Eliminar'
+		'Delete' => 'Eliminar',
+		'Language' => 'Editar Idioma'
 	)
 
 );
