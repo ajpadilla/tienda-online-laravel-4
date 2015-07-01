@@ -15,19 +15,8 @@
 			@include('flash::message')
 			<div class="ibox-content">
 			<a class="btn btn-info " href="{{route('categories.create')}}"><i class="fa fa-paste"></i> {{ trans('categories.labels.new') }} </a>
-				<?php
-					$columns = [
-						trans('categories.list.Name'),
-						trans('categories.list.parent_category'),
-						trans('categories.list.Actions')
-				];
-				$table = Datatable::table()
-				->addColumn($columns)
-				->setUrl(route('api.categories'))
-				->noScript();
-				?>
 				<div class="row"><br/></div>
-				{{ $table->render() }}
+				@include('partials._index-table')
 			</div>
 		</div>
 	</div>
@@ -35,5 +24,4 @@
 @stop
 
 @section('scripts')
-	{{ $table->script() }}
 @stop
