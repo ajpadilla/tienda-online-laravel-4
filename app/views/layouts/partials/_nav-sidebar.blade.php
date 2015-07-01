@@ -19,7 +19,7 @@
                     </li>
 
                      <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Categoria - Producto</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Categorias</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="{{URL::route('categories.create')}}">Crear</a></li>
                             <li><a href="{{URL::route('categories.index')}}">Listar</a></li>
