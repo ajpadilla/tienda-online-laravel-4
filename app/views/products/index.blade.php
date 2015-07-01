@@ -140,7 +140,7 @@
 					data: {'productId': productId},
 					dataType: "JSON",
 					success: function(response) {
-						console.log(response.product);
+						//console.log(response.product);
 						if (response.success == true) {
 							$('#product_id_language').val(response.product.attributes.id);
 							$('#lang_id').val(response.product.productLang.language_id);
@@ -188,10 +188,6 @@
 					}
 				});
 			}
-
-			$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-					return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-			}, 'only letters, numbers and spaces.');
 
 			$('#form-edit-product').validate({
 					rules:{
