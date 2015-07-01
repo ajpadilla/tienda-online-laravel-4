@@ -25,50 +25,9 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('categories.index');
+		$table = $this->categoryRepository->getAllTable();
+		return View::make('categories.index',compact('table'));
 	}
-
-
-	public function getDatatable()
-	{
-		$collection = Datatable::collection($this->categoryLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-			->searchColumns('name','parent_category')
-			->orderColumns('name','parent_category');
-
-		$collection->addColumn('name', function($model)
-		{
-			$language = $this->languageRepository->returnLanguage();
-			$categoryLanguage = $model->category->languages()->where('language_id','=',$language->id)->first();
-			return $categoryLanguage->pivot->name;
-		});
-
-		$collection->addColumn('parent_category', function($model)
-		{
-			$language = $this->languageRepository->returnLanguage();
-
-			if ($model->category->hasParent()) {
-				$parentCategoryLanguage = $model->category->parent->languages()->where('language_id','=',$language->id)->first();
-				return $parentCategoryLanguage->pivot->name;
-			}else{
-				$categoryLanguage = $model->category->languages()->where('language_id','=',$language->id)->first();
-				return $categoryLanguage->pivot->name;
-			}
-		});
-
-		$collection->addColumn('Actions',function($model){
-		
-			$links = "<a class='btn btn-info btn-circle' href='" . route('categories.show', $model->category->id) . "'><i class='fa fa-check'></i></a>
-					<br />";
-			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('categories.edit', $model->category->id) . "'><i class='fa fa-pencil'></i></a>
-					<br />
-					<a class='btn btn-danger btn-circle' href='" . route('categories.destroy', $model->category->id) . "'><i class='fa fa-times'></i></a>";
-
-			return $links;
-		});
-
-		return $collection->make();
-	}
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -195,6 +154,10 @@ class CategoriesController extends \BaseController {
 			$categories = $this->categoryRepository->getNameForLanguage();
 			return Response::json(['success' =>true, 'categories' => $categories]);
 		}
+	}
 
+	public function listApi()
+	{
+		return $this->categoryRepository->getDefaultTableForAll();
 	}
 }
