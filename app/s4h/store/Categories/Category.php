@@ -26,6 +26,10 @@ class Category extends BaseModel{
 		return CategoryLang::whereCategoriesId($this->id)->whereLanguageId($language->id)->first();
 	}
 
+	public function getAccessorInCurrentLang($languageId = '')
+	{
+		return CategoryLang::whereCategoriesId($this->id)->whereLanguageId($languageId)->first();
+	}
 
 /*	public function parent(){
 		return $this->belongsTo('s4h\store\Categories\Category');
