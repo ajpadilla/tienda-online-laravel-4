@@ -69,7 +69,6 @@
 	<script  type="text/javascript">
 		$(document).ready(function () 
 		{
-
 			$('select[name="color"]').simplecolorpicker({theme: 'glyphicons'});
 			
 			$(".table").delegate(".edit-product", "click", function() {
