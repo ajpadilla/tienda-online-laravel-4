@@ -22,8 +22,7 @@ class Category extends BaseModel{
 	}
 
 	public function getInCurrentLangAttribute(){
-		$isoCode = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		$language = $this->getCurrentLang();
 		return CategoryLang::whereCategoriesId($this->id)->whereLanguageId($language->id)->first();
 	}
 
