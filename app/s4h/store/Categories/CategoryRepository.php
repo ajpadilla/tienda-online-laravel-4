@@ -31,9 +31,9 @@ class CategoryRepository extends BaseRepository{
 		$category->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
-	public function updateCategory($data = array())
+	public function update($data = array())
 	{
-		$category = $this->getCategoryId($data['category_id']);
+		$category = $this->get($data['category_id']);
 
 		if (!empty($data['parent_category'])) {
 			$category->category_id = $data['parent_category'];
@@ -46,6 +46,20 @@ class CategoryRepository extends BaseRepository{
 		}else{
 			$category->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
+
+		return $category;
+	}
+
+	public function updateLanguage($data = array())
+	{
+		$category = $this->get($data['category_id']);
+
+		if (count($category->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$category->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
+		}else{
+			$category->languages()->attach($data['language_id'], array('name' => $data['name']));
+		}
+		return $category;
 	}
 
 	public function deleteCategory($categories_id)
@@ -132,6 +146,31 @@ class CategoryRepository extends BaseRepository{
 		return Category::find($categories_id);
 	}
 
+	
+	public function getArrayInCurrentLangData($categoryId)
+	{
+		$parentCategory = Null;
+		$category = $this->get($categoryId);
+		$categoryLanguage = $category->InCurrentLang;
+
+		if($category->hasParent()) 
+			$parentCategory = $category->parent->InCurrentLang;
+
+		return[
+			'attributes' => $category, 
+			'categoryLang' => $categoryLanguage,
+			'parentCategory' => $parentCategory
+		];
+	}
+
+	public function getDataForLanguage($categoryId, $languageId)
+	{
+		$category = $this->get($categoryId);
+		$categoryLang = $category->getAccessorInCurrentLang($languageId);
+		return $categoryLang;
+	}
+
+
 	public function setDefaultActionColumn() 
 	{
 		$this->addColumnToCollection('Actions', function($model)
@@ -142,11 +181,11 @@ class CategoryRepository extends BaseRepository{
 			$this->addActionColumn("<form action='".route('categories.show',$model->id)."' method='get'>
 				<button href='#'  class='btn btn-success btn-outline dim col-sm-4 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Show')."'  data-original-title='".trans('categories.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
 			</form>");
-			$this->addActionColumn("<button href='#fancybox-edit-product' id='edit_product_".$model->id."' class='edit-product btn btn-warning btn-outline dim col-sm-4' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Edit')."'  data-original-title='".trans('categories.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+			$this->addActionColumn("<button href='#fancybox-edit-category' id='edit_category_".$model->id."' class='edit-category btn btn-warning btn-outline dim col-sm-4' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Edit')."'  data-original-title='".trans('categories.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 		</button><br/>");
-			$this->addActionColumn("<button href='#' class='delete-product btn btn-danger btn-outline dim col-sm-4' id='delet_product_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Delete')."'  data-original-title='".trans('categories.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$this->addActionColumn("<button href='#' class='delete-category btn btn-danger btn-outline dim col-sm-4' id='delet_category_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Delete')."'  data-original-title='".trans('categories.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 		</button><br/>");
-			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='edit-product-lang btn btn-success btn-outline dim col-sm-4' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Language')."'  data-original-title='".trans('categories.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			$this->addActionColumn("<button href='#fancybox-edit-language-category' id='language_category_".$model->id."'  class='edit-category-lang btn btn-success btn-outline dim col-sm-4' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Language')."'  data-original-title='".trans('categories.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
@@ -167,7 +206,7 @@ class CategoryRepository extends BaseRepository{
 			if($model->hasParent()) 
 				return $model->parent->InCurrentLang->name;
 			else
-				return $model->InCurrentLang->name;
+				return '';
 		});
 
 	}
