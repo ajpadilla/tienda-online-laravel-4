@@ -2,14 +2,18 @@
 return array(
 
 	"routes" => array(
-		"create" => "categorias-productos/crear",
-		"store" => "categorias-productos/agregar",
-		"show"=>"categorias-productos/ver/{id}",
-		"edit"=>"categorias-productos/editar/{id}",
-		"update"=>"categorias-productos/actualizar/{id}",
-		"destroy"=>"categorias-productos/eliminar/{id}",
+		"create" => "categorias/crear",
+		"store" => "categorias/agregar",
+		"show"=>"categorias/ver/{id}",
+		"edit"=>"categorias/editar/{id}",
+		"update"=>"categorias/actualizar/{id}",
+		"destroy"=>"categorias/eliminar/{id}",
+		"index" => "categorias/api/lista-categorias",
 		"api" => array(
-			"index" => "categorias-productos/api/lista-categorias-productos",
+			'update' => 'categorias/api/actualizar',
+			"list" => "categorias/api/lista-categorias",
+			"delete" =>"categorias/api/eliminar" ,
+			"saveLang" => 'categorias/api/actualizar-idioma'
 		),
 	),
 	"title" => "Agregar categoria",
@@ -35,7 +39,7 @@ return array(
 		'title' => 'Lista de categorias',
 		'subtitle' => 'Listado de categorias',
 		'Name' => 'Nombre',
-		'parent_category' => 'Categoria padre',
+		'Parent_category' => 'Categoria padre',
 		'Actions' =>'Acciones'
 	),
 

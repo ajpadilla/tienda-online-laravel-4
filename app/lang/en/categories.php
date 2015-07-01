@@ -2,14 +2,18 @@
 return array(
 
 	"routes" => array(
-		"create" => "categories-products/create",
-		"store" => "categories-products/store",
-		"show"=>"categories-products/show/{id}",
-		"edit"=>"categories-products/edit/{id}",
-		"update"=>"categories-products/update/{id}",
-		"destroy"=>"categories-products/destroy/{id}",
+		"create" => "categories/create",
+		"store" => "categories/store",
+		"show"=>"categories/show/{id}",
+		"edit"=>"categories/edit/{id}",
+		"update"=>"categories/update/{id}",
+		"destroy"=>"categories/destroy/{id}",
+		"index" => "categories/list-categories",
 		"api" => array(
-			"index" => "categories-products/api/list-categories-products",
+			'update' => 'categories/api/updated',
+			"list" => "categories/api/list-categories",
+			"delete" =>"categories/api/delete" ,
+			"saveLang" => 'categories/api/update-lang'
 		),
 	),
 	"title" => "Add category",
