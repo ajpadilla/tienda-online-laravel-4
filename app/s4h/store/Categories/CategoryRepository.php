@@ -8,6 +8,16 @@ use s4h\store\Base\BaseRepository;
 
 class CategoryRepository extends BaseRepository{
 
+	function __construct() {
+		$this->columns = [
+			trans('categories.list.Name'),
+			trans('categories.list.Parent_category'),
+			trans('categories.list.Actions')
+		];
+		$this->setModel(new Category);
+		$this->setListAllRoute('categories.api.list');
+	}
+
 	public function create($data = array())
 	{
 		$category = new Category;
@@ -120,6 +130,46 @@ class CategoryRepository extends BaseRepository{
 	public function getCategoryId($categories_id)
 	{
 		return Category::find($categories_id);
+	}
+
+	public function setDefaultActionColumn() 
+	{
+		$this->addColumnToCollection('Actions', function($model)
+		{
+			$language = $this->getCurrentLang();
+
+			$this->cleanActionColumn();
+			$this->addActionColumn("<form action='".route('categories.show',$model->id)."' method='get'>
+				<button href='#'  class='btn btn-success btn-outline dim col-sm-4 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Show')."'  data-original-title='".trans('categories.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
+			</form>");
+			$this->addActionColumn("<button href='#fancybox-edit-product' id='edit_product_".$model->id."' class='edit-product btn btn-warning btn-outline dim col-sm-4' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Edit')."'  data-original-title='".trans('categories.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+		</button><br/>");
+			$this->addActionColumn("<button href='#' class='delete-product btn btn-danger btn-outline dim col-sm-4' id='delet_product_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Delete')."'  data-original-title='".trans('categories.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+		</button><br/>");
+			$this->addActionColumn("<button href='#fancybox-edit-language-product' id='language_product_".$model->id."'  class='edit-product-lang btn btn-success btn-outline dim col-sm-4' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('categories.actions.Language')."'  data-original-title='".trans('categories.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
+	public function setBodyTableSettings()
+	{
+		$this->collection->searchColumns('name', 'parent_category');
+		$this->collection->orderColumns('name', 'parent_category');
+
+		$this->collection->addColumn('name', function($model)
+		{
+			if($model->InCurrentLang)
+				return $model->InCurrentLang->name;
+		});
+
+		$this->collection->addColumn('parent_category', function($model)
+		{
+			if($model->hasParent()) 
+				return $model->parent->InCurrentLang->name;
+			else
+				return $model->InCurrentLang->name;
+		});
+
 	}
 
 }
