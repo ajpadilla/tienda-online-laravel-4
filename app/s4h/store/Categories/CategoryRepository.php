@@ -8,15 +8,7 @@ use s4h\store\Base\BaseRepository;
 
 class CategoryRepository extends BaseRepository{
 
-	public function save(Category $category){
-		return $category->save();
-	}
-
-	public function getModel(){
-      return new Category;
-    }
-
-	public function createNewCategory($data = array())
+	public function create($data = array())
 	{
 		$category = new Category;
 
