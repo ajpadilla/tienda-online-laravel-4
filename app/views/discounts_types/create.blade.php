@@ -14,29 +14,8 @@
 			</div>
 			<div class="ibox-content">
 			<div class="row">
-				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCreateDiscountType']) }}
-				<div class="col-sm-6 b-r">
-					<div class="form-group">
-						{{ Form::label('language_id', trans('discountType.labels.language'),['class'=>'col-sm-2 control-label']) }}
-						<div class="col-sm-8">
-							{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
-						</div>
-					</div>
-					
-					<div class="form-group">
-						{{ Form::label('name',trans('discountType.labels.name'),['class'=>'col-sm-2 control-label']) }}
-						<div class="col-sm-8">
-							{{ Form::text('name',null, ['class' => 'form-control','id'=>'name']) }}
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<div class="col-sm-4 col-sm-offset-2">
-							{{ Form::submit(trans('discountType.labels.save'), ['class' => 'btn btn-primary']) }}
-						</div>
-					</div>
-				</div>
+				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'form-create-discountType']) }}
+					@include('discounts_types.partials._form')
 				{{ Form::close() }}
 			</div>
 		</div>
@@ -48,11 +27,7 @@
 <script>
 	$(document).ready(function () {
 
-		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-            }, '{{ trans('discountType.validation.onlyLettersNumbersAndSpaces') }}');
-
-		$('#formCreateDiscountType').validate({
+		$('#form-create-discountType').validate({
 			rules:{
 				name:{
 					required:!0,
@@ -101,7 +76,7 @@
 				url:  '{{URL::to(LaravelLocalization::transRoute('discountType.routes.store'))}}',
         		type:'POST'
 			};
-		$('#formCreateDiscountType').ajaxForm(options);
+		$('#form-create-discountType').ajaxForm(options);
 
 	});
 
@@ -118,17 +93,24 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false    
 			}), 5000 );  
-			return $('#formCreateDiscountType').valid(); 
+			return $('#form-create-discountType').valid(); 
 		} 
 														     
 		// post-submit callback 
 		function showResponse(responseText, statusText, xhr, $form)  {    
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
-			$('#formCreateDiscountType').resetForm();
-			 document.location.href = '{{URL::to(LaravelLocalization::transRoute('discountType.routes.create'))}}';
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
+			$('#form-create-discountType').resetForm();
 		} 						
 </script>
 @stop
