@@ -8,6 +8,7 @@
 			"edit"=>"discounts-type/edit/{id}",
 			"update"=>"discounts-type/update/{id}",
 			"destroy"=>"discounts-type/destroy/{id}",
+			"index"=>'discounts-type/list-discounts-type',
 			"api" => array(
 				"index" => "discounts-type/api/list-discounts-type",
 			),
