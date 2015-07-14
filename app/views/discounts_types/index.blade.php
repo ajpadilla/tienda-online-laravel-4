@@ -15,18 +15,8 @@
 			@include('flash::message')
 			<div class="ibox-content">
 				<a class="btn btn-info " href="{{route('discountType.create')}}"><i class="fa fa-paste"></i> {{ trans('discountType.labels.new') }} </a>
-				<?php
-					$columns = [
-						trans('discountType.list.Name'),
-						trans('discountType.list.Actions')
-				];
-				$table = Datatable::table()
-				->addColumn($columns)
-				->setUrl(route('api.discountType'))
-				->noScript();
-				?>
 				<div class="row"><br/></div>
-				{{ $table->render() }}
+				@include('partials._index-table')
 			</div>
 		</div>
 	</div>
@@ -34,5 +24,4 @@
 @stop
 
 @section('scripts')
-	{{ $table->script() }}
 @stop
