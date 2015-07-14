@@ -9,20 +9,20 @@ use s4h\store\Forms\EditDiscountTypeForm;
 
 class DiscountTypeController extends \BaseController {
 
-	private $discountTypeRepository;
 	private $repository;
+	private $registerDiscountTypeForm;
 	private $languageRepository;
 	private $discountTypeLangRepository;
 	private $editDiscountTypeForm;
 
-	function __construct(RegisterDiscountTypeForm $repository,
-	 						DiscountTypeRepository $discountTypeRepository, 
+	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm,
+	 						DiscountTypeRepository $repository, 
 	 						LanguageRepository $languageRepository,
 	 						DiscountTypeLangRepository $discountTypeLangRepository,
 	 						EditDiscountTypeForm $editDiscountTypeForm){
 
-		$this->discountTypeRepository = $discountTypeRepository;
 		$this->repository = $repository;
+		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
 		$this->languageRepository = $languageRepository;
 		$this->discountTypeLangRepository = $discountTypeLangRepository;
 		$this->editDiscountTypeForm = $editDiscountTypeForm;
@@ -36,7 +36,9 @@ class DiscountTypeController extends \BaseController {
 
 	public function index()
 	{
-		return View::make('discounts_types.index');
+		$languages = $this->languageRepository->getAllForSelect();
+		$table = $this->repository->getAllTable();
+		return View::make('discounts_types.index', compact('language', 'table'));
 	}
 
 	public function getDatatable()
@@ -86,8 +88,8 @@ class DiscountTypeController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->repository->validate($input);
-				$this->discountTypeRepository->create($input);
+				$this->registerDiscountTypeForm->validate($input);
+				$this->repository->create($input);
 				$this->setSuccess(true);
 				$this->addToResponseArray('message', trans('discountType.response'));
 				return $this->getResponseArrayJson();	
@@ -109,7 +111,7 @@ class DiscountTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$discount_type = $this->discountTypeRepository->getDiscountTypeId($id);
+		$discount_type = $this->repository->getDiscountTypeId($id);
 		$language = $this->languageRepository->returnLanguage();
 		$discount_type_language = $discount_type->languages()->where('language_id','=', $language->id)->first();
 		return View::make('discounts_types.show',compact('discount_type_language'));
@@ -124,7 +126,7 @@ class DiscountTypeController extends \BaseController {
 		//
 	public function edit($id)
 	{
-		$discount_type = $this->discountTypeRepository->getDiscountTypeId($id);
+		$discount_type = $this->repository->getDiscountTypeId($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$discount_type_language = $discount_type->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -148,7 +150,7 @@ class DiscountTypeController extends \BaseController {
 			try
 			{
 				$this->editDiscountTypeForm->validate($input);
-				$this->discountTypeRepository->updateDiscountType($input);
+				$this->repository->updateDiscountType($input);
 				return Response::json(trans('discountType.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -167,7 +169,7 @@ class DiscountTypeController extends \BaseController {
 
 	public function destroy($id)
 	{
-		$this->discountTypeRepository->deletediscountType($id);
+		$this->repository->deletediscountType($id);
 		Flash::message(trans('discountType.Delete'));
 		return Redirect::route('discountType.index');
 	}
@@ -175,7 +177,7 @@ class DiscountTypeController extends \BaseController {
 	public function checkName() {
 		$response = array();
 		if (Request::ajax()) {
-			$discount_type = $this->discountTypeRepository->getName(Input::all());
+			$discount_type = $this->repository->getName(Input::all());
 			if (count($discount_type) > 0) {
 				return Response::json(false);
 			} else {
@@ -189,7 +191,7 @@ class DiscountTypeController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$discount_type = $this->discountTypeRepository->getNameForEdit(Input::all());
+			$discount_type = $this->repository->getNameForEdit(Input::all());
 			if (count($discount_type) > 0) {
 				return Response::json(false);
 			} else {
@@ -197,6 +199,11 @@ class DiscountTypeController extends \BaseController {
 			}
 		}
 		return Response::json(array('response' => 'false'));
+	}
+
+	public function listApi()
+	{
+		return $this->repository->getDefaultTableForAll();
 	}
 
 }
