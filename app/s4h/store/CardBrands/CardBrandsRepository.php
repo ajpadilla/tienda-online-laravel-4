@@ -7,16 +7,7 @@ use s4h\store\CardBrands\CardBrands;
 
 class CardBrandsRepository extends BaseRepository
 {
-	public function getModel()
-    {
-      return new CardBrands;
-    }
-
-    public function getAll()
-    {
-        return CardBrands::all();
-    }
-
+	
     public function listAll()
     {
         return CardBrands::all()->lists('name','id');
