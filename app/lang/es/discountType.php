@@ -10,7 +10,7 @@
 			"destroy"=>"tipos-de-descuentos/eliminar/{id}",
 			"index"=>'tipos-de-descuentos/lista-tipos-descuentos',
 			"api" => array(
-				"index" => "tipos-de-descuentos/api/lista-tipos-descuentos",
+				"list" => "tipos-de-descuentos/api/lista-tipos-descuentos",
 			),
 		),
 		"title" => "Agregar Tipo de descuento",

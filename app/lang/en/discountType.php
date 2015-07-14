@@ -10,7 +10,7 @@
 			"destroy"=>"discounts-type/destroy/{id}",
 			"index"=>'discounts-type/list-discounts-type',
 			"api" => array(
-				"index" => "discounts-type/api/list-discounts-type",
+				"list" => "discounts-type/api/list-discounts-type",
 			),
 		),
 		"title" => "Add Discount Type",
