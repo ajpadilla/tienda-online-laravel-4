@@ -7,15 +7,6 @@ use s4h\store\PaymentCredentialDetails\PaymentCredentialDetails;
 
 class PaymentCredentialDetailsRepository extends BaseRepository
 {
-	public function getModel()
-    {
-      return new PaymentCredentialDetails;
-    }
-
-    public function getAll()
-    {
-        return PaymentCredentialDetails::all();
-    }
 
     public function create($data = array())
     {
