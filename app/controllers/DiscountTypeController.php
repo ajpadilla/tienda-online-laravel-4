@@ -10,19 +10,19 @@ use s4h\store\Forms\EditDiscountTypeForm;
 class DiscountTypeController extends \BaseController {
 
 	private $discountTypeRepository;
-	private $registerDiscountTypeForm;
+	private $repository;
 	private $languageRepository;
 	private $discountTypeLangRepository;
 	private $editDiscountTypeForm;
 
-	function __construct(RegisterDiscountTypeForm $registerDiscountTypeForm,
+	function __construct(RegisterDiscountTypeForm $repository,
 	 						DiscountTypeRepository $discountTypeRepository, 
 	 						LanguageRepository $languageRepository,
 	 						DiscountTypeLangRepository $discountTypeLangRepository,
 	 						EditDiscountTypeForm $editDiscountTypeForm){
 
 		$this->discountTypeRepository = $discountTypeRepository;
-		$this->registerDiscountTypeForm = $registerDiscountTypeForm;
+		$this->repository = $repository;
 		$this->languageRepository = $languageRepository;
 		$this->discountTypeLangRepository = $discountTypeLangRepository;
 		$this->editDiscountTypeForm = $editDiscountTypeForm;
@@ -86,15 +86,19 @@ class DiscountTypeController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->registerDiscountTypeForm->validate($input);
-				$this->discountTypeRepository->createNewDiscountType($input);
-				return Response::json(trans('discounts.response'));
+				$this->repository->validate($input);
+				$this->discountTypeRepository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('discountType.response'));
+				return $this->getResponseArrayJson();	
 			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 	/**
