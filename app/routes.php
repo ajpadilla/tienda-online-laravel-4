@@ -148,6 +148,12 @@ function () {
 	]);
 
 
+	Route::get(LaravelLocalization::transRoute('discountType.routes.api.list'),[
+		'as'=>'discountType.api.list', 
+		'uses'=>'DiscountTypeController@listApi'
+	 ]);
+
+
 	Route::get(LaravelLocalization::transRoute('discountType.routes.show'), [
 		'as' => 'discountType.show',
 		'uses' => 'DiscountTypeController@show'
