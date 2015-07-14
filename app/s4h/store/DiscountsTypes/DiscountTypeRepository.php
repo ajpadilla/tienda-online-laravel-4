@@ -8,6 +8,23 @@ use s4h\store\Base\BaseRepository;
 
 class DiscountTypeRepository extends BaseRepository{
 
+	function __construct() {
+		$this->columns = [
+			trans('products.list.photo'),
+			trans('products.list.name'),
+			trans('products.list.price'),
+			trans('products.list.quantity'),
+			trans('products.list.active'),
+			trans('products.list.accept'),
+			trans('products.list.category'),
+			trans('products.labels.condition'),
+			trans('products.list.ratings'),
+			trans('products.list.actions')
+		];
+		$this->setModel(new DiscountType);
+		$this->setListAllRoute('products.routes.api.list');
+	}
+
 	public function getName($data)
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
@@ -27,11 +44,11 @@ class DiscountTypeRepository extends BaseRepository{
 			return array();
 	}
 
-	public function createNewDiscountType($data = array())
+	public function create($data = array())
 	{
-		$discount_type = new DiscountType;
-		$discount_type->save();
-		$discount_type->languages()->attach($data['language_id'], array('name'=> $data['name']));	
+		$discountType = $this->model->create([]);
+		$discountType->languages()->attach($data['language_id'], array('name'=> $data['name']));	
+		return $discountType;
 	}
 
 	public function updateDiscountType($data = array())
