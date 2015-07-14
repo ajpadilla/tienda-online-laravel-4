@@ -14,7 +14,7 @@
 			</div>
 			<div class="ibox-content">
 			<div class="row">
-				{{ Form::open(['url' => LaravelLocalization::transRoute('discountType.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'form-create-discountType']) }}
+				{{ Form::open(['routes' =>'discountType.store','class'=>'form-horizontal','method' => 'POST','id' => 'form-create-discountType']) }}
 					@include('discounts_types.partials._form')
 				{{ Form::close() }}
 			</div>
