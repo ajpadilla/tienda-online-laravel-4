@@ -20,7 +20,7 @@ class CategoryRepository extends BaseRepository{
 
 	public function create($data = array())
 	{
-		$category = new Category;
+		$category = $this->model->create([]);
 
 		if (!empty($data['parent_category'])) {
 			$category->category_id = $data['parent_category'];
