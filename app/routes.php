@@ -142,7 +142,7 @@ function () {
 		'uses' => 'DiscountTypeController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('discountType.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('discountType.routes.index'), [
 		'as' => 'discountType.index',
 		'uses' => 'DiscountTypeController@index'
 	]);
