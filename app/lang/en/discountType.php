@@ -11,7 +11,8 @@
 			"index"=>'discounts-type/list-discounts-type',
 			"api" => array(
 				"list" => "discounts-type/api/list-discounts-type",
-				"update" => "discounts-type/api/update"
+				"update" => "discounts-type/api/update",
+				"delete" => "discounts-type/api/delete"
 			),
 		),
 		"title" => "Add Discount Type",
