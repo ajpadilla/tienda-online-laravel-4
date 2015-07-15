@@ -18,9 +18,9 @@ class Language extends Eloquent
 	public function discounts_types(){
 		return $this->belongsToMany('s4h\store\DiscountsTypes\DiscountType','discount_types_lang','language_id','discount_type_id')->withPivot('name');
 	}
-	public function shipment_status()
+	public function shipmentStatus()
 	{
-		return $this->belongsToMany('s4h\store\ShipmentStatus\Shipment_Status','shipment_status_lang','language_id','shipment_status_id')->withPivot('name','description');
+		return $this->belongsToMany('s4h\store\ShipmentStatus\ShipmentStatus','shipment_status_lang','language_id','shipment_status_id')->withPivot('name','description');
 	}
 
 	public function invoice_status()
