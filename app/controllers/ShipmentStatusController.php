@@ -11,13 +11,18 @@ class ShipmentStatusController extends \BaseController {
 
 	private $languageRepository;
 	private $registerShipmentStatusForm;
-	private $shipmentStatusRepository;
+	private $repository;
 	private $shipmentStatusLangRepository;
 	private $editShipmentStatusForm;
-	function __construct(LanguageRepository $languageRepository, RegisterShipmentStatusForm $registerShipmentStatusForm, ShipmentStatusRepository $shipmentStatusRepository, ShipmentStatusLangRepository $shipmentStatusLangRepository, EditShipmentStatusForm $editShipmentStatusForm) {
+	function __construct(LanguageRepository $languageRepository, 
+		RegisterShipmentStatusForm $registerShipmentStatusForm, 
+		ShipmentStatusRepository $repository, 
+		ShipmentStatusLangRepository $shipmentStatusLangRepository, 
+		EditShipmentStatusForm $editShipmentStatusForm) 
+	{
 		$this->languageRepository = $languageRepository;
 		$this->registerShipmentStatusForm = $registerShipmentStatusForm;
-		$this->shipmentStatusRepository = $shipmentStatusRepository;
+		$this->repository = $repository;
 		$this->shipmentStatusLangRepository = $shipmentStatusLangRepository;
 		$this->editShipmentStatusForm = $editShipmentStatusForm;
 	}
@@ -29,7 +34,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function index()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$languages = $this->languageRepository->getAllForSelect();
 		return View::make('shipment_status.index',compact('languages'));
 	}
 
@@ -83,7 +88,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name','id');
+		$languages = $this->languageRepository->getAllForSelect();
 		return View::make('shipment_status.create',compact('languages'));
 	}
 
@@ -95,21 +100,24 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function store()
 	{
-		if(Request::ajax())
+		if (Request::ajax()) 
 		{
 			$input = Input::all();
-			//dd($input);
 			try
 			{
 				$this->registerShipmentStatusForm->validate($input);
-				$this->shipmentStatusRepository->createNewShipmentStatus($input);
-				return Response::json(trans('shipmentStatus.response'));
-			}
+				$this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('shipmentStatus.response'));
+				return $this->getResponseArrayJson();	
+			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 
@@ -121,7 +129,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$shipmentStatus = $this->shipmentStatusRepository->getById($id);
+		$shipmentStatus = $this->repository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$shipmentStatusLanguage = $shipmentStatus->languages()->where('language_id','=',$language_id)->first();
 		return View::make('shipment_status.show',compact('shipmentStatus','shipmentStatusLanguage'));
@@ -136,7 +144,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$shipmentStatus = $this->shipmentStatusRepository->getById($id);
+		$shipmentStatus = $this->repository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$shipmentStatusLanguage = $shipmentStatus->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -158,7 +166,7 @@ class ShipmentStatusController extends \BaseController {
 			try
 			{
 				$this->editShipmentStatusForm->validate($input);
-				$this->shipmentStatusRepository->updateData($input);
+				$this->repository->updateData($input);
 				return Response::json(trans('shipmentStatus.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -177,7 +185,7 @@ class ShipmentStatusController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->shipmentStatusRepository->deleteShipmentStatu($id);
+		$this->repository->deleteShipmentStatu($id);
 		Flash::message(trans('shipmentStatus.Delete'));
 		return Redirect::route('shipmentStatus.index');
 	}
@@ -185,7 +193,7 @@ class ShipmentStatusController extends \BaseController {
 	public function deleteAjax()
 	{
 		if (Request::ajax()){
-			$this->shipmentStatusRepository->deleteShipmentStatu(Input::get('shipmentStatusId'));
+			$this->repository->deleteShipmentStatu(Input::get('shipmentStatusId'));
 			return Response::json(['success' => true]);
 		}
 		return Response::json(['success' => false]);
@@ -195,8 +203,8 @@ class ShipmentStatusController extends \BaseController {
 	{
 		if (Request::ajax()) {
 			$input = Input::all();
-			$shipment_status = $this->shipmentStatusRepository->getNameShipmentStatus($input);
-			if(count($shipment_status) > 0){
+			$shipmentStatus = $this->repository->getNameShipmentStatus($input);
+			if(count($shipmentStatus) > 0){
 				return Response::json(false);
 			}else{
 				 return Response::json(true);
@@ -206,7 +214,7 @@ class ShipmentStatusController extends \BaseController {
 
 	public function checkColorShipmentStatus()
 	{
-			$shipment_status = $this->shipmentStatusRepository->getColor(Input::get('color'));
+			$shipment_status = $this->repository->getColor(Input::get('color'));
 			if(count($shipment_status) > 0){
 				return Response::json(false);
 			}else{
@@ -219,7 +227,7 @@ class ShipmentStatusController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$shipment_status = $this->shipmentStatusRepository->getNameForEdit(Input::all());
+			$shipment_status = $this->repository->getNameForEdit(Input::all());
 			if (count($shipment_status) > 0) {
 				return Response::json(false);
 			} else {
@@ -234,7 +242,7 @@ class ShipmentStatusController extends \BaseController {
 		{
 			if (Input::has('shipmentStatusId'))
 			{
-				$shipmentStatus = $this->shipmentStatusRepository->getArrayInCurrentLangData(Input::get('shipmentStatusId'));
+				$shipmentStatus = $this->repository->getArrayInCurrentLangData(Input::get('shipmentStatusId'));
 				return Response::json($shipmentStatus);
 			}else{
 				return Response::json(['success' => false]);
@@ -248,7 +256,7 @@ class ShipmentStatusController extends \BaseController {
 		{
 			if (Input::has('shipmentStatusId') && Input::has('languageId'))
 			{
-				 $shipmentStatusLang = $this->shipmentStatusRepository->getDataForLanguage(Input::get('shipmentStatusId'), Input::get('languageId'));
+				 $shipmentStatusLang = $this->repository->getDataForLanguage(Input::get('shipmentStatusId'), Input::get('languageId'));
 				 return Response::json($shipmentStatusLang);
 			}else{
 				return Response::json(['success' => false]);
@@ -265,7 +273,7 @@ class ShipmentStatusController extends \BaseController {
 			try
 			{
 				//$this->editLangProductoForm->validate($input);
-				$this->shipmentStatusRepository->updateData($input);
+				$this->repository->updateData($input);
 				return Response::json([trans('shipmentStatus.Updated')]);
 			}
 			catch (FormValidationException $e)
