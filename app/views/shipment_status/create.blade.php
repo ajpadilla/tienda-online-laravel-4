@@ -14,55 +14,8 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('shipmentStatus.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateShipmentStatus']) }}
-					<div class="col-sm-6 b-r">
-						<div class="form-group">
-							{{ Form::label('language_id', trans('shipmentStatus.labels.language'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('name', trans('shipmentStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::textarea('description',null, ['class' => 'form-control', 'rows' => '3','id' => 'description']) }}
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-6">
-						<div class="form-group">
-							{{ Form::label('color', trans('shipmentStatus.labels.color'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('color',array(
-											'#7bd148' => 'Green',
-											'#5484ed' =>'Bold blue',
-											'#a4bdfc' => 'Blue',
-											'#46d6db' => 'Turquoise',
-											'#7ae7bf' => 'Light green',
-											'#51b749' => 'Bold green',
-											'#fbd75b' => 'Yellow',
-											'#ffb878' => 'Orange',
-											'#ff887c' => 'Red',
-											'#dc2127' => 'Bold red',
-											'#dbadff' => 'Purple',
-											'#e1e1e1' => 'Gray',
-										)
-								,null,['class' => 'form-control','id' => 'color']) }}
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('shipmentStatus.labels.save'), ['class' => 'btn btn-primary']) }}
-							</div>
-						</div>
-					</div>
+					{{ Form::open(['url' => LaravelLocalization::transRoute('shipmentStatus.routes.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'form-create-shipment-status']) }}
+						@include('shipment_status.partials._form')
 					{{ Form::close() }}
 				</div>
 			</div>
@@ -74,21 +27,9 @@
 <script>
 	$(document).ready(function () 
 	{
-		$('#description').summernote();	
-			
 		$('select[name="color"]').simplecolorpicker({picker: true, theme: 'glyphicons'});
 
-		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-       	}, '{{ trans('shipmentStatus.validation.onlyLettersNumbersAndSpaces') }}');
-
-		$.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
-        }, '{{ trans('shipmentStatus.validation.onlyLettersNumbersAndDash') }}');
-
-
-		$('#formCrateShipmentStatus').validate({
-
+		$('#form-create-shipment-status').validate({
 			rules:{
 				name:{
 					required:!0,
@@ -152,7 +93,7 @@
 				url:  '{{ URL::route('shipmentStatus.store') }}',
         		type:'POST'
 			};
-		$('#formCrateShipmentStatus').ajaxForm(options);
+		$('#form-create-shipment-status').ajaxForm(options);
 	});
 
 	// pre-submit callback
@@ -168,15 +109,25 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formCrateShipmentStatus').valid();
+			return $('#form-create-shipment-status').valid();
 		}
 
-		// post-submit callback
-		function showResponse(responseText, statusText, xhr, $form)  {
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
-		} 						
+		// post-submit callback 
+		function showResponse(responseText, statusText, xhr, $form)  {    
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				$('#form-create-shipment-status').resetForm();
+				$('.summernote').code('');
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
+		} 					
 </script>
 @stop
