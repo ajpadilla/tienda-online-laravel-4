@@ -159,6 +159,8 @@ function () {
 		'uses' => 'DiscountTypeController@show'
 	]);
 
+	Route::get('discountType/api-show',  ['as' => 'discountType.api.show','uses' => 'DiscountTypeController@showApi' ] );
+
 	Route::get(LaravelLocalization::transRoute('discountType.routes.edit'), [
 		'as' => 'discountType.edit',
 		'uses' => 'DiscountTypeController@edit'
@@ -169,6 +171,11 @@ function () {
 		'uses' => 'DiscountTypeController@update'
 	]);
 
+	Route::post(LaravelLocalization::transRoute('discountType.routes.api.update'), [
+		'as' => 'discountType.api.update',
+		'uses' => 'DiscountTypeController@updateApi'
+	]);
+
 	Route::get(LaravelLocalization::transRoute('discountType.routes.destroy'), [
 		'as' => 'discountType.destroy',
 		'uses' => 'DiscountTypeController@destroy'
@@ -176,9 +183,6 @@ function () {
 
 	Route::post('checkName','DiscountTypeController@checkName');
 	Route::post('checkNameForEditDiscountType','DiscountTypeController@checkNameForEdit');
-
-	Route::get('api/discountType', array('as'=>'api.discountType', 'uses'=>'DiscountTypeController@getDatatable'));
-
 
 	/**
 		* ------------------------------ Rutas para lenguajes -----------------------
