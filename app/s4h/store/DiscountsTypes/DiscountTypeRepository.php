@@ -46,6 +46,13 @@ class DiscountTypeRepository extends BaseRepository{
 		];
 	}
 
+	public function getDataForLanguage($discountTypeId, $languageId)
+	{
+		$discountType = $this->get($discountTypeId);
+		$discountTypeLang = $discountType->getAccessorInCurrentLang($languageId);
+		return $discountTypeLang;
+	}
+
 	public function create($data = array())
 	{
 		$discountType = $this->model->create([]);
@@ -66,10 +73,18 @@ class DiscountTypeRepository extends BaseRepository{
 		return $discountType;
 	}
 
-	public function deletediscountType($discount_type_id)
+	public function updateLanguage($data = array())
 	{
-		$discount_type = $this->getDiscountTypeId($discount_type_id);
-		$discount_type->delete();
+		$discountType = $this->get($data['discount_type_id']);
+
+		if (count($discountType->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$discountType->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'])
+			);
+		}else{
+			$discountType->languages()->attach($data['language_id'], array('name'=> $data['name'])
+			);
+		}
+		return $discountType;
 	}
 
 	public function getDiscountTypeId($discount_type_id)
