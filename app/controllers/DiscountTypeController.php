@@ -253,4 +253,45 @@ class DiscountTypeController extends \BaseController {
 		}
 		return $this->getResponseArrayJson();
 	}
+
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('discountTypeId') && Input::has('languageId'))
+			{
+				$discountTypeLang = $this->repository->getDataForLanguage(Input::get('discountTypeId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('discountTypeLang', $discountTypeLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function updateApiLang()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editDiscountTypeForm->validate($input);
+				$discountType = $this->repository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('discountType.Updated'));
+				$this->addToResponseArray('discountType', $discountType);
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
 }
