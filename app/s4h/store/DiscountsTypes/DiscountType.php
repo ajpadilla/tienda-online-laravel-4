@@ -30,6 +30,10 @@ class DiscountType extends BaseModel {
 		return DiscountTypeLang::whereDiscountTypeId($this->id)->whereLanguageId($language->id)->first();
 	}
 
+	public function getAccessorInCurrentLang($languageId = ''){
+		return DiscountTypeLang::whereDiscountTypeId($this->id)->whereLanguageId($languageId)->first();
+	}
+
 	public function delete()
 	{
 		foreach ($this->discounts as $discount) {
