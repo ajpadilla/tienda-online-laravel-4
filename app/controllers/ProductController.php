@@ -297,7 +297,6 @@ class ProductController extends \BaseController {
 
 	public function updateApiLang()
 	{
-
 		if(Request::ajax())
 		{
 			$input = Input::all();
