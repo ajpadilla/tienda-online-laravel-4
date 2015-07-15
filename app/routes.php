@@ -159,7 +159,20 @@ function () {
 		'uses' => 'DiscountTypeController@show'
 	]);
 
-	Route::get('discountType/api-show',  ['as' => 'discountType.api.show','uses' => 'DiscountTypeController@showApi' ] );
+	Route::get('discountType/api-show',  [
+		'as' => 'discountType.api.show',
+		'uses' => 'DiscountTypeController@showApi' 
+	] );
+
+	Route::get('discountType/api-show-lang', [
+		'as'=>'discountType.api.show-lang',
+		'uses' => 'DiscountTypeController@showApiLang'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('discountType.routes.api.saveLang'), [
+		'as' => 'discountType.api.saveLang',
+		'uses' => 'DiscountTypeController@updateApiLang'
+	]);
 
 	Route::get(LaravelLocalization::transRoute('discountType.routes.edit'), [
 		'as' => 'discountType.edit',
@@ -180,6 +193,12 @@ function () {
 		'as' => 'discountType.destroy',
 		'uses' => 'DiscountTypeController@destroy'
 	]);
+
+	Route::get(LaravelLocalization::transRoute('discountType.routes.api.delete'),  [
+		'as' => 'discountType.api.delete',
+		'uses' => 'DiscountTypeController@destroyApi' 
+	] );
+
 
 	Route::post('checkName','DiscountTypeController@checkName');
 	Route::post('checkNameForEditDiscountType','DiscountTypeController@checkNameForEdit');
