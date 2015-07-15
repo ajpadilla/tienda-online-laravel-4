@@ -197,6 +197,14 @@ class DiscountTypeController extends \BaseController {
 		return Redirect::route('discountType.index');
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('discountTypeId')));
+		return $this->getResponseArrayJson();
+	}
+
+
 	public function checkName() {
 		$response = array();
 		if (Request::ajax()) {
