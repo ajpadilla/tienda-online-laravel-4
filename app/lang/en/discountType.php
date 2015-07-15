@@ -11,6 +11,7 @@
 			"index"=>'discounts-type/list-discounts-type',
 			"api" => array(
 				"list" => "discounts-type/api/list-discounts-type",
+				"update" => "discounts-type/api/update"
 			),
 		),
 		"title" => "Add Discount Type",
@@ -64,7 +65,8 @@
 		'actions' => array(
 			'Show' => 'Show   ',
 			'Edit' => 'Edit',
-			'Delete' => 'Delete'
+			'Delete' => 'Delete',
+			'Language' => 'Edit Language'
 		)
 		
 	);

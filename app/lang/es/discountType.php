@@ -11,6 +11,7 @@
 			"index"=>'tipos-de-descuentos/lista-tipos-descuentos',
 			"api" => array(
 				"list" => "tipos-de-descuentos/api/lista-tipos-descuentos",
+				"update" => "tipos-de-descuentos/api/actualizar"
 			),
 		),
 		"title" => "Agregar Tipo de descuento",
@@ -64,8 +65,9 @@
 		),
 
 		'actions' => array(
-			'Show' => 'Ver   ',
+			'Show' => 'Ver',
 			'Edit' => 'Editar',
-			'Delete' => 'Borar'
-		)
+			'Delete' => 'Borrar',
+			'Language' => 'Editar Idioma'
+		),
 	);
