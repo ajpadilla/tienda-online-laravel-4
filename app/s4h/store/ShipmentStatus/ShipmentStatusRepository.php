@@ -1,23 +1,26 @@
 <?php namespace s4h\store\ShipmentStatus;
 
-use s4h\store\ShipmentStatus\Shipment_Status;
+use s4h\store\ShipmentStatus\ShipmentStatus;
 use s4h\store\ShipmentStatusLang\ShipmentStatusLang;
 use s4h\store\Languages\Language;
-
+use s4h\store\Base\BaseRepository;
 /**
 * 
 */
-class ShipmentStatusRepository {
-	public function save(Shipment_Status $shipmentStatus)
-	{
-		return $shipmentStatus->save();
+class ShipmentStatusRepository extends BaseRepository {
+
+	function __construct() {
+		$this->columns = [
+			trans('discountType.list.Name'),
+			trans('discountType.list.Actions')
+		];
+		$this->setModel(new ShipmentStatus);
+		$this->setListAllRoute('discountType.api.list');
 	}
 
-	public function createNewShipmentStatus($data = array())
+	public function create($data = array())
 	{
-		$shipmentStatus = new Shipment_Status;
-		$shipmentStatus->color = $data['color'];
-		$shipmentStatus->save();
+		$shipmentStatus = $this->model->create($data);
 		$shipmentStatus->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}	
 
@@ -25,7 +28,7 @@ class ShipmentStatusRepository {
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
 		if (count($language) > 0) {
-			return $language->shipment_status()->wherePivot('name','=',$data['name'])->first();
+			return $language->shipmentStatus()->wherePivot('name','=',$data['name'])->first();
 		}else{
 			return $language;
 		}
@@ -33,19 +36,19 @@ class ShipmentStatusRepository {
 
 	public function getColor($color)
 	{
-		$shipment_status = Shipment_Status::select()->where('color','=',$color)->first();
-		return $shipment_status;
+		$shipmentStatus = ShipmentStatus::select()->where('color','=',$color)->first();
+		return $ShipmentStatus;
 	}
 
 	public function getById($id)
 	{
-		return Shipment_Status::findOrFail($id);
+		return ShipmentStatus::findOrFail($id);
 	}
 
 	public function deleteShipmentStatu($shipmentStatusId)
 	{
-		$shipment_status = $this->getById($shipmentStatusId);
-		$shipment_status->delete();
+		$ShipmentStatus = $this->getById($shipmentStatusId);
+		$ShipmentStatus->delete();
 	}
 
 	public function getNameForEdit($data = array())
