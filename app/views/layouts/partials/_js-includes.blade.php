@@ -159,6 +159,8 @@
 
     var showPopUpFancybox = function (selector) {
         $.fancybox($(selector),{
+            autoDimensions: false,
+            autoSize: false,
             openEffect  : 'elastic',
             closeEffect : 'elastic',
             centerOnScroll: true,
