@@ -38,7 +38,7 @@ class DiscountTypeController extends \BaseController {
 	{
 		$languages = $this->languageRepository->getAllForSelect();
 		$table = $this->repository->getAllTable();
-		return View::make('discounts_types.index', compact('language', 'table'));
+		return View::make('discounts_types.index', compact('languages', 'table'));
 	}
 
 	public function getDatatable()
@@ -140,7 +140,7 @@ class DiscountTypeController extends \BaseController {
 	 * @return Response
 	 */
 
-	public function update($id)
+	/*public function update($id)
 	{
 		if(Request::ajax())
 		{
@@ -151,6 +151,7 @@ class DiscountTypeController extends \BaseController {
 			{
 				$this->editDiscountTypeForm->validate($input);
 				$this->repository->updateDiscountType($input);
+
 				return Response::json(trans('discountType.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -158,6 +159,28 @@ class DiscountTypeController extends \BaseController {
 				return Response::json($e->getErrors()->all());
 			}
 		}
+	}*/
+
+	public function updateApi() 
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editDiscountTypeForm->validate($input);
+				$this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('discountType.Updated'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
 	}
 
 	/**
@@ -206,4 +229,20 @@ class DiscountTypeController extends \BaseController {
 		return $this->repository->getDefaultTableForAll();
 	}
 
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('discountTypeId'))
+			{
+				$discountType = $this->repository->getArrayInCurrentLangData(Input::get('discountTypeId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('discountType', $discountType);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
 }
