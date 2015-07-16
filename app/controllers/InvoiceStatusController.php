@@ -5,6 +5,7 @@ use s4h\store\InvoiceStatusLang\InvoiceStatusLangRepository;
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\RegisterInvoiceStatusForm;
 use s4h\store\Forms\EditInvoiceStatusForm;
+use s4h\store\Forms\EditInvoiceStatusFormLang;
 use Laracasts\Validation\FormValidationException;
 
 class InvoiceStatusController extends \BaseController {
@@ -14,17 +15,21 @@ class InvoiceStatusController extends \BaseController {
 	private $languageRepository;
 	private $registerInvoiceStatusForm;
 	private $editInvoiceStatusForm;
+	private $editInvoiceStatusFormLang;
 
 	function __construct(InvoiceStatusRepository $repository, 
 		InvoiceStatusLangRepository $invoiceStatusLangRepository, 
 		LanguageRepository $languageRepository, 
 		RegisterInvoiceStatusForm $registerInvoiceStatusForm, 
-		EditInvoiceStatusForm $editInvoiceStatusForm) {
+		EditInvoiceStatusForm $editInvoiceStatusForm,
+		EditInvoiceStatusFormLang $editInvoiceStatusFormLang) {
+
 		$this->repository = $repository;
 		$this->invoiceStatusLangRepository = $invoiceStatusLangRepository;
 		$this->languageRepository = $languageRepository;
 		$this->registerInvoiceStatusForm = $registerInvoiceStatusForm;
 		$this->editInvoiceStatusForm = $editInvoiceStatusForm;
+		$this->editInvoiceStatusFormLang = $editInvoiceStatusFormLang;
 	}
 
 	/**
@@ -38,51 +43,6 @@ class InvoiceStatusController extends \BaseController {
 		$table = $this->repository->getAllTable();
 		return View::make('invoice_status.index',compact('languages', 'table'));
 	}
-
-	public function getDatatable(){
-
-		$collection = Datatable::collection($this->invoiceStatusLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-			->searchColumns('color','name','description')
-			->orderColumns('color','name','description');
-
-		$collection->addColumn('color', function($model)
-		{
-			return  "<input type='text' class='form-control' STYLE='background-color: ".$model->invoiceStatus->color.";' size='5' readonly>";
-		});
-
-		$collection->addColumn('name', function($model)
-		{
-			return $model->name;
-		});
-
-		$collection->addColumn('description', function($model)
-		{
-			return $model->description;
-		});
-	
-		$collection->addColumn('Actions',function($model){
-			
-			$languageId = $this->languageRepository->returnLanguage()->id;
-
-			$links = "<form action='".route('invoiceStatus.show',$model->invoiceStatus->id)."' method='get'>
-						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
-					  </form>";
-
-			$links.= "<button href='#fancybox-edit-invoice-status' id='edit_".$model->invoiceStatus->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
-					 </button><br/>";
-
-			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->invoiceStatus->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
-					 </button><br/>";
-			
-			$links.= "<button href='#fancybox-edit-language-invoice-status' id='language_".$model->invoiceStatus->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
-
-			return $links;
-		});
-
-		return $collection->make();
-	}
-
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -325,10 +285,49 @@ class InvoiceStatusController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('invoiceStatusId') && Input::has('languageId'))
+			{
+				$invoiceStatusLang = $this->repository->getDataForLanguage(Input::get('invoiceStatusId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('invoiceStatusLang', $invoiceStatusLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
 	public function destroyApi()
 	{
 		if(Request::ajax())
 			$this->setSuccess($this->repository->delete(Input::get('invoiceStatusId')));
+		return $this->getResponseArrayJson();
+	}
+
+	public function updateApiLang()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editInvoiceStatusFormLang->validate($input);
+				$this->repository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('invoiceStatus.Updated'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
 		return $this->getResponseArrayJson();
 	}
 
