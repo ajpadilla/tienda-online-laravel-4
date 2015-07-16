@@ -44,49 +44,6 @@ class ShipmentStatusController extends \BaseController {
 		return View::make('shipment_status.index',compact('languages', 'table'));
 	}
 
-	public function getDatatable(){
-
-		$collection = Datatable::collection($this->shipmentStatusLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-			->searchColumns('color','name','description')
-			->orderColumns('color','name','description');
-
-		$collection->addColumn('color', function($model)
-		{
-			return  "<input type='text' class='form-control' STYLE='background-color: ".$model->shipmentStatus->color.";' size='5' readonly>";
-		});
-
-		$collection->addColumn('name', function($model)
-		{
-			return $model->name;
-		});
-
-		$collection->addColumn('description', function($model)
-		{
-			return $model->description;
-		});
-	
-		$collection->addColumn('Actions',function($model){
-			
-			$languageId = $this->languageRepository->returnLanguage()->id;
-
-			$links = "<form action='".route('shipmentStatus.show',$model->shipment_status->id)."' method='get'>
-						<button href='#'  class='btn btn-success btn-outline dim col-sm-8 show' style='margin-left: 20px;' type='submit' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Show')."'  data-original-title='".trans('products.actions.Show')."' ><i class='fa fa-check fa-2x'></i></button><br/>
-					  </form>";
-
-			$links.= "<button href='#fancybox-edit-shipment-status' id='edit_".$model->shipment_status->id."' class='btn btn-warning btn-outline dim col-sm-8 edit' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Edit')."'  data-original-title='".trans('products.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
-					 </button><br/>";
-
-			$links.= "<button href='#' class='btn btn-danger btn-outline dim col-sm-8' id='delet_".$model->shipment_status->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Delete')."'  data-original-title='".trans('products.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
-					 </button><br/>";
-			
-			$links.= "<button href='#fancybox-edit-language-shipment-status' id='language_".$model->shipment_status->id."'  class='btn btn-success btn-outline dim col-sm-8 language' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('products.actions.Language')."'  data-original-title='".trans('products.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />";
-
-			return $links;
-		});
-
-		return $collection->make();
-	}
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
