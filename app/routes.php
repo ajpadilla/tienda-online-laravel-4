@@ -310,10 +310,15 @@ function () {
 		'uses' => 'InvoiceStatusController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.index'), [
 		'as' => 'invoiceStatus.index',
 		'uses' => 'InvoiceStatusController@index'
 	]);
+
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.list'),[
+		'as'=>'invoiceStatus.api.list', 
+		'uses'=>'InvoiceStatusController@listApi'
+	 ]);
 
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.edit'), [
 		'as' => 'invoiceStatus.edit',
@@ -325,9 +330,29 @@ function () {
 		'uses' => 'InvoiceStatusController@show'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.show'), [
+		'as' => 'invoiceStatus.api.show',
+		'uses' => 'InvoiceStatusController@showApi'
+	]);
+
+	Route::get('invoiceStatus/api-show-lang', [
+		'as'=>'invoiceStatus.api.show-lang',
+		'uses' => 'InvoiceStatusController@showApiLang'
+	]);
+
 	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.update'), [
 		'as' => 'invoiceStatus.update',
 		'uses' => 'InvoiceStatusController@update'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.api.update'), [
+		'as' => 'invoiceStatus.api.update',
+		'uses' => 'InvoiceStatusController@updateApi'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.api.saveLang'), [
+		'as' => 'invoiceStatus.api.saveLang',
+		'uses' => 'InvoiceStatusController@updateApiLang'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.destroy'), [
@@ -335,24 +360,18 @@ function () {
 		'uses' => 'InvoiceStatusController@destroy'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.delete'),  [
+		'as' => 'invoiceStatus.api.delete',
+		'uses' => 'InvoiceStatusController@destroyApi' 
+	] );
 
-	Route::get('api/invoiceStatus', array('as'=>'api.invoiceStatus', 'uses'=>'InvoiceStatusController@getDatatable'));
 	Route::post('checkNameInvoiceStatus','InvoiceStatusController@checkNameInvoiceStatus');
     Route::post('checkNameInvoiceStatusEdit','InvoiceStatusController@checkNameForEdit');
 
-
-
    	Route::get('returnDataInvoiceStatus','InvoiceStatusController@returnDataInvoiceStatus');
-
-	Route::get(LaravelLocalization::transRoute('invoiceStatus.routes.api.delete-ajax'),  ['as' => 'invoiceStatus.delete-ajax','uses' => 'InvoiceStatusController@deleteAjax' ] );
-
 
 	Route::get('returnDatainvoiceStatusLang','InvoiceStatusController@returnDatainvoiceStatusLang');
 
-	Route::post(LaravelLocalization::transRoute('invoiceStatus.routes.api.saveLang'), [
-		'as' => 'invoiceStatus.saveLang',
-		'uses' => 'InvoiceStatusController@saveDataForLanguage'
-	]);
 
 
 	/**
