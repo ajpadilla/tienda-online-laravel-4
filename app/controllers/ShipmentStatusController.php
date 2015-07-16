@@ -213,6 +213,13 @@ class ShipmentStatusController extends \BaseController {
 		return Redirect::route('shipmentStatus.index');
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('shipmentStatusId')));
+		return $this->getResponseArrayJson();
+	}
+
 	public function deleteAjax()
 	{
 		if (Request::ajax()){
