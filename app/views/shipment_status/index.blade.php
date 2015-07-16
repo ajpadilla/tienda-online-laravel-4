@@ -138,7 +138,7 @@
 			};
 
 			$('#lang_id').click(function () {
-				console.log($('#shipment_status_id_language').val() +" "+ $('#lang_id').val());
+				//console.log($('#shipment_status_id_language').val() +" "+ $('#lang_id').val());
 				$.ajax({
 					type: 'GET',
 					url: '{{ URL::route('shipmentStatus.api.show-lang') }}',	
