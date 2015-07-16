@@ -5,10 +5,11 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use s4h\store\InvoiceStatusLang\InvoiceStatusLang;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
+use s4h\store\Base\BaseModel;
 /**
  * 
  */
- class InvoiceStatus extends Eloquent {
+ class InvoiceStatus extends BaseModel {
  	
  	use SoftDeletingTrait;
 
@@ -23,9 +24,12 @@ use s4h\store\Languages\Language;
 	}
 
 	public function getInCurrentLangAttribute(){
-		$isoCode = LaravelLocalization::setLocale();
-		$language = Language::select()->where('iso_code','=',$isoCode)->first();
+		$language = $this->getCurrentLang();
 		return InvoiceStatusLang::whereInvoiceStatusId($this->id)->whereLanguageId($language->id)->first();
+	}
+
+	public function getAccessorInCurrentLang($languageId = ''){
+		return InvoiceStatusLang::whereInvoiceStatusId($this->id)->whereLanguageId($languageId)->first();
 	}
 
 	public function delete()
