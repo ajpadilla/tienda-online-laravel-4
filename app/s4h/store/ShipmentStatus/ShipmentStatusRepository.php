@@ -70,7 +70,7 @@ class ShipmentStatusRepository extends BaseRepository {
 
 	public function getDataForLanguage($shipmentStatusId, $languageId)
 	{
-		$shipmentStatus = $this->get($discountTypeId);
+		$shipmentStatus = $this->get($shipmentStatusId);
 		$shipmentStatusLang = $shipmentStatus->getAccessorInCurrentLang($languageId);
 		return $shipmentStatusLang;
 	}
@@ -93,6 +93,20 @@ class ShipmentStatusRepository extends BaseRepository {
 				'description' => $data['description'])
 			);
 		}
+	}
+
+	public function updateLanguage($data = array())
+	{
+		$shipmentStatus = $this->get($data['shipment_status_id']);
+
+		if (count($shipmentStatus->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$shipmentStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'])
+			);
+		}else{
+			$shipmentStatus->languages()->attach($data['language_id'], array('name'=> $data['name'])
+			);
+		}
+		return $shipmentStatus;
 	}
 
 	public function setDefaultActionColumn() {
