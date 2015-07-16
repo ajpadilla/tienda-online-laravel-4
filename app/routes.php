@@ -232,7 +232,7 @@ function () {
 		'uses' => 'ShipmentStatusController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.index'), [
 		'as' => 'shipmentStatus.index',
 		'uses' => 'ShipmentStatusController@index'
 	]);
@@ -256,6 +256,12 @@ function () {
 		'as' => 'shipmentStatus.api.show',
 		'uses' => 'ShipmentStatusController@showApi'
 	]);
+
+	Route::get('shipmentStatus/api-show-lang', [
+		'as'=>'shipmentStatus.api.show-lang',
+		'uses' => 'ShipmentStatusController@showApiLang'
+	]);
+
 
 	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.update'), [
 		'as' => 'shipmentStatus.update',
@@ -283,14 +289,11 @@ function () {
 
    	Route::get('returnDatashipmentStatus','ShipmentStatusController@returnDataShipmentStatus');
 
-	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.destroyApi'),  ['as' => 'shipmentStatus.delete-ajax','uses' => 'ShipmentStatusController@deleteAjax' ] );
-
-
 	Route::get('returnDataShipmentStatusLang','ShipmentStatusController@returnDataShipmentStatusLang');
 
 	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.api.saveLang'), [
-		'as' => 'shipmentStatus.saveLang',
-		'uses' => 'ShipmentStatusController@saveDataForLanguage'
+		'as' => 'shipmentStatus.api.saveLang',
+		'uses' => 'ShipmentStatusController@updateApiLang'
 	]);
 
 	/**
