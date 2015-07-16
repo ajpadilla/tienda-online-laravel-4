@@ -3,21 +3,26 @@
 use s4h\store\InvoiceStatus\InvoiceStatus;
 use s4h\store\InvoiceStatusLang\InvoiceStatusLang;
 use s4h\store\Languages\Language;
+use s4h\store\Base\BaseRepository;
 /**
 * 
 */
-class InvoiceStatusRepository {
+class InvoiceStatusRepository extends BaseRepository{
 	
-	public function save(InvoiceStatus $invoiceStatus)
-	{
-		$invoiceStatus->save();
+	function __construct() {
+		$this->columns = [
+			trans('shipmentStatus.list.Color'),
+			trans('shipmentStatus.list.Name'),
+			trans('shipmentStatus.list.Description'),
+			trans('shipmentStatus.list.Actions')
+		];
+		$this->setModel(new InvoiceStatus);
+		$this->setListAllRoute('invoiceStatus.api.list');
 	}
 
-	public function createNewInvoiceStatus($data = array())
+	public function create($data = array())
 	{
-		$invoiceStatus = new InvoiceStatus;
-		$invoiceStatus->color = $data['color'];
-		$invoiceStatus->save();
+		$invoiceStatus = $this->model->create($data);
 		$invoiceStatus->languages()->attach($data['language_id'], array('name' => $data['name'], 'description' => $data['description']));
 	}	
 
@@ -47,20 +52,19 @@ class InvoiceStatusRepository {
 		return InvoiceStatusLang::select()->where('invoice_status_id','!=',$data['invoice_status_id'])->where('name','=',$data['name'])->first();
 	}
 
-	public function getArrayInCurrentLangData($id)
+	public function getArrayInCurrentLangData($invoiceStatusId)
 	{
-		$invoiceStatus = $this->getById($id);
-		$invoiceStatusLanguage = $invoiceStatus->getInCurrentLangAttribute();
+		$invoiceStatus = $this->get($invoiceStatusId);
+		$invoiceStatusLanguage = $invoiceStatus->InCurrentLang;
 		return[
-			'success' => true, 
-			'invoice_status' => $invoiceStatus->toArray(),
-			'invoice_status_lang' => $invoiceStatusLanguage->toArray(),
+			'attributes' => $invoiceStatus, 
+			'invoiceStatusLang' => $invoiceStatusLanguage,
 		];
 	}
 
-	public function updateData($data = array())
+	public function update($data = array())
 	{
-		$invoiceStatus = $this->getById($data['invoice_status_id']);
+		$invoiceStatus = $this->get($data['invoice_status_id']);
 		if (isset($data['color'])) {
 			$invoiceStatus->color = $data['color'];
 		}
@@ -88,6 +92,44 @@ class InvoiceStatusRepository {
 		}else{
 			return ['success' => false];
 		}
+	}
+
+
+	public function setDefaultActionColumn() {
+		$this->addColumnToCollection('Actions', function($model)
+		{
+			$language = $this->getCurrentLang();
+
+			$this->cleanActionColumn();
+			
+			$this->addActionColumn("<button href='#fancybox-edit-invoice-status' id='edit_invoice-status_".$model->id."' class='edit-invoice-status btn btn-warning btn-outline dim col-sm-8' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Edit')."'  data-original-title='".trans('discountType.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>");
+			$this->addActionColumn("<button href='#' class='delete-invoice-status btn btn-danger btn-outline dim col-sm-8' id='delet_invoice-status_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Delete')."'  data-original-title='".trans('discountType.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>");
+			$this->addActionColumn("<button href='#fancybox-edit-language-invoice-status' id='language_invoice-status_".$model->id."'  class='edit-invoice-status-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Language')."'  data-original-title='".trans('discountType.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
+	public function setBodyTableSettings()
+	{
+		$this->collection->searchColumns('color','name','description');
+		$this->collection->orderColumns('color','name', 'description');
+
+		$this->collection->addColumn('color', function($model)
+		{
+			return  "<input type='text' class='form-control' STYLE='background-color: ".$model->color.";' size='5' readonly>";
+		});
+
+		$this->collection->addColumn('name', function($model)
+		{
+			return $model->InCurrentLang->name;
+		});
+
+		$this->collection->addColumn('description', function($model)
+		{
+			return $model->InCurrentLang->description;
+		});
 	}
 }
 
