@@ -8,10 +8,12 @@
 			"edit"=>"edit/invoice/status/{id}",
 			"update"=>"update/invoice/status",
 			"destroy"=>"delete/invoice/status/{id}",
+			"index" => "invoice-status/list",
 			"api" => array(
-				"index"=>'invoice-status/api/list-invoice-status',
-				'delete-ajax' => 'invoice-status/api/delete-ajax',
+				"list"=>'invoice-status/api/list-invoice-status',
+				'delete' => 'invoice-status/api/delete',
 				"saveLang" => "invoice-status/api/lang-invoice-status",
+				"update" => "invoice-status/api/update"
 			)
 		),
 		"title" => "Add invoice status",

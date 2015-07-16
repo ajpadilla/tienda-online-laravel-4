@@ -8,10 +8,12 @@
 			"edit"=>"estatus-de-factura/editar/{id}",
 			"update"=>"estatus-de-factura/actualizar",
 			"destroy"=>"estatus-de-factura/eliminar/{id}",
+			"index" => "estatus-de-factura/lista",
 			"api" => array(
-				"index"=>'estatus-de-factura/api/lista-estatus-de-factura',
-				"delete-ajax" =>"estatus-de-factura/api/borrar",
-				"saveLang" => "actualizar-idioma-estatus-factura/api/idioma-estatus-factura",
+				"list"=>'estatus-de-factura/api/lista-estatus-de-factura',
+				"delete" =>"estatus-de-factura/api/eliminar",
+				"saveLang" => "estatus-de-factura/api/actualizar-idioma",
+				"update" => "estatus-de-factura/api/actualizar"
 			),
 		),
 		"title" => "Agregar estatus para factura",
