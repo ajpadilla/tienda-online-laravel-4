@@ -62,6 +62,13 @@ class InvoiceStatusRepository extends BaseRepository{
 		];
 	}
 
+	public function getDataForLanguage($invoiceStatusId, $languageId)
+	{
+		$invoiceStatus = $this->get($invoiceStatusId);
+		$invoiceStatusLang = $invoiceStatus->getAccessorInCurrentLang($languageId);
+		return $invoiceStatusLang;
+	}
+
 	public function update($data = array())
 	{
 		$invoiceStatus = $this->get($data['invoice_status_id']);
@@ -81,19 +88,21 @@ class InvoiceStatusRepository extends BaseRepository{
 		}
 	}
 
-	public function getDataForLanguage($invoiceStatusId, $languageId)
+	public function updateLanguage($data = array())
 	{
-		$invoiceStatusLang = InvoiceStatusLang::whereInvoiceStatusId($invoiceStatusId)->whereLanguageId($languageId)->first();
-		if(count($invoiceStatusLang) > 0){
-			return [
-				'success' => true, 
-				'invoiceStatusLang' => $invoiceStatusLang->toArray()
-			];
-		}else{
-			return ['success' => false];
-		}
-	}
+		$invoiceStatus = $this->get($data['invoice_status_id']);
 
+		if (count($invoiceStatus->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+					$invoiceStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}else{
+					$invoiceStatus->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
+			);
+		}
+		return $invoiceStatus;
+	}
 
 	public function setDefaultActionColumn() {
 		$this->addColumnToCollection('Actions', function($model)
