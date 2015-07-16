@@ -18,7 +18,7 @@
 	<div class="form-group">
 		{{ Form::label('name',  trans('products.labels.name') , ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name', 'id' => 'name_language']) }}
+			{{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name', 'id' => 'name_shipment_status_language']) }}
 		</div>
 	</div>
 
@@ -26,7 +26,7 @@
 		{{ Form::label('description', trans('products.labels.description'), ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
 			<div class="ibox-content no-padding">
-				{{ Form::textarea('description', null, ['class' => 'form-control summernote', 'id' => 'description_language']) }}
+				{{ Form::textarea('description', null, ['class' => 'form-control summernote', 'id' => 'description_shipment_status_language']) }}
 			</div>
 		</div>
 	</div>
