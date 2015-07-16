@@ -48,7 +48,7 @@
 							}
 						},
 						dataFilter: function (respuesta) {
-							console.log('consulta:'+respuesta);
+							//console.log('consulta:'+respuesta);
 							return respuesta;
 						}
 					}
@@ -134,7 +134,7 @@
 					'content' : '<h1>'+ responseText.message + '</h1>',
 					'autoScale' : true
 				});
-				$('#form-create-shipment-status').resetForm();
+				$('#form-crate-invoice-status').resetForm();
 				$('.summernote').code('');
 			}else{
 				jQuery.fancybox({
