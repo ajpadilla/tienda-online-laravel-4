@@ -100,10 +100,12 @@ class ShipmentStatusRepository extends BaseRepository {
 		$shipmentStatus = $this->get($data['shipment_status_id']);
 
 		if (count($shipmentStatus->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$shipmentStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'])
+					$shipmentStatus->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
 			);
 		}else{
-			$shipmentStatus->languages()->attach($data['language_id'], array('name'=> $data['name'])
+					$shipmentStatus->languages()->attach($data['language_id'], array('name'=> $data['name'],
+				'description' => $data['description'])
 			);
 		}
 		return $shipmentStatus;
