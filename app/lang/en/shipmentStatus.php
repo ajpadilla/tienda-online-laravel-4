@@ -8,11 +8,14 @@
 			"edit"=>"shipment-status/edit/{id}",
 			"update"=>"shipment-status/update",
 			"destroy"=>"shipment-status/destroy/{id}",
+			"index" => "shipment-status/list",
 			"api" => array(
-				"delete-ajax" =>"estatus-de-envio/api/borrar",
-				"index"=>'estatus-de-envio/lista',
-				"saveLang" => "actualizar-idioma-estatus-de-envio",
-			),
+				"delete-ajax" =>"shipment-status/api/borrar",
+				"list"=>'shipment-status/api/list',
+				"saveLang" => "shipment-status/api/update-language",
+				"update" => "shipment-status/api/update",
+				"delete" => "shipment-status/api/delete"
+ 			),
 		),
 		"title" => "Add shipment status",
 		"subtitle" => "Create shipment status",
