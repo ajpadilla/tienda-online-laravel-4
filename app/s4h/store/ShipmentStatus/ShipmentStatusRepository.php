@@ -11,11 +11,13 @@ class ShipmentStatusRepository extends BaseRepository {
 
 	function __construct() {
 		$this->columns = [
-			trans('discountType.list.Name'),
-			trans('discountType.list.Actions')
+			trans('shipmentStatus.list.Color'),
+			trans('shipmentStatus.list.Name'),
+			trans('shipmentStatus.list.Description'),
+			trans('shipmentStatus.list.Actions')
 		];
 		$this->setModel(new ShipmentStatus);
-		$this->setListAllRoute('discountType.api.list');
+		$this->setListAllRoute('shipmentStatus.api.list');
 	}
 
 	public function create($data = array())
@@ -56,20 +58,27 @@ class ShipmentStatusRepository extends BaseRepository {
 		return ShipmentStatusLang::select()->where('shipment_status_id','!=',$data['shipment_status_id'])->where('name','=',$data['name'])->first();
 	}
 
-	public function getArrayInCurrentLangData($id)
+	public function getArrayInCurrentLangData($shipmentStatusId)
 	{
-		$shipmentStatus = $this->getById($id);
-		$shipmentStatusLanguage = $shipmentStatus->getInCurrentLangAttribute();
+		$shipmentStatus = $this->get($shipmentStatusId);
+		$shipmentStatusLang = $shipmentStatus->InCurrentLang;
 		return[
-			'success' => true, 
-			'shipment_status' => $shipmentStatus->toArray(),
-			'shipment_status_lang' => $shipmentStatusLanguage->toArray(),
+			'attributes' => $shipmentStatus, 
+			'shipmentStatusLang' => $shipmentStatusLang,
 		];
 	}
 
-	public function updateData($data = array())
+	public function getDataForLanguage($shipmentStatusId, $languageId)
 	{
-		$shipmentStatus = $this->getById($data['shipment_status_id']);
+		$shipmentStatus = $this->get($discountTypeId);
+		$shipmentStatusLang = $shipmentStatus->getAccessorInCurrentLang($languageId);
+		return $shipmentStatusLang;
+	}
+
+
+	public function update($data = array())
+	{
+		$shipmentStatus = $this->get($data['shipment_status_id']);
 		if (isset($data['color'])) {
 			$shipmentStatus->color = $data['color'];
 		}
@@ -86,17 +95,41 @@ class ShipmentStatusRepository extends BaseRepository {
 		}
 	}
 
-	public function getDataForLanguage($shipmentStatusId, $languageId)
+	public function setDefaultActionColumn() {
+		$this->addColumnToCollection('Actions', function($model)
+		{
+			$language = $this->getCurrentLang();
+
+			$this->cleanActionColumn();
+			
+			$this->addActionColumn("<button href='#fancybox-edit-shipment-status' id='edit_shipment-status_".$model->id."' class='edit-shipment-status btn btn-warning btn-outline dim col-sm-8' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Edit')."'  data-original-title='".trans('discountType.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+					 </button><br/>");
+			$this->addActionColumn("<button href='#' class='delete-shipment-status btn btn-danger btn-outline dim col-sm-8' id='delet_shipment-status_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Delete')."'  data-original-title='".trans('discountType.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+					 </button><br/>");
+			$this->addActionColumn("<button href='#fancybox-edit-language-shipment-status' id='language_shipment-status_".$model->id."'  class='edit-shipment-status-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Language')."'  data-original-title='".trans('discountType.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			return implode(" ", $this->getActionColumn());
+		});
+	}
+
+	public function setBodyTableSettings()
 	{
-		$shipmentStatusLang = ShipmentStatusLang::whereShipmentStatusId($shipmentStatusId)->whereLanguageId($languageId)->first();
-		if(count($shipmentStatusLang) > 0){
-			return [
-				'success' => true, 
-				'shipmentStatusLang' => $shipmentStatusLang->toArray()
-			];
-		}else{
-			return ['success' => false];
-		}
+		$this->collection->searchColumns('color','name','description');
+		$this->collection->orderColumns('color','name', 'description');
+
+		$this->collection->addColumn('color', function($model)
+		{
+			return  "<input type='text' class='form-control' STYLE='background-color: ".$model->color.";' size='5' readonly>";
+		});
+
+		$this->collection->addColumn('name', function($model)
+		{
+			return $model->InCurrentLang->name;
+		});
+
+		$this->collection->addColumn('description', function($model)
+		{
+			return $model->InCurrentLang->description;
+		});
 	}
 
 }
