@@ -3,6 +3,7 @@
 use s4h\store\Languages\LanguageRepository;
 use s4h\store\Forms\RegisterShipmentStatusForm;
 use s4h\store\Forms\EditShipmentStatusForm;
+use s4h\store\Forms\EditShipmentStatusFormLang;
 use s4h\store\ShipmentStatus\ShipmentStatusRepository;
 use s4h\store\ShipmentStatusLang\ShipmentStatusLangRepository;
 use Laracasts\Validation\FormValidationException;
@@ -14,17 +15,21 @@ class ShipmentStatusController extends \BaseController {
 	private $repository;
 	private $shipmentStatusLangRepository;
 	private $editShipmentStatusForm;
+	private $editShipmentStatusFormLang;
+
 	function __construct(LanguageRepository $languageRepository, 
 		RegisterShipmentStatusForm $registerShipmentStatusForm, 
 		ShipmentStatusRepository $repository, 
 		ShipmentStatusLangRepository $shipmentStatusLangRepository, 
-		EditShipmentStatusForm $editShipmentStatusForm) 
+		EditShipmentStatusForm $editShipmentStatusForm,
+		EditShipmentStatusFormLang $editShipmentStatusFormLang) 
 	{
 		$this->languageRepository = $languageRepository;
 		$this->registerShipmentStatusForm = $registerShipmentStatusForm;
 		$this->repository = $repository;
 		$this->shipmentStatusLangRepository = $shipmentStatusLangRepository;
 		$this->editShipmentStatusForm = $editShipmentStatusForm;
+		$this->editShipmentStatusFormLang = $editShipmentStatusFormLang;
 	}
 
 	/**
@@ -329,6 +334,45 @@ class ShipmentStatusController extends \BaseController {
 				$this->addToResponseArray('shipmentStatus', $shipmentStatus);
 				return $this->getResponseArrayJson();
 			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('shipmentStatusId') && Input::has('languageId'))
+			{
+				$shipmentStatusLang = $this->repository->getDataForLanguage(Input::get('shipmentStatusId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('shipmentStatusLang', $shipmentStatusLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function updateApiLang()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editShipmentStatusFormLang->validate($input);
+				$this->repository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('shipmentStatus.Updated'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
 			}
 		}
