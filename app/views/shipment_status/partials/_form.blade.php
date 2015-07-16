@@ -17,14 +17,14 @@
 	<div class="form-group">
 		{{ Form::label('name', trans('shipmentStatus.labels.name'),['class'=>'col-sm-2 control-label']) }}
 		<div class="col-sm-6">
-			{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
+			{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name_shipment_status']) }}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{{ Form::label('description', trans('shipmentStatus.labels.description'),['class'=>'col-sm-2 control-label']) }}
 		<div class="col-sm-6">
-			{{ Form::textarea('description',null, ['class' => 'form-control summernote', 'rows' => '3','id' => 'description']) }}
+			{{ Form::textarea('description',null, ['class' => 'form-control summernote', 'rows' => '3','id' => 'description_shipment_status']) }}
 		</div>
 	</div>
 
