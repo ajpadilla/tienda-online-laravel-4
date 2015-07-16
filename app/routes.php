@@ -237,6 +237,11 @@ function () {
 		'uses' => 'ShipmentStatusController@index'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.list'),[
+		'as'=>'shipmentStatus.api.list', 
+		'uses'=>'ShipmentStatusController@listApi'
+	 ]);
+
 	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.edit'), [
 		'as' => 'shipmentStatus.edit',
 		'uses' => 'ShipmentStatusController@edit'
@@ -247,9 +252,19 @@ function () {
 		'uses' => 'ShipmentStatusController@show'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.show'), [
+		'as' => 'shipmentStatus.api.show',
+		'uses' => 'ShipmentStatusController@showApi'
+	]);
+
 	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.update'), [
 		'as' => 'shipmentStatus.update',
 		'uses' => 'ShipmentStatusController@update'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('shipmentStatus.routes.api.update'), [
+		'as' => 'shipmentStatus.api.update',
+		'uses' => 'ShipmentStatusController@updateApi'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.destroy'), [
@@ -257,8 +272,10 @@ function () {
 		'uses' => 'ShipmentStatusController@destroy'
 	]);
 
-
-	Route::get('api/shipmentStatus', array('as'=>'api.shipmentStatus', 'uses'=>'ShipmentStatusController@getDatatable'));
+	Route::get(LaravelLocalization::transRoute('shipmentStatus.routes.api.delete'),  [
+		'as' => 'shipmentStatus.api.delete',
+		'uses' => 'ShipmentStatusController@destroyApi' 
+	] );
 
 	Route::post('checkColorShipmentStatus','ShipmentStatusController@checkColorShipmentStatus');
 	Route::post('checkNameShipmentStatus','ShipmentStatusController@checkNameShipmentStatus');
