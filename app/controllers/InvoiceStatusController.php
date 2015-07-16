@@ -35,7 +35,8 @@ class InvoiceStatusController extends \BaseController {
 	public function index()
 	{
 		$languages = $this->languageRepository->getAll()->lists('name', 'id');
-		return View::make('invoice_status.index',compact('languages'));
+		$table = $this->repository->getAllTable();
+		return View::make('invoice_status.index',compact('languages', 'table'));
 	}
 
 	public function getDatatable(){
@@ -167,8 +168,8 @@ class InvoiceStatusController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				//$this->editInvoiceStatusForm ->validate($input);
-				$this->repository->updateData($input);
+				$this->editInvoiceStatusForm ->validate($input);
+				$this->repository->update($input);
 				return Response::json(trans('invoiceStatus.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -176,6 +177,28 @@ class InvoiceStatusController extends \BaseController {
 				return Response::json($e->getErrors()->all());
 			}
 		}
+	}
+
+	public function updateApi() 
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editInvoiceStatusForm->validate($input);
+				$this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('invoiceStatus.Updated'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
 	}
 
 
@@ -279,6 +302,34 @@ class InvoiceStatusController extends \BaseController {
 				return Response::json($e->getErrors()->all());
 			}
 		}
+	}
+
+	public function listApi(){
+		return $this->repository->getDefaultTableForAll();
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('invoiceStatusId'))
+			{
+				$invoiceStatus = $this->repository->getArrayInCurrentLangData(Input::get('invoiceStatusId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('invoiceStatus', $invoiceStatus);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('invoiceStatusId')));
+		return $this->getResponseArrayJson();
 	}
 
 }
