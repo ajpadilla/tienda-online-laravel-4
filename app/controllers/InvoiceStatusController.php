@@ -9,14 +9,18 @@ use Laracasts\Validation\FormValidationException;
 
 class InvoiceStatusController extends \BaseController {
 
-	private $invoiceStatusRepository;
+	private $repository;
 	private $invoiceStatusLangRepository;
 	private $languageRepository;
 	private $registerInvoiceStatusForm;
 	private $editInvoiceStatusForm;
 
-	function __construct(InvoiceStatusRepository $invoiceStatusRepository, InvoiceStatusLangRepository $invoiceStatusLangRepository, LanguageRepository $languageRepository, RegisterInvoiceStatusForm $registerInvoiceStatusForm, EditInvoiceStatusForm $editInvoiceStatusForm) {
-		$this->invoiceStatusRepository = $invoiceStatusRepository;
+	function __construct(InvoiceStatusRepository $repository, 
+		InvoiceStatusLangRepository $invoiceStatusLangRepository, 
+		LanguageRepository $languageRepository, 
+		RegisterInvoiceStatusForm $registerInvoiceStatusForm, 
+		EditInvoiceStatusForm $editInvoiceStatusForm) {
+		$this->repository = $repository;
 		$this->invoiceStatusLangRepository = $invoiceStatusLangRepository;
 		$this->languageRepository = $languageRepository;
 		$this->registerInvoiceStatusForm = $registerInvoiceStatusForm;
@@ -86,7 +90,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name','id');
+		$languages = $this->languageRepository->getAllForSelect();
 		return View::make('invoice_status.create',compact('languages'));
 	}
 
@@ -98,20 +102,24 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function store()
 	{
-		if(Request::ajax())
+		if (Request::ajax()) 
 		{
 			$input = Input::all();
 			try
 			{
 				$this->registerInvoiceStatusForm->validate($input);
-				$this->invoiceStatusRepository->createNewInvoiceStatus($input);
-				return Response::json(trans('invoiceStatus.response'));
-			}
+				$this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('invoiceStatus.response'));
+				return $this->getResponseArrayJson();	
+			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
 
 
@@ -123,7 +131,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$invoiceStatus = $this->invoiceStatusRepository->getById($id);
+		$invoiceStatus = $this->repository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$invoiceStatusLanguage = $invoiceStatus->languages()->where('language_id','=',$language_id)->first();
 		return View::make('invoice_status.show',compact('invoiceStatus','invoiceStatusLanguage'));
@@ -138,7 +146,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$invoiceStatus = $this->invoiceStatusRepository->getById($id);
+		$invoiceStatus = $this->repository->getById($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$invoiceStatusLanguage = $invoiceStatus->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -160,7 +168,7 @@ class InvoiceStatusController extends \BaseController {
 			try
 			{
 				//$this->editInvoiceStatusForm ->validate($input);
-				$this->invoiceStatusRepository->updateData($input);
+				$this->repository->updateData($input);
 				return Response::json(trans('invoiceStatus.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -179,7 +187,7 @@ class InvoiceStatusController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->invoiceStatusRepository->deleteInvoiceStatu($id);
+		$this->repository->deleteInvoiceStatu($id);
 		Flash::message(trans('invoiceStatus.Delete'));
 		return Redirect::route('invoiceStatus.index');
 	}
@@ -190,7 +198,7 @@ class InvoiceStatusController extends \BaseController {
 		{
 			if (Input::has('invoiceStatusId')) 
 			{
-				$this->invoiceStatusRepository->deleteInvoiceStatu(Input::get('invoiceStatusId'));
+				$this->repository->deleteInvoiceStatu(Input::get('invoiceStatusId'));
 				return Response::json(['success' => true]);
 			} else {
 			 	return Response::json(['success' => false]);
@@ -204,7 +212,7 @@ class InvoiceStatusController extends \BaseController {
 		if (Request::ajax()) 
 		{
 			$input = Input::all();
-			$invoice_status = $this->invoiceStatusRepository->getNameInvoiceStatus($input);
+			$invoice_status = $this->repository->getNameInvoiceStatus($input);
 			if(count($invoice_status) > 0){
 				return Response::json(false);
 			}else{
@@ -217,7 +225,7 @@ class InvoiceStatusController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$invoice_status = $this->invoiceStatusRepository->getNameForEdit(Input::all());
+			$invoice_status = $this->repository->getNameForEdit(Input::all());
 			if (count($invoice_status) > 0) {
 				return Response::json(false);
 			} else {
@@ -233,7 +241,7 @@ class InvoiceStatusController extends \BaseController {
 		{
 			if (Input::has('invoiceStatusId'))
 			{
-				$shipmentStatus = $this->invoiceStatusRepository->getArrayInCurrentLangData(Input::get('invoiceStatusId'));
+				$shipmentStatus = $this->repository->getArrayInCurrentLangData(Input::get('invoiceStatusId'));
 				return Response::json($shipmentStatus);
 			}else{
 				return Response::json(['success' => false]);
@@ -247,7 +255,7 @@ class InvoiceStatusController extends \BaseController {
 		{
 			if (Input::has('invoiceStatusId') && Input::has('languageId'))
 			{
-				 $invoiceStatusLang = $this->invoiceStatusRepository->getDataForLanguage(Input::get('invoiceStatusId'), Input::get('languageId'));
+				 $invoiceStatusLang = $this->repository->getDataForLanguage(Input::get('invoiceStatusId'), Input::get('languageId'));
 				 return Response::json($invoiceStatusLang);
 			}else{
 				return Response::json(['success' => false]);
@@ -263,7 +271,7 @@ class InvoiceStatusController extends \BaseController {
 			$input = Input::all();
 			try
 			{
-				$this->invoiceStatusRepository->updateData($input);
+				$this->repository->updateData($input);
 				return Response::json([trans('invoiceStatus.Updated')]);
 			}
 			catch (FormValidationException $e)
