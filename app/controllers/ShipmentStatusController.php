@@ -35,7 +35,8 @@ class ShipmentStatusController extends \BaseController {
 	public function index()
 	{
 		$languages = $this->languageRepository->getAllForSelect();
-		return View::make('shipment_status.index',compact('languages'));
+		$table = $this->repository->getAllTable();
+		return View::make('shipment_status.index',compact('languages', 'table'));
 	}
 
 	public function getDatatable(){
@@ -176,6 +177,28 @@ class ShipmentStatusController extends \BaseController {
 		}
 	}
 
+	public function updateApi() 
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editShipmentStatusForm->validate($input);
+				$this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('shipmentStatus.Updated'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
 
 	/**
 	 * Remove the specified resource from storage.
@@ -281,6 +304,28 @@ class ShipmentStatusController extends \BaseController {
 				return Response::json($e->getErrors()->all());
 			}
 		}
+	}
+
+	public function listApi()
+	{
+		return $this->repository->getDefaultTableForAll();
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('shipmentStatusId'))
+			{
+				$shipmentStatus = $this->repository->getArrayInCurrentLangData(Input::get('shipmentStatusId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('shipmentStatus', $shipmentStatus);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
 	}
 
 }
