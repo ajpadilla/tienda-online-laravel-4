@@ -10,19 +10,19 @@ use s4h\store\Forms\EditClassifiedConditionForm;
 
 class ClassifiedConditionController extends \BaseController {
 	private $languageRepository;
-	private $classifiedConditionsRepository;
+	private $repository;
 	private $registerClassifiedConditionsForm;
 	private $classifiedConditionLangRepository;
 	private $editClassifiedConditionForm;
 
 	function __construct(LanguageRepository $languageRepository, 
-		ClassifiedConditionsRepository $classifiedConditionsRepository, 
+		ClassifiedConditionsRepository $repository, 
 		RegisterClassifiedConditionsForm $registerClassifiedConditionsForm,
 		ClassifiedConditionLangRepository $classifiedConditionLangRepository,
 		EditClassifiedConditionForm $editClassifiedConditionForm) {
 
 		$this->languageRepository = $languageRepository ;
-		$this->classifiedConditionsRepository = $classifiedConditionsRepository;
+		$this->repository = $repository;
 		$this->registerClassifiedConditionsForm = $registerClassifiedConditionsForm;
 		$this->classifiedConditionLangRepository = $classifiedConditionLangRepository;
 		$this->editClassifiedConditionForm = $editClassifiedConditionForm;
@@ -89,15 +89,20 @@ class ClassifiedConditionController extends \BaseController {
 			try
 			{
 				$this->registerClassifiedConditionsForm->validate($input);
-				$this->classifiedConditionsRepository->createNewClassifiedCondition($input);
-				return Response::json(trans('classifiedConditions.response'));
+				$this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifiedConditions.response'));
+				return $this->getResponseArrayJson();
 			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
+
 
 
 	/**
@@ -108,7 +113,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$classified_condition = $this->classifiedConditionsRepository->getClassifiedConditionId($id);
+		$classified_condition = $this->repository->getClassifiedConditionId($id);
 		$language = $this->languageRepository->returnLanguage();
 		$classified_condition_language = $classified_condition->languages()->where('language_id','=', $language->id)->first();
 		return View::make('classified_conditions.show',compact('classified_condition_language'));
@@ -123,7 +128,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$classified_condition = $this->classifiedConditionsRepository->getClassifiedConditionId($id);
+		$classified_condition = $this->repository->getClassifiedConditionId($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$classified_condition_language = $classified_condition->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -147,7 +152,7 @@ class ClassifiedConditionController extends \BaseController {
 			try
 			{
 				$this->editClassifiedConditionForm->validate($input);
-				$this->classifiedConditionsRepository->updateClassifiedCondition($input);
+				$this->repository->updateClassifiedCondition($input);
 				return Response::json(trans('classifiedConditions.Actualiced'));
 			}
 			catch (FormValidationException $e)
@@ -166,7 +171,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->classifiedConditionsRepository->delteClassifiedCondition($id);
+		$this->repository->delteClassifiedCondition($id);
 		Flash::message(trans('classifiedConditions.Delete'));
 		return Redirect::route('classifiedConditions.index');
 	}
@@ -175,7 +180,7 @@ class ClassifiedConditionController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$classified_condition = $this->classifiedConditionsRepository->getName(Input::all());
+			$classified_condition = $this->repository->getName(Input::all());
 			if (count($classified_condition) > 0) {
 				return Response::json(false);
 			} else {
@@ -189,7 +194,7 @@ class ClassifiedConditionController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$classified_condition = $this->classifiedConditionsRepository->getNameForEdit(Input::all());
+			$classified_condition = $this->repository->getNameForEdit(Input::all());
 			if (count($classified_condition) > 0) {
 				return Response::json(false);
 			} else {
@@ -203,7 +208,7 @@ class ClassifiedConditionController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			$classifiedsCoonditionsLang = $this->classifiedConditionsRepository->getNameForLanguage();
+			$classifiedsCoonditionsLang = $this->repository->getNameForLanguage();
 			array_unshift($classifiedsCoonditionsLang,trans('classifiedConditions.all-conditions'));
 			return Response::json(['success' => true, 'data'=> $classifiedsCoonditionsLang]);
 		}
