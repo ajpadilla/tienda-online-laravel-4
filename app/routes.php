@@ -403,6 +403,16 @@ function () {
 		'uses' => 'ClassifiedTypeController@show'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.api.show'), [
+		'as' => 'classifiedTypes.api.show',
+		'uses' => 'ClassifiedTypeController@showApi'
+	]);
+
+	Route::get('classifiedTypes/api-show-lang', [
+		'as'=>'classifiedTypes.api.show-lang',
+		'uses' => 'ClassifiedTypeController@showApiLang'
+	]);
+
 	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.edit'), [
 		'as' => 'classifiedTypes.edit',
 		'uses' => 'ClassifiedTypeController@edit'
@@ -413,10 +423,26 @@ function () {
 		'uses' => 'ClassifiedTypeController@update'
 	]);
 
+	Route::post(LaravelLocalization::transRoute('classifiedTypes.routes.api.update'), [
+		'as' => 'classifiedTypes.api.update',
+		'uses' => 'ClassifiedTypeController@updateApi'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifiedTypes.routes.api.saveLang'), [
+		'as' => 'classifiedTypes.api.saveLang',
+		'uses' => 'ClassifiedTypeController@updateApiLang'
+	]);
+
 	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.destroy'), [
 		'as' => 'classifiedTypes.destroy',
 		'uses' => 'ClassifiedTypeController@destroy'
 	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.api.delete'),  [
+		'as' => 'classifiedTypes.api.delete',
+		'uses' => 'ClassifiedTypeController@destroyApi' 
+	] );
+
 
 	Route::post('checkNameClassifiedType','ClassifiedTypeController@checkName');
     Route::post('checkNameClassifiedTypesEdit','ClassifiedTypeController@checkNameForEdit');
