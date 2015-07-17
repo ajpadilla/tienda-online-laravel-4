@@ -29,6 +29,10 @@ class ClassifiedType extends BaseModel {
 		return ClassifiedTypeLang::whereClassifiedTypesId($this->id)->whereLanguageId($language->id)->first();
 	}
 
+	public function getAccessorInCurrentLang($languageId = ''){
+		return ClassifiedTypeLang::whereClassifiedTypesId($this->id)->whereLanguageId($languageId)->first();
+	}
+
 	// Override methods
 	public function delete()
 	{
