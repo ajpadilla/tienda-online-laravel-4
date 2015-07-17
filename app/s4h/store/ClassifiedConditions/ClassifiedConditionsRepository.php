@@ -37,11 +37,6 @@ class ClassifiedConditionsRepository extends BaseRepository{
 		}
 	}
 
-	public function delteClassifiedCondition($classified_condition_id)
-	{
-		$classified_condition = $this->getClassifiedConditionId($classified_condition_id);
-		$classified_condition->delete();
- 	}
 
 	public function getName($data)
 	{
