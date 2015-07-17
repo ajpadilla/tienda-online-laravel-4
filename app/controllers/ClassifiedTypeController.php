@@ -34,7 +34,9 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('classified_types.index');
+		$languages = $this->languageRepository->getAllForSelect();
+		$table = $this->repository->getAllTable();
+		return View::make('classified_types.index', compact('languages','table'));
 	}
 
 
@@ -70,7 +72,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function create()
 	{
-		$languages = $this->languageRepository->getAll()->lists('name', 'id');
+		$languages = $this->languageRepository->getAllForSelect();
 		return View::make('classified_types.create',compact('languages'));
 	}
 
@@ -213,4 +215,7 @@ class ClassifiedTypeController extends \BaseController {
 		return Response::json(['success' => false]);
 	}
 
+	public function listApi(){
+		return $this->repository->getDefaultTableForAll();
+	}
 }
