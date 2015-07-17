@@ -142,25 +142,28 @@ class ClassifiedTypeController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function updateApi() 
 	{
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['classified_type_id'] = $id;
 			try
 			{
 				$this->editClassifiedTypeForm->validate($input);
-				$this->repository->updateClassifiedType($input);
-				return Response::json(trans('classifiedTypes.Updated'));
+				$this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifiedTypes.Updated'));
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
+
 
 
 	/**
@@ -174,6 +177,13 @@ class ClassifiedTypeController extends \BaseController {
 		$this->repository->delteClassifiedType($id);
 		Flash::message(trans('classifiedTypes.Delete'));
 		return Redirect::route('classifiedTypes.index');
+	}
+
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('classifiedTypeId')));
+		return $this->getResponseArrayJson();
 	}
 
 	public function checkName() {
@@ -217,5 +227,22 @@ class ClassifiedTypeController extends \BaseController {
 
 	public function listApi(){
 		return $this->repository->getDefaultTableForAll();
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('classifiedTypeId'))
+			{
+				$classifiedType = $this->repository->getArrayInCurrentLangData(Input::get('classifiedTypeId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('classifiedType', $classifiedType);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
 	}
 }
