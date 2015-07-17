@@ -8,9 +8,9 @@
 	</div>
 	
 	<div class="form-group" style="display: none">
-		{{ Form::label('classified_conditions_id','id', ['class' => 'col-sm-2 control-label']) }}
+		{{ Form::label('classified_condition_id','id', ['class' => 'col-sm-2 control-label']) }}
 		<div class="col-sm-10">
-			{{ Form::text('classified_conditions_id', null, ['class' => 'form-control', 'placeholder' =>'','id'=> 'classified_conditions_id']) }}
+			{{ Form::text('classified_condition_id', null, ['class' => 'form-control', 'placeholder' =>'','id'=> 'classified_conditions_id']) }}
 		</div>
 	</div>
 
