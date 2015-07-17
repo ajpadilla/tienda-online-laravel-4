@@ -9,7 +9,10 @@
 			"update"=>"condition-classifieds/update/{id}",
 			"destroy"=>"condition-classifieds/destroy/{id}",
 			"api" => array(
-				"index" => "condition-classifieds/api/list-condition-classifieds",
+				"list" => "condition-classifieds/api/list-condition-classifieds",
+				"update" => "condition-classifieds/api/update",
+				"show" => "condition-classifieds/api/ver",
+				"saveLang" => "condition-classifieds/api/update-language"
 			),
 		),
 

@@ -9,7 +9,10 @@
 			"update"=>"condiciones-clasificados/actualizar/{id}",
 			"destroy"=>"condiciones-clasificados/elimiar/{id}",
 			"api" => array(
-				"index" => "condiciones-clasificados/api/lista-condiciones-clasificados",
+				"list" => "condiciones-clasificados/api/lista-condiciones-clasificados",
+				"update" => "condiciones-clasificados/api/actualizar",
+				"show" => "condiciones-clasificados/api/ver",
+				"saveLang" => "condiciones-clasificados/api/actualizar-idioma"
 			),
 		),
 		"title" => "Agregar Condición para clasificados",
