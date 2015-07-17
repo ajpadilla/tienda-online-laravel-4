@@ -10,21 +10,19 @@ use s4h\store\Base\BaseRepository;
 */
 class ClassifiedConditionsRepository extends BaseRepository{
 
-	public function save(ClassifiedCondition $classifiedCondition){
-		return $classifiedCondition->save();
+	function __construct() {
+		$this->columns = [
+			trans('classifiedConditions.list.Name'),
+			trans('classifiedConditions.list.Actions')
+		];
+		$this->setModel(new ClassifiedCondition);
+		$this->setListAllRoute('classifiedConditions.api.list');
 	}
 
-	public function getModel()
-    {
-      return new ClassifiedCondition;
-    }
-
-	public function createNewClassifiedCondition($data = array())
+	public function create($data = array())
 	{
-		$classified_condition = new ClassifiedCondition;
-		
-		$classified_condition->save();
-		$classified_condition->languages()->attach($data['language_id'], array('name'=> $data['name']));
+		$classifiedCondition = $this->model->create([]);
+		$classifiedCondition->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
 	public function updateClassifiedCondition($data = array())
