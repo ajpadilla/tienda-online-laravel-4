@@ -10,15 +10,23 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 class ClassifiedTypesRepository extends BaseRepository{
 	
-	public function save(ClassifiedType $classifiedType){
-		return $classifiedType->save();
+	function __construct() {
+		$this->columns = [
+			trans('shipmentStatus.list.Color'),
+			trans('shipmentStatus.list.Name'),
+			trans('shipmentStatus.list.Description'),
+			trans('shipmentStatus.list.Actions')
+		];
+		$this->setModel(new ClassifiedType);
+		$this->setListAllRoute('shipmentStatus.api.list');
 	}
 
-	public function createNewClassifiedType($data = array())
+
+	public function create($data = array())
 	{
-		$classified_type = new ClassifiedType;
-		$classified_type->save();
-		$classified_type->languages()->attach($data['language_id'], array('name'=> $data['name']));
+		$classifiedType = $this->model->create([]);
+		$classifiedType->save();
+		$classifiedType->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
 	public function updateClassifiedType($data = array())
