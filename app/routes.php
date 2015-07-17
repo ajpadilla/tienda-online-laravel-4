@@ -388,11 +388,15 @@ function () {
 		'uses' => 'ClassifiedTypeController@store'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.api.index'), [
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.index'), [
 		'as' => 'classifiedTypes.index',
 		'uses' => 'ClassifiedTypeController@index'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.api.list'),[
+		'as'=>'classifiedTypes.api.list', 
+		'uses'=>'ClassifiedTypeController@listApi'
+	]);
 
 	Route::get(LaravelLocalization::transRoute('classifiedTypes.routes.show'), [
 		'as' => 'classifiedTypes.show',
