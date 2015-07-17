@@ -159,6 +159,13 @@ class ClassifiedConditionController extends \BaseController {
 		//
 	}
 
+	public function destroyApi()
+	{
+		if(Request::ajax())
+			$this->setSuccess($this->repository->delete(Input::get('classifiedConditionId')));
+		return $this->getResponseArrayJson();
+	}
+
 	public function checkNameClassifiedCondition() 
 	{
 		$response = array();
@@ -213,6 +220,46 @@ class ClassifiedConditionController extends \BaseController {
 				$this->addToResponseArray('classifiedCondition', $classifiedCondition);
 				return $this->getResponseArrayJson();
 			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('classifiedConditionId') && Input::has('languageId'))
+			{
+				$classifiedConditionLang = $this->repository->getDataForLanguage(Input::get('classifiedConditionId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('classifiedConditionLang', $classifiedConditionLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+	public function updateApiLang()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editClassifiedConditionForm->validate($input);
+				$this->repository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifiedConditions.Actualiced'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
 				return $this->getResponseArrayJson();
 			}
 		}
