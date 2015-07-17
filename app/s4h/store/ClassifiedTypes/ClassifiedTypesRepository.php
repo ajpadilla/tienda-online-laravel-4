@@ -26,16 +26,30 @@ class ClassifiedTypesRepository extends BaseRepository{
 		$classifiedType->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
-	public function updateClassifiedType($data = array())
+	public function update($data = array())
 	{
-		$classified_type = $this->getClassifiedTypeId($data['classified_type_id']);
-		$classified_type->save();
+		$classifiedType = $this->get($data['classified_type_id']);
+		$classifiedType->save();
 
-		if (count($classified_type->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$classified_type->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
+		if (count($classifiedType->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classifiedType->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
 		}else{
-			$classified_type->languages()->attach($data['language_id'], array('name' => $data['name']));
+			$classifiedType->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
+	}
+
+	public function updateLanguage($data = array())
+	{
+		$classifiedType = $this->get($data['classified_type_id']);
+
+		if (count($classifiedType->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classifiedType->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'])
+				);
+		}else{
+			$classifiedType->languages()->attach($data['language_id'], array('name'=> $data['name'])
+				);
+		}
+		return $classifiedType;
 	}
 
 	public function getArrayInCurrentLangData($classifiedTypeId)
@@ -97,11 +111,11 @@ class ClassifiedTypesRepository extends BaseRepository{
 
 			$this->cleanActionColumn();
 			
-			$this->addActionColumn("<button href='#fancybox-edit-shipment-status' id='edit_shipment-status_".$model->id."' class='edit-shipment-status btn btn-warning btn-outline dim col-sm-8' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Edit')."'  data-original-title='".trans('discountType.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
+			$this->addActionColumn("<button href='#fancybox-edit-classified-type' id='edit_classified-type_".$model->id."' class='edit-classified-type btn btn-warning btn-outline dim col-sm-8' style='margin-left: 20px; ' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Edit')."'  data-original-title='".trans('discountType.actions.Edit')."' ><i class='fa fa-pencil fa-2x'></i>
 					 </button><br/>");
-			$this->addActionColumn("<button href='#' class='delete-shipment-status btn btn-danger btn-outline dim col-sm-8' id='delet_shipment-status_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Delete')."'  data-original-title='".trans('discountType.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
+			$this->addActionColumn("<button href='#' class='delete-classified-type btn btn-danger btn-outline dim col-sm-8' id='delete_classified-type_".$model->id."' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Delete')."'  data-original-title='".trans('discountType.actions.Delete')."' ><i class='fa fa-times fa-2x'></i>
 					 </button><br/>");
-			$this->addActionColumn("<button href='#fancybox-edit-language-shipment-status' id='language_shipment-status_".$model->id."'  class='edit-shipment-status-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Language')."'  data-original-title='".trans('discountType.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
+			$this->addActionColumn("<button href='#fancybox-language-edit-classified-type' id='language_classified-type_".$model->id."'  class='edit-classified-type-lang btn btn-success btn-outline dim col-sm-8' style='margin-left: 20px' type='button' data-toggle='tooltip' data-placement='top' title='".trans('discountType.actions.Language')."'  data-original-title='".trans('discountType.actions.Language')."'> <i class='fa fa-pencil fa-2x'></i></button><br />");
 			return implode(" ", $this->getActionColumn());
 		});
 	}
