@@ -69,12 +69,6 @@ class ClassifiedTypesRepository extends BaseRepository{
 	}
 
 
-	public function delteClassifiedType($classified_type_id)
-	{
-		$classified_type = $this->getClassifiedTypeId($classified_type_id);
-		$classified_type->delete();
- 	}
-
 	public function getName($data)
 	{
 		$language = Language::select()->where('id','=',$data['language_id'])->first();
