@@ -13,7 +13,7 @@ class ClassifiedTypesRepository extends BaseRepository{
 	function __construct() {
 		$this->columns = [
 			trans('classifiedTypes.list.Name'),
-			trans('shipmentStatus.list.Actions')
+			trans('classifiedTypes.list.Actions')
 		];
 		$this->setModel(new ClassifiedType);
 		$this->setListAllRoute('classifiedTypes.api.list');
@@ -22,7 +22,6 @@ class ClassifiedTypesRepository extends BaseRepository{
 	public function create($data = array())
 	{
 		$classifiedType = $this->model->create([]);
-		$classifiedType->save();
 		$classifiedType->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
