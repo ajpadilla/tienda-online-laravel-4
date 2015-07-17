@@ -121,23 +121,31 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		//
+	}
+
+	public function updateApi() 
+	{
 		if(Request::ajax())
 		{
-			$input = array();
 			$input = Input::all();
-			$input['classified_condition_id'] = $id;
 			try
 			{
 				$this->editClassifiedConditionForm->validate($input);
-				$this->repository->updateClassifiedCondition($input);
-				return Response::json(trans('classifiedConditions.Actualiced'));
+				$this->repository->update($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifiedConditions.Actualiced'));
+				return $this->getResponseArrayJson();
 			}
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
+
 
 
 	/**
@@ -192,6 +200,23 @@ class ClassifiedConditionController extends \BaseController {
 
 	public function listApi(){
 		return $this->repository->getDefaultTableForAll();
+	}
+
+	public function showApi()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('classifiedConditionId'))
+			{
+				$classifiedCondition = $this->repository->getArrayInCurrentLangData(Input::get('classifiedConditionId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('classifiedCondition', $classifiedCondition);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
 	}
 
 }
