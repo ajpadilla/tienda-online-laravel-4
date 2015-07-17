@@ -474,10 +474,24 @@ function () {
 		'uses' => 'ClassifiedConditionController@index'
 	]);
 
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.api.list'),[
+		'as'=>'classifiedConditions.api.list', 
+		'uses'=>'ClassifiedConditionController@listApi'
+	]);
 
 	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.show'), [
 		'as' => 'classifiedConditions.show',
 		'uses' => 'ClassifiedConditionController@show'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.api.show'), [
+		'as' => 'classifiedConditions.api.show',
+		'uses' => 'ClassifiedConditionController@showApi'
+	]);
+
+	Route::get('classifiedConditions/api-show-lang', [
+		'as'=>'classifiedConditions.api.show-lang',
+		'uses' => 'ClassifiedConditionController@showApiLang'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.edit'), [
@@ -490,10 +504,25 @@ function () {
 		'uses' => 'ClassifiedConditionController@update'
 	]);
 
+	Route::post(LaravelLocalization::transRoute('classifiedConditions.routes.api.update'), [
+		'as' => 'classifiedConditions.api.update',
+		'uses' => 'ClassifiedConditionController@updateApi'
+	]);
+
+	Route::post(LaravelLocalization::transRoute('classifiedConditions.routes.api.saveLang'), [
+		'as' => 'classifiedConditions.api.saveLang',
+		'uses' => 'ClassifiedConditionController@updateApiLang'
+	]);
+
 	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.destroy'), [
 		'as' => 'classifiedConditions.destroy',
 		'uses' => 'ClassifiedConditionController@destroy'
 	]);
+
+	Route::get(LaravelLocalization::transRoute('classifiedConditions.routes.api.delete'),  [
+		'as' => 'classifiedConditions.api.delete',
+		'uses' => 'ClassifiedConditionController@destroyApi' 
+	] );
 
 	Route::post('verificateNameClassifiedCondition','ClassifiedConditionController@checkNameClassifiedCondition');
 	Route::post('checkNameClassifiedConditionEdit','ClassifiedConditionController@checkNameForEdit');
