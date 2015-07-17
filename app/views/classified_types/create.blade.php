@@ -47,7 +47,7 @@
 							}
 						},
 						dataFilter: function (respuesta) {
-							console.log('consulta:'+respuesta);
+							//console.log('consulta:'+respuesta);
 							return respuesta;
 						}
 					}
