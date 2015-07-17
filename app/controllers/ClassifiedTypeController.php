@@ -245,4 +245,44 @@ class ClassifiedTypeController extends \BaseController {
 		}
 		return $this->getResponseArrayJson();
 	}
+
+	public function showApiLang()
+	{
+		if (Request::ajax())
+		{
+			if (Input::has('classifiedTypeId') && Input::has('languageId'))
+			{
+				$classifiedTypeLang = $this->repository->getDataForLanguage(Input::get('classifiedTypeId'), Input::get('languageId'));
+				$this->setSuccess(true);
+				$this->addToResponseArray('classifiedTypeLang', $classifiedTypeLang);
+				return $this->getResponseArrayJson();
+			}else{
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
+
+
+	public function updateApiLang()
+	{
+		if(Request::ajax())
+		{
+			$input = Input::all();
+			try
+			{
+				$this->editClassifiedTypeForm->validate($input);
+				$this->repository->updateLanguage($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifiedTypes.Updated'));
+				return $this->getResponseArrayJson();
+			}
+			catch (FormValidationException $e)
+			{
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
+			}
+		}
+		return $this->getResponseArrayJson();
+	}
 }
