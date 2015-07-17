@@ -14,29 +14,8 @@
 			</div>
 			<div class="ibox-content">
 				<div class="row">
-					{{ Form::open(['url' => LaravelLocalization::transRoute('classifiedConditions.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'formCrateClassifiedConditions']) }}
-					<div class="col-sm-6 b-r">
-						<div class="form-group">
-							{{ Form::label('language_id', trans('classifiedConditions.labels.language'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::select('language_id',$languages,null,array('class' => 'form-control','id'=>'language_id')) }}
-							</div>
-						</div>
-						<div class="form-group">
-							{{ Form::label('name', trans('classifiedConditions.labels.name'),['class'=>'col-sm-2 control-label']) }}
-							<div class="col-sm-6">
-								{{ Form::text('name',null, ['class' => 'form-control', 'id' => 'name']) }}
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-6">
-						<div class="form-group">
-							<div class="col-sm-4 col-sm-offset-2">
-								{{ Form::submit(trans('classifiedConditions.labels.save'), ['class' => 'btn btn-primary']) }}
-							</div>
-						</div>
-					</div>
+					{{ Form::open(['url' => LaravelLocalization::transRoute('classifiedConditions.store'),'class'=>'form-horizontal','method' => 'POST','id' => 'form-crate-classified-conditions']) }}
+						@include('classified_conditions.partials._form')
 					{{ Form::close() }}
 				</div>
 			</div>
@@ -48,13 +27,7 @@
 <script>
 	$(document).ready(function () 
 	{
-
-		$.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
-         	  return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
-       	}, '{{ trans('classifiedConditions.validation.onlyLettersNumbersAndSpaces') }}');
-
-		$('#formCrateClassifiedConditions').validate({
-
+		$('#form-crate-classified-conditions').validate({
 			rules:{
 				name:{
 					required:!0,
@@ -103,7 +76,7 @@
 				url:  '{{ URL::route('classifiedConditions.store') }}',
         		type:'POST'
 			};
-		$('#formCrateClassifiedConditions').ajaxForm(options);
+		$('#form-crate-classified-conditions').ajaxForm(options);
 	});
 
 	// pre-submit callback
@@ -119,15 +92,25 @@
 				'hideOnOverlayClick' : false,
 				'hideOnContentClick' : false
 			}), 5000 );
-			return $('#formCrateClassifiedConditions').valid();
+			return $('#form-crate-classified-conditions').valid();
 		}
 
 		// post-submit callback
 		function showResponse(responseText, statusText, xhr, $form)  {
-			jQuery.fancybox({
-				'content' : '<h1>'+ responseText + '</h1>',
-				'autoScale' : true
-			});
+			if(responseText.success) 
+			{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.message + '</h1>',
+					'autoScale' : true
+				});
+				$('#form-crate-classified-types').resetForm();
+				$('.summernote').code('');
+			}else{
+				jQuery.fancybox({
+					'content' : '<h1>'+ responseText.errors + '</h1>',
+					'autoScale' : true
+				});
+			}
 		} 						
 </script>
 @stop
