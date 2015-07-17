@@ -35,32 +35,9 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('classified_conditions.index');
-	}
-
-	public function getDatatable()
-	{
-		$collection = Datatable::collection($this->classifiedConditionLangRepository->getAllForLanguage($this->languageRepository->returnLanguage()->id))
-			->searchColumns('name')
-			->orderColumns('name');
-
-		$collection->addColumn('name', function($model)
-		{
-			return $model->name;
-		});
-	
-		$collection->addColumn('Actions',function($model){
-		
-			$links = "<a class='btn btn-info btn-circle' href='" . route('classifiedConditions.show', $model->classifiedCondition->id) . "'><i class='fa fa-check'></i></a>
-					<br />";
-			$links .= "<a a class='btn btn-warning btn-circle' href='" . route('classifiedConditions.edit', $model->classifiedCondition->id) . "'><i class='fa fa-pencil'></i></a>
-					<br />
-					<a class='btn btn-danger btn-circle' href='" . route('classifiedConditions.destroy', $model->classifiedCondition->id) . "'><i class='fa fa-times'></i></a>";
-
-			return $links;
-		});
-
-		return $collection->make();
+		$languages = $this->languageRepository->getAllForSelect();
+		$table = $this->repository->getAllTable();
+		return View::make('classified_conditions.index', compact('languages', 'table'));
 	}
 
 
