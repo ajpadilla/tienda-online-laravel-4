@@ -3,12 +3,16 @@
 		"routes" => array(
 			"create" => "tipos-de-clasificados/crear",
 			"store" => "tipos-de-clasificados/agregar",
-			"show"=>"tipos-de-clasificados/ver/{id}",
-			"edit"=>"tipos-de-clasificados/editar/{id}",
-			"update"=>"tipos-de-clasificados/actualizar/{id}",
-			"destroy"=>"tipos-de-clasificados/eliminar/{id}",
+			"show"=> "tipos-de-clasificados/ver/{id}",
+			"edit"=> "tipos-de-clasificados/editar/{id}",
+			"update"=> "tipos-de-clasificados/actualizar/{id}",
+			"destroy"=> "tipos-de-clasificados/eliminar/{id}",
+			"index" => "tipos-de-clasificados/lista", 
 			"api" => array(
-				"index" => "tipos-de-clasificados/api/lista-tipos-de-clasificados",
+				"list" => "tipos-de-clasificados/api/lista-tipos-de-clasificados",
+				"show" => "tipos-de-clasificados/api/ver",
+				"update" => "tipos-de-clasificados/api/actualizar",
+				"saveLang" => "tipos-de-clasificados/api/actualizar-idioma"
 			)
 		),
 		"title" => "Agregar Tipo de clasificado",

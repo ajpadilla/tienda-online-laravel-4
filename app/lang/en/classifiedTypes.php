@@ -4,12 +4,16 @@
 		"routes" => array(
 			"create" => "classifieds-type/create",
 			"store" => "classifieds-type/store",
-			"show"=>"classifieds-type/shiow/{id}",
+			"show"=>"classifieds-type/show/{id}",
 			"edit"=>"classifieds-type/edit/{id}",
 			"update"=>"classifieds-type/update/{id}",
 			"destroy"=>"classifieds-type/destroy/{id}",
+			"index" => "classifieds-type/list", 
 			"api" => array(
-				"index" => "classifieds-type/api/list-classifieds-type",
+				"list" => "classifieds-type/api/list-classifieds-type",
+				"show" => "classifieds-type/api/show",
+				"update" => "classifieds-type/api/update",
+				"saveLang" => "classifieds-type/api/update-lang"
 			)
 		),
 		"title" => "Add classified type",
