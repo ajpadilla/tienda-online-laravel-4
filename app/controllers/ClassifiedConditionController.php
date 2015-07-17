@@ -171,9 +171,7 @@ class ClassifiedConditionController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->repository->delteClassifiedCondition($id);
-		Flash::message(trans('classifiedConditions.Delete'));
-		return Redirect::route('classifiedConditions.index');
+		//
 	}
 
 	public function checkNameClassifiedCondition() 
@@ -213,6 +211,10 @@ class ClassifiedConditionController extends \BaseController {
 			return Response::json(['success' => true, 'data'=> $classifiedsCoonditionsLang]);
 		}
 		return Response::json(['success' => false]);
+	}
+
+	public function listApi(){
+		return $this->repository->getDefaultTableForAll();
 	}
 
 }
