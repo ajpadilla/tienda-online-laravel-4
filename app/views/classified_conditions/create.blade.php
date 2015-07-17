@@ -80,37 +80,37 @@
 	});
 
 	// pre-submit callback
-		function showRequest(formData, jqForm, options) {
-			setTimeout(jQuery.fancybox({
-				'content': '<h1>'+'{{ trans('classifiedConditions.sending') }}'+'</h1>',
-				'autoScale' : true,
-				'transitionIn' : 'none',
-				'transitionOut' : 'none',
-				'scrolling' : 'no',
-				'type' : 'inline',
-				'showCloseButton' : false,
-				'hideOnOverlayClick' : false,
-				'hideOnContentClick' : false
-			}), 5000 );
-			return $('#form-crate-classified-conditions').valid();
-		}
+	function showRequest(formData, jqForm, options) {
+		setTimeout(jQuery.fancybox({
+			'content': '<h1>'+'{{ trans('classifiedConditions.sending') }}'+'</h1>',
+			'autoScale' : true,
+			'transitionIn' : 'none',
+			'transitionOut' : 'none',
+			'scrolling' : 'no',
+			'type' : 'inline',
+			'showCloseButton' : false,
+			'hideOnOverlayClick' : false,
+			'hideOnContentClick' : false
+		}), 5000 );
+		return $('#form-crate-classified-conditions').valid();
+	}
 
-		// post-submit callback
-		function showResponse(responseText, statusText, xhr, $form)  {
-			if(responseText.success) 
-			{
-				jQuery.fancybox({
-					'content' : '<h1>'+ responseText.message + '</h1>',
-					'autoScale' : true
-				});
-				$('#form-crate-classified-types').resetForm();
-				$('.summernote').code('');
-			}else{
-				jQuery.fancybox({
-					'content' : '<h1>'+ responseText.errors + '</h1>',
-					'autoScale' : true
-				});
-			}
-		} 						
+	// post-submit callback
+	function showResponse(responseText, statusText, xhr, $form)  {
+		if(responseText.success) 
+		{
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText.message + '</h1>',
+				'autoScale' : true
+			});
+			$('#form-crate-classified-types').resetForm();
+			$('.summernote').code('');
+		}else{
+			jQuery.fancybox({
+				'content' : '<h1>'+ responseText.errors + '</h1>',
+				'autoScale' : true
+			});
+		}
+	} 						
 </script>
 @stop
