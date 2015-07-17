@@ -71,13 +71,12 @@ class ClassifiedTypeController extends \BaseController {
 			} 
 			catch (FormValidationException $e)
 			{
-				return Response::json($e->getErrors()->all());
+				$this->addToResponseArray('errors', $e->getErrors()->all());
+				return $this->getResponseArrayJson();
 			}
 		}
+		return $this->getResponseArrayJson();
 	}
-
-
-
 
 	/**
 	 * Display the specified resource.
