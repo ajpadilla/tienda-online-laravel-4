@@ -147,9 +147,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->repository->delteClassifiedType($id);
-		Flash::message(trans('classifiedTypes.Delete'));
-		return Redirect::route('classifiedTypes.index');
+		//
 	}
 
 	public function destroyApi()
