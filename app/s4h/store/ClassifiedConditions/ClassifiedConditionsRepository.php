@@ -25,18 +25,48 @@ class ClassifiedConditionsRepository extends BaseRepository{
 		$classifiedCondition->languages()->attach($data['language_id'], array('name'=> $data['name']));
 	}
 
-	public function updateClassifiedCondition($data = array())
+	public function update($data = array())
 	{
-		$classified_condition = $this->getClassifiedConditionId($data['classified_condition_id']);
-		$classified_condition->save();
+		$classifiedCondition = $this->get($data['classified_condition_id']);
+		$classifiedCondition->save();
 
-		if (count($classified_condition->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
-			$classified_condition->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
+		if (count($classifiedCondition->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classifiedCondition->languages()->updateExistingPivot($data['language_id'], array('name' => $data['name']));
 		}else{
-			$classified_condition->languages()->attach($data['language_id'], array('name' => $data['name']));
+			$classifiedCondition->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
 	}
 
+	public function updateLanguage($data = array())
+	{
+		$classifiedCondition = $this->get($data['classified_condition_id']);
+
+		if (count($classifiedCondition->languages()->whereIn('language_id',array($data['language_id']))->get()) > 0) {
+			$classifiedCondition->languages()->updateExistingPivot($data['language_id'], array('name'=> $data['name'])
+				);
+		}else{
+			$classifiedCondition->languages()->attach($data['language_id'], array('name'=> $data['name'])
+				);
+		}
+		return $classifiedCondition;
+	}
+
+	public function getArrayInCurrentLangData($classifiedConditionId)
+	{
+		$classifiedCondition = $this->get($classifiedConditionId);
+		$classifiedConditionLang = $classifiedCondition->InCurrentLang;
+		return[
+			'attributes' => $classifiedCondition, 
+			'classifiedConditionLang' => $classifiedConditionLang,
+		];
+	}
+
+	public function getDataForLanguage($classifiedConditionId, $languageId)
+	{
+		$classifiedCondition = $this->get($classifiedConditionId);
+		$classifiedConditionLang = $classifiedCondition->getAccessorInCurrentLang($languageId);
+		return $classifiedConditionLang;
+	}
 
 	public function getName($data)
 	{
