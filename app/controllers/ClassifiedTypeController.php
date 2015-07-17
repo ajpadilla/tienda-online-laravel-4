@@ -10,19 +10,19 @@ use s4h\store\ClassifiedTypesLang\ClassifiedTypeLangRepository;
 class ClassifiedTypeController extends \BaseController {
 	private $languageRepository;
 	private $registerClassifiedTypesForm;
-	private $classifiedTypesRepository;
+	private $repository;
 	private $classifiedTypeLangRepository;
 	private $editClassifiedTypeForm;
 
 	function __construct(LanguageRepository $languageRepository, 
 		RegisterClassifiedTypesForm $registerClassifiedTypesForm, 
-		ClassifiedTypesRepository $classifiedTypesRepository, 
+		ClassifiedTypesRepository $repository, 
 		ClassifiedTypeLangRepository $classifiedTypeLangRepository,
 		EditClassifiedTypeForm $editClassifiedTypeForm) {
 
 		$this->languageRepository = $languageRepository;
 		$this->registerClassifiedTypesForm = $registerClassifiedTypesForm;
-		$this->classifiedTypesRepository = $classifiedTypesRepository;
+		$this->repository = $repository;
 		$this->classifiedTypeLangRepository = $classifiedTypeLangRepository;
 		$this->editClassifiedTypeForm = $editClassifiedTypeForm;
 	}
@@ -88,8 +88,10 @@ class ClassifiedTypeController extends \BaseController {
 			try
 			{
 				$this->registerClassifiedTypesForm->validate($input);
-				$this->classifiedTypesRepository->createNewClassifiedType($input);
-				return Response::json(trans('classifiedTypes.response'));
+				$this->repository->create($input);
+				$this->setSuccess(true);
+				$this->addToResponseArray('message', trans('classifiedTypes.response'));
+				return $this->getResponseArrayJson();
 			} 
 			catch (FormValidationException $e)
 			{
@@ -97,6 +99,8 @@ class ClassifiedTypeController extends \BaseController {
 			}
 		}
 	}
+
+
 
 
 	/**
@@ -107,7 +111,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$classified_type = $this->classifiedTypesRepository->getClassifiedTypeId($id);
+		$classified_type = $this->repository->getClassifiedTypeId($id);
 		$language = $this->languageRepository->returnLanguage();
 		$classified_type_language = $classified_type->languages()->where('language_id','=', $language->id)->first();
 		return View::make('classified_types.show',compact('classified_type_language'));
@@ -122,7 +126,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$classified_type = $this->classifiedTypesRepository->getClassifiedTypeId($id);
+		$classified_type = $this->repository->getClassifiedTypeId($id);
 		$language_id = $this->languageRepository->returnLanguage()->id;
 		$classified_type_language = $classified_type->languages()->where('language_id','=',$language_id)->first();
 		$languages = $this->languageRepository->getAll()->lists('name','id');
@@ -146,7 +150,7 @@ class ClassifiedTypeController extends \BaseController {
 			try
 			{
 				$this->editClassifiedTypeForm->validate($input);
-				$this->classifiedTypesRepository->updateClassifiedType($input);
+				$this->repository->updateClassifiedType($input);
 				return Response::json(trans('classifiedTypes.Updated'));
 			}
 			catch (FormValidationException $e)
@@ -165,7 +169,7 @@ class ClassifiedTypeController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->classifiedTypesRepository->delteClassifiedType($id);
+		$this->repository->delteClassifiedType($id);
 		Flash::message(trans('classifiedTypes.Delete'));
 		return Redirect::route('classifiedTypes.index');
 	}
@@ -173,7 +177,7 @@ class ClassifiedTypeController extends \BaseController {
 	public function checkName() {
 		$response = array();
 		if (Request::ajax()) {
-			$classified_type = $this->classifiedTypesRepository->getName(Input::all());
+			$classified_type = $this->repository->getName(Input::all());
 			if (count($classified_type) > 0) {
 				return Response::json(false);
 			} else {
@@ -187,7 +191,7 @@ class ClassifiedTypeController extends \BaseController {
 	{
 		$response = array();
 		if (Request::ajax()) {
-			$classified_type = $this->classifiedTypesRepository->getNameForEdit(Input::all());
+			$classified_type = $this->repository->getNameForEdit(Input::all());
 			if (count($classified_type) > 0) {
 				return Response::json(false);
 			} else {
@@ -202,7 +206,7 @@ class ClassifiedTypeController extends \BaseController {
 	{
 		if (Request::ajax()) 
 		{
-			$classifiedsTypes = $this->classifiedTypesRepository->getNameForLanguage();
+			$classifiedsTypes = $this->repository->getNameForLanguage();
 			array_unshift($classifiedsTypes,trans('classifiedTypes.all-conditions'));
 			return Response::json(['success' => true,'data'=> $classifiedsTypes]);
 		}
