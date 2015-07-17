@@ -19,7 +19,6 @@ class ClassifiedTypesRepository extends BaseRepository{
 		$this->setListAllRoute('classifiedTypes.api.list');
 	}
 
-
 	public function create($data = array())
 	{
 		$classifiedType = $this->model->create([]);
@@ -38,6 +37,24 @@ class ClassifiedTypesRepository extends BaseRepository{
 			$classified_type->languages()->attach($data['language_id'], array('name' => $data['name']));
 		}
 	}
+
+	public function getArrayInCurrentLangData($classifiedTypeId)
+	{
+		$classifiedType = $this->get($classifiedTypeId);
+		$classifiedTypeLang = $classifiedType->InCurrentLang;
+		return[
+			'attributes' => $classifiedType, 
+			'classifiedTypeLang' => $classifiedTypeLang,
+		];
+	}
+
+	public function getDataForLanguage($classifiedTypeId, $languageId)
+	{
+		$classifiedType = $this->get($classifiedTypeId);
+		$classifiedTypeLang = $classifiedType->getAccessorInCurrentLang($languageId);
+		return $classifiedTypeLang;
+	}
+
 
 	public function delteClassifiedType($classified_type_id)
 	{
