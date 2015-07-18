@@ -3,7 +3,7 @@
 
 		"routes" => array(
 			"api" => array(
-				'listForCurrentLang' => 'coutries/list-for-current-lang',
+				'listForCurrentLang' => 'coutries/lista-paises-por-idioma',
 			)
 		),
 		'all-conditions' => 'Todos',
