@@ -452,7 +452,7 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('classifiedTypes.current-lang'), [
 		'as' => 'classifiedTypes.current-lang',
-		'uses' => 'ClassifiedTypeController@returnDataForLang'
+		'uses' => 'ClassifiedTypeController@returnAllForCurrentLang'
 	]);
 
 	/**
@@ -532,7 +532,7 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('classifiedConditions.current-lang'), [
 		'as' => 'classifiedConditions.current-lang',
-		'uses' => 'ClassifiedConditionController@returnDataForLang'
+		'uses' => 'ClassifiedConditionController@returnAllForCurrentLang'
 	]);
 
 	/**
@@ -542,7 +542,7 @@ function () {
 
 	Route::get(LaravelLocalization::transRoute('productCondition.current-lang'), [
 		'as' => 'productCondition.current-lang',
-		'uses' => 'ProductConditionController@returnDataForLang'
+		'uses' => 'ProductConditionController@returnAllForCurrentLang'
 	]);
 
 
@@ -597,20 +597,7 @@ function () {
 		'uses' => 'ClassifiedController@searchClassified'
 	]);
 
-	Route::get(LaravelLocalization::transRoute('classifieds.countries'), [
-		'as' => 'classifieds.countries',
-		'uses' => 'ClassifiedController@countries'
-	]);
-
-	Route::get(LaravelLocalization::transRoute('classifieds.statesForCountry'), [
-		'as' => 'classifieds.statesForCountry',
-		'uses' => 'ClassifiedController@statesForCountry'
-	]);
-
-	Route::get(LaravelLocalization::transRoute('classifieds.citiesForState'), [
-		'as' => 'classifieds.citiesForState',
-		'uses' => 'ClassifiedController@citiesForState'
-	]);
+	
 
 	Route::get('classifieds/api-show-lang',[ 'as' => 'classifieds.api.show-lang',
 		'uses' => 'ClassifiedController@showApiLang'
@@ -877,7 +864,24 @@ function () {
 		'uses' => 'PaymentCredentialDetailsController@getData'
 	]);
 
-	
+	/**
+		* ------------------------------ Country Routes -----------------------
+	**/
+
+	Route::get(LaravelLocalization::transRoute('countries.routes.api.listForCurrentLang'), [
+		'as' => 'countries.api.listForCurrentLang',
+		'uses' => 'CountryController@getAllValues'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('countries.routes.api.statesForCountry'), [
+		'as' => 'countries.api.statesForCountry',
+		'uses' => 'CountryController@getAllStatesValue'
+	]);
+
+	Route::get(LaravelLocalization::transRoute('states.routes.api.citiesForState'), [
+		'as' => 'states.api.citiesForState',
+		'uses' => 'StateController@getAllCitiesValue'
+	]);
 
 });
 
