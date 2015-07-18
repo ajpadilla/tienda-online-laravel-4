@@ -874,12 +874,12 @@ function () {
 	]);
 
 	Route::get(LaravelLocalization::transRoute('countries.routes.api.statesForCountry'), [
-		'as' => 'countries.api.statesForCountry',
+		'as' => 'countries.api.listStatesForCountry',
 		'uses' => 'CountryController@getAllStatesValue'
 	]);
 
 	Route::get(LaravelLocalization::transRoute('states.routes.api.citiesForState'), [
-		'as' => 'states.api.citiesForState',
+		'as' => 'states.api.listCitiesForState',
 		'uses' => 'StateController@getAllCitiesValue'
 	]);
 
