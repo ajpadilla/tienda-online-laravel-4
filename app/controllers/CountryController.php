@@ -104,4 +104,26 @@ class CountryController extends \BaseController {
 		return $this->getResponseArrayJson();
 	}
 
+	public function getAllStatesValue()
+	{
+		if (Request::ajax()) 
+		{
+			if (Input::has('countryId') && Input::get('countryId') > 0) 
+			{
+				$states = $this->repository->getListOfStates(Input::get('countryId'));
+				if (count($states) > 0) {
+					array_unshift($states,trans('classifieds.all-conditions'));
+					$this->setSuccess(true);
+					$this->addToResponseArray('location', $states);
+					return $this->getResponseArrayJson();
+				}else{
+					return $this->getResponseArrayJson();
+				}
+			}
+			return $this->getResponseArrayJson();
+		}
+		return $this->getResponseArrayJson();
+	}
+
+
 }
