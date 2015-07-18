@@ -16,6 +16,7 @@ class CountriesTableSeeder extends DatabaseSeeder{
 		$date = new DateTime;
 
         $countries[] = array(
+            'name' => 'Venezuela', 
             'active' => 1,
             'iso_code' => 'VEN',
             'currency_id' => 1,
@@ -24,6 +25,7 @@ class CountriesTableSeeder extends DatabaseSeeder{
         );  
 
         $countries[] = array(
+            'name' => 'Unite states',
             'active' => 1,
             'iso_code' => 'USA',
             'currency_id' => 2,
