@@ -185,15 +185,17 @@ class ClassifiedTypeController extends \BaseController {
 	}
 
 
-	public function returnDataForLang()
+	public function returnAllForCurrentLang()
 	{
 		if (Request::ajax()) 
 		{
-			$classifiedsTypes = $this->repository->getNameForLanguage();
-			array_unshift($classifiedsTypes,trans('classifiedTypes.all-conditions'));
-			return Response::json(['success' => true,'data'=> $classifiedsTypes]);
+			$classifiedsTypes = $this->repository->getAllForCurrentLang();
+			array_unshift($classifiedsTypes, trans('classifiedTypes.all-conditions'));
+			$this->setSuccess(true);
+			$this->addToResponseArray('data', $classifiedsTypes);
+			return $this->getResponseArrayJson();
 		}
-		return Response::json(['success' => false]);
+		return $this->getResponseArrayJson();
 	}
 
 	public function listApi(){
