@@ -194,15 +194,17 @@ class ClassifiedConditionController extends \BaseController {
 		return Response::json(array('response' => 'false'));
 	}
 
-	public function returnDataForLang()
+	public function returnAllForCurrentLang()
 	{
 		if (Request::ajax()) 
 		{
-			$classifiedsCoonditionsLang = $this->repository->getNameForLanguage();
+			$classifiedsCoonditionsLang = $this->repository->getAllForCurrentLang();
 			array_unshift($classifiedsCoonditionsLang,trans('classifiedConditions.all-conditions'));
-			return Response::json(['success' => true, 'data'=> $classifiedsCoonditionsLang]);
+			$this->setSuccess(true);
+			$this->addToResponseArray('data', $classifiedsCoonditionsLang);
+			return $this->getResponseArrayJson();
 		}
-		return Response::json(['success' => false]);
+		return $this->getResponseArrayJson();
 	}
 
 	public function listApi(){
