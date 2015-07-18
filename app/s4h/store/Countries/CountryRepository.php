@@ -10,11 +10,7 @@ use s4h\store\Base\BaseRepository;
 class CountryRepository extends BaseRepository {
 
 	function __construct() {
-		$this->columns = [
-			trans('categories.list.Name'),
-			trans('categories.list.Parent_category'),
-			trans('categories.list.Actions')
-		];
+		$this->columns = [];
 		$this->setModel(new Country);
 		$this->setListAllRoute('categories.api.list');
 	}
@@ -24,12 +20,5 @@ class CountryRepository extends BaseRepository {
 		$country = $this->get($countryId);
 	 	$states = $country->states()->where('country_id', '=', $countryId)->lists('name', 'id');
 	 	return $states;
-	}
-
-	public function getListOfCities($stateId)
-	{
-		$state = State::findOrFail($stateId);
-		$cities = $state->cities()->where('states_id', '=', $stateId)->lists('name', 'id');
-		return $cities;
 	}
 }
