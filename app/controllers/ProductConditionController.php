@@ -90,15 +90,17 @@ class ProductConditionController extends \BaseController {
 	}
 
 
-	public function returnDataForLang()
+	public function returnAllForCurrentLang()
 	{
 		if (Request::ajax()) 
 		{
-			$conditionsProducts = $this->conditionRepository->getNameForLanguage();
+			$conditionsProducts = $this->conditionRepository->getAllForCurrentLang();
 			array_unshift($conditionsProducts,trans('productCondition.all-conditions'));
-			return Response::json(['success' => true, 'data'=> $conditionsProducts]);
+			$this->setSuccess(true);
+			$this->addToResponseArray('data', $conditionsProducts);
+			return $this->getResponseArrayJson();
 		}
-		return Response::json(['success' => false]);
+		return $this->getResponseArrayJson();
 	}
 
 
