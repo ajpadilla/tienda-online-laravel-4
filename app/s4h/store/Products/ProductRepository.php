@@ -8,6 +8,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use s4h\store\Languages\Language;
 use s4h\store\ProductsLang\ProductLang;
 use s4h\store\Base\BaseRepository;
+use s4h\store\Classifieds\ClassifiedRepository;
+use Illuminate\Support\Facades\View;
 use DB;
 use Auth;
 
@@ -457,6 +459,33 @@ class ProductRepository extends BaseRepository{
 			}
 			return '';
 		});
+	}
+
+
+	public function resultSearchAjax($isChecked = false, $checkLength, $checkValue, $input = array())
+	{
+		$productsResultsSearch = null;
+		$classifiedsResultsSearch = null;
+		$view = null;
+		$classifiedRepository = new ClassifiedRepository;
+
+		if ($isChecked) 
+		{
+			if($checkLength == 1 && $checkValue == 'product') 
+			{
+				$productsResultsSearch = $this->search($input,'s4h\store\Base\BaseRepository::PAGINATE',$input['paginate']);
+			}elseif ($checkLength == 1 && $checkValue == 'classified') {
+				$classifiedsResultsSearch = $classifiedRepository->search($input,'s4h\store\Base\BaseRepository::PAGINATE',$input['paginate']);
+			}else{
+				$productsResultsSearch = $this->search($input,'s4h\store\Base\BaseRepository::PAGINATE',$input['paginate']);
+				$classifiedsResultsSearch = $classifiedRepository->search($input,'s4h\store\Base\BaseRepository::PAGINATE',$input['paginate']);
+			}
+		}else{
+			$productsResultsSearch = $this->search($input,'s4h\store\Base\BaseRepository::PAGINATE',$input['paginate']);
+			$classifiedsResultsSearch = $classifiedRepository->search($input,'s4h\store\Base\BaseRepository::PAGINATE',$input['paginate']);
+		}
+		$view = View::make('products.result-search-tpl',['products' => $productsResultsSearch, 'classifieds' => $classifiedsResultsSearch])->render();
+		return $view;
 	}
 
 
