@@ -87,7 +87,7 @@
              @if(!$classifieds->isEmpty())
              <!-- BEGIN PAGINATOR -->
              <div id="total-items-classifieds-1" class="row margen">
-              <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.classified-for-page') }} {{ $products->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $products->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
+              <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.classified-for-page') }} {{ $classifieds->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $classifieds->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
               <div class="col-md-8 col-sm-8">
                {{ $classifieds->links() }}
              </div>
@@ -106,7 +106,7 @@
           <!-- END PRODUCT LIST -->
           <!-- BEGIN PAGINATOR -->
           <div id="total-items-classifieds-2" class="row">
-             <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.classified-for-page') }} {{ $products->getPerPage() }} {{ trans('products.search-blade.of') }} {{ $products->getTotal()}} {{ trans('products.search-blade.in') }} {{ $products->getCurrentPage()  }}</div>
+             <div class="col-md-4 col-sm-4 items-info">{{ trans('products.search-blade.classified-for-page') }} {{$classifieds->getPerPage() }} {{ trans('products.search-blade.of') }} {{$classifieds->getTotal()}} {{ trans('products.search-blade.in') }} {{$classifieds->getCurrentPage()  }}</div>
             <div class="col-md-8 col-sm-8">
               {{ $classifieds->links()}}
             </div>
