@@ -17,6 +17,7 @@ use s4h\store\Classifieds\ClassifiedRepository;
 use Laracasts\Validation\FormValidationException;
 use s4h\store\Forms\EditLangProductoForm;
 
+
 class ProductController extends \BaseController {
 
 	protected $registerProductForm;
@@ -206,35 +207,25 @@ class ProductController extends \BaseController {
 	{
 		$productsResultsSearch = null;
 		$classifiedsResultsSearch = null;
-		$categories = $this->categoryRepository->getNameForLanguage();
-		$input = null;
+		$view = null;
+		$categories = $this->categoryRepository->getAllForCurrentLang();
+		$input = Input::all();
 
 		if(Request::ajax()) 
 		{
-			if(Input::has('check'))
-			{
-				if (count(Input::get('check')) == 1 && Input::get('check.0.value') == 'product'){
-					$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-				}elseif (count(Input::get('check')) == 1  && Input::get('check.0.value') == 'classified') {
-					$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-				}else{
-					$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-					$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-				}	
-			}else{
-				$productsResultsSearch = $this->productRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-				$classifiedsResultsSearch = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE',Input::get('paginate'));
-			}	
-			
-			$view = View::make('products.result-search-tpl',['products' => $productsResultsSearch, 'classifieds' => $classifiedsResultsSearch])->render();
-			return Response::json([
-				'success' => true, 
-				'view' => $view,
-				'input' => Input::all(),
-			]);
+			$view = $this->productRepository->resultSearchAjax(
+				Input::has('check'), 
+				count(Input::get('check')),
+				Input::get('check.0.value'),
+				$input
+			);
+			$this->setSuccess(true);
+			$this->addToResponseArray('view', $view);
+			$this->addToResponseArray('input', $input);
+			return $this->getResponseArrayJson();
 		} 
-		else {
-			$input = Input::all();
+		else 
+		{
 			$input['orderBy'] = 'rating-desc'; 
 			$productsResultsSearch = $this->productRepository->search($input,'s4h\store\Base\BaseRepository::PAGINATE');
 			$classifiedsResultsSearch  = $this->classifiedRepository->search(Input::all(),'s4h\store\Base\BaseRepository::PAGINATE');
@@ -249,7 +240,6 @@ class ProductController extends \BaseController {
 				Flash::warning('No se encontraron resultados que coincidan con la información suministrada para la búsqueda');
 			}
 		}
-
 	}
 
 	public function sortSearchResults(){
