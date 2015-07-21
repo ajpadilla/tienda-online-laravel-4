@@ -20,6 +20,7 @@ class Cart extends Eloquent
 
 	protected $table = 'carts';
 
+	protected $fillable = ['active'];
 
 	/*
 	 * ------------- Relations ---------------
