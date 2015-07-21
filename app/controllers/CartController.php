@@ -33,17 +33,18 @@ class CartController extends \BaseController {
 	 */
 	public function create($id, $quantity = 1)
 	{
-		$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('add-to-cart')) {
 			if (!$this->cartRepository->getActiveCartForUser(Auth::user()))
 				$this->cartRepository->createNewCartForUser(Auth::user());
 
 			if ($this->productRepository->addToUserCart($id, $quantity, Auth::user())) {
-				$response['success'] = TRUE;
-				$response['product'] = $this->productRepository->getArrayForTopCart(Auth::user(), $id);
+				$product = $this->productRepository->getArrayForTopCart(Auth::user(), $id);
+				$this->setSuccess(true);
+				$this->addToResponseArray('product', $product);
 			}
+			return $this->getResponseArrayJson();
 		}
-		return Response::json($response);
+		return $this->getResponseArrayJson();
 	}
 
 
@@ -109,20 +110,20 @@ class CartController extends \BaseController {
 
 	public function deleteAjax($id)
 	{
-		$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('remove-from-cart')) {
-			$response['success'] = $this->productRepository->deleteFromUserCart($id, Auth::user());
-			$response['total'] = $this->cartRepository->getActiveCartForUser(Auth::user())->total;
+			$this->setSuccess($this->productRepository->deleteFromUserCart($id, Auth::user()));
+			$total =  $this->cartRepository->getActiveCartForUser(Auth::user())->total;
+			$this->addToResponseArray('total', $total);
+			return $this->getResponseArrayJson();
 		}
-		return Response::json($response);
+		return $this->getResponseArrayJson();
 	}
 
 	public function changeQuantity($productId, $quantity)
 	{
-		$response = ['success' => FALSE];
 		if(Request::ajax() && !Entrust::can('change-quantity-from-cart'))
-			$response['success'] = $this->cartRepository->changeQuantity(Auth::user(), $productId, $quantity);
-		return Response::json($response);
+			$this->setSuccess($this->cartRepository->changeQuantity(Auth::user(), $productId, $quantity));
+		return $this->getResponseArrayJson();
 	}
 
 

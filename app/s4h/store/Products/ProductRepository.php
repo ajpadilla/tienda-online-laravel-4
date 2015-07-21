@@ -304,7 +304,7 @@ class ProductRepository extends BaseRepository{
 		if ($this->existsInUserCart($productId, $user))
 			return FALSE;
 		$cart = CartRepository::getActiveCartForUser($user);
-		Product::findOrFail($productId);
+		//Product::findOrFail($productId);
 		return $cart->products()->attach([$productId => ['quantity' => $quantity]]) == NULL;
 	}
 
