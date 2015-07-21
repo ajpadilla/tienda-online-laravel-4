@@ -121,10 +121,9 @@ class CartController extends \BaseController {
 
 	public function changeQuantity($productId, $quantity)
 	{
-		$response = ['success' => FALSE];
 		if(Request::ajax() && !Entrust::can('change-quantity-from-cart'))
-			$response['success'] = $this->cartRepository->changeQuantity(Auth::user(), $productId, $quantity);
-		return Response::json($response);
+			$this->setSuccess($this->cartRepository->changeQuantity(Auth::user(), $productId, $quantity));
+		return $this->getResponseArrayJson();
 	}
 
 
