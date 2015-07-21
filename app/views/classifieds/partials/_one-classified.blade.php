@@ -21,5 +21,5 @@
     <div class="pi-price">{{ $classified->priceWithCurrency }}</div><br>
     <a href="{{ route('cart.create', $classified->id) }}" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
     <a href="{{ route('wishlist.create', $classified->id) }}" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
-    <div class="sticker {{ $currentSticker }}"></div>
+    {{--<div class="sticker {{ $currentSticker }}"></div>--}}
 </div>
