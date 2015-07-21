@@ -33,17 +33,18 @@ class CartController extends \BaseController {
 	 */
 	public function create($id, $quantity = 1)
 	{
-		$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('add-to-cart')) {
 			if (!$this->cartRepository->getActiveCartForUser(Auth::user()))
 				$this->cartRepository->createNewCartForUser(Auth::user());
 
 			if ($this->productRepository->addToUserCart($id, $quantity, Auth::user())) {
-				$response['success'] = TRUE;
-				$response['product'] = $this->productRepository->getArrayForTopCart(Auth::user(), $id);
+				$product = $this->productRepository->getArrayForTopCart(Auth::user(), $id);
+				$this->setSuccess(true);
+				$this->addToResponseArray('product', $product);
 			}
+			return $this->getResponseArrayJson();
 		}
-		return Response::json($response);
+		return $this->getResponseArrayJson();
 	}
 
 
