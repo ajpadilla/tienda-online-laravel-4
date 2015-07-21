@@ -49,17 +49,17 @@
 
     <div class="col-sm-8 ">
       {{ Form::select('countryId',array(),null,['class' => 'chosen-select form-control','data-placeholder'=> trans('products.search-blade.country'),'id'=>'countryId']) }}
-      <a href="{{ URL::route('classifieds.countries') }}" id="search-data-for-country"></a>
+      <a href="{{ URL::route('countries.api.listForCurrentLang') }}" id="search-data-for-country"></a>
     </div>
 
     <div class="col-sm-8">
     {{ Form::select('stateId',array(''),null,array('class' => 'chosen-select form-control','data-placeholder'=> trans('products.search-blade.state'),'id'=>'stateId')) }}
-      <a href="{{ URL::route('classifieds.statesForCountry') }}" id="search-data-for-states"></a>
+      <a href="{{ URL::route('countries.api.listStatesForCountry') }}" id="search-data-for-states"></a>
     </div>
 
   <div class="col-sm-8">
     {{ Form::select('cityId',array(''),null,array('class' => 'chosen-select form-control','data-placeholder'=> trans('products.search-blade.city'),'id'=>'cityId')) }}
-    <a href="{{ URL::route('classifieds.citiesForState') }}" id="search-data-for-cities"></a>
+    <a href="{{ URL::route('states.api.listCitiesForState') }}" id="search-data-for-cities"></a>
   </div>
 
   <!--<div class="col-sm-8">
