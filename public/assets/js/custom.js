@@ -172,8 +172,10 @@ var initSliderRange = function() {
         " - $" + jQuery("#slider-range-price-points").slider("values", 1));
 }
 
-var searchAgain = function () {
-    jQuery('#search-data-again').click(function(){
+var searchDataAgain = function () {
+    jQuery('#search-data-again').click(function(event)
+    {
+        event.preventDefault();
         var url = jQuery('#search').attr('href');
 
         dataSearch = {
@@ -193,9 +195,7 @@ var searchAgain = function () {
                 'orderBy': jQuery('#order-by-search').val(),
                 'active' : 1
         };
-
-        console.log(dataSearch);
-
+        //console.log(dataSearch);
         jQuery.ajax({
             type: 'GET',
             url: url,
@@ -229,7 +229,7 @@ var dataSearchNotActive = function() {
     };
 }
 
-var checkBox = function(){
+var checkBoxSelectedForSearch = function(){
 
     jQuery('input[name="select-search[]"]').click(function()
     {
@@ -589,7 +589,7 @@ var loadFieldSelect = function(url,idField) {
         url: url,
         dataType:'json',
         success: function(response) {
-            console.log(response);
+            //console.log(response);
             if (response.success == true) {
                 jQuery(idField).html('');
                 jQuery(idField).append('<option value=\"\"></option>');
@@ -922,7 +922,7 @@ jQuery(document).ready(function() {
     addToCart();
     removeFromCart();
     rating();
-    searchAgain();
+    searchDataAgain();
     loadFieldsProduct();
     loadFieldsClassified();
     hideFields();
@@ -937,7 +937,7 @@ jQuery(document).ready(function() {
     orderBySearch();
     paginateQuantitySearch();
     linksPaginator();
-    checkBox();
+    checkBoxSelectedForSearch();
     searchDataForCountry();
     searchDataForState();
     searchDataForCity();
