@@ -2,8 +2,18 @@
 
 use s4h\store\Currencies\Currency;
 use s4h\store\Users\User;
+use s4h\store\Carts\Cart;
+use s4h\store\Base\BaseRepository;
 
-class CartRepository {
+class CartRepository extends BaseRepository{
+
+
+	function __construct() {
+		$this->columns = [];
+		$this->setModel(new Cart);
+		$this->setListAllRoute('');
+	}
+
 	public static function getActiveCartForUser(User $user)
 	{
 		return Cart::whereUserId($user->id)->whereActive(TRUE)->orderBy('created_at', 'DESC')->first();
@@ -13,7 +23,7 @@ class CartRepository {
 		return Cart::findOrFail($id);
 	}
 
-	public static function createNewCartForUser(User $user)
+	public function createNewCartForUser(User $user)
 	{
 		$cart = new Cart();
 		$cart->active = TRUE;
