@@ -110,12 +110,14 @@ class CartController extends \BaseController {
 
 	public function deleteAjax($id)
 	{
-		$response = ['success' => FALSE];
+		//$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('remove-from-cart')) {
-			$response['success'] = $this->productRepository->deleteFromUserCart($id, Auth::user());
-			$response['total'] = $this->cartRepository->getActiveCartForUser(Auth::user())->total;
+			$this->setSuccess($this->productRepository->deleteFromUserCart($id, Auth::user()));
+			$total =  $this->cartRepository->getActiveCartForUser(Auth::user())->total;
+			$this->addToResponseArray('total', $total);
+			return $this->getResponseArrayJson();
 		}
-		return Response::json($response);
+		return $this->getResponseArrayJson();
 	}
 
 	public function changeQuantity($productId, $quantity)
