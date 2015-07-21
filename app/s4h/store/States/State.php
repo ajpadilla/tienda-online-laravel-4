@@ -17,6 +17,10 @@ class State extends Eloquent
 
 	protected $table = 'states';
 
+	public function country(){
+		return $this->belongsTo('s4h\store\Countries\Country','country_id');
+	}
+
 	public function cities(){
 		return  $this->hasMany('s4h\store\Cities\City','states_id');
 	}

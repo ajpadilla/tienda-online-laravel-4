@@ -1,12 +1,13 @@
 <?php
-use s4h\store\Conditions\ConditionRepository;
+use s4h\store\States\StateRepository;
+use Laracasts\Validation\FormValidationException;
 
-class ProductConditionController extends \BaseController {
+class StateController extends \BaseController {
 
-	private $conditionRepository;
+	private $repository;
 
-	function __construct(ConditionRepository $conditionRepository) {
-		$this->conditionRepository = $conditionRepository;
+	function __construct(StateRepository $repository) {
+		$this->repository = $repository;
 	}
 
 	/**
@@ -89,16 +90,22 @@ class ProductConditionController extends \BaseController {
 		//
 	}
 
-
-	public function returnAllForCurrentLang()
+	public function getAllCitiesValue()
 	{
 		if (Request::ajax()) 
 		{
-			$conditionsProducts = $this->conditionRepository->getAllForCurrentLang();
-			array_unshift($conditionsProducts,trans('productCondition.all-conditions'));
-			$this->setSuccess(true);
-			$this->addToResponseArray('data', $conditionsProducts);
-			return $this->getResponseArrayJson();
+			if (Input::has('stateId') && Input::get('stateId') > 0) 
+			{
+				$cities = $this->repository->getListOfCities(Input::get('stateId'));
+				if (count($cities) > 0) {
+					array_unshift($cities,trans('classifieds.all-conditions'));
+					$this->setSuccess(true);
+					$this->addToResponseArray('location', $cities);
+					return $this->getResponseArrayJson();
+				}else{
+					return $this->getResponseArrayJson();
+				}
+			}
 		}
 		return $this->getResponseArrayJson();
 	}

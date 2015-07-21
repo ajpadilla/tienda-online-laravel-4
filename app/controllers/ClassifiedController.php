@@ -247,52 +247,6 @@ class ClassifiedController extends \BaseController {
 		return View::make('classifieds.filtered-classisied',compact('classifiedsResult'));
 	}
 
-	public function countries()
-	{
-		if (Request::ajax()) 
-		{
-			$countries = $this->countryRepository->getNameForLanguage();
-			array_unshift($countries,trans('classifieds.all-conditions'));
-			return Response::json(['success' => true, 'data'=> $countries]);
-		}else{
-			return Response::json(['success' => false]);
-		}
-	}
-
-	public function statesForCountry()
-	{
-		if (Request::ajax()) 
-		{
-			if (Input::has('countryId')) 
-			{
-				$states = $this->countryRepository->getListOfStates(Input::get('countryId'));
-				if (count($states) > 0) {
-					array_unshift($states,trans('classifieds.all-conditions'));
-					return Response::json(['success' => true, 'location' => $states]);
-				}else{
-					return Response::json(['success' => false]);
-				}
-			}
-		}
-	}
-
-	public function citiesForState()
-	{
-		if (Request::ajax()) 
-		{
-			if (Input::has('stateId')) 
-			{
-				$cities = $this->countryRepository->getListOfCities(Input::get('stateId'));
-				if (count($cities) > 0) {
-					array_unshift($cities,trans('classifieds.all-conditions'));
-					return Response::json(['success' => true, 'location' => $cities]);
-				}else{
-					return Response::json(['success' => false]);
-				}
-			}
-		}
-	}
-
 
 	public function showApi()
 	{

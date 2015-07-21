@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder {
 
 		 $this->call('CurrenciesTableSeeder');
 		 $this->call('CountriesTableSeeder');
-	     $this->call('CountriesLangTableSeeder');
 	     $this->call('StatesTableSeeder');
 	     $this->call('CitiesTableSeeder');
 		 $this->call('AddressTableSeeder');

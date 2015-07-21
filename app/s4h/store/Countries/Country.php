@@ -2,11 +2,11 @@
 
 use Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
-
+use s4h\store\Base\BaseModel;
 /**
 * 
 */
-class Country extends Eloquent
+class Country extends BaseModel
 {
 	
 	use SoftDeletingTrait;
