@@ -263,7 +263,8 @@ class ProductRepository extends BaseRepository{
 	{
 		if ($this->existsInUserWishlist($productId, $user))
 			return FALSE;
-		return Product::findOrFail($productId)->wishlist()->attach($user->id) == NULL;
+		//return Product::findOrFail($productId)->wishlist()->attach($user->id) == NULL;
+		return $this->get($productId)->wishlist()->attach($user->id) == NULL;
 	}
 
 	public function existsInUserWishlist($productId, User $user)
