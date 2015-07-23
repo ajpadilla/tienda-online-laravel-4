@@ -31,14 +31,17 @@ class WishlistController extends \BaseController {
 	 */
 	public function create($id)
 	{
-		$response = ['success' => FALSE];
-		if(Request::ajax() && Entrust::can('add-to-wishlist')) {
-			if ($this->productRepository->addToUserWishlist($id, Auth::user())) {
-				$response['success'] = TRUE;
-				$response['product'] = $this->productRepository->getArrayForTopWishlist($id);
+		if(Request::ajax() && Entrust::can('add-to-wishlist')) 
+		{
+			if ($this->productRepository->addToUserWishlist($id, Auth::user())) 
+			{
+				$product = $this->productRepository->getArrayForTopWishlist($id);
+				$this->setSuccess(true);
+				$this->addToResponseArray('product', $product);
+				return $this->getResponseArrayJson();
 			}
 		}
-		return Response::json($response);
+		return $this->getResponseArrayJson();
 	}
 
 
@@ -102,10 +105,9 @@ class WishlistController extends \BaseController {
 
 	public function deleteAjax($id)
 	{
-		$response = ['success' => FALSE];
 		if(Request::ajax() && Entrust::can('remove-from-wishlist'))
-			$response['success'] = $this->productRepository->deleteFromUserWishlist($id, Auth::user());
-		return Response::json($response);
+			$this->setSuccess($this->productRepository->deleteFromUserWishlist($id, Auth::user()));
+		return $this->getResponseArrayJson();
 	}
 
 }
