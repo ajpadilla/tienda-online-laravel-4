@@ -1,6 +1,6 @@
 <?php
 
-use \Entrust;
+//use \Entrust;
 use s4h\store\Products\Product;
 use s4h\store\Products\ProductRepository;
 use s4h\store\Users\UserRepository;
