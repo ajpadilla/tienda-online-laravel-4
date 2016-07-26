@@ -6,8 +6,13 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 
 *.log
 /app/config/local/
 /.idea
 /public/uploads/
+=======
+*.log
+/app/config/local/
+>>>>>>> 98e3d787a94fc7265398e7eeb639f1b70c85a405
