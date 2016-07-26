@@ -1,6 +1,6 @@
 <?php
 
-use \Entrust;
+//use \Entrust;
 use s4h\store\Products\ProductRepository;
 
 class WishlistController extends \BaseController {

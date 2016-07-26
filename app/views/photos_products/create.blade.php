@@ -33,12 +33,7 @@
 									<i class="glyphicon glyphicon-ban-circle"></i>
 									<span>{{ trans('photoProduct.labels.cancel') }}</span>
 								</button>
-									{{--{{ Form::open(['route' => 'products.index', 'method' => 'get']) }}
-										<button type="submit" href="{{ route('products.index') }}" class="btn-alert">
-											<span>Lista de Productos</span>
-										</button>
-										{{ Form::close() }}--}}
-									</div>
+							</div>
 									<div class="col-lg-5">
 										<!-- The global file processing state -->
 										<span class="fileupload-process">
