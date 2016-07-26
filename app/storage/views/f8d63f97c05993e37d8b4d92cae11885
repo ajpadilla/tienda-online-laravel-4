@@ -1,0 +1,234 @@
+<!-- Mainly scripts -->
+<?php echo HTML::script('assets/js/jquery-1.10.2.js');; ?>
+
+<?php echo HTML::script('assets/js/mustache.min.js');; ?>
+
+<?php echo HTML::script('assets/js/bootstrap.min.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/metisMenu/jquery.metisMenu.js');; ?>
+
+
+<!-- Custom and plugin javascript -->
+<?php echo HTML::script('assets/js/inspinia.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/pace/pace.min.js');; ?>
+
+<?php echo HTML::script('assets/js/jquery-ui.custom.min.js');; ?>
+
+
+<!-- DROPZONE -->
+<?php echo HTML::script('assets/js/plugins/dropzone/dropzone.js');; ?>
+
+
+<!-- Input Mask-->
+<?php echo HTML::script('assets/js/plugins/jasny/jasny-bootstrap.min.js');; ?>
+
+
+<!-- Date picker -->
+<?php echo HTML::script('assets/js/plugins/datapicker/bootstrap-datepicker.js');; ?>
+
+
+<!-- iCheck -->
+<?php echo HTML::script('assets/js/plugins/iCheck/icheck.min.js');; ?>
+
+
+<!-- Full Calendar -->
+<?php echo HTML::script('assets/js/plugins/fullcalendar/fullcalendar.min.js');; ?>
+
+
+<!-- Steps -->
+<?php echo HTML::script('assets/js/plugins/staps/jquery.steps.min.js');; ?>
+
+
+<!-- Jquery Validate -->
+<?php echo HTML::script('assets/js/plugins/validate/jquery.validate.min.js');; ?>
+
+
+<!-- Jquery preimage -->
+<?php echo HTML::script('assets/js/plugins/preimage/preimage.js');; ?>
+
+
+<!-- Jquery Form -->
+<?php echo HTML::script('assets/js/plugins/jQueryForm/jquery.form.min.js');; ?>
+
+
+<!-- Chosen -->
+<?php echo HTML::script('assets/js/plugins/chosen/chosen.jquery.js'); ?>
+
+
+<!-- Jquery Fancybox -->
+<?php echo HTML::script('assets/js/plugins/fancybox/jquery.fancybox.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/fancybox/jquery.fancybox.pack.js');; ?>
+
+
+<!-- summernote -->
+<?php echo HTML::script('assets/js/plugins/summernote/summernote.min.js');; ?>
+
+
+<!-- Jquery UI -->
+<?php echo HTML::script('assets/js/plugins/jquery-ui/jquery-ui.js');; ?>
+
+
+<!-- Datatable -->
+<?php echo HTML::script('assets/js/plugins/dataTables/jquery.dataTables.js');; ?>
+
+<?php echo HTML::script('assets/js/plugins/dataTables/dataTables.bootstrap.js');; ?>
+
+
+<!-- simplecolorpicker -->
+<?php echo HTML::script('assets/js/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js');; ?>
+
+
+<?php echo HTML::script('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-hover-dropdown/2.0.10/bootstrap-hover-dropdown.js'); ?>
+
+
+<?php echo HTML::script('assets/js/plugins/rateit/jquery.rateit.min.js'); ?>
+
+<?php echo HTML::script('assets/js/plugins/zoom/jquery.zoom.min.js'); ?>
+
+<?php echo HTML::script('assets/js/plugins/uniform/jquery.uniform.min.js'); ?>
+
+<?php echo HTML::script('assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js'); ?>
+
+
+<!-- BOOTBOX -->
+<?php echo HTML::script('assets/js/plugins/bootbox/bootbox.min.js'); ?>
+
+
+<!-- product zoom -->
+<?php echo HTML::script('assets/js/custom.js'); ?>
+
+
+<script>
+
+    $.validator.addMethod('onlyLettersNumbersAndSpaces', function(value, element) {
+      return this.optional(element) || /^[a-zA-Z0-9ñÑ\s]+$/i.test(value);
+    }, '<?php echo trans('discounts.validation.onlyLettersNumbersAndSpaces'); ?>');
+
+    $.validator.addMethod('onlyLettersNumbersAndDash', function(value, element) {
+      return this.optional(element) || /^[a-zA-Z0-9ñÑ\-]+$/i.test(value);
+    }, '<?php echo trans('discounts.validation.onlyLettersNumbersAndDash'); ?>');
+
+    jQuery.validator.addMethod('customDateValidator', function(value, element) {
+        try{
+            jQuery.datepicker.parseDate( '<?php echo trans('discounts.date'); ?>' , value);return true;}
+            catch(e){return false;}
+        },'<?php echo trans('discounts.validation.date'); ?>'
+    );
+
+    jQuery.validator.addMethod("decimalNumbers", function(value, element) {
+        return this.optional(element) || /^\d{0,20}(\.\d{0,6})?$/i.test(value);
+    }, '<?php echo trans('products.validation.maxlength'); ?>'+[20]+'<?php echo trans('products.validation.length'); ?>' + '<?php echo trans('products.validation.maxlengthDecimal'); ?>'+ [6] + '<?php echo trans('products.validation.decimal'); ?>');
+
+    $('.chosen-select').chosen({width: "95%"});
+
+    $('.summernote').summernote();
+
+    $('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green',
+        radioClass: 'iradio_square-green',
+    });
+
+    
+	$('.tooltip-pop').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+
+
+    $('.datepicker').datepicker({
+        showButtonPanel: true,
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '2014:2030',
+        dateFormat: '<?php echo trans('discounts.date'); ?>',
+    });
+
+	var handleMenu = function() {
+        $(".header .navbar-toggle").click(function () {
+            if ($(".header .navbar-collapse").hasClass("open")) {
+                $(".header .navbar-collapse").slideDown(300)
+                .removeClass("open");
+            } else {
+                $(".header .navbar-collapse").slideDown(300)
+                .addClass("open");
+            }
+        });
+    }
+    var handleSubMenuExt = function() {
+        $(".header-navigation.dropdown").on("hover", function() {
+            alert('menu');
+            if ($(this).children(".header-navigation-content-ext").show()) {
+                if ($(".header-navigation-content-ext").height()>=$(".header-navigation-description").height()) {
+                    $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height()+22);
+                }
+            }
+        });
+    }
+
+    var handleSidebarMenu = function () {
+        $(".sidebar .dropdown a i").click(function (event) {
+            event.preventDefault();
+            if ($(this).parent("a").hasClass("collapsed") == false) {
+                $(this).parent("a").addClass("collapsed");
+                $(this).parent("a").siblings(".dropdown-menu").slideDown(300);
+            } else {
+                $(this).parent("a").removeClass("collapsed");
+                $(this).parent("a").siblings(".dropdown-menu").slideUp(300);
+            }
+        });
+    }
+
+    var getAttributeIdActionSelect = function (id) {
+        var action = new Object(); 
+        action.typeAction = id ? id.split('_')[0] : '';
+        action.view = id ? id.split('_')[1] : '';
+        action.number = id ? id.split('_')[2] : '';
+        return action;
+    }
+
+    var showPopUpFancybox = function (selector) {
+        $.fancybox($(selector),{
+            autoDimensions: false,
+            autoSize: false,
+            openEffect  : 'elastic',
+            closeEffect : 'elastic',
+            centerOnScroll: true,
+            hideOnOverlayClick: true,
+            width : '70%',
+            height : '70%'
+        });
+    }
+
+    var reloadDataTable = function (table) {
+        var table = typeof table !== 'undefined' ? table : 'datatable';
+        if($(table).length) {
+            var table = $(table).DataTable();
+            table.search('').draw();
+        }
+    }
+
+    function fancyConfirm(msg, functionDelete, elementId)
+    {
+        jQuery.fancybox({
+            'modal' : true,
+            'content' : "<div style=\"margin:1px;width:240px;\">"+msg+"<div style=\"text-align:right;margin-top:10px;\"><input id=\"fancyconfirm_cancel\" style=\"margin:3px;padding:0px;\" type=\"button\" value=\"Cancel\"><input id=\"fancyConfirm_ok\" style=\"margin:3px;padding:0px;\" type=\"button\" value=\"Ok\"></div></div>",
+            'beforeShow' : function() {
+                jQuery("#fancyconfirm_cancel").click(function() {
+                    $.fancybox.close();
+                });
+
+                jQuery("#fancyConfirm_ok").click(function() {
+                    $.fancybox.close();
+                    functionDelete(elementId);
+                });
+            }
+        });
+    }
+
+</script>
+
+<?php echo $__env->yieldContent('in-situ-js'); ?>
+<?php echo $__env->yieldContent('table'); ?>
+<?php echo $__env->yieldContent('scripts'); ?>

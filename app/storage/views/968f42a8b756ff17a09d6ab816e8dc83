@@ -1,0 +1,97 @@
+<div class="sidebar-filter margin-bottom-25">
+  <h2><?php echo trans('products.search-blade.search-options'); ?></h2>
+  <!--<h3>Condición</h3>-->
+  <!--<div class="checkbox-list">
+    <label><input type="checkbox"> Nuevos</label>
+    <label><input type="checkbox"> Usados</label>
+    <label><input type="checkbox"> En venta</label>
+    <label><input type="checkbox"> Para trueque</label>
+  </div>-->
+  
+  <div class="checkbox-list">
+    <label><input type="checkbox" name="select-search[]" id="product" value="product"> <?php echo trans('products.search-blade.products'); ?> </label>
+    <label><input type="checkbox" name="select-search[]" id="classified" value="classified"> <?php echo trans('products.search-blade.classifieds'); ?> </label>
+  </div>
+
+
+  <div class="col-sm-10">
+    <?php echo Form::select('categories[]', $categories, null,
+        ['class' => 'chosen-select form-control',
+        'multiple' => 'multiple', 'data-placeholder' => trans('products.search-blade.categories'), 'id' =>'categories']); ?>
+
+  </div>
+
+  <div class="col-sm-10" id="conditionProduct">
+    <?php echo Form::select('conditionsProducts', array(), null,
+          ['class' => 'chosen-select form-control', 'data-placeholder' => trans('products.search-blade.condition-product'), 'id' => 'conditionsProducts']); ?>
+
+    <a href="<?php echo URL::route('productCondition.current-lang'); ?>" id="search-data-conditions-product-lang"></a>
+  </div>
+
+  <div class="col-sm-10" id="conditionClassified">
+    <?php echo Form::select('conditionsClassifieds', array(), null,
+          ['class' => 'chosen-select form-control', 'data-placeholder' => trans('products.search-blade.condition-classified'), 'id' => 'conditionsClassifieds']); ?>
+
+    <a href="<?php echo URL::route('classifiedConditions.current-lang'); ?>" id="search-data-conditions-classified-lang"></a>
+  </div>
+
+  <div class="col-sm-10" id="type">
+    <?php echo Form::select('classified_type', array(), null,
+          ['class' => 'chosen-select form-control', 'data-placeholder' => trans('products.search-blade.classified-type'), 'id' => 'classifiedType']); ?>
+
+      <a href="<?php echo URL::route('classifiedTypes.current-lang'); ?>" id="search-data-classified-type-lang"></a>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-8 ">
+      <?php echo Form::select('countryId',array(),null,['class' => 'chosen-select form-control','data-placeholder'=> trans('products.search-blade.country'),'id'=>'countryId']); ?>
+
+      <a href="<?php echo URL::route('countries.api.listForCurrentLang'); ?>" id="search-data-for-country"></a>
+    </div>
+
+    <div class="col-sm-8">
+    <?php echo Form::select('stateId',array(''),null,array('class' => 'chosen-select form-control','data-placeholder'=> trans('products.search-blade.state'),'id'=>'stateId')); ?>
+
+      <a href="<?php echo URL::route('countries.api.listStatesForCountry'); ?>" id="search-data-for-states"></a>
+    </div>
+
+  <div class="col-sm-8">
+    <?php echo Form::select('cityId',array(''),null,array('class' => 'chosen-select form-control','data-placeholder'=> trans('products.search-blade.city'),'id'=>'cityId')); ?>
+
+    <a href="<?php echo URL::route('states.api.listCitiesForState'); ?>" id="search-data-for-cities"></a>
+  </div>
+
+  <!--<div class="col-sm-8">
+    <?php echo Form::select('operator',
+      array(
+          '>' => 'Mayor a', 
+          '<' => 'Menor a',
+          '=' => 'Igual a'
+        ,),
+        null,array('class' => 'form-control input-sm','id'=>'operator')); ?>
+
+  </div>
+
+      <div class="col-sm-8">
+        <?php echo Form::text('price',null, ['class' => 'form-control input-sm','placeholder' =>'Precio','id'=> 'price']); ?>
+
+      </div>-->
+
+    </div>
+
+  <h3><?php echo trans('product<s.search-blade.price'); ?></h3>
+  <p>
+    <label for="priceRange"><?php echo trans('product<s.search-blade.range'); ?>:</label>
+    <input type="text" id="priceRange" style="border:0; color:#f6931f; font-weight:bold;">
+    <a href="<?php echo URL::route('products.search'); ?>" id="search"></a>
+  </p>
+  <div id="slider-range-price"></div>
+
+  <h3><?php echo trans('products.search-blade.point-price'); ?></h3>
+  <p>
+    <label for="price-points"><?php echo trans('product<s.search-blade.range'); ?>:</label>
+    <input type="text" id="price-points" style="border:0; color:#f6931f; font-weight:bold;">
+  </p>
+  <div id="slider-range-price-points"></div>
+</div>

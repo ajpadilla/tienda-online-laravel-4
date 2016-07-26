@@ -1,0 +1,90 @@
+<?php $__env->startSection('content'); ?>
+	<div class="panel-body">
+		<div class="panel blank-panel">
+	        <div class="row margin-bottom-40">
+	          <!-- BEGIN CONTENT -->
+	          <div class="col-md-12 col-sm-12">
+	            <h1><?php echo trans('cart.title'); ?></h1>
+	            <?php if(!$cart): ?>
+		            <div class="shopping-cart-page">
+		              <div class="shopping-cart-data clearfix">
+		                <p><?php echo trans('cart.cart-empty'); ?></p>
+		              </div>
+		            </div>
+		        <?php else: ?>
+					<div class="goods-page">
+		              <div class="goods-data clearfix">
+		                <div class="table-wrapper-responsive">
+		                <table summary="Shopping cart">
+		                  <tr>
+		                    <th class="goods-page-image"><?php echo Lang::get('cart.labels.Image'); ?></th>
+		                    <th class="goods-page-description"><?php echo Lang::get('cart.labels.description'); ?></th>
+		                    <th class="goods-page-quantity"><?php echo Lang::get('cart.labels.quantity'); ?></th>
+		                    <th class="goods-page-price"><?php echo Lang::get('cart.labels.UnitPrice'); ?></th>
+		                    <th class="goods-page-total" colspan="2"><?php echo Lang::get('cart.labels.total'); ?></th>
+		                  </tr>
+		                  <?php foreach($cart->products as $product): ?>
+		                  <tr>
+		                    <td class="goods-page-image">
+		                    	<?php if($product->hasPhotos()): ?>
+		                    		<a href="#"><img src="<?php echo $product->firstPhoto->complete_thumbnail_path; ?>" alt="$product->inCurrentLang->name"></a>
+		                    	<?php else: ?>
+		                      		<a href="#"><img src="../../assets/frontend/pages/img/products/model3.jpg" alt="Berry Lace Dress"></a>
+		                      	<?php endif; ?>
+		                    </td>
+		                    <td class="goods-page-description">
+		                      <h3><a href="#"><?php echo $product->inCurrentLang->name; ?></a></h3>
+		                      <p><strong>Item 1</strong> - Color: Green; Size: S</p>
+		                      <em><a href="<?php echo route('products.show', $product->id); ?>">Detalles del producto.</a></em>
+		                    </td>
+		                    <?php /* <td class="goods-page-ref-no">
+		                      javc2133
+		                    </td> */ ?>
+		                    <td class="goods-page-quantity">
+		                      <div class="product-quantity">
+		                          <input data-url="<?php echo route('cart.change-quantity', $product->id); ?>" type="text" value="<?php echo $product->pivot->quantity; ?>" readonly class="product-quantity-change form-control input-sm">
+		                      </div>
+		                    </td>
+		                    <td class="goods-page-price">
+		                      <strong><span>$</span><?php echo $product->price; ?></strong>
+		                    </td>
+		                    <td class="goods-page-total">
+		                      <strong><span>$</span><?php echo $product->price; ?></strong>
+		                    </td>
+		                    <td class="del-goods-col">
+		                      <a class="del-goods delete-from-cart-list" href="<?php echo route('cart.delete-ajax', $product->id); ?>">&nbsp;</a>
+		                    </td>
+		                  </tr>
+		                  <?php endforeach; ?>
+		                </table>
+		                </div>
+
+		                <div class="shopping-total">
+		                  <ul>
+		                    <li>
+		                      <em><?php echo Lang::get('cart.labels.sub-total'); ?></em>
+		                      <strong class="price"><span>$</span><p id='sub-total' style='display: inline-block'><?php echo $cart->total; ?></p></strong>
+		                    </li>
+		                    <li>
+		                      <em><?php echo Lang::get('cart.labels.cost'); ?></em>
+		                      <strong class="price"><span>$</span><p id='ship-cost' style='display: inline-block'>3</p></strong>
+		                    </li>
+		                    <li class="shopping-total-price">
+		                      <em><?php echo Lang::get('cart.labels.total'); ?></em>
+		                      <strong class="price"><span>$</span><p id='total' style='display: inline-block'><?php echo $cart->total; ?></p></strong>
+		                    </li>
+		                  </ul>
+		                </div>
+		              </div>		              
+		              <a href="<?php /* route('pages.home') */ ?>"><button class="btn btn-primary" style="background-color: blue" type="submit"><?php echo Lang::get('cart.labels.continue-shopping'); ?><i class="fa fa-shopping-cart"></i></button></a>
+		              <a href="<?php /* route('pages.home') */ ?>"><button class="btn btn-primary" type="submit"><?php echo Lang::get('cart.labels.pay'); ?><i class="fa fa-check"></i></button></a>
+		            </div>
+		        <?php endif; ?>
+	          </div>
+	          <!-- END CONTENT -->
+	        </div>
+	    </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

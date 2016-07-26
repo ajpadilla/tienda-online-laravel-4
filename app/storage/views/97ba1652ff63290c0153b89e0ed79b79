@@ -1,0 +1,75 @@
+ <?php if(!empty($products)): ?>
+ <!-- BEGIN PAGINATOR -->
+ <div id="total-items-produts-1" class="row">
+  <div class="col-md-4 col-sm-4 items-info"><?php echo trans('products.search-blade.products-for-page'); ?> <?php echo $products->getPerPage(); ?> <?php echo trans('products.search-blade.of'); ?> <?php echo $products->getTotal(); ?> <?php echo trans('products.search-blade.in'); ?> <?php echo $products->getCurrentPage(); ?></div>
+  <div class="col-md-8 col-sm-8 links-products">
+   <?php echo $products->links(); ?>
+
+ </div>
+</div>
+<!-- END PAGINATOR -->
+<!-- BEGIN PRODUCT LIST -->
+<div id="products-list" class="row product-list">
+  <!-- PRODUCT ITEM START -->
+  <?php foreach($products as $product): ?>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+    <?php echo $__env->make('products.partials._one-product', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  </div>
+  <?php endforeach; ?>
+  <!-- PRODUCT ITEM END -->
+</div>
+<!-- END PRODUCT LIST -->
+<!-- BEGIN PAGINATOR -->
+<div id="total-items-produts-2" class="row">
+ <div class="col-md-4 col-sm-4 items-info"><?php echo trans('products.search-blade.products-for-page'); ?> <?php echo $products->getPerPage(); ?> <?php echo trans('products.search-blade.of'); ?> <?php echo $products->getTotal(); ?> <?php echo trans('products.search-blade.in'); ?> <?php echo $products->getCurrentPage(); ?></div>
+  <div class="col-md-8 col-sm-8 links-products">
+    <?php echo $products->links(); ?>
+
+  </div>
+</div>
+<!-- END PAGINATOR -->
+<?php endif; ?>
+
+<?php if(!empty($classifieds)): ?>
+<!-- BEGIN PAGINATOR -->
+<div id="total-items-classifieds-1" class="row margen">
+   <div class="col-md-4 col-sm-4 items-info"><?php echo trans('products.search-blade.classified-for-page'); ?> <?php echo $classifieds->getPerPage(); ?> <?php echo trans('products.search-blade.of'); ?> <?php echo $classifieds->getTotal(); ?> <?php echo trans('products.search-blade.in'); ?> <?php echo $classifieds->getCurrentPage(); ?></div>
+  <div class="col-md-8 col-sm-8">
+   <?php echo $classifieds->links(); ?>
+
+ </div>
+</div>
+<!-- END PAGINATOR -->
+<!-- BEGIN PRODUCT LIST -->
+<div id="classifieds-list" class="row classified-list">
+  <!-- PRODUCT ITEM START -->
+  <?php foreach($classifieds as $classified): ?>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+    <?php echo $__env->make('classifieds.partials._one-classified', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  </div>
+  <?php endforeach; ?>
+  <!-- PRODUCT ITEM END -->
+</div>
+<!-- END PRODUCT LIST -->
+<!-- BEGIN PAGINATOR -->
+<div id="total-items-classifieds-2" class="row">
+   <div class="col-md-4 col-sm-4 items-info"><?php echo trans('products.search-blade.classified-for-page'); ?> <?php echo $classifieds->getPerPage(); ?> <?php echo trans('products.search-blade.of'); ?> <?php echo $classifieds->getTotal(); ?> <?php echo trans('products.search-blade.in'); ?> <?php echo $classifieds->getCurrentPage(); ?></div>
+  <div class="col-md-8 col-sm-8">
+    <?php echo $classifieds->links(); ?>
+
+  </div>
+</div>
+<!-- END PAGINATOR -->
+<?php endif; ?>
+
+<?php if(!empty($products)): ?>
+  <?php foreach($products as $product): ?>
+    <?php echo $__env->make('products.partials._pop-up-products', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if(!empty($classifieds)): ?>
+  <?php foreach($classifieds as $classified): ?>
+    <?php echo $__env->make('classifieds.partials._pop-up-classifieds', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <?php endforeach; ?>
+<?php endif; ?>

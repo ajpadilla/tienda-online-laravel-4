@@ -1,0 +1,25 @@
+<div class="product-item">
+  <div class="pi-img-wrapper">
+    <?php if($classified->hasPhotos()): ?>
+      <img class="img-responsive" src="<?php echo asset($classified->firstPhoto->complete_path); ?>" alt="<?php echo $classified->firstPhoto->filename; ?>"/>
+      <div>
+        <a href="<?php echo asset($classified->firstPhoto->complete_path); ?>" class="btn btn-default fancybox-button" alt=" <?php echo $classified->firstPhoto->filename; ?>"><i class="fa fa-search-plus fa-3x"></i>
+        </a>
+    <?php else: ?>
+      <img class="img-responsive" src="<?php echo asset('/uploads/products/images/model1.jpg'); ?>" alt="not-path"/>
+      <div>
+      <a href="<?php echo asset('/uploads/products/images/model1.jpg'); ?>" class="btn btn-default fancybox-button" alt="not-path">
+        <i class="fa fa-search-plus fa-3x"></i>
+      </a>
+    <?php endif; ?>
+      <a href="#product-pop-up-<?php echo $classified->id; ?>" class="btn btn-default fancybox-fast-view"><i class="fa fa-eye fa-3x"></i></a>
+    </div>
+    </div>
+    <h3>
+    <a href="<?php echo route('classifieds.show', $classified->id); ?>"><?php echo $classified->inCurrentLang->name; ?></a>
+    </h3>
+    <div class="pi-price"><?php echo $classified->priceWithCurrency; ?></div><br>
+    <a href="<?php echo route('cart.create', $classified->id); ?>" class="add_cart btn btn-default add2cart"><i class="fa fa-shopping-cart"></i></a>
+    <a href="<?php echo route('wishlist.create', $classified->id); ?>" class="add_wishlist btn btn-default add2cart"><i class="fa fa-check-square-o"></i></a>
+    <?php /*<div class="sticker <?php echo $currentSticker; ?>"></div>*/ ?>
+</div>

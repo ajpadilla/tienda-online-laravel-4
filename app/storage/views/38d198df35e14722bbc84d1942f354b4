@@ -1,0 +1,9 @@
+<?php echo $table->render(); ?>
+
+
+<?php if(!isset($scriptTableTemplate)): ?>
+	<?php $__env->startSection('table'); ?>	
+		<?php echo $table->script(); ?>
+
+	<?php $__env->stopSection(); ?>
+<?php endif; ?>

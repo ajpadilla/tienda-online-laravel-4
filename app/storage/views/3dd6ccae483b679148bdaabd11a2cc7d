@@ -1,0 +1,67 @@
+<?php $__env->startSection('title'); ?>
+    <?php echo trans('products.show_data.title'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <div class="row">
+        <?php /*<div class="col-md-3 col-sm-5">
+            */ ?><?php /*<?php echo $__env->make('products.partials._category-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?><?php /*
+            */ ?><?php /*<?php echo $__env->make('products.partials._relate-sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>*/ ?><?php /*
+        </div>*/ ?>
+        <div class="col-md-1 col-sm-2"></div>
+        <div class="col-md-10 col-sm-8">
+			<div class="product-page">
+			<div class="row">
+			<?php echo $__env->make('products.partials._show-photo', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			<div class="col-md-6 col-sm-6">
+			  <h1><?php echo $product->inCurrentLang->name; ?></h1>
+			  <div class="price-availability-block clearfix">
+			    <div class="price">
+			      <strong><?php echo $product->priceWithCurrency; ?></strong>
+			      <em><span><?php echo $product->priceWithCurrency; ?></span></em>
+			    </div>
+			    <div class="availability">
+			      Availability: <strong><?php echo $product->quantity; ?></strong>
+			    </div>
+			  </div>
+			  <div class="description">
+			    <p><?php echo $product->inCurrentLang->description; ?></p>
+			  </div>
+			  <div class="product-page-options">
+			    <div class="pull-left">
+			      <label class="control-label">Size:</label>
+			      <select class="form-control input-sm">
+			        <option>L</option>
+			        <option>M</option>
+			        <option>XL</option>
+			      </select>
+			    </div>
+			    <div class="pull-left">
+			      <label class="control-label">Color:</label>
+			      <select class="form-control input-sm">
+			        <option>Red</option>
+			        <option>Blue</option>
+			        <option>Black</option>
+			      </select>
+			    </div>
+			  </div>
+			  <?php echo $__env->make('products.partials._buttons-actions-set', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			  <div class="review">
+			  	<div class="rateit" data-rateit-value="<?php echo $product->rating; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>			  
+			    <a href="#">7 reviews</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">Write a review</a>
+			  </div>
+			  <?php echo $__env->make('products.partials._social-icons', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			</div>
+				<?php echo $__env->make('products.partials._show-content-product', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+				<div class="sticker sticker-sale"></div>
+			</div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('in-situ-css'); ?>
+	<link rel="stylesheet" href="<?php echo asset('assets/css/plugins/rateit/rateit.css'); ?>"/>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

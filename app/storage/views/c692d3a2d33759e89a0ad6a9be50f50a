@@ -1,0 +1,20 @@
+<div class="col-md-6 col-sm-6">
+	<div class="product-main-image">
+  	<?php if($product->hasPhotos()): ?>
+        <img src="<?php echo asset($product->getFirstPhotoAttribute()->complete_path); ?>" alt="<?php echo $product->getFirstPhotoAttribute()->filename; ?>" class="img-responsive" data-BigImgsrc="<?php echo asset($product->getFirstPhotoAttribute()->complete_path); ?>">
+      </div>
+      <div class="product-other-images">
+      	<?php foreach($product->photos as $photo): ?>
+        	<a href="#" class="active fancybox-button" rel="photos-lib"><img src="<?php echo asset($photo->complete_path); ?>" alt="<?php echo $photo->filename; ?>"></a>
+        <?php endforeach; ?>
+      </div>
+  <?php else: ?>
+      <img src="<?php echo asset('uploads/products/images/model1.jpg'); ?>" alt="Cool green dress with red bell" class="img-responsive">
+      </div>
+      <div class="product-other-images">
+        <a href="#" class="active"><img alt="Berry Lace Dress" src="<?php echo asset('uploads/products/images/model1.jpg'); ?>"></a>
+        <a href="#"><img alt="Berry Lace Dress" src="<?php echo asset('uploads/products/images/model4.jpg'); ?>"></a>
+        <a href="#"><img alt="Berry Lace Dress" src="<?php echo asset('uploads/products/images/model5.jpg'); ?>"></a>
+      </div>
+  <?php endif; ?>
+</div>
